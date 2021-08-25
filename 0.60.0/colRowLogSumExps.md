@@ -72,17 +72,17 @@ where
 ```r
 > X <- data[["10x10"]]
 > gc()
-          used  (Mb) gc trigger  (Mb) max used  (Mb)
-Ncells 5177172 276.5   10014072 534.9  8429723 450.2
-Vcells 9740960  74.4   18204443 138.9 17517433 133.7
+           used  (Mb) gc trigger  (Mb) max used  (Mb)
+Ncells  5242264 280.0    7916910 422.9  7916910 422.9
+Vcells 10188779  77.8   33191153 253.3 53339345 407.0
 > colStats <- microbenchmark(colLogSumExps = colLogSumExps(X, na.rm = FALSE), `apply+logSumExp` = apply(X, 
 +     MARGIN = 2L, FUN = logSumExp, na.rm = FALSE), `apply+logSumExp0` = apply(X, MARGIN = 2L, FUN = logSumExp0, 
 +     na.rm = FALSE), unit = "ms")
 > X <- t(X)
 > gc()
-          used  (Mb) gc trigger  (Mb) max used  (Mb)
-Ncells 5161871 275.7   10014072 534.9  8429723 450.2
-Vcells 9690579  74.0   18204443 138.9 17517433 133.7
+           used  (Mb) gc trigger  (Mb) max used  (Mb)
+Ncells  5228192 279.3    7916910 422.9  7916910 422.9
+Vcells 10142210  77.4   33191153 253.3 53339345 407.0
 > rowStats <- microbenchmark(rowLogSumExps = rowLogSumExps(X, na.rm = FALSE), `apply+logSumExp` = apply(X, 
 +     MARGIN = 1L, FUN = logSumExp, na.rm = FALSE), `apply+logSumExp0` = apply(X, MARGIN = 1L, FUN = logSumExp0, 
 +     na.rm = FALSE), unit = "ms")
@@ -92,35 +92,35 @@ _Table: Benchmarking of colLogSumExps(), apply+logSumExp() and apply+logSumExp0(
 
 
 
-|   |expr             |      min|        lq|      mean|    median|       uq|      max|
-|:--|:----------------|--------:|---------:|---------:|---------:|--------:|--------:|
-|1  |colLogSumExps    | 0.003947| 0.0044990| 0.0053883| 0.0050300| 0.005441| 0.020105|
-|2  |apply+logSumExp  | 0.043889| 0.0469055| 0.0509127| 0.0502795| 0.052233| 0.140598|
-|3  |apply+logSumExp0 | 0.062299| 0.0647660| 0.0691546| 0.0682880| 0.071329| 0.171047|
+|   |expr             |      min|        lq|      mean|    median|        uq|      max|
+|:--|:----------------|--------:|---------:|---------:|---------:|---------:|--------:|
+|1  |colLogSumExps    | 0.008133| 0.0090895| 0.0104243| 0.0104435| 0.0109565| 0.032976|
+|2  |apply+logSumExp  | 0.047248| 0.0507385| 0.0535950| 0.0527455| 0.0533990| 0.155811|
+|3  |apply+logSumExp0 | 0.064913| 0.0685595| 0.0716377| 0.0705830| 0.0714225| 0.174637|
 
 
-|   |expr             |      min|       lq|      mean|    median|       uq|      max|
-|:--|:----------------|--------:|--------:|---------:|---------:|--------:|--------:|
-|1  |colLogSumExps    |  1.00000|  1.00000|  1.000000|  1.000000|  1.00000| 1.000000|
-|2  |apply+logSumExp  | 11.11958| 10.42576|  9.448722|  9.995924|  9.59989| 6.993186|
-|3  |apply+logSumExp0 | 15.78389| 14.39564| 12.834175| 13.576143| 13.10954| 8.507685|
+|   |expr             |      min|       lq|     mean|   median|       uq|      max|
+|:--|:----------------|--------:|--------:|--------:|--------:|--------:|--------:|
+|1  |colLogSumExps    | 1.000000| 1.000000| 1.000000| 1.000000| 1.000000| 1.000000|
+|2  |apply+logSumExp  | 5.809418| 5.582100| 5.141343| 5.050558| 4.873728| 4.724982|
+|3  |apply+logSumExp0 | 7.981434| 7.542714| 6.872169| 6.758558| 6.518733| 5.295882|
 
 _Table: Benchmarking of rowLogSumExps(), apply+logSumExp() and apply+logSumExp0() on 10x10 data (transposed). The top panel shows times in milliseconds and the bottom panel shows relative times._
 
 
 
-|   |expr             |      min|       lq|      mean|    median|        uq|      max|
-|:--|:----------------|--------:|--------:|---------:|---------:|---------:|--------:|
-|1  |rowLogSumExps    | 0.003778| 0.004441| 0.0051114| 0.0050235| 0.0052935| 0.018875|
-|2  |apply+logSumExp  | 0.044624| 0.046574| 0.0492895| 0.0479260| 0.0504065| 0.078266|
-|3  |apply+logSumExp0 | 0.060719| 0.063385| 0.0676514| 0.0655110| 0.0692760| 0.156715|
+|   |expr             |      min|        lq|      mean|    median|        uq|      max|
+|:--|:----------------|--------:|---------:|---------:|---------:|---------:|--------:|
+|1  |rowLogSumExps    | 0.007400| 0.0081525| 0.0094867| 0.0093865| 0.0099785| 0.028806|
+|2  |apply+logSumExp  | 0.047769| 0.0521430| 0.0536802| 0.0528420| 0.0533980| 0.085639|
+|3  |apply+logSumExp0 | 0.065200| 0.0696110| 0.0724195| 0.0713380| 0.0721935| 0.155864|
 
 
-|   |expr             |      min|       lq|      mean|   median|        uq|      max|
-|:--|:----------------|--------:|--------:|---------:|--------:|---------:|--------:|
-|1  |rowLogSumExps    |  1.00000|  1.00000|  1.000000|  1.00000|  1.000000| 1.000000|
-|2  |apply+logSumExp  | 11.81154| 10.48728|  9.643049|  9.54036|  9.522339| 4.146543|
-|3  |apply+logSumExp0 | 16.07173| 14.27269| 13.235386| 13.04091| 13.086994| 8.302782|
+|   |expr             |      min|       lq|     mean|   median|       uq|      max|
+|:--|:----------------|--------:|--------:|--------:|--------:|--------:|--------:|
+|1  |rowLogSumExps    | 1.000000| 1.000000| 1.000000| 1.000000| 1.000000| 1.000000|
+|2  |apply+logSumExp  | 6.455270| 6.395952| 5.658454| 5.629574| 5.351305| 2.972957|
+|3  |apply+logSumExp0 | 8.810811| 8.538608| 7.633780| 7.600064| 7.234905| 5.410817|
 
 _Figure: Benchmarking of colLogSumExps(), apply+logSumExp() and apply+logSumExp0() on 10x10 data  as well as rowLogSumExps(), apply+logSumExp() and apply+logSumExp0() on the same data transposed.  Outliers are displayed as crosses.  Times are in milliseconds._
 
@@ -132,16 +132,16 @@ _Table: Benchmarking of colLogSumExps() and rowLogSumExps() on 10x10 data (origi
 
 
 
-|   |expr          |   min|    lq|    mean| median|     uq|    max|
-|:--|:-------------|-----:|-----:|-------:|------:|------:|------:|
-|2  |rowLogSumExps | 3.778| 4.441| 5.11140| 5.0235| 5.2935| 18.875|
-|1  |colLogSumExps | 3.947| 4.499| 5.38832| 5.0300| 5.4410| 20.105|
+|   |expr          |   min|     lq|     mean|  median|      uq|    max|
+|:--|:-------------|-----:|------:|--------:|-------:|-------:|------:|
+|2  |rowLogSumExps | 7.400| 8.1525|  9.48672|  9.3865|  9.9785| 28.806|
+|1  |colLogSumExps | 8.133| 9.0895| 10.42432| 10.4435| 10.9565| 32.976|
 
 
-|   |expr          |      min|      lq|     mean|   median|       uq|      max|
-|:--|:-------------|--------:|-------:|--------:|--------:|--------:|--------:|
-|2  |rowLogSumExps | 1.000000| 1.00000| 1.000000| 1.000000| 1.000000| 1.000000|
-|1  |colLogSumExps | 1.044733| 1.01306| 1.054177| 1.001294| 1.027864| 1.065166|
+|   |expr          |      min|       lq|     mean|   median|       uq|      max|
+|:--|:-------------|--------:|--------:|--------:|--------:|--------:|--------:|
+|2  |rowLogSumExps | 1.000000| 1.000000| 1.000000| 1.000000| 1.000000| 1.000000|
+|1  |colLogSumExps | 1.099054| 1.114934| 1.098833| 1.112608| 1.098011| 1.144761|
 
 _Figure: Benchmarking of colLogSumExps() and rowLogSumExps() on 10x10 data (original and transposed).  Outliers are displayed as crosses. Times are in milliseconds._
 
@@ -155,16 +155,16 @@ _Figure: Benchmarking of colLogSumExps() and rowLogSumExps() on 10x10 data (orig
 > X <- data[["100x100"]]
 > gc()
           used  (Mb) gc trigger  (Mb) max used  (Mb)
-Ncells 5161076 275.7   10014072 534.9  8429723 450.2
-Vcells 9307552  71.1   18204443 138.9 17517433 133.7
+Ncells 5226752 279.2    7916910 422.9  7916910 422.9
+Vcells 9758795  74.5   33191153 253.3 53339345 407.0
 > colStats <- microbenchmark(colLogSumExps = colLogSumExps(X, na.rm = FALSE), `apply+logSumExp` = apply(X, 
 +     MARGIN = 2L, FUN = logSumExp, na.rm = FALSE), `apply+logSumExp0` = apply(X, MARGIN = 2L, FUN = logSumExp0, 
 +     na.rm = FALSE), unit = "ms")
 > X <- t(X)
 > gc()
           used  (Mb) gc trigger  (Mb) max used  (Mb)
-Ncells 5161052 275.7   10014072 534.9  8429723 450.2
-Vcells 9317565  71.1   18204443 138.9 17517433 133.7
+Ncells 5226746 279.2    7916910 422.9  7916910 422.9
+Vcells 9768838  74.6   33191153 253.3 53339345 407.0
 > rowStats <- microbenchmark(rowLogSumExps = rowLogSumExps(X, na.rm = FALSE), `apply+logSumExp` = apply(X, 
 +     MARGIN = 1L, FUN = logSumExp, na.rm = FALSE), `apply+logSumExp0` = apply(X, MARGIN = 1L, FUN = logSumExp0, 
 +     na.rm = FALSE), unit = "ms")
@@ -176,16 +176,16 @@ _Table: Benchmarking of colLogSumExps(), apply+logSumExp() and apply+logSumExp0(
 
 |   |expr             |      min|        lq|      mean|    median|        uq|      max|
 |:--|:----------------|--------:|---------:|---------:|---------:|---------:|--------:|
-|1  |colLogSumExps    | 0.143889| 0.1452145| 0.1622381| 0.1462550| 0.1772955| 0.260263|
-|2  |apply+logSumExp  | 0.375447| 0.3796420| 0.4259860| 0.3894725| 0.4565545| 0.667414|
-|3  |apply+logSumExp0 | 0.523910| 0.5321035| 0.6002387| 0.5448570| 0.6325715| 1.078091|
+|1  |colLogSumExps    | 0.147286| 0.1533570| 0.1748630| 0.1615145| 0.1881190| 0.318889|
+|2  |apply+logSumExp  | 0.374943| 0.3857225| 0.4386438| 0.4127325| 0.4663460| 0.766932|
+|3  |apply+logSumExp0 | 0.532599| 0.5451135| 0.6201473| 0.5709585| 0.6800395| 1.043200|
 
 
 |   |expr             |      min|       lq|     mean|   median|       uq|      max|
 |:--|:----------------|--------:|--------:|--------:|--------:|--------:|--------:|
 |1  |colLogSumExps    | 1.000000| 1.000000| 1.000000| 1.000000| 1.000000| 1.000000|
-|2  |apply+logSumExp  | 2.609282| 2.614353| 2.625684| 2.662969| 2.575105| 2.564383|
-|3  |apply+logSumExp0 | 3.641071| 3.664259| 3.699740| 3.725391| 3.567894| 4.142314|
+|2  |apply+logSumExp  | 2.545680| 2.515193| 2.508500| 2.555390| 2.478995| 2.405012|
+|3  |apply+logSumExp0 | 3.616087| 3.554539| 3.546476| 3.535029| 3.614943| 3.271358|
 
 _Table: Benchmarking of rowLogSumExps(), apply+logSumExp() and apply+logSumExp0() on 100x100 data (transposed). The top panel shows times in milliseconds and the bottom panel shows relative times._
 
@@ -193,16 +193,16 @@ _Table: Benchmarking of rowLogSumExps(), apply+logSumExp() and apply+logSumExp0(
 
 |   |expr             |      min|        lq|      mean|    median|       uq|      max|
 |:--|:----------------|--------:|---------:|---------:|---------:|--------:|--------:|
-|1  |rowLogSumExps    | 0.151674| 0.1530585| 0.1701265| 0.1542530| 0.183900| 0.262543|
-|2  |apply+logSumExp  | 0.376025| 0.3796140| 0.4233891| 0.3842545| 0.447411| 0.671846|
-|3  |apply+logSumExp0 | 0.523607| 0.5341585| 0.6010811| 0.5505110| 0.658857| 1.101675|
+|1  |rowLogSumExps    | 0.151541| 0.1609810| 0.1803268| 0.1699135| 0.192550| 0.266127|
+|2  |apply+logSumExp  | 0.375183| 0.3909565| 0.4443629| 0.4233270| 0.470347| 0.679589|
+|3  |apply+logSumExp0 | 0.534134| 0.5546200| 0.6243859| 0.5808370| 0.671827| 1.073041|
 
 
 |   |expr             |      min|       lq|     mean|   median|       uq|      max|
 |:--|:----------------|--------:|--------:|--------:|--------:|--------:|--------:|
 |1  |rowLogSumExps    | 1.000000| 1.000000| 1.000000| 1.000000| 1.000000| 1.000000|
-|2  |apply+logSumExp  | 2.479166| 2.480189| 2.488672| 2.491067| 2.432904| 2.558994|
-|3  |apply+logSumExp0 | 3.452187| 3.489898| 3.533142| 3.568884| 3.582692| 4.196170|
+|2  |apply+logSumExp  | 2.475785| 2.428588| 2.464208| 2.491427| 2.442727| 2.553627|
+|3  |apply+logSumExp0 | 3.524683| 3.445251| 3.462523| 3.418428| 3.489104| 4.032064|
 
 _Figure: Benchmarking of colLogSumExps(), apply+logSumExp() and apply+logSumExp0() on 100x100 data  as well as rowLogSumExps(), apply+logSumExp() and apply+logSumExp0() on the same data transposed.  Outliers are displayed as crosses.  Times are in milliseconds._
 
@@ -214,16 +214,16 @@ _Table: Benchmarking of colLogSumExps() and rowLogSumExps() on 100x100 data (ori
 
 
 
-|   |expr          |     min|       lq|     mean|  median|       uq|     max|
-|:--|:-------------|-------:|--------:|--------:|-------:|--------:|-------:|
-|1  |colLogSumExps | 143.889| 145.2145| 162.2381| 146.255| 177.2955| 260.263|
-|2  |rowLogSumExps | 151.674| 153.0585| 170.1265| 154.253| 183.9000| 262.543|
+|   |expr          |     min|      lq|     mean|   median|      uq|     max|
+|:--|:-------------|-------:|-------:|--------:|--------:|-------:|-------:|
+|1  |colLogSumExps | 147.286| 153.357| 174.8630| 161.5145| 188.119| 318.889|
+|2  |rowLogSumExps | 151.541| 160.981| 180.3268| 169.9135| 192.550| 266.127|
 
 
-|   |expr          |      min|       lq|     mean|   median|       uq|     max|
-|:--|:-------------|--------:|--------:|--------:|--------:|--------:|-------:|
-|1  |colLogSumExps | 1.000000| 1.000000| 1.000000| 1.000000| 1.000000| 1.00000|
-|2  |rowLogSumExps | 1.054104| 1.054017| 1.048623| 1.054685| 1.037251| 1.00876|
+|   |expr          |      min|       lq|     mean|   median|       uq|       max|
+|:--|:-------------|--------:|--------:|--------:|--------:|--------:|---------:|
+|1  |colLogSumExps | 1.000000| 1.000000| 1.000000| 1.000000| 1.000000| 1.0000000|
+|2  |rowLogSumExps | 1.028889| 1.049714| 1.031247| 1.052002| 1.023554| 0.8345443|
 
 _Figure: Benchmarking of colLogSumExps() and rowLogSumExps() on 100x100 data (original and transposed).  Outliers are displayed as crosses. Times are in milliseconds._
 
@@ -237,16 +237,16 @@ _Figure: Benchmarking of colLogSumExps() and rowLogSumExps() on 100x100 data (or
 > X <- data[["1000x10"]]
 > gc()
           used  (Mb) gc trigger  (Mb) max used  (Mb)
-Ncells 5161808 275.7   10014072 534.9  8878578 474.2
-Vcells 9311294  71.1   18204443 138.9 18204443 138.9
+Ncells 5227507 279.2    7916910 422.9  7916910 422.9
+Vcells 9762590  74.5   33191153 253.3 53339345 407.0
 > colStats <- microbenchmark(colLogSumExps = colLogSumExps(X, na.rm = FALSE), `apply+logSumExp` = apply(X, 
 +     MARGIN = 2L, FUN = logSumExp, na.rm = FALSE), `apply+logSumExp0` = apply(X, MARGIN = 2L, FUN = logSumExp0, 
 +     na.rm = FALSE), unit = "ms")
 > X <- t(X)
 > gc()
           used  (Mb) gc trigger  (Mb) max used  (Mb)
-Ncells 5161802 275.7   10014072 534.9  8878578 474.2
-Vcells 9321337  71.2   18204443 138.9 18204443 138.9
+Ncells 5227495 279.2    7916910 422.9  7916910 422.9
+Vcells 9772623  74.6   33191153 253.3 53339345 407.0
 > rowStats <- microbenchmark(rowLogSumExps = rowLogSumExps(X, na.rm = FALSE), `apply+logSumExp` = apply(X, 
 +     MARGIN = 1L, FUN = logSumExp, na.rm = FALSE), `apply+logSumExp0` = apply(X, MARGIN = 1L, FUN = logSumExp0, 
 +     na.rm = FALSE), unit = "ms")
@@ -256,35 +256,35 @@ _Table: Benchmarking of colLogSumExps(), apply+logSumExp() and apply+logSumExp0(
 
 
 
-|   |expr             |      min|        lq|      mean|    median|       uq|      max|
-|:--|:----------------|--------:|---------:|---------:|---------:|--------:|--------:|
-|1  |colLogSumExps    | 0.140295| 0.1434265| 0.1716248| 0.1710155| 0.183826| 0.247553|
-|2  |apply+logSumExp  | 0.224223| 0.2315905| 0.2738347| 0.2661720| 0.295451| 0.493498|
-|3  |apply+logSumExp0 | 0.263734| 0.2733430| 0.3221786| 0.3158515| 0.347561| 0.445363|
+|   |expr             |      min|        lq|      mean|    median|        uq|      max|
+|:--|:----------------|--------:|---------:|---------:|---------:|---------:|--------:|
+|1  |colLogSumExps    | 0.148651| 0.1647045| 0.1906819| 0.1847195| 0.2085615| 0.350757|
+|2  |apply+logSumExp  | 0.227003| 0.2507095| 0.2880074| 0.2765740| 0.3024020| 0.486887|
+|3  |apply+logSumExp0 | 0.269485| 0.3098875| 0.3494949| 0.3436425| 0.3780010| 0.480715|
 
 
 |   |expr             |      min|       lq|     mean|   median|       uq|      max|
 |:--|:----------------|--------:|--------:|--------:|--------:|--------:|--------:|
 |1  |colLogSumExps    | 1.000000| 1.000000| 1.000000| 1.000000| 1.000000| 1.000000|
-|2  |apply+logSumExp  | 1.598225| 1.614698| 1.595542| 1.556420| 1.607232| 1.993504|
-|3  |apply+logSumExp0 | 1.879853| 1.905805| 1.877225| 1.846917| 1.890706| 1.799061|
+|2  |apply+logSumExp  | 1.527087| 1.522178| 1.510408| 1.497265| 1.449942| 1.388103|
+|3  |apply+logSumExp0 | 1.812870| 1.881476| 1.832869| 1.860348| 1.812420| 1.370507|
 
 _Table: Benchmarking of rowLogSumExps(), apply+logSumExp() and apply+logSumExp0() on 1000x10 data (transposed). The top panel shows times in milliseconds and the bottom panel shows relative times._
 
 
 
-|   |expr             |      min|        lq|      mean|   median|        uq|      max|
-|:--|:----------------|--------:|---------:|---------:|--------:|---------:|--------:|
-|1  |rowLogSumExps    | 0.145568| 0.1492690| 0.1785042| 0.178602| 0.1982570| 0.250941|
-|2  |apply+logSumExp  | 0.224451| 0.2290525| 0.2670782| 0.253404| 0.2963425| 0.472336|
-|3  |apply+logSumExp0 | 0.261819| 0.2668805| 0.3066712| 0.287636| 0.3328945| 0.451196|
+|   |expr             |      min|        lq|      mean|    median|        uq|      max|
+|:--|:----------------|--------:|---------:|---------:|---------:|---------:|--------:|
+|1  |rowLogSumExps    | 0.148117| 0.1623880| 0.1906410| 0.1862295| 0.2183835| 0.266496|
+|2  |apply+logSumExp  | 0.216779| 0.2381875| 0.2746292| 0.2602685| 0.3046930| 0.471987|
+|3  |apply+logSumExp0 | 0.261497| 0.2902070| 0.3273246| 0.3186795| 0.3461150| 0.478835|
 
 
 |   |expr             |      min|       lq|     mean|   median|       uq|      max|
 |:--|:----------------|--------:|--------:|--------:|--------:|--------:|--------:|
 |1  |rowLogSumExps    | 1.000000| 1.000000| 1.000000| 1.000000| 1.000000| 1.000000|
-|2  |apply+logSumExp  | 1.541898| 1.534495| 1.496201| 1.418819| 1.494739| 1.882259|
-|3  |apply+logSumExp0 | 1.798603| 1.787916| 1.718006| 1.610486| 1.679106| 1.798016|
+|2  |apply+logSumExp  | 1.463566| 1.466780| 1.440557| 1.397569| 1.395220| 1.771085|
+|3  |apply+logSumExp0 | 1.765476| 1.787121| 1.716968| 1.711219| 1.584895| 1.796781|
 
 _Figure: Benchmarking of colLogSumExps(), apply+logSumExp() and apply+logSumExp0() on 1000x10 data  as well as rowLogSumExps(), apply+logSumExp() and apply+logSumExp0() on the same data transposed.  Outliers are displayed as crosses.  Times are in milliseconds._
 
@@ -296,16 +296,16 @@ _Table: Benchmarking of colLogSumExps() and rowLogSumExps() on 1000x10 data (ori
 
 
 
-|   |expr          |     min|       lq|     mean|   median|      uq|     max|
-|:--|:-------------|-------:|--------:|--------:|--------:|-------:|-------:|
-|1  |colLogSumExps | 140.295| 143.4265| 171.6249| 171.0155| 183.826| 247.553|
-|2  |rowLogSumExps | 145.568| 149.2690| 178.5042| 178.6020| 198.257| 250.941|
+|   |expr          |     min|       lq|     mean|   median|       uq|     max|
+|:--|:-------------|-------:|--------:|--------:|--------:|--------:|-------:|
+|1  |colLogSumExps | 148.651| 164.7045| 190.6819| 184.7195| 208.5615| 350.757|
+|2  |rowLogSumExps | 148.117| 162.3880| 190.6410| 186.2295| 218.3835| 266.496|
 
 
-|   |expr          |      min|       lq|     mean|   median|       uq|      max|
-|:--|:-------------|--------:|--------:|--------:|--------:|--------:|--------:|
-|1  |colLogSumExps | 1.000000| 1.000000| 1.000000| 1.000000| 1.000000| 1.000000|
-|2  |rowLogSumExps | 1.037585| 1.040735| 1.040083| 1.044361| 1.078504| 1.013686|
+|   |expr          |       min|        lq|      mean|   median|       uq|       max|
+|:--|:-------------|---------:|---------:|---------:|--------:|--------:|---------:|
+|1  |colLogSumExps | 1.0000000| 1.0000000| 1.0000000| 1.000000| 1.000000| 1.0000000|
+|2  |rowLogSumExps | 0.9964077| 0.9859354| 0.9997857| 1.008175| 1.047094| 0.7597739|
 
 _Figure: Benchmarking of colLogSumExps() and rowLogSumExps() on 1000x10 data (original and transposed).  Outliers are displayed as crosses. Times are in milliseconds._
 
@@ -319,16 +319,16 @@ _Figure: Benchmarking of colLogSumExps() and rowLogSumExps() on 1000x10 data (or
 > X <- data[["10x1000"]]
 > gc()
           used  (Mb) gc trigger  (Mb) max used  (Mb)
-Ncells 5162036 275.7   10014072 534.9  8878578 474.2
-Vcells 9312132  71.1   18204443 138.9 18204443 138.9
+Ncells 5227714 279.2    7916910 422.9  7916910 422.9
+Vcells 9763394  74.5   33191153 253.3 53339345 407.0
 > colStats <- microbenchmark(colLogSumExps = colLogSumExps(X, na.rm = FALSE), `apply+logSumExp` = apply(X, 
 +     MARGIN = 2L, FUN = logSumExp, na.rm = FALSE), `apply+logSumExp0` = apply(X, MARGIN = 2L, FUN = logSumExp0, 
 +     na.rm = FALSE), unit = "ms")
 > X <- t(X)
 > gc()
           used  (Mb) gc trigger  (Mb) max used  (Mb)
-Ncells 5162012 275.7   10014072 534.9 10014072 534.9
-Vcells 9322145  71.2   18204443 138.9 18204443 138.9
+Ncells 5227708 279.2    7916910 422.9  7916910 422.9
+Vcells 9773437  74.6   33191153 253.3 53339345 407.0
 > rowStats <- microbenchmark(rowLogSumExps = rowLogSumExps(X, na.rm = FALSE), `apply+logSumExp` = apply(X, 
 +     MARGIN = 1L, FUN = logSumExp, na.rm = FALSE), `apply+logSumExp0` = apply(X, MARGIN = 1L, FUN = logSumExp0, 
 +     na.rm = FALSE), unit = "ms")
@@ -338,35 +338,35 @@ _Table: Benchmarking of colLogSumExps(), apply+logSumExp() and apply+logSumExp0(
 
 
 
-|   |expr             |      min|        lq|      mean|   median|        uq|      max|
-|:--|:----------------|--------:|---------:|---------:|--------:|---------:|--------:|
-|1  |colLogSumExps    | 0.176056| 0.1781105| 0.1869264| 0.180046| 0.1845705| 0.264708|
-|2  |apply+logSumExp  | 1.764702| 1.8164385| 1.9885468| 1.913741| 2.0797890| 2.816793|
-|3  |apply+logSumExp0 | 3.031441| 3.1225105| 3.4056036| 3.277106| 3.3828405| 8.485389|
+|   |expr             |      min|       lq|      mean|   median|        uq|       max|
+|:--|:----------------|--------:|--------:|---------:|--------:|---------:|---------:|
+|1  |colLogSumExps    | 0.182868| 0.198522| 0.2186889| 0.206460| 0.2248295|  0.425178|
+|2  |apply+logSumExp  | 1.811853| 1.978557| 2.1914504| 2.065537| 2.1991665|  4.675994|
+|3  |apply+logSumExp0 | 3.031848| 3.310961| 3.8202764| 3.474716| 3.6859950| 12.717593|
 
 
-|   |expr             |      min|       lq|     mean|   median|       uq|      max|
-|:--|:----------------|--------:|--------:|--------:|--------:|--------:|--------:|
-|1  |colLogSumExps    |  1.00000|  1.00000|  1.00000|  1.00000|  1.00000|  1.00000|
-|2  |apply+logSumExp  | 10.02353| 10.19838| 10.63813| 10.62918| 11.26826| 10.64113|
-|3  |apply+logSumExp0 | 17.21862| 17.53131| 18.21896| 18.20149| 18.32818| 32.05566|
+|   |expr             |       min|        lq|     mean|   median|        uq|      max|
+|:--|:----------------|---------:|---------:|--------:|--------:|---------:|--------:|
+|1  |colLogSumExps    |  1.000000|  1.000000|  1.00000|  1.00000|  1.000000|  1.00000|
+|2  |apply+logSumExp  |  9.907983|  9.966439| 10.02086| 10.00454|  9.781486| 10.99773|
+|3  |apply+logSumExp0 | 16.579434| 16.678058| 17.46900| 16.82997| 16.394624| 29.91122|
 
 _Table: Benchmarking of rowLogSumExps(), apply+logSumExp() and apply+logSumExp0() on 10x1000 data (transposed). The top panel shows times in milliseconds and the bottom panel shows relative times._
 
 
 
-|   |expr             |      min|       lq|      mean|    median|        uq|      max|
-|:--|:----------------|--------:|--------:|---------:|---------:|---------:|--------:|
-|1  |rowLogSumExps    | 0.181578| 0.184254| 0.1980622| 0.1860255| 0.1942585| 0.317733|
-|2  |apply+logSumExp  | 1.747824| 1.801270| 1.9519493| 1.8946645| 1.9271320| 6.252395|
-|3  |apply+logSumExp0 | 2.976593| 3.087345| 3.2349114| 3.2102070| 3.3244710| 4.111634|
+|   |expr             |      min|        lq|      mean|    median|        uq|      max|
+|:--|:----------------|--------:|---------:|---------:|---------:|---------:|--------:|
+|1  |rowLogSumExps    | 0.177854| 0.2003505| 0.2230796| 0.2116575| 0.2355875| 0.378667|
+|2  |apply+logSumExp  | 1.798603| 1.9887350| 2.1438652| 2.0944100| 2.2260755| 3.235006|
+|3  |apply+logSumExp0 | 3.021550| 3.3278055| 3.5985985| 3.4443350| 3.6162465| 8.963276|
 
 
-|   |expr             |       min|        lq|      mean|   median|        uq|      max|
-|:--|:----------------|---------:|---------:|---------:|--------:|---------:|--------:|
-|1  |rowLogSumExps    |  1.000000|  1.000000|  1.000000|  1.00000|  1.000000|  1.00000|
-|2  |apply+logSumExp  |  9.625748|  9.776013|  9.855234| 10.18497|  9.920451| 19.67814|
-|3  |apply+logSumExp0 | 16.392916| 16.755918| 16.332806| 17.25681| 17.113645| 12.94053|
+|   |expr             |      min|        lq|      mean|    median|        uq|       max|
+|:--|:----------------|--------:|---------:|---------:|---------:|---------:|---------:|
+|1  |rowLogSumExps    |  1.00000|  1.000000|  1.000000|  1.000000|  1.000000|  1.000000|
+|2  |apply+logSumExp  | 10.11281|  9.926279|  9.610316|  9.895279|  9.449039|  8.543142|
+|3  |apply+logSumExp0 | 16.98893| 16.609919| 16.131456| 16.273154| 15.349908| 23.670602|
 
 _Figure: Benchmarking of colLogSumExps(), apply+logSumExp() and apply+logSumExp0() on 10x1000 data  as well as rowLogSumExps(), apply+logSumExp() and apply+logSumExp0() on the same data transposed.  Outliers are displayed as crosses.  Times are in milliseconds._
 
@@ -380,14 +380,14 @@ _Table: Benchmarking of colLogSumExps() and rowLogSumExps() on 10x1000 data (ori
 
 |   |expr          |     min|       lq|     mean|   median|       uq|     max|
 |:--|:-------------|-------:|--------:|--------:|--------:|--------:|-------:|
-|1  |colLogSumExps | 176.056| 178.1105| 186.9264| 180.0460| 184.5705| 264.708|
-|2  |rowLogSumExps | 181.578| 184.2540| 198.0622| 186.0255| 194.2585| 317.733|
+|1  |colLogSumExps | 182.868| 198.5220| 218.6889| 206.4600| 224.8295| 425.178|
+|2  |rowLogSumExps | 177.854| 200.3505| 223.0796| 211.6575| 235.5875| 378.667|
 
 
-|   |expr          |      min|       lq|     mean|   median|       uq|      max|
-|:--|:-------------|--------:|--------:|--------:|--------:|--------:|--------:|
-|1  |colLogSumExps | 1.000000| 1.000000| 1.000000| 1.000000| 1.000000| 1.000000|
-|2  |rowLogSumExps | 1.031365| 1.034493| 1.059573| 1.033211| 1.052489| 1.200315|
+|   |expr          |       min|       lq|     mean|   median|      uq|       max|
+|:--|:-------------|---------:|--------:|--------:|--------:|-------:|---------:|
+|1  |colLogSumExps | 1.0000000| 1.000000| 1.000000| 1.000000| 1.00000| 1.0000000|
+|2  |rowLogSumExps | 0.9725813| 1.009211| 1.020077| 1.025174| 1.04785| 0.8906082|
 
 _Figure: Benchmarking of colLogSumExps() and rowLogSumExps() on 10x1000 data (original and transposed).  Outliers are displayed as crosses. Times are in milliseconds._
 
@@ -401,16 +401,16 @@ _Figure: Benchmarking of colLogSumExps() and rowLogSumExps() on 10x1000 data (or
 > X <- data[["100x1000"]]
 > gc()
           used  (Mb) gc trigger  (Mb) max used  (Mb)
-Ncells 5162230 275.7   10014072 534.9 10014072 534.9
-Vcells 9312683  71.1   18204443 138.9 18204443 138.9
+Ncells 5227930 279.3    7916910 422.9  7916910 422.9
+Vcells 9763989  74.5   33191153 253.3 53339345 407.0
 > colStats <- microbenchmark(colLogSumExps = colLogSumExps(X, na.rm = FALSE), `apply+logSumExp` = apply(X, 
 +     MARGIN = 2L, FUN = logSumExp, na.rm = FALSE), `apply+logSumExp0` = apply(X, MARGIN = 2L, FUN = logSumExp0, 
 +     na.rm = FALSE), unit = "ms")
 > X <- t(X)
 > gc()
           used  (Mb) gc trigger  (Mb) max used  (Mb)
-Ncells 5162218 275.7   10014072 534.9 10014072 534.9
-Vcells 9412716  71.9   18204443 138.9 18204443 138.9
+Ncells 5227912 279.3    7916910 422.9  7916910 422.9
+Vcells 9864012  75.3   33191153 253.3 53339345 407.0
 > rowStats <- microbenchmark(rowLogSumExps = rowLogSumExps(X, na.rm = FALSE), `apply+logSumExp` = apply(X, 
 +     MARGIN = 1L, FUN = logSumExp, na.rm = FALSE), `apply+logSumExp0` = apply(X, MARGIN = 1L, FUN = logSumExp0, 
 +     na.rm = FALSE), unit = "ms")
@@ -420,18 +420,18 @@ _Table: Benchmarking of colLogSumExps(), apply+logSumExp() and apply+logSumExp0(
 
 
 
-|   |expr             |      min|       lq|     mean|   median|       uq|        max|
-|:--|:----------------|--------:|--------:|--------:|--------:|--------:|----------:|
-|1  |colLogSumExps    | 1.429705| 1.438362| 1.485668| 1.450688| 1.483238|   1.816532|
-|2  |apply+logSumExp  | 3.633103| 3.676150| 3.958381| 3.713915| 3.784422|  14.761173|
-|3  |apply+logSumExp0 | 5.162355| 5.222633| 9.666156| 5.280809| 5.893619| 349.403078|
+|   |expr             |      min|       lq|     mean|   median|       uq|       max|
+|:--|:----------------|--------:|--------:|--------:|--------:|--------:|---------:|
+|1  |colLogSumExps    | 1.537931| 1.665246| 1.759681| 1.704182| 1.837969|  2.555003|
+|2  |apply+logSumExp  | 3.701825| 4.101192| 4.849556| 4.249950| 4.569222| 26.022281|
+|3  |apply+logSumExp0 | 5.369943| 5.892519| 6.522110| 6.149206| 6.676341| 28.776985|
 
 
-|   |expr             |      min|       lq|     mean|   median|       uq|        max|
-|:--|:----------------|--------:|--------:|--------:|--------:|--------:|----------:|
-|1  |colLogSumExps    | 1.000000| 1.000000| 1.000000| 1.000000| 1.000000|   1.000000|
-|2  |apply+logSumExp  | 2.541156| 2.555788| 2.664378| 2.560106| 2.551459|   8.126019|
-|3  |apply+logSumExp0 | 3.610783| 3.630957| 6.506270| 3.640210| 3.973482| 192.346228|
+|   |expr             |      min|       lq|     mean|   median|       uq|      max|
+|:--|:----------------|--------:|--------:|--------:|--------:|--------:|--------:|
+|1  |colLogSumExps    | 1.000000| 1.000000| 1.000000| 1.000000| 1.000000|  1.00000|
+|2  |apply+logSumExp  | 2.407016| 2.462814| 2.755929| 2.493836| 2.486017| 10.18483|
+|3  |apply+logSumExp0 | 3.491667| 3.538527| 3.706415| 3.608304| 3.632455| 11.26299|
 
 _Table: Benchmarking of rowLogSumExps(), apply+logSumExp() and apply+logSumExp0() on 100x1000 data (transposed). The top panel shows times in milliseconds and the bottom panel shows relative times._
 
@@ -439,16 +439,16 @@ _Table: Benchmarking of rowLogSumExps(), apply+logSumExp() and apply+logSumExp0(
 
 |   |expr             |      min|       lq|     mean|   median|       uq|       max|
 |:--|:----------------|--------:|--------:|--------:|--------:|--------:|---------:|
-|1  |rowLogSumExps    | 1.520874| 1.538600| 1.627126| 1.565017| 1.630826|  2.616128|
-|2  |apply+logSumExp  | 3.654891| 3.707024| 4.444415| 3.764799| 4.005774| 15.653977|
-|3  |apply+logSumExp0 | 5.196007| 5.258693| 6.011726| 5.327285| 5.756739| 17.158318|
+|1  |rowLogSumExps    | 1.580767| 1.732992| 2.018422| 1.765429| 1.823624| 21.395092|
+|2  |apply+logSumExp  | 3.719148| 4.072647| 4.282412| 4.166019| 4.295800|  5.740941|
+|3  |apply+logSumExp0 | 5.225207| 5.850327| 6.585593| 5.939724| 6.127233| 29.342143|
 
 
-|   |expr             |      min|       lq|     mean|   median|       uq|      max|
-|:--|:----------------|--------:|--------:|--------:|--------:|--------:|--------:|
-|1  |rowLogSumExps    | 1.000000| 1.000000| 1.000000| 1.000000| 1.000000| 1.000000|
-|2  |apply+logSumExp  | 2.403152| 2.409349| 2.731452| 2.405596| 2.456284| 5.983643|
-|3  |apply+logSumExp0 | 3.416461| 3.417842| 3.694691| 3.403979| 3.529952| 6.558669|
+|   |expr             |      min|       lq|     mean|   median|       uq|       max|
+|:--|:----------------|--------:|--------:|--------:|--------:|--------:|---------:|
+|1  |rowLogSumExps    | 1.000000| 1.000000| 1.000000| 1.000000| 1.000000| 1.0000000|
+|2  |apply+logSumExp  | 2.352749| 2.350067| 2.121663| 2.359777| 2.355639| 0.2683298|
+|3  |apply+logSumExp0 | 3.305488| 3.375853| 3.262744| 3.364465| 3.359921| 1.3714427|
 
 _Figure: Benchmarking of colLogSumExps(), apply+logSumExp() and apply+logSumExp0() on 100x1000 data  as well as rowLogSumExps(), apply+logSumExp() and apply+logSumExp0() on the same data transposed.  Outliers are displayed as crosses.  Times are in milliseconds._
 
@@ -460,16 +460,16 @@ _Table: Benchmarking of colLogSumExps() and rowLogSumExps() on 100x1000 data (or
 
 
 
-|   |expr          |      min|       lq|     mean|   median|       uq|      max|
-|:--|:-------------|--------:|--------:|--------:|--------:|--------:|--------:|
-|1  |colLogSumExps | 1.429705| 1.438362| 1.485668| 1.450688| 1.483238| 1.816532|
-|2  |rowLogSumExps | 1.520874| 1.538600| 1.627126| 1.565017| 1.630826| 2.616128|
+|   |expr          |      min|       lq|     mean|   median|       uq|       max|
+|:--|:-------------|--------:|--------:|--------:|--------:|--------:|---------:|
+|1  |colLogSumExps | 1.537931| 1.665246| 1.759681| 1.704182| 1.837969|  2.555003|
+|2  |rowLogSumExps | 1.580767| 1.732992| 2.018422| 1.765429| 1.823624| 21.395092|
 
 
-|   |expr          |      min|       lq|     mean|  median|       uq|      max|
-|:--|:-------------|--------:|--------:|--------:|-------:|--------:|--------:|
-|1  |colLogSumExps | 1.000000| 1.000000| 1.000000| 1.00000| 1.000000| 1.000000|
-|2  |rowLogSumExps | 1.063768| 1.069689| 1.095215| 1.07881| 1.099504| 1.440177|
+|   |expr          |      min|       lq|     mean|   median|        uq|      max|
+|:--|:-------------|--------:|--------:|--------:|--------:|---------:|--------:|
+|1  |colLogSumExps | 1.000000| 1.000000| 1.000000| 1.000000| 1.0000000| 1.000000|
+|2  |rowLogSumExps | 1.027853| 1.040682| 1.147038| 1.035939| 0.9921952| 8.373803|
 
 _Figure: Benchmarking of colLogSumExps() and rowLogSumExps() on 100x1000 data (original and transposed).  Outliers are displayed as crosses. Times are in milliseconds._
 
@@ -483,16 +483,16 @@ _Figure: Benchmarking of colLogSumExps() and rowLogSumExps() on 100x1000 data (o
 > X <- data[["1000x100"]]
 > gc()
           used  (Mb) gc trigger  (Mb) max used  (Mb)
-Ncells 5162446 275.8   10014072 534.9 10014072 534.9
-Vcells 9313364  71.1   18204443 138.9 18204443 138.9
+Ncells 5228130 279.3    7916910 422.9  7916910 422.9
+Vcells 9764643  74.5   33191153 253.3 53339345 407.0
 > colStats <- microbenchmark(colLogSumExps = colLogSumExps(X, na.rm = FALSE), `apply+logSumExp` = apply(X, 
 +     MARGIN = 2L, FUN = logSumExp, na.rm = FALSE), `apply+logSumExp0` = apply(X, MARGIN = 2L, FUN = logSumExp0, 
 +     na.rm = FALSE), unit = "ms")
 > X <- t(X)
 > gc()
           used  (Mb) gc trigger  (Mb) max used  (Mb)
-Ncells 5162422 275.8   10014072 534.9 10014072 534.9
-Vcells 9413377  71.9   18204443 138.9 18204443 138.9
+Ncells 5228118 279.3    7916910 422.9  7916910 422.9
+Vcells 9864676  75.3   33191153 253.3 53339345 407.0
 > rowStats <- microbenchmark(rowLogSumExps = rowLogSumExps(X, na.rm = FALSE), `apply+logSumExp` = apply(X, 
 +     MARGIN = 1L, FUN = logSumExp, na.rm = FALSE), `apply+logSumExp0` = apply(X, MARGIN = 1L, FUN = logSumExp0, 
 +     na.rm = FALSE), unit = "ms")
@@ -504,33 +504,33 @@ _Table: Benchmarking of colLogSumExps(), apply+logSumExp() and apply+logSumExp0(
 
 |   |expr             |      min|       lq|     mean|   median|       uq|      max|
 |:--|:----------------|--------:|--------:|--------:|--------:|--------:|--------:|
-|1  |colLogSumExps    | 1.379630| 1.384518| 1.477507| 1.403514| 1.497534| 2.198962|
-|2  |apply+logSumExp  | 2.110582| 2.130687| 2.345729| 2.158870| 2.309216| 7.898525|
-|3  |apply+logSumExp0 | 2.444077| 2.513711| 2.962575| 2.565890| 2.721223| 8.477729|
+|1  |colLogSumExps    | 1.461910| 1.665638| 1.874952| 1.758566| 1.838413|  9.37362|
+|2  |apply+logSumExp  | 2.183029| 2.406405| 2.725101| 2.592052| 2.748403| 10.75560|
+|3  |apply+logSumExp0 | 2.546085| 2.931929| 3.311470| 3.118014| 3.495567| 10.58627|
 
 
 |   |expr             |      min|       lq|     mean|   median|       uq|      max|
 |:--|:----------------|--------:|--------:|--------:|--------:|--------:|--------:|
 |1  |colLogSumExps    | 1.000000| 1.000000| 1.000000| 1.000000| 1.000000| 1.000000|
-|2  |apply+logSumExp  | 1.529817| 1.538938| 1.587626| 1.538189| 1.542012| 3.591933|
-|3  |apply+logSumExp0 | 1.771545| 1.815587| 2.005117| 1.828189| 1.817136| 3.855332|
+|2  |apply+logSumExp  | 1.493272| 1.444735| 1.453425| 1.473958| 1.494986| 1.147433|
+|3  |apply+logSumExp0 | 1.741615| 1.760244| 1.766163| 1.773044| 1.901404| 1.129369|
 
 _Table: Benchmarking of rowLogSumExps(), apply+logSumExp() and apply+logSumExp0() on 1000x100 data (transposed). The top panel shows times in milliseconds and the bottom panel shows relative times._
 
 
 
-|   |expr             |      min|       lq|     mean|   median|       uq|      max|
-|:--|:----------------|--------:|--------:|--------:|--------:|--------:|--------:|
-|1  |rowLogSumExps    | 1.458873| 1.462925| 1.541836| 1.467489| 1.569214| 2.227659|
-|2  |apply+logSumExp  | 2.134399| 2.152706| 2.395594| 2.198590| 2.358947| 8.050600|
-|3  |apply+logSumExp0 | 2.487738| 2.530534| 2.989541| 2.558609| 2.734797| 8.662568|
+|   |expr             |      min|       lq|     mean|   median|       uq|       max|
+|:--|:----------------|--------:|--------:|--------:|--------:|--------:|---------:|
+|1  |rowLogSumExps    | 1.475570| 1.718748| 1.871399| 1.757151| 1.810914|  9.543469|
+|2  |apply+logSumExp  | 2.189496| 2.400485| 2.563202| 2.460184| 2.625558|  5.026601|
+|3  |apply+logSumExp0 | 2.670531| 2.930343| 3.328314| 2.997537| 3.231213| 10.639849|
 
 
-|   |expr             |      min|       lq|     mean|   median|       uq|      max|
-|:--|:----------------|--------:|--------:|--------:|--------:|--------:|--------:|
-|1  |rowLogSumExps    | 1.000000| 1.000000| 1.000000| 1.000000| 1.000000| 1.000000|
-|2  |apply+logSumExp  | 1.463046| 1.471509| 1.553728| 1.498199| 1.503266| 3.613928|
-|3  |apply+logSumExp0 | 1.705246| 1.729777| 1.938948| 1.743529| 1.742781| 3.888642|
+|   |expr             |      min|       lq|     mean|   median|       uq|       max|
+|:--|:----------------|--------:|--------:|--------:|--------:|--------:|---------:|
+|1  |rowLogSumExps    | 1.000000| 1.000000| 1.000000| 1.000000| 1.000000| 1.0000000|
+|2  |apply+logSumExp  | 1.483831| 1.396648| 1.369671| 1.400098| 1.449852| 0.5267059|
+|3  |apply+logSumExp0 | 1.809830| 1.704929| 1.778517| 1.705907| 1.784299| 1.1148828|
 
 _Figure: Benchmarking of colLogSumExps(), apply+logSumExp() and apply+logSumExp0() on 1000x100 data  as well as rowLogSumExps(), apply+logSumExp() and apply+logSumExp0() on the same data transposed.  Outliers are displayed as crosses.  Times are in milliseconds._
 
@@ -542,16 +542,16 @@ _Table: Benchmarking of colLogSumExps() and rowLogSumExps() on 1000x100 data (or
 
 
 
-|   |expr          |      min|       lq|     mean|   median|       uq|      max|
-|:--|:-------------|--------:|--------:|--------:|--------:|--------:|--------:|
-|1  |colLogSumExps | 1.379630| 1.384518| 1.477507| 1.403514| 1.497534| 2.198962|
-|2  |rowLogSumExps | 1.458873| 1.462925| 1.541836| 1.467489| 1.569214| 2.227659|
+|   |expr          |     min|       lq|     mean|   median|       uq|      max|
+|:--|:-------------|-------:|--------:|--------:|--------:|--------:|--------:|
+|2  |rowLogSumExps | 1.47557| 1.718748| 1.871399| 1.757151| 1.810914| 9.543469|
+|1  |colLogSumExps | 1.46191| 1.665638| 1.874952| 1.758566| 1.838413| 9.373620|
 
 
-|   |expr          |      min|       lq|     mean|   median|       uq|     max|
-|:--|:-------------|--------:|--------:|--------:|--------:|--------:|-------:|
-|1  |colLogSumExps | 1.000000| 1.000000| 1.000000| 1.000000| 1.000000| 1.00000|
-|2  |rowLogSumExps | 1.057438| 1.056632| 1.043539| 1.045582| 1.047865| 1.01305|
+|   |expr          |       min|        lq|     mean|   median|       uq|       max|
+|:--|:-------------|---------:|---------:|--------:|--------:|--------:|---------:|
+|2  |rowLogSumExps | 1.0000000| 1.0000000| 1.000000| 1.000000| 1.000000| 1.0000000|
+|1  |colLogSumExps | 0.9907426| 0.9690996| 1.001898| 1.000805| 1.015185| 0.9822026|
 
 _Figure: Benchmarking of colLogSumExps() and rowLogSumExps() on 1000x100 data (original and transposed).  Outliers are displayed as crosses. Times are in milliseconds._
 
@@ -584,7 +584,7 @@ attached base packages:
 [1] stats     graphics  grDevices utils     datasets  methods   base     
 
 other attached packages:
-[1] microbenchmark_1.4-7   matrixStats_0.60.1     ggplot2_3.3.5         
+[1] microbenchmark_1.4-7   matrixStats_0.60.0     ggplot2_3.3.5         
 [4] knitr_1.33             R.devices_2.17.0       R.utils_2.10.1        
 [7] R.oo_1.24.0            R.methodsS3_1.8.1-9001 history_0.0.1-9000    
 
@@ -610,16 +610,17 @@ loaded via a namespace (and not attached):
 [55] tabby_0.0.1-9001        AnnotationDbi_1.54.1    Biostrings_2.60.2      
 [58] compiler_4.1.1          GenomeInfoDb_1.28.1     rlang_0.4.11           
 [61] grid_4.1.1              RCurl_1.98-1.4          cwhmisc_6.6            
-[64] rappdirs_0.3.3          startup_0.15.0          labeling_0.4.2         
-[67] bitops_1.0-7            base64enc_0.1-3         boot_1.3-28            
-[70] gtable_0.3.0            DBI_1.1.1               markdown_1.1           
-[73] R6_2.5.1                lpSolveAPI_5.5.2.0-17.7 rle_0.9.2              
-[76] dplyr_1.0.7             fastmap_1.1.0           bit_4.0.4              
-[79] utf8_1.2.2              parallel_4.1.1          Rcpp_1.0.7             
-[82] vctrs_0.3.8             png_0.1-7               DEoptimR_1.0-9         
-[85] tidyselect_1.1.1        xfun_0.25               coda_0.19-4            
+[64] rstudioapi_0.13         rappdirs_0.3.3          startup_0.15.0         
+[67] labeling_0.4.2          bitops_1.0-7            base64enc_0.1-3        
+[70] boot_1.3-28             gtable_0.3.0            DBI_1.1.1              
+[73] markdown_1.1            R6_2.5.1                lpSolveAPI_5.5.2.0-17.7
+[76] rle_0.9.2               dplyr_1.0.7             fastmap_1.1.0          
+[79] bit_4.0.4               utf8_1.2.2              parallel_4.1.1         
+[82] Rcpp_1.0.7              vctrs_0.3.8             png_0.1-7              
+[85] DEoptimR_1.0-9          tidyselect_1.1.1        xfun_0.25              
+[88] coda_0.19-4            
 ```
-Total processing time was 16.49 secs.
+Total processing time was 17.62 secs.
 
 
 ### Reproducibility
@@ -636,7 +637,7 @@ html <- matrixStats:::benchmark('colLogSumExps')
 [StackOverflow:rowProds?]: https://stackoverflow.com/questions/20198801/ "Stack Overflow: Row product of matrix and column sum of matrix"
 
 ---------------------------------------
-Copyright Henrik Bengtsson. Last updated on 2021-08-25 18:03:37 (+0200 UTC). Powered by [RSP].
+Copyright Henrik Bengtsson. Last updated on 2021-08-25 22:16:45 (+0200 UTC). Powered by [RSP].
 
 <script>
  var link = document.createElement('link');

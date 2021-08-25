@@ -63,16 +63,16 @@ This report benchmark the performance of colCummins() and rowCummins() on subset
 > X_S <- X[rows, cols]
 > gc()
           used  (Mb) gc trigger  (Mb) max used  (Mb)
-Ncells 5169930 276.2    7554717 403.5  7554717 403.5
-Vcells 9396749  71.7   31793280 242.6 60508962 461.7
+Ncells 5205545 278.1    7916910 422.9  7916910 422.9
+Vcells 9772989  74.6   33191153 253.3 53339345 407.0
 > colStats <- microbenchmark(colCummins_X_S = colCummins(X_S), `colCummins(X, rows, cols)` = colCummins(X, 
 +     rows = rows, cols = cols), `colCummins(X[rows, cols])` = colCummins(X[rows, cols]), unit = "ms")
 > X <- t(X)
 > X_S <- t(X_S)
 > gc()
           used  (Mb) gc trigger  (Mb) max used  (Mb)
-Ncells 5169214 276.1    7554717 403.5  7554717 403.5
-Vcells 9394927  71.7   31793280 242.6 60508962 461.7
+Ncells 5193013 277.4    7916910 422.9  7916910 422.9
+Vcells 9731461  74.3   33191153 253.3 53339345 407.0
 > rowStats <- microbenchmark(rowCummins_X_S = rowCummins(X_S), `rowCummins(X, cols, rows)` = rowCummins(X, 
 +     rows = cols, cols = rows), `rowCummins(X[cols, rows])` = rowCummins(X[cols, rows]), unit = "ms")
 ```
@@ -81,35 +81,35 @@ _Table: Benchmarking of colCummins_X_S(), colCummins(X, rows, cols)() and colCum
 
 
 
-|   |expr                      |      min|        lq|      mean|    median|        uq|      max|
-|:--|:-------------------------|--------:|---------:|---------:|---------:|---------:|--------:|
-|1  |colCummins_X_S            | 0.002245| 0.0024175| 0.0040436| 0.0024815| 0.0026075| 0.154451|
-|2  |colCummins(X, rows, cols) | 0.002523| 0.0027960| 0.0029343| 0.0028750| 0.0029865| 0.004864|
-|3  |colCummins(X[rows, cols]) | 0.002976| 0.0034810| 0.0036359| 0.0035665| 0.0036510| 0.007857|
+|   |expr                      |      min|        lq|      mean|   median|        uq|      max|
+|:--|:-------------------------|--------:|---------:|---------:|--------:|---------:|--------:|
+|1  |colCummins_X_S            | 0.002330| 0.0024935| 0.0041899| 0.002534| 0.0026285| 0.163776|
+|2  |colCummins(X, rows, cols) | 0.002512| 0.0028250| 0.0029663| 0.002905| 0.0030145| 0.005294|
+|3  |colCummins(X[rows, cols]) | 0.003221| 0.0035685| 0.0037370| 0.003672| 0.0037845| 0.007849|
 
 
 |   |expr                      |      min|       lq|      mean|   median|       uq|       max|
 |:--|:-------------------------|--------:|--------:|---------:|--------:|--------:|---------:|
 |1  |colCummins_X_S            | 1.000000| 1.000000| 1.0000000| 1.000000| 1.000000| 1.0000000|
-|2  |colCummins(X, rows, cols) | 1.123831| 1.156567| 0.7256659| 1.158573| 1.145350| 0.0314922|
-|3  |colCummins(X[rows, cols]) | 1.325613| 1.439917| 0.8991817| 1.437236| 1.400192| 0.0508705|
+|2  |colCummins(X, rows, cols) | 1.078112| 1.132946| 0.7079807| 1.146409| 1.146852| 0.0323246|
+|3  |colCummins(X[rows, cols]) | 1.382403| 1.431121| 0.8919152| 1.449092| 1.439795| 0.0479252|
 
 _Table: Benchmarking of rowCummins_X_S(), rowCummins(X, cols, rows)() and rowCummins(X[cols, rows])() on integer+10x10 data (transposed). The top panel shows times in milliseconds and the bottom panel shows relative times._
 
 
 
-|   |expr                      |      min|        lq|      mean|    median|        uq|      max|
-|:--|:-------------------------|--------:|---------:|---------:|---------:|---------:|--------:|
-|1  |rowCummins_X_S            | 0.002141| 0.0024435| 0.0025852| 0.0025245| 0.0026705| 0.005235|
-|2  |rowCummins(X, cols, rows) | 0.002608| 0.0028340| 0.0043350| 0.0029140| 0.0030185| 0.142029|
-|3  |rowCummins(X[cols, rows]) | 0.002997| 0.0035295| 0.0036669| 0.0036315| 0.0037405| 0.005421|
+|   |expr                      |      min|        lq|      mean|    median|       uq|      max|
+|:--|:-------------------------|--------:|---------:|---------:|---------:|--------:|--------:|
+|1  |rowCummins_X_S            | 0.002180| 0.0025405| 0.0028294| 0.0026840| 0.002929| 0.005550|
+|2  |rowCummins(X, cols, rows) | 0.002590| 0.0029520| 0.0049077| 0.0031060| 0.003385| 0.172772|
+|3  |rowCummins(X[cols, rows]) | 0.003161| 0.0037645| 0.0042124| 0.0040355| 0.004395| 0.008983|
 
 
-|   |expr                      |      min|       lq|     mean|   median|       uq|      max|
-|:--|:-------------------------|--------:|--------:|--------:|--------:|--------:|--------:|
-|1  |rowCummins_X_S            | 1.000000| 1.000000| 1.000000| 1.000000| 1.000000|  1.00000|
-|2  |rowCummins(X, cols, rows) | 1.218122| 1.159812| 1.676827| 1.154288| 1.130313| 27.13066|
-|3  |rowCummins(X[cols, rows]) | 1.399813| 1.444444| 1.418398| 1.438503| 1.400674|  1.03553|
+|   |expr                      |      min|       lq|     mean|   median|       uq|       max|
+|:--|:-------------------------|--------:|--------:|--------:|--------:|--------:|---------:|
+|1  |rowCummins_X_S            | 1.000000| 1.000000| 1.000000| 1.000000| 1.000000|  1.000000|
+|2  |rowCummins(X, cols, rows) | 1.188073| 1.161976| 1.734530| 1.157228| 1.155685| 31.130090|
+|3  |rowCummins(X[cols, rows]) | 1.450000| 1.481795| 1.488793| 1.503540| 1.500512|  1.618559|
 
 _Figure: Benchmarking of colCummins_X_S(), colCummins(X, rows, cols)() and colCummins(X[rows, cols])() on integer+10x10 data  as well as rowCummins_X_S(), rowCummins(X, cols, rows)() and rowCummins(X[cols, rows])() on the same data transposed.  Outliers are displayed as crosses.  Times are in milliseconds._
 
@@ -121,16 +121,16 @@ _Table: Benchmarking of colCummins_X_S() and rowCummins_X_S() on integer+10x10 d
 
 
 
-|   |expr           |   min|     lq|    mean| median|     uq|     max|
-|:--|:--------------|-----:|------:|-------:|------:|------:|-------:|
-|1  |colCummins_X_S | 2.245| 2.4175| 4.04361| 2.4815| 2.6075| 154.451|
-|2  |rowCummins_X_S | 2.141| 2.4435| 2.58524| 2.5245| 2.6705|   5.235|
+|   |expr           |  min|     lq|    mean| median|     uq|     max|
+|:--|:--------------|----:|------:|-------:|------:|------:|-------:|
+|1  |colCummins_X_S | 2.33| 2.4935| 4.18986|  2.534| 2.6285| 163.776|
+|2  |rowCummins_X_S | 2.18| 2.5405| 2.82940|  2.684| 2.9290|   5.550|
 
 
-|   |expr           |       min|       lq|      mean|   median|       uq|       max|
-|:--|:--------------|---------:|--------:|---------:|--------:|--------:|---------:|
-|1  |colCummins_X_S | 1.0000000| 1.000000| 1.0000000| 1.000000| 1.000000| 1.0000000|
-|2  |rowCummins_X_S | 0.9536748| 1.010755| 0.6393396| 1.017328| 1.024161| 0.0338942|
+|   |expr           |       min|       lq|     mean|   median|       uq|       max|
+|:--|:--------------|---------:|--------:|--------:|--------:|--------:|---------:|
+|1  |colCummins_X_S | 1.0000000| 1.000000| 1.000000| 1.000000| 1.000000| 1.0000000|
+|2  |rowCummins_X_S | 0.9356223| 1.018849| 0.675297| 1.059195| 1.114324| 0.0338877|
 
 _Figure: Benchmarking of colCummins_X_S() and rowCummins_X_S() on integer+10x10 data (original and transposed).  Outliers are displayed as crosses. Times are in milliseconds._
 
@@ -146,16 +146,16 @@ _Figure: Benchmarking of colCummins_X_S() and rowCummins_X_S() on integer+10x10 
 > X_S <- X[rows, cols]
 > gc()
           used  (Mb) gc trigger  (Mb) max used  (Mb)
-Ncells 5167925 276.0    7554717 403.5  7554717 403.5
-Vcells 9064280  69.2   31793280 242.6 60508962 461.7
+Ncells 5191738 277.3    7916910 422.9  7916910 422.9
+Vcells 9400288  71.8   33191153 253.3 53339345 407.0
 > colStats <- microbenchmark(colCummins_X_S = colCummins(X_S), `colCummins(X, rows, cols)` = colCummins(X, 
 +     rows = rows, cols = cols), `colCummins(X[rows, cols])` = colCummins(X[rows, cols]), unit = "ms")
 > X <- t(X)
 > X_S <- t(X_S)
 > gc()
           used  (Mb) gc trigger  (Mb) max used  (Mb)
-Ncells 5167919 276.0    7554717 403.5  7554717 403.5
-Vcells 9069363  69.2   31793280 242.6 60508962 461.7
+Ncells 5191732 277.3    7916910 422.9  7916910 422.9
+Vcells 9405371  71.8   33191153 253.3 53339345 407.0
 > rowStats <- microbenchmark(rowCummins_X_S = rowCummins(X_S), `rowCummins(X, cols, rows)` = rowCummins(X, 
 +     rows = cols, cols = rows), `rowCummins(X[cols, rows])` = rowCummins(X[cols, rows]), unit = "ms")
 ```
@@ -164,35 +164,35 @@ _Table: Benchmarking of colCummins_X_S(), colCummins(X, rows, cols)() and colCum
 
 
 
-|   |expr                      |      min|        lq|      mean|    median|       uq|      max|
-|:--|:-------------------------|--------:|---------:|---------:|---------:|--------:|--------:|
-|1  |colCummins_X_S            | 0.014551| 0.0148320| 0.0154395| 0.0150310| 0.015175| 0.030870|
-|2  |colCummins(X, rows, cols) | 0.019713| 0.0200055| 0.0202792| 0.0201330| 0.020288| 0.025358|
-|3  |colCummins(X[rows, cols]) | 0.025384| 0.0259840| 0.0269042| 0.0262445| 0.026592| 0.060024|
+|   |expr                      |      min|        lq|      mean|    median|        uq|      max|
+|:--|:-------------------------|--------:|---------:|---------:|---------:|---------:|--------:|
+|1  |colCummins_X_S            | 0.014722| 0.0150745| 0.0154053| 0.0152420| 0.0156375| 0.020775|
+|2  |colCummins(X, rows, cols) | 0.019863| 0.0200705| 0.0204905| 0.0202300| 0.0209000| 0.024746|
+|3  |colCummins(X[rows, cols]) | 0.025919| 0.0264095| 0.0274265| 0.0266065| 0.0275770| 0.051017|
 
 
-|   |expr                      |      min|       lq|     mean|   median|       uq|       max|
-|:--|:-------------------------|--------:|--------:|--------:|--------:|--------:|---------:|
-|1  |colCummins_X_S            | 1.000000| 1.000000| 1.000000| 1.000000| 1.000000| 1.0000000|
-|2  |colCummins(X, rows, cols) | 1.354752| 1.348807| 1.313463| 1.339432| 1.336936| 0.8214448|
-|3  |colCummins(X[rows, cols]) | 1.744485| 1.751888| 1.742553| 1.746025| 1.752356| 1.9444121|
+|   |expr                      |      min|       lq|     mean|   median|       uq|      max|
+|:--|:-------------------------|--------:|--------:|--------:|--------:|--------:|--------:|
+|1  |colCummins_X_S            | 1.000000| 1.000000| 1.000000| 1.000000| 1.000000| 1.000000|
+|2  |colCummins(X, rows, cols) | 1.349205| 1.331421| 1.330091| 1.327254| 1.336531| 1.191143|
+|3  |colCummins(X[rows, cols]) | 1.760562| 1.751932| 1.780325| 1.745604| 1.763517| 2.455692|
 
 _Table: Benchmarking of rowCummins_X_S(), rowCummins(X, cols, rows)() and rowCummins(X[cols, rows])() on integer+100x100 data (transposed). The top panel shows times in milliseconds and the bottom panel shows relative times._
 
 
 
-|   |expr                      |      min|        lq|      mean|    median|        uq|      max|
-|:--|:-------------------------|--------:|---------:|---------:|---------:|---------:|--------:|
-|1  |rowCummins_X_S            | 0.010682| 0.0111615| 0.0117754| 0.0115635| 0.0118515| 0.029455|
-|2  |rowCummins(X, cols, rows) | 0.019190| 0.0196635| 0.0209656| 0.0203260| 0.0206680| 0.047943|
-|3  |rowCummins(X[cols, rows]) | 0.021452| 0.0219815| 0.0228265| 0.0227555| 0.0230450| 0.035006|
+|   |expr                      |      min|        lq|      mean|    median|       uq|      max|
+|:--|:-------------------------|--------:|---------:|---------:|---------:|--------:|--------:|
+|1  |rowCummins_X_S            | 0.011269| 0.0116405| 0.0120914| 0.0117745| 0.011904| 0.021832|
+|2  |rowCummins(X, cols, rows) | 0.020076| 0.0203055| 0.0210412| 0.0204785| 0.020640| 0.046656|
+|3  |rowCummins(X[cols, rows]) | 0.022696| 0.0230005| 0.0232872| 0.0231585| 0.023364| 0.028107|
 
 
 |   |expr                      |      min|       lq|     mean|   median|       uq|      max|
 |:--|:-------------------------|--------:|--------:|--------:|--------:|--------:|--------:|
 |1  |rowCummins_X_S            | 1.000000| 1.000000| 1.000000| 1.000000| 1.000000| 1.000000|
-|2  |rowCummins(X, cols, rows) | 1.796480| 1.761726| 1.780463| 1.757772| 1.743914| 1.627669|
-|3  |rowCummins(X[cols, rows]) | 2.008238| 1.969404| 1.938488| 1.967873| 1.944480| 1.188457|
+|2  |rowCummins(X, cols, rows) | 1.781524| 1.744384| 1.740175| 1.739225| 1.733871| 2.137046|
+|3  |rowCummins(X[cols, rows]) | 2.014021| 1.975903| 1.925929| 1.966835| 1.962702| 1.287422|
 
 _Figure: Benchmarking of colCummins_X_S(), colCummins(X, rows, cols)() and colCummins(X[rows, cols])() on integer+100x100 data  as well as rowCummins_X_S(), rowCummins(X, cols, rows)() and rowCummins(X[cols, rows])() on the same data transposed.  Outliers are displayed as crosses.  Times are in milliseconds._
 
@@ -206,14 +206,14 @@ _Table: Benchmarking of colCummins_X_S() and rowCummins_X_S() on integer+100x100
 
 |   |expr           |    min|      lq|     mean|  median|      uq|    max|
 |:--|:--------------|------:|-------:|--------:|-------:|-------:|------:|
-|2  |rowCummins_X_S | 10.682| 11.1615| 11.77539| 11.5635| 11.8515| 29.455|
-|1  |colCummins_X_S | 14.551| 14.8320| 15.43950| 15.0310| 15.1750| 30.870|
+|2  |rowCummins_X_S | 11.269| 11.6405| 12.09144| 11.7745| 11.9040| 21.832|
+|1  |colCummins_X_S | 14.722| 15.0745| 15.40532| 15.2420| 15.6375| 20.775|
 
 
-|   |expr           |      min|       lq|     mean|   median|       uq|      max|
-|:--|:--------------|--------:|--------:|--------:|--------:|--------:|--------:|
-|2  |rowCummins_X_S | 1.000000| 1.000000| 1.000000| 1.000000| 1.000000| 1.000000|
-|1  |colCummins_X_S | 1.362198| 1.328854| 1.311167| 1.299866| 1.280429| 1.048039|
+|   |expr           |      min|       lq|     mean|   median|       uq|       max|
+|:--|:--------------|--------:|--------:|--------:|--------:|--------:|---------:|
+|2  |rowCummins_X_S | 1.000000| 1.000000| 1.000000| 1.000000| 1.000000| 1.0000000|
+|1  |colCummins_X_S | 1.306416| 1.295004| 1.274068| 1.294492| 1.313634| 0.9515848|
 
 _Figure: Benchmarking of colCummins_X_S() and rowCummins_X_S() on integer+100x100 data (original and transposed).  Outliers are displayed as crosses. Times are in milliseconds._
 
@@ -229,16 +229,16 @@ _Figure: Benchmarking of colCummins_X_S() and rowCummins_X_S() on integer+100x10
 > X_S <- X[rows, cols]
 > gc()
           used  (Mb) gc trigger  (Mb) max used  (Mb)
-Ncells 5168125 276.1    7554717 403.5  7554717 403.5
-Vcells 9065163  69.2   31793280 242.6 60508962 461.7
+Ncells 5192480 277.4    7916910 422.9  7916910 422.9
+Vcells 9404338  71.8   33191153 253.3 53339345 407.0
 > colStats <- microbenchmark(colCummins_X_S = colCummins(X_S), `colCummins(X, rows, cols)` = colCummins(X, 
 +     rows = rows, cols = cols), `colCummins(X[rows, cols])` = colCummins(X[rows, cols]), unit = "ms")
 > X <- t(X)
 > X_S <- t(X_S)
 > gc()
           used  (Mb) gc trigger  (Mb) max used  (Mb)
-Ncells 5168119 276.1    7554717 403.5  7554717 403.5
-Vcells 9070246  69.3   31793280 242.6 60508962 461.7
+Ncells 5192474 277.4    7916910 422.9  7916910 422.9
+Vcells 9409421  71.8   33191153 253.3 53339345 407.0
 > rowStats <- microbenchmark(rowCummins_X_S = rowCummins(X_S), `rowCummins(X, cols, rows)` = rowCummins(X, 
 +     rows = cols, cols = rows), `rowCummins(X[cols, rows])` = rowCummins(X[cols, rows]), unit = "ms")
 ```
@@ -249,16 +249,16 @@ _Table: Benchmarking of colCummins_X_S(), colCummins(X, rows, cols)() and colCum
 
 |   |expr                      |      min|        lq|      mean|    median|        uq|      max|
 |:--|:-------------------------|--------:|---------:|---------:|---------:|---------:|--------:|
-|1  |colCummins_X_S            | 0.015369| 0.0157945| 0.0166214| 0.0160185| 0.0164425| 0.020407|
-|2  |colCummins(X, rows, cols) | 0.020123| 0.0211830| 0.0233667| 0.0213775| 0.0217550| 0.038248|
-|3  |colCummins(X[rows, cols]) | 0.027098| 0.0277920| 0.0305393| 0.0281250| 0.0296600| 0.069282|
+|1  |colCummins_X_S            | 0.015670| 0.0158360| 0.0161365| 0.0160075| 0.0161700| 0.022060|
+|2  |colCummins(X, rows, cols) | 0.020882| 0.0211305| 0.0213286| 0.0212610| 0.0213995| 0.024265|
+|3  |colCummins(X[rows, cols]) | 0.027668| 0.0281160| 0.0294205| 0.0282215| 0.0284410| 0.062390|
 
 
 |   |expr                      |      min|       lq|     mean|   median|       uq|      max|
 |:--|:-------------------------|--------:|--------:|--------:|--------:|--------:|--------:|
 |1  |colCummins_X_S            | 1.000000| 1.000000| 1.000000| 1.000000| 1.000000| 1.000000|
-|2  |colCummins(X, rows, cols) | 1.309324| 1.341163| 1.405826| 1.334551| 1.323096| 1.874259|
-|3  |colCummins(X[rows, cols]) | 1.763160| 1.759600| 1.837353| 1.755782| 1.803862| 3.395011|
+|2  |colCummins(X, rows, cols) | 1.332610| 1.334333| 1.321760| 1.328190| 1.323408| 1.099955|
+|3  |colCummins(X[rows, cols]) | 1.765667| 1.775448| 1.823221| 1.763017| 1.758874| 2.828196|
 
 _Table: Benchmarking of rowCummins_X_S(), rowCummins(X, cols, rows)() and rowCummins(X[cols, rows])() on integer+1000x10 data (transposed). The top panel shows times in milliseconds and the bottom panel shows relative times._
 
@@ -266,16 +266,16 @@ _Table: Benchmarking of rowCummins_X_S(), rowCummins(X, cols, rows)() and rowCum
 
 |   |expr                      |      min|        lq|      mean|    median|        uq|      max|
 |:--|:-------------------------|--------:|---------:|---------:|---------:|---------:|--------:|
-|1  |rowCummins_X_S            | 0.013536| 0.0141215| 0.0144029| 0.0143365| 0.0145715| 0.018483|
-|2  |rowCummins(X, cols, rows) | 0.022226| 0.0232610| 0.0239554| 0.0236175| 0.0239660| 0.039635|
-|3  |rowCummins(X[cols, rows]) | 0.026367| 0.0277390| 0.0290708| 0.0281540| 0.0284065| 0.091400|
+|1  |rowCummins_X_S            | 0.014166| 0.0144155| 0.0148361| 0.0145505| 0.0147625| 0.029874|
+|2  |rowCummins(X, cols, rows) | 0.023063| 0.0233835| 0.0240219| 0.0236370| 0.0238950| 0.041511|
+|3  |rowCummins(X[cols, rows]) | 0.027575| 0.0281980| 0.0289943| 0.0283870| 0.0287650| 0.057518|
 
 
 |   |expr                      |      min|       lq|     mean|   median|       uq|      max|
 |:--|:-------------------------|--------:|--------:|--------:|--------:|--------:|--------:|
 |1  |rowCummins_X_S            | 1.000000| 1.000000| 1.000000| 1.000000| 1.000000| 1.000000|
-|2  |rowCummins(X, cols, rows) | 1.641992| 1.647205| 1.663232| 1.647369| 1.644717| 2.144403|
-|3  |rowCummins(X[cols, rows]) | 1.947917| 1.964310| 2.018393| 1.963799| 1.949456| 4.945085|
+|2  |rowCummins(X, cols, rows) | 1.628053| 1.622108| 1.619154| 1.624480| 1.618628| 1.389536|
+|3  |rowCummins(X[cols, rows]) | 1.946562| 1.956089| 1.954311| 1.950929| 1.948518| 1.925353|
 
 _Figure: Benchmarking of colCummins_X_S(), colCummins(X, rows, cols)() and colCummins(X[rows, cols])() on integer+1000x10 data  as well as rowCummins_X_S(), rowCummins(X, cols, rows)() and rowCummins(X[cols, rows])() on the same data transposed.  Outliers are displayed as crosses.  Times are in milliseconds._
 
@@ -289,14 +289,14 @@ _Table: Benchmarking of colCummins_X_S() and rowCummins_X_S() on integer+1000x10
 
 |   |expr           |    min|      lq|     mean|  median|      uq|    max|
 |:--|:--------------|------:|-------:|--------:|-------:|-------:|------:|
-|2  |rowCummins_X_S | 13.536| 14.1215| 14.40293| 14.3365| 14.5715| 18.483|
-|1  |colCummins_X_S | 15.369| 15.7945| 16.62135| 16.0185| 16.4425| 20.407|
+|2  |rowCummins_X_S | 14.166| 14.4155| 14.83608| 14.5505| 14.7625| 29.874|
+|1  |colCummins_X_S | 15.670| 15.8360| 16.13655| 16.0075| 16.1700| 22.060|
 
 
-|   |expr           |      min|       lq|     mean|   median|       uq|      max|
-|:--|:--------------|--------:|--------:|--------:|--------:|--------:|--------:|
-|2  |rowCummins_X_S | 1.000000| 1.000000| 1.000000| 1.000000| 1.000000| 1.000000|
-|1  |colCummins_X_S | 1.135417| 1.118472| 1.154026| 1.117323| 1.128401| 1.104096|
+|   |expr           |     min|      lq|     mean|   median|       uq|       max|
+|:--|:--------------|-------:|-------:|--------:|--------:|--------:|---------:|
+|2  |rowCummins_X_S | 1.00000| 1.00000| 1.000000| 1.000000| 1.000000| 1.0000000|
+|1  |colCummins_X_S | 1.10617| 1.09854| 1.087656| 1.100134| 1.095343| 0.7384348|
 
 _Figure: Benchmarking of colCummins_X_S() and rowCummins_X_S() on integer+1000x10 data (original and transposed).  Outliers are displayed as crosses. Times are in milliseconds._
 
@@ -312,16 +312,16 @@ _Figure: Benchmarking of colCummins_X_S() and rowCummins_X_S() on integer+1000x1
 > X_S <- X[rows, cols]
 > gc()
           used  (Mb) gc trigger  (Mb) max used  (Mb)
-Ncells 5168330 276.1    7554717 403.5  7554717 403.5
-Vcells 9065994  69.2   31793280 242.6 60508962 461.7
+Ncells 5192685 277.4    7916910 422.9  7916910 422.9
+Vcells 9405170  71.8   33191153 253.3 53339345 407.0
 > colStats <- microbenchmark(colCummins_X_S = colCummins(X_S), `colCummins(X, rows, cols)` = colCummins(X, 
 +     rows = rows, cols = cols), `colCummins(X[rows, cols])` = colCummins(X[rows, cols]), unit = "ms")
 > X <- t(X)
 > X_S <- t(X_S)
 > gc()
           used  (Mb) gc trigger  (Mb) max used  (Mb)
-Ncells 5168324 276.1    7554717 403.5  7554717 403.5
-Vcells 9071077  69.3   31793280 242.6 60508962 461.7
+Ncells 5192679 277.4    7916910 422.9  7916910 422.9
+Vcells 9410253  71.8   33191153 253.3 53339345 407.0
 > rowStats <- microbenchmark(rowCummins_X_S = rowCummins(X_S), `rowCummins(X, cols, rows)` = rowCummins(X, 
 +     rows = cols, cols = rows), `rowCummins(X[cols, rows])` = rowCummins(X[cols, rows]), unit = "ms")
 ```
@@ -332,16 +332,16 @@ _Table: Benchmarking of colCummins_X_S(), colCummins(X, rows, cols)() and colCum
 
 |   |expr                      |      min|        lq|      mean|    median|        uq|      max|
 |:--|:-------------------------|--------:|---------:|---------:|---------:|---------:|--------:|
-|1  |colCummins_X_S            | 0.012171| 0.0126420| 0.0131185| 0.0129515| 0.0132895| 0.028385|
-|2  |colCummins(X, rows, cols) | 0.021632| 0.0220585| 0.0229383| 0.0228560| 0.0231805| 0.037744|
-|3  |colCummins(X[rows, cols]) | 0.025195| 0.0257620| 0.0268199| 0.0266955| 0.0272145| 0.038380|
+|1  |colCummins_X_S            | 0.012417| 0.0129775| 0.0133815| 0.0130920| 0.0132620| 0.027088|
+|2  |colCummins(X, rows, cols) | 0.021947| 0.0228485| 0.0232299| 0.0229705| 0.0231175| 0.037744|
+|3  |colCummins(X[rows, cols]) | 0.026242| 0.0268645| 0.0271684| 0.0270525| 0.0272390| 0.031215|
 
 
 |   |expr                      |      min|       lq|     mean|   median|       uq|      max|
 |:--|:-------------------------|--------:|--------:|--------:|--------:|--------:|--------:|
 |1  |colCummins_X_S            | 1.000000| 1.000000| 1.000000| 1.000000| 1.000000| 1.000000|
-|2  |colCummins(X, rows, cols) | 1.777340| 1.744858| 1.748544| 1.764738| 1.744272| 1.329716|
-|3  |colCummins(X[rows, cols]) | 2.070085| 2.037810| 2.044433| 2.061190| 2.047820| 1.352123|
+|2  |colCummins(X, rows, cols) | 1.767496| 1.760624| 1.735977| 1.754545| 1.743138| 1.393385|
+|3  |colCummins(X[rows, cols]) | 2.113393| 2.070083| 2.030304| 2.066338| 2.053913| 1.152355|
 
 _Table: Benchmarking of rowCummins_X_S(), rowCummins(X, cols, rows)() and rowCummins(X[cols, rows])() on integer+10x1000 data (transposed). The top panel shows times in milliseconds and the bottom panel shows relative times._
 
@@ -349,16 +349,16 @@ _Table: Benchmarking of rowCummins_X_S(), rowCummins(X, cols, rows)() and rowCum
 
 |   |expr                      |      min|        lq|      mean|    median|        uq|      max|
 |:--|:-------------------------|--------:|---------:|---------:|---------:|---------:|--------:|
-|1  |rowCummins_X_S            | 0.010335| 0.0109225| 0.0111876| 0.0111355| 0.0113560| 0.014650|
-|2  |rowCummins(X, cols, rows) | 0.019043| 0.0195740| 0.0203135| 0.0201940| 0.0203390| 0.043095|
-|3  |rowCummins(X[cols, rows]) | 0.021838| 0.0225245| 0.0232645| 0.0230975| 0.0233895| 0.038276|
+|1  |rowCummins_X_S            | 0.010842| 0.0112060| 0.0114377| 0.0113875| 0.0115715| 0.014782|
+|2  |rowCummins(X, cols, rows) | 0.019605| 0.0200830| 0.0205675| 0.0202240| 0.0204085| 0.044026|
+|3  |rowCummins(X[cols, rows]) | 0.022824| 0.0232155| 0.0235122| 0.0233875| 0.0236185| 0.028475|
 
 
 |   |expr                      |      min|       lq|     mean|   median|       uq|      max|
 |:--|:-------------------------|--------:|--------:|--------:|--------:|--------:|--------:|
 |1  |rowCummins_X_S            | 1.000000| 1.000000| 1.000000| 1.000000| 1.000000| 1.000000|
-|2  |rowCummins(X, cols, rows) | 1.842574| 1.792081| 1.815712| 1.813479| 1.791036| 2.941638|
-|3  |rowCummins(X[cols, rows]) | 2.113014| 2.062211| 2.079489| 2.074222| 2.059660| 2.612696|
+|2  |rowCummins(X, cols, rows) | 1.808246| 1.792165| 1.798223| 1.775982| 1.763687| 2.978352|
+|3  |rowCummins(X[cols, rows]) | 2.105147| 2.071703| 2.055684| 2.053787| 2.041092| 1.926329|
 
 _Figure: Benchmarking of colCummins_X_S(), colCummins(X, rows, cols)() and colCummins(X[rows, cols])() on integer+10x1000 data  as well as rowCummins_X_S(), rowCummins(X, cols, rows)() and rowCummins(X[cols, rows])() on the same data transposed.  Outliers are displayed as crosses.  Times are in milliseconds._
 
@@ -372,14 +372,14 @@ _Table: Benchmarking of colCummins_X_S() and rowCummins_X_S() on integer+10x1000
 
 |   |expr           |    min|      lq|     mean|  median|      uq|    max|
 |:--|:--------------|------:|-------:|--------:|-------:|-------:|------:|
-|2  |rowCummins_X_S | 10.335| 10.9225| 11.18761| 11.1355| 11.3560| 14.650|
-|1  |colCummins_X_S | 12.171| 12.6420| 13.11852| 12.9515| 13.2895| 28.385|
+|2  |rowCummins_X_S | 10.842| 11.2060| 11.43768| 11.3875| 11.5715| 14.782|
+|1  |colCummins_X_S | 12.417| 12.9775| 13.38146| 13.0920| 13.2620| 27.088|
 
 
 |   |expr           |      min|       lq|     mean|   median|       uq|      max|
 |:--|:--------------|--------:|--------:|--------:|--------:|--------:|--------:|
 |2  |rowCummins_X_S | 1.000000| 1.000000| 1.000000| 1.000000| 1.000000| 1.000000|
-|1  |colCummins_X_S | 1.177649| 1.157427| 1.172594| 1.163082| 1.170262| 1.937543|
+|1  |colCummins_X_S | 1.145268| 1.158085| 1.169945| 1.149682| 1.146092| 1.832499|
 
 _Figure: Benchmarking of colCummins_X_S() and rowCummins_X_S() on integer+10x1000 data (original and transposed).  Outliers are displayed as crosses. Times are in milliseconds._
 
@@ -395,16 +395,16 @@ _Figure: Benchmarking of colCummins_X_S() and rowCummins_X_S() on integer+10x100
 > X_S <- X[rows, cols]
 > gc()
           used  (Mb) gc trigger  (Mb) max used  (Mb)
-Ncells 5168540 276.1    7554717 403.5  7554717 403.5
-Vcells 9088665  69.4   31793280 242.6 60508962 461.7
+Ncells 5192896 277.4    7916910 422.9  7916910 422.9
+Vcells 9427841  72.0   33191153 253.3 53339345 407.0
 > colStats <- microbenchmark(colCummins_X_S = colCummins(X_S), `colCummins(X, rows, cols)` = colCummins(X, 
 +     rows = rows, cols = cols), `colCummins(X[rows, cols])` = colCummins(X[rows, cols]), unit = "ms")
 > X <- t(X)
 > X_S <- t(X_S)
 > gc()
           used  (Mb) gc trigger  (Mb) max used  (Mb)
-Ncells 5168534 276.1    7554717 403.5  7554717 403.5
-Vcells 9138748  69.8   31793280 242.6 60508962 461.7
+Ncells 5192890 277.4    7916910 422.9  7916910 422.9
+Vcells 9477924  72.4   33191153 253.3 53339345 407.0
 > rowStats <- microbenchmark(rowCummins_X_S = rowCummins(X_S), `rowCummins(X, cols, rows)` = rowCummins(X, 
 +     rows = cols, cols = rows), `rowCummins(X[cols, rows])` = rowCummins(X[cols, rows]), unit = "ms")
 ```
@@ -413,18 +413,18 @@ _Table: Benchmarking of colCummins_X_S(), colCummins(X, rows, cols)() and colCum
 
 
 
-|   |expr                      |      min|        lq|      mean|    median|        uq|      max|
-|:--|:-------------------------|--------:|---------:|---------:|---------:|---------:|--------:|
-|1  |colCummins_X_S            | 0.078050| 0.0940405| 0.1015596| 0.1015325| 0.1083205| 0.137274|
-|2  |colCummins(X, rows, cols) | 0.108922| 0.1261400| 0.1572101| 0.1389250| 0.1940475| 0.251067|
-|3  |colCummins(X[rows, cols]) | 0.146199| 0.1816045| 0.2036848| 0.1927170| 0.2325295| 0.291788|
+|   |expr                      |      min|       lq|      mean|    median|        uq|      max|
+|:--|:-------------------------|--------:|--------:|---------:|---------:|---------:|--------:|
+|1  |colCummins_X_S            | 0.091849| 0.097813| 0.1084712| 0.1021645| 0.1173995| 0.165053|
+|2  |colCummins(X, rows, cols) | 0.124766| 0.133437| 0.1502803| 0.1379690| 0.1668310| 0.283260|
+|3  |colCummins(X[rows, cols]) | 0.169853| 0.181177| 0.2021601| 0.1929750| 0.2217820| 0.275184|
 
 
-|   |expr                      |      min|       lq|     mean|   median|      uq|      max|
-|:--|:-------------------------|--------:|--------:|--------:|--------:|-------:|--------:|
-|1  |colCummins_X_S            | 1.000000| 1.000000| 1.000000| 1.000000| 1.00000| 1.000000|
-|2  |colCummins(X, rows, cols) | 1.395541| 1.341337| 1.547959| 1.368281| 1.79142| 1.828948|
-|3  |colCummins(X[rows, cols]) | 1.873145| 1.931131| 2.005569| 1.898082| 2.14668| 2.125588|
+|   |expr                      |      min|       lq|     mean|   median|       uq|      max|
+|:--|:-------------------------|--------:|--------:|--------:|--------:|--------:|--------:|
+|1  |colCummins_X_S            | 1.000000| 1.000000| 1.000000| 1.000000| 1.000000| 1.000000|
+|2  |colCummins(X, rows, cols) | 1.358382| 1.364205| 1.385439| 1.350459| 1.421054| 1.716176|
+|3  |colCummins(X[rows, cols]) | 1.849263| 1.852279| 1.863721| 1.888866| 1.889122| 1.667246|
 
 _Table: Benchmarking of rowCummins_X_S(), rowCummins(X, cols, rows)() and rowCummins(X[cols, rows])() on integer+100x1000 data (transposed). The top panel shows times in milliseconds and the bottom panel shows relative times._
 
@@ -432,16 +432,16 @@ _Table: Benchmarking of rowCummins_X_S(), rowCummins(X, cols, rows)() and rowCum
 
 |   |expr                      |      min|        lq|      mean|    median|        uq|      max|
 |:--|:-------------------------|--------:|---------:|---------:|---------:|---------:|--------:|
-|1  |rowCummins_X_S            | 0.063434| 0.0680585| 0.0774057| 0.0747840| 0.0848785| 0.148718|
-|2  |rowCummins(X, cols, rows) | 0.123822| 0.1317405| 0.1439455| 0.1363105| 0.1516675| 0.294103|
-|3  |rowCummins(X[cols, rows]) | 0.138158| 0.1478875| 0.1649033| 0.1569055| 0.1814240| 0.274453|
+|1  |rowCummins_X_S            | 0.065341| 0.0697605| 0.0782191| 0.0747945| 0.0866420| 0.124541|
+|2  |rowCummins(X, cols, rows) | 0.127408| 0.1325905| 0.1477554| 0.1377975| 0.1600035| 0.301935|
+|3  |rowCummins(X[cols, rows]) | 0.141966| 0.1514080| 0.1663348| 0.1574730| 0.1824585| 0.265356|
 
 
-|   |expr                      |      min|       lq|     mean|   median|       uq|      max|
-|:--|:-------------------------|--------:|--------:|--------:|--------:|--------:|--------:|
-|1  |rowCummins_X_S            | 1.000000| 1.000000| 1.000000| 1.000000| 1.000000| 1.000000|
-|2  |rowCummins(X, cols, rows) | 1.951982| 1.935695| 1.859625| 1.822723| 1.786878| 1.977588|
-|3  |rowCummins(X[cols, rows]) | 2.177980| 2.172947| 2.130378| 2.098116| 2.137455| 1.845459|
+|   |expr                      |      min|       lq|     mean|   median|      uq|      max|
+|:--|:-------------------------|--------:|--------:|--------:|--------:|-------:|--------:|
+|1  |rowCummins_X_S            | 1.000000| 1.000000| 1.000000| 1.000000| 1.00000| 1.000000|
+|2  |rowCummins(X, cols, rows) | 1.949894| 1.900653| 1.888994| 1.842348| 1.84672| 2.424382|
+|3  |rowCummins(X[cols, rows]) | 2.172694| 2.170397| 2.126526| 2.105409| 2.10589| 2.130672|
 
 _Figure: Benchmarking of colCummins_X_S(), colCummins(X, rows, cols)() and colCummins(X[rows, cols])() on integer+100x1000 data  as well as rowCummins_X_S(), rowCummins(X, cols, rows)() and rowCummins(X[cols, rows])() on the same data transposed.  Outliers are displayed as crosses.  Times are in milliseconds._
 
@@ -455,14 +455,14 @@ _Table: Benchmarking of colCummins_X_S() and rowCummins_X_S() on integer+100x100
 
 |   |expr           |    min|      lq|      mean|   median|       uq|     max|
 |:--|:--------------|------:|-------:|---------:|--------:|--------:|-------:|
-|2  |rowCummins_X_S | 63.434| 68.0585|  77.40568|  74.7840|  84.8785| 148.718|
-|1  |colCummins_X_S | 78.050| 94.0405| 101.55965| 101.5325| 108.3205| 137.274|
+|2  |rowCummins_X_S | 65.341| 69.7605|  78.21906|  74.7945|  86.6420| 124.541|
+|1  |colCummins_X_S | 91.849| 97.8130| 108.47125| 102.1645| 117.3995| 165.053|
 
 
-|   |expr           |      min|      lq|     mean|   median|       uq|      max|
-|:--|:--------------|--------:|-------:|--------:|--------:|--------:|--------:|
-|2  |rowCummins_X_S | 1.000000| 1.00000| 1.000000| 1.000000| 1.000000| 1.000000|
-|1  |colCummins_X_S | 1.230413| 1.38176| 1.312044| 1.357677| 1.276183| 0.923049|
+|   |expr           |      min|       lq|     mean|   median|       uq|     max|
+|:--|:--------------|--------:|--------:|--------:|--------:|--------:|-------:|
+|2  |rowCummins_X_S | 1.000000| 1.000000| 1.000000| 1.000000| 1.000000| 1.00000|
+|1  |colCummins_X_S | 1.405687| 1.402126| 1.386762| 1.365936| 1.354995| 1.32529|
 
 _Figure: Benchmarking of colCummins_X_S() and rowCummins_X_S() on integer+100x1000 data (original and transposed).  Outliers are displayed as crosses. Times are in milliseconds._
 
@@ -478,16 +478,16 @@ _Figure: Benchmarking of colCummins_X_S() and rowCummins_X_S() on integer+100x10
 > X_S <- X[rows, cols]
 > gc()
           used  (Mb) gc trigger  (Mb) max used  (Mb)
-Ncells 5168753 276.1    7554717 403.5  7554717 403.5
-Vcells 9089445  69.4   31793280 242.6 60508962 461.7
+Ncells 5193106 277.4    7916910 422.9  7916910 422.9
+Vcells 9428618  72.0   33191153 253.3 53339345 407.0
 > colStats <- microbenchmark(colCummins_X_S = colCummins(X_S), `colCummins(X, rows, cols)` = colCummins(X, 
 +     rows = rows, cols = cols), `colCummins(X[rows, cols])` = colCummins(X[rows, cols]), unit = "ms")
 > X <- t(X)
 > X_S <- t(X_S)
 > gc()
           used  (Mb) gc trigger  (Mb) max used  (Mb)
-Ncells 5168747 276.1    7554717 403.5  7554717 403.5
-Vcells 9139528  69.8   31793280 242.6 60508962 461.7
+Ncells 5193100 277.4    7916910 422.9  7916910 422.9
+Vcells 9478701  72.4   33191153 253.3 53339345 407.0
 > rowStats <- microbenchmark(rowCummins_X_S = rowCummins(X_S), `rowCummins(X, cols, rows)` = rowCummins(X, 
 +     rows = cols, cols = rows), `rowCummins(X[cols, rows])` = rowCummins(X[cols, rows]), unit = "ms")
 ```
@@ -496,18 +496,18 @@ _Table: Benchmarking of colCummins_X_S(), colCummins(X, rows, cols)() and colCum
 
 
 
-|   |expr                      |      min|        lq|      mean|   median|       uq|      max|
-|:--|:-------------------------|--------:|---------:|---------:|--------:|--------:|--------:|
-|1  |colCummins_X_S            | 0.092079| 0.1010410| 0.1109436| 0.104998| 0.119537| 0.177131|
-|2  |colCummins(X, rows, cols) | 0.121449| 0.1327815| 0.1451736| 0.138561| 0.154718| 0.201078|
-|3  |colCummins(X[rows, cols]) | 0.167877| 0.1787515| 0.2018887| 0.196960| 0.218873| 0.298559|
+|   |expr                      |      min|        lq|      mean|    median|        uq|      max|
+|:--|:-------------------------|--------:|---------:|---------:|---------:|---------:|--------:|
+|1  |colCummins_X_S            | 0.097288| 0.1043695| 0.1141792| 0.1094445| 0.1224050| 0.167498|
+|2  |colCummins(X, rows, cols) | 0.124448| 0.1325890| 0.1513855| 0.1430235| 0.1623875| 0.308314|
+|3  |colCummins(X[rows, cols]) | 0.171952| 0.1848175| 0.2125704| 0.2042670| 0.2365570| 0.341080|
 
 
 |   |expr                      |      min|       lq|     mean|   median|       uq|      max|
 |:--|:-------------------------|--------:|--------:|--------:|--------:|--------:|--------:|
 |1  |colCummins_X_S            | 1.000000| 1.000000| 1.000000| 1.000000| 1.000000| 1.000000|
-|2  |colCummins(X, rows, cols) | 1.318965| 1.314135| 1.308535| 1.319654| 1.294310| 1.135194|
-|3  |colCummins(X[rows, cols]) | 1.823184| 1.769099| 1.819741| 1.875845| 1.831006| 1.685526|
+|2  |colCummins(X, rows, cols) | 1.279171| 1.270381| 1.325859| 1.306813| 1.326641| 1.840703|
+|3  |colCummins(X[rows, cols]) | 1.767453| 1.770800| 1.861725| 1.866398| 1.932576| 2.036323|
 
 _Table: Benchmarking of rowCummins_X_S(), rowCummins(X, cols, rows)() and rowCummins(X[cols, rows])() on integer+1000x100 data (transposed). The top panel shows times in milliseconds and the bottom panel shows relative times._
 
@@ -515,16 +515,16 @@ _Table: Benchmarking of rowCummins_X_S(), rowCummins(X, cols, rows)() and rowCum
 
 |   |expr                      |      min|        lq|      mean|    median|        uq|      max|
 |:--|:-------------------------|--------:|---------:|---------:|---------:|---------:|--------:|
-|1  |rowCummins_X_S            | 0.066883| 0.0716560| 0.0796293| 0.0765720| 0.0893735| 0.110695|
-|2  |rowCummins(X, cols, rows) | 0.130059| 0.1390740| 0.1552406| 0.1447590| 0.1669420| 0.276422|
-|3  |rowCummins(X[cols, rows]) | 0.149181| 0.1590765| 0.1784349| 0.1702055| 0.1984120| 0.252664|
+|1  |rowCummins_X_S            | 0.064526| 0.0690160| 0.0752052| 0.0727410| 0.0794415| 0.114851|
+|2  |rowCummins(X, cols, rows) | 0.125718| 0.1342185| 0.1461374| 0.1403835| 0.1541915| 0.264038|
+|3  |rowCummins(X[cols, rows]) | 0.142518| 0.1527550| 0.1666361| 0.1579085| 0.1786145| 0.240792|
 
 
 |   |expr                      |      min|       lq|     mean|   median|       uq|      max|
 |:--|:-------------------------|--------:|--------:|--------:|--------:|--------:|--------:|
 |1  |rowCummins_X_S            | 1.000000| 1.000000| 1.000000| 1.000000| 1.000000| 1.000000|
-|2  |rowCummins(X, cols, rows) | 1.944575| 1.940856| 1.949541| 1.890495| 1.867914| 2.497150|
-|3  |rowCummins(X[cols, rows]) | 2.230477| 2.220003| 2.240820| 2.222816| 2.220032| 2.282524|
+|2  |rowCummins(X, cols, rows) | 1.948331| 1.944745| 1.943183| 1.929909| 1.940944| 2.298961|
+|3  |rowCummins(X[cols, rows]) | 2.208691| 2.213327| 2.215754| 2.170832| 2.248378| 2.096560|
 
 _Figure: Benchmarking of colCummins_X_S(), colCummins(X, rows, cols)() and colCummins(X[rows, cols])() on integer+1000x100 data  as well as rowCummins_X_S(), rowCummins(X, cols, rows)() and rowCummins(X[cols, rows])() on the same data transposed.  Outliers are displayed as crosses.  Times are in milliseconds._
 
@@ -536,16 +536,16 @@ _Table: Benchmarking of colCummins_X_S() and rowCummins_X_S() on integer+1000x10
 
 
 
-|   |expr           |    min|      lq|      mean|  median|       uq|     max|
-|:--|:--------------|------:|-------:|---------:|-------:|--------:|-------:|
-|2  |rowCummins_X_S | 66.883|  71.656|  79.62929|  76.572|  89.3735| 110.695|
-|1  |colCummins_X_S | 92.079| 101.041| 110.94363| 104.998| 119.5370| 177.131|
+|   |expr           |    min|       lq|      mean|   median|       uq|     max|
+|:--|:--------------|------:|--------:|---------:|--------:|--------:|-------:|
+|2  |rowCummins_X_S | 64.526|  69.0160|  75.20515|  72.7410|  79.4415| 114.851|
+|1  |colCummins_X_S | 97.288| 104.3695| 114.17923| 109.4445| 122.4050| 167.498|
 
 
 |   |expr           |      min|       lq|     mean|   median|       uq|      max|
 |:--|:--------------|--------:|--------:|--------:|--------:|--------:|--------:|
 |2  |rowCummins_X_S | 1.000000| 1.000000| 1.000000| 1.000000| 1.000000| 1.000000|
-|1  |colCummins_X_S | 1.376718| 1.410084| 1.393252| 1.371232| 1.337499| 1.600172|
+|1  |colCummins_X_S | 1.507733| 1.512251| 1.518237| 1.504578| 1.540819| 1.458394|
 
 _Figure: Benchmarking of colCummins_X_S() and rowCummins_X_S() on integer+1000x100 data (original and transposed).  Outliers are displayed as crosses. Times are in milliseconds._
 
@@ -602,16 +602,16 @@ _Figure: Benchmarking of colCummins_X_S() and rowCummins_X_S() on integer+1000x1
 > X_S <- X[rows, cols]
 > gc()
           used  (Mb) gc trigger  (Mb) max used  (Mb)
-Ncells 5168970 276.1    7554717 403.5  7554717 403.5
-Vcells 9180549  70.1   31793280 242.6 60508962 461.7
+Ncells 5193324 277.4    7916910 422.9  7916910 422.9
+Vcells 9519723  72.7   33191153 253.3 53339345 407.0
 > colStats <- microbenchmark(colCummins_X_S = colCummins(X_S), `colCummins(X, rows, cols)` = colCummins(X, 
 +     rows = rows, cols = cols), `colCummins(X[rows, cols])` = colCummins(X[rows, cols]), unit = "ms")
 > X <- t(X)
 > X_S <- t(X_S)
 > gc()
           used  (Mb) gc trigger  (Mb) max used  (Mb)
-Ncells 5168955 276.1    7554717 403.5  7554717 403.5
-Vcells 9180717  70.1   31793280 242.6 60508962 461.7
+Ncells 5193309 277.4    7916910 422.9  7916910 422.9
+Vcells 9519891  72.7   33191153 253.3 53339345 407.0
 > rowStats <- microbenchmark(rowCummins_X_S = rowCummins(X_S), `rowCummins(X, cols, rows)` = rowCummins(X, 
 +     rows = cols, cols = rows), `rowCummins(X[cols, rows])` = rowCummins(X[cols, rows]), unit = "ms")
 ```
@@ -620,35 +620,35 @@ _Table: Benchmarking of colCummins_X_S(), colCummins(X, rows, cols)() and colCum
 
 
 
-|   |expr                      |      min|        lq|      mean|    median|        uq|      max|
-|:--|:-------------------------|--------:|---------:|---------:|---------:|---------:|--------:|
-|1  |colCummins_X_S            | 0.002326| 0.0024830| 0.0029155| 0.0025845| 0.0027460| 0.024956|
-|2  |colCummins(X, rows, cols) | 0.002514| 0.0028655| 0.0032617| 0.0029905| 0.0032045| 0.023299|
-|3  |colCummins(X[rows, cols]) | 0.003495| 0.0036470| 0.0039704| 0.0038230| 0.0040050| 0.009217|
+|   |expr                      |      min|        lq|      mean|   median|        uq|      max|
+|:--|:-------------------------|--------:|---------:|---------:|--------:|---------:|--------:|
+|1  |colCummins_X_S            | 0.002216| 0.0023310| 0.0027661| 0.002414| 0.0024975| 0.032504|
+|2  |colCummins(X, rows, cols) | 0.002441| 0.0027025| 0.0028328| 0.002778| 0.0028675| 0.005693|
+|3  |colCummins(X[rows, cols]) | 0.003184| 0.0033950| 0.0035779| 0.003496| 0.0036075| 0.009843|
 
 
 |   |expr                      |      min|       lq|     mean|   median|       uq|       max|
 |:--|:-------------------------|--------:|--------:|--------:|--------:|--------:|---------:|
 |1  |colCummins_X_S            | 1.000000| 1.000000| 1.000000| 1.000000| 1.000000| 1.0000000|
-|2  |colCummins(X, rows, cols) | 1.080825| 1.154047| 1.118746| 1.157090| 1.166970| 0.9336031|
-|3  |colCummins(X[rows, cols]) | 1.502579| 1.468788| 1.361813| 1.479203| 1.458485| 0.3693300|
+|2  |colCummins(X, rows, cols) | 1.101534| 1.159374| 1.024117| 1.150787| 1.148148| 0.1751477|
+|3  |colCummins(X[rows, cols]) | 1.436823| 1.456457| 1.293463| 1.448219| 1.444444| 0.3028243|
 
 _Table: Benchmarking of rowCummins_X_S(), rowCummins(X, cols, rows)() and rowCummins(X[cols, rows])() on double+10x10 data (transposed). The top panel shows times in milliseconds and the bottom panel shows relative times._
 
 
 
-|   |expr                      |      min|        lq|      mean|   median|        uq|      max|
-|:--|:-------------------------|--------:|---------:|---------:|--------:|---------:|--------:|
-|1  |rowCummins_X_S            | 0.002379| 0.0025160| 0.0026698| 0.002589| 0.0027045| 0.004975|
-|2  |rowCummins(X, cols, rows) | 0.002720| 0.0028730| 0.0033547| 0.002933| 0.0030600| 0.041406|
-|3  |rowCummins(X[cols, rows]) | 0.003198| 0.0036415| 0.0038034| 0.003749| 0.0038385| 0.008549|
+|   |expr                      |      min|        lq|      mean|    median|        uq|      max|
+|:--|:-------------------------|--------:|---------:|---------:|---------:|---------:|--------:|
+|1  |rowCummins_X_S            | 0.002192| 0.0024240| 0.0026295| 0.0025030| 0.0026140| 0.009779|
+|2  |rowCummins(X, cols, rows) | 0.002463| 0.0026520| 0.0030682| 0.0027145| 0.0028265| 0.033493|
+|3  |rowCummins(X[cols, rows]) | 0.003037| 0.0034525| 0.0035934| 0.0035190| 0.0036480| 0.008236|
 
 
-|   |expr                      |      min|       lq|    mean|   median|       uq|      max|
-|:--|:-------------------------|--------:|--------:|-------:|--------:|--------:|--------:|
-|1  |rowCummins_X_S            | 1.000000| 1.000000| 1.00000| 1.000000| 1.000000| 1.000000|
-|2  |rowCummins(X, cols, rows) | 1.143337| 1.141892| 1.25654| 1.132870| 1.131448| 8.322814|
-|3  |rowCummins(X[cols, rows]) | 1.344262| 1.447337| 1.42459| 1.448049| 1.419301| 1.718392|
+|   |expr                      |      min|       lq|     mean|   median|       uq|       max|
+|:--|:-------------------------|--------:|--------:|--------:|--------:|--------:|---------:|
+|1  |rowCummins_X_S            | 1.000000| 1.000000| 1.000000| 1.000000| 1.000000| 1.0000000|
+|2  |rowCummins(X, cols, rows) | 1.123631| 1.094059| 1.166833| 1.084499| 1.081293| 3.4249923|
+|3  |rowCummins(X[cols, rows]) | 1.385493| 1.424299| 1.366561| 1.405913| 1.395562| 0.8422129|
 
 _Figure: Benchmarking of colCummins_X_S(), colCummins(X, rows, cols)() and colCummins(X[rows, cols])() on double+10x10 data  as well as rowCummins_X_S(), rowCummins(X, cols, rows)() and rowCummins(X[cols, rows])() on the same data transposed.  Outliers are displayed as crosses.  Times are in milliseconds._
 
@@ -662,14 +662,14 @@ _Table: Benchmarking of colCummins_X_S() and rowCummins_X_S() on double+10x10 da
 
 |   |expr           |   min|    lq|    mean| median|     uq|    max|
 |:--|:--------------|-----:|-----:|-------:|------:|------:|------:|
-|1  |colCummins_X_S | 2.326| 2.483| 2.91554| 2.5845| 2.7460| 24.956|
-|2  |rowCummins_X_S | 2.379| 2.516| 2.66980| 2.5890| 2.7045|  4.975|
+|1  |colCummins_X_S | 2.216| 2.331| 2.76614|  2.414| 2.4975| 32.504|
+|2  |rowCummins_X_S | 2.192| 2.424| 2.62952|  2.503| 2.6140|  9.779|
 
 
-|   |expr           |      min|      lq|      mean|   median|        uq|       max|
-|:--|:--------------|--------:|-------:|---------:|--------:|---------:|---------:|
-|1  |colCummins_X_S | 1.000000| 1.00000| 1.0000000| 1.000000| 1.0000000| 1.0000000|
-|2  |rowCummins_X_S | 1.022786| 1.01329| 0.9157137| 1.001741| 0.9848871| 0.1993509|
+|   |expr           |       min|       lq|      mean|   median|       uq|       max|
+|:--|:--------------|---------:|--------:|---------:|--------:|--------:|---------:|
+|1  |colCummins_X_S | 1.0000000| 1.000000| 1.0000000| 1.000000| 1.000000| 1.0000000|
+|2  |rowCummins_X_S | 0.9891697| 1.039897| 0.9506099| 1.036868| 1.046647| 0.3008553|
 
 _Figure: Benchmarking of colCummins_X_S() and rowCummins_X_S() on double+10x10 data (original and transposed).  Outliers are displayed as crosses. Times are in milliseconds._
 
@@ -685,16 +685,16 @@ _Figure: Benchmarking of colCummins_X_S() and rowCummins_X_S() on double+10x10 d
 > X_S <- X[rows, cols]
 > gc()
           used  (Mb) gc trigger  (Mb) max used  (Mb)
-Ncells 5169167 276.1    7554717 403.5  7554717 403.5
-Vcells 9186497  70.1   31793280 242.6 60508962 461.7
+Ncells 5193524 277.4    7916910 422.9  7916910 422.9
+Vcells 9525683  72.7   33191153 253.3 53339345 407.0
 > colStats <- microbenchmark(colCummins_X_S = colCummins(X_S), `colCummins(X, rows, cols)` = colCummins(X, 
 +     rows = rows, cols = cols), `colCummins(X[rows, cols])` = colCummins(X[rows, cols]), unit = "ms")
 > X <- t(X)
 > X_S <- t(X_S)
 > gc()
           used  (Mb) gc trigger  (Mb) max used  (Mb)
-Ncells 5169161 276.1    7554717 403.5  7554717 403.5
-Vcells 9196580  70.2   31793280 242.6 60508962 461.7
+Ncells 5193518 277.4    7916910 422.9  7916910 422.9
+Vcells 9535766  72.8   33191153 253.3 53339345 407.0
 > rowStats <- microbenchmark(rowCummins_X_S = rowCummins(X_S), `rowCummins(X, cols, rows)` = rowCummins(X, 
 +     rows = cols, cols = rows), `rowCummins(X[cols, rows])` = rowCummins(X[cols, rows]), unit = "ms")
 ```
@@ -703,35 +703,35 @@ _Table: Benchmarking of colCummins_X_S(), colCummins(X, rows, cols)() and colCum
 
 
 
-|   |expr                      |      min|        lq|      mean|    median|        uq|      max|
-|:--|:-------------------------|--------:|---------:|---------:|---------:|---------:|--------:|
-|1  |colCummins_X_S            | 0.017787| 0.0187715| 0.0192741| 0.0194115| 0.0196115| 0.021984|
-|2  |colCummins(X, rows, cols) | 0.026593| 0.0277440| 0.0283372| 0.0283660| 0.0286590| 0.033957|
-|3  |colCummins(X[rows, cols]) | 0.032537| 0.0353265| 0.0362931| 0.0359620| 0.0361635| 0.061340|
+|   |expr                      |      min|       lq|      mean|    median|        uq|      max|
+|:--|:-------------------------|--------:|--------:|---------:|---------:|---------:|--------:|
+|1  |colCummins_X_S            | 0.018548| 0.019370| 0.0214916| 0.0196115| 0.0203645| 0.081237|
+|2  |colCummins(X, rows, cols) | 0.027487| 0.028266| 0.0297218| 0.0285560| 0.0297905| 0.044972|
+|3  |colCummins(X[rows, cols]) | 0.035384| 0.035747| 0.0406520| 0.0361620| 0.0378185| 0.145265|
 
 
-|   |expr                      |      min|       lq|     mean|   median|       uq|      max|
-|:--|:-------------------------|--------:|--------:|--------:|--------:|--------:|--------:|
-|1  |colCummins_X_S            | 1.000000| 1.000000| 1.000000| 1.000000| 1.000000| 1.000000|
-|2  |colCummins(X, rows, cols) | 1.495081| 1.477985| 1.470222| 1.461299| 1.461337| 1.544623|
-|3  |colCummins(X[rows, cols]) | 1.829257| 1.881922| 1.882998| 1.852613| 1.843995| 2.790211|
+|   |expr                      |      min|       lq|     mean|   median|       uq|       max|
+|:--|:-------------------------|--------:|--------:|--------:|--------:|--------:|---------:|
+|1  |colCummins_X_S            | 1.000000| 1.000000| 1.000000| 1.000000| 1.000000| 1.0000000|
+|2  |colCummins(X, rows, cols) | 1.481939| 1.459267| 1.382948| 1.456084| 1.462864| 0.5535901|
+|3  |colCummins(X[rows, cols]) | 1.907699| 1.845483| 1.891528| 1.843918| 1.857080| 1.7881630|
 
 _Table: Benchmarking of rowCummins_X_S(), rowCummins(X, cols, rows)() and rowCummins(X[cols, rows])() on double+100x100 data (transposed). The top panel shows times in milliseconds and the bottom panel shows relative times._
 
 
 
-|   |expr                      |      min|        lq|      mean|   median|        uq|      max|
-|:--|:-------------------------|--------:|---------:|---------:|--------:|---------:|--------:|
-|1  |rowCummins_X_S            | 0.009089| 0.0094465| 0.0098623| 0.009732| 0.0101305| 0.014002|
-|2  |rowCummins(X, cols, rows) | 0.017638| 0.0179770| 0.0189746| 0.018582| 0.0189120| 0.045001|
-|3  |rowCummins(X[cols, rows]) | 0.024633| 0.0251530| 0.0264077| 0.026094| 0.0265785| 0.058582|
+|   |expr                      |      min|       lq|      mean|    median|        uq|      max|
+|:--|:-------------------------|--------:|--------:|---------:|---------:|---------:|--------:|
+|1  |rowCummins_X_S            | 0.008610| 0.009274| 0.0098582| 0.0096510| 0.0099870| 0.024965|
+|2  |rowCummins(X, cols, rows) | 0.016725| 0.017617| 0.0187327| 0.0179720| 0.0185155| 0.049009|
+|3  |rowCummins(X[cols, rows]) | 0.023891| 0.024936| 0.0259356| 0.0256355| 0.0264860| 0.038386|
 
 
 |   |expr                      |      min|       lq|     mean|   median|       uq|      max|
 |:--|:-------------------------|--------:|--------:|--------:|--------:|--------:|--------:|
 |1  |rowCummins_X_S            | 1.000000| 1.000000| 1.000000| 1.000000| 1.000000| 1.000000|
-|2  |rowCummins(X, cols, rows) | 1.940587| 1.903033| 1.923954| 1.909371| 1.866838| 3.213898|
-|3  |rowCummins(X[cols, rows]) | 2.710199| 2.662679| 2.677652| 2.681258| 2.623612| 4.183831|
+|2  |rowCummins(X, cols, rows) | 1.942509| 1.899612| 1.900225| 1.862190| 1.853960| 1.963108|
+|3  |rowCummins(X[cols, rows]) | 2.774797| 2.688807| 2.630879| 2.656253| 2.652048| 1.537593|
 
 _Figure: Benchmarking of colCummins_X_S(), colCummins(X, rows, cols)() and colCummins(X[rows, cols])() on double+100x100 data  as well as rowCummins_X_S(), rowCummins(X, cols, rows)() and rowCummins(X[cols, rows])() on the same data transposed.  Outliers are displayed as crosses.  Times are in milliseconds._
 
@@ -743,16 +743,16 @@ _Table: Benchmarking of colCummins_X_S() and rowCummins_X_S() on double+100x100 
 
 
 
-|   |expr           |    min|      lq|     mean|  median|      uq|    max|
-|:--|:--------------|------:|-------:|--------:|-------:|-------:|------:|
-|2  |rowCummins_X_S |  9.089|  9.4465|  9.86227|  9.7320| 10.1305| 14.002|
-|1  |colCummins_X_S | 17.787| 18.7715| 19.27411| 19.4115| 19.6115| 21.984|
+|   |expr           |    min|     lq|     mean|  median|      uq|    max|
+|:--|:--------------|------:|------:|--------:|-------:|-------:|------:|
+|2  |rowCummins_X_S |  8.610|  9.274|  9.85815|  9.6510|  9.9870| 24.965|
+|1  |colCummins_X_S | 18.548| 19.370| 21.49163| 19.6115| 20.3645| 81.237|
 
 
 |   |expr           |      min|       lq|     mean|   median|       uq|      max|
 |:--|:--------------|--------:|--------:|--------:|--------:|--------:|--------:|
 |2  |rowCummins_X_S | 1.000000| 1.000000| 1.000000| 1.000000| 1.000000| 1.000000|
-|1  |colCummins_X_S | 1.956981| 1.987138| 1.954328| 1.994605| 1.935887| 1.570061|
+|1  |colCummins_X_S | 2.154239| 2.088635| 2.180087| 2.032069| 2.039101| 3.254036|
 
 _Figure: Benchmarking of colCummins_X_S() and rowCummins_X_S() on double+100x100 data (original and transposed).  Outliers are displayed as crosses. Times are in milliseconds._
 
@@ -768,16 +768,16 @@ _Figure: Benchmarking of colCummins_X_S() and rowCummins_X_S() on double+100x100
 > X_S <- X[rows, cols]
 > gc()
           used  (Mb) gc trigger  (Mb) max used  (Mb)
-Ncells 5169367 276.1    7554717 403.5  7554717 403.5
-Vcells 9187899  70.1   31793280 242.6 60508962 461.7
+Ncells 5193723 277.4    7916910 422.9  7916910 422.9
+Vcells 9527087  72.7   33191153 253.3 53339345 407.0
 > colStats <- microbenchmark(colCummins_X_S = colCummins(X_S), `colCummins(X, rows, cols)` = colCummins(X, 
 +     rows = rows, cols = cols), `colCummins(X[rows, cols])` = colCummins(X[rows, cols]), unit = "ms")
 > X <- t(X)
 > X_S <- t(X_S)
 > gc()
           used  (Mb) gc trigger  (Mb) max used  (Mb)
-Ncells 5169361 276.1    7554717 403.5  7554717 403.5
-Vcells 9197982  70.2   31793280 242.6 60508962 461.7
+Ncells 5193717 277.4    7916910 422.9  7916910 422.9
+Vcells 9537170  72.8   33191153 253.3 53339345 407.0
 > rowStats <- microbenchmark(rowCummins_X_S = rowCummins(X_S), `rowCummins(X, cols, rows)` = rowCummins(X, 
 +     rows = cols, cols = rows), `rowCummins(X[cols, rows])` = rowCummins(X[cols, rows]), unit = "ms")
 ```
@@ -786,35 +786,35 @@ _Table: Benchmarking of colCummins_X_S(), colCummins(X, rows, cols)() and colCum
 
 
 
-|   |expr                      |      min|        lq|      mean|    median|        uq|      max|
-|:--|:-------------------------|--------:|---------:|---------:|---------:|---------:|--------:|
-|1  |colCummins_X_S            | 0.019656| 0.0207895| 0.0222255| 0.0214590| 0.0219200| 0.035140|
-|2  |colCummins(X, rows, cols) | 0.023503| 0.0250030| 0.0276743| 0.0260895| 0.0268695| 0.046878|
-|3  |colCummins(X[rows, cols]) | 0.035089| 0.0362760| 0.0404454| 0.0385930| 0.0402810| 0.081655|
+|   |expr                      |      min|        lq|      mean|    median|       uq|      max|
+|:--|:-------------------------|--------:|---------:|---------:|---------:|--------:|--------:|
+|1  |colCummins_X_S            | 0.020001| 0.0211825| 0.0216423| 0.0213465| 0.021506| 0.051758|
+|2  |colCummins(X, rows, cols) | 0.024540| 0.0256575| 0.0261151| 0.0259225| 0.026106| 0.040537|
+|3  |colCummins(X[rows, cols]) | 0.036050| 0.0369165| 0.0388757| 0.0383145| 0.038539| 0.077128|
 
 
-|   |expr                      |      min|       lq|     mean|   median|       uq|      max|
-|:--|:-------------------------|--------:|--------:|--------:|--------:|--------:|--------:|
-|1  |colCummins_X_S            | 1.000000| 1.000000| 1.000000| 1.000000| 1.000000| 1.000000|
-|2  |colCummins(X, rows, cols) | 1.195716| 1.202674| 1.245157| 1.215784| 1.225798| 1.334035|
-|3  |colCummins(X[rows, cols]) | 1.785155| 1.744919| 1.819773| 1.798453| 1.837637| 2.323705|
+|   |expr                      |      min|       lq|     mean|   median|       uq|       max|
+|:--|:-------------------------|--------:|--------:|--------:|--------:|--------:|---------:|
+|1  |colCummins_X_S            | 1.000000| 1.000000| 1.000000| 1.000000| 1.000000| 1.0000000|
+|2  |colCummins(X, rows, cols) | 1.226939| 1.211259| 1.206670| 1.214368| 1.213894| 0.7832026|
+|3  |colCummins(X[rows, cols]) | 1.802410| 1.742783| 1.796283| 1.794884| 1.792012| 1.4901658|
 
 _Table: Benchmarking of rowCummins_X_S(), rowCummins(X, cols, rows)() and rowCummins(X[cols, rows])() on double+1000x10 data (transposed). The top panel shows times in milliseconds and the bottom panel shows relative times._
 
 
 
-|   |expr                      |      min|        lq|      mean|    median|       uq|      max|
-|:--|:-------------------------|--------:|---------:|---------:|---------:|--------:|--------:|
-|1  |rowCummins_X_S            | 0.011018| 0.0117245| 0.0119632| 0.0119115| 0.012110| 0.015482|
-|2  |rowCummins(X, cols, rows) | 0.020864| 0.0219970| 0.0223580| 0.0221675| 0.022337| 0.036372|
-|3  |rowCummins(X[cols, rows]) | 0.030103| 0.0314890| 0.0321430| 0.0317605| 0.031961| 0.067251|
+|   |expr                      |      min|        lq|      mean|    median|        uq|      max|
+|:--|:-------------------------|--------:|---------:|---------:|---------:|---------:|--------:|
+|1  |rowCummins_X_S            | 0.010577| 0.0114020| 0.0118177| 0.0118060| 0.0120895| 0.014964|
+|2  |rowCummins(X, cols, rows) | 0.019738| 0.0208580| 0.0214364| 0.0217220| 0.0220050| 0.024602|
+|3  |rowCummins(X[cols, rows]) | 0.028957| 0.0303755| 0.0324387| 0.0316365| 0.0320795| 0.067983|
 
 
 |   |expr                      |      min|       lq|     mean|   median|       uq|      max|
 |:--|:-------------------------|--------:|--------:|--------:|--------:|--------:|--------:|
 |1  |rowCummins_X_S            | 1.000000| 1.000000| 1.000000| 1.000000| 1.000000| 1.000000|
-|2  |rowCummins(X, cols, rows) | 1.893629| 1.876157| 1.868898| 1.861017| 1.844509| 2.349309|
-|3  |rowCummins(X[cols, rows]) | 2.732165| 2.685744| 2.686826| 2.666373| 2.639224| 4.343819|
+|2  |rowCummins(X, cols, rows) | 1.866125| 1.829328| 1.813913| 1.839912| 1.820175| 1.644079|
+|3  |rowCummins(X[cols, rows]) | 2.737733| 2.664050| 2.744916| 2.679697| 2.653501| 4.543103|
 
 _Figure: Benchmarking of colCummins_X_S(), colCummins(X, rows, cols)() and colCummins(X[rows, cols])() on double+1000x10 data  as well as rowCummins_X_S(), rowCummins(X, cols, rows)() and rowCummins(X[cols, rows])() on the same data transposed.  Outliers are displayed as crosses.  Times are in milliseconds._
 
@@ -826,16 +826,16 @@ _Table: Benchmarking of colCummins_X_S() and rowCummins_X_S() on double+1000x10 
 
 
 
-|   |expr           |    min|      lq|     mean|  median|    uq|    max|
-|:--|:--------------|------:|-------:|--------:|-------:|-----:|------:|
-|2  |rowCummins_X_S | 11.018| 11.7245| 11.96319| 11.9115| 12.11| 15.482|
-|1  |colCummins_X_S | 19.656| 20.7895| 22.22553| 21.4590| 21.92| 35.140|
+|   |expr           |    min|      lq|     mean|  median|      uq|    max|
+|:--|:--------------|------:|-------:|--------:|-------:|-------:|------:|
+|2  |rowCummins_X_S | 10.577| 11.4020| 11.81774| 11.8060| 12.0895| 14.964|
+|1  |colCummins_X_S | 20.001| 21.1825| 21.64233| 21.3465| 21.5060| 51.758|
 
 
 |   |expr           |     min|       lq|     mean|   median|       uq|      max|
 |:--|:--------------|-------:|--------:|--------:|--------:|--------:|--------:|
 |2  |rowCummins_X_S | 1.00000| 1.000000| 1.000000| 1.000000| 1.000000| 1.000000|
-|1  |colCummins_X_S | 1.78399| 1.773167| 1.857826| 1.801536| 1.810074| 2.269733|
+|1  |colCummins_X_S | 1.89099| 1.857788| 1.831343| 1.808106| 1.778899| 3.458835|
 
 _Figure: Benchmarking of colCummins_X_S() and rowCummins_X_S() on double+1000x10 data (original and transposed).  Outliers are displayed as crosses. Times are in milliseconds._
 
@@ -851,16 +851,16 @@ _Figure: Benchmarking of colCummins_X_S() and rowCummins_X_S() on double+1000x10
 > X_S <- X[rows, cols]
 > gc()
           used  (Mb) gc trigger  (Mb) max used  (Mb)
-Ncells 5169572 276.1    7554717 403.5  7554717 403.5
-Vcells 9188035  70.1   31793280 242.6 60508962 461.7
+Ncells 5193928 277.4    7916910 422.9  7916910 422.9
+Vcells 9527223  72.7   33191153 253.3 53339345 407.0
 > colStats <- microbenchmark(colCummins_X_S = colCummins(X_S), `colCummins(X, rows, cols)` = colCummins(X, 
 +     rows = rows, cols = cols), `colCummins(X[rows, cols])` = colCummins(X[rows, cols]), unit = "ms")
 > X <- t(X)
 > X_S <- t(X_S)
 > gc()
           used  (Mb) gc trigger  (Mb) max used  (Mb)
-Ncells 5169566 276.1    7554717 403.5  7554717 403.5
-Vcells 9198118  70.2   31793280 242.6 60508962 461.7
+Ncells 5193922 277.4    7916910 422.9  7916910 422.9
+Vcells 9537306  72.8   33191153 253.3 53339345 407.0
 > rowStats <- microbenchmark(rowCummins_X_S = rowCummins(X_S), `rowCummins(X, cols, rows)` = rowCummins(X, 
 +     rows = cols, cols = rows), `rowCummins(X[cols, rows])` = rowCummins(X[cols, rows]), unit = "ms")
 ```
@@ -871,16 +871,16 @@ _Table: Benchmarking of colCummins_X_S(), colCummins(X, rows, cols)() and colCum
 
 |   |expr                      |      min|        lq|      mean|    median|        uq|      max|
 |:--|:-------------------------|--------:|---------:|---------:|---------:|---------:|--------:|
-|1  |colCummins_X_S            | 0.011740| 0.0121615| 0.0128652| 0.0123555| 0.0125670| 0.035363|
-|3  |colCummins(X[rows, cols]) | 0.031743| 0.0320585| 0.0324767| 0.0322260| 0.0324420| 0.040305|
-|2  |colCummins(X, rows, cols) | 0.039156| 0.0414875| 0.0432124| 0.0425395| 0.0439095| 0.086371|
+|1  |colCummins_X_S            | 0.011280| 0.0118475| 0.0123158| 0.0120555| 0.0123515| 0.031398|
+|3  |colCummins(X[rows, cols]) | 0.030099| 0.0313330| 0.0320822| 0.0319560| 0.0322320| 0.058855|
+|2  |colCummins(X, rows, cols) | 0.038250| 0.0401205| 0.0420835| 0.0413480| 0.0430510| 0.068609|
 
 
 |   |expr                      |      min|       lq|     mean|   median|       uq|      max|
 |:--|:-------------------------|--------:|--------:|--------:|--------:|--------:|--------:|
 |1  |colCummins_X_S            | 1.000000| 1.000000| 1.000000| 1.000000| 1.000000| 1.000000|
-|3  |colCummins(X[rows, cols]) | 2.703833| 2.636065| 2.524380| 2.608231| 2.581523| 1.139751|
-|2  |colCummins(X, rows, cols) | 3.335264| 3.411380| 3.358856| 3.442961| 3.494032| 2.442412|
+|3  |colCummins(X[rows, cols]) | 2.668351| 2.644693| 2.604954| 2.650740| 2.609562| 1.874483|
+|2  |colCummins(X, rows, cols) | 3.390957| 3.386411| 3.417025| 3.429804| 3.485488| 2.185139|
 
 _Table: Benchmarking of rowCummins_X_S(), rowCummins(X, cols, rows)() and rowCummins(X[cols, rows])() on double+10x1000 data (transposed). The top panel shows times in milliseconds and the bottom panel shows relative times._
 
@@ -888,16 +888,16 @@ _Table: Benchmarking of rowCummins_X_S(), rowCummins(X, cols, rows)() and rowCum
 
 |   |expr                      |      min|        lq|      mean|    median|        uq|      max|
 |:--|:-------------------------|--------:|---------:|---------:|---------:|---------:|--------:|
-|1  |rowCummins_X_S            | 0.009375| 0.0098755| 0.0105310| 0.0100995| 0.0104655| 0.042020|
-|2  |rowCummins(X, cols, rows) | 0.018842| 0.0191315| 0.0197089| 0.0193025| 0.0195780| 0.046986|
-|3  |rowCummins(X[cols, rows]) | 0.026286| 0.0268460| 0.0274960| 0.0271145| 0.0273905| 0.041663|
+|1  |rowCummins_X_S            | 0.009841| 0.0103465| 0.0155926| 0.0179385| 0.0190945| 0.022135|
+|2  |rowCummins(X, cols, rows) | 0.019463| 0.0268685| 0.0312358| 0.0334295| 0.0348230| 0.057469|
+|3  |rowCummins(X[cols, rows]) | 0.027592| 0.0281150| 0.0398897| 0.0444620| 0.0459760| 0.096757|
 
 
 |   |expr                      |      min|       lq|     mean|   median|       uq|      max|
 |:--|:-------------------------|--------:|--------:|--------:|--------:|--------:|--------:|
 |1  |rowCummins_X_S            | 1.000000| 1.000000| 1.000000| 1.000000| 1.000000| 1.000000|
-|2  |rowCummins(X, cols, rows) | 2.009813| 1.937269| 1.871514| 1.911233| 1.870718| 1.118182|
-|3  |rowCummins(X[cols, rows]) | 2.803840| 2.718445| 2.610958| 2.684737| 2.617218| 0.991504|
+|2  |rowCummins(X, cols, rows) | 1.977746| 2.596868| 2.003247| 1.863562| 1.823719| 2.596296|
+|3  |rowCummins(X[cols, rows]) | 2.803780| 2.717344| 2.558243| 2.478580| 2.407814| 4.371222|
 
 _Figure: Benchmarking of colCummins_X_S(), colCummins(X, rows, cols)() and colCummins(X[rows, cols])() on double+10x1000 data  as well as rowCummins_X_S(), rowCummins(X, cols, rows)() and rowCummins(X[cols, rows])() on the same data transposed.  Outliers are displayed as crosses.  Times are in milliseconds._
 
@@ -911,14 +911,14 @@ _Table: Benchmarking of colCummins_X_S() and rowCummins_X_S() on double+10x1000 
 
 |   |expr           |    min|      lq|     mean|  median|      uq|    max|
 |:--|:--------------|------:|-------:|--------:|-------:|-------:|------:|
-|2  |rowCummins_X_S |  9.375|  9.8755| 10.53101| 10.0995| 10.4655| 42.020|
-|1  |colCummins_X_S | 11.740| 12.1615| 12.86523| 12.3555| 12.5670| 35.363|
+|1  |colCummins_X_S | 11.280| 11.8475| 12.31584| 12.0555| 12.3515| 31.398|
+|2  |rowCummins_X_S |  9.841| 10.3465| 15.59261| 17.9385| 19.0945| 22.135|
 
 
-|   |expr           |      min|       lq|     mean|   median|       uq|       max|
-|:--|:--------------|--------:|--------:|--------:|--------:|--------:|---------:|
-|2  |rowCummins_X_S | 1.000000| 1.000000| 1.000000| 1.000000| 1.000000| 1.0000000|
-|1  |colCummins_X_S | 1.252267| 1.231482| 1.221652| 1.223377| 1.200803| 0.8415754|
+|   |expr           |       min|        lq|     mean|   median|       uq|       max|
+|:--|:--------------|---------:|---------:|--------:|--------:|--------:|---------:|
+|1  |colCummins_X_S | 1.0000000| 1.0000000| 1.000000| 1.000000| 1.000000| 1.0000000|
+|2  |rowCummins_X_S | 0.8724291| 0.8733066| 1.266061| 1.487993| 1.545926| 0.7049812|
 
 _Figure: Benchmarking of colCummins_X_S() and rowCummins_X_S() on double+10x1000 data (original and transposed).  Outliers are displayed as crosses. Times are in milliseconds._
 
@@ -934,16 +934,16 @@ _Figure: Benchmarking of colCummins_X_S() and rowCummins_X_S() on double+10x1000
 > X_S <- X[rows, cols]
 > gc()
           used  (Mb) gc trigger  (Mb) max used  (Mb)
-Ncells 5169782 276.1    7554717 403.5  7554717 403.5
-Vcells 9233488  70.5   31793280 242.6 60508962 461.7
+Ncells 5194139 277.4    7916910 422.9  7916910 422.9
+Vcells 9572677  73.1   33191153 253.3 53339345 407.0
 > colStats <- microbenchmark(colCummins_X_S = colCummins(X_S), `colCummins(X, rows, cols)` = colCummins(X, 
 +     rows = rows, cols = cols), `colCummins(X[rows, cols])` = colCummins(X[rows, cols]), unit = "ms")
 > X <- t(X)
 > X_S <- t(X_S)
 > gc()
           used  (Mb) gc trigger  (Mb) max used  (Mb)
-Ncells 5169776 276.1    7554717 403.5  7554717 403.5
-Vcells 9333571  71.3   31793280 242.6 60508962 461.7
+Ncells 5194133 277.4    7916910 422.9  7916910 422.9
+Vcells 9672760  73.8   33191153 253.3 53339345 407.0
 > rowStats <- microbenchmark(rowCummins_X_S = rowCummins(X_S), `rowCummins(X, cols, rows)` = rowCummins(X, 
 +     rows = cols, cols = rows), `rowCummins(X[cols, rows])` = rowCummins(X[cols, rows]), unit = "ms")
 ```
@@ -954,16 +954,16 @@ _Table: Benchmarking of colCummins_X_S(), colCummins(X, rows, cols)() and colCum
 
 |   |expr                      |      min|        lq|      mean|    median|        uq|      max|
 |:--|:-------------------------|--------:|---------:|---------:|---------:|---------:|--------:|
-|1  |colCummins_X_S            | 0.109806| 0.1204930| 0.1431060| 0.1311470| 0.1582860| 0.228617|
-|2  |colCummins(X, rows, cols) | 0.168535| 0.1888955| 0.2174983| 0.2071915| 0.2385405| 0.369377|
-|3  |colCummins(X[rows, cols]) | 0.210663| 0.2354020| 0.2726687| 0.2578750| 0.2961635| 0.441452|
+|1  |colCummins_X_S            | 0.123995| 0.1489515| 0.1902407| 0.1716795| 0.2377835| 0.274697|
+|2  |colCummins(X, rows, cols) | 0.206843| 0.2215395| 0.2682690| 0.2676780| 0.3009670| 0.383653|
+|3  |colCummins(X[rows, cols]) | 0.249138| 0.2781345| 0.3626980| 0.3239760| 0.4529690| 0.547241|
 
 
 |   |expr                      |      min|       lq|     mean|   median|       uq|      max|
 |:--|:-------------------------|--------:|--------:|--------:|--------:|--------:|--------:|
 |1  |colCummins_X_S            | 1.000000| 1.000000| 1.000000| 1.000000| 1.000000| 1.000000|
-|2  |colCummins(X, rows, cols) | 1.534843| 1.567689| 1.519840| 1.579842| 1.507022| 1.615702|
-|3  |colCummins(X[rows, cols]) | 1.918502| 1.953657| 1.905361| 1.966305| 1.871066| 1.930967|
+|2  |colCummins(X, rows, cols) | 1.668156| 1.487326| 1.410155| 1.559173| 1.265719| 1.396641|
+|3  |colCummins(X[rows, cols]) | 2.009258| 1.867282| 1.906522| 1.887098| 1.904964| 1.992162|
 
 _Table: Benchmarking of rowCummins_X_S(), rowCummins(X, cols, rows)() and rowCummins(X[cols, rows])() on double+100x1000 data (transposed). The top panel shows times in milliseconds and the bottom panel shows relative times._
 
@@ -971,16 +971,16 @@ _Table: Benchmarking of rowCummins_X_S(), rowCummins(X, cols, rows)() and rowCum
 
 |   |expr                      |      min|        lq|      mean|    median|        uq|      max|
 |:--|:-------------------------|--------:|---------:|---------:|---------:|---------:|--------:|
-|1  |rowCummins_X_S            | 0.052667| 0.0567725| 0.0629682| 0.0613385| 0.0670305| 0.101740|
-|2  |rowCummins(X, cols, rows) | 0.113617| 0.1213380| 0.1347279| 0.1252555| 0.1457040| 0.264213|
-|3  |rowCummins(X[cols, rows]) | 0.168825| 0.1811490| 0.2023078| 0.1917470| 0.2139530| 0.346913|
+|1  |rowCummins_X_S            | 0.053265| 0.0568025| 0.0655034| 0.0628090| 0.0690690| 0.116550|
+|2  |rowCummins(X, cols, rows) | 0.117202| 0.1187275| 0.1311534| 0.1257885| 0.1389795| 0.255642|
+|3  |rowCummins(X[cols, rows]) | 0.173150| 0.1790470| 0.2006694| 0.1961750| 0.2154230| 0.351481|
 
 
 |   |expr                      |      min|       lq|     mean|   median|       uq|      max|
 |:--|:-------------------------|--------:|--------:|--------:|--------:|--------:|--------:|
 |1  |rowCummins_X_S            | 1.000000| 1.000000| 1.000000| 1.000000| 1.000000| 1.000000|
-|2  |rowCummins(X, cols, rows) | 2.157271| 2.137267| 2.139620| 2.042037| 2.173697| 2.596943|
-|3  |rowCummins(X[cols, rows]) | 3.205518| 3.190788| 3.212859| 3.126046| 3.191875| 3.409800|
+|2  |rowCummins(X, cols, rows) | 2.200357| 2.090181| 2.002237| 2.002715| 2.012183| 2.193411|
+|3  |rowCummins(X[cols, rows]) | 3.250727| 3.152097| 3.063494| 3.123358| 3.118953| 3.015710|
 
 _Figure: Benchmarking of colCummins_X_S(), colCummins(X, rows, cols)() and colCummins(X[rows, cols])() on double+100x1000 data  as well as rowCummins_X_S(), rowCummins(X, cols, rows)() and rowCummins(X[cols, rows])() on the same data transposed.  Outliers are displayed as crosses.  Times are in milliseconds._
 
@@ -994,14 +994,14 @@ _Table: Benchmarking of colCummins_X_S() and rowCummins_X_S() on double+100x1000
 
 |   |expr           |     min|       lq|      mean|   median|       uq|     max|
 |:--|:--------------|-------:|--------:|---------:|--------:|--------:|-------:|
-|2  |rowCummins_X_S |  52.667|  56.7725|  62.96815|  61.3385|  67.0305| 101.740|
-|1  |colCummins_X_S | 109.806| 120.4930| 143.10604| 131.1470| 158.2860| 228.617|
+|2  |rowCummins_X_S |  53.265|  56.8025|  65.50343|  62.8090|  69.0690| 116.550|
+|1  |colCummins_X_S | 123.995| 148.9515| 190.24072| 171.6795| 237.7835| 274.697|
 
 
-|   |expr           |      min|       lq|     mean|   median|       uq|      max|
-|:--|:--------------|--------:|--------:|--------:|--------:|--------:|--------:|
-|2  |rowCummins_X_S | 1.000000| 1.000000| 1.000000| 1.000000| 1.000000| 1.000000|
-|1  |colCummins_X_S | 2.084911| 2.122383| 2.272673| 2.138086| 2.361403| 2.247071|
+|   |expr           |      min|      lq|     mean|   median|       uq|      max|
+|:--|:--------------|--------:|-------:|--------:|--------:|--------:|--------:|
+|2  |rowCummins_X_S | 1.000000| 1.00000| 1.000000| 1.000000| 1.000000| 1.000000|
+|1  |colCummins_X_S | 2.327889| 2.62227| 2.904286| 2.733358| 3.442695| 2.356903|
 
 _Figure: Benchmarking of colCummins_X_S() and rowCummins_X_S() on double+100x1000 data (original and transposed).  Outliers are displayed as crosses. Times are in milliseconds._
 
@@ -1017,16 +1017,16 @@ _Figure: Benchmarking of colCummins_X_S() and rowCummins_X_S() on double+100x100
 > X_S <- X[rows, cols]
 > gc()
           used  (Mb) gc trigger  (Mb) max used  (Mb)
-Ncells 5169995 276.2    7554717 403.5  7554717 403.5
-Vcells 9233632  70.5   31793280 242.6 60508962 461.7
+Ncells 5194349 277.5    7916910 422.9  7916910 422.9
+Vcells 9572818  73.1   33191153 253.3 53339345 407.0
 > colStats <- microbenchmark(colCummins_X_S = colCummins(X_S), `colCummins(X, rows, cols)` = colCummins(X, 
 +     rows = rows, cols = cols), `colCummins(X[rows, cols])` = colCummins(X[rows, cols]), unit = "ms")
 > X <- t(X)
 > X_S <- t(X_S)
 > gc()
           used  (Mb) gc trigger  (Mb) max used  (Mb)
-Ncells 5169989 276.2    7554717 403.5  7554717 403.5
-Vcells 9333715  71.3   31793280 242.6 60508962 461.7
+Ncells 5194343 277.5    7916910 422.9  7916910 422.9
+Vcells 9672901  73.8   33191153 253.3 53339345 407.0
 > rowStats <- microbenchmark(rowCummins_X_S = rowCummins(X_S), `rowCummins(X, cols, rows)` = rowCummins(X, 
 +     rows = cols, cols = rows), `rowCummins(X[cols, rows])` = rowCummins(X[cols, rows]), unit = "ms")
 ```
@@ -1037,16 +1037,16 @@ _Table: Benchmarking of colCummins_X_S(), colCummins(X, rows, cols)() and colCum
 
 |   |expr                      |      min|        lq|      mean|    median|        uq|      max|
 |:--|:-------------------------|--------:|---------:|---------:|---------:|---------:|--------:|
-|1  |colCummins_X_S            | 0.156406| 0.1790685| 0.2639617| 0.2192705| 0.3547225| 0.409570|
-|2  |colCummins(X, rows, cols) | 0.179490| 0.2952220| 0.3826319| 0.3441610| 0.5076630| 0.684654|
-|3  |colCummins(X[rows, cols]) | 0.282646| 0.3861905| 0.5465701| 0.4615800| 0.7420170| 1.099684|
+|2  |colCummins(X, rows, cols) | 0.170143| 0.1879635| 0.2392096| 0.2400995| 0.2819365| 0.323949|
+|1  |colCummins_X_S            | 0.145330| 0.1700135| 0.2202261| 0.2402445| 0.2609510| 0.313648|
+|3  |colCummins(X[rows, cols]) | 0.261099| 0.3078045| 0.3916748| 0.3450270| 0.4830445| 0.541359|
 
 
-|   |expr                      |     min|       lq|     mean|   median|       uq|      max|
-|:--|:-------------------------|-------:|--------:|--------:|--------:|--------:|--------:|
-|1  |colCummins_X_S            | 1.00000| 1.000000| 1.000000| 1.000000| 1.000000| 1.000000|
-|2  |colCummins(X, rows, cols) | 1.14759| 1.648654| 1.449574| 1.569573| 1.431155| 1.671641|
-|3  |colCummins(X[rows, cols]) | 1.80713| 2.156664| 2.070641| 2.105071| 2.091824| 2.684972|
+|   |expr                      |       min|        lq|      mean|   median|        uq|       max|
+|:--|:-------------------------|---------:|---------:|---------:|--------:|---------:|---------:|
+|2  |colCummins(X, rows, cols) | 1.0000000| 1.0000000| 1.0000000| 1.000000| 1.0000000| 1.0000000|
+|1  |colCummins_X_S            | 0.8541639| 0.9045027| 0.9206408| 1.000604| 0.9255666| 0.9682018|
+|3  |colCummins(X[rows, cols]) | 1.5345856| 1.6375759| 1.6373704| 1.437017| 1.7133096| 1.6711242|
 
 _Table: Benchmarking of rowCummins_X_S(), rowCummins(X, cols, rows)() and rowCummins(X[cols, rows])() on double+1000x100 data (transposed). The top panel shows times in milliseconds and the bottom panel shows relative times._
 
@@ -1054,16 +1054,16 @@ _Table: Benchmarking of rowCummins_X_S(), rowCummins(X, cols, rows)() and rowCum
 
 |   |expr                      |      min|        lq|      mean|    median|        uq|      max|
 |:--|:-------------------------|--------:|---------:|---------:|---------:|---------:|--------:|
-|1  |rowCummins_X_S            | 0.052879| 0.0554065| 0.0611304| 0.0571495| 0.0628320| 0.102103|
-|2  |rowCummins(X, cols, rows) | 0.112134| 0.1189430| 0.1264798| 0.1234195| 0.1316475| 0.277960|
-|3  |rowCummins(X[cols, rows]) | 0.168514| 0.1753270| 0.1877459| 0.1799760| 0.1977105| 0.266418|
+|1  |rowCummins_X_S            | 0.053698| 0.0563250| 0.0643461| 0.0603185| 0.0690515| 0.106838|
+|2  |rowCummins(X, cols, rows) | 0.118892| 0.1234485| 0.1388333| 0.1360840| 0.1488855| 0.308372|
+|3  |rowCummins(X[cols, rows]) | 0.174977| 0.1816975| 0.2041870| 0.1964685| 0.2244635| 0.354954|
 
 
 |   |expr                      |      min|       lq|     mean|   median|       uq|      max|
 |:--|:-------------------------|--------:|--------:|--------:|--------:|--------:|--------:|
 |1  |rowCummins_X_S            | 1.000000| 1.000000| 1.000000| 1.000000| 1.000000| 1.000000|
-|2  |rowCummins(X, cols, rows) | 2.120577| 2.146734| 2.069017| 2.159590| 2.095230| 2.722349|
-|3  |rowCummins(X[cols, rows]) | 3.186785| 3.164376| 3.071238| 3.149214| 3.146653| 2.609306|
+|2  |rowCummins(X, cols, rows) | 2.214086| 2.191718| 2.157603| 2.256091| 2.156152| 2.886351|
+|3  |rowCummins(X[cols, rows]) | 3.258538| 3.225877| 3.173263| 3.257185| 3.250668| 3.322357|
 
 _Figure: Benchmarking of colCummins_X_S(), colCummins(X, rows, cols)() and colCummins(X[rows, cols])() on double+1000x100 data  as well as rowCummins_X_S(), rowCummins(X, cols, rows)() and rowCummins(X[cols, rows])() on the same data transposed.  Outliers are displayed as crosses.  Times are in milliseconds._
 
@@ -1077,14 +1077,14 @@ _Table: Benchmarking of colCummins_X_S() and rowCummins_X_S() on double+1000x100
 
 |   |expr           |     min|       lq|      mean|   median|       uq|     max|
 |:--|:--------------|-------:|--------:|---------:|--------:|--------:|-------:|
-|2  |rowCummins_X_S |  52.879|  55.4065|  61.13037|  57.1495|  62.8320| 102.103|
-|1  |colCummins_X_S | 156.406| 179.0685| 263.96174| 219.2705| 354.7225| 409.570|
+|2  |rowCummins_X_S |  53.698|  56.3250|  64.34607|  60.3185|  69.0515| 106.838|
+|1  |colCummins_X_S | 145.330| 170.0135| 220.22613| 240.2445| 260.9510| 313.648|
 
 
 |   |expr           |      min|       lq|     mean|   median|       uq|      max|
 |:--|:--------------|--------:|--------:|--------:|--------:|--------:|--------:|
 |2  |rowCummins_X_S | 1.000000| 1.000000| 1.000000| 1.000000| 1.000000| 1.000000|
-|1  |colCummins_X_S | 2.957809| 3.231904| 4.318013| 3.836788| 5.645571| 4.011342|
+|1  |colCummins_X_S | 2.706432| 3.018438| 3.422527| 3.982932| 3.779078| 2.935735|
 
 _Figure: Benchmarking of colCummins_X_S() and rowCummins_X_S() on double+1000x100 data (original and transposed).  Outliers are displayed as crosses. Times are in milliseconds._
 
@@ -1120,7 +1120,7 @@ attached base packages:
 other attached packages:
 [1] microbenchmark_1.4-7   matrixStats_0.60.0     ggplot2_3.3.5         
 [4] knitr_1.33             R.devices_2.17.0       R.utils_2.10.1        
-[7] R.oo_1.24.0            R.methodsS3_1.8.1-9001
+[7] R.oo_1.24.0            R.methodsS3_1.8.1-9001 history_0.0.1-9000    
 
 loaded via a namespace (and not attached):
  [1] Biobase_2.52.0          httr_1.4.2              splines_4.1.1          
@@ -1139,20 +1139,22 @@ loaded via a namespace (and not attached):
 [40] magrittr_2.0.1          crayon_1.4.1            statnet.common_4.5.0   
 [43] memoise_2.0.0           laeken_0.5.1            fansi_0.5.0            
 [46] R.cache_0.15.0          MASS_7.3-54             R.rsp_0.44.0           
-[49] tools_4.1.1             lifecycle_1.0.0         S4Vectors_0.30.0       
-[52] trust_0.1-8             munsell_0.5.0           AnnotationDbi_1.54.1   
-[55] Biostrings_2.60.2       compiler_4.1.1          GenomeInfoDb_1.28.1    
-[58] rlang_0.4.11            grid_4.1.1              RCurl_1.98-1.4         
-[61] cwhmisc_6.6             rappdirs_0.3.3          labeling_0.4.2         
-[64] bitops_1.0-7            base64enc_0.1-3         boot_1.3-28            
-[67] gtable_0.3.0            DBI_1.1.1               markdown_1.1           
-[70] R6_2.5.1                lpSolveAPI_5.5.2.0-17.7 rle_0.9.2              
-[73] dplyr_1.0.7             fastmap_1.1.0           bit_4.0.4              
-[76] utf8_1.2.2              parallel_4.1.1          Rcpp_1.0.7             
-[79] vctrs_0.3.8             png_0.1-7               DEoptimR_1.0-9         
-[82] tidyselect_1.1.1        xfun_0.25               coda_0.19-4            
+[49] progressr_0.8.0         tools_4.1.1             lifecycle_1.0.0        
+[52] S4Vectors_0.30.0        trust_0.1-8             munsell_0.5.0          
+[55] tabby_0.0.1-9001        AnnotationDbi_1.54.1    Biostrings_2.60.2      
+[58] compiler_4.1.1          GenomeInfoDb_1.28.1     rlang_0.4.11           
+[61] grid_4.1.1              RCurl_1.98-1.4          cwhmisc_6.6            
+[64] rstudioapi_0.13         rappdirs_0.3.3          startup_0.15.0         
+[67] labeling_0.4.2          bitops_1.0-7            base64enc_0.1-3        
+[70] boot_1.3-28             gtable_0.3.0            DBI_1.1.1              
+[73] markdown_1.1            R6_2.5.1                lpSolveAPI_5.5.2.0-17.7
+[76] rle_0.9.2               dplyr_1.0.7             fastmap_1.1.0          
+[79] bit_4.0.4               utf8_1.2.2              parallel_4.1.1         
+[82] Rcpp_1.0.7              vctrs_0.3.8             png_0.1-7              
+[85] DEoptimR_1.0-9          tidyselect_1.1.1        xfun_0.25              
+[88] coda_0.19-4            
 ```
-Total processing time was 23.18 secs.
+Total processing time was 23.5 secs.
 
 
 ### Reproducibility
@@ -1169,7 +1171,7 @@ html <- matrixStats:::benchmark('colRowCummins_subset')
 [StackOverflow:rowProds?]: https://stackoverflow.com/questions/20198801/ "Stack Overflow: Row product of matrix and column sum of matrix"
 
 ---------------------------------------
-Copyright Dongcan Jiang. Last updated on 2021-08-25 17:37:22 (+0200 UTC). Powered by [RSP].
+Copyright Dongcan Jiang. Last updated on 2021-08-25 22:13:04 (+0200 UTC). Powered by [RSP].
 
 <script>
  var link = document.createElement('link');

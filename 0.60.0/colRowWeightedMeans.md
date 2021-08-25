@@ -63,15 +63,15 @@ This report benchmark the performance of colWeightedMeans() and rowWeightedMeans
 > w <- runif(nrow(X))
 > gc()
            used  (Mb) gc trigger  (Mb) max used  (Mb)
-Ncells  5279667 282.0   10014072 534.9 10014072 534.9
-Vcells 10429870  79.6   18422267 140.6 18422267 140.6
+Ncells  5331809 284.8    7916910 422.9  7916910 422.9
+Vcells 10856214  82.9   33191153 253.3 53339345 407.0
 > colStats <- microbenchmark(colWeightedMeans = colWeightedMeans(X, w = w, na.rm = FALSE), `apply+weigthed.mean` = apply(X, 
 +     MARGIN = 2L, FUN = weighted.mean, w = w, na.rm = FALSE), unit = "ms")
 > X <- t(X)
 > gc()
            used  (Mb) gc trigger  (Mb) max used  (Mb)
-Ncells  5264455 281.2   10014072 534.9 10014072 534.9
-Vcells 10379587  79.2   18422267 140.6 18422267 140.6
+Ncells  5331103 284.8    7916910 422.9  7916910 422.9
+Vcells 10854208  82.9   33191153 253.3 53339345 407.0
 > rowStats <- microbenchmark(rowWeightedMeans = rowWeightedMeans(X, w = w, na.rm = FALSE), `apply+weigthed.mean` = apply(X, 
 +     MARGIN = 1L, FUN = weighted.mean, w = w, na.rm = FALSE), unit = "ms")
 ```
@@ -82,29 +82,29 @@ _Table: Benchmarking of colWeightedMeans() and apply+weigthed.mean() on 10x10 da
 
 |   |expr                |      min|        lq|      mean|    median|        uq|      max|
 |:--|:-------------------|--------:|---------:|---------:|---------:|---------:|--------:|
-|1  |colWeightedMeans    | 0.014690| 0.0158745| 0.0183404| 0.0178275| 0.0197725| 0.051019|
-|2  |apply+weigthed.mean | 0.080117| 0.0847510| 0.0899068| 0.0876430| 0.0894295| 0.298599|
+|1  |colWeightedMeans    | 0.014514| 0.0158945| 0.0183756| 0.0173735| 0.0196270| 0.051723|
+|2  |apply+weigthed.mean | 0.081258| 0.0862375| 0.0911114| 0.0889395| 0.0908155| 0.306399|
 
 
-|   |expr                |      min|       lq|     mean|   median|       uq|      max|
-|:--|:-------------------|--------:|--------:|--------:|--------:|--------:|--------:|
-|1  |colWeightedMeans    | 1.000000| 1.000000| 1.000000| 1.000000| 1.000000| 1.000000|
-|2  |apply+weigthed.mean | 5.453846| 5.338814| 4.902111| 4.916169| 4.522923| 5.852702|
+|   |expr                |      min|       lq|     mean|   median|      uq|      max|
+|:--|:-------------------|--------:|--------:|--------:|--------:|-------:|--------:|
+|1  |colWeightedMeans    | 1.000000| 1.000000| 1.000000| 1.000000| 1.00000| 1.000000|
+|2  |apply+weigthed.mean | 5.598594| 5.425619| 4.958286| 5.119262| 4.62707| 5.923844|
 
 _Table: Benchmarking of rowWeightedMeans() and apply+weigthed.mean() on 10x10 data (transposed). The top panel shows times in milliseconds and the bottom panel shows relative times._
 
 
 
-|   |expr                |      min|        lq|      mean|    median|       uq|      max|
-|:--|:-------------------|--------:|---------:|---------:|---------:|--------:|--------:|
-|1  |rowWeightedMeans    | 0.020576| 0.0221925| 0.0246379| 0.0242320| 0.025526| 0.069836|
-|2  |apply+weigthed.mean | 0.080148| 0.0841460| 0.0886985| 0.0864055| 0.090708| 0.179163|
+|   |expr                |      min|        lq|      mean|    median|        uq|      max|
+|:--|:-------------------|--------:|---------:|---------:|---------:|---------:|--------:|
+|1  |rowWeightedMeans    | 0.020235| 0.0219355| 0.0248860| 0.0244995| 0.0253815| 0.066676|
+|2  |apply+weigthed.mean | 0.081370| 0.0890960| 0.0923169| 0.0909045| 0.0918575| 0.171881|
 
 
-|   |expr                |      min|       lq|     mean|  median|       uq|      max|
-|:--|:-------------------|--------:|--------:|--------:|-------:|--------:|--------:|
-|1  |rowWeightedMeans    | 1.000000| 1.000000| 1.000000| 1.00000| 1.000000| 1.000000|
-|2  |apply+weigthed.mean | 3.895218| 3.791641| 3.600079| 3.56576| 3.553553| 2.565482|
+|   |expr                |     min|       lq|     mean|   median|       uq|      max|
+|:--|:-------------------|-------:|--------:|--------:|--------:|--------:|--------:|
+|1  |rowWeightedMeans    | 1.00000| 1.000000| 1.000000| 1.000000| 1.000000| 1.000000|
+|2  |apply+weigthed.mean | 4.02125| 4.061726| 3.709588| 3.710463| 3.619073| 2.577854|
 
 _Figure: Benchmarking of colWeightedMeans() and apply+weigthed.mean() on 10x10 data  as well as rowWeightedMeans() and apply+weigthed.mean() on the same data transposed.  Outliers are displayed as crosses.  Times are in milliseconds._
 
@@ -118,14 +118,14 @@ _Table: Benchmarking of colWeightedMeans() and rowWeightedMeans() on 10x10 data 
 
 |   |expr             |    min|      lq|     mean|  median|      uq|    max|
 |:--|:----------------|------:|-------:|--------:|-------:|-------:|------:|
-|1  |colWeightedMeans | 14.690| 15.8745| 18.34042| 17.8275| 19.7725| 51.019|
-|2  |rowWeightedMeans | 20.576| 22.1925| 24.63794| 24.2320| 25.5260| 69.836|
+|1  |colWeightedMeans | 14.514| 15.8945| 18.37558| 17.3735| 19.6270| 51.723|
+|2  |rowWeightedMeans | 20.235| 21.9355| 24.88602| 24.4995| 25.3815| 66.676|
 
 
 |   |expr             |      min|       lq|     mean|   median|       uq|      max|
 |:--|:----------------|--------:|--------:|--------:|--------:|--------:|--------:|
 |1  |colWeightedMeans | 1.000000| 1.000000| 1.000000| 1.000000| 1.000000| 1.000000|
-|2  |rowWeightedMeans | 1.400681| 1.397997| 1.343368| 1.359248| 1.290985| 1.368823|
+|2  |rowWeightedMeans | 1.394171| 1.380069| 1.354299| 1.410165| 1.293193| 1.289098|
 
 _Figure: Benchmarking of colWeightedMeans() and rowWeightedMeans() on 10x10 data (original and transposed).  Outliers are displayed as crosses. Times are in milliseconds._
 
@@ -139,16 +139,16 @@ _Figure: Benchmarking of colWeightedMeans() and rowWeightedMeans() on 10x10 data
 > X <- data[["100x100"]]
 > w <- runif(nrow(X))
 > gc()
-          used  (Mb) gc trigger  (Mb) max used  (Mb)
-Ncells 5263034 281.1   10014072 534.9 10014072 534.9
-Vcells 9994449  76.3   18422267 140.6 18422267 140.6
+           used  (Mb) gc trigger  (Mb) max used  (Mb)
+Ncells  5329664 284.7    7916910 422.9  7916910 422.9
+Vcells 10469040  79.9   33191153 253.3 53339345 407.0
 > colStats <- microbenchmark(colWeightedMeans = colWeightedMeans(X, w = w, na.rm = FALSE), `apply+weigthed.mean` = apply(X, 
 +     MARGIN = 2L, FUN = weighted.mean, w = w, na.rm = FALSE), unit = "ms")
 > X <- t(X)
 > gc()
            used  (Mb) gc trigger  (Mb) max used  (Mb)
-Ncells  5263010 281.1   10014072 534.9 10014072 534.9
-Vcells 10004462  76.4   18422267 140.6 18422267 140.6
+Ncells  5329658 284.7    7916910 422.9  7916910 422.9
+Vcells 10479083  80.0   33191153 253.3 53339345 407.0
 > rowStats <- microbenchmark(rowWeightedMeans = rowWeightedMeans(X, w = w, na.rm = FALSE), `apply+weigthed.mean` = apply(X, 
 +     MARGIN = 1L, FUN = weighted.mean, w = w, na.rm = FALSE), unit = "ms")
 ```
@@ -157,16 +157,16 @@ _Table: Benchmarking of colWeightedMeans() and apply+weigthed.mean() on 100x100 
 
 
 
-|   |expr                |      min|        lq|      mean|    median|        uq|      max|
-|:--|:-------------------|--------:|---------:|---------:|---------:|---------:|--------:|
-|1  |colWeightedMeans    | 0.030385| 0.0365535| 0.0420789| 0.0401090| 0.0472445| 0.091637|
-|2  |apply+weigthed.mean | 0.550954| 0.5987340| 0.6863913| 0.6692365| 0.7184725| 1.130328|
+|   |expr                |      min|       lq|      mean|  median|        uq|      max|
+|:--|:-------------------|--------:|--------:|---------:|-------:|---------:|--------:|
+|1  |colWeightedMeans    | 0.030195| 0.032921| 0.0382298| 0.03661| 0.0418240| 0.084657|
+|2  |apply+weigthed.mean | 0.534847| 0.554290| 0.6471003| 0.63325| 0.7064345| 1.068205|
 
 
-|   |expr                |      min|       lq|   mean|   median|       uq|      max|
-|:--|:-------------------|--------:|--------:|------:|--------:|--------:|--------:|
-|1  |colWeightedMeans    |  1.00000|  1.00000|  1.000|  1.00000|  1.00000|  1.00000|
-|2  |apply+weigthed.mean | 18.13243| 16.37966| 16.312| 16.68544| 15.20754| 12.33484|
+|   |expr                |     min|       lq|     mean|   median|       uq|      max|
+|:--|:-------------------|-------:|--------:|--------:|--------:|--------:|--------:|
+|1  |colWeightedMeans    |  1.0000|  1.00000|  1.00000|  1.00000|  1.00000|  1.00000|
+|2  |apply+weigthed.mean | 17.7131| 16.83697| 16.92659| 17.29719| 16.89065| 12.61804|
 
 _Table: Benchmarking of rowWeightedMeans() and apply+weigthed.mean() on 100x100 data (transposed). The top panel shows times in milliseconds and the bottom panel shows relative times._
 
@@ -174,14 +174,14 @@ _Table: Benchmarking of rowWeightedMeans() and apply+weigthed.mean() on 100x100 
 
 |   |expr                |      min|       lq|      mean|    median|        uq|      max|
 |:--|:-------------------|--------:|--------:|---------:|---------:|---------:|--------:|
-|1  |rowWeightedMeans    | 0.119238| 0.126456| 0.1514169| 0.1478485| 0.1661620| 0.247022|
-|2  |apply+weigthed.mean | 0.536405| 0.576207| 0.6702919| 0.6524095| 0.7165685| 1.129828|
+|1  |rowWeightedMeans    | 0.108045| 0.114521| 0.1378237| 0.1341905| 0.1548515| 0.224745|
+|2  |apply+weigthed.mean | 0.535381| 0.558136| 0.6648594| 0.6451205| 0.7158065| 1.127485|
 
 
-|   |expr                |      min|       lq|     mean|   median|       uq|      max|
-|:--|:-------------------|--------:|--------:|--------:|--------:|--------:|--------:|
-|1  |rowWeightedMeans    | 1.000000| 1.000000| 1.000000| 1.000000| 1.000000| 1.000000|
-|2  |apply+weigthed.mean | 4.498608| 4.556581| 4.426798| 4.412689| 4.312469| 4.573795|
+|   |expr                |      min|       lq|     mean|   median|       uq|     max|
+|:--|:-------------------|--------:|--------:|--------:|--------:|--------:|-------:|
+|1  |rowWeightedMeans    | 1.000000| 1.000000| 1.000000| 1.000000| 1.000000| 1.00000|
+|2  |apply+weigthed.mean | 4.955167| 4.873656| 4.823984| 4.807498| 4.622535| 5.01673|
 
 _Figure: Benchmarking of colWeightedMeans() and apply+weigthed.mean() on 100x100 data  as well as rowWeightedMeans() and apply+weigthed.mean() on the same data transposed.  Outliers are displayed as crosses.  Times are in milliseconds._
 
@@ -193,16 +193,16 @@ _Table: Benchmarking of colWeightedMeans() and rowWeightedMeans() on 100x100 dat
 
 
 
-|   |expr             |     min|       lq|      mean|   median|       uq|     max|
-|:--|:----------------|-------:|--------:|---------:|--------:|--------:|-------:|
-|1  |colWeightedMeans |  30.385|  36.5535|  42.07892|  40.1090|  47.2445|  91.637|
-|2  |rowWeightedMeans | 119.238| 126.4560| 151.41687| 147.8485| 166.1620| 247.022|
+|   |expr             |     min|      lq|     mean|   median|       uq|     max|
+|:--|:----------------|-------:|-------:|--------:|--------:|--------:|-------:|
+|1  |colWeightedMeans |  30.195|  32.921|  38.2298|  36.6100|  41.8240|  84.657|
+|2  |rowWeightedMeans | 108.045| 114.521| 137.8237| 134.1905| 154.8515| 224.745|
 
 
 |   |expr             |      min|       lq|     mean|   median|       uq|      max|
 |:--|:----------------|--------:|--------:|--------:|--------:|--------:|--------:|
 |1  |colWeightedMeans | 1.000000| 1.000000| 1.000000| 1.000000| 1.000000| 1.000000|
-|2  |rowWeightedMeans | 3.924239| 3.459477| 3.598402| 3.686168| 3.517066| 2.695658|
+|2  |rowWeightedMeans | 3.578241| 3.478661| 3.605138| 3.665406| 3.702456| 2.654772|
 
 _Figure: Benchmarking of colWeightedMeans() and rowWeightedMeans() on 100x100 data (original and transposed).  Outliers are displayed as crosses. Times are in milliseconds._
 
@@ -216,16 +216,16 @@ _Figure: Benchmarking of colWeightedMeans() and rowWeightedMeans() on 100x100 da
 > X <- data[["1000x10"]]
 > w <- runif(nrow(X))
 > gc()
-          used  (Mb) gc trigger  (Mb) max used  (Mb)
-Ncells 5263735 281.2   10014072 534.9 10014072 534.9
-Vcells 9998815  76.3   18422267 140.6 18422267 140.6
+           used  (Mb) gc trigger  (Mb) max used  (Mb)
+Ncells  5330389 284.7    7916910 422.9  7916910 422.9
+Vcells 10473445  80.0   33191153 253.3 53339345 407.0
 > colStats <- microbenchmark(colWeightedMeans = colWeightedMeans(X, w = w, na.rm = FALSE), `apply+weigthed.mean` = apply(X, 
 +     MARGIN = 2L, FUN = weighted.mean, w = w, na.rm = FALSE), unit = "ms")
 > X <- t(X)
 > gc()
            used  (Mb) gc trigger  (Mb) max used  (Mb)
-Ncells  5263729 281.2   10014072 534.9 10014072 534.9
-Vcells 10008858  76.4   18422267 140.6 18422267 140.6
+Ncells  5330377 284.7    7916910 422.9  7916910 422.9
+Vcells 10483478  80.0   33191153 253.3 53339345 407.0
 > rowStats <- microbenchmark(rowWeightedMeans = rowWeightedMeans(X, w = w, na.rm = FALSE), `apply+weigthed.mean` = apply(X, 
 +     MARGIN = 1L, FUN = weighted.mean, w = w, na.rm = FALSE), unit = "ms")
 ```
@@ -234,31 +234,31 @@ _Table: Benchmarking of colWeightedMeans() and apply+weigthed.mean() on 1000x10 
 
 
 
-|   |expr                |      min|        lq|      mean|    median|        uq|      max|
-|:--|:-------------------|--------:|---------:|---------:|---------:|---------:|--------:|
-|1  |colWeightedMeans    | 0.053542| 0.0578595| 0.0648666| 0.0632270| 0.0691820| 0.134685|
-|2  |apply+weigthed.mean | 0.226459| 0.2372125| 0.2586568| 0.2520565| 0.2751085| 0.344581|
+|   |expr                |      min|       lq|      mean|   median|        uq|      max|
+|:--|:-------------------|--------:|--------:|---------:|--------:|---------:|--------:|
+|1  |colWeightedMeans    | 0.050207| 0.052973| 0.0616090| 0.058177| 0.0663215| 0.159488|
+|2  |apply+weigthed.mean | 0.207594| 0.215316| 0.2434847| 0.231619| 0.2656575| 0.379112|
 
 
-|   |expr                |      min|       lq|    mean|   median|       uq|      max|
-|:--|:-------------------|--------:|--------:|-------:|--------:|--------:|--------:|
-|1  |colWeightedMeans    | 1.000000| 1.000000| 1.00000| 1.000000| 1.000000| 1.000000|
-|2  |apply+weigthed.mean | 4.229558| 4.099802| 3.98752| 3.986533| 3.976591| 2.558422|
+|   |expr                |      min|       lq|     mean|   median|       uq|      max|
+|:--|:-------------------|--------:|--------:|--------:|--------:|--------:|--------:|
+|1  |colWeightedMeans    | 1.000000| 1.000000| 1.000000| 1.000000| 1.000000| 1.000000|
+|2  |apply+weigthed.mean | 4.134762| 4.064637| 3.952096| 3.981281| 4.005602| 2.377057|
 
 _Table: Benchmarking of rowWeightedMeans() and apply+weigthed.mean() on 1000x10 data (transposed). The top panel shows times in milliseconds and the bottom panel shows relative times._
 
 
 
-|   |expr                |      min|        lq|      mean|    median|        uq|      max|
-|:--|:-------------------|--------:|---------:|---------:|---------:|---------:|--------:|
-|1  |rowWeightedMeans    | 0.164435| 0.1765825| 0.1951785| 0.1850125| 0.2099875| 0.299780|
-|2  |apply+weigthed.mean | 0.213646| 0.2294030| 0.2515278| 0.2433315| 0.2660050| 0.345468|
+|   |expr                |      min|        lq|      mean|   median|       uq|      max|
+|:--|:-------------------|--------:|---------:|---------:|--------:|--------:|--------:|
+|1  |rowWeightedMeans    | 0.142004| 0.1511195| 0.1673899| 0.160325| 0.179218| 0.262431|
+|2  |apply+weigthed.mean | 0.202047| 0.2183060| 0.2437231| 0.236016| 0.261967| 0.353293|
 
 
-|   |expr                |      min|       lq|     mean|   median|       uq|      max|
-|:--|:-------------------|--------:|--------:|--------:|--------:|--------:|--------:|
-|1  |rowWeightedMeans    | 1.000000| 1.000000| 1.000000| 1.000000| 1.000000| 1.000000|
-|2  |apply+weigthed.mean | 1.299273| 1.299127| 1.288707| 1.315217| 1.266766| 1.152405|
+|   |expr                |      min|       lq|    mean|  median|       uq|      max|
+|:--|:-------------------|--------:|--------:|-------:|-------:|--------:|--------:|
+|1  |rowWeightedMeans    | 1.000000| 1.000000| 1.00000| 1.00000| 1.000000| 1.000000|
+|2  |apply+weigthed.mean | 1.422826| 1.444592| 1.45602| 1.47211| 1.461723| 1.346232|
 
 _Figure: Benchmarking of colWeightedMeans() and apply+weigthed.mean() on 1000x10 data  as well as rowWeightedMeans() and apply+weigthed.mean() on the same data transposed.  Outliers are displayed as crosses.  Times are in milliseconds._
 
@@ -270,16 +270,16 @@ _Table: Benchmarking of colWeightedMeans() and rowWeightedMeans() on 1000x10 dat
 
 
 
-|   |expr             |     min|       lq|      mean|   median|       uq|     max|
-|:--|:----------------|-------:|--------:|---------:|--------:|--------:|-------:|
-|1  |colWeightedMeans |  53.542|  57.8595|  64.86658|  63.2270|  69.1820| 134.685|
-|2  |rowWeightedMeans | 164.435| 176.5825| 195.17846| 185.0125| 209.9875| 299.780|
+|   |expr             |     min|       lq|      mean|  median|       uq|     max|
+|:--|:----------------|-------:|--------:|---------:|-------:|--------:|-------:|
+|1  |colWeightedMeans |  50.207|  52.9730|  61.60899|  58.177|  66.3215| 159.488|
+|2  |rowWeightedMeans | 142.004| 151.1195| 167.38994| 160.325| 179.2180| 262.431|
 
 
-|   |expr             |     min|       lq|     mean|   median|       uq|      max|
-|:--|:----------------|-------:|--------:|--------:|--------:|--------:|--------:|
-|1  |colWeightedMeans | 1.00000| 1.000000| 1.000000| 1.000000| 1.000000| 1.000000|
-|2  |rowWeightedMeans | 3.07114| 3.051919| 3.008922| 2.926163| 3.035291| 2.225786|
+|   |expr             |      min|       lq|     mean|   median|       uq|      max|
+|:--|:----------------|--------:|--------:|--------:|--------:|--------:|--------:|
+|1  |colWeightedMeans | 1.000000| 1.000000| 1.000000| 1.000000| 1.000000| 1.000000|
+|2  |rowWeightedMeans | 2.828371| 2.852765| 2.716973| 2.755814| 2.702261| 1.645459|
 
 _Figure: Benchmarking of colWeightedMeans() and rowWeightedMeans() on 1000x10 data (original and transposed).  Outliers are displayed as crosses. Times are in milliseconds._
 
@@ -293,16 +293,16 @@ _Figure: Benchmarking of colWeightedMeans() and rowWeightedMeans() on 1000x10 da
 > X <- data[["10x1000"]]
 > w <- runif(nrow(X))
 > gc()
-          used  (Mb) gc trigger  (Mb) max used  (Mb)
-Ncells 5263933 281.2   10014072 534.9 10014072 534.9
-Vcells 9998611  76.3   18422267 140.6 18422267 140.6
+           used  (Mb) gc trigger  (Mb) max used  (Mb)
+Ncells  5330581 284.7    7916910 422.9  7916910 422.9
+Vcells 10473235  80.0   33191153 253.3 53339345 407.0
 > colStats <- microbenchmark(colWeightedMeans = colWeightedMeans(X, w = w, na.rm = FALSE), `apply+weigthed.mean` = apply(X, 
 +     MARGIN = 2L, FUN = weighted.mean, w = w, na.rm = FALSE), unit = "ms")
 > X <- t(X)
 > gc()
            used  (Mb) gc trigger  (Mb) max used  (Mb)
-Ncells  5263927 281.2   10014072 534.9 10014072 534.9
-Vcells 10008654  76.4   18422267 140.6 18422267 140.6
+Ncells  5330575 284.7    7916910 422.9  7916910 422.9
+Vcells 10483278  80.0   33191153 253.3 53339345 407.0
 > rowStats <- microbenchmark(rowWeightedMeans = rowWeightedMeans(X, w = w, na.rm = FALSE), `apply+weigthed.mean` = apply(X, 
 +     MARGIN = 1L, FUN = weighted.mean, w = w, na.rm = FALSE), unit = "ms")
 ```
@@ -311,31 +311,31 @@ _Table: Benchmarking of colWeightedMeans() and apply+weigthed.mean() on 10x1000 
 
 
 
-|   |expr                |      min|       lq|      mean|    median|        uq|       max|
-|:--|:-------------------|--------:|--------:|---------:|---------:|---------:|---------:|
-|1  |colWeightedMeans    | 0.029236| 0.031995| 0.0404603| 0.0370065| 0.0432085|  0.106513|
-|2  |apply+weigthed.mean | 3.957823| 4.348457| 4.6348759| 4.5859350| 4.7427615| 10.562126|
+|   |expr                |      min|       lq|      mean|    median|       uq|       max|
+|:--|:-------------------|--------:|--------:|---------:|---------:|--------:|---------:|
+|1  |colWeightedMeans    | 0.027890| 0.031472| 0.0402594| 0.0373785| 0.043889|  0.100983|
+|2  |apply+weigthed.mean | 4.093371| 4.224227| 4.6551195| 4.3682620| 4.654880| 12.683915|
 
 
-|   |expr                |     min|       lq|     mean|   median|       uq|      max|
-|:--|:-------------------|-------:|--------:|--------:|--------:|--------:|--------:|
-|1  |colWeightedMeans    |   1.000|   1.0000|   1.0000|   1.0000|   1.0000|  1.00000|
-|2  |apply+weigthed.mean | 135.375| 135.9105| 114.5538| 123.9224| 109.7645| 99.16279|
+|   |expr                |      min|       lq|     mean|   median|       uq|      max|
+|:--|:-------------------|--------:|--------:|--------:|--------:|--------:|--------:|
+|1  |colWeightedMeans    |   1.0000|   1.0000|   1.0000|   1.0000|   1.0000|   1.0000|
+|2  |apply+weigthed.mean | 146.7684| 134.2218| 115.6281| 116.8656| 106.0603| 125.6045|
 
 _Table: Benchmarking of rowWeightedMeans() and apply+weigthed.mean() on 10x1000 data (transposed). The top panel shows times in milliseconds and the bottom panel shows relative times._
 
 
 
-|   |expr                |      min|       lq|      mean|   median|       uq|       max|
-|:--|:-------------------|--------:|--------:|---------:|--------:|--------:|---------:|
-|1  |rowWeightedMeans    | 0.118536| 0.129625| 0.1429275| 0.136098| 0.149408|  0.230407|
-|2  |apply+weigthed.mean | 4.078078| 4.424132| 4.6910580| 4.539199| 4.729876| 10.125294|
+|   |expr                |      min|        lq|      mean|   median|        uq|       max|
+|:--|:-------------------|--------:|---------:|---------:|--------:|---------:|---------:|
+|1  |rowWeightedMeans    | 0.106895| 0.1135865| 0.1268637| 0.121555| 0.1352205|  0.223218|
+|2  |apply+weigthed.mean | 4.066901| 4.2600495| 4.6186294| 4.353472| 4.5128765| 11.151535|
 
 
-|   |expr                |      min|       lq|     mean|   median|       uq|      max|
-|:--|:-------------------|--------:|--------:|--------:|--------:|--------:|--------:|
-|1  |rowWeightedMeans    |  1.00000|  1.00000|  1.00000|  1.00000|  1.00000|  1.00000|
-|2  |apply+weigthed.mean | 34.40371| 34.13024| 32.82124| 33.35243| 31.65744| 43.94525|
+|   |expr                |      min|       lq|     mean|   median|      uq|      max|
+|:--|:-------------------|--------:|--------:|--------:|--------:|-------:|--------:|
+|1  |rowWeightedMeans    |  1.00000|  1.00000|  1.00000|  1.00000|  1.0000|  1.00000|
+|2  |apply+weigthed.mean | 38.04576| 37.50489| 36.40624| 35.81484| 33.3742| 49.95805|
 
 _Figure: Benchmarking of colWeightedMeans() and apply+weigthed.mean() on 10x1000 data  as well as rowWeightedMeans() and apply+weigthed.mean() on the same data transposed.  Outliers are displayed as crosses.  Times are in milliseconds._
 
@@ -347,16 +347,16 @@ _Table: Benchmarking of colWeightedMeans() and rowWeightedMeans() on 10x1000 dat
 
 
 
-|   |expr             |     min|      lq|      mean|   median|       uq|     max|
-|:--|:----------------|-------:|-------:|---------:|--------:|--------:|-------:|
-|1  |colWeightedMeans |  29.236|  31.995|  40.46025|  37.0065|  43.2085| 106.513|
-|2  |rowWeightedMeans | 118.536| 129.625| 142.92749| 136.0980| 149.4080| 230.407|
+|   |expr             |     min|       lq|      mean|   median|       uq|     max|
+|:--|:----------------|-------:|--------:|---------:|--------:|--------:|-------:|
+|1  |colWeightedMeans |  27.890|  31.4720|  40.25943|  37.3785|  43.8890| 100.983|
+|2  |rowWeightedMeans | 106.895| 113.5865| 126.86366| 121.5550| 135.2205| 223.218|
 
 
 |   |expr             |      min|       lq|     mean|   median|       uq|      max|
 |:--|:----------------|--------:|--------:|--------:|--------:|--------:|--------:|
 |1  |colWeightedMeans | 1.000000| 1.000000| 1.000000| 1.000000| 1.000000| 1.000000|
-|2  |rowWeightedMeans | 4.054453| 4.051414| 3.532541| 3.677678| 3.457838| 2.163182|
+|2  |rowWeightedMeans | 3.832736| 3.609129| 3.151154| 3.252003| 3.080966| 2.210451|
 
 _Figure: Benchmarking of colWeightedMeans() and rowWeightedMeans() on 10x1000 data (original and transposed).  Outliers are displayed as crosses. Times are in milliseconds._
 
@@ -370,16 +370,16 @@ _Figure: Benchmarking of colWeightedMeans() and rowWeightedMeans() on 10x1000 da
 > X <- data[["100x1000"]]
 > w <- runif(nrow(X))
 > gc()
-          used  (Mb) gc trigger  (Mb) max used  (Mb)
-Ncells 5264141 281.2   10014072 534.9 10014072 534.9
-Vcells 9999232  76.3   18422267 140.6 18422267 140.6
+           used  (Mb) gc trigger  (Mb) max used  (Mb)
+Ncells  5330777 284.7    7916910 422.9  7916910 422.9
+Vcells 10473841  80.0   33191153 253.3 53339345 407.0
 > colStats <- microbenchmark(colWeightedMeans = colWeightedMeans(X, w = w, na.rm = FALSE), `apply+weigthed.mean` = apply(X, 
 +     MARGIN = 2L, FUN = weighted.mean, w = w, na.rm = FALSE), unit = "ms")
 > X <- t(X)
 > gc()
            used  (Mb) gc trigger  (Mb) max used  (Mb)
-Ncells  5264117 281.2   10014072 534.9 10014072 534.9
-Vcells 10099245  77.1   18422267 140.6 18422267 140.6
+Ncells  5330765 284.7    7916910 422.9  7916910 422.9
+Vcells 10573874  80.7   33191153 253.3 53339345 407.0
 > rowStats <- microbenchmark(rowWeightedMeans = rowWeightedMeans(X, w = w, na.rm = FALSE), `apply+weigthed.mean` = apply(X, 
 +     MARGIN = 1L, FUN = weighted.mean, w = w, na.rm = FALSE), unit = "ms")
 ```
@@ -388,31 +388,31 @@ _Table: Benchmarking of colWeightedMeans() and apply+weigthed.mean() on 100x1000
 
 
 
-|   |expr                |      min|       lq|      mean|   median|        uq|       max|
-|:--|:-------------------|--------:|--------:|---------:|--------:|---------:|---------:|
-|1  |colWeightedMeans    | 0.180754| 0.216558| 0.2519706| 0.244062| 0.2720775|  0.476509|
-|2  |apply+weigthed.mean | 5.274757| 5.620457| 7.1698028| 6.087127| 6.7634730| 19.943412|
+|   |expr                |      min|        lq|      mean|   median|       uq|      max|
+|:--|:-------------------|--------:|---------:|---------:|--------:|--------:|--------:|
+|1  |colWeightedMeans    | 0.176290| 0.2078795| 0.4456043| 0.234187| 0.270846| 20.88489|
+|2  |apply+weigthed.mean | 5.194491| 5.3765175| 6.1930076| 5.488162| 5.870243| 27.26077|
 
 
-|   |expr                |      min|       lq|     mean|  median|       uq|      max|
-|:--|:-------------------|--------:|--------:|--------:|-------:|--------:|--------:|
-|1  |colWeightedMeans    |  1.00000|  1.00000|  1.00000|  1.0000|  1.00000|  1.00000|
-|2  |apply+weigthed.mean | 29.18197| 25.95359| 28.45491| 24.9409| 24.85863| 41.85317|
+|   |expr                |     min|       lq|   mean|   median|       uq|      max|
+|:--|:-------------------|-------:|--------:|------:|--------:|--------:|--------:|
+|1  |colWeightedMeans    |  1.0000|  1.00000|  1.000|  1.00000|  1.00000| 1.000000|
+|2  |apply+weigthed.mean | 29.4656| 25.86363| 13.898| 23.43496| 21.67373| 1.305286|
 
 _Table: Benchmarking of rowWeightedMeans() and apply+weigthed.mean() on 100x1000 data (transposed). The top panel shows times in milliseconds and the bottom panel shows relative times._
 
 
 
+|   |expr                |      min|        lq|     mean|   median|       uq|      max|
+|:--|:-------------------|--------:|---------:|--------:|--------:|--------:|--------:|
+|1  |rowWeightedMeans    | 0.939194| 0.9811385| 1.280713| 1.007786| 1.164391| 22.33007|
+|2  |apply+weigthed.mean | 5.244182| 5.3788310| 6.250966| 5.525034| 5.953479| 28.91215|
+
+
 |   |expr                |      min|       lq|     mean|   median|       uq|      max|
 |:--|:-------------------|--------:|--------:|--------:|--------:|--------:|--------:|
-|1  |rowWeightedMeans    | 1.046808| 1.106279| 1.447603| 1.143368| 1.296322| 13.66081|
-|2  |apply+weigthed.mean | 5.366046| 5.588311| 6.882910| 5.886255| 6.774345| 20.24445|
-
-
-|   |expr                |      min|       lq|     mean|   median|      uq|      max|
-|:--|:-------------------|--------:|--------:|--------:|--------:|-------:|--------:|
-|1  |rowWeightedMeans    | 1.000000| 1.000000| 1.000000| 1.000000| 1.00000| 1.000000|
-|2  |apply+weigthed.mean | 5.126103| 5.051449| 4.754696| 5.148172| 5.22582| 1.481937|
+|1  |rowWeightedMeans    | 1.000000| 1.000000| 1.000000| 1.000000| 1.000000| 1.000000|
+|2  |apply+weigthed.mean | 5.583705| 5.482234| 4.880847| 5.482348| 5.112957| 1.294763|
 
 _Figure: Benchmarking of colWeightedMeans() and apply+weigthed.mean() on 100x1000 data  as well as rowWeightedMeans() and apply+weigthed.mean() on the same data transposed.  Outliers are displayed as crosses.  Times are in milliseconds._
 
@@ -424,16 +424,16 @@ _Table: Benchmarking of colWeightedMeans() and rowWeightedMeans() on 100x1000 da
 
 
 
-|   |expr             |      min|       lq|      mean|   median|        uq|       max|
-|:--|:----------------|--------:|--------:|---------:|--------:|---------:|---------:|
-|1  |colWeightedMeans |  180.754|  216.558|  251.9706|  244.062|  272.0775|   476.509|
-|2  |rowWeightedMeans | 1046.808| 1106.279| 1447.6026| 1143.368| 1296.3220| 13660.808|
+|   |expr             |     min|       lq|      mean|   median|       uq|      max|
+|:--|:----------------|-------:|--------:|---------:|--------:|--------:|--------:|
+|1  |colWeightedMeans | 176.290| 207.8795|  445.6043|  234.187|  270.846| 20884.89|
+|2  |rowWeightedMeans | 939.194| 981.1385| 1280.7132| 1007.786| 1164.390| 22330.07|
 
 
 |   |expr             |      min|       lq|     mean|   median|       uq|      max|
 |:--|:----------------|--------:|--------:|--------:|--------:|--------:|--------:|
-|1  |colWeightedMeans | 1.000000| 1.000000| 1.000000| 1.000000| 1.000000|  1.00000|
-|2  |rowWeightedMeans | 5.791341| 5.108465| 5.745124| 4.684744| 4.764532| 28.66852|
+|1  |colWeightedMeans | 1.000000| 1.000000| 1.000000| 1.000000| 1.000000| 1.000000|
+|2  |rowWeightedMeans | 5.327551| 4.719746| 2.874104| 4.303339| 4.299087| 1.069197|
 
 _Figure: Benchmarking of colWeightedMeans() and rowWeightedMeans() on 100x1000 data (original and transposed).  Outliers are displayed as crosses. Times are in milliseconds._
 
@@ -448,15 +448,15 @@ _Figure: Benchmarking of colWeightedMeans() and rowWeightedMeans() on 100x1000 d
 > w <- runif(nrow(X))
 > gc()
            used  (Mb) gc trigger  (Mb) max used  (Mb)
-Ncells  5264310 281.2   10014072 534.9 10014072 534.9
-Vcells 10000755  76.3   18422267 140.6 18422267 140.6
+Ncells  5330958 284.8    7916910 422.9  7916910 422.9
+Vcells 10475373  80.0   33191153 253.3 53339345 407.0
 > colStats <- microbenchmark(colWeightedMeans = colWeightedMeans(X, w = w, na.rm = FALSE), `apply+weigthed.mean` = apply(X, 
 +     MARGIN = 2L, FUN = weighted.mean, w = w, na.rm = FALSE), unit = "ms")
 > X <- t(X)
 > gc()
            used  (Mb) gc trigger  (Mb) max used  (Mb)
-Ncells  5264304 281.2   10014072 534.9 10014072 534.9
-Vcells 10100798  77.1   18422267 140.6 18422267 140.6
+Ncells  5330952 284.8    7916910 422.9  7916910 422.9
+Vcells 10575416  80.7   33191153 253.3 53339345 407.0
 > rowStats <- microbenchmark(rowWeightedMeans = rowWeightedMeans(X, w = w, na.rm = FALSE), `apply+weigthed.mean` = apply(X, 
 +     MARGIN = 1L, FUN = weighted.mean, w = w, na.rm = FALSE), unit = "ms")
 ```
@@ -465,31 +465,31 @@ _Table: Benchmarking of colWeightedMeans() and apply+weigthed.mean() on 1000x100
 
 
 
-|   |expr                |      min|       lq|      mean|   median|       uq|      max|
-|:--|:-------------------|--------:|--------:|---------:|--------:|--------:|--------:|
-|1  |colWeightedMeans    | 0.249869| 0.271466| 0.5556434| 0.288713| 0.316416| 16.67137|
-|2  |apply+weigthed.mean | 1.976495| 2.070725| 2.7413217| 2.233005| 2.467035| 10.55352|
+|   |expr                |      min|        lq|      mean|    median|       uq|        max|
+|:--|:-------------------|--------:|---------:|---------:|---------:|--------:|----------:|
+|1  |colWeightedMeans    | 0.201873| 0.2324025| 0.2648283| 0.2548875| 0.281130|   0.443784|
+|2  |apply+weigthed.mean | 1.514922| 1.6610620| 5.8543197| 1.8988915| 2.089488| 376.589480|
 
 
-|   |expr                |      min|       lq|     mean|   median|       uq|       max|
-|:--|:-------------------|--------:|--------:|--------:|--------:|--------:|---------:|
-|1  |colWeightedMeans    | 1.000000| 1.000000| 1.000000| 1.000000| 1.000000| 1.0000000|
-|2  |apply+weigthed.mean | 7.910125| 7.627935| 4.933599| 7.734343| 7.796809| 0.6330324|
+|   |expr                |      min|      lq|     mean|  median|       uq|      max|
+|:--|:-------------------|--------:|-------:|--------:|-------:|--------:|--------:|
+|1  |colWeightedMeans    | 1.000000| 1.00000|  1.00000| 1.00000| 1.000000|   1.0000|
+|2  |apply+weigthed.mean | 7.504332| 7.14735| 22.10609| 7.44992| 7.432464| 848.5873|
 
 _Table: Benchmarking of rowWeightedMeans() and apply+weigthed.mean() on 1000x100 data (transposed). The top panel shows times in milliseconds and the bottom panel shows relative times._
 
 
 
+|   |expr                |      min|       lq|     mean|   median|       uq|       max|
+|:--|:-------------------|--------:|--------:|--------:|--------:|--------:|---------:|
+|1  |rowWeightedMeans    | 0.959981| 0.979435| 1.125434| 1.090402| 1.228889|  1.656196|
+|2  |apply+weigthed.mean | 1.523706| 1.564525| 2.017792| 1.617954| 1.943826| 11.460256|
+
+
 |   |expr                |      min|       lq|     mean|   median|       uq|      max|
 |:--|:-------------------|--------:|--------:|--------:|--------:|--------:|--------:|
-|1  |rowWeightedMeans    | 1.105672| 1.193351| 1.296669| 1.276639| 1.361754| 1.821328|
-|2  |apply+weigthed.mean | 1.727789| 1.857369| 2.499109| 1.988961| 2.086884| 8.776585|
-
-
-|   |expr                |     min|       lq|     mean|   median|       uq|      max|
-|:--|:-------------------|-------:|--------:|--------:|--------:|--------:|--------:|
-|1  |rowWeightedMeans    | 1.00000| 1.000000| 1.000000| 1.000000| 1.000000| 1.000000|
-|2  |apply+weigthed.mean | 1.56266| 1.556431| 1.927329| 1.557967| 1.532496| 4.818783|
+|1  |rowWeightedMeans    | 1.000000| 1.000000| 1.000000| 1.000000| 1.000000| 1.000000|
+|2  |apply+weigthed.mean | 1.587225| 1.597374| 1.792902| 1.483814| 1.581775| 6.919626|
 
 _Figure: Benchmarking of colWeightedMeans() and apply+weigthed.mean() on 1000x100 data  as well as rowWeightedMeans() and apply+weigthed.mean() on the same data transposed.  Outliers are displayed as crosses.  Times are in milliseconds._
 
@@ -501,16 +501,16 @@ _Table: Benchmarking of colWeightedMeans() and rowWeightedMeans() on 1000x100 da
 
 
 
-|   |expr             |      min|       lq|      mean|   median|       uq|       max|
-|:--|:----------------|--------:|--------:|---------:|--------:|--------:|---------:|
-|1  |colWeightedMeans |  249.869|  271.466|  555.6434|  288.713|  316.416| 16671.370|
-|2  |rowWeightedMeans | 1105.672| 1193.351| 1296.6692| 1276.639| 1361.755|  1821.328|
+|   |expr             |     min|       lq|      mean|    median|       uq|      max|
+|:--|:----------------|-------:|--------:|---------:|---------:|--------:|--------:|
+|1  |colWeightedMeans | 201.873| 232.4025|  264.8283|  254.8875|  281.130|  443.784|
+|2  |rowWeightedMeans | 959.981| 979.4350| 1125.4340| 1090.4015| 1228.889| 1656.196|
 
 
-|   |expr             |      min|      lq|     mean|   median|       uq|       max|
-|:--|:----------------|--------:|-------:|--------:|--------:|--------:|---------:|
-|1  |colWeightedMeans | 1.000000| 1.00000| 1.000000| 1.000000| 1.000000| 1.0000000|
-|2  |rowWeightedMeans | 4.425007| 4.39595| 2.333635| 4.421825| 4.303684| 0.1092488|
+|   |expr             |      min|       lq|     mean|   median|       uq|      max|
+|:--|:----------------|--------:|--------:|--------:|--------:|--------:|--------:|
+|1  |colWeightedMeans | 1.000000| 1.000000| 1.000000| 1.000000| 1.000000| 1.000000|
+|2  |rowWeightedMeans | 4.755371| 4.214391| 4.249674| 4.277972| 4.371248| 3.731987|
 
 _Figure: Benchmarking of colWeightedMeans() and rowWeightedMeans() on 1000x100 data (original and transposed).  Outliers are displayed as crosses. Times are in milliseconds._
 
@@ -543,7 +543,7 @@ attached base packages:
 [1] stats     graphics  grDevices utils     datasets  methods   base     
 
 other attached packages:
-[1] microbenchmark_1.4-7   matrixStats_0.60.1     ggplot2_3.3.5         
+[1] microbenchmark_1.4-7   matrixStats_0.60.0     ggplot2_3.3.5         
 [4] knitr_1.33             R.devices_2.17.0       R.utils_2.10.1        
 [7] R.oo_1.24.0            R.methodsS3_1.8.1-9001 history_0.0.1-9000    
 
@@ -569,16 +569,17 @@ loaded via a namespace (and not attached):
 [55] tabby_0.0.1-9001        AnnotationDbi_1.54.1    Biostrings_2.60.2      
 [58] compiler_4.1.1          GenomeInfoDb_1.28.1     rlang_0.4.11           
 [61] grid_4.1.1              RCurl_1.98-1.4          cwhmisc_6.6            
-[64] rappdirs_0.3.3          startup_0.15.0          labeling_0.4.2         
-[67] bitops_1.0-7            base64enc_0.1-3         boot_1.3-28            
-[70] gtable_0.3.0            DBI_1.1.1               markdown_1.1           
-[73] R6_2.5.1                lpSolveAPI_5.5.2.0-17.7 rle_0.9.2              
-[76] dplyr_1.0.7             fastmap_1.1.0           bit_4.0.4              
-[79] utf8_1.2.2              parallel_4.1.1          Rcpp_1.0.7             
-[82] vctrs_0.3.8             png_0.1-7               DEoptimR_1.0-9         
-[85] tidyselect_1.1.1        xfun_0.25               coda_0.19-4            
+[64] rstudioapi_0.13         rappdirs_0.3.3          startup_0.15.0         
+[67] labeling_0.4.2          bitops_1.0-7            base64enc_0.1-3        
+[70] boot_1.3-28             gtable_0.3.0            DBI_1.1.1              
+[73] markdown_1.1            R6_2.5.1                lpSolveAPI_5.5.2.0-17.7
+[76] rle_0.9.2               dplyr_1.0.7             fastmap_1.1.0          
+[79] bit_4.0.4               utf8_1.2.2              parallel_4.1.1         
+[82] Rcpp_1.0.7              vctrs_0.3.8             png_0.1-7              
+[85] DEoptimR_1.0-9          tidyselect_1.1.1        xfun_0.25              
+[88] coda_0.19-4            
 ```
-Total processing time was 15.32 secs.
+Total processing time was 15.44 secs.
 
 
 ### Reproducibility
@@ -595,7 +596,7 @@ html <- matrixStats:::benchmark('colWeightedMeans')
 [StackOverflow:rowProds?]: https://stackoverflow.com/questions/20198801/ "Stack Overflow: Row product of matrix and column sum of matrix"
 
 ---------------------------------------
-Copyright Henrik Bengtsson. Last updated on 2021-08-25 18:18:22 (+0200 UTC). Powered by [RSP].
+Copyright Henrik Bengtsson. Last updated on 2021-08-25 22:32:10 (+0200 UTC). Powered by [RSP].
 
 <script>
  var link = document.createElement('link');

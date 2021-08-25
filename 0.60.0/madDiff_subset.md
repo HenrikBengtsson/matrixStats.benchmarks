@@ -55,8 +55,8 @@ This report benchmark the performance of madDiff() on subsetted computation.
 > x_S <- x[idxs]
 > gc()
            used  (Mb) gc trigger  (Mb) max used  (Mb)
-Ncells  5277901 281.9   10014072 534.9 10014072 534.9
-Vcells 16537638 126.2   36079799 275.3 55956209 427.0
+Ncells  5344253 285.5    7916910 422.9  7916910 422.9
+Vcells 17011428 129.8   36893127 281.5 57430649 438.2
 > stats <- microbenchmark(madDiff_x_S = madDiff(x_S), `madDiff(x, idxs)` = madDiff(x, idxs = idxs), 
 +     `madDiff(x[idxs])` = madDiff(x[idxs]), unit = "ms")
 ```
@@ -65,18 +65,18 @@ _Table: Benchmarking of madDiff_x_S(), madDiff(x, idxs)() and madDiff(x[idxs])()
 
 
 
-|   |expr             |      min|        lq|      mean|    median|        uq|      max|
-|:--|:----------------|--------:|---------:|---------:|---------:|---------:|--------:|
-|1  |madDiff_x_S      | 0.074200| 0.0766875| 0.0821665| 0.0787145| 0.0832920| 0.145213|
-|2  |madDiff(x, idxs) | 0.077912| 0.0803035| 0.0872416| 0.0827220| 0.0931810| 0.131446|
-|3  |madDiff(x[idxs]) | 0.077116| 0.0806825| 0.0912271| 0.0832735| 0.0947665| 0.495955|
+|   |expr             |      min|        lq|      mean|   median|        uq|      max|
+|:--|:----------------|--------:|---------:|---------:|--------:|---------:|--------:|
+|1  |madDiff_x_S      | 0.076442| 0.0799290| 0.0881440| 0.084452| 0.0942640| 0.146663|
+|2  |madDiff(x, idxs) | 0.079360| 0.0860325| 0.0954273| 0.092769| 0.1014305| 0.166170|
+|3  |madDiff(x[idxs]) | 0.079384| 0.0846570| 0.1001273| 0.092774| 0.1021840| 0.528362|
 
 
-|   |expr             |      min|       lq|     mean|   median|       uq|       max|
-|:--|:----------------|--------:|--------:|--------:|--------:|--------:|---------:|
-|1  |madDiff_x_S      | 1.000000| 1.000000| 1.000000| 1.000000| 1.000000| 1.0000000|
-|2  |madDiff(x, idxs) | 1.050027| 1.047152| 1.061766| 1.050912| 1.118727| 0.9051944|
-|3  |madDiff(x[idxs]) | 1.039299| 1.052094| 1.110271| 1.057918| 1.137762| 3.4153623|
+|   |expr             |      min|       lq|     mean|   median|       uq|      max|
+|:--|:----------------|--------:|--------:|--------:|--------:|--------:|--------:|
+|1  |madDiff_x_S      | 1.000000| 1.000000| 1.000000| 1.000000| 1.000000| 1.000000|
+|2  |madDiff(x, idxs) | 1.038173| 1.076361| 1.082629| 1.098482| 1.076026| 1.133006|
+|3  |madDiff(x[idxs]) | 1.038487| 1.059152| 1.135951| 1.098541| 1.084019| 3.602558|
 
 _Figure: Benchmarking of madDiff_x_S(), madDiff(x, idxs)() and madDiff(x[idxs])() on integer+n = 1000 data.  Outliers are displayed as crosses.  Times are in milliseconds._
 
@@ -91,8 +91,8 @@ _Figure: Benchmarking of madDiff_x_S(), madDiff(x, idxs)() and madDiff(x[idxs])(
 > x_S <- x[idxs]
 > gc()
            used  (Mb) gc trigger  (Mb) max used  (Mb)
-Ncells  5275350 281.8   10014072 534.9 10014072 534.9
-Vcells 15407852 117.6   36079799 275.3 55956209 427.0
+Ncells  5341851 285.3    7916910 422.9  7916910 422.9
+Vcells 15882129 121.2   36893127 281.5 57430649 438.2
 > stats <- microbenchmark(madDiff_x_S = madDiff(x_S), `madDiff(x, idxs)` = madDiff(x, idxs = idxs), 
 +     `madDiff(x[idxs])` = madDiff(x[idxs]), unit = "ms")
 ```
@@ -101,18 +101,18 @@ _Table: Benchmarking of madDiff_x_S(), madDiff(x, idxs)() and madDiff(x[idxs])()
 
 
 
-|   |expr             |      min|        lq|      mean|    median|       uq|      max|
-|:--|:----------------|--------:|---------:|---------:|---------:|--------:|--------:|
-|1  |madDiff_x_S      | 0.239450| 0.2461230| 0.2986800| 0.2787400| 0.325083| 0.645232|
-|3  |madDiff(x[idxs]) | 0.253703| 0.2614290| 0.3037200| 0.2849175| 0.331286| 0.546287|
-|2  |madDiff(x, idxs) | 0.254294| 0.2606455| 0.3120573| 0.2948515| 0.342488| 0.678427|
+|   |expr             |      min|        lq|      mean|    median|        uq|      max|
+|:--|:----------------|--------:|---------:|---------:|---------:|---------:|--------:|
+|1  |madDiff_x_S      | 0.241986| 0.2458525| 0.2896286| 0.2729940| 0.3160605| 0.421982|
+|3  |madDiff(x[idxs]) | 0.255741| 0.2593270| 0.2991417| 0.2801310| 0.3266175| 0.555078|
+|2  |madDiff(x, idxs) | 0.256148| 0.2596000| 0.3065501| 0.2874185| 0.3367050| 0.453426|
 
 
-|   |expr             |      min|       lq|     mean|   median|       uq|       max|
-|:--|:----------------|--------:|--------:|--------:|--------:|--------:|---------:|
-|1  |madDiff_x_S      | 1.000000| 1.000000| 1.000000| 1.000000| 1.000000| 1.0000000|
-|3  |madDiff(x[idxs]) | 1.059524| 1.062188| 1.016874| 1.022162| 1.019081| 0.8466521|
-|2  |madDiff(x, idxs) | 1.061992| 1.059005| 1.044788| 1.057801| 1.053540| 1.0514466|
+|   |expr             |      min|       lq|     mean|   median|       uq|      max|
+|:--|:----------------|--------:|--------:|--------:|--------:|--------:|--------:|
+|1  |madDiff_x_S      | 1.000000| 1.000000| 1.000000| 1.000000| 1.000000| 1.000000|
+|3  |madDiff(x[idxs]) | 1.056842| 1.054807| 1.032846| 1.026143| 1.033402| 1.315407|
+|2  |madDiff(x, idxs) | 1.058524| 1.055918| 1.058425| 1.052838| 1.065318| 1.074515|
 
 _Figure: Benchmarking of madDiff_x_S(), madDiff(x, idxs)() and madDiff(x[idxs])() on integer+n = 10000 data.  Outliers are displayed as crosses.  Times are in milliseconds._
 
@@ -127,8 +127,8 @@ _Figure: Benchmarking of madDiff_x_S(), madDiff(x, idxs)() and madDiff(x[idxs])(
 > x_S <- x[idxs]
 > gc()
            used  (Mb) gc trigger  (Mb) max used  (Mb)
-Ncells  5275422 281.8   10014072 534.9 10014072 534.9
-Vcells 15471412 118.1   36079799 275.3 55956209 427.0
+Ncells  5341923 285.3    7916910 422.9  7916910 422.9
+Vcells 15945689 121.7   36893127 281.5 57430649 438.2
 > stats <- microbenchmark(madDiff_x_S = madDiff(x_S), `madDiff(x, idxs)` = madDiff(x, idxs = idxs), 
 +     `madDiff(x[idxs])` = madDiff(x[idxs]), unit = "ms")
 ```
@@ -137,18 +137,18 @@ _Table: Benchmarking of madDiff_x_S(), madDiff(x, idxs)() and madDiff(x[idxs])()
 
 
 
-|   |expr             |      min|       lq|     mean|   median|       uq|       max|
-|:--|:----------------|--------:|--------:|--------:|--------:|--------:|---------:|
-|1  |madDiff_x_S      | 2.162317| 2.277525| 2.521476| 2.339349| 2.750243|  7.744738|
-|2  |madDiff(x, idxs) | 2.293631| 2.420543| 2.710823| 2.483136| 2.685769| 10.263861|
-|3  |madDiff(x[idxs]) | 2.299653| 2.427745| 2.671832| 2.486301| 2.831400|  8.562172|
-
-
 |   |expr             |      min|       lq|     mean|   median|       uq|      max|
 |:--|:----------------|--------:|--------:|--------:|--------:|--------:|--------:|
-|1  |madDiff_x_S      | 1.000000| 1.000000| 1.000000| 1.000000| 1.000000| 1.000000|
-|2  |madDiff(x, idxs) | 1.060728| 1.062795| 1.075094| 1.061465| 0.976557| 1.325269|
-|3  |madDiff(x[idxs]) | 1.063513| 1.065957| 1.059630| 1.062817| 1.029509| 1.105547|
+|1  |madDiff_x_S      | 2.129314| 2.160170| 2.517114| 2.199688| 2.609695| 9.828779|
+|2  |madDiff(x, idxs) | 2.286819| 2.313893| 2.534705| 2.338712| 2.615870| 8.736546|
+|3  |madDiff(x[idxs]) | 2.284914| 2.316596| 2.636846| 2.380107| 2.775296| 8.292508|
+
+
+|   |expr             |      min|       lq|     mean|   median|       uq|       max|
+|:--|:----------------|--------:|--------:|--------:|--------:|--------:|---------:|
+|1  |madDiff_x_S      | 1.000000| 1.000000| 1.000000| 1.000000| 1.000000| 1.0000000|
+|2  |madDiff(x, idxs) | 1.073970| 1.071162| 1.006988| 1.063202| 1.002366| 0.8888740|
+|3  |madDiff(x[idxs]) | 1.073075| 1.072413| 1.047567| 1.082021| 1.063456| 0.8436967|
 
 _Figure: Benchmarking of madDiff_x_S(), madDiff(x, idxs)() and madDiff(x[idxs])() on integer+n = 100000 data.  Outliers are displayed as crosses.  Times are in milliseconds._
 
@@ -163,8 +163,8 @@ _Figure: Benchmarking of madDiff_x_S(), madDiff(x, idxs)() and madDiff(x[idxs])(
 > x_S <- x[idxs]
 > gc()
            used  (Mb) gc trigger  (Mb) max used  (Mb)
-Ncells  5275494 281.8   10014072 534.9 10014072 534.9
-Vcells 16101461 122.9   36079799 275.3 55956209 427.0
+Ncells  5341995 285.3    7916910 422.9  7916910 422.9
+Vcells 16575738 126.5   36893127 281.5 57430649 438.2
 > stats <- microbenchmark(madDiff_x_S = madDiff(x_S), `madDiff(x, idxs)` = madDiff(x, idxs = idxs), 
 +     `madDiff(x[idxs])` = madDiff(x[idxs]), unit = "ms")
 ```
@@ -173,18 +173,18 @@ _Table: Benchmarking of madDiff_x_S(), madDiff(x, idxs)() and madDiff(x[idxs])()
 
 
 
-|   |expr             |      min|       lq|     mean|   median|       uq|      max|
-|:--|:----------------|--------:|--------:|--------:|--------:|--------:|--------:|
-|1  |madDiff_x_S      | 19.23154| 19.77846| 21.71188| 20.40218| 21.39168| 36.81052|
-|3  |madDiff(x[idxs]) | 22.33738| 22.87957| 25.00160| 23.38951| 25.79242| 32.25493|
-|2  |madDiff(x, idxs) | 22.12245| 22.83673| 25.48146| 23.44144| 29.54516| 41.74122|
+|   |expr             |      min|       lq|     mean|   median|       uq|       max|
+|:--|:----------------|--------:|--------:|--------:|--------:|--------:|---------:|
+|1  |madDiff_x_S      | 19.21814| 20.16101| 23.29995| 21.41715| 26.30154|  40.84189|
+|3  |madDiff(x[idxs]) | 22.07896| 23.91887| 31.53210| 26.59459| 30.84588| 417.09725|
+|2  |madDiff(x, idxs) | 22.23748| 23.95018| 27.84580| 26.91693| 31.03340|  44.13918|
 
 
 |   |expr             |      min|       lq|     mean|   median|       uq|       max|
 |:--|:----------------|--------:|--------:|--------:|--------:|--------:|---------:|
-|1  |madDiff_x_S      | 1.000000| 1.000000| 1.000000| 1.000000| 1.000000| 1.0000000|
-|3  |madDiff(x[idxs]) | 1.161497| 1.156792| 1.151517| 1.146422| 1.205722| 0.8762421|
-|2  |madDiff(x, idxs) | 1.150321| 1.154626| 1.173618| 1.148967| 1.381152| 1.1339479|
+|1  |madDiff_x_S      | 1.000000| 1.000000| 1.000000| 1.000000| 1.000000|  1.000000|
+|3  |madDiff(x[idxs]) | 1.148860| 1.186392| 1.353312| 1.241743| 1.172778| 10.212487|
+|2  |madDiff(x, idxs) | 1.157109| 1.187945| 1.195101| 1.256793| 1.179908|  1.080733|
 
 _Figure: Benchmarking of madDiff_x_S(), madDiff(x, idxs)() and madDiff(x[idxs])() on integer+n = 1000000 data.  Outliers are displayed as crosses.  Times are in milliseconds._
 
@@ -199,8 +199,8 @@ _Figure: Benchmarking of madDiff_x_S(), madDiff(x, idxs)() and madDiff(x[idxs])(
 > x_S <- x[idxs]
 > gc()
            used  (Mb) gc trigger  (Mb) max used  (Mb)
-Ncells  5275560 281.8   10014072 534.9 10014072 534.9
-Vcells 22401499 171.0   36079799 275.3 55956209 427.0
+Ncells  5342067 285.3    7916910 422.9  7916910 422.9
+Vcells 22875786 174.6   36893127 281.5 57430649 438.2
 > stats <- microbenchmark(madDiff_x_S = madDiff(x_S), `madDiff(x, idxs)` = madDiff(x, idxs = idxs), 
 +     `madDiff(x[idxs])` = madDiff(x[idxs]), unit = "ms")
 ```
@@ -211,16 +211,16 @@ _Table: Benchmarking of madDiff_x_S(), madDiff(x, idxs)() and madDiff(x[idxs])()
 
 |   |expr             |      min|       lq|     mean|   median|       uq|      max|
 |:--|:----------------|--------:|--------:|--------:|--------:|--------:|--------:|
-|1  |madDiff_x_S      | 224.4964| 236.4825| 288.7532| 250.0882| 265.9779| 632.5643|
-|2  |madDiff(x, idxs) | 348.2577| 369.3984| 416.7935| 383.6402| 414.0022| 799.9990|
-|3  |madDiff(x[idxs]) | 349.5720| 368.8546| 410.4814| 384.4574| 398.9289| 823.4109|
+|1  |madDiff_x_S      | 223.9843| 235.0427| 281.9048| 241.0282| 255.6912| 658.2526|
+|2  |madDiff(x, idxs) | 346.1576| 371.1629| 416.0227| 383.7330| 400.6054| 805.2715|
+|3  |madDiff(x[idxs]) | 356.6291| 382.9311| 461.8421| 394.5892| 420.1714| 818.3962|
 
 
 |   |expr             |      min|       lq|     mean|   median|       uq|      max|
 |:--|:----------------|--------:|--------:|--------:|--------:|--------:|--------:|
 |1  |madDiff_x_S      | 1.000000| 1.000000| 1.000000| 1.000000| 1.000000| 1.000000|
-|2  |madDiff(x, idxs) | 1.551284| 1.562054| 1.443425| 1.534020| 1.556528| 1.264692|
-|3  |madDiff(x[idxs]) | 1.557138| 1.559754| 1.421565| 1.537287| 1.499857| 1.301703|
+|2  |madDiff(x, idxs) | 1.545455| 1.579130| 1.475756| 1.592067| 1.566755| 1.223347|
+|3  |madDiff(x[idxs]) | 1.592206| 1.629198| 1.638291| 1.637108| 1.643277| 1.243286|
 
 _Figure: Benchmarking of madDiff_x_S(), madDiff(x, idxs)() and madDiff(x[idxs])() on integer+n = 10000000 data.  Outliers are displayed as crosses.  Times are in milliseconds._
 
@@ -268,8 +268,8 @@ _Figure: Benchmarking of madDiff_x_S(), madDiff(x, idxs)() and madDiff(x[idxs])(
 > x_S <- x[idxs]
 > gc()
            used  (Mb) gc trigger  (Mb) max used  (Mb)
-Ncells  5275641 281.8   10014072 534.9 10014072 534.9
-Vcells 20958711 160.0   62637090 477.9 60902792 464.7
+Ncells  5342148 285.4    7916910 422.9  7916910 422.9
+Vcells 21432997 163.6   66913630 510.6 65932233 503.1
 > stats <- microbenchmark(madDiff_x_S = madDiff(x_S), `madDiff(x, idxs)` = madDiff(x, idxs = idxs), 
 +     `madDiff(x[idxs])` = madDiff(x[idxs]), unit = "ms")
 ```
@@ -278,18 +278,18 @@ _Table: Benchmarking of madDiff_x_S(), madDiff(x, idxs)() and madDiff(x[idxs])()
 
 
 
-|   |expr             |      min|        lq|      mean|    median|        uq|      max|
-|:--|:----------------|--------:|---------:|---------:|---------:|---------:|--------:|
-|1  |madDiff_x_S      | 0.090402| 0.0939285| 0.1006674| 0.0972590| 0.1079240| 0.119610|
-|3  |madDiff(x[idxs]) | 0.093273| 0.0974265| 0.1080761| 0.1045865| 0.1167620| 0.240312|
-|2  |madDiff(x, idxs) | 0.093514| 0.0975960| 0.1077100| 0.1058380| 0.1168455| 0.135649|
+|   |expr             |      min|       lq|      mean|    median|        uq|      max|
+|:--|:----------------|--------:|--------:|---------:|---------:|---------:|--------:|
+|1  |madDiff_x_S      | 0.084334| 0.089016| 0.0934545| 0.0923530| 0.0964715| 0.131338|
+|3  |madDiff(x[idxs]) | 0.087137| 0.091671| 0.0992167| 0.0970800| 0.1033340| 0.227260|
+|2  |madDiff(x, idxs) | 0.088080| 0.093526| 0.0981428| 0.0974065| 0.1023410| 0.121016|
 
 
-|   |expr             |      min|       lq|     mean|   median|       uq|      max|
-|:--|:----------------|--------:|--------:|--------:|--------:|--------:|--------:|
-|1  |madDiff_x_S      | 1.000000| 1.000000| 1.000000| 1.000000| 1.000000| 1.000000|
-|3  |madDiff(x[idxs]) | 1.031758| 1.037241| 1.073596| 1.075340| 1.081891| 2.009130|
-|2  |madDiff(x, idxs) | 1.034424| 1.039046| 1.069959| 1.088208| 1.082665| 1.134094|
+|   |expr             |      min|       lq|     mean|   median|       uq|       max|
+|:--|:----------------|--------:|--------:|--------:|--------:|--------:|---------:|
+|1  |madDiff_x_S      | 1.000000| 1.000000| 1.000000| 1.000000| 1.000000| 1.0000000|
+|3  |madDiff(x[idxs]) | 1.033237| 1.029826| 1.061659| 1.051184| 1.071135| 1.7303446|
+|2  |madDiff(x, idxs) | 1.044419| 1.050665| 1.050167| 1.054719| 1.060842| 0.9214089|
 
 _Figure: Benchmarking of madDiff_x_S(), madDiff(x, idxs)() and madDiff(x[idxs])() on double+n = 1000 data.  Outliers are displayed as crosses.  Times are in milliseconds._
 
@@ -304,8 +304,8 @@ _Figure: Benchmarking of madDiff_x_S(), madDiff(x, idxs)() and madDiff(x[idxs])(
 > x_S <- x[idxs]
 > gc()
            used  (Mb) gc trigger  (Mb) max used  (Mb)
-Ncells  5275710 281.8   10014072 534.9 10014072 534.9
-Vcells 20968203 160.0   62637090 477.9 60902792 464.7
+Ncells  5342211 285.4    7916910 422.9  7916910 422.9
+Vcells 21442479 163.6   66913630 510.6 65932233 503.1
 > stats <- microbenchmark(madDiff_x_S = madDiff(x_S), `madDiff(x, idxs)` = madDiff(x, idxs = idxs), 
 +     `madDiff(x[idxs])` = madDiff(x[idxs]), unit = "ms")
 ```
@@ -316,16 +316,16 @@ _Table: Benchmarking of madDiff_x_S(), madDiff(x, idxs)() and madDiff(x[idxs])()
 
 |   |expr             |      min|        lq|      mean|    median|        uq|      max|
 |:--|:----------------|--------:|---------:|---------:|---------:|---------:|--------:|
-|3  |madDiff(x[idxs]) | 0.294591| 0.3054040| 0.3455965| 0.3164625| 0.3792580| 0.656277|
-|1  |madDiff_x_S      | 0.281877| 0.2913015| 0.3373472| 0.3180180| 0.3736790| 0.485415|
-|2  |madDiff(x, idxs) | 0.295706| 0.3061530| 0.3559535| 0.3285045| 0.3914415| 0.520530|
+|1  |madDiff_x_S      | 0.276932| 0.2947845| 0.3392882| 0.3269570| 0.3602870| 0.532405|
+|3  |madDiff(x[idxs]) | 0.289242| 0.3073325| 0.3624250| 0.3411220| 0.3887430| 0.615523|
+|2  |madDiff(x, idxs) | 0.289653| 0.3109800| 0.3649975| 0.3464645| 0.4050515| 0.652488|
 
 
-|   |expr             |       min|        lq|      mean|   median|        uq|       max|
-|:--|:----------------|---------:|---------:|---------:|--------:|---------:|---------:|
-|3  |madDiff(x[idxs]) | 1.0000000| 1.0000000| 1.0000000| 1.000000| 1.0000000| 1.0000000|
-|1  |madDiff_x_S      | 0.9568419| 0.9538235| 0.9761303| 1.004915| 0.9852897| 0.7396496|
-|2  |madDiff(x, idxs) | 1.0037849| 1.0024525| 1.0299685| 1.038052| 1.0321246| 0.7931559|
+|   |expr             |      min|       lq|     mean|   median|       uq|      max|
+|:--|:----------------|--------:|--------:|--------:|--------:|--------:|--------:|
+|1  |madDiff_x_S      | 1.000000| 1.000000| 1.000000| 1.000000| 1.000000| 1.000000|
+|3  |madDiff(x[idxs]) | 1.044451| 1.042567| 1.068192| 1.043324| 1.078982| 1.156118|
+|2  |madDiff(x, idxs) | 1.045935| 1.054940| 1.075774| 1.059664| 1.124247| 1.225548|
 
 _Figure: Benchmarking of madDiff_x_S(), madDiff(x, idxs)() and madDiff(x[idxs])() on double+n = 10000 data.  Outliers are displayed as crosses.  Times are in milliseconds._
 
@@ -340,8 +340,8 @@ _Figure: Benchmarking of madDiff_x_S(), madDiff(x, idxs)() and madDiff(x[idxs])(
 > x_S <- x[idxs]
 > gc()
            used  (Mb) gc trigger  (Mb) max used  (Mb)
-Ncells  5275782 281.8   10014072 534.9 10014072 534.9
-Vcells 21063084 160.7   62637090 477.9 60902792 464.7
+Ncells  5342283 285.4    7916910 422.9  7916910 422.9
+Vcells 21537360 164.4   66913630 510.6 65932233 503.1
 > stats <- microbenchmark(madDiff_x_S = madDiff(x_S), `madDiff(x, idxs)` = madDiff(x, idxs = idxs), 
 +     `madDiff(x[idxs])` = madDiff(x[idxs]), unit = "ms")
 ```
@@ -350,18 +350,18 @@ _Table: Benchmarking of madDiff_x_S(), madDiff(x, idxs)() and madDiff(x[idxs])()
 
 
 
-|   |expr             |      min|       lq|     mean|   median|       uq|      max|
-|:--|:----------------|--------:|--------:|--------:|--------:|--------:|--------:|
-|1  |madDiff_x_S      | 2.805528| 2.980672| 3.181715| 3.063123| 3.122529| 9.790596|
-|2  |madDiff(x, idxs) | 2.981700| 3.190015| 3.400242| 3.264165| 3.346545| 8.966223|
-|3  |madDiff(x[idxs]) | 2.986559| 3.200321| 3.375237| 3.275526| 3.375567| 4.719400|
-
-
 |   |expr             |      min|       lq|     mean|   median|       uq|       max|
 |:--|:----------------|--------:|--------:|--------:|--------:|--------:|---------:|
-|1  |madDiff_x_S      | 1.000000| 1.000000| 1.000000| 1.000000| 1.000000| 1.0000000|
-|2  |madDiff(x, idxs) | 1.062795| 1.070234| 1.068682| 1.065633| 1.071742| 0.9157995|
-|3  |madDiff(x[idxs]) | 1.064526| 1.073691| 1.060823| 1.069342| 1.081037| 0.4820340|
+|1  |madDiff_x_S      | 2.769695| 2.946010| 3.229999| 3.038127| 3.485053|  5.296025|
+|2  |madDiff(x, idxs) | 2.929154| 3.088465| 3.437747| 3.206155| 3.358687|  9.822420|
+|3  |madDiff(x[idxs]) | 2.930527| 3.164171| 3.544953| 3.267368| 3.988570| 10.072499|
+
+
+|   |expr             |      min|       lq|     mean|   median|        uq|      max|
+|:--|:----------------|--------:|--------:|--------:|--------:|---------:|--------:|
+|1  |madDiff_x_S      | 1.000000| 1.000000| 1.000000| 1.000000| 1.0000000| 1.000000|
+|2  |madDiff(x, idxs) | 1.057573| 1.048355| 1.064318| 1.055307| 0.9637404| 1.854678|
+|3  |madDiff(x[idxs]) | 1.058069| 1.074053| 1.097509| 1.075455| 1.1444787| 1.901898|
 
 _Figure: Benchmarking of madDiff_x_S(), madDiff(x, idxs)() and madDiff(x[idxs])() on double+n = 100000 data.  Outliers are displayed as crosses.  Times are in milliseconds._
 
@@ -376,8 +376,8 @@ _Figure: Benchmarking of madDiff_x_S(), madDiff(x, idxs)() and madDiff(x[idxs])(
 > x_S <- x[idxs]
 > gc()
            used  (Mb) gc trigger  (Mb) max used  (Mb)
-Ncells  5275854 281.8   10014072 534.9 10014072 534.9
-Vcells 22008531 168.0   62637090 477.9 62618780 477.8
+Ncells  5342355 285.4    7916910 422.9  7916910 422.9
+Vcells 22482804 171.6   66913630 510.6 66909510 510.5
 > stats <- microbenchmark(madDiff_x_S = madDiff(x_S), `madDiff(x, idxs)` = madDiff(x, idxs = idxs), 
 +     `madDiff(x[idxs])` = madDiff(x[idxs]), unit = "ms")
 ```
@@ -386,18 +386,18 @@ _Table: Benchmarking of madDiff_x_S(), madDiff(x, idxs)() and madDiff(x[idxs])()
 
 
 
-|   |expr             |      min|       lq|     mean|   median|       uq|       max|
-|:--|:----------------|--------:|--------:|--------:|--------:|--------:|---------:|
-|1  |madDiff_x_S      | 27.31705| 29.20585| 31.47976| 30.14585| 31.84868|  41.15535|
-|2  |madDiff(x, idxs) | 36.07666| 38.96312| 45.43416| 40.52054| 42.14556| 421.90075|
-|3  |madDiff(x[idxs]) | 36.23514| 39.60981| 41.69321| 40.82552| 42.28437|  51.12196|
+|   |expr             |      min|       lq|     mean|   median|       uq|      max|
+|:--|:----------------|--------:|--------:|--------:|--------:|--------:|--------:|
+|1  |madDiff_x_S      | 27.67178| 29.77384| 31.77019| 30.72146| 32.80154| 46.24240|
+|3  |madDiff(x[idxs]) | 37.20858| 39.89259| 42.56868| 40.85085| 43.18691| 55.18924|
+|2  |madDiff(x, idxs) | 37.59856| 40.26422| 43.08320| 41.20645| 44.43903| 54.45280|
 
 
 |   |expr             |      min|       lq|     mean|   median|       uq|      max|
 |:--|:----------------|--------:|--------:|--------:|--------:|--------:|--------:|
-|1  |madDiff_x_S      | 1.000000| 1.000000| 1.000000| 1.000000| 1.000000|  1.00000|
-|2  |madDiff(x, idxs) | 1.320665| 1.334086| 1.443281| 1.344150| 1.323306| 10.25142|
-|3  |madDiff(x[idxs]) | 1.326466| 1.356229| 1.324445| 1.354267| 1.327665|  1.24217|
+|1  |madDiff_x_S      | 1.000000| 1.000000| 1.000000| 1.000000| 1.000000| 1.000000|
+|3  |madDiff(x[idxs]) | 1.344640| 1.339854| 1.339894| 1.329717| 1.316612| 1.193477|
+|2  |madDiff(x, idxs) | 1.358733| 1.352335| 1.356089| 1.341292| 1.354785| 1.177551|
 
 _Figure: Benchmarking of madDiff_x_S(), madDiff(x, idxs)() and madDiff(x[idxs])() on double+n = 1000000 data.  Outliers are displayed as crosses.  Times are in milliseconds._
 
@@ -412,8 +412,8 @@ _Figure: Benchmarking of madDiff_x_S(), madDiff(x, idxs)() and madDiff(x[idxs])(
 > x_S <- x[idxs]
 > gc()
            used  (Mb) gc trigger  (Mb) max used  (Mb)
-Ncells  5275926 281.8   10014072 534.9 10014072 534.9
-Vcells 31458579 240.1   62637090 477.9 62618780 477.8
+Ncells  5342427 285.4    7916910 422.9  7916910 422.9
+Vcells 31932852 243.7   66913630 510.6 66909510 510.5
 > stats <- microbenchmark(madDiff_x_S = madDiff(x_S), `madDiff(x, idxs)` = madDiff(x, idxs = idxs), 
 +     `madDiff(x[idxs])` = madDiff(x[idxs]), unit = "ms")
 ```
@@ -422,18 +422,18 @@ _Table: Benchmarking of madDiff_x_S(), madDiff(x, idxs)() and madDiff(x[idxs])()
 
 
 
-|   |expr             |      min|       lq|     mean|   median|       uq|       max|
-|:--|:----------------|--------:|--------:|--------:|--------:|--------:|---------:|
-|1  |madDiff_x_S      | 329.6369| 359.1778| 398.4743| 368.1303| 374.7447|  744.3348|
-|2  |madDiff(x, idxs) | 479.9477| 529.9871| 564.4913| 534.2490| 547.0622|  907.6681|
-|3  |madDiff(x[idxs]) | 497.7338| 531.6360| 596.6168| 540.8308| 556.0309| 1331.3023|
+|   |expr             |      min|       lq|     mean|   median|       uq|      max|
+|:--|:----------------|--------:|--------:|--------:|--------:|--------:|--------:|
+|1  |madDiff_x_S      | 295.2065| 315.0181| 378.5460| 324.6075| 339.9018| 770.2836|
+|2  |madDiff(x, idxs) | 437.4005| 488.3774| 536.7878| 506.2254| 519.6453| 920.3717|
+|3  |madDiff(x[idxs]) | 439.6459| 493.2539| 561.7259| 508.0569| 529.1599| 940.5145|
 
 
 |   |expr             |      min|       lq|     mean|   median|       uq|      max|
 |:--|:----------------|--------:|--------:|--------:|--------:|--------:|--------:|
 |1  |madDiff_x_S      | 1.000000| 1.000000| 1.000000| 1.000000| 1.000000| 1.000000|
-|2  |madDiff(x, idxs) | 1.455989| 1.475556| 1.416632| 1.451250| 1.459826| 1.219435|
-|3  |madDiff(x[idxs]) | 1.509945| 1.480147| 1.497253| 1.469129| 1.483759| 1.788580|
+|2  |madDiff(x, idxs) | 1.481677| 1.550315| 1.418025| 1.559500| 1.528810| 1.194848|
+|3  |madDiff(x[idxs]) | 1.489283| 1.565795| 1.483904| 1.565142| 1.556802| 1.220998|
 
 _Figure: Benchmarking of madDiff_x_S(), madDiff(x, idxs)() and madDiff(x[idxs])() on double+n = 10000000 data.  Outliers are displayed as crosses.  Times are in milliseconds._
 
@@ -465,7 +465,7 @@ attached base packages:
 [1] stats     graphics  grDevices utils     datasets  methods   base     
 
 other attached packages:
-[1] microbenchmark_1.4-7   matrixStats_0.60.1     ggplot2_3.3.5         
+[1] microbenchmark_1.4-7   matrixStats_0.60.0     ggplot2_3.3.5         
 [4] knitr_1.33             R.devices_2.17.0       R.utils_2.10.1        
 [7] R.oo_1.24.0            R.methodsS3_1.8.1-9001 history_0.0.1-9000    
 
@@ -491,16 +491,17 @@ loaded via a namespace (and not attached):
 [55] tabby_0.0.1-9001        AnnotationDbi_1.54.1    Biostrings_2.60.2      
 [58] compiler_4.1.1          GenomeInfoDb_1.28.1     rlang_0.4.11           
 [61] grid_4.1.1              RCurl_1.98-1.4          cwhmisc_6.6            
-[64] rappdirs_0.3.3          startup_0.15.0          labeling_0.4.2         
-[67] bitops_1.0-7            base64enc_0.1-3         boot_1.3-28            
-[70] gtable_0.3.0            DBI_1.1.1               markdown_1.1           
-[73] R6_2.5.1                lpSolveAPI_5.5.2.0-17.7 rle_0.9.2              
-[76] dplyr_1.0.7             fastmap_1.1.0           bit_4.0.4              
-[79] utf8_1.2.2              parallel_4.1.1          Rcpp_1.0.7             
-[82] vctrs_0.3.8             png_0.1-7               DEoptimR_1.0-9         
-[85] tidyselect_1.1.1        xfun_0.25               coda_0.19-4            
+[64] rstudioapi_0.13         rappdirs_0.3.3          startup_0.15.0-9000    
+[67] labeling_0.4.2          bitops_1.0-7            base64enc_0.1-3        
+[70] boot_1.3-28             gtable_0.3.0            DBI_1.1.1              
+[73] markdown_1.1            R6_2.5.1                lpSolveAPI_5.5.2.0-17.7
+[76] rle_0.9.2               dplyr_1.0.7             fastmap_1.1.0          
+[79] bit_4.0.4               utf8_1.2.2              parallel_4.1.1         
+[82] Rcpp_1.0.7              vctrs_0.3.8             png_0.1-7              
+[85] DEoptimR_1.0-9          tidyselect_1.1.1        xfun_0.25              
+[88] coda_0.19-4            
 ```
-Total processing time was 5.02 mins.
+Total processing time was 4.98 mins.
 
 
 ### Reproducibility
@@ -517,7 +518,7 @@ html <- matrixStats:::benchmark('madDiff_subset')
 [StackOverflow:rowProds?]: https://stackoverflow.com/questions/20198801/ "Stack Overflow: Row product of matrix and column sum of matrix"
 
 ---------------------------------------
-Copyright Dongcan Jiang. Last updated on 2021-08-25 18:26:45 (+0200 UTC). Powered by [RSP].
+Copyright Dongcan Jiang. Last updated on 2021-08-25 22:40:28 (+0200 UTC). Powered by [RSP].
 
 <script>
  var link = document.createElement('link');

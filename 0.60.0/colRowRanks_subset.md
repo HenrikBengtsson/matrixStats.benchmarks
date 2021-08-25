@@ -63,8 +63,8 @@ This report benchmark the performance of colRanks() and rowRanks() on subsetted 
 > X_S <- X[rows, cols]
 > gc()
            used  (Mb) gc trigger  (Mb) max used  (Mb)
-Ncells  5242791 280.0   10014072 534.9 10014072 534.9
-Vcells 10050255  76.7   18204443 138.9 18204443 138.9
+Ncells  5294418 282.8    7916910 422.9  7916910 422.9
+Vcells 10454721  79.8   33191153 253.3 53339345 407.0
 > colStats <- microbenchmark(colRanks_X_S = colRanks(X_S, na.rm = FALSE), `colRanks(X, rows, cols)` = colRanks(X, 
 +     rows = rows, cols = cols, na.rm = FALSE), `colRanks(X[rows, cols])` = colRanks(X[rows, cols], 
 +     na.rm = FALSE), unit = "ms")
@@ -72,8 +72,8 @@ Vcells 10050255  76.7   18204443 138.9 18204443 138.9
 > X_S <- t(X_S)
 > gc()
            used  (Mb) gc trigger  (Mb) max used  (Mb)
-Ncells  5228866 279.3   10014072 534.9 10014072 534.9
-Vcells 10004249  76.4   18204443 138.9 18204443 138.9
+Ncells  5294519 282.8    7916910 422.9  7916910 422.9
+Vcells 10455276  79.8   33191153 253.3 53339345 407.0
 > rowStats <- microbenchmark(rowRanks_X_S = rowRanks(X_S, na.rm = FALSE), `rowRanks(X, cols, rows)` = rowRanks(X, 
 +     rows = cols, cols = rows, na.rm = FALSE), `rowRanks(X[cols, rows])` = rowRanks(X[cols, rows], 
 +     na.rm = FALSE), unit = "ms")
@@ -83,18 +83,18 @@ _Table: Benchmarking of colRanks_X_S(), colRanks(X, rows, cols)() and colRanks(X
 
 
 
-|   |expr                    |      min|       lq|      mean|    median|        uq|      max|
-|:--|:-----------------------|--------:|--------:|---------:|---------:|---------:|--------:|
-|1  |colRanks_X_S            | 0.009821| 0.010262| 0.0126004| 0.0104920| 0.0108115| 0.209501|
-|2  |colRanks(X, rows, cols) | 0.010384| 0.010715| 0.0109976| 0.0108775| 0.0111935| 0.015224|
-|3  |colRanks(X[rows, cols]) | 0.011026| 0.011384| 0.0119837| 0.0116280| 0.0119680| 0.027208|
+|   |expr                    |      min|        lq|      mean|    median|        uq|      max|
+|:--|:-----------------------|--------:|---------:|---------:|---------:|---------:|--------:|
+|1  |colRanks_X_S            | 0.010032| 0.0105045| 0.0138274| 0.0108680| 0.0111200| 0.304142|
+|2  |colRanks(X, rows, cols) | 0.010547| 0.0110480| 0.0114338| 0.0114070| 0.0116500| 0.015685|
+|3  |colRanks(X[rows, cols]) | 0.011377| 0.0117655| 0.0124191| 0.0122655| 0.0125965| 0.027460|
 
 
 |   |expr                    |      min|       lq|      mean|   median|       uq|       max|
 |:--|:-----------------------|--------:|--------:|---------:|--------:|--------:|---------:|
 |1  |colRanks_X_S            | 1.000000| 1.000000| 1.0000000| 1.000000| 1.000000| 1.0000000|
-|2  |colRanks(X, rows, cols) | 1.057326| 1.044143| 0.8727971| 1.036742| 1.035333| 0.0726679|
-|3  |colRanks(X[rows, cols]) | 1.122696| 1.109335| 0.9510564| 1.108273| 1.106969| 0.1298705|
+|2  |colRanks(X, rows, cols) | 1.051336| 1.051740| 0.8268954| 1.049595| 1.047662| 0.0515713|
+|3  |colRanks(X[rows, cols]) | 1.134071| 1.120044| 0.8981509| 1.128588| 1.132779| 0.0902868|
 
 _Table: Benchmarking of rowRanks_X_S(), rowRanks(X, cols, rows)() and rowRanks(X[cols, rows])() on integer+10x10 data (transposed). The top panel shows times in milliseconds and the bottom panel shows relative times._
 
@@ -102,16 +102,16 @@ _Table: Benchmarking of rowRanks_X_S(), rowRanks(X, cols, rows)() and rowRanks(X
 
 |   |expr                    |      min|        lq|      mean|    median|        uq|      max|
 |:--|:-----------------------|--------:|---------:|---------:|---------:|---------:|--------:|
-|1  |rowRanks_X_S            | 0.005134| 0.0054310| 0.0056442| 0.0055825| 0.0057540| 0.008680|
-|2  |rowRanks(X, cols, rows) | 0.005576| 0.0058640| 0.0075071| 0.0060585| 0.0062420| 0.144157|
-|3  |rowRanks(X[cols, rows]) | 0.006283| 0.0065485| 0.0069488| 0.0067200| 0.0069345| 0.021639|
+|1  |rowRanks_X_S            | 0.005725| 0.0059555| 0.0061417| 0.0060835| 0.0061995| 0.009428|
+|2  |rowRanks(X, cols, rows) | 0.006005| 0.0063055| 0.0086534| 0.0064075| 0.0065660| 0.221239|
+|3  |rowRanks(X[cols, rows]) | 0.006649| 0.0071440| 0.0073792| 0.0072575| 0.0074620| 0.013028|
 
 
 |   |expr                    |      min|       lq|     mean|   median|       uq|       max|
 |:--|:-----------------------|--------:|--------:|--------:|--------:|--------:|---------:|
 |1  |rowRanks_X_S            | 1.000000| 1.000000| 1.000000| 1.000000| 1.000000|  1.000000|
-|2  |rowRanks(X, cols, rows) | 1.086093| 1.079727| 1.330057| 1.085266| 1.084811| 16.607949|
-|3  |rowRanks(X[cols, rows]) | 1.223802| 1.205763| 1.231154| 1.203762| 1.205162|  2.492972|
+|2  |rowRanks(X, cols, rows) | 1.048908| 1.058769| 1.408969| 1.053259| 1.059118| 23.466165|
+|3  |rowRanks(X[cols, rows]) | 1.161397| 1.199563| 1.201487| 1.192981| 1.203645|  1.381841|
 
 _Figure: Benchmarking of colRanks_X_S(), colRanks(X, rows, cols)() and colRanks(X[rows, cols])() on integer+10x10 data  as well as rowRanks_X_S(), rowRanks(X, cols, rows)() and rowRanks(X[cols, rows])() on the same data transposed.  Outliers are displayed as crosses.  Times are in milliseconds._
 
@@ -123,16 +123,16 @@ _Table: Benchmarking of colRanks_X_S() and rowRanks_X_S() on integer+10x10 data 
 
 
 
-|   |expr         |   min|     lq|     mean|  median|      uq|     max|
-|:--|:------------|-----:|------:|--------:|-------:|-------:|-------:|
-|2  |rowRanks_X_S | 5.134|  5.431|  5.64417|  5.5825|  5.7540|   8.680|
-|1  |colRanks_X_S | 9.821| 10.262| 12.60042| 10.4920| 10.8115| 209.501|
+|   |expr         |    min|      lq|     mean|  median|      uq|     max|
+|:--|:------------|------:|-------:|--------:|-------:|-------:|-------:|
+|2  |rowRanks_X_S |  5.725|  5.9555|  6.14168|  6.0835|  6.1995|   9.428|
+|1  |colRanks_X_S | 10.032| 10.5045| 13.82742| 10.8680| 11.1200| 304.142|
 
 
 |   |expr         |      min|       lq|     mean|   median|       uq|      max|
 |:--|:------------|--------:|--------:|--------:|--------:|--------:|--------:|
 |2  |rowRanks_X_S | 1.000000| 1.000000| 1.000000| 1.000000| 1.000000|  1.00000|
-|1  |colRanks_X_S | 1.912933| 1.889523| 2.232466| 1.879445| 1.878954| 24.13606|
+|1  |colRanks_X_S | 1.752314| 1.763832| 2.251407| 1.786472| 1.793693| 32.25944|
 
 _Figure: Benchmarking of colRanks_X_S() and rowRanks_X_S() on integer+10x10 data (original and transposed).  Outliers are displayed as crosses. Times are in milliseconds._
 
@@ -147,18 +147,18 @@ _Figure: Benchmarking of colRanks_X_S() and rowRanks_X_S() on integer+10x10 data
 > cols <- sample.int(ncol(X), size = ncol(X) * 0.7)
 > X_S <- X[rows, cols]
 > gc()
-          used  (Mb) gc trigger  (Mb) max used  (Mb)
-Ncells 5227577 279.2   10014072 534.9 10014072 534.9
-Vcells 9673291  73.9   18204443 138.9 18204443 138.9
+           used  (Mb) gc trigger  (Mb) max used  (Mb)
+Ncells  5293327 282.7    7916910 422.9  7916910 422.9
+Vcells 10124574  77.3   33191153 253.3 53339345 407.0
 > colStats <- microbenchmark(colRanks_X_S = colRanks(X_S, na.rm = FALSE), `colRanks(X, rows, cols)` = colRanks(X, 
 +     rows = rows, cols = cols, na.rm = FALSE), `colRanks(X[rows, cols])` = colRanks(X[rows, cols], 
 +     na.rm = FALSE), unit = "ms")
 > X <- t(X)
 > X_S <- t(X_S)
 > gc()
-          used  (Mb) gc trigger  (Mb) max used  (Mb)
-Ncells 5227553 279.2   10014072 534.9 10014072 534.9
-Vcells 9678344  73.9   18204443 138.9 18204443 138.9
+           used  (Mb) gc trigger  (Mb) max used  (Mb)
+Ncells  5293321 282.7    7916910 422.9  7916910 422.9
+Vcells 10129657  77.3   33191153 253.3 53339345 407.0
 > rowStats <- microbenchmark(rowRanks_X_S = rowRanks(X_S, na.rm = FALSE), `rowRanks(X, cols, rows)` = rowRanks(X, 
 +     rows = cols, cols = rows, na.rm = FALSE), `rowRanks(X[cols, rows])` = rowRanks(X[cols, rows], 
 +     na.rm = FALSE), unit = "ms")
@@ -168,35 +168,35 @@ _Table: Benchmarking of colRanks_X_S(), colRanks(X, rows, cols)() and colRanks(X
 
 
 
-|   |expr                    |      min|       lq|      mean|    median|        uq|      max|
-|:--|:-----------------------|--------:|--------:|---------:|---------:|---------:|--------:|
-|2  |colRanks(X, rows, cols) | 0.152349| 0.159716| 0.1844254| 0.1821930| 0.1999845| 0.251044|
-|1  |colRanks_X_S            | 0.150959| 0.157406| 0.1843852| 0.1843585| 0.2001950| 0.251409|
-|3  |colRanks(X[rows, cols]) | 0.159840| 0.169235| 0.1937894| 0.1889720| 0.2087330| 0.325084|
+|   |expr                    |      min|        lq|      mean|   median|        uq|      max|
+|:--|:-----------------------|--------:|---------:|---------:|--------:|---------:|--------:|
+|1  |colRanks_X_S            | 0.152024| 0.1657050| 0.1908988| 0.189321| 0.2064810| 0.254377|
+|2  |colRanks(X, rows, cols) | 0.159376| 0.1747150| 0.1975440| 0.194722| 0.2074785| 0.267923|
+|3  |colRanks(X[rows, cols]) | 0.159383| 0.1781465| 0.2018076| 0.197223| 0.2167080| 0.323973|
 
 
-|   |expr                    |       min|        lq|      mean|   median|       uq|      max|
-|:--|:-----------------------|---------:|---------:|---------:|--------:|--------:|--------:|
-|2  |colRanks(X, rows, cols) | 1.0000000| 1.0000000| 1.0000000| 1.000000| 1.000000| 1.000000|
-|1  |colRanks_X_S            | 0.9908762| 0.9855368| 0.9997821| 1.011886| 1.001053| 1.001454|
-|3  |colRanks(X[rows, cols]) | 1.0491700| 1.0595995| 1.0507739| 1.037208| 1.043746| 1.294928|
+|   |expr                    |      min|       lq|     mean|   median|       uq|      max|
+|:--|:-----------------------|--------:|--------:|--------:|--------:|--------:|--------:|
+|1  |colRanks_X_S            | 1.000000| 1.000000| 1.000000| 1.000000| 1.000000| 1.000000|
+|2  |colRanks(X, rows, cols) | 1.048361| 1.054374| 1.034810| 1.028528| 1.004831| 1.053252|
+|3  |colRanks(X[rows, cols]) | 1.048407| 1.075082| 1.057144| 1.041739| 1.049530| 1.273594|
 
 _Table: Benchmarking of rowRanks_X_S(), rowRanks(X, cols, rows)() and rowRanks(X[cols, rows])() on integer+100x100 data (transposed). The top panel shows times in milliseconds and the bottom panel shows relative times._
 
 
 
-|   |expr                    |      min|        lq|      mean|    median|        uq|      max|
-|:--|:-----------------------|--------:|---------:|---------:|---------:|---------:|--------:|
-|1  |rowRanks_X_S            | 0.141948| 0.1603460| 0.1814845| 0.1788405| 0.2007515| 0.247326|
-|2  |rowRanks(X, cols, rows) | 0.143249| 0.1669940| 0.1826753| 0.1814225| 0.1937280| 0.292602|
-|3  |rowRanks(X[cols, rows]) | 0.151124| 0.1699035| 0.1889690| 0.1894195| 0.2016380| 0.243541|
+|   |expr                    |      min|        lq|      mean|   median|        uq|      max|
+|:--|:-----------------------|--------:|---------:|---------:|--------:|---------:|--------:|
+|1  |rowRanks_X_S            | 0.147362| 0.1576265| 0.1824829| 0.176650| 0.2026855| 0.241691|
+|2  |rowRanks(X, cols, rows) | 0.150039| 0.1639530| 0.1838277| 0.178487| 0.1924285| 0.279286|
+|3  |rowRanks(X[cols, rows]) | 0.155485| 0.1697270| 0.1902174| 0.185682| 0.2033160| 0.254544|
 
 
-|   |expr                    |      min|       lq|     mean|   median|       uq|       max|
-|:--|:-----------------------|--------:|--------:|--------:|--------:|--------:|---------:|
-|1  |rowRanks_X_S            | 1.000000| 1.000000| 1.000000| 1.000000| 1.000000| 1.0000000|
-|2  |rowRanks(X, cols, rows) | 1.009165| 1.041460| 1.006562| 1.014437| 0.965014| 1.1830620|
-|3  |rowRanks(X[cols, rows]) | 1.064643| 1.059605| 1.041240| 1.059153| 1.004416| 0.9846963|
+|   |expr                    |      min|       lq|     mean|   median|        uq|      max|
+|:--|:-----------------------|--------:|--------:|--------:|--------:|---------:|--------:|
+|1  |rowRanks_X_S            | 1.000000| 1.000000| 1.000000| 1.000000| 1.0000000| 1.000000|
+|2  |rowRanks(X, cols, rows) | 1.018166| 1.040136| 1.007370| 1.010399| 0.9493945| 1.155550|
+|3  |rowRanks(X[cols, rows]) | 1.055123| 1.076767| 1.042385| 1.051129| 1.0031107| 1.053179|
 
 _Figure: Benchmarking of colRanks_X_S(), colRanks(X, rows, cols)() and colRanks(X[rows, cols])() on integer+100x100 data  as well as rowRanks_X_S(), rowRanks(X, cols, rows)() and rowRanks(X[cols, rows])() on the same data transposed.  Outliers are displayed as crosses.  Times are in milliseconds._
 
@@ -208,16 +208,16 @@ _Table: Benchmarking of colRanks_X_S() and rowRanks_X_S() on integer+100x100 dat
 
 
 
-|   |expr         |     min|      lq|     mean|   median|       uq|     max|
-|:--|:------------|-------:|-------:|--------:|--------:|--------:|-------:|
-|2  |rowRanks_X_S | 141.948| 160.346| 181.4845| 178.8405| 200.7515| 247.326|
-|1  |colRanks_X_S | 150.959| 157.406| 184.3852| 184.3585| 200.1950| 251.409|
+|   |expr         |     min|       lq|     mean|  median|       uq|     max|
+|:--|:------------|-------:|--------:|--------:|-------:|--------:|-------:|
+|2  |rowRanks_X_S | 147.362| 157.6265| 182.4829| 176.650| 202.6855| 241.691|
+|1  |colRanks_X_S | 152.024| 165.7050| 190.8988| 189.321| 206.4810| 254.377|
 
 
-|   |expr         |      min|        lq|     mean|   median|        uq|      max|
-|:--|:------------|--------:|---------:|--------:|--------:|---------:|--------:|
-|2  |rowRanks_X_S | 1.000000| 1.0000000| 1.000000| 1.000000| 1.0000000| 1.000000|
-|1  |colRanks_X_S | 1.063481| 0.9816647| 1.015983| 1.030854| 0.9972279| 1.016509|
+|   |expr         |      min|       lq|     mean|   median|       uq|      max|
+|:--|:------------|--------:|--------:|--------:|--------:|--------:|--------:|
+|2  |rowRanks_X_S | 1.000000| 1.000000| 1.000000| 1.000000| 1.000000| 1.000000|
+|1  |colRanks_X_S | 1.031636| 1.051251| 1.046119| 1.071729| 1.018726| 1.052488|
 
 _Figure: Benchmarking of colRanks_X_S() and rowRanks_X_S() on integer+100x100 data (original and transposed).  Outliers are displayed as crosses. Times are in milliseconds._
 
@@ -232,18 +232,18 @@ _Figure: Benchmarking of colRanks_X_S() and rowRanks_X_S() on integer+100x100 da
 > cols <- sample.int(ncol(X), size = ncol(X) * 0.7)
 > X_S <- X[rows, cols]
 > gc()
-          used  (Mb) gc trigger  (Mb) max used  (Mb)
-Ncells 5226991 279.2   10014072 534.9 10014072 534.9
-Vcells 9652552  73.7   18204443 138.9 18204443 138.9
+           used  (Mb) gc trigger  (Mb) max used  (Mb)
+Ncells  5294070 282.8    7916910 422.9  7916910 422.9
+Vcells 10128619  77.3   33191153 253.3 53339345 407.0
 > colStats <- microbenchmark(colRanks_X_S = colRanks(X_S, na.rm = FALSE), `colRanks(X, rows, cols)` = colRanks(X, 
 +     rows = rows, cols = cols, na.rm = FALSE), `colRanks(X[rows, cols])` = colRanks(X[rows, cols], 
 +     na.rm = FALSE), unit = "ms")
 > X <- t(X)
 > X_S <- t(X_S)
 > gc()
-          used  (Mb) gc trigger  (Mb) max used  (Mb)
-Ncells 5226967 279.2   10014072 534.9 10014072 534.9
-Vcells 9657605  73.7   18204443 138.9 18204443 138.9
+           used  (Mb) gc trigger  (Mb) max used  (Mb)
+Ncells  5294064 282.8    7916910 422.9  7916910 422.9
+Vcells 10133702  77.4   33191153 253.3 53339345 407.0
 > rowStats <- microbenchmark(rowRanks_X_S = rowRanks(X_S, na.rm = FALSE), `rowRanks(X, cols, rows)` = rowRanks(X, 
 +     rows = cols, cols = rows, na.rm = FALSE), `rowRanks(X[cols, rows])` = rowRanks(X[cols, rows], 
 +     na.rm = FALSE), unit = "ms")
@@ -253,35 +253,35 @@ _Table: Benchmarking of colRanks_X_S(), colRanks(X, rows, cols)() and colRanks(X
 
 
 
-|   |expr                    |      min|        lq|      mean|    median|        uq|      max|
-|:--|:-----------------------|--------:|---------:|---------:|---------:|---------:|--------:|
-|2  |colRanks(X, rows, cols) | 0.200953| 0.2029525| 0.2359558| 0.2253925| 0.2570625| 0.336865|
-|3  |colRanks(X[rows, cols]) | 0.206978| 0.2089585| 0.2435014| 0.2263000| 0.2656900| 0.440451|
-|1  |colRanks_X_S            | 0.198346| 0.2038725| 0.2393282| 0.2309360| 0.2587115| 0.339284|
+|   |expr                    |      min|        lq|      mean|    median|       uq|      max|
+|:--|:-----------------------|--------:|---------:|---------:|---------:|--------:|--------:|
+|2  |colRanks(X, rows, cols) | 0.200874| 0.2034770| 0.2376866| 0.2251025| 0.262953| 0.340451|
+|1  |colRanks_X_S            | 0.196767| 0.2035565| 0.2382044| 0.2266240| 0.258712| 0.331434|
+|3  |colRanks(X[rows, cols]) | 0.205192| 0.2069565| 0.2419362| 0.2271965| 0.269603| 0.398267|
 
 
-|   |expr                    |       min|       lq|     mean|   median|       uq|      max|
-|:--|:-----------------------|---------:|--------:|--------:|--------:|--------:|--------:|
-|2  |colRanks(X, rows, cols) | 1.0000000| 1.000000| 1.000000| 1.000000| 1.000000| 1.000000|
-|3  |colRanks(X[rows, cols]) | 1.0299821| 1.029593| 1.031979| 1.004026| 1.033562| 1.307500|
-|1  |colRanks_X_S            | 0.9870268| 1.004533| 1.014293| 1.024595| 1.006415| 1.007181|
+|   |expr                    |       min|       lq|     mean|   median|        uq|       max|
+|:--|:-----------------------|---------:|--------:|--------:|--------:|---------:|---------:|
+|2  |colRanks(X, rows, cols) | 1.0000000| 1.000000| 1.000000| 1.000000| 1.0000000| 1.0000000|
+|1  |colRanks_X_S            | 0.9795543| 1.000391| 1.002178| 1.006759| 0.9838716| 0.9735145|
+|3  |colRanks(X[rows, cols]) | 1.0214961| 1.017100| 1.017879| 1.009302| 1.0252897| 1.1698218|
 
 _Table: Benchmarking of rowRanks_X_S(), rowRanks(X, cols, rows)() and rowRanks(X[cols, rows])() on integer+1000x10 data (transposed). The top panel shows times in milliseconds and the bottom panel shows relative times._
 
 
 
-|   |expr                    |      min|        lq|      mean|    median|        uq|      max|
-|:--|:-----------------------|--------:|---------:|---------:|---------:|---------:|--------:|
-|1  |rowRanks_X_S            | 0.188116| 0.1904775| 0.2214310| 0.2060140| 0.2385215| 0.317690|
-|3  |rowRanks(X[cols, rows]) | 0.198539| 0.2003240| 0.2332928| 0.2233810| 0.2518500| 0.384313|
-|2  |rowRanks(X, cols, rows) | 0.190698| 0.1931980| 0.2277259| 0.2267865| 0.2488460| 0.322000|
+|   |expr                    |      min|        lq|      mean|   median|        uq|      max|
+|:--|:-----------------------|--------:|---------:|---------:|--------:|---------:|--------:|
+|1  |rowRanks_X_S            | 0.186699| 0.1894420| 0.2191481| 0.201473| 0.2365900| 0.316220|
+|3  |rowRanks(X[cols, rows]) | 0.196371| 0.1989575| 0.2305956| 0.220234| 0.2556160| 0.366882|
+|2  |rowRanks(X, cols, rows) | 0.190173| 0.1930620| 0.2264596| 0.220360| 0.2491185| 0.316662|
 
 
 |   |expr                    |      min|       lq|     mean|   median|       uq|      max|
 |:--|:-----------------------|--------:|--------:|--------:|--------:|--------:|--------:|
 |1  |rowRanks_X_S            | 1.000000| 1.000000| 1.000000| 1.000000| 1.000000| 1.000000|
-|3  |rowRanks(X[cols, rows]) | 1.055407| 1.051694| 1.053569| 1.084300| 1.055880| 1.209711|
-|2  |rowRanks(X, cols, rows) | 1.013726| 1.014282| 1.028428| 1.100831| 1.043285| 1.013567|
+|3  |rowRanks(X[cols, rows]) | 1.051805| 1.050229| 1.052236| 1.093119| 1.080418| 1.160211|
+|2  |rowRanks(X, cols, rows) | 1.018608| 1.019109| 1.033363| 1.093745| 1.052955| 1.001398|
 
 _Figure: Benchmarking of colRanks_X_S(), colRanks(X, rows, cols)() and colRanks(X[rows, cols])() on integer+1000x10 data  as well as rowRanks_X_S(), rowRanks(X, cols, rows)() and rowRanks(X[cols, rows])() on the same data transposed.  Outliers are displayed as crosses.  Times are in milliseconds._
 
@@ -293,16 +293,16 @@ _Table: Benchmarking of colRanks_X_S() and rowRanks_X_S() on integer+1000x10 dat
 
 
 
-|   |expr         |     min|       lq|     mean|  median|       uq|     max|
-|:--|:------------|-------:|--------:|--------:|-------:|--------:|-------:|
-|2  |rowRanks_X_S | 188.116| 190.4775| 221.4310| 206.014| 238.5215| 317.690|
-|1  |colRanks_X_S | 198.346| 203.8725| 239.3282| 230.936| 258.7115| 339.284|
+|   |expr         |     min|       lq|     mean|  median|      uq|     max|
+|:--|:------------|-------:|--------:|--------:|-------:|-------:|-------:|
+|2  |rowRanks_X_S | 186.699| 189.4420| 219.1481| 201.473| 236.590| 316.220|
+|1  |colRanks_X_S | 196.767| 203.5565| 238.2044| 226.624| 258.712| 331.434|
 
 
 |   |expr         |      min|       lq|     mean|   median|       uq|      max|
 |:--|:------------|--------:|--------:|--------:|--------:|--------:|--------:|
 |2  |rowRanks_X_S | 1.000000| 1.000000| 1.000000| 1.000000| 1.000000| 1.000000|
-|1  |colRanks_X_S | 1.054381| 1.070323| 1.080825| 1.120972| 1.084647| 1.067972|
+|1  |colRanks_X_S | 1.053926| 1.074506| 1.086956| 1.124836| 1.093503| 1.048112|
 
 _Figure: Benchmarking of colRanks_X_S() and rowRanks_X_S() on integer+1000x10 data (original and transposed).  Outliers are displayed as crosses. Times are in milliseconds._
 
@@ -317,18 +317,18 @@ _Figure: Benchmarking of colRanks_X_S() and rowRanks_X_S() on integer+1000x10 da
 > cols <- sample.int(ncol(X), size = ncol(X) * 0.7)
 > X_S <- X[rows, cols]
 > gc()
-          used  (Mb) gc trigger  (Mb) max used  (Mb)
-Ncells 5227196 279.2   10014072 534.9 10014072 534.9
-Vcells 9653406  73.7   18204443 138.9 18204443 138.9
+           used  (Mb) gc trigger  (Mb) max used  (Mb)
+Ncells  5294275 282.8    7916910 422.9  7916910 422.9
+Vcells 10129469  77.3   33191153 253.3 53339345 407.0
 > colStats <- microbenchmark(colRanks_X_S = colRanks(X_S, na.rm = FALSE), `colRanks(X, rows, cols)` = colRanks(X, 
 +     rows = rows, cols = cols, na.rm = FALSE), `colRanks(X[rows, cols])` = colRanks(X[rows, cols], 
 +     na.rm = FALSE), unit = "ms")
 > X <- t(X)
 > X_S <- t(X_S)
 > gc()
-          used  (Mb) gc trigger  (Mb) max used  (Mb)
-Ncells 5227172 279.2   10014072 534.9 10014072 534.9
-Vcells 9658459  73.7   18204443 138.9 18204443 138.9
+           used  (Mb) gc trigger  (Mb) max used  (Mb)
+Ncells  5294269 282.8    7916910 422.9  7916910 422.9
+Vcells 10134552  77.4   33191153 253.3 53339345 407.0
 > rowStats <- microbenchmark(rowRanks_X_S = rowRanks(X_S, na.rm = FALSE), `rowRanks(X, cols, rows)` = rowRanks(X, 
 +     rows = cols, cols = rows, na.rm = FALSE), `rowRanks(X[cols, rows])` = rowRanks(X[cols, rows], 
 +     na.rm = FALSE), unit = "ms")
@@ -338,18 +338,18 @@ _Table: Benchmarking of colRanks_X_S(), colRanks(X, rows, cols)() and colRanks(X
 
 
 
-|   |expr                    |      min|        lq|      mean|    median|        uq|      max|
-|:--|:-----------------------|--------:|---------:|---------:|---------:|---------:|--------:|
-|2  |colRanks(X, rows, cols) | 0.104070| 0.1109600| 0.1195293| 0.1147945| 0.1274790| 0.164761|
-|1  |colRanks_X_S            | 0.100193| 0.1075755| 0.1196476| 0.1172985| 0.1278765| 0.213361|
-|3  |colRanks(X[rows, cols]) | 0.112968| 0.1208010| 0.1302674| 0.1280695| 0.1367280| 0.163583|
+|   |expr                    |      min|        lq|      mean|    median|       uq|      max|
+|:--|:-----------------------|--------:|---------:|---------:|---------:|--------:|--------:|
+|1  |colRanks_X_S            | 0.092344| 0.1017765| 0.1126097| 0.1093100| 0.121655| 0.198021|
+|3  |colRanks(X[rows, cols]) | 0.105324| 0.1146230| 0.1232231| 0.1197880| 0.130496| 0.157222|
+|2  |colRanks(X, rows, cols) | 0.104418| 0.1161910| 0.1247681| 0.1209115| 0.128946| 0.174461|
 
 
-|   |expr                    |       min|       lq|     mean|   median|       uq|       max|
-|:--|:-----------------------|---------:|--------:|--------:|--------:|--------:|---------:|
-|2  |colRanks(X, rows, cols) | 1.0000000| 1.000000| 1.000000| 1.000000| 1.000000| 1.0000000|
-|1  |colRanks_X_S            | 0.9627462| 0.969498| 1.000990| 1.021813| 1.003118| 1.2949727|
-|3  |colRanks(X[rows, cols]) | 1.0855001| 1.088690| 1.089837| 1.115641| 1.072553| 0.9928502|
+|   |expr                    |      min|       lq|     mean|   median|       uq|       max|
+|:--|:-----------------------|--------:|--------:|--------:|--------:|--------:|---------:|
+|1  |colRanks_X_S            | 1.000000| 1.000000| 1.000000| 1.000000| 1.000000| 1.0000000|
+|3  |colRanks(X[rows, cols]) | 1.140561| 1.126223| 1.094249| 1.095856| 1.072673| 0.7939663|
+|2  |colRanks(X, rows, cols) | 1.130750| 1.141629| 1.107969| 1.106134| 1.059932| 0.8810227|
 
 _Table: Benchmarking of rowRanks_X_S(), rowRanks(X, cols, rows)() and rowRanks(X[cols, rows])() on integer+10x1000 data (transposed). The top panel shows times in milliseconds and the bottom panel shows relative times._
 
@@ -357,16 +357,16 @@ _Table: Benchmarking of rowRanks_X_S(), rowRanks(X, cols, rows)() and rowRanks(X
 
 |   |expr                    |      min|        lq|      mean|    median|        uq|      max|
 |:--|:-----------------------|--------:|---------:|---------:|---------:|---------:|--------:|
-|1  |rowRanks_X_S            | 0.091603| 0.0972155| 0.1056301| 0.1018475| 0.1126995| 0.152855|
-|2  |rowRanks(X, cols, rows) | 0.094203| 0.0998665| 0.1089388| 0.1035785| 0.1145565| 0.225744|
-|3  |rowRanks(X[cols, rows]) | 0.101284| 0.1069700| 0.1174652| 0.1117520| 0.1261405| 0.162746|
+|1  |rowRanks_X_S            | 0.088483| 0.0934085| 0.1013918| 0.0972985| 0.1076370| 0.135862|
+|2  |rowRanks(X, cols, rows) | 0.092686| 0.0990780| 0.1078311| 0.1036120| 0.1129945| 0.179000|
+|3  |rowRanks(X[cols, rows]) | 0.095436| 0.1031545| 0.1134725| 0.1105220| 0.1215570| 0.141407|
 
 
 |   |expr                    |      min|       lq|     mean|   median|       uq|      max|
 |:--|:-----------------------|--------:|--------:|--------:|--------:|--------:|--------:|
 |1  |rowRanks_X_S            | 1.000000| 1.000000| 1.000000| 1.000000| 1.000000| 1.000000|
-|2  |rowRanks(X, cols, rows) | 1.028383| 1.027269| 1.031323| 1.016996| 1.016477| 1.476851|
-|3  |rowRanks(X[cols, rows]) | 1.105684| 1.100339| 1.112043| 1.097248| 1.119264| 1.064708|
+|2  |rowRanks(X, cols, rows) | 1.047501| 1.060696| 1.063509| 1.064888| 1.049774| 1.317513|
+|3  |rowRanks(X[cols, rows]) | 1.078580| 1.104337| 1.119149| 1.135906| 1.129324| 1.040814|
 
 _Figure: Benchmarking of colRanks_X_S(), colRanks(X, rows, cols)() and colRanks(X[rows, cols])() on integer+10x1000 data  as well as rowRanks_X_S(), rowRanks(X, cols, rows)() and rowRanks(X[cols, rows])() on the same data transposed.  Outliers are displayed as crosses.  Times are in milliseconds._
 
@@ -378,16 +378,16 @@ _Table: Benchmarking of colRanks_X_S() and rowRanks_X_S() on integer+10x1000 dat
 
 
 
-|   |expr         |     min|       lq|     mean|   median|       uq|     max|
-|:--|:------------|-------:|--------:|--------:|--------:|--------:|-------:|
-|2  |rowRanks_X_S |  91.603|  97.2155| 105.6301| 101.8475| 112.6995| 152.855|
-|1  |colRanks_X_S | 100.193| 107.5755| 119.6476| 117.2985| 127.8765| 213.361|
+|   |expr         |    min|       lq|     mean|   median|      uq|     max|
+|:--|:------------|------:|--------:|--------:|--------:|-------:|-------:|
+|2  |rowRanks_X_S | 88.483|  93.4085| 101.3918|  97.2985| 107.637| 135.862|
+|1  |colRanks_X_S | 92.344| 101.7765| 112.6097| 109.3100| 121.655| 198.021|
 
 
-|   |expr         |      min|       lq|     mean|   median|       uq|      max|
-|:--|:------------|--------:|--------:|--------:|--------:|--------:|--------:|
-|2  |rowRanks_X_S | 1.000000| 1.000000| 1.000000| 1.000000| 1.000000| 1.000000|
-|1  |colRanks_X_S | 1.093774| 1.106567| 1.132703| 1.151707| 1.134668| 1.395839|
+|   |expr         |      min|       lq|    mean|  median|       uq|      max|
+|:--|:------------|--------:|--------:|-------:|-------:|--------:|--------:|
+|2  |rowRanks_X_S | 1.000000| 1.000000| 1.00000| 1.00000| 1.000000| 1.000000|
+|1  |colRanks_X_S | 1.043635| 1.089585| 1.11064| 1.12345| 1.130234| 1.457516|
 
 _Figure: Benchmarking of colRanks_X_S() and rowRanks_X_S() on integer+10x1000 data (original and transposed).  Outliers are displayed as crosses. Times are in milliseconds._
 
@@ -402,18 +402,18 @@ _Figure: Benchmarking of colRanks_X_S() and rowRanks_X_S() on integer+10x1000 da
 > cols <- sample.int(ncol(X), size = ncol(X) * 0.7)
 > X_S <- X[rows, cols]
 > gc()
-          used  (Mb) gc trigger  (Mb) max used  (Mb)
-Ncells 5227406 279.2   10014072 534.9 10014072 534.9
-Vcells 9676079  73.9   18204443 138.9 18204443 138.9
+           used  (Mb) gc trigger  (Mb) max used  (Mb)
+Ncells  5294485 282.8    7916910 422.9  7916910 422.9
+Vcells 10152141  77.5   33191153 253.3 53339345 407.0
 > colStats <- microbenchmark(colRanks_X_S = colRanks(X_S, na.rm = FALSE), `colRanks(X, rows, cols)` = colRanks(X, 
 +     rows = rows, cols = cols, na.rm = FALSE), `colRanks(X[rows, cols])` = colRanks(X[rows, cols], 
 +     na.rm = FALSE), unit = "ms")
 > X <- t(X)
 > X_S <- t(X_S)
 > gc()
-          used  (Mb) gc trigger  (Mb) max used  (Mb)
-Ncells 5227382 279.2   10014072 534.9 10014072 534.9
-Vcells 9726132  74.3   18204443 138.9 18204443 138.9
+           used  (Mb) gc trigger  (Mb) max used  (Mb)
+Ncells  5294479 282.8    7916910 422.9  7916910 422.9
+Vcells 10202224  77.9   33191153 253.3 53339345 407.0
 > rowStats <- microbenchmark(rowRanks_X_S = rowRanks(X_S, na.rm = FALSE), `rowRanks(X, cols, rows)` = rowRanks(X, 
 +     rows = cols, cols = rows, na.rm = FALSE), `rowRanks(X[cols, rows])` = rowRanks(X[cols, rows], 
 +     na.rm = FALSE), unit = "ms")
@@ -425,16 +425,16 @@ _Table: Benchmarking of colRanks_X_S(), colRanks(X, rows, cols)() and colRanks(X
 
 |   |expr                    |      min|       lq|     mean|   median|       uq|      max|
 |:--|:-----------------------|--------:|--------:|--------:|--------:|--------:|--------:|
-|2  |colRanks(X, rows, cols) | 1.462593| 1.469108| 1.566768| 1.476521| 1.608513| 2.451581|
-|1  |colRanks_X_S            | 1.454473| 1.460762| 1.663853| 1.479961| 1.599579| 6.911268|
-|3  |colRanks(X[rows, cols]) | 1.523576| 1.529249| 1.665068| 1.613781| 1.738954| 2.222094|
+|1  |colRanks_X_S            | 1.441827| 1.451632| 1.509335| 1.456159| 1.500632| 2.319045|
+|2  |colRanks(X, rows, cols) | 1.509743| 1.515233| 1.562314| 1.519967| 1.533454| 2.389907|
+|3  |colRanks(X[rows, cols]) | 1.512313| 1.518984| 1.577089| 1.524574| 1.547218| 2.142405|
 
 
-|   |expr                    |       min|        lq|     mean|   median|        uq|       max|
-|:--|:-----------------------|---------:|---------:|--------:|--------:|---------:|---------:|
-|2  |colRanks(X, rows, cols) | 1.0000000| 1.0000000| 1.000000| 1.000000| 1.0000000| 1.0000000|
-|1  |colRanks_X_S            | 0.9944482| 0.9943183| 1.061965| 1.002330| 0.9944458| 2.8191065|
-|3  |colRanks(X[rows, cols]) | 1.0416951| 1.0409364| 1.062741| 1.092962| 1.0810945| 0.9063922|
+|   |expr                    |      min|       lq|     mean|   median|       uq|       max|
+|:--|:-----------------------|--------:|--------:|--------:|--------:|--------:|---------:|
+|1  |colRanks_X_S            | 1.000000| 1.000000| 1.000000| 1.000000| 1.000000| 1.0000000|
+|2  |colRanks(X, rows, cols) | 1.047104| 1.043814| 1.035101| 1.043820| 1.021872| 1.0305565|
+|3  |colRanks(X[rows, cols]) | 1.048887| 1.046397| 1.044890| 1.046983| 1.031044| 0.9238307|
 
 _Table: Benchmarking of rowRanks_X_S(), rowRanks(X, cols, rows)() and rowRanks(X[cols, rows])() on integer+100x1000 data (transposed). The top panel shows times in milliseconds and the bottom panel shows relative times._
 
@@ -442,16 +442,16 @@ _Table: Benchmarking of rowRanks_X_S(), rowRanks(X, cols, rows)() and rowRanks(X
 
 |   |expr                    |      min|       lq|     mean|   median|       uq|      max|
 |:--|:-----------------------|--------:|--------:|--------:|--------:|--------:|--------:|
-|1  |rowRanks_X_S            | 1.415657| 1.421874| 1.578132| 1.474726| 1.486973| 8.408534|
-|2  |rowRanks(X, cols, rows) | 1.426705| 1.433461| 1.503220| 1.487982| 1.493604| 2.222188|
-|3  |rowRanks(X[cols, rows]) | 1.491207| 1.506116| 1.595130| 1.602948| 1.612930| 2.187084|
+|1  |rowRanks_X_S            | 1.393368| 1.397792| 1.446303| 1.399810| 1.405717| 2.236869|
+|2  |rowRanks(X, cols, rows) | 1.421849| 1.426300| 1.442784| 1.428338| 1.430756| 2.075620|
+|3  |rowRanks(X[cols, rows]) | 1.440722| 1.478462| 1.509710| 1.483329| 1.489240| 1.993883|
 
 
 |   |expr                    |      min|       lq|      mean|   median|       uq|       max|
 |:--|:-----------------------|--------:|--------:|---------:|--------:|--------:|---------:|
 |1  |rowRanks_X_S            | 1.000000| 1.000000| 1.0000000| 1.000000| 1.000000| 1.0000000|
-|2  |rowRanks(X, cols, rows) | 1.007804| 1.008150| 0.9525315| 1.008989| 1.004459| 0.2642777|
-|3  |rowRanks(X[cols, rows]) | 1.053367| 1.059247| 1.0107711| 1.086946| 1.084707| 0.2601029|
+|2  |rowRanks(X, cols, rows) | 1.020440| 1.020395| 0.9975671| 1.020380| 1.017813| 0.9279131|
+|3  |rowRanks(X[cols, rows]) | 1.033985| 1.057713| 1.0438406| 1.059664| 1.059417| 0.8913723|
 
 _Figure: Benchmarking of colRanks_X_S(), colRanks(X, rows, cols)() and colRanks(X[rows, cols])() on integer+100x1000 data  as well as rowRanks_X_S(), rowRanks(X, cols, rows)() and rowRanks(X[cols, rows])() on the same data transposed.  Outliers are displayed as crosses.  Times are in milliseconds._
 
@@ -465,14 +465,14 @@ _Table: Benchmarking of colRanks_X_S() and rowRanks_X_S() on integer+100x1000 da
 
 |   |expr         |      min|       lq|     mean|   median|       uq|      max|
 |:--|:------------|--------:|--------:|--------:|--------:|--------:|--------:|
-|2  |rowRanks_X_S | 1.415657| 1.421874| 1.578132| 1.474726| 1.486973| 8.408534|
-|1  |colRanks_X_S | 1.454473| 1.460762| 1.663853| 1.479961| 1.599579| 6.911268|
+|2  |rowRanks_X_S | 1.393368| 1.397792| 1.446303| 1.399810| 1.405717| 2.236869|
+|1  |colRanks_X_S | 1.441827| 1.451632| 1.509335| 1.456159| 1.500632| 2.319045|
 
 
-|   |expr         |      min|       lq|     mean|  median|       uq|      max|
-|:--|:------------|--------:|--------:|--------:|-------:|--------:|--------:|
-|2  |rowRanks_X_S | 1.000000| 1.000000| 1.000000| 1.00000| 1.000000| 1.000000|
-|1  |colRanks_X_S | 1.027419| 1.027349| 1.054318| 1.00355| 1.075728| 0.821935|
+|   |expr         |      min|       lq|     mean|   median|       uq|      max|
+|:--|:------------|--------:|--------:|--------:|--------:|--------:|--------:|
+|2  |rowRanks_X_S | 1.000000| 1.000000| 1.000000| 1.000000| 1.000000| 1.000000|
+|1  |colRanks_X_S | 1.034778| 1.038518| 1.043582| 1.040255| 1.067521| 1.036737|
 
 _Figure: Benchmarking of colRanks_X_S() and rowRanks_X_S() on integer+100x1000 data (original and transposed).  Outliers are displayed as crosses. Times are in milliseconds._
 
@@ -487,18 +487,18 @@ _Figure: Benchmarking of colRanks_X_S() and rowRanks_X_S() on integer+100x1000 d
 > cols <- sample.int(ncol(X), size = ncol(X) * 0.7)
 > X_S <- X[rows, cols]
 > gc()
-          used  (Mb) gc trigger  (Mb) max used  (Mb)
-Ncells 5227619 279.2   10014072 534.9 10014072 534.9
-Vcells 9676862  73.9   18204443 138.9 18204443 138.9
+           used  (Mb) gc trigger  (Mb) max used  (Mb)
+Ncells  5294689 282.8    7916910 422.9  7916910 422.9
+Vcells 10152907  77.5   33191153 253.3 53339345 407.0
 > colStats <- microbenchmark(colRanks_X_S = colRanks(X_S, na.rm = FALSE), `colRanks(X, rows, cols)` = colRanks(X, 
 +     rows = rows, cols = cols, na.rm = FALSE), `colRanks(X[rows, cols])` = colRanks(X[rows, cols], 
 +     na.rm = FALSE), unit = "ms")
 > X <- t(X)
 > X_S <- t(X_S)
 > gc()
-          used  (Mb) gc trigger  (Mb) max used  (Mb)
-Ncells 5227595 279.2   10014072 534.9 10014072 534.9
-Vcells 9726915  74.3   18204443 138.9 18204443 138.9
+           used  (Mb) gc trigger  (Mb) max used  (Mb)
+Ncells  5294692 282.8    7916910 422.9  7916910 422.9
+Vcells 10203005  77.9   33191153 253.3 53339345 407.0
 > rowStats <- microbenchmark(rowRanks_X_S = rowRanks(X_S, na.rm = FALSE), `rowRanks(X, cols, rows)` = rowRanks(X, 
 +     rows = cols, cols = rows, na.rm = FALSE), `rowRanks(X[cols, rows])` = rowRanks(X[cols, rows], 
 +     na.rm = FALSE), unit = "ms")
@@ -510,16 +510,16 @@ _Table: Benchmarking of colRanks_X_S(), colRanks(X, rows, cols)() and colRanks(X
 
 |   |expr                    |      min|       lq|     mean|   median|       uq|      max|
 |:--|:-----------------------|--------:|--------:|--------:|--------:|--------:|--------:|
-|1  |colRanks_X_S            | 1.893957| 1.901601| 2.046415| 1.910059| 2.024019| 7.250901|
-|2  |colRanks(X, rows, cols) | 1.895921| 1.906438| 2.009395| 1.922896| 2.029772| 2.751349|
-|3  |colRanks(X[rows, cols]) | 1.954312| 1.962411| 2.102213| 1.965952| 2.144626| 7.417147|
+|1  |colRanks_X_S            | 1.871106| 1.878167| 1.936659| 1.881288| 1.889145| 3.456286|
+|2  |colRanks(X, rows, cols) | 1.895522| 1.907013| 1.980835| 1.910787| 1.925739| 2.920142|
+|3  |colRanks(X[rows, cols]) | 1.934019| 1.939526| 1.982213| 1.943576| 1.950561| 3.214206|
 
 
-|   |expr                    |      min|       lq|      mean|   median|       uq|       max|
-|:--|:-----------------------|--------:|--------:|---------:|--------:|--------:|---------:|
-|1  |colRanks_X_S            | 1.000000| 1.000000| 1.0000000| 1.000000| 1.000000| 1.0000000|
-|2  |colRanks(X, rows, cols) | 1.001037| 1.002544| 0.9819101| 1.006721| 1.002843| 0.3794493|
-|3  |colRanks(X[rows, cols]) | 1.031867| 1.031978| 1.0272664| 1.029262| 1.059588| 1.0229276|
+|   |expr                    |      min|       lq|     mean|   median|      uq|       max|
+|:--|:-----------------------|--------:|--------:|--------:|--------:|-------:|---------:|
+|1  |colRanks_X_S            | 1.000000| 1.000000| 1.000000| 1.000000| 1.00000| 1.0000000|
+|2  |colRanks(X, rows, cols) | 1.013049| 1.015359| 1.022810| 1.015680| 1.01937| 0.8448786|
+|3  |colRanks(X[rows, cols]) | 1.033623| 1.032670| 1.023521| 1.033109| 1.03251| 0.9299595|
 
 _Table: Benchmarking of rowRanks_X_S(), rowRanks(X, cols, rows)() and rowRanks(X[cols, rows])() on integer+1000x100 data (transposed). The top panel shows times in milliseconds and the bottom panel shows relative times._
 
@@ -527,16 +527,16 @@ _Table: Benchmarking of rowRanks_X_S(), rowRanks(X, cols, rows)() and rowRanks(X
 
 |   |expr                    |      min|       lq|     mean|   median|       uq|      max|
 |:--|:-----------------------|--------:|--------:|--------:|--------:|--------:|--------:|
-|1  |rowRanks_X_S            | 1.864009| 1.875547| 1.956103| 1.905483| 1.933476| 2.444948|
-|2  |rowRanks(X, cols, rows) | 1.867837| 1.878310| 2.036915| 1.922621| 1.932877| 8.975646|
-|3  |rowRanks(X[cols, rows]) | 1.933746| 1.949648| 2.048235| 1.980886| 2.058504| 3.053772|
+|1  |rowRanks_X_S            | 1.849571| 1.858715| 1.900790| 1.861840| 1.868486| 2.572422|
+|2  |rowRanks(X, cols, rows) | 1.869737| 1.876607| 1.935731| 1.880375| 1.884843| 3.134836|
+|3  |rowRanks(X[cols, rows]) | 1.926088| 1.935420| 1.974058| 1.940850| 1.949309| 3.109879|
 
 
-|   |expr                    |      min|       lq|     mean|   median|        uq|      max|
-|:--|:-----------------------|--------:|--------:|--------:|--------:|---------:|--------:|
-|1  |rowRanks_X_S            | 1.000000| 1.000000| 1.000000| 1.000000| 1.0000000| 1.000000|
-|2  |rowRanks(X, cols, rows) | 1.002054| 1.001473| 1.041313| 1.008994| 0.9996899| 3.671099|
-|3  |rowRanks(X[cols, rows]) | 1.037412| 1.039509| 1.047100| 1.039571| 1.0646649| 1.249013|
+|   |expr                    |      min|       lq|     mean|   median|       uq|      max|
+|:--|:-----------------------|--------:|--------:|--------:|--------:|--------:|--------:|
+|1  |rowRanks_X_S            | 1.000000| 1.000000| 1.000000| 1.000000| 1.000000| 1.000000|
+|2  |rowRanks(X, cols, rows) | 1.010903| 1.009626| 1.018383| 1.009955| 1.008754| 1.218632|
+|3  |rowRanks(X[cols, rows]) | 1.041370| 1.041268| 1.038546| 1.042436| 1.043255| 1.208930|
 
 _Figure: Benchmarking of colRanks_X_S(), colRanks(X, rows, cols)() and colRanks(X[rows, cols])() on integer+1000x100 data  as well as rowRanks_X_S(), rowRanks(X, cols, rows)() and rowRanks(X[cols, rows])() on the same data transposed.  Outliers are displayed as crosses.  Times are in milliseconds._
 
@@ -550,14 +550,14 @@ _Table: Benchmarking of colRanks_X_S() and rowRanks_X_S() on integer+1000x100 da
 
 |   |expr         |      min|       lq|     mean|   median|       uq|      max|
 |:--|:------------|--------:|--------:|--------:|--------:|--------:|--------:|
-|2  |rowRanks_X_S | 1.864009| 1.875547| 1.956103| 1.905483| 1.933476| 2.444948|
-|1  |colRanks_X_S | 1.893957| 1.901601| 2.046415| 1.910059| 2.024019| 7.250901|
+|2  |rowRanks_X_S | 1.849571| 1.858715| 1.900790| 1.861840| 1.868486| 2.572422|
+|1  |colRanks_X_S | 1.871106| 1.878167| 1.936659| 1.881288| 1.889145| 3.456286|
 
 
 |   |expr         |      min|       lq|     mean|   median|       uq|      max|
 |:--|:------------|--------:|--------:|--------:|--------:|--------:|--------:|
 |2  |rowRanks_X_S | 1.000000| 1.000000| 1.000000| 1.000000| 1.000000| 1.000000|
-|1  |colRanks_X_S | 1.016066| 1.013891| 1.046169| 1.002401| 1.046829| 2.965667|
+|1  |colRanks_X_S | 1.011643| 1.010466| 1.018871| 1.010446| 1.011056| 1.343592|
 
 _Figure: Benchmarking of colRanks_X_S() and rowRanks_X_S() on integer+1000x100 data (original and transposed).  Outliers are displayed as crosses. Times are in milliseconds._
 
@@ -613,18 +613,18 @@ _Figure: Benchmarking of colRanks_X_S() and rowRanks_X_S() on integer+1000x100 d
 > cols <- sample.int(ncol(X), size = ncol(X) * 0.7)
 > X_S <- X[rows, cols]
 > gc()
-          used  (Mb) gc trigger  (Mb) max used  (Mb)
-Ncells 5227836 279.2   10014072 534.9 10014072 534.9
-Vcells 9767965  74.6   18204443 138.9 18204443 138.9
+           used  (Mb) gc trigger  (Mb) max used  (Mb)
+Ncells  5294915 282.8    7916910 422.9  7916910 422.9
+Vcells 10244025  78.2   33191153 253.3 53339345 407.0
 > colStats <- microbenchmark(colRanks_X_S = colRanks(X_S, na.rm = FALSE), `colRanks(X, rows, cols)` = colRanks(X, 
 +     rows = rows, cols = cols, na.rm = FALSE), `colRanks(X[rows, cols])` = colRanks(X[rows, cols], 
 +     na.rm = FALSE), unit = "ms")
 > X <- t(X)
 > X_S <- t(X_S)
 > gc()
-          used  (Mb) gc trigger  (Mb) max used  (Mb)
-Ncells 5227803 279.2   10014072 534.9 10014072 534.9
-Vcells 9768103  74.6   18204443 138.9 18204443 138.9
+           used  (Mb) gc trigger  (Mb) max used  (Mb)
+Ncells  5294900 282.8    7916910 422.9  7916910 422.9
+Vcells 10244193  78.2   33191153 253.3 53339345 407.0
 > rowStats <- microbenchmark(rowRanks_X_S = rowRanks(X_S, na.rm = FALSE), `rowRanks(X, cols, rows)` = rowRanks(X, 
 +     rows = cols, cols = rows, na.rm = FALSE), `rowRanks(X[cols, rows])` = rowRanks(X[cols, rows], 
 +     na.rm = FALSE), unit = "ms")
@@ -636,16 +636,16 @@ _Table: Benchmarking of colRanks_X_S(), colRanks(X, rows, cols)() and colRanks(X
 
 |   |expr                    |      min|        lq|      mean|    median|        uq|      max|
 |:--|:-----------------------|--------:|---------:|---------:|---------:|---------:|--------:|
-|1  |colRanks_X_S            | 0.010189| 0.0105075| 0.0113098| 0.0107430| 0.0109500| 0.057924|
-|2  |colRanks(X, rows, cols) | 0.010587| 0.0109440| 0.0112871| 0.0111675| 0.0114685| 0.016318|
-|3  |colRanks(X[rows, cols]) | 0.011352| 0.0117120| 0.0122188| 0.0119315| 0.0121960| 0.026659|
+|1  |colRanks_X_S            | 0.010046| 0.0108215| 0.0121828| 0.0111040| 0.0114215| 0.078071|
+|2  |colRanks(X, rows, cols) | 0.010503| 0.0111190| 0.0120167| 0.0114835| 0.0118055| 0.023125|
+|3  |colRanks(X[rows, cols]) | 0.011499| 0.0121265| 0.0129971| 0.0125630| 0.0128560| 0.023611|
 
 
-|   |expr                    |      min|       lq|      mean|   median|       uq|      max|
-|:--|:-----------------------|--------:|--------:|---------:|--------:|--------:|--------:|
-|1  |colRanks_X_S            | 1.000000| 1.000000| 1.0000000| 1.000000| 1.000000| 1.000000|
-|2  |colRanks(X, rows, cols) | 1.039062| 1.041542| 0.9979867| 1.039514| 1.047352| 0.281714|
-|3  |colRanks(X[rows, cols]) | 1.114143| 1.114632| 1.0803645| 1.110630| 1.113790| 0.460241|
+|   |expr                    |      min|       lq|     mean|   median|       uq|       max|
+|:--|:-----------------------|--------:|--------:|--------:|--------:|--------:|---------:|
+|1  |colRanks_X_S            | 1.000000| 1.000000| 1.000000| 1.000000| 1.000000| 1.0000000|
+|2  |colRanks(X, rows, cols) | 1.045491| 1.027492| 0.986366| 1.034177| 1.033621| 0.2962047|
+|3  |colRanks(X[rows, cols]) | 1.144635| 1.120593| 1.066838| 1.131394| 1.125597| 0.3024298|
 
 _Table: Benchmarking of rowRanks_X_S(), rowRanks(X, cols, rows)() and rowRanks(X[cols, rows])() on double+10x10 data (transposed). The top panel shows times in milliseconds and the bottom panel shows relative times._
 
@@ -653,16 +653,16 @@ _Table: Benchmarking of rowRanks_X_S(), rowRanks(X, cols, rows)() and rowRanks(X
 
 |   |expr                    |      min|        lq|      mean|    median|        uq|      max|
 |:--|:-----------------------|--------:|---------:|---------:|---------:|---------:|--------:|
-|1  |rowRanks_X_S            | 0.005156| 0.0054795| 0.0058597| 0.0056310| 0.0057910| 0.020085|
-|2  |rowRanks(X, cols, rows) | 0.005522| 0.0058180| 0.0063412| 0.0059705| 0.0061760| 0.033406|
-|3  |rowRanks(X[cols, rows]) | 0.006036| 0.0064325| 0.0066790| 0.0065605| 0.0067335| 0.008587|
+|1  |rowRanks_X_S            | 0.005589| 0.0059690| 0.0061898| 0.0060755| 0.0062490| 0.009853|
+|2  |rowRanks(X, cols, rows) | 0.005804| 0.0062175| 0.0067400| 0.0063605| 0.0065025| 0.039315|
+|3  |rowRanks(X[cols, rows]) | 0.006751| 0.0071200| 0.0073298| 0.0072655| 0.0074530| 0.009750|
 
 
-|   |expr                    |      min|       lq|     mean|   median|       uq|      max|
-|:--|:-----------------------|--------:|--------:|--------:|--------:|--------:|--------:|
-|1  |rowRanks_X_S            | 1.000000| 1.000000| 1.000000| 1.000000| 1.000000| 1.000000|
-|2  |rowRanks(X, cols, rows) | 1.070985| 1.061776| 1.082166| 1.060291| 1.066482| 1.663231|
-|3  |rowRanks(X[cols, rows]) | 1.170675| 1.173921| 1.139828| 1.165068| 1.162753| 0.427533|
+|   |expr                    |      min|       lq|     mean|   median|       uq|       max|
+|:--|:-----------------------|--------:|--------:|--------:|--------:|--------:|---------:|
+|1  |rowRanks_X_S            | 1.000000| 1.000000| 1.000000| 1.000000| 1.000000| 1.0000000|
+|2  |rowRanks(X, cols, rows) | 1.038468| 1.041632| 1.088905| 1.046910| 1.040566| 3.9901553|
+|3  |rowRanks(X[cols, rows]) | 1.207908| 1.192830| 1.184182| 1.195869| 1.192671| 0.9895463|
 
 _Figure: Benchmarking of colRanks_X_S(), colRanks(X, rows, cols)() and colRanks(X[rows, cols])() on double+10x10 data  as well as rowRanks_X_S(), rowRanks(X, cols, rows)() and rowRanks(X[cols, rows])() on the same data transposed.  Outliers are displayed as crosses.  Times are in milliseconds._
 
@@ -674,16 +674,16 @@ _Table: Benchmarking of colRanks_X_S() and rowRanks_X_S() on double+10x10 data (
 
 
 
-|   |expr         |    min|      lq|     mean| median|     uq|    max|
-|:--|:------------|------:|-------:|--------:|------:|------:|------:|
-|2  |rowRanks_X_S |  5.156|  5.4795|  5.85970|  5.631|  5.791| 20.085|
-|1  |colRanks_X_S | 10.189| 10.5075| 11.30984| 10.743| 10.950| 57.924|
+|   |expr         |    min|      lq|     mean|  median|      uq|    max|
+|:--|:------------|------:|-------:|--------:|-------:|-------:|------:|
+|2  |rowRanks_X_S |  5.589|  5.9690|  6.18975|  6.0755|  6.2490|  9.853|
+|1  |colRanks_X_S | 10.046| 10.8215| 12.18282| 11.1040| 11.4215| 78.071|
 
 
-|   |expr         |      min|       lq|     mean|   median|       uq|      max|
-|:--|:------------|--------:|--------:|--------:|--------:|--------:|--------:|
-|2  |rowRanks_X_S | 1.000000| 1.000000| 1.000000| 1.000000| 1.000000| 1.000000|
-|1  |colRanks_X_S | 1.976144| 1.917602| 1.930106| 1.907832| 1.890865| 2.883943|
+|   |expr         |      min|      lq|     mean|   median|       uq|      max|
+|:--|:------------|--------:|-------:|--------:|--------:|--------:|--------:|
+|2  |rowRanks_X_S | 1.000000| 1.00000| 1.000000| 1.000000| 1.000000| 1.000000|
+|1  |colRanks_X_S | 1.797459| 1.81295| 1.968225| 1.827668| 1.827732| 7.923577|
 
 _Figure: Benchmarking of colRanks_X_S() and rowRanks_X_S() on double+10x10 data (original and transposed).  Outliers are displayed as crosses. Times are in milliseconds._
 
@@ -698,18 +698,18 @@ _Figure: Benchmarking of colRanks_X_S() and rowRanks_X_S() on double+10x10 data 
 > cols <- sample.int(ncol(X), size = ncol(X) * 0.7)
 > X_S <- X[rows, cols]
 > gc()
-          used  (Mb) gc trigger  (Mb) max used  (Mb)
-Ncells 5228033 279.3   10014072 534.9 10014072 534.9
-Vcells 9773911  74.6   18204443 138.9 18204443 138.9
+           used  (Mb) gc trigger  (Mb) max used  (Mb)
+Ncells  5295112 282.8    7916910 422.9  7916910 422.9
+Vcells 10249968  78.3   33191153 253.3 53339345 407.0
 > colStats <- microbenchmark(colRanks_X_S = colRanks(X_S, na.rm = FALSE), `colRanks(X, rows, cols)` = colRanks(X, 
 +     rows = rows, cols = cols, na.rm = FALSE), `colRanks(X[rows, cols])` = colRanks(X[rows, cols], 
 +     na.rm = FALSE), unit = "ms")
 > X <- t(X)
 > X_S <- t(X_S)
 > gc()
-          used  (Mb) gc trigger  (Mb) max used  (Mb)
-Ncells 5228009 279.3   10014072 534.9 10014072 534.9
-Vcells 9783964  74.7   18204443 138.9 18204443 138.9
+           used  (Mb) gc trigger  (Mb) max used  (Mb)
+Ncells  5295106 282.8    7916910 422.9  7916910 422.9
+Vcells 10260051  78.3   33191153 253.3 53339345 407.0
 > rowStats <- microbenchmark(rowRanks_X_S = rowRanks(X_S, na.rm = FALSE), `rowRanks(X, cols, rows)` = rowRanks(X, 
 +     rows = cols, cols = rows, na.rm = FALSE), `rowRanks(X[cols, rows])` = rowRanks(X[cols, rows], 
 +     na.rm = FALSE), unit = "ms")
@@ -719,18 +719,18 @@ _Table: Benchmarking of colRanks_X_S(), colRanks(X, rows, cols)() and colRanks(X
 
 
 
-|   |expr                    |      min|        lq|      mean|    median|        uq|      max|
-|:--|:-----------------------|--------:|---------:|---------:|---------:|---------:|--------:|
-|1  |colRanks_X_S            | 0.155651| 0.1616045| 0.1904314| 0.1855195| 0.2052235| 0.276679|
-|2  |colRanks(X, rows, cols) | 0.157643| 0.1635885| 0.1901653| 0.1864325| 0.2071120| 0.281621|
-|3  |colRanks(X[rows, cols]) | 0.168125| 0.1758765| 0.2047820| 0.1990770| 0.2248660| 0.365715|
+|   |expr                    |      min|        lq|      mean|   median|       uq|      max|
+|:--|:-----------------------|--------:|---------:|---------:|--------:|--------:|--------:|
+|1  |colRanks_X_S            | 0.151390| 0.1581345| 0.1843986| 0.181861| 0.199447| 0.287467|
+|2  |colRanks(X, rows, cols) | 0.155479| 0.1655370| 0.1875884| 0.185985| 0.203799| 0.291003|
+|3  |colRanks(X[rows, cols]) | 0.164027| 0.1734645| 0.2010427| 0.196166| 0.215847| 0.371377|
 
 
-|   |expr                    |      min|       lq|      mean|   median|       uq|      max|
-|:--|:-----------------------|--------:|--------:|---------:|--------:|--------:|--------:|
-|1  |colRanks_X_S            | 1.000000| 1.000000| 1.0000000| 1.000000| 1.000000| 1.000000|
-|2  |colRanks(X, rows, cols) | 1.012798| 1.012277| 0.9986029| 1.004921| 1.009202| 1.017862|
-|3  |colRanks(X[rows, cols]) | 1.080141| 1.088314| 1.0753586| 1.073079| 1.095713| 1.321802|
+|   |expr                    |      min|       lq|     mean|   median|       uq|      max|
+|:--|:-----------------------|--------:|--------:|--------:|--------:|--------:|--------:|
+|1  |colRanks_X_S            | 1.000000| 1.000000| 1.000000| 1.000000| 1.000000| 1.000000|
+|2  |colRanks(X, rows, cols) | 1.027010| 1.046811| 1.017298| 1.022677| 1.021820| 1.012301|
+|3  |colRanks(X[rows, cols]) | 1.083473| 1.096943| 1.090261| 1.078659| 1.082227| 1.291894|
 
 _Table: Benchmarking of rowRanks_X_S(), rowRanks(X, cols, rows)() and rowRanks(X[cols, rows])() on double+100x100 data (transposed). The top panel shows times in milliseconds and the bottom panel shows relative times._
 
@@ -738,16 +738,16 @@ _Table: Benchmarking of rowRanks_X_S(), rowRanks(X, cols, rows)() and rowRanks(X
 
 |   |expr                    |      min|        lq|      mean|   median|        uq|      max|
 |:--|:-----------------------|--------:|---------:|---------:|--------:|---------:|--------:|
-|1  |rowRanks_X_S            | 0.144917| 0.1580215| 0.1797368| 0.181389| 0.1963375| 0.259964|
-|2  |rowRanks(X, cols, rows) | 0.146525| 0.1635105| 0.1821619| 0.183311| 0.1909085| 0.309175|
-|3  |rowRanks(X[cols, rows]) | 0.155317| 0.1707920| 0.1927466| 0.193399| 0.2058530| 0.270839|
+|2  |rowRanks(X, cols, rows) | 0.147523| 0.1628170| 0.1851003| 0.185114| 0.1927970| 0.297328|
+|1  |rowRanks_X_S            | 0.147318| 0.1609815| 0.1858971| 0.186161| 0.2048955| 0.264698|
+|3  |rowRanks(X[cols, rows]) | 0.157847| 0.1744075| 0.1966930| 0.193793| 0.2108030| 0.268770|
 
 
-|   |expr                    |      min|       lq|     mean|   median|        uq|      max|
-|:--|:-----------------------|--------:|--------:|--------:|--------:|---------:|--------:|
-|1  |rowRanks_X_S            | 1.000000| 1.000000| 1.000000| 1.000000| 1.0000000| 1.000000|
-|2  |rowRanks(X, cols, rows) | 1.011096| 1.034736| 1.013493| 1.010596| 0.9723486| 1.189299|
-|3  |rowRanks(X[cols, rows]) | 1.071765| 1.080815| 1.072383| 1.066211| 1.0484650| 1.041833|
+|   |expr                    |       min|        lq|     mean|   median|       uq|       max|
+|:--|:-----------------------|---------:|---------:|--------:|--------:|--------:|---------:|
+|2  |rowRanks(X, cols, rows) | 1.0000000| 1.0000000| 1.000000| 1.000000| 1.000000| 1.0000000|
+|1  |rowRanks_X_S            | 0.9986104| 0.9887266| 1.004304| 1.005656| 1.062752| 0.8902559|
+|3  |rowRanks(X[cols, rows]) | 1.0699823| 1.0711873| 1.062629| 1.046885| 1.093394| 0.9039512|
 
 _Figure: Benchmarking of colRanks_X_S(), colRanks(X, rows, cols)() and colRanks(X[rows, cols])() on double+100x100 data  as well as rowRanks_X_S(), rowRanks(X, cols, rows)() and rowRanks(X[cols, rows])() on the same data transposed.  Outliers are displayed as crosses.  Times are in milliseconds._
 
@@ -759,16 +759,16 @@ _Table: Benchmarking of colRanks_X_S() and rowRanks_X_S() on double+100x100 data
 
 
 
-|   |expr         |     min|       lq|     mean|   median|       uq|     max|
-|:--|:------------|-------:|--------:|--------:|--------:|--------:|-------:|
-|2  |rowRanks_X_S | 144.917| 158.0215| 179.7368| 181.3890| 196.3375| 259.964|
-|1  |colRanks_X_S | 155.651| 161.6045| 190.4314| 185.5195| 205.2235| 276.679|
+|   |expr         |     min|       lq|     mean|  median|       uq|     max|
+|:--|:------------|-------:|--------:|--------:|-------:|--------:|-------:|
+|1  |colRanks_X_S | 151.390| 158.1345| 184.3986| 181.861| 199.4470| 287.467|
+|2  |rowRanks_X_S | 147.318| 160.9815| 185.8971| 186.161| 204.8955| 264.698|
 
 
-|   |expr         |     min|       lq|     mean|   median|       uq|      max|
-|:--|:------------|-------:|--------:|--------:|--------:|--------:|--------:|
-|2  |rowRanks_X_S | 1.00000| 1.000000| 1.000000| 1.000000| 1.000000| 1.000000|
-|1  |colRanks_X_S | 1.07407| 1.022674| 1.059502| 1.022771| 1.045259| 1.064297|
+|   |expr         |       min|       lq|     mean|   median|       uq|       max|
+|:--|:------------|---------:|--------:|--------:|--------:|--------:|---------:|
+|1  |colRanks_X_S | 1.0000000| 1.000000| 1.000000| 1.000000| 1.000000| 1.0000000|
+|2  |rowRanks_X_S | 0.9731026| 1.018004| 1.008126| 1.023644| 1.027318| 0.9207944|
 
 _Figure: Benchmarking of colRanks_X_S() and rowRanks_X_S() on double+100x100 data (original and transposed).  Outliers are displayed as crosses. Times are in milliseconds._
 
@@ -783,18 +783,18 @@ _Figure: Benchmarking of colRanks_X_S() and rowRanks_X_S() on double+100x100 dat
 > cols <- sample.int(ncol(X), size = ncol(X) * 0.7)
 > X_S <- X[rows, cols]
 > gc()
-          used  (Mb) gc trigger  (Mb) max used  (Mb)
-Ncells 5228233 279.3   10014072 534.9 10014072 534.9
-Vcells 9775322  74.6   18204443 138.9 18204443 138.9
+           used  (Mb) gc trigger  (Mb) max used  (Mb)
+Ncells  5295312 282.9    7916910 422.9  7916910 422.9
+Vcells 10251380  78.3   33191153 253.3 53339345 407.0
 > colStats <- microbenchmark(colRanks_X_S = colRanks(X_S, na.rm = FALSE), `colRanks(X, rows, cols)` = colRanks(X, 
 +     rows = rows, cols = cols, na.rm = FALSE), `colRanks(X[rows, cols])` = colRanks(X[rows, cols], 
 +     na.rm = FALSE), unit = "ms")
 > X <- t(X)
 > X_S <- t(X_S)
 > gc()
-          used  (Mb) gc trigger  (Mb) max used  (Mb)
-Ncells 5228209 279.3   10014072 534.9 10014072 534.9
-Vcells 9785375  74.7   18204443 138.9 18204443 138.9
+           used  (Mb) gc trigger  (Mb) max used  (Mb)
+Ncells  5295306 282.8    7916910 422.9  7916910 422.9
+Vcells 10261463  78.3   33191153 253.3 53339345 407.0
 > rowStats <- microbenchmark(rowRanks_X_S = rowRanks(X_S, na.rm = FALSE), `rowRanks(X, cols, rows)` = rowRanks(X, 
 +     rows = cols, cols = rows, na.rm = FALSE), `rowRanks(X[cols, rows])` = rowRanks(X[cols, rows], 
 +     na.rm = FALSE), unit = "ms")
@@ -804,35 +804,35 @@ _Table: Benchmarking of colRanks_X_S(), colRanks(X, rows, cols)() and colRanks(X
 
 
 
-|   |expr                    |      min|        lq|      mean|    median|        uq|      max|
-|:--|:-----------------------|--------:|---------:|---------:|---------:|---------:|--------:|
-|2  |colRanks(X, rows, cols) | 0.219367| 0.2220235| 0.2519329| 0.2349740| 0.2770220| 0.378007|
-|3  |colRanks(X[rows, cols]) | 0.229301| 0.2314075| 0.2624214| 0.2401695| 0.2898750| 0.461047|
-|1  |colRanks_X_S            | 0.216636| 0.2205795| 0.2540517| 0.2437845| 0.2753255| 0.379385|
+|   |expr                    |      min|        lq|      mean|    median|       uq|      max|
+|:--|:-----------------------|--------:|---------:|---------:|---------:|--------:|--------:|
+|2  |colRanks(X, rows, cols) | 0.216300| 0.2195605| 0.2471112| 0.2313465| 0.270918| 0.333435|
+|1  |colRanks_X_S            | 0.213868| 0.2188160| 0.2468778| 0.2342785| 0.270833| 0.329352|
+|3  |colRanks(X[rows, cols]) | 0.224252| 0.2269050| 0.2577789| 0.2412950| 0.285416| 0.434080|
 
 
-|   |expr                    |       min|        lq|     mean|   median|        uq|      max|
-|:--|:-----------------------|---------:|---------:|--------:|--------:|---------:|--------:|
-|2  |colRanks(X, rows, cols) | 1.0000000| 1.0000000| 1.000000| 1.000000| 1.0000000| 1.000000|
-|3  |colRanks(X[rows, cols]) | 1.0452848| 1.0422658| 1.041632| 1.022111| 1.0463970| 1.219679|
-|1  |colRanks_X_S            | 0.9875505| 0.9934962| 1.008411| 1.037496| 0.9938759| 1.003645|
+|   |expr                    |       min|        lq|      mean|   median|        uq|       max|
+|:--|:-----------------------|---------:|---------:|---------:|--------:|---------:|---------:|
+|2  |colRanks(X, rows, cols) | 1.0000000| 1.0000000| 1.0000000| 1.000000| 1.0000000| 1.0000000|
+|1  |colRanks_X_S            | 0.9887564| 0.9966091| 0.9990553| 1.012674| 0.9996863| 0.9877547|
+|3  |colRanks(X[rows, cols]) | 1.0367638| 1.0334509| 1.0431692| 1.043003| 1.0535143| 1.3018429|
 
 _Table: Benchmarking of rowRanks_X_S(), rowRanks(X, cols, rows)() and rowRanks(X[cols, rows])() on double+1000x10 data (transposed). The top panel shows times in milliseconds and the bottom panel shows relative times._
 
 
 
-|   |expr                    |      min|        lq|      mean|    median|       uq|      max|
-|:--|:-----------------------|--------:|---------:|---------:|---------:|--------:|--------:|
-|1  |rowRanks_X_S            | 0.205738| 0.2079940| 0.2364665| 0.2183045| 0.256759| 0.342523|
-|2  |rowRanks(X, cols, rows) | 0.207829| 0.2105965| 0.2423875| 0.2319725| 0.269494| 0.343034|
-|3  |rowRanks(X[cols, rows]) | 0.218955| 0.2210945| 0.2521619| 0.2385715| 0.276159| 0.419494|
+|   |expr                    |      min|        lq|      mean|    median|        uq|      max|
+|:--|:-----------------------|--------:|---------:|---------:|---------:|---------:|--------:|
+|1  |rowRanks_X_S            | 0.208932| 0.2122895| 0.2423210| 0.2212945| 0.2607075| 0.360016|
+|2  |rowRanks(X, cols, rows) | 0.210265| 0.2119360| 0.2458155| 0.2361405| 0.2737270| 0.349649|
+|3  |rowRanks(X[cols, rows]) | 0.222993| 0.2261535| 0.2600201| 0.2451795| 0.2823920| 0.427432|
 
 
-|   |expr                    |      min|       lq|     mean|   median|       uq|      max|
-|:--|:-----------------------|--------:|--------:|--------:|--------:|--------:|--------:|
-|1  |rowRanks_X_S            | 1.000000| 1.000000| 1.000000| 1.000000| 1.000000| 1.000000|
-|2  |rowRanks(X, cols, rows) | 1.010163| 1.012512| 1.025040| 1.062610| 1.049599| 1.001492|
-|3  |rowRanks(X[cols, rows]) | 1.064242| 1.062985| 1.066375| 1.092838| 1.075557| 1.224718|
+|   |expr                    |      min|        lq|     mean|   median|       uq|       max|
+|:--|:-----------------------|--------:|---------:|--------:|--------:|--------:|---------:|
+|1  |rowRanks_X_S            | 1.000000| 1.0000000| 1.000000| 1.000000| 1.000000| 1.0000000|
+|2  |rowRanks(X, cols, rows) | 1.006380| 0.9983348| 1.014421| 1.067087| 1.049939| 0.9712041|
+|3  |rowRanks(X[cols, rows]) | 1.067299| 1.0653070| 1.073040| 1.107933| 1.083176| 1.1872583|
 
 _Figure: Benchmarking of colRanks_X_S(), colRanks(X, rows, cols)() and colRanks(X[rows, cols])() on double+1000x10 data  as well as rowRanks_X_S(), rowRanks(X, cols, rows)() and rowRanks(X[cols, rows])() on the same data transposed.  Outliers are displayed as crosses.  Times are in milliseconds._
 
@@ -846,14 +846,14 @@ _Table: Benchmarking of colRanks_X_S() and rowRanks_X_S() on double+1000x10 data
 
 |   |expr         |     min|       lq|     mean|   median|       uq|     max|
 |:--|:------------|-------:|--------:|--------:|--------:|--------:|-------:|
-|2  |rowRanks_X_S | 205.738| 207.9940| 236.4665| 218.3045| 256.7590| 342.523|
-|1  |colRanks_X_S | 216.636| 220.5795| 254.0517| 243.7845| 275.3255| 379.385|
+|2  |rowRanks_X_S | 208.932| 212.2895| 242.3210| 221.2945| 260.7075| 360.016|
+|1  |colRanks_X_S | 213.868| 218.8160| 246.8778| 234.2785| 270.8330| 329.352|
 
 
-|   |expr         |     min|       lq|     mean|   median|       uq|      max|
-|:--|:------------|-------:|--------:|--------:|--------:|--------:|--------:|
-|2  |rowRanks_X_S | 1.00000| 1.000000| 1.000000| 1.000000| 1.000000| 1.000000|
-|1  |colRanks_X_S | 1.05297| 1.060509| 1.074367| 1.116718| 1.072311| 1.107619|
+|   |expr         |      min|       lq|     mean|   median|       uq|      max|
+|:--|:------------|--------:|--------:|--------:|--------:|--------:|--------:|
+|2  |rowRanks_X_S | 1.000000| 1.000000| 1.000000| 1.000000| 1.000000| 1.000000|
+|1  |colRanks_X_S | 1.023625| 1.030743| 1.018805| 1.058673| 1.038838| 0.914826|
 
 _Figure: Benchmarking of colRanks_X_S() and rowRanks_X_S() on double+1000x10 data (original and transposed).  Outliers are displayed as crosses. Times are in milliseconds._
 
@@ -868,18 +868,18 @@ _Figure: Benchmarking of colRanks_X_S() and rowRanks_X_S() on double+1000x10 dat
 > cols <- sample.int(ncol(X), size = ncol(X) * 0.7)
 > X_S <- X[rows, cols]
 > gc()
-          used  (Mb) gc trigger  (Mb) max used  (Mb)
-Ncells 5228438 279.3   10014072 534.9 10014072 534.9
-Vcells 9775458  74.6   18204443 138.9 18204443 138.9
+           used  (Mb) gc trigger  (Mb) max used  (Mb)
+Ncells  5295517 282.9    7916910 422.9  7916910 422.9
+Vcells 10251516  78.3   33191153 253.3 53339345 407.0
 > colStats <- microbenchmark(colRanks_X_S = colRanks(X_S, na.rm = FALSE), `colRanks(X, rows, cols)` = colRanks(X, 
 +     rows = rows, cols = cols, na.rm = FALSE), `colRanks(X[rows, cols])` = colRanks(X[rows, cols], 
 +     na.rm = FALSE), unit = "ms")
 > X <- t(X)
 > X_S <- t(X_S)
 > gc()
-          used  (Mb) gc trigger  (Mb) max used  (Mb)
-Ncells 5228414 279.3   10014072 534.9 10014072 534.9
-Vcells 9785511  74.7   18204443 138.9 18204443 138.9
+           used  (Mb) gc trigger  (Mb) max used  (Mb)
+Ncells  5295511 282.9    7916910 422.9  7916910 422.9
+Vcells 10261599  78.3   33191153 253.3 53339345 407.0
 > rowStats <- microbenchmark(rowRanks_X_S = rowRanks(X_S, na.rm = FALSE), `rowRanks(X, cols, rows)` = rowRanks(X, 
 +     rows = cols, cols = rows, na.rm = FALSE), `rowRanks(X[cols, rows])` = rowRanks(X[cols, rows], 
 +     na.rm = FALSE), unit = "ms")
@@ -889,35 +889,35 @@ _Table: Benchmarking of colRanks_X_S(), colRanks(X, rows, cols)() and colRanks(X
 
 
 
-|   |expr                    |      min|        lq|      mean|    median|        uq|      max|
-|:--|:-----------------------|--------:|---------:|---------:|---------:|---------:|--------:|
-|2  |colRanks(X, rows, cols) | 0.105070| 0.1149145| 0.1236990| 0.1219910| 0.1269405| 0.182481|
-|1  |colRanks_X_S            | 0.103563| 0.1114300| 0.1233918| 0.1220335| 0.1312205| 0.214506|
-|3  |colRanks(X[rows, cols]) | 0.118610| 0.1319710| 0.1400104| 0.1377070| 0.1486145| 0.178885|
+|   |expr                    |      min|       lq|      mean|    median|       uq|      max|
+|:--|:-----------------------|--------:|--------:|---------:|---------:|--------:|--------:|
+|1  |colRanks_X_S            | 0.105517| 0.112539| 0.1269707| 0.1180565| 0.131107| 0.206649|
+|2  |colRanks(X, rows, cols) | 0.112464| 0.117770| 0.1287253| 0.1207140| 0.132215| 0.218159|
+|3  |colRanks(X[rows, cols]) | 0.121687| 0.129823| 0.1405388| 0.1353255| 0.144698| 0.220886|
 
 
-|   |expr                    |       min|        lq|      mean|   median|       uq|       max|
-|:--|:-----------------------|---------:|---------:|---------:|--------:|--------:|---------:|
-|2  |colRanks(X, rows, cols) | 1.0000000| 1.0000000| 1.0000000| 1.000000| 1.000000| 1.0000000|
-|1  |colRanks_X_S            | 0.9856572| 0.9696775| 0.9975165| 1.000348| 1.033717| 1.1754977|
-|3  |colRanks(X[rows, cols]) | 1.1288665| 1.1484277| 1.1318630| 1.128829| 1.170741| 0.9802938|
+|   |expr                    |      min|       lq|     mean|   median|       uq|      max|
+|:--|:-----------------------|--------:|--------:|--------:|--------:|--------:|--------:|
+|1  |colRanks_X_S            | 1.000000| 1.000000| 1.000000| 1.000000| 1.000000| 1.000000|
+|2  |colRanks(X, rows, cols) | 1.065838| 1.046482| 1.013819| 1.022510| 1.008451| 1.055698|
+|3  |colRanks(X[rows, cols]) | 1.153245| 1.153582| 1.106860| 1.146277| 1.103663| 1.068895|
 
 _Table: Benchmarking of rowRanks_X_S(), rowRanks(X, cols, rows)() and rowRanks(X[cols, rows])() on double+10x1000 data (transposed). The top panel shows times in milliseconds and the bottom panel shows relative times._
 
 
 
-|   |expr                    |      min|        lq|      mean|    median|       uq|      max|
-|:--|:-----------------------|--------:|---------:|---------:|---------:|--------:|--------:|
-|1  |rowRanks_X_S            | 0.088484| 0.0988500| 0.1046109| 0.1039095| 0.108599| 0.137396|
-|2  |rowRanks(X, cols, rows) | 0.089701| 0.1011350| 0.1077024| 0.1068375| 0.110845| 0.187304|
-|3  |rowRanks(X[cols, rows]) | 0.099710| 0.1113255| 0.1192001| 0.1180495| 0.125356| 0.164434|
+|   |expr                    |      min|       lq|      mean|    median|        uq|      max|
+|:--|:-----------------------|--------:|--------:|---------:|---------:|---------:|--------:|
+|1  |rowRanks_X_S            | 0.099094| 0.105963| 0.1162706| 0.1105740| 0.1247770| 0.160034|
+|2  |rowRanks(X, cols, rows) | 0.099429| 0.107063| 0.1174934| 0.1121625| 0.1234985| 0.187703|
+|3  |rowRanks(X[cols, rows]) | 0.111495| 0.120578| 0.1337787| 0.1261040| 0.1439960| 0.222497|
 
 
-|   |expr                    |      min|       lq|     mean|   median|       uq|      max|
-|:--|:-----------------------|--------:|--------:|--------:|--------:|--------:|--------:|
-|1  |rowRanks_X_S            | 1.000000| 1.000000| 1.000000| 1.000000| 1.000000| 1.000000|
-|2  |rowRanks(X, cols, rows) | 1.013754| 1.023116| 1.029552| 1.028178| 1.020682| 1.363242|
-|3  |rowRanks(X[cols, rows]) | 1.126870| 1.126206| 1.139461| 1.136080| 1.154302| 1.196789|
+|   |expr                    |      min|       lq|     mean|   median|        uq|      max|
+|:--|:-----------------------|--------:|--------:|--------:|--------:|---------:|--------:|
+|1  |rowRanks_X_S            | 1.000000| 1.000000| 1.000000| 1.000000| 1.0000000| 1.000000|
+|2  |rowRanks(X, cols, rows) | 1.003381| 1.010381| 1.010517| 1.014366| 0.9897537| 1.172894|
+|3  |rowRanks(X[cols, rows]) | 1.125144| 1.137925| 1.150580| 1.140449| 1.1540268| 1.390311|
 
 _Figure: Benchmarking of colRanks_X_S(), colRanks(X, rows, cols)() and colRanks(X[rows, cols])() on double+10x1000 data  as well as rowRanks_X_S(), rowRanks(X, cols, rows)() and rowRanks(X[cols, rows])() on the same data transposed.  Outliers are displayed as crosses.  Times are in milliseconds._
 
@@ -929,16 +929,16 @@ _Table: Benchmarking of colRanks_X_S() and rowRanks_X_S() on double+10x1000 data
 
 
 
-|   |expr         |     min|     lq|     mean|   median|       uq|     max|
-|:--|:------------|-------:|------:|--------:|--------:|--------:|-------:|
-|2  |rowRanks_X_S |  88.484|  98.85| 104.6109| 103.9095| 108.5990| 137.396|
-|1  |colRanks_X_S | 103.563| 111.43| 123.3918| 122.0335| 131.2205| 214.506|
+|   |expr         |     min|      lq|     mean|   median|      uq|     max|
+|:--|:------------|-------:|-------:|--------:|--------:|-------:|-------:|
+|2  |rowRanks_X_S |  99.094| 105.963| 116.2707| 110.5740| 124.777| 160.034|
+|1  |colRanks_X_S | 105.517| 112.539| 126.9707| 118.0565| 131.107| 206.649|
 
 
-|   |expr         |      min|       lq|     mean|   median|       uq|      max|
-|:--|:------------|--------:|--------:|--------:|--------:|--------:|--------:|
-|2  |rowRanks_X_S | 1.000000| 1.000000| 1.000000| 1.000000| 1.000000| 1.000000|
-|1  |colRanks_X_S | 1.170415| 1.127263| 1.179531| 1.174421| 1.208303| 1.561225|
+|   |expr         |      min|       lq|     mean|  median|       uq|      max|
+|:--|:------------|--------:|--------:|--------:|-------:|--------:|--------:|
+|2  |rowRanks_X_S | 1.000000| 1.000000| 1.000000| 1.00000| 1.000000| 1.000000|
+|1  |colRanks_X_S | 1.064817| 1.062059| 1.092027| 1.06767| 1.050731| 1.291282|
 
 _Figure: Benchmarking of colRanks_X_S() and rowRanks_X_S() on double+10x1000 data (original and transposed).  Outliers are displayed as crosses. Times are in milliseconds._
 
@@ -953,18 +953,18 @@ _Figure: Benchmarking of colRanks_X_S() and rowRanks_X_S() on double+10x1000 dat
 > cols <- sample.int(ncol(X), size = ncol(X) * 0.7)
 > X_S <- X[rows, cols]
 > gc()
-          used  (Mb) gc trigger  (Mb) max used  (Mb)
-Ncells 5228648 279.3   10014072 534.9 10014072 534.9
-Vcells 9820922  75.0   18204443 138.9 18204443 138.9
+           used  (Mb) gc trigger  (Mb) max used  (Mb)
+Ncells  5295727 282.9    7916910 422.9  7916910 422.9
+Vcells 10296973  78.6   33191153 253.3 53339345 407.0
 > colStats <- microbenchmark(colRanks_X_S = colRanks(X_S, na.rm = FALSE), `colRanks(X, rows, cols)` = colRanks(X, 
 +     rows = rows, cols = cols, na.rm = FALSE), `colRanks(X[rows, cols])` = colRanks(X[rows, cols], 
 +     na.rm = FALSE), unit = "ms")
 > X <- t(X)
 > X_S <- t(X_S)
 > gc()
-          used  (Mb) gc trigger  (Mb) max used  (Mb)
-Ncells 5228624 279.3   10014072 534.9 10014072 534.9
-Vcells 9920975  75.7   18204443 138.9 18204443 138.9
+           used  (Mb) gc trigger  (Mb) max used  (Mb)
+Ncells  5295721 282.9    7916910 422.9  7916910 422.9
+Vcells 10397056  79.4   33191153 253.3 53339345 407.0
 > rowStats <- microbenchmark(rowRanks_X_S = rowRanks(X_S, na.rm = FALSE), `rowRanks(X, cols, rows)` = rowRanks(X, 
 +     rows = cols, cols = rows, na.rm = FALSE), `rowRanks(X[cols, rows])` = rowRanks(X[cols, rows], 
 +     na.rm = FALSE), unit = "ms")
@@ -976,16 +976,16 @@ _Table: Benchmarking of colRanks_X_S(), colRanks(X, rows, cols)() and colRanks(X
 
 |   |expr                    |      min|       lq|     mean|   median|       uq|      max|
 |:--|:-----------------------|--------:|--------:|--------:|--------:|--------:|--------:|
-|2  |colRanks(X, rows, cols) | 1.516817| 1.562361| 1.618916| 1.566528| 1.654154| 2.444436|
-|1  |colRanks_X_S            | 1.513150| 1.559795| 1.684312| 1.567908| 1.691382| 6.808317|
-|3  |colRanks(X[rows, cols]) | 1.615370| 1.658243| 1.827513| 1.671256| 1.903858| 7.284038|
+|1  |colRanks_X_S            | 1.515504| 1.533683| 1.674026| 1.595538| 1.735742| 2.411300|
+|2  |colRanks(X, rows, cols) | 1.546539| 1.562464| 1.717956| 1.668411| 1.807972| 2.359373|
+|3  |colRanks(X[rows, cols]) | 1.614494| 1.636637| 1.844790| 1.744627| 2.031112| 2.523000|
 
 
-|   |expr                    |       min|        lq|     mean|   median|       uq|      max|
-|:--|:-----------------------|---------:|---------:|--------:|--------:|--------:|--------:|
-|2  |colRanks(X, rows, cols) | 1.0000000| 1.0000000| 1.000000| 1.000000| 1.000000| 1.000000|
-|1  |colRanks_X_S            | 0.9975824| 0.9983576| 1.040395| 1.000881| 1.022506| 2.785230|
-|3  |colRanks(X[rows, cols]) | 1.0649736| 1.0613693| 1.128850| 1.066854| 1.150956| 2.979844|
+|   |expr                    |      min|       lq|     mean|   median|       uq|       max|
+|:--|:-----------------------|--------:|--------:|--------:|--------:|--------:|---------:|
+|1  |colRanks_X_S            | 1.000000| 1.000000| 1.000000| 1.000000| 1.000000| 1.0000000|
+|2  |colRanks(X, rows, cols) | 1.020478| 1.018766| 1.026242| 1.045673| 1.041613| 0.9784651|
+|3  |colRanks(X[rows, cols]) | 1.065318| 1.067128| 1.102008| 1.093441| 1.170169| 1.0463236|
 
 _Table: Benchmarking of rowRanks_X_S(), rowRanks(X, cols, rows)() and rowRanks(X[cols, rows])() on double+100x1000 data (transposed). The top panel shows times in milliseconds and the bottom panel shows relative times._
 
@@ -993,16 +993,16 @@ _Table: Benchmarking of rowRanks_X_S(), rowRanks(X, cols, rows)() and rowRanks(X
 
 |   |expr                    |      min|       lq|     mean|   median|       uq|      max|
 |:--|:-----------------------|--------:|--------:|--------:|--------:|--------:|--------:|
-|2  |rowRanks(X, cols, rows) | 1.493804| 1.504092| 1.622171| 1.511578| 1.564171| 8.666129|
-|1  |rowRanks_X_S            | 1.486024| 1.498105| 1.580957| 1.543940| 1.564704| 2.424509|
-|3  |rowRanks(X[cols, rows]) | 1.619143| 1.632604| 1.725072| 1.668141| 1.776071| 2.262535|
+|1  |rowRanks_X_S            | 1.511452| 1.554996| 1.690989| 1.600645| 1.747926| 2.597745|
+|2  |rowRanks(X, cols, rows) | 1.511784| 1.541399| 1.689750| 1.622421| 1.804791| 2.376141|
+|3  |rowRanks(X[cols, rows]) | 1.631885| 1.668545| 1.806874| 1.756641| 1.888040| 2.417612|
 
 
-|   |expr                    |       min|        lq|      mean|   median|       uq|       max|
-|:--|:-----------------------|---------:|---------:|---------:|--------:|--------:|---------:|
-|2  |rowRanks(X, cols, rows) | 1.0000000| 1.0000000| 1.0000000| 1.000000| 1.000000| 1.0000000|
-|1  |rowRanks_X_S            | 0.9947918| 0.9960195| 0.9745936| 1.021409| 1.000341| 0.2797684|
-|3  |rowRanks(X[cols, rows]) | 1.0839059| 1.0854412| 1.0634344| 1.103576| 1.135471| 0.2610779|
+|   |expr                    |     min|        lq|     mean|   median|       uq|       max|
+|:--|:-----------------------|-------:|---------:|--------:|--------:|--------:|---------:|
+|1  |rowRanks_X_S            | 1.00000| 1.0000000| 1.000000| 1.000000| 1.000000| 1.0000000|
+|2  |rowRanks(X, cols, rows) | 1.00022| 0.9912559| 0.999267| 1.013604| 1.032533| 0.9146937|
+|3  |rowRanks(X[cols, rows]) | 1.07968| 1.0730221| 1.068531| 1.097458| 1.080160| 0.9306579|
 
 _Figure: Benchmarking of colRanks_X_S(), colRanks(X, rows, cols)() and colRanks(X[rows, cols])() on double+100x1000 data  as well as rowRanks_X_S(), rowRanks(X, cols, rows)() and rowRanks(X[cols, rows])() on the same data transposed.  Outliers are displayed as crosses.  Times are in milliseconds._
 
@@ -1016,14 +1016,14 @@ _Table: Benchmarking of colRanks_X_S() and rowRanks_X_S() on double+100x1000 dat
 
 |   |expr         |      min|       lq|     mean|   median|       uq|      max|
 |:--|:------------|--------:|--------:|--------:|--------:|--------:|--------:|
-|2  |rowRanks_X_S | 1.486024| 1.498105| 1.580957| 1.543940| 1.564704| 2.424509|
-|1  |colRanks_X_S | 1.513150| 1.559795| 1.684312| 1.567908| 1.691382| 6.808317|
+|1  |colRanks_X_S | 1.515504| 1.533683| 1.674026| 1.595538| 1.735742| 2.411300|
+|2  |rowRanks_X_S | 1.511452| 1.554996| 1.690989| 1.600645| 1.747926| 2.597745|
 
 
-|   |expr         |      min|       lq|     mean|   median|      uq|      max|
-|:--|:------------|--------:|--------:|--------:|--------:|-------:|--------:|
-|2  |rowRanks_X_S | 1.000000| 1.000000| 1.000000| 1.000000| 1.00000| 1.000000|
-|1  |colRanks_X_S | 1.018254| 1.041179| 1.065374| 1.015524| 1.08096| 2.808122|
+|   |expr         |       min|       lq|     mean|   median|       uq|      max|
+|:--|:------------|---------:|--------:|--------:|--------:|--------:|--------:|
+|1  |colRanks_X_S | 1.0000000| 1.000000| 1.000000| 1.000000| 1.000000| 1.000000|
+|2  |rowRanks_X_S | 0.9973263| 1.013896| 1.010133| 1.003201| 1.007019| 1.077321|
 
 _Figure: Benchmarking of colRanks_X_S() and rowRanks_X_S() on double+100x1000 data (original and transposed).  Outliers are displayed as crosses. Times are in milliseconds._
 
@@ -1038,18 +1038,18 @@ _Figure: Benchmarking of colRanks_X_S() and rowRanks_X_S() on double+100x1000 da
 > cols <- sample.int(ncol(X), size = ncol(X) * 0.7)
 > X_S <- X[rows, cols]
 > gc()
-          used  (Mb) gc trigger  (Mb) max used  (Mb)
-Ncells 5228861 279.3   10014072 534.9 10014072 534.9
-Vcells 9821066  75.0   18204443 138.9 18204443 138.9
+           used  (Mb) gc trigger  (Mb) max used  (Mb)
+Ncells  5295940 282.9    7916910 422.9  7916910 422.9
+Vcells 10297117  78.6   33191153 253.3 53339345 407.0
 > colStats <- microbenchmark(colRanks_X_S = colRanks(X_S, na.rm = FALSE), `colRanks(X, rows, cols)` = colRanks(X, 
 +     rows = rows, cols = cols, na.rm = FALSE), `colRanks(X[rows, cols])` = colRanks(X[rows, cols], 
 +     na.rm = FALSE), unit = "ms")
 > X <- t(X)
 > X_S <- t(X_S)
 > gc()
-          used  (Mb) gc trigger  (Mb) max used  (Mb)
-Ncells 5228837 279.3   10014072 534.9 10014072 534.9
-Vcells 9921119  75.7   18204443 138.9 18204443 138.9
+           used  (Mb) gc trigger  (Mb) max used  (Mb)
+Ncells  5295934 282.9    7916910 422.9  7916910 422.9
+Vcells 10397200  79.4   33191153 253.3 53339345 407.0
 > rowStats <- microbenchmark(rowRanks_X_S = rowRanks(X_S, na.rm = FALSE), `rowRanks(X, cols, rows)` = rowRanks(X, 
 +     rows = cols, cols = rows, na.rm = FALSE), `rowRanks(X[cols, rows])` = rowRanks(X[cols, rows], 
 +     na.rm = FALSE), unit = "ms")
@@ -1061,33 +1061,33 @@ _Table: Benchmarking of colRanks_X_S(), colRanks(X, rows, cols)() and colRanks(X
 
 |   |expr                    |      min|       lq|     mean|   median|       uq|      max|
 |:--|:-----------------------|--------:|--------:|--------:|--------:|--------:|--------:|
-|1  |colRanks_X_S            | 2.130894| 2.138357| 2.264212| 2.142449| 2.241703| 7.489690|
-|2  |colRanks(X, rows, cols) | 2.132105| 2.142273| 2.282938| 2.148332| 2.259694| 7.352256|
-|3  |colRanks(X[rows, cols]) | 2.222375| 2.230061| 2.319799| 2.236913| 2.463054| 3.415791|
+|1  |colRanks_X_S            | 2.104173| 2.132992| 2.332693| 2.241137| 2.445591| 3.469060|
+|3  |colRanks(X[rows, cols]) | 2.190613| 2.211988| 2.392780| 2.258703| 2.511791| 3.488755|
+|2  |colRanks(X, rows, cols) | 2.126134| 2.165003| 2.371664| 2.306563| 2.537124| 3.207789|
 
 
 |   |expr                    |      min|       lq|     mean|   median|       uq|       max|
 |:--|:-----------------------|--------:|--------:|--------:|--------:|--------:|---------:|
 |1  |colRanks_X_S            | 1.000000| 1.000000| 1.000000| 1.000000| 1.000000| 1.0000000|
-|2  |colRanks(X, rows, cols) | 1.000568| 1.001831| 1.008271| 1.002746| 1.008025| 0.9816502|
-|3  |colRanks(X[rows, cols]) | 1.042931| 1.042885| 1.024551| 1.044092| 1.098742| 0.4560657|
+|3  |colRanks(X[rows, cols]) | 1.041080| 1.037035| 1.025759| 1.007838| 1.027069| 1.0056773|
+|2  |colRanks(X, rows, cols) | 1.010437| 1.015008| 1.016706| 1.029193| 1.037428| 0.9246854|
 
 _Table: Benchmarking of rowRanks_X_S(), rowRanks(X, cols, rows)() and rowRanks(X[cols, rows])() on double+1000x100 data (transposed). The top panel shows times in milliseconds and the bottom panel shows relative times._
 
 
 
-|   |expr                    |      min|       lq|     mean|   median|       uq|       max|
-|:--|:-----------------------|--------:|--------:|--------:|--------:|--------:|---------:|
-|2  |rowRanks(X, cols, rows) | 2.083490| 2.132675| 2.357410| 2.143369| 2.334093|  3.899468|
-|1  |rowRanks_X_S            | 2.074501| 2.126654| 2.314691| 2.145650| 2.342897|  3.409164|
-|3  |rowRanks(X[cols, rows]) | 2.187364| 2.304594| 2.653090| 2.356991| 2.704323| 14.673750|
+|   |expr                    |      min|       lq|     mean|   median|       uq|      max|
+|:--|:-----------------------|--------:|--------:|--------:|--------:|--------:|--------:|
+|1  |rowRanks_X_S            | 2.104285| 2.128067| 2.356135| 2.163998| 2.571961| 3.210471|
+|2  |rowRanks(X, cols, rows) | 2.100223| 2.111956| 2.411410| 2.189487| 2.561288| 3.889469|
+|3  |rowRanks(X[cols, rows]) | 2.218066| 2.236652| 2.459743| 2.270361| 2.644265| 3.865038|
 
 
-|   |expr                    |       min|        lq|     mean|   median|       uq|       max|
-|:--|:-----------------------|---------:|---------:|--------:|--------:|--------:|---------:|
-|2  |rowRanks(X, cols, rows) | 1.0000000| 1.0000000| 1.000000| 1.000000| 1.000000| 1.0000000|
-|1  |rowRanks_X_S            | 0.9956856| 0.9971768| 0.981879| 1.001064| 1.003772| 0.8742639|
-|3  |rowRanks(X[cols, rows]) | 1.0498558| 1.0806117| 1.125426| 1.099666| 1.158618| 3.7630133|
+|   |expr                    |       min|        lq|     mean|   median|        uq|      max|
+|:--|:-----------------------|---------:|---------:|--------:|--------:|---------:|--------:|
+|1  |rowRanks_X_S            | 1.0000000| 1.0000000| 1.000000| 1.000000| 1.0000000| 1.000000|
+|2  |rowRanks(X, cols, rows) | 0.9980697| 0.9924288| 1.023460| 1.011779| 0.9958501| 1.211495|
+|3  |rowRanks(X[cols, rows]) | 1.0540711| 1.0510249| 1.043974| 1.049151| 1.0281126| 1.203885|
 
 _Figure: Benchmarking of colRanks_X_S(), colRanks(X, rows, cols)() and colRanks(X[rows, cols])() on double+1000x100 data  as well as rowRanks_X_S(), rowRanks(X, cols, rows)() and rowRanks(X[cols, rows])() on the same data transposed.  Outliers are displayed as crosses.  Times are in milliseconds._
 
@@ -1101,14 +1101,14 @@ _Table: Benchmarking of colRanks_X_S() and rowRanks_X_S() on double+1000x100 dat
 
 |   |expr         |      min|       lq|     mean|   median|       uq|      max|
 |:--|:------------|--------:|--------:|--------:|--------:|--------:|--------:|
-|1  |colRanks_X_S | 2.130894| 2.138357| 2.264212| 2.142449| 2.241703| 7.489690|
-|2  |rowRanks_X_S | 2.074501| 2.126654| 2.314691| 2.145650| 2.342897| 3.409164|
+|2  |rowRanks_X_S | 2.104285| 2.128067| 2.356135| 2.163998| 2.571961| 3.210471|
+|1  |colRanks_X_S | 2.104173| 2.132992| 2.332693| 2.241137| 2.445591| 3.469060|
 
 
-|   |expr         |       min|        lq|     mean|   median|       uq|       max|
-|:--|:------------|---------:|---------:|--------:|--------:|--------:|---------:|
-|1  |colRanks_X_S | 1.0000000| 1.0000000| 1.000000| 1.000000| 1.000000| 1.0000000|
-|2  |rowRanks_X_S | 0.9735355| 0.9945271| 1.022294| 1.001494| 1.045141| 0.4551809|
+|   |expr         |       min|       lq|      mean|   median|        uq|      max|
+|:--|:------------|---------:|--------:|---------:|--------:|---------:|--------:|
+|2  |rowRanks_X_S | 1.0000000| 1.000000| 1.0000000| 1.000000| 1.0000000| 1.000000|
+|1  |colRanks_X_S | 0.9999468| 1.002314| 0.9900505| 1.035646| 0.9508663| 1.080545|
 
 _Figure: Benchmarking of colRanks_X_S() and rowRanks_X_S() on double+1000x100 data (original and transposed).  Outliers are displayed as crosses. Times are in milliseconds._
 
@@ -1142,7 +1142,7 @@ attached base packages:
 [1] stats     graphics  grDevices utils     datasets  methods   base     
 
 other attached packages:
-[1] microbenchmark_1.4-7   matrixStats_0.60.1     ggplot2_3.3.5         
+[1] microbenchmark_1.4-7   matrixStats_0.60.0     ggplot2_3.3.5         
 [4] knitr_1.33             R.devices_2.17.0       R.utils_2.10.1        
 [7] R.oo_1.24.0            R.methodsS3_1.8.1-9001 history_0.0.1-9000    
 
@@ -1168,16 +1168,17 @@ loaded via a namespace (and not attached):
 [55] tabby_0.0.1-9001        AnnotationDbi_1.54.1    Biostrings_2.60.2      
 [58] compiler_4.1.1          GenomeInfoDb_1.28.1     rlang_0.4.11           
 [61] grid_4.1.1              RCurl_1.98-1.4          cwhmisc_6.6            
-[64] rappdirs_0.3.3          startup_0.15.0          labeling_0.4.2         
-[67] bitops_1.0-7            base64enc_0.1-3         boot_1.3-28            
-[70] gtable_0.3.0            DBI_1.1.1               markdown_1.1           
-[73] R6_2.5.1                lpSolveAPI_5.5.2.0-17.7 rle_0.9.2              
-[76] dplyr_1.0.7             fastmap_1.1.0           bit_4.0.4              
-[79] utf8_1.2.2              parallel_4.1.1          Rcpp_1.0.7             
-[82] vctrs_0.3.8             png_0.1-7               DEoptimR_1.0-9         
-[85] tidyselect_1.1.1        xfun_0.25               coda_0.19-4            
+[64] rstudioapi_0.13         rappdirs_0.3.3          startup_0.15.0         
+[67] labeling_0.4.2          bitops_1.0-7            base64enc_0.1-3        
+[70] boot_1.3-28             gtable_0.3.0            DBI_1.1.1              
+[73] markdown_1.1            R6_2.5.1                lpSolveAPI_5.5.2.0-17.7
+[76] rle_0.9.2               dplyr_1.0.7             fastmap_1.1.0          
+[79] bit_4.0.4               utf8_1.2.2              parallel_4.1.1         
+[82] Rcpp_1.0.7              vctrs_0.3.8             png_0.1-7              
+[85] DEoptimR_1.0-9          tidyselect_1.1.1        xfun_0.25              
+[88] coda_0.19-4            
 ```
-Total processing time was 27.19 secs.
+Total processing time was 28.79 secs.
 
 
 ### Reproducibility
@@ -1194,7 +1195,7 @@ html <- matrixStats:::benchmark('colRowRanks_subset')
 [StackOverflow:rowProds?]: https://stackoverflow.com/questions/20198801/ "Stack Overflow: Row product of matrix and column sum of matrix"
 
 ---------------------------------------
-Copyright Dongcan Jiang. Last updated on 2021-08-25 18:14:30 (+0200 UTC). Powered by [RSP].
+Copyright Dongcan Jiang. Last updated on 2021-08-25 22:28:18 (+0200 UTC). Powered by [RSP].
 
 <script>
  var link = document.createElement('link');

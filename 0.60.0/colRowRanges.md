@@ -64,15 +64,15 @@ This report benchmark the performance of colRanges() and rowRanges() against alt
 > X <- data[["10x10"]]
 > gc()
            used  (Mb) gc trigger  (Mb) max used  (Mb)
-Ncells  5240090 279.9   10014072 534.9 10014072 534.9
-Vcells 10075494  76.9   18204443 138.9 18204443 138.9
+Ncells  5290711 282.6    7916910 422.9  7916910 422.9
+Vcells 10476589  80.0   33191153 253.3 53339345 407.0
 > colStats <- microbenchmark(colRanges = colRanges(X, na.rm = FALSE), `apply+range` = apply(X, MARGIN = 2L, 
 +     FUN = range, na.rm = FALSE), unit = "ms")
 > X <- t(X)
 > gc()
            used  (Mb) gc trigger  (Mb) max used  (Mb)
-Ncells  5224764 279.1   10014072 534.9 10014072 534.9
-Vcells 10024861  76.5   18204443 138.9 18204443 138.9
+Ncells  5290306 282.6    7916910 422.9  7916910 422.9
+Vcells 10475612  80.0   33191153 253.3 53339345 407.0
 > rowStats <- microbenchmark(rowRanges = rowRanges(X, na.rm = FALSE), `apply+range` = apply(X, MARGIN = 1L, 
 +     FUN = range, na.rm = FALSE), unit = "ms")
 ```
@@ -81,31 +81,31 @@ _Table: Benchmarking of colRanges() and apply+range() on integer+10x10 data. The
 
 
 
-|   |expr        |      min|       lq|      mean|   median|       uq|      max|
-|:--|:-----------|--------:|--------:|---------:|--------:|--------:|--------:|
-|1  |colRanges   | 0.002057| 0.002326| 0.0031182| 0.002639| 0.003730| 0.014247|
-|2  |apply+range | 0.063789| 0.065496| 0.0685767| 0.067369| 0.068502| 0.159636|
+|   |expr        |      min|       lq|      mean|    median|        uq|      max|
+|:--|:-----------|--------:|--------:|---------:|---------:|---------:|--------:|
+|1  |colRanges   | 0.002473| 0.002782| 0.0036021| 0.0030815| 0.0041665| 0.016364|
+|2  |apply+range | 0.061796| 0.063297| 0.0673617| 0.0647410| 0.0672345| 0.165235|
 
 
-|   |expr        |     min|       lq|     mean|   median|       uq|      max|
-|:--|:-----------|-------:|--------:|--------:|--------:|--------:|--------:|
-|1  |colRanges   |  1.0000|  1.00000|  1.00000|  1.00000|  1.00000|  1.00000|
-|2  |apply+range | 31.0107| 28.15821| 21.99255| 25.52823| 18.36515| 11.20489|
+|   |expr        |      min|       lq|     mean|   median|       uq|      max|
+|:--|:-----------|--------:|--------:|--------:|--------:|--------:|--------:|
+|1  |colRanges   |  1.00000|  1.00000|  1.00000|  1.00000|  1.00000|  1.00000|
+|2  |apply+range | 24.98827| 22.75234| 18.70048| 21.00957| 16.13693| 10.09747|
 
 _Table: Benchmarking of rowRanges() and apply+range() on integer+10x10 data (transposed). The top panel shows times in milliseconds and the bottom panel shows relative times._
 
 
 
-|   |expr        |      min|        lq|      mean|   median|        uq|      max|
-|:--|:-----------|--------:|---------:|---------:|--------:|---------:|--------:|
-|1  |rowRanges   | 0.002093| 0.0025090| 0.0035860| 0.003513| 0.0037805| 0.017638|
-|2  |apply+range | 0.061729| 0.0656545| 0.0682573| 0.067529| 0.0685940| 0.151717|
+|   |expr        |      min|        lq|      mean|    median|       uq|      max|
+|:--|:-----------|--------:|---------:|---------:|---------:|--------:|--------:|
+|1  |rowRanges   | 0.002468| 0.0029030| 0.0038761| 0.0040395| 0.004299| 0.016288|
+|2  |apply+range | 0.061815| 0.0630775| 0.0670372| 0.0641105| 0.067389| 0.163298|
 
 
-|   |expr        |      min|      lq|     mean|  median|       uq|      max|
-|:--|:-----------|--------:|-------:|--------:|-------:|--------:|--------:|
-|1  |rowRanges   |  1.00000|  1.0000|  1.00000|  1.0000|  1.00000| 1.000000|
-|2  |apply+range | 29.49307| 26.1676| 19.03434| 19.2226| 18.14416| 8.601712|
+|   |expr        |     min|       lq|     mean|  median|       uq|      max|
+|:--|:-----------|-------:|--------:|--------:|-------:|--------:|--------:|
+|1  |rowRanges   |  1.0000|  1.00000|  1.00000|  1.0000|  1.00000|  1.00000|
+|2  |apply+range | 25.0466| 21.72838| 17.29502| 15.8709| 15.67551| 10.02566|
 
 _Figure: Benchmarking of colRanges() and apply+range() on integer+10x10 data  as well as rowRanges() and apply+range() on the same data transposed.  Outliers are displayed as crosses.  Times are in milliseconds._
 
@@ -119,14 +119,14 @@ _Table: Benchmarking of colRanges() and rowRanges() on integer+10x10 data (origi
 
 |   |expr      |   min|    lq|    mean| median|     uq|    max|
 |:--|:---------|-----:|-----:|-------:|------:|------:|------:|
-|1  |colRanges | 2.057| 2.326| 3.11818|  2.639| 3.7300| 14.247|
-|2  |rowRanges | 2.093| 2.509| 3.58601|  3.513| 3.7805| 17.638|
+|1  |colRanges | 2.473| 2.782| 3.60214| 3.0815| 4.1665| 16.364|
+|2  |rowRanges | 2.468| 2.903| 3.87610| 4.0395| 4.2990| 16.288|
 
 
-|   |expr      |      min|       lq|     mean|   median|       uq|      max|
-|:--|:---------|--------:|--------:|--------:|--------:|--------:|--------:|
-|1  |colRanges | 1.000000| 1.000000| 1.000000| 1.000000| 1.000000| 1.000000|
-|2  |rowRanges | 1.017501| 1.078676| 1.150033| 1.331186| 1.013539| 1.238015|
+|   |expr      |       min|       lq|     mean|   median|       uq|       max|
+|:--|:---------|---------:|--------:|--------:|--------:|--------:|---------:|
+|1  |colRanges | 1.0000000| 1.000000| 1.000000| 1.000000| 1.000000| 1.0000000|
+|2  |rowRanges | 0.9979782| 1.043494| 1.076055| 1.310888| 1.031801| 0.9953557|
 
 _Figure: Benchmarking of colRanges() and rowRanges() on integer+10x10 data (original and transposed).  Outliers are displayed as crosses. Times are in milliseconds._
 
@@ -138,16 +138,16 @@ _Figure: Benchmarking of colRanges() and rowRanges() on integer+10x10 data (orig
 ```r
 > X <- data[["100x100"]]
 > gc()
-          used  (Mb) gc trigger  (Mb) max used  (Mb)
-Ncells 5223342 279.0   10014072 534.9 10014072 534.9
-Vcells 9641393  73.6   18204443 138.9 18204443 138.9
+           used  (Mb) gc trigger  (Mb) max used  (Mb)
+Ncells  5288866 282.5    7916910 422.9  7916910 422.9
+Vcells 10092114  77.0   33191153 253.3 53339345 407.0
 > colStats <- microbenchmark(colRanges = colRanges(X, na.rm = FALSE), `apply+range` = apply(X, MARGIN = 2L, 
 +     FUN = range, na.rm = FALSE), unit = "ms")
 > X <- t(X)
 > gc()
-          used  (Mb) gc trigger  (Mb) max used  (Mb)
-Ncells 5223318 279.0   10014072 534.9 10014072 534.9
-Vcells 9646406  73.6   18204443 138.9 18204443 138.9
+           used  (Mb) gc trigger  (Mb) max used  (Mb)
+Ncells  5288860 282.5    7916910 422.9  7916910 422.9
+Vcells 10097157  77.1   33191153 253.3 53339345 407.0
 > rowStats <- microbenchmark(rowRanges = rowRanges(X, na.rm = FALSE), `apply+range` = apply(X, MARGIN = 1L, 
 +     FUN = range, na.rm = FALSE), unit = "ms")
 ```
@@ -156,31 +156,31 @@ _Table: Benchmarking of colRanges() and apply+range() on integer+100x100 data. T
 
 
 
-|   |expr        |      min|       lq|      mean|    median|       uq|      max|
-|:--|:-----------|--------:|--------:|---------:|---------:|--------:|--------:|
-|1  |colRanges   | 0.027009| 0.030268| 0.0330110| 0.0320405| 0.034590| 0.057917|
-|2  |apply+range | 0.351210| 0.387800| 0.4274622| 0.4090590| 0.449414| 0.669321|
+|   |expr        |      min|        lq|      mean|    median|       uq|      max|
+|:--|:-----------|--------:|---------:|---------:|---------:|--------:|--------:|
+|1  |colRanges   | 0.025231| 0.0285145| 0.0320065| 0.0301910| 0.033218| 0.079283|
+|2  |apply+range | 0.374070| 0.4097785| 0.4503690| 0.4266275| 0.488610| 0.667680|
 
 
-|   |expr        |      min|       lq|    mean|   median|      uq|      max|
-|:--|:-----------|--------:|--------:|-------:|--------:|-------:|--------:|
-|1  |colRanges   |  1.00000|  1.00000|  1.0000|  1.00000|  1.0000|  1.00000|
-|2  |apply+range | 13.00344| 12.81221| 12.9491| 12.76694| 12.9926| 11.55656|
+|   |expr        |      min|       lq|     mean|   median|       uq|      max|
+|:--|:-----------|--------:|--------:|--------:|--------:|--------:|--------:|
+|1  |colRanges   |  1.00000|  1.00000|  1.00000|  1.00000|  1.00000| 1.000000|
+|2  |apply+range | 14.82581| 14.37088| 14.07116| 14.13095| 14.70919| 8.421477|
 
 _Table: Benchmarking of rowRanges() and apply+range() on integer+100x100 data (transposed). The top panel shows times in milliseconds and the bottom panel shows relative times._
 
 
 
-|   |expr        |      min|        lq|      mean|    median|       uq|      max|
-|:--|:-----------|--------:|---------:|---------:|---------:|--------:|--------:|
-|1  |rowRanges   | 0.026756| 0.0310710| 0.0337663| 0.0326970| 0.035686| 0.053549|
-|2  |apply+range | 0.350329| 0.3860135| 0.4263543| 0.4113785| 0.450911| 0.678199|
+|   |expr        |      min|        lq|      mean|    median|        uq|      max|
+|:--|:-----------|--------:|---------:|---------:|---------:|---------:|--------:|
+|1  |rowRanges   | 0.027509| 0.0307135| 0.0349542| 0.0324365| 0.0366515| 0.087596|
+|2  |apply+range | 0.387839| 0.4097395| 0.4576021| 0.4304910| 0.4923930| 0.732246|
 
 
-|   |expr        |      min|       lq|     mean|   median|       uq|      max|
-|:--|:-----------|--------:|--------:|--------:|--------:|--------:|--------:|
-|1  |rowRanges   |  1.00000|  1.00000|  1.00000|  1.00000|  1.00000|  1.00000|
-|2  |apply+range | 13.09347| 12.42359| 12.62663| 12.58154| 12.63552| 12.66502|
+|   |expr        |      min|      lq|     mean|   median|       uq|      max|
+|:--|:-----------|--------:|-------:|--------:|--------:|--------:|--------:|
+|1  |rowRanges   |  1.00000|  1.0000|  1.00000|  1.00000|  1.00000| 1.000000|
+|2  |apply+range | 14.09862| 13.3407| 13.09146| 13.27181| 13.43446| 8.359354|
 
 _Figure: Benchmarking of colRanges() and apply+range() on integer+100x100 data  as well as rowRanges() and apply+range() on the same data transposed.  Outliers are displayed as crosses.  Times are in milliseconds._
 
@@ -192,16 +192,16 @@ _Table: Benchmarking of colRanges() and rowRanges() on integer+100x100 data (ori
 
 
 
-|   |expr      |    min|     lq|     mean|  median|     uq|    max|
-|:--|:---------|------:|------:|--------:|-------:|------:|------:|
-|1  |colRanges | 27.009| 30.268| 33.01097| 32.0405| 34.590| 57.917|
-|2  |rowRanges | 26.756| 31.071| 33.76628| 32.6970| 35.686| 53.549|
+|   |expr      |    min|      lq|     mean|  median|      uq|    max|
+|:--|:---------|------:|-------:|--------:|-------:|-------:|------:|
+|1  |colRanges | 25.231| 28.5145| 32.00652| 30.1910| 33.2180| 79.283|
+|2  |rowRanges | 27.509| 30.7135| 34.95425| 32.4365| 36.6515| 87.596|
 
 
-|   |expr      |       min|      lq|     mean|  median|       uq|       max|
-|:--|:---------|---------:|-------:|--------:|-------:|--------:|---------:|
-|1  |colRanges | 1.0000000| 1.00000| 1.000000| 1.00000| 1.000000| 1.0000000|
-|2  |rowRanges | 0.9906328| 1.02653| 1.022881| 1.02049| 1.031686| 0.9245817|
+|   |expr      |      min|       lq|     mean|   median|       uq|      max|
+|:--|:---------|--------:|--------:|--------:|--------:|--------:|--------:|
+|1  |colRanges | 1.000000| 1.000000| 1.000000| 1.000000| 1.000000| 1.000000|
+|2  |rowRanges | 1.090286| 1.077119| 1.092098| 1.074377| 1.103363| 1.104852|
 
 _Figure: Benchmarking of colRanges() and rowRanges() on integer+100x100 data (original and transposed).  Outliers are displayed as crosses. Times are in milliseconds._
 
@@ -213,16 +213,16 @@ _Figure: Benchmarking of colRanges() and rowRanges() on integer+100x100 data (or
 ```r
 > X <- data[["1000x10"]]
 > gc()
-          used  (Mb) gc trigger  (Mb) max used  (Mb)
-Ncells 5224072 279.0   10014072 534.9 10014072 534.9
-Vcells 9644900  73.6   18204443 138.9 18204443 138.9
+           used  (Mb) gc trigger  (Mb) max used  (Mb)
+Ncells  5289602 282.5    7916910 422.9  7916910 422.9
+Vcells 10095627  77.1   33191153 253.3 53339345 407.0
 > colStats <- microbenchmark(colRanges = colRanges(X, na.rm = FALSE), `apply+range` = apply(X, MARGIN = 2L, 
 +     FUN = range, na.rm = FALSE), unit = "ms")
 > X <- t(X)
 > gc()
-          used  (Mb) gc trigger  (Mb) max used  (Mb)
-Ncells 5224048 279.0   10014072 534.9 10014072 534.9
-Vcells 9649913  73.7   18204443 138.9 18204443 138.9
+           used  (Mb) gc trigger  (Mb) max used  (Mb)
+Ncells  5289590 282.5    7916910 422.9  7916910 422.9
+Vcells 10100660  77.1   33191153 253.3 53339345 407.0
 > rowStats <- microbenchmark(rowRanges = rowRanges(X, na.rm = FALSE), `apply+range` = apply(X, MARGIN = 1L, 
 +     FUN = range, na.rm = FALSE), unit = "ms")
 ```
@@ -231,31 +231,31 @@ _Table: Benchmarking of colRanges() and apply+range() on integer+1000x10 data. T
 
 
 
-|   |expr        |      min|        lq|      mean|    median|       uq|      max|
-|:--|:-----------|--------:|---------:|---------:|---------:|--------:|--------:|
-|1  |colRanges   | 0.022660| 0.0241705| 0.0271618| 0.0263270| 0.028964| 0.044593|
-|2  |apply+range | 0.161451| 0.1638615| 0.1794838| 0.1761165| 0.188744| 0.292214|
+|   |expr        |      min|       lq|      mean|    median|       uq|      max|
+|:--|:-----------|--------:|--------:|---------:|---------:|--------:|--------:|
+|1  |colRanges   | 0.021882| 0.023777| 0.0266113| 0.0255570| 0.027650| 0.050962|
+|2  |apply+range | 0.158220| 0.171353| 0.1913571| 0.1858885| 0.200442| 0.364808|
 
 
-|   |expr        |      min|       lq|     mean|   median|       uq|      max|
-|:--|:-----------|--------:|--------:|--------:|--------:|--------:|--------:|
-|1  |colRanges   | 1.000000| 1.000000| 1.000000| 1.000000| 1.000000| 1.000000|
-|2  |apply+range | 7.124934| 6.779401| 6.607953| 6.689577| 6.516503| 6.552912|
+|   |expr        |      min|      lq|     mean|   median|       uq|      max|
+|:--|:-----------|--------:|-------:|--------:|--------:|--------:|--------:|
+|1  |colRanges   | 1.000000| 1.00000| 1.000000| 1.000000| 1.000000| 1.000000|
+|2  |apply+range | 7.230601| 7.20667| 7.190815| 7.273487| 7.249259| 7.158432|
 
 _Table: Benchmarking of rowRanges() and apply+range() on integer+1000x10 data (transposed). The top panel shows times in milliseconds and the bottom panel shows relative times._
 
 
 
-|   |expr        |      min|        lq|      mean|    median|        uq|      max|
-|:--|:-----------|--------:|---------:|---------:|---------:|---------:|--------:|
-|1  |rowRanges   | 0.028936| 0.0314625| 0.0368090| 0.0343450| 0.0366270| 0.062338|
-|2  |apply+range | 0.157462| 0.1706390| 0.2018153| 0.1797335| 0.1988875| 0.372108|
+|   |expr        |      min|        lq|      mean|   median|        uq|      max|
+|:--|:-----------|--------:|---------:|---------:|--------:|---------:|--------:|
+|1  |rowRanges   | 0.024865| 0.0274885| 0.0300131| 0.029600| 0.0318100| 0.048732|
+|2  |apply+range | 0.158219| 0.1735090| 0.1857822| 0.182612| 0.1987155| 0.287092|
 
 
-|   |expr        |      min|       lq|     mean|   median|       uq|    max|
-|:--|:-----------|--------:|--------:|--------:|--------:|--------:|------:|
-|1  |rowRanges   | 1.000000| 1.000000| 1.000000| 1.000000| 1.000000| 1.0000|
-|2  |apply+range | 5.441733| 5.423568| 5.482773| 5.233178| 5.430079| 5.9692|
+|   |expr        |      min|       lq|     mean|   median|       uq|      max|
+|:--|:-----------|--------:|--------:|--------:|--------:|--------:|--------:|
+|1  |rowRanges   | 1.000000| 1.000000| 1.000000| 1.000000| 1.000000| 1.000000|
+|2  |apply+range | 6.363121| 6.312058| 6.190035| 6.169324| 6.246951| 5.891242|
 
 _Figure: Benchmarking of colRanges() and apply+range() on integer+1000x10 data  as well as rowRanges() and apply+range() on the same data transposed.  Outliers are displayed as crosses.  Times are in milliseconds._
 
@@ -267,16 +267,16 @@ _Table: Benchmarking of colRanges() and rowRanges() on integer+1000x10 data (ori
 
 
 
-|   |expr      |    min|      lq|     mean| median|     uq|    max|
-|:--|:---------|------:|-------:|--------:|------:|------:|------:|
-|1  |colRanges | 22.660| 24.1705| 27.16178| 26.327| 28.964| 44.593|
-|2  |rowRanges | 28.936| 31.4625| 36.80898| 34.345| 36.627| 62.338|
+|   |expr      |    min|      lq|     mean| median|    uq|    max|
+|:--|:---------|------:|-------:|--------:|------:|-----:|------:|
+|1  |colRanges | 21.882| 23.7770| 26.61132| 25.557| 27.65| 50.962|
+|2  |rowRanges | 24.865| 27.4885| 30.01311| 29.600| 31.81| 48.732|
 
 
-|   |expr      |      min|      lq|     mean|   median|      uq|      max|
-|:--|:---------|--------:|-------:|--------:|--------:|-------:|--------:|
-|1  |colRanges | 1.000000| 1.00000| 1.000000| 1.000000| 1.00000| 1.000000|
-|2  |rowRanges | 1.276964| 1.30169| 1.355176| 1.304554| 1.26457| 1.397932|
+|   |expr      |      min|       lq|     mean|   median|       uq|       max|
+|:--|:---------|--------:|--------:|--------:|--------:|--------:|---------:|
+|1  |colRanges | 1.000000| 1.000000| 1.000000| 1.000000| 1.000000| 1.0000000|
+|2  |rowRanges | 1.136322| 1.156096| 1.127832| 1.158195| 1.150452| 0.9562419|
 
 _Figure: Benchmarking of colRanges() and rowRanges() on integer+1000x10 data (original and transposed).  Outliers are displayed as crosses. Times are in milliseconds._
 
@@ -288,16 +288,16 @@ _Figure: Benchmarking of colRanges() and rowRanges() on integer+1000x10 data (or
 ```r
 > X <- data[["10x1000"]]
 > gc()
-          used  (Mb) gc trigger  (Mb) max used  (Mb)
-Ncells 5224260 279.1   10014072 534.9 10014072 534.9
-Vcells 9645580  73.6   18204443 138.9 18204443 138.9
+           used  (Mb) gc trigger  (Mb) max used  (Mb)
+Ncells  5289784 282.6    7916910 422.9  7916910 422.9
+Vcells 10096288  77.1   33191153 253.3 53339345 407.0
 > colStats <- microbenchmark(colRanges = colRanges(X, na.rm = FALSE), `apply+range` = apply(X, MARGIN = 2L, 
 +     FUN = range, na.rm = FALSE), unit = "ms")
 > X <- t(X)
 > gc()
-          used  (Mb) gc trigger  (Mb) max used  (Mb)
-Ncells 5224236 279.1   10014072 534.9 10014072 534.9
-Vcells 9650593  73.7   18204443 138.9 18204443 138.9
+           used  (Mb) gc trigger  (Mb) max used  (Mb)
+Ncells  5289778 282.6    7916910 422.9  7916910 422.9
+Vcells 10101331  77.1   33191153 253.3 53339345 407.0
 > rowStats <- microbenchmark(rowRanges = rowRanges(X, na.rm = FALSE), `apply+range` = apply(X, MARGIN = 1L, 
 +     FUN = range, na.rm = FALSE), unit = "ms")
 ```
@@ -306,31 +306,31 @@ _Table: Benchmarking of colRanges() and apply+range() on integer+10x1000 data. T
 
 
 
-|   |expr        |     min|       lq|      mean|   median|        uq|      max|
-|:--|:-----------|-------:|--------:|---------:|--------:|---------:|--------:|
-|1  |colRanges   | 0.05286| 0.054329| 0.0593475| 0.056141| 0.0598065| 0.095758|
-|2  |apply+range | 2.25581| 2.384006| 2.5118099| 2.494061| 2.5521825| 3.561955|
+|   |expr        |      min|        lq|      mean|    median|        uq|      max|
+|:--|:-----------|--------:|---------:|---------:|---------:|---------:|--------:|
+|1  |colRanges   | 0.048760| 0.0515365| 0.0574253| 0.0539435| 0.0624505| 0.093977|
+|2  |apply+range | 2.286009| 2.3110690| 2.5454226| 2.3890505| 2.5688840| 8.147520|
 
 
-|   |expr        |      min|       lq|    mean|   median|     uq|      max|
-|:--|:-----------|--------:|--------:|-------:|--------:|------:|--------:|
-|1  |colRanges   |  1.00000|  1.00000|  1.0000|  1.00000|  1.000|  1.00000|
-|2  |apply+range | 42.67518| 43.88091| 42.3238| 44.42495| 42.674| 37.19747|
+|   |expr        |      min|       lq|     mean|   median|       uq|      max|
+|:--|:-----------|--------:|--------:|--------:|--------:|--------:|--------:|
+|1  |colRanges   |  1.00000|  1.00000|  1.00000|  1.00000|  1.00000|  1.00000|
+|2  |apply+range | 46.88288| 44.84334| 44.32583| 44.28801| 41.13472| 86.69696|
 
 _Table: Benchmarking of rowRanges() and apply+range() on integer+10x1000 data (transposed). The top panel shows times in milliseconds and the bottom panel shows relative times._
 
 
 
-|   |expr        |      min|       lq|      mean|   median|       uq|      max|
-|:--|:-----------|--------:|--------:|---------:|--------:|--------:|--------:|
-|1  |rowRanges   | 0.044177| 0.046085| 0.0500648| 0.047817| 0.049926| 0.082737|
-|2  |apply+range | 2.209073| 2.361173| 2.5029451| 2.479004| 2.534382| 3.459649|
+|   |expr        |      min|       lq|     mean|   median|        uq|      max|
+|:--|:-----------|--------:|--------:|--------:|--------:|---------:|--------:|
+|1  |rowRanges   | 0.045986| 0.048111| 0.054664| 0.051825| 0.0588115| 0.086165|
+|2  |apply+range | 2.239152| 2.324964| 2.571745| 2.401298| 2.6230155| 8.277417|
 
 
-|   |expr        |      min|       lq|     mean|   median|       uq|      max|
-|:--|:-----------|--------:|--------:|--------:|--------:|--------:|--------:|
-|1  |rowRanges   |  1.00000|  1.00000|  1.00000|  1.00000|  1.00000|  1.00000|
-|2  |apply+range | 50.00505| 51.23517| 49.99415| 51.84356| 50.76278| 41.81502|
+|   |expr        |      min|     lq|     mean|   median|       uq|      max|
+|:--|:-----------|--------:|------:|--------:|--------:|--------:|--------:|
+|1  |rowRanges   |  1.00000|  1.000|  1.00000|  1.00000|  1.00000|  1.00000|
+|2  |apply+range | 48.69204| 48.325| 47.04642| 46.33475| 44.60038| 96.06472|
 
 _Figure: Benchmarking of colRanges() and apply+range() on integer+10x1000 data  as well as rowRanges() and apply+range() on the same data transposed.  Outliers are displayed as crosses.  Times are in milliseconds._
 
@@ -342,16 +342,16 @@ _Table: Benchmarking of colRanges() and rowRanges() on integer+10x1000 data (ori
 
 
 
-|   |expr      |    min|     lq|     mean| median|      uq|    max|
-|:--|:---------|------:|------:|--------:|------:|-------:|------:|
-|2  |rowRanges | 44.177| 46.085| 50.06476| 47.817| 49.9260| 82.737|
-|1  |colRanges | 52.860| 54.329| 59.34745| 56.141| 59.8065| 95.758|
+|   |expr      |    min|      lq|     mean|  median|      uq|    max|
+|:--|:---------|------:|-------:|--------:|-------:|-------:|------:|
+|2  |rowRanges | 45.986| 48.1110| 54.66398| 51.8250| 58.8115| 86.165|
+|1  |colRanges | 48.760| 51.5365| 57.42527| 53.9435| 62.4505| 93.977|
 
 
-|   |expr      |     min|       lq|     mean|  median|       uq|      max|
-|:--|:---------|-------:|--------:|--------:|-------:|--------:|--------:|
-|2  |rowRanges | 1.00000| 1.000000| 1.000000| 1.00000| 1.000000| 1.000000|
-|1  |colRanges | 1.19655| 1.178887| 1.185414| 1.17408| 1.197903| 1.157378|
+|   |expr      |      min|     lq|     mean|   median|       uq|      max|
+|:--|:---------|--------:|------:|--------:|--------:|--------:|--------:|
+|2  |rowRanges | 1.000000| 1.0000| 1.000000| 1.000000| 1.000000| 1.000000|
+|1  |colRanges | 1.060323| 1.0712| 1.050514| 1.040878| 1.061876| 1.090663|
 
 _Figure: Benchmarking of colRanges() and rowRanges() on integer+10x1000 data (original and transposed).  Outliers are displayed as crosses. Times are in milliseconds._
 
@@ -363,16 +363,16 @@ _Figure: Benchmarking of colRanges() and rowRanges() on integer+10x1000 data (or
 ```r
 > X <- data[["100x1000"]]
 > gc()
-          used  (Mb) gc trigger  (Mb) max used  (Mb)
-Ncells 5224438 279.1   10014072 534.9 10014072 534.9
-Vcells 9646049  73.6   18204443 138.9 18204443 138.9
+           used  (Mb) gc trigger  (Mb) max used  (Mb)
+Ncells  5289980 282.6    7916910 422.9  7916910 422.9
+Vcells 10096785  77.1   33191153 253.3 53339345 407.0
 > colStats <- microbenchmark(colRanges = colRanges(X, na.rm = FALSE), `apply+range` = apply(X, MARGIN = 2L, 
 +     FUN = range, na.rm = FALSE), unit = "ms")
 > X <- t(X)
 > gc()
-          used  (Mb) gc trigger  (Mb) max used  (Mb)
-Ncells 5224420 279.1   10014072 534.9 10014072 534.9
-Vcells 9696072  74.0   18204443 138.9 18204443 138.9
+           used  (Mb) gc trigger  (Mb) max used  (Mb)
+Ncells  5289962 282.6    7916910 422.9  7916910 422.9
+Vcells 10146808  77.5   33191153 253.3 53339345 407.0
 > rowStats <- microbenchmark(rowRanges = rowRanges(X, na.rm = FALSE), `apply+range` = apply(X, MARGIN = 1L, 
 +     FUN = range, na.rm = FALSE), unit = "ms")
 ```
@@ -381,31 +381,31 @@ _Table: Benchmarking of colRanges() and apply+range() on integer+100x1000 data. 
 
 
 
-|   |expr        |      min|       lq|      mean|   median|       uq|       max|
-|:--|:-----------|--------:|--------:|---------:|--------:|--------:|---------:|
-|1  |colRanges   | 0.237228| 0.251467| 0.2681171| 0.256303| 0.272192|  0.402164|
-|2  |apply+range | 3.041097| 3.100046| 3.5469595| 3.153003| 3.339666| 16.496577|
+|   |expr        |      min|       lq|      mean|   median|        uq|       max|
+|:--|:-----------|--------:|--------:|---------:|--------:|---------:|---------:|
+|1  |colRanges   | 0.213473| 0.218363| 0.2367702| 0.223724| 0.2457605|  0.355539|
+|2  |apply+range | 3.030555| 3.097857| 3.4724992| 3.166438| 3.3794380| 18.319767|
 
 
-|   |expr        |     min|       lq|     mean|   median|       uq|      max|
-|:--|:-----------|-------:|--------:|--------:|--------:|--------:|--------:|
-|1  |colRanges   |  1.0000|  1.00000|  1.00000|  1.00000|  1.00000|  1.00000|
-|2  |apply+range | 12.8193| 12.32785| 13.22914| 12.30186| 12.26952| 41.01953|
+|   |expr        |      min|       lq|     mean|   median|       uq|      max|
+|:--|:-----------|--------:|--------:|--------:|--------:|--------:|--------:|
+|1  |colRanges   |  1.00000|  1.00000|  1.00000|  1.00000|  1.00000|  1.00000|
+|2  |apply+range | 14.19643| 14.18673| 14.66612| 14.15332| 13.75094| 51.52674|
 
 _Table: Benchmarking of rowRanges() and apply+range() on integer+100x1000 data (transposed). The top panel shows times in milliseconds and the bottom panel shows relative times._
 
 
 
-|   |expr        |      min|        lq|      mean|   median|        uq|       max|
-|:--|:-----------|--------:|---------:|---------:|--------:|---------:|---------:|
-|1  |rowRanges   | 0.237055| 0.2407715| 0.2559443| 0.245285| 0.2602725|  0.377456|
-|2  |apply+range | 3.061818| 3.1102670| 3.5776471| 3.169609| 3.4011560| 16.749653|
+|   |expr        |      min|        lq|      mean|    median|        uq|       max|
+|:--|:-----------|--------:|---------:|---------:|---------:|---------:|---------:|
+|1  |rowRanges   | 0.224587| 0.2279005| 0.2460298| 0.2299505| 0.2401315|  0.387467|
+|2  |apply+range | 3.043226| 3.0889425| 3.6265368| 3.1390335| 3.4800580| 26.799406|
 
 
-|   |expr        |      min|       lq|     mean|   median|       uq|      max|
-|:--|:-----------|--------:|--------:|--------:|--------:|--------:|--------:|
-|1  |rowRanges   |  1.00000|  1.00000|  1.00000|  1.00000|  1.00000|  1.00000|
-|2  |apply+range | 12.91607| 12.91792| 13.97822| 12.92215| 13.06767| 44.37511|
+|   |expr        |      min|       lq|     mean|   median|      uq|      max|
+|:--|:-----------|--------:|--------:|--------:|--------:|-------:|--------:|
+|1  |rowRanges   |  1.00000|  1.00000|  1.00000|  1.00000|  1.0000|  1.00000|
+|2  |apply+range | 13.55032| 13.55391| 14.74023| 13.65091| 14.4923| 69.16565|
 
 _Figure: Benchmarking of colRanges() and apply+range() on integer+100x1000 data  as well as rowRanges() and apply+range() on the same data transposed.  Outliers are displayed as crosses.  Times are in milliseconds._
 
@@ -417,16 +417,16 @@ _Table: Benchmarking of colRanges() and rowRanges() on integer+100x1000 data (or
 
 
 
-|   |expr      |     min|       lq|     mean|  median|       uq|     max|
-|:--|:---------|-------:|--------:|--------:|-------:|--------:|-------:|
-|2  |rowRanges | 237.055| 240.7715| 255.9443| 245.285| 260.2725| 377.456|
-|1  |colRanges | 237.228| 251.4670| 268.1171| 256.303| 272.1920| 402.164|
+|   |expr      |     min|       lq|     mean|   median|       uq|     max|
+|:--|:---------|-------:|--------:|--------:|--------:|--------:|-------:|
+|1  |colRanges | 213.473| 218.3630| 236.7702| 223.7240| 245.7605| 355.539|
+|2  |rowRanges | 224.587| 227.9005| 246.0298| 229.9505| 240.1315| 387.467|
 
 
-|   |expr      |     min|       lq|    mean|   median|       uq|      max|
-|:--|:---------|-------:|--------:|-------:|--------:|--------:|--------:|
-|2  |rowRanges | 1.00000| 1.000000| 1.00000| 1.000000| 1.000000| 1.000000|
-|1  |colRanges | 1.00073| 1.044422| 1.04756| 1.044919| 1.045796| 1.065459|
+|   |expr      |      min|       lq|     mean|   median|        uq|      max|
+|:--|:---------|--------:|--------:|--------:|--------:|---------:|--------:|
+|1  |colRanges | 1.000000| 1.000000| 1.000000| 1.000000| 1.0000000| 1.000000|
+|2  |rowRanges | 1.052063| 1.043677| 1.039108| 1.027831| 0.9770956| 1.089802|
 
 _Figure: Benchmarking of colRanges() and rowRanges() on integer+100x1000 data (original and transposed).  Outliers are displayed as crosses. Times are in milliseconds._
 
@@ -438,16 +438,16 @@ _Figure: Benchmarking of colRanges() and rowRanges() on integer+100x1000 data (o
 ```r
 > X <- data[["1000x100"]]
 > gc()
-          used  (Mb) gc trigger  (Mb) max used  (Mb)
-Ncells 5224636 279.1   10014072 534.9 10014072 534.9
-Vcells 9646617  73.6   18204443 138.9 18204443 138.9
+           used  (Mb) gc trigger  (Mb) max used  (Mb)
+Ncells  5290172 282.6    7916910 422.9  7916910 422.9
+Vcells 10097343  77.1   33191153 253.3 53339345 407.0
 > colStats <- microbenchmark(colRanges = colRanges(X, na.rm = FALSE), `apply+range` = apply(X, MARGIN = 2L, 
 +     FUN = range, na.rm = FALSE), unit = "ms")
 > X <- t(X)
 > gc()
-          used  (Mb) gc trigger  (Mb) max used  (Mb)
-Ncells 5224612 279.1   10014072 534.9 10014072 534.9
-Vcells 9696630  74.0   18204443 138.9 18204443 138.9
+           used  (Mb) gc trigger  (Mb) max used  (Mb)
+Ncells  5290154 282.6    7916910 422.9  7916910 422.9
+Vcells 10147366  77.5   33191153 253.3 53339345 407.0
 > rowStats <- microbenchmark(rowRanges = rowRanges(X, na.rm = FALSE), `apply+range` = apply(X, MARGIN = 1L, 
 +     FUN = range, na.rm = FALSE), unit = "ms")
 ```
@@ -456,31 +456,31 @@ _Table: Benchmarking of colRanges() and apply+range() on integer+1000x100 data. 
 
 
 
-|   |expr        |      min|       lq|     mean|    median|        uq|      max|
-|:--|:-----------|--------:|--------:|--------:|---------:|---------:|--------:|
-|1  |colRanges   | 0.180562| 0.193472| 0.217037| 0.2172445| 0.2345055| 0.322629|
-|2  |apply+range | 1.032728| 1.063320| 1.359840| 1.2078705| 1.3209405| 8.332265|
+|   |expr        |      min|       lq|      mean|   median|        uq|      max|
+|:--|:-----------|--------:|--------:|---------:|--------:|---------:|--------:|
+|1  |colRanges   | 0.154839| 0.155973| 0.1723323| 0.157236| 0.1852475| 0.277939|
+|2  |apply+range | 1.009848| 1.019756| 1.1499305| 1.031660| 1.2281775| 1.818271|
 
 
-|   |expr        |     min|       lq|     mean|   median|       uq|      max|
-|:--|:-----------|-------:|--------:|--------:|--------:|--------:|--------:|
-|1  |colRanges   | 1.00000| 1.000000| 1.000000| 1.000000| 1.000000|  1.00000|
-|2  |apply+range | 5.71952| 5.495992| 6.265477| 5.559959| 5.632876| 25.82615|
+|   |expr        |      min|       lq|    mean|  median|       uq|      max|
+|:--|:-----------|--------:|--------:|-------:|-------:|--------:|--------:|
+|1  |colRanges   | 1.000000| 1.000000| 1.00000| 1.00000| 1.000000| 1.000000|
+|2  |apply+range | 6.521923| 6.538032| 6.67275| 6.56122| 6.629927| 6.541979|
 
 _Table: Benchmarking of rowRanges() and apply+range() on integer+1000x100 data (transposed). The top panel shows times in milliseconds and the bottom panel shows relative times._
 
 
 
-|   |expr        |      min|        lq|      mean|    median|       uq|      max|
-|:--|:-----------|--------:|---------:|---------:|---------:|--------:|--------:|
-|1  |rowRanges   | 0.200344| 0.2097735| 0.2367739| 0.2322595| 0.252521| 0.531338|
-|2  |apply+range | 1.034344| 1.0918660| 1.3885301| 1.2098755| 1.337280| 8.526294|
+|   |expr        |      min|        lq|      mean|   median|        uq|      max|
+|:--|:-----------|--------:|---------:|---------:|--------:|---------:|--------:|
+|1  |rowRanges   | 0.176820| 0.1792245| 0.2032811| 0.192065| 0.2231835| 0.302751|
+|2  |apply+range | 1.006984| 1.0160345| 1.1601044| 1.032503| 1.2505930| 1.839541|
 
 
-|   |expr        |     min|       lq|     mean|   median|       uq|      max|
-|:--|:-----------|-------:|--------:|--------:|--------:|--------:|--------:|
-|1  |rowRanges   | 1.00000| 1.000000| 1.000000| 1.000000| 1.000000|  1.00000|
-|2  |apply+range | 5.16284| 5.204976| 5.864371| 5.209154| 5.295718| 16.04684|
+|   |expr        |      min|      lq|     mean| median|       uq|      max|
+|:--|:-----------|--------:|-------:|--------:|------:|--------:|--------:|
+|1  |rowRanges   | 1.000000| 1.00000| 1.000000| 1.0000| 1.000000| 1.000000|
+|2  |apply+range | 5.694967| 5.66906| 5.706898| 5.3758| 5.603429| 6.076086|
 
 _Figure: Benchmarking of colRanges() and apply+range() on integer+1000x100 data  as well as rowRanges() and apply+range() on the same data transposed.  Outliers are displayed as crosses.  Times are in milliseconds._
 
@@ -492,16 +492,16 @@ _Table: Benchmarking of colRanges() and rowRanges() on integer+1000x100 data (or
 
 
 
-|   |expr      |     min|       lq|     mean|   median|       uq|     max|
-|:--|:---------|-------:|--------:|--------:|--------:|--------:|-------:|
-|1  |colRanges | 180.562| 193.4720| 217.0370| 217.2445| 234.5055| 322.629|
-|2  |rowRanges | 200.344| 209.7735| 236.7739| 232.2595| 252.5210| 531.338|
+|   |expr      |     min|       lq|     mean|  median|       uq|     max|
+|:--|:---------|-------:|--------:|--------:|-------:|--------:|-------:|
+|1  |colRanges | 154.839| 155.9730| 172.3323| 157.236| 185.2475| 277.939|
+|2  |rowRanges | 176.820| 179.2245| 203.2811| 192.065| 223.1835| 302.751|
 
 
-|   |expr      |      min|       lq|     mean|   median|       uq|      max|
-|:--|:---------|--------:|--------:|--------:|--------:|--------:|--------:|
-|1  |colRanges | 1.000000| 1.000000| 1.000000| 1.000000| 1.000000| 1.000000|
-|2  |rowRanges | 1.109558| 1.084258| 1.090938| 1.069116| 1.076823| 1.646901|
+|   |expr      |     min|       lq|     mean|   median|       uq|      max|
+|:--|:---------|-------:|--------:|--------:|--------:|--------:|--------:|
+|1  |colRanges | 1.00000| 1.000000| 1.000000| 1.000000| 1.000000| 1.000000|
+|2  |rowRanges | 1.14196| 1.149074| 1.179588| 1.221508| 1.204786| 1.089271|
 
 _Figure: Benchmarking of colRanges() and rowRanges() on integer+1000x100 data (original and transposed).  Outliers are displayed as crosses. Times are in milliseconds._
 
@@ -554,16 +554,16 @@ _Figure: Benchmarking of colRanges() and rowRanges() on integer+1000x100 data (o
 ```r
 > X <- data[["10x10"]]
 > gc()
-          used  (Mb) gc trigger  (Mb) max used  (Mb)
-Ncells 5224836 279.1   10014072 534.9 10014072 534.9
-Vcells 9762962  74.5   18204443 138.9 18204443 138.9
+           used  (Mb) gc trigger  (Mb) max used  (Mb)
+Ncells  5290360 282.6    7916910 422.9  7916910 422.9
+Vcells 10213698  78.0   33191153 253.3 53339345 407.0
 > colStats <- microbenchmark(colRanges = colRanges(X, na.rm = FALSE), `apply+range` = apply(X, MARGIN = 2L, 
 +     FUN = range, na.rm = FALSE), unit = "ms")
 > X <- t(X)
 > gc()
-          used  (Mb) gc trigger  (Mb) max used  (Mb)
-Ncells 5224803 279.1   10014072 534.9 10014072 534.9
-Vcells 9763060  74.5   18204443 138.9 18204443 138.9
+           used  (Mb) gc trigger  (Mb) max used  (Mb)
+Ncells  5290345 282.6    7916910 422.9  7916910 422.9
+Vcells 10213826  78.0   33191153 253.3 53339345 407.0
 > rowStats <- microbenchmark(rowRanges = rowRanges(X, na.rm = FALSE), `apply+range` = apply(X, MARGIN = 1L, 
 +     FUN = range, na.rm = FALSE), unit = "ms")
 ```
@@ -574,14 +574,14 @@ _Table: Benchmarking of colRanges() and apply+range() on double+10x10 data. The 
 
 |   |expr        |      min|        lq|      mean|    median|        uq|      max|
 |:--|:-----------|--------:|---------:|---------:|---------:|---------:|--------:|
-|1  |colRanges   | 0.002148| 0.0024705| 0.0032412| 0.0028635| 0.0037525| 0.014975|
-|2  |apply+range | 0.061845| 0.0635120| 0.0666467| 0.0654470| 0.0668620| 0.145694|
+|1  |colRanges   | 0.002879| 0.0032545| 0.0041415| 0.0038460| 0.0047245| 0.017094|
+|2  |apply+range | 0.065756| 0.0679330| 0.0706799| 0.0690135| 0.0701160| 0.156967|
 
 
-|   |expr        |     min|       lq|     mean|  median|       uq|      max|
-|:--|:-----------|-------:|--------:|--------:|-------:|--------:|--------:|
-|1  |colRanges   |  1.0000|  1.00000|  1.00000|  1.0000|  1.00000| 1.000000|
-|2  |apply+range | 28.7919| 25.70816| 20.56209| 22.8556| 17.81799| 9.729149|
+|   |expr        |      min|       lq|     mean|   median|       uq|      max|
+|:--|:-----------|--------:|--------:|--------:|--------:|--------:|--------:|
+|1  |colRanges   |  1.00000|  1.00000|  1.00000|  1.00000|  1.00000| 1.000000|
+|2  |apply+range | 22.83987| 20.87356| 17.06629| 17.94423| 14.84094| 9.182579|
 
 _Table: Benchmarking of rowRanges() and apply+range() on double+10x10 data (transposed). The top panel shows times in milliseconds and the bottom panel shows relative times._
 
@@ -589,14 +589,14 @@ _Table: Benchmarking of rowRanges() and apply+range() on double+10x10 data (tran
 
 |   |expr        |      min|        lq|      mean|    median|        uq|      max|
 |:--|:-----------|--------:|---------:|---------:|---------:|---------:|--------:|
-|1  |rowRanges   | 0.002233| 0.0026710| 0.0037109| 0.0037610| 0.0039235| 0.019247|
-|2  |apply+range | 0.061256| 0.0639925| 0.0673388| 0.0662325| 0.0675150| 0.150304|
+|1  |rowRanges   | 0.002863| 0.0034115| 0.0046455| 0.0047015| 0.0049960| 0.018058|
+|2  |apply+range | 0.068222| 0.0696690| 0.0723556| 0.0702260| 0.0710085| 0.187341|
 
 
-|   |expr        |      min|       lq|     mean|   median|       uq|      max|
-|:--|:-----------|--------:|--------:|--------:|--------:|--------:|--------:|
-|1  |rowRanges   |  1.00000|  1.00000|  1.00000|  1.00000|  1.00000| 1.000000|
-|2  |apply+range | 27.43215| 23.95826| 18.14641| 17.61034| 17.20785| 7.809217|
+|   |expr        |      min|       lq|     mean|   median|       uq|     max|
+|:--|:-----------|--------:|--------:|--------:|--------:|--------:|-------:|
+|1  |rowRanges   |  1.00000|  1.00000|  1.00000|  1.00000|  1.00000|  1.0000|
+|2  |apply+range | 23.82885| 20.42181| 15.57539| 14.93694| 14.21307| 10.3744|
 
 _Figure: Benchmarking of colRanges() and apply+range() on double+10x10 data  as well as rowRanges() and apply+range() on the same data transposed.  Outliers are displayed as crosses.  Times are in milliseconds._
 
@@ -610,14 +610,14 @@ _Table: Benchmarking of colRanges() and rowRanges() on double+10x10 data (origin
 
 |   |expr      |   min|     lq|    mean| median|     uq|    max|
 |:--|:---------|-----:|------:|-------:|------:|------:|------:|
-|1  |colRanges | 2.148| 2.4705| 3.24124| 2.8635| 3.7525| 14.975|
-|2  |rowRanges | 2.233| 2.6710| 3.71086| 3.7610| 3.9235| 19.247|
+|1  |colRanges | 2.879| 3.2545| 4.14149| 3.8460| 4.7245| 17.094|
+|2  |rowRanges | 2.863| 3.4115| 4.64551| 4.7015| 4.9960| 18.058|
 
 
-|   |expr      |      min|       lq|     mean|   median|      uq|      max|
-|:--|:---------|--------:|--------:|--------:|--------:|-------:|--------:|
-|1  |colRanges | 1.000000| 1.000000| 1.000000| 1.000000| 1.00000| 1.000000|
-|2  |rowRanges | 1.039572| 1.081158| 1.144889| 1.313428| 1.04557| 1.285276|
+|   |expr      |       min|       lq|   mean|   median|       uq|      max|
+|:--|:---------|---------:|--------:|------:|--------:|--------:|--------:|
+|1  |colRanges | 1.0000000| 1.000000| 1.0000| 1.000000| 1.000000| 1.000000|
+|2  |rowRanges | 0.9944425| 1.048241| 1.1217| 1.222439| 1.057466| 1.056394|
 
 _Figure: Benchmarking of colRanges() and rowRanges() on double+10x10 data (original and transposed).  Outliers are displayed as crosses. Times are in milliseconds._
 
@@ -629,16 +629,16 @@ _Figure: Benchmarking of colRanges() and rowRanges() on double+10x10 data (origi
 ```r
 > X <- data[["100x100"]]
 > gc()
-          used  (Mb) gc trigger  (Mb) max used  (Mb)
-Ncells 5225016 279.1   10014072 534.9 10014072 534.9
-Vcells 9763074  74.5   18204443 138.9 18204443 138.9
+           used  (Mb) gc trigger  (Mb) max used  (Mb)
+Ncells  5290540 282.6    7916910 422.9  7916910 422.9
+Vcells 10213810  78.0   33191153 253.3 53339345 407.0
 > colStats <- microbenchmark(colRanges = colRanges(X, na.rm = FALSE), `apply+range` = apply(X, MARGIN = 2L, 
 +     FUN = range, na.rm = FALSE), unit = "ms")
 > X <- t(X)
 > gc()
-          used  (Mb) gc trigger  (Mb) max used  (Mb)
-Ncells 5224992 279.1   10014072 534.9 10014072 534.9
-Vcells 9773087  74.6   18204443 138.9 18204443 138.9
+           used  (Mb) gc trigger  (Mb) max used  (Mb)
+Ncells  5290534 282.6    7916910 422.9  7916910 422.9
+Vcells 10223853  78.1   33191153 253.3 53339345 407.0
 > rowStats <- microbenchmark(rowRanges = rowRanges(X, na.rm = FALSE), `apply+range` = apply(X, MARGIN = 1L, 
 +     FUN = range, na.rm = FALSE), unit = "ms")
 ```
@@ -647,31 +647,31 @@ _Table: Benchmarking of colRanges() and apply+range() on double+100x100 data. Th
 
 
 
-|   |expr        |      min|        lq|      mean|    median|       uq|      max|
-|:--|:-----------|--------:|---------:|---------:|---------:|--------:|--------:|
-|1  |colRanges   | 0.030615| 0.0335635| 0.0365519| 0.0355765| 0.038170| 0.064798|
-|2  |apply+range | 0.356077| 0.3972040| 0.4359822| 0.4252905| 0.463955| 0.675913|
+|   |expr        |      min|        lq|      mean|    median|        uq|      max|
+|:--|:-----------|--------:|---------:|---------:|---------:|---------:|--------:|
+|1  |colRanges   | 0.023408| 0.0258655| 0.0287942| 0.0273385| 0.0300845| 0.058754|
+|2  |apply+range | 0.384650| 0.4139755| 0.4521284| 0.4273005| 0.4828200| 0.670138|
 
 
-|   |expr        |     min|      lq|     mean|   median|       uq|      max|
-|:--|:-----------|-------:|-------:|--------:|--------:|--------:|--------:|
-|1  |colRanges   |  1.0000|  1.0000|  1.00000|  1.00000|  1.00000|  1.00000|
-|2  |apply+range | 11.6308| 11.8344| 11.92777| 11.95425| 12.15496| 10.43108|
+|   |expr        |      min|       lq|     mean|   median|      uq|      max|
+|:--|:-----------|--------:|--------:|--------:|--------:|-------:|--------:|
+|1  |colRanges   |  1.00000|  1.00000|  1.00000|  1.00000|  1.0000|  1.00000|
+|2  |apply+range | 16.43242| 16.00493| 15.70205| 15.62999| 16.0488| 11.40583|
 
 _Table: Benchmarking of rowRanges() and apply+range() on double+100x100 data (transposed). The top panel shows times in milliseconds and the bottom panel shows relative times._
 
 
 
-|   |expr        |     min|        lq|      mean|    median|        uq|      max|
-|:--|:-----------|-------:|---------:|---------:|---------:|---------:|--------:|
-|1  |rowRanges   | 0.03731| 0.0426655| 0.0459618| 0.0445075| 0.0475475| 0.070014|
-|2  |apply+range | 0.36502| 0.3934255| 0.4331965| 0.4180275| 0.4583515| 0.691302|
+|   |expr        |      min|        lq|      mean|   median|        uq|      max|
+|:--|:-----------|--------:|---------:|---------:|--------:|---------:|--------:|
+|1  |rowRanges   | 0.031904| 0.0350040| 0.0384628| 0.036666| 0.0398435| 0.061222|
+|2  |apply+range | 0.385608| 0.4120555| 0.4509709| 0.430714| 0.4840040| 0.687707|
 
 
-|   |expr        |      min|       lq|     mean|   median|       uq|      max|
-|:--|:-----------|--------:|--------:|--------:|--------:|--------:|--------:|
-|1  |rowRanges   | 1.000000| 1.000000| 1.000000| 1.000000| 1.000000| 1.000000|
-|2  |apply+range | 9.783436| 9.221162| 9.425152| 9.392293| 9.639865| 9.873768|
+|   |expr        |      min|       lq|     mean|   median|       uq|    max|
+|:--|:-----------|--------:|--------:|--------:|--------:|--------:|------:|
+|1  |rowRanges   |  1.00000|  1.00000|  1.00000|  1.00000|  1.00000|  1.000|
+|2  |apply+range | 12.08651| 11.77167| 11.72487| 11.74696| 12.14763| 11.233|
 
 _Figure: Benchmarking of colRanges() and apply+range() on double+100x100 data  as well as rowRanges() and apply+range() on the same data transposed.  Outliers are displayed as crosses.  Times are in milliseconds._
 
@@ -685,14 +685,14 @@ _Table: Benchmarking of colRanges() and rowRanges() on double+100x100 data (orig
 
 |   |expr      |    min|      lq|     mean|  median|      uq|    max|
 |:--|:---------|------:|-------:|--------:|-------:|-------:|------:|
-|1  |colRanges | 30.615| 33.5635| 36.55186| 35.5765| 38.1700| 64.798|
-|2  |rowRanges | 37.310| 42.6655| 45.96175| 44.5075| 47.5475| 70.014|
+|1  |colRanges | 23.408| 25.8655| 28.79422| 27.3385| 30.0845| 58.754|
+|2  |rowRanges | 31.904| 35.0040| 38.46277| 36.6660| 39.8435| 61.222|
 
 
 |   |expr      |      min|       lq|     mean|   median|       uq|      max|
 |:--|:---------|--------:|--------:|--------:|--------:|--------:|--------:|
 |1  |colRanges | 1.000000| 1.000000| 1.000000| 1.000000| 1.000000| 1.000000|
-|2  |rowRanges | 1.218684| 1.271187| 1.257439| 1.251037| 1.245677| 1.080496|
+|2  |rowRanges | 1.362953| 1.353309| 1.335781| 1.341185| 1.324386| 1.042006|
 
 _Figure: Benchmarking of colRanges() and rowRanges() on double+100x100 data (original and transposed).  Outliers are displayed as crosses. Times are in milliseconds._
 
@@ -704,16 +704,16 @@ _Figure: Benchmarking of colRanges() and rowRanges() on double+100x100 data (ori
 ```r
 > X <- data[["1000x10"]]
 > gc()
-          used  (Mb) gc trigger  (Mb) max used  (Mb)
-Ncells 5225206 279.1   10014072 534.9 10014072 534.9
-Vcells 9763947  74.5   18204443 138.9 18204443 138.9
+           used  (Mb) gc trigger  (Mb) max used  (Mb)
+Ncells  5290730 282.6    7916910 422.9  7916910 422.9
+Vcells 10214686  78.0   33191153 253.3 53339345 407.0
 > colStats <- microbenchmark(colRanges = colRanges(X, na.rm = FALSE), `apply+range` = apply(X, MARGIN = 2L, 
 +     FUN = range, na.rm = FALSE), unit = "ms")
 > X <- t(X)
 > gc()
-          used  (Mb) gc trigger  (Mb) max used  (Mb)
-Ncells 5225182 279.1   10014072 534.9 10014072 534.9
-Vcells 9773960  74.6   18204443 138.9 18204443 138.9
+           used  (Mb) gc trigger  (Mb) max used  (Mb)
+Ncells  5290724 282.6    7916910 422.9  7916910 422.9
+Vcells 10224729  78.1   33191153 253.3 53339345 407.0
 > rowStats <- microbenchmark(rowRanges = rowRanges(X, na.rm = FALSE), `apply+range` = apply(X, MARGIN = 1L, 
 +     FUN = range, na.rm = FALSE), unit = "ms")
 ```
@@ -722,31 +722,31 @@ _Table: Benchmarking of colRanges() and apply+range() on double+1000x10 data. Th
 
 
 
-|   |expr        |      min|        lq|      mean|    median|        uq|      max|
-|:--|:-----------|--------:|---------:|---------:|---------:|---------:|--------:|
-|1  |colRanges   | 0.028738| 0.0307825| 0.0330278| 0.0324120| 0.0343035| 0.052027|
-|2  |apply+range | 0.170261| 0.1795800| 0.1928061| 0.1893405| 0.2035945| 0.304501|
+|   |expr        |      min|        lq|      mean|    median|       uq|      max|
+|:--|:-----------|--------:|---------:|---------:|---------:|--------:|--------:|
+|1  |colRanges   | 0.020682| 0.0233455| 0.0255574| 0.0247460| 0.026293| 0.052913|
+|2  |apply+range | 0.174358| 0.1907640| 0.2073045| 0.2074195| 0.218942| 0.319710|
 
 
 |   |expr        |      min|       lq|     mean|   median|       uq|      max|
 |:--|:-----------|--------:|--------:|--------:|--------:|--------:|--------:|
 |1  |colRanges   | 1.000000| 1.000000| 1.000000| 1.000000| 1.000000| 1.000000|
-|2  |apply+range | 5.924595| 5.833834| 5.837684| 5.841679| 5.935094| 5.852749|
+|2  |apply+range | 8.430423| 8.171339| 8.111329| 8.381941| 8.327007| 6.042183|
 
 _Table: Benchmarking of rowRanges() and apply+range() on double+1000x10 data (transposed). The top panel shows times in milliseconds and the bottom panel shows relative times._
 
 
 
-|   |expr        |      min|        lq|      mean|    median|       uq|      max|
-|:--|:-----------|--------:|---------:|---------:|---------:|--------:|--------:|
-|1  |rowRanges   | 0.040771| 0.0433165| 0.0465609| 0.0451735| 0.048985| 0.069011|
-|2  |apply+range | 0.167759| 0.1801440| 0.1963123| 0.1925015| 0.209153| 0.315251|
+|   |expr        |      min|        lq|      mean|    median|        uq|      max|
+|:--|:-----------|--------:|---------:|---------:|---------:|---------:|--------:|
+|1  |rowRanges   | 0.030284| 0.0338570| 0.0409032| 0.0367230| 0.0414865| 0.105211|
+|2  |apply+range | 0.177154| 0.1985895| 0.2311509| 0.2174635| 0.2393390| 0.692905|
 
 
 |   |expr        |      min|       lq|     mean|   median|       uq|      max|
 |:--|:-----------|--------:|--------:|--------:|--------:|--------:|--------:|
 |1  |rowRanges   | 1.000000| 1.000000| 1.000000| 1.000000| 1.000000| 1.000000|
-|2  |apply+range | 4.114665| 4.158785| 4.216251| 4.261381| 4.269736| 4.568127|
+|2  |apply+range | 5.849756| 5.865537| 5.651173| 5.921725| 5.769082| 6.585861|
 
 _Figure: Benchmarking of colRanges() and apply+range() on double+1000x10 data  as well as rowRanges() and apply+range() on the same data transposed.  Outliers are displayed as crosses.  Times are in milliseconds._
 
@@ -758,16 +758,16 @@ _Table: Benchmarking of colRanges() and rowRanges() on double+1000x10 data (orig
 
 
 
-|   |expr      |    min|      lq|     mean|  median|      uq|    max|
-|:--|:---------|------:|-------:|--------:|-------:|-------:|------:|
-|1  |colRanges | 28.738| 30.7825| 33.02784| 32.4120| 34.3035| 52.027|
-|2  |rowRanges | 40.771| 43.3165| 46.56088| 45.1735| 48.9850| 69.011|
+|   |expr      |    min|      lq|     mean| median|      uq|     max|
+|:--|:---------|------:|-------:|--------:|------:|-------:|-------:|
+|1  |colRanges | 20.682| 23.3455| 25.55740| 24.746| 26.2930|  52.913|
+|2  |rowRanges | 30.284| 33.8570| 40.90318| 36.723| 41.4865| 105.211|
 
 
 |   |expr      |      min|       lq|     mean|   median|       uq|      max|
 |:--|:---------|--------:|--------:|--------:|--------:|--------:|--------:|
 |1  |colRanges | 1.000000| 1.000000| 1.000000| 1.000000| 1.000000| 1.000000|
-|2  |rowRanges | 1.418714| 1.407179| 1.409746| 1.393728| 1.427988| 1.326446|
+|2  |rowRanges | 1.464268| 1.450258| 1.600444| 1.483997| 1.577853| 1.988377|
 
 _Figure: Benchmarking of colRanges() and rowRanges() on double+1000x10 data (original and transposed).  Outliers are displayed as crosses. Times are in milliseconds._
 
@@ -779,16 +779,16 @@ _Figure: Benchmarking of colRanges() and rowRanges() on double+1000x10 data (ori
 ```r
 > X <- data[["10x1000"]]
 > gc()
-          used  (Mb) gc trigger  (Mb) max used  (Mb)
-Ncells 5225394 279.1   10014072 534.9 10014072 534.9
-Vcells 9764977  74.6   18204443 138.9 18204443 138.9
+           used  (Mb) gc trigger  (Mb) max used  (Mb)
+Ncells  5290918 282.6    7916910 422.9  7916910 422.9
+Vcells 10215717  78.0   33191153 253.3 53339345 407.0
 > colStats <- microbenchmark(colRanges = colRanges(X, na.rm = FALSE), `apply+range` = apply(X, MARGIN = 2L, 
 +     FUN = range, na.rm = FALSE), unit = "ms")
 > X <- t(X)
 > gc()
-          used  (Mb) gc trigger  (Mb) max used  (Mb)
-Ncells 5225370 279.1   10014072 534.9 10014072 534.9
-Vcells 9774990  74.6   18204443 138.9 18204443 138.9
+           used  (Mb) gc trigger  (Mb) max used  (Mb)
+Ncells  5290912 282.6    7916910 422.9  7916910 422.9
+Vcells 10225760  78.1   33191153 253.3 53339345 407.0
 > rowStats <- microbenchmark(rowRanges = rowRanges(X, na.rm = FALSE), `apply+range` = apply(X, MARGIN = 1L, 
 +     FUN = range, na.rm = FALSE), unit = "ms")
 ```
@@ -797,31 +797,31 @@ _Table: Benchmarking of colRanges() and apply+range() on double+10x1000 data. Th
 
 
 
-|   |expr        |      min|        lq|      mean|   median|       uq|      max|
-|:--|:-----------|--------:|---------:|---------:|--------:|--------:|--------:|
-|1  |colRanges   | 0.056251| 0.0590555| 0.0647614| 0.061067| 0.065092| 0.108365|
-|2  |apply+range | 2.215488| 2.3442075| 2.5060031| 2.488068| 2.550717| 3.607952|
+|   |expr        |      min|       lq|      mean|    median|       uq|      max|
+|:--|:-----------|--------:|--------:|---------:|---------:|--------:|--------:|
+|1  |colRanges   | 0.051686| 0.060895| 0.0718143| 0.0692865| 0.079079| 0.119015|
+|2  |apply+range | 2.420775| 2.699049| 3.0359467| 2.8332520| 3.124196| 9.275332|
 
 
-|   |expr        |      min|       lq|     mean|   median|       uq|      max|
-|:--|:-----------|--------:|--------:|--------:|--------:|--------:|--------:|
-|1  |colRanges   |  1.00000|  1.00000|  1.00000|  1.00000|  1.00000|  1.00000|
-|2  |apply+range | 39.38575| 39.69499| 38.69591| 40.74325| 39.18634| 33.29444|
+|   |expr        |      min|     lq|     mean|   median|       uq|      max|
+|:--|:-----------|--------:|------:|--------:|--------:|--------:|--------:|
+|1  |colRanges   |  1.00000|  1.000|  1.00000|  1.00000|  1.00000|  1.00000|
+|2  |apply+range | 46.83618| 44.323| 42.27496| 40.89183| 39.50728| 77.93414|
 
 _Table: Benchmarking of rowRanges() and apply+range() on double+10x1000 data (transposed). The top panel shows times in milliseconds and the bottom panel shows relative times._
 
 
 
-|   |expr        |      min|       lq|      mean|    median|       uq|      max|
-|:--|:-----------|--------:|--------:|---------:|---------:|--------:|--------:|
-|1  |rowRanges   | 0.056228| 0.058068| 0.0635845| 0.0603355| 0.064690| 0.107334|
-|2  |apply+range | 2.228791| 2.369447| 2.5265842| 2.5062175| 2.605555| 3.511559|
+|   |expr        |      min|        lq|      mean|   median|       uq|      max|
+|:--|:-----------|--------:|---------:|---------:|--------:|--------:|--------:|
+|1  |rowRanges   | 0.051484| 0.0540105| 0.0623394| 0.058000| 0.067957| 0.106699|
+|2  |apply+range | 2.201806| 2.3151420| 2.5563392| 2.441146| 2.631711| 8.012906|
 
 
-|   |expr        |      min|       lq|     mean|   median|       uq|      max|
-|:--|:-----------|--------:|--------:|--------:|--------:|--------:|--------:|
-|1  |rowRanges   |  1.00000|  1.00000|  1.00000|  1.00000|  1.00000|  1.00000|
-|2  |apply+range | 39.63845| 40.80469| 39.73583| 41.53802| 40.27755| 32.71619|
+|   |expr        |     min|       lq|     mean|   median|       uq|      max|
+|:--|:-----------|-------:|--------:|--------:|--------:|--------:|--------:|
+|1  |rowRanges   |  1.0000|  1.00000|  1.00000|  1.00000|  1.00000|  1.00000|
+|2  |apply+range | 42.7668| 42.86467| 41.00682| 42.08872| 38.72612| 75.09823|
 
 _Figure: Benchmarking of colRanges() and apply+range() on double+10x1000 data  as well as rowRanges() and apply+range() on the same data transposed.  Outliers are displayed as crosses.  Times are in milliseconds._
 
@@ -835,14 +835,14 @@ _Table: Benchmarking of colRanges() and rowRanges() on double+10x1000 data (orig
 
 |   |expr      |    min|      lq|     mean|  median|     uq|     max|
 |:--|:---------|------:|-------:|--------:|-------:|------:|-------:|
-|2  |rowRanges | 56.228| 58.0680| 63.58453| 60.3355| 64.690| 107.334|
-|1  |colRanges | 56.251| 59.0555| 64.76144| 61.0670| 65.092| 108.365|
+|2  |rowRanges | 51.484| 54.0105| 62.33937| 58.0000| 67.957| 106.699|
+|1  |colRanges | 51.686| 60.8950| 71.81431| 69.2865| 79.079| 119.015|
 
 
-|   |expr      |      min|       lq|     mean|   median|       uq|      max|
-|:--|:---------|--------:|--------:|--------:|--------:|--------:|--------:|
-|2  |rowRanges | 1.000000| 1.000000| 1.000000| 1.000000| 1.000000| 1.000000|
-|1  |colRanges | 1.000409| 1.017006| 1.018509| 1.012124| 1.006214| 1.009605|
+|   |expr      |      min|       lq|    mean|   median|       uq|      max|
+|:--|:---------|--------:|--------:|-------:|--------:|--------:|--------:|
+|2  |rowRanges | 1.000000| 1.000000| 1.00000| 1.000000| 1.000000| 1.000000|
+|1  |colRanges | 1.003923| 1.127466| 1.15199| 1.194595| 1.163662| 1.115428|
 
 _Figure: Benchmarking of colRanges() and rowRanges() on double+10x1000 data (original and transposed).  Outliers are displayed as crosses. Times are in milliseconds._
 
@@ -854,16 +854,16 @@ _Figure: Benchmarking of colRanges() and rowRanges() on double+10x1000 data (ori
 ```r
 > X <- data[["100x1000"]]
 > gc()
-          used  (Mb) gc trigger  (Mb) max used  (Mb)
-Ncells 5225572 279.1   10014072 534.9 10014072 534.9
-Vcells 9765088  74.6   18204443 138.9 18204443 138.9
+           used  (Mb) gc trigger  (Mb) max used  (Mb)
+Ncells  5291114 282.6    7916910 422.9  7916910 422.9
+Vcells 10215858  78.0   33191153 253.3 53339345 407.0
 > colStats <- microbenchmark(colRanges = colRanges(X, na.rm = FALSE), `apply+range` = apply(X, MARGIN = 2L, 
 +     FUN = range, na.rm = FALSE), unit = "ms")
 > X <- t(X)
 > gc()
-          used  (Mb) gc trigger  (Mb) max used  (Mb)
-Ncells 5225554 279.1   10014072 534.9 10014072 534.9
-Vcells 9865111  75.3   18204443 138.9 18204443 138.9
+           used  (Mb) gc trigger  (Mb) max used  (Mb)
+Ncells  5291096 282.6    7916910 422.9  7916910 422.9
+Vcells 10315881  78.8   33191153 253.3 53339345 407.0
 > rowStats <- microbenchmark(rowRanges = rowRanges(X, na.rm = FALSE), `apply+range` = apply(X, MARGIN = 1L, 
 +     FUN = range, na.rm = FALSE), unit = "ms")
 ```
@@ -872,31 +872,31 @@ _Table: Benchmarking of colRanges() and apply+range() on double+100x1000 data. T
 
 
 
-|   |expr        |      min|       lq|      mean|   median|       uq|       max|
-|:--|:-----------|--------:|--------:|---------:|--------:|--------:|---------:|
-|1  |colRanges   | 0.277684| 0.281549| 0.3081119| 0.289915| 0.329131|  0.451144|
-|2  |apply+range | 3.088158| 3.142177| 3.9142857| 3.290719| 3.719542| 15.680763|
+|   |expr        |      min|        lq|      mean|   median|        uq|       max|
+|:--|:-----------|--------:|---------:|---------:|--------:|---------:|---------:|
+|1  |colRanges   | 0.207962| 0.2318125| 0.2615825| 0.251070| 0.2766675|  0.474887|
+|2  |apply+range | 3.020312| 3.1727460| 3.8239588| 3.310179| 3.8593650| 24.960700|
 
 
-|   |expr        |      min|       lq|    mean|   median|      uq|      max|
-|:--|:-----------|--------:|--------:|-------:|--------:|-------:|--------:|
-|1  |colRanges   |  1.00000|  1.00000|  1.0000|  1.00000|  1.0000|  1.00000|
-|2  |apply+range | 11.12112| 11.16032| 12.7041| 11.35063| 11.3011| 34.75778|
+|   |expr        |      min|       lq|     mean|   median|       uq|      max|
+|:--|:-----------|--------:|--------:|--------:|--------:|--------:|--------:|
+|1  |colRanges   |  1.00000|  1.00000|  1.00000|  1.00000|  1.00000|  1.00000|
+|2  |apply+range | 14.52338| 13.68669| 14.61856| 13.18429| 13.94947| 52.56135|
 
 _Table: Benchmarking of rowRanges() and apply+range() on double+100x1000 data (transposed). The top panel shows times in milliseconds and the bottom panel shows relative times._
 
 
 
-|   |expr        |      min|       lq|      mean|   median|        uq|       max|
-|:--|:-----------|--------:|--------:|---------:|--------:|---------:|---------:|
-|1  |rowRanges   | 0.347134| 0.355874| 0.3984116| 0.383756| 0.4408345|  0.556816|
-|2  |apply+range | 3.127102| 3.187652| 3.9534566| 3.368743| 3.7822905| 15.288974|
+|   |expr        |      min|       lq|     mean|   median|       uq|       max|
+|:--|:-----------|--------:|--------:|--------:|--------:|--------:|---------:|
+|1  |rowRanges   | 0.265632| 0.286015| 0.318320| 0.306714| 0.342155|  0.469355|
+|2  |apply+range | 3.015830| 3.304992| 4.087795| 3.660667| 4.109141| 23.201915|
 
 
 |   |expr        |      min|       lq|     mean|   median|       uq|      max|
 |:--|:-----------|--------:|--------:|--------:|--------:|--------:|--------:|
-|1  |rowRanges   | 1.000000| 1.000000| 1.000000| 1.000000| 1.000000|  1.00000|
-|2  |apply+range | 9.008343| 8.957249| 9.923046| 8.778345| 8.579842| 27.45786|
+|1  |rowRanges   |  1.00000|  1.00000|  1.00000|  1.00000|  1.00000|  1.00000|
+|2  |apply+range | 11.35341| 11.55531| 12.84178| 11.93512| 12.00959| 49.43362|
 
 _Figure: Benchmarking of colRanges() and apply+range() on double+100x1000 data  as well as rowRanges() and apply+range() on the same data transposed.  Outliers are displayed as crosses.  Times are in milliseconds._
 
@@ -908,16 +908,16 @@ _Table: Benchmarking of colRanges() and rowRanges() on double+100x1000 data (ori
 
 
 
-|   |expr      |     min|      lq|     mean|  median|       uq|     max|
-|:--|:---------|-------:|-------:|--------:|-------:|--------:|-------:|
-|1  |colRanges | 277.684| 281.549| 308.1119| 289.915| 329.1310| 451.144|
-|2  |rowRanges | 347.134| 355.874| 398.4116| 383.756| 440.8345| 556.816|
+|   |expr      |     min|       lq|     mean|  median|       uq|     max|
+|:--|:---------|-------:|--------:|--------:|-------:|--------:|-------:|
+|1  |colRanges | 207.962| 231.8125| 261.5825| 251.070| 276.6675| 474.887|
+|2  |rowRanges | 265.632| 286.0150| 318.3200| 306.714| 342.1550| 469.355|
 
 
-|   |expr      |      min|       lq|     mean|   median|       uq|      max|
-|:--|:---------|--------:|--------:|--------:|--------:|--------:|--------:|
-|1  |colRanges | 1.000000| 1.000000| 1.000000| 1.000000| 1.000000| 1.000000|
-|2  |rowRanges | 1.250104| 1.263986| 1.293074| 1.323684| 1.339389| 1.234231|
+|   |expr      |     min|      lq|     mean|   median|       uq|       max|
+|:--|:---------|-------:|-------:|--------:|--------:|--------:|---------:|
+|1  |colRanges | 1.00000| 1.00000| 1.000000| 1.000000| 1.000000| 1.0000000|
+|2  |rowRanges | 1.27731| 1.23382| 1.216901| 1.221627| 1.236701| 0.9883509|
 
 _Figure: Benchmarking of colRanges() and rowRanges() on double+100x1000 data (original and transposed).  Outliers are displayed as crosses. Times are in milliseconds._
 
@@ -929,16 +929,16 @@ _Figure: Benchmarking of colRanges() and rowRanges() on double+100x1000 data (or
 ```r
 > X <- data[["1000x100"]]
 > gc()
-          used  (Mb) gc trigger  (Mb) max used  (Mb)
-Ncells 5225770 279.1   10014072 534.9 10014072 534.9
-Vcells 9766312  74.6   18204443 138.9 18204443 138.9
+           used  (Mb) gc trigger  (Mb) max used  (Mb)
+Ncells  5291306 282.6    7916910 422.9  7916910 422.9
+Vcells 10217072  78.0   33191153 253.3 53339345 407.0
 > colStats <- microbenchmark(colRanges = colRanges(X, na.rm = FALSE), `apply+range` = apply(X, MARGIN = 2L, 
 +     FUN = range, na.rm = FALSE), unit = "ms")
 > X <- t(X)
 > gc()
-          used  (Mb) gc trigger  (Mb) max used  (Mb)
-Ncells 5225746 279.1   10014072 534.9 10014072 534.9
-Vcells 9866325  75.3   18204443 138.9 18204443 138.9
+           used  (Mb) gc trigger  (Mb) max used  (Mb)
+Ncells  5291288 282.6    7916910 422.9  7916910 422.9
+Vcells 10317095  78.8   33191153 253.3 53339345 407.0
 > rowStats <- microbenchmark(rowRanges = rowRanges(X, na.rm = FALSE), `apply+range` = apply(X, MARGIN = 1L, 
 +     FUN = range, na.rm = FALSE), unit = "ms")
 ```
@@ -947,31 +947,31 @@ _Table: Benchmarking of colRanges() and apply+range() on double+1000x100 data. T
 
 
 
-|   |expr        |      min|       lq|     mean|    median|        uq|      max|
-|:--|:-----------|--------:|--------:|--------:|---------:|---------:|--------:|
-|1  |colRanges   | 0.218089| 0.238748| 0.264533| 0.2584865| 0.2810465| 0.389060|
-|2  |apply+range | 1.170397| 1.284070| 1.651580| 1.4314490| 1.4886885| 7.681046|
+|   |expr        |      min|       lq|      mean|   median|        uq|      max|
+|:--|:-----------|--------:|--------:|---------:|--------:|---------:|--------:|
+|1  |colRanges   | 0.142391| 0.152734| 0.1735739| 0.167516| 0.1864305| 0.280665|
+|2  |apply+range | 1.100118| 1.188143| 1.4283477| 1.299945| 1.4674575| 9.004336|
 
 
 |   |expr        |      min|       lq|     mean|   median|       uq|      max|
 |:--|:-----------|--------:|--------:|--------:|--------:|--------:|--------:|
 |1  |colRanges   | 1.000000| 1.000000| 1.000000| 1.000000| 1.000000|  1.00000|
-|2  |apply+range | 5.366603| 5.378351| 6.243381| 5.537809| 5.296947| 19.74257|
+|2  |apply+range | 7.726036| 7.779162| 8.229048| 7.760121| 7.871338| 32.08215|
 
 _Table: Benchmarking of rowRanges() and apply+range() on double+1000x100 data (transposed). The top panel shows times in milliseconds and the bottom panel shows relative times._
 
 
 
-|   |expr        |      min|        lq|      mean|   median|       uq|      max|
-|:--|:-----------|--------:|---------:|---------:|--------:|--------:|--------:|
-|1  |rowRanges   | 0.302704| 0.3304845| 0.3578241| 0.357886| 0.382028| 0.489149|
-|2  |apply+range | 1.162293| 1.2584545| 1.6268363| 1.417270| 1.483949| 7.213822|
+|   |expr        |      min|        lq|      mean|    median|        uq|      max|
+|:--|:-----------|--------:|---------:|---------:|---------:|---------:|--------:|
+|1  |rowRanges   | 0.219919| 0.2248505| 0.2570479| 0.2453945| 0.2789315| 0.444242|
+|2  |apply+range | 1.124972| 1.1448900| 1.4296463| 1.2933755| 1.4817175| 8.798881|
 
 
-|   |expr        |      min|       lq|    mean|   median|       uq|     max|
-|:--|:-----------|--------:|--------:|-------:|--------:|--------:|-------:|
-|1  |rowRanges   | 1.000000| 1.000000| 1.00000| 1.000000| 1.000000|  1.0000|
-|2  |apply+range | 3.839701| 3.807908| 4.54647| 3.960116| 3.884399| 14.7477|
+|   |expr        |      min|       lq|    mean|   median|      uq|     max|
+|:--|:-----------|--------:|--------:|-------:|--------:|-------:|-------:|
+|1  |rowRanges   | 1.000000| 1.000000| 1.00000| 1.000000| 1.00000|  1.0000|
+|2  |apply+range | 5.115392| 5.091783| 5.56179| 5.270597| 5.31212| 19.8065|
 
 _Figure: Benchmarking of colRanges() and apply+range() on double+1000x100 data  as well as rowRanges() and apply+range() on the same data transposed.  Outliers are displayed as crosses.  Times are in milliseconds._
 
@@ -985,14 +985,14 @@ _Table: Benchmarking of colRanges() and rowRanges() on double+1000x100 data (ori
 
 |   |expr      |     min|       lq|     mean|   median|       uq|     max|
 |:--|:---------|-------:|--------:|--------:|--------:|--------:|-------:|
-|1  |colRanges | 218.089| 238.7480| 264.5330| 258.4865| 281.0465| 389.060|
-|2  |rowRanges | 302.704| 330.4845| 357.8241| 357.8860| 382.0280| 489.149|
+|1  |colRanges | 142.391| 152.7340| 173.5739| 167.5160| 186.4305| 280.665|
+|2  |rowRanges | 219.919| 224.8505| 257.0479| 245.3945| 278.9315| 444.242|
 
 
-|   |expr      |      min|      lq|     mean|   median|       uq|      max|
-|:--|:---------|--------:|-------:|--------:|--------:|--------:|--------:|
-|1  |colRanges | 1.000000| 1.00000| 1.000000| 1.000000| 1.000000| 1.000000|
-|2  |rowRanges | 1.387984| 1.38424| 1.352663| 1.384544| 1.359305| 1.257259|
+|   |expr      |      min|       lq|     mean|   median|       uq|      max|
+|:--|:---------|--------:|--------:|--------:|--------:|--------:|--------:|
+|1  |colRanges | 1.000000| 1.000000| 1.000000| 1.000000| 1.000000| 1.000000|
+|2  |rowRanges | 1.544473| 1.472171| 1.480913| 1.464902| 1.496169| 1.582819|
 
 _Figure: Benchmarking of colRanges() and rowRanges() on double+1000x100 data (original and transposed).  Outliers are displayed as crosses. Times are in milliseconds._
 
@@ -1026,7 +1026,7 @@ attached base packages:
 [1] stats     graphics  grDevices utils     datasets  methods   base     
 
 other attached packages:
-[1] microbenchmark_1.4-7   matrixStats_0.60.1     ggplot2_3.3.5         
+[1] microbenchmark_1.4-7   matrixStats_0.60.0     ggplot2_3.3.5         
 [4] knitr_1.33             R.devices_2.17.0       R.utils_2.10.1        
 [7] R.oo_1.24.0            R.methodsS3_1.8.1-9001 history_0.0.1-9000    
 
@@ -1052,16 +1052,17 @@ loaded via a namespace (and not attached):
 [55] tabby_0.0.1-9001        AnnotationDbi_1.54.1    Biostrings_2.60.2      
 [58] compiler_4.1.1          GenomeInfoDb_1.28.1     rlang_0.4.11           
 [61] grid_4.1.1              RCurl_1.98-1.4          cwhmisc_6.6            
-[64] rappdirs_0.3.3          startup_0.15.0          labeling_0.4.2         
-[67] bitops_1.0-7            base64enc_0.1-3         boot_1.3-28            
-[70] gtable_0.3.0            DBI_1.1.1               markdown_1.1           
-[73] R6_2.5.1                lpSolveAPI_5.5.2.0-17.7 rle_0.9.2              
-[76] dplyr_1.0.7             fastmap_1.1.0           bit_4.0.4              
-[79] utf8_1.2.2              parallel_4.1.1          Rcpp_1.0.7             
-[82] vctrs_0.3.8             png_0.1-7               DEoptimR_1.0-9         
-[85] tidyselect_1.1.1        xfun_0.25               coda_0.19-4            
+[64] rstudioapi_0.13         rappdirs_0.3.3          startup_0.15.0         
+[67] labeling_0.4.2          bitops_1.0-7            base64enc_0.1-3        
+[70] boot_1.3-28             gtable_0.3.0            DBI_1.1.1              
+[73] markdown_1.1            R6_2.5.1                lpSolveAPI_5.5.2.0-17.7
+[76] rle_0.9.2               dplyr_1.0.7             fastmap_1.1.0          
+[79] bit_4.0.4               utf8_1.2.2              parallel_4.1.1         
+[82] Rcpp_1.0.7              vctrs_0.3.8             png_0.1-7              
+[85] DEoptimR_1.0-9          tidyselect_1.1.1        xfun_0.25              
+[88] coda_0.19-4            
 ```
-Total processing time was 25.44 secs.
+Total processing time was 27.25 secs.
 
 
 ### Reproducibility
@@ -1078,7 +1079,7 @@ html <- matrixStats:::benchmark('colRanges')
 [StackOverflow:rowProds?]: https://stackoverflow.com/questions/20198801/ "Stack Overflow: Row product of matrix and column sum of matrix"
 
 ---------------------------------------
-Copyright Henrik Bengtsson. Last updated on 2021-08-25 18:14:02 (+0200 UTC). Powered by [RSP].
+Copyright Henrik Bengtsson. Last updated on 2021-08-25 22:27:48 (+0200 UTC). Powered by [RSP].
 
 <script>
  var link = document.createElement('link');

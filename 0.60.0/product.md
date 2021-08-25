@@ -78,8 +78,8 @@ where
 > x <- data[["n = 1000"]]
 > gc()
            used  (Mb) gc trigger  (Mb) max used  (Mb)
-Ncells  5284283 282.3   10014072 534.9 10014072 534.9
-Vcells 13148294 100.4   33943181 259.0 90959857 694.0
+Ncells  5350780 285.8    7916910 422.9  7916910 422.9
+Vcells 13622559 104.0   35130986 268.1 94934136 724.3
 > stats <- microbenchmark(product = product(x, na.rm = FALSE), product_R = product_R(x, na.rm = FALSE), 
 +     prod = prod(x, na.rm = FALSE), unit = "ms")
 ```
@@ -88,18 +88,18 @@ _Table: Benchmarking of product(), product_R() and prod() on n = 1000 data. The 
 
 
 
-|   |expr      |      min|        lq|      mean|   median|        uq|       max|
-|:--|:---------|--------:|---------:|---------:|--------:|---------:|---------:|
-|3  |prod      | 0.001913| 0.0020620| 0.0021911| 0.002138| 0.0022470|  0.003927|
-|1  |product   | 0.028385| 0.0297085| 0.0320490| 0.031291| 0.0326775|  0.049714|
-|2  |product_R | 0.030976| 0.0330980| 0.1608030| 0.033549| 0.0340340| 12.669122|
+|   |expr      |      min|        lq|      mean|    median|        uq|       max|
+|:--|:---------|--------:|---------:|---------:|---------:|---------:|---------:|
+|3  |prod      | 0.002038| 0.0021310| 0.0022307| 0.0022010| 0.0022685|  0.004069|
+|1  |product   | 0.028761| 0.0297330| 0.0316324| 0.0309230| 0.0323755|  0.053376|
+|2  |product_R | 0.032185| 0.0336955| 0.1690530| 0.0344495| 0.0358210| 13.334780|
 
 
 |   |expr      |      min|       lq|     mean|   median|       uq|        max|
 |:--|:---------|--------:|--------:|--------:|--------:|--------:|----------:|
 |3  |prod      |  1.00000|  1.00000|  1.00000|  1.00000|  1.00000|    1.00000|
-|1  |product   | 14.83795| 14.40761| 14.62717| 14.63564| 14.54272|   12.65954|
-|2  |product_R | 16.19237| 16.05141| 73.39051| 15.69177| 15.14642| 3226.15788|
+|1  |product   | 14.11237| 13.95260| 14.18053| 14.04952| 14.27177|   13.11772|
+|2  |product_R | 15.79244| 15.81206| 75.78508| 15.65175| 15.79061| 3277.16392|
 
 _Figure: Benchmarking of product(), product_R() and prod() on n = 1000 data.  Outliers are displayed as crosses.  Times are in milliseconds._
 
@@ -111,8 +111,8 @@ _Figure: Benchmarking of product(), product_R() and prod() on n = 1000 data.  Ou
 > x <- data[["n = 10000"]]
 > gc()
            used  (Mb) gc trigger  (Mb) max used  (Mb)
-Ncells  5282109 282.1   10014072 534.9 10014072 534.9
-Vcells 10964093  83.7   33943181 259.0 90959857 694.0
+Ncells  5348608 285.7    7916910 422.9  7916910 422.9
+Vcells 11438369  87.3   35130986 268.1 94934136 724.3
 > stats <- microbenchmark(product = product(x, na.rm = FALSE), product_R = product_R(x, na.rm = FALSE), 
 +     prod = prod(x, na.rm = FALSE), unit = "ms")
 ```
@@ -121,18 +121,18 @@ _Table: Benchmarking of product(), product_R() and prod() on n = 10000 data. The
 
 
 
-|   |expr      |      min|        lq|      mean|    median|        uq|      max|
-|:--|:---------|--------:|---------:|---------:|---------:|---------:|--------:|
-|2  |product_R | 0.223911| 0.2264545| 0.2536524| 0.2312485| 0.2703475| 0.383890|
-|1  |product   | 0.229893| 0.2312665| 0.2617688| 0.2320340| 0.2900090| 0.392095|
-|3  |prod      | 0.634558| 0.6381710| 0.7162277| 0.6427165| 0.7803675| 1.090236|
+|   |expr      |      min|       lq|      mean|    median|        uq|      max|
+|:--|:---------|--------:|--------:|---------:|---------:|---------:|--------:|
+|1  |product   | 0.220377| 0.221737| 0.2512977| 0.2230715| 0.2759320| 0.395691|
+|2  |product_R | 0.222116| 0.226149| 0.2527879| 0.2298840| 0.2675845| 0.377672|
+|3  |prod      | 0.634510| 0.638161| 0.7171957| 0.6449205| 0.7744755| 1.087187|
 
 
-|   |expr      |      min|       lq|     mean|   median|       uq|      max|
-|:--|:---------|--------:|--------:|--------:|--------:|--------:|--------:|
-|2  |product_R | 1.000000| 1.000000| 1.000000| 1.000000| 1.000000| 1.000000|
-|1  |product   | 1.026716| 1.021249| 1.031998| 1.003397| 1.072727| 1.021373|
-|3  |prod      | 2.833974| 2.818098| 2.823659| 2.779333| 2.886535| 2.839970|
+|   |expr      |      min|       lq|     mean|   median|       uq|       max|
+|:--|:---------|--------:|--------:|--------:|--------:|--------:|---------:|
+|1  |product   | 1.000000| 1.000000| 1.000000| 1.000000| 1.000000| 1.0000000|
+|2  |product_R | 1.007891| 1.019897| 1.005930| 1.030539| 0.969748| 0.9544619|
+|3  |prod      | 2.879202| 2.878009| 2.853968| 2.891093| 2.806762| 2.7475657|
 
 _Figure: Benchmarking of product(), product_R() and prod() on n = 10000 data.  Outliers are displayed as crosses.  Times are in milliseconds._
 
@@ -144,8 +144,8 @@ _Figure: Benchmarking of product(), product_R() and prod() on n = 10000 data.  O
 > x <- data[["n = 100000"]]
 > gc()
            used  (Mb) gc trigger  (Mb) max used  (Mb)
-Ncells  5282181 282.1   10014072 534.9 10014072 534.9
-Vcells 10964653  83.7   33943181 259.0 90959857 694.0
+Ncells  5348680 285.7    7916910 422.9  7916910 422.9
+Vcells 11438929  87.3   35130986 268.1 94934136 724.3
 > stats <- microbenchmark(product = product(x, na.rm = FALSE), product_R = product_R(x, na.rm = FALSE), 
 +     prod = prod(x, na.rm = FALSE), unit = "ms")
 ```
@@ -156,16 +156,16 @@ _Table: Benchmarking of product(), product_R() and prod() on n = 100000 data. Th
 
 |   |expr      |      min|       lq|     mean|   median|       uq|       max|
 |:--|:---------|--------:|--------:|--------:|--------:|--------:|---------:|
-|2  |product_R | 2.211631| 2.235046| 2.551025| 2.285462| 2.815228|  8.544144|
-|1  |product   | 2.300934| 2.308839| 2.368022| 2.315355| 2.374199|  3.589991|
-|3  |prod      | 8.882275| 8.943593| 9.110176| 8.985100| 9.129256| 11.786194|
+|1  |product   | 2.185606| 2.217324| 2.273853| 2.222247| 2.257988|  3.782774|
+|2  |product_R | 2.227848| 2.248203| 2.695299| 2.758787| 2.834966|  9.495283|
+|3  |prod      | 8.890270| 8.941182| 9.107281| 8.967258| 9.011705| 12.723921|
 
 
-|   |expr      |      min|       lq|     mean|   median|        uq|       max|
-|:--|:---------|--------:|--------:|--------:|--------:|---------:|---------:|
-|2  |product_R | 1.000000| 1.000000| 1.000000| 1.000000| 1.0000000| 1.0000000|
-|1  |product   | 1.040379| 1.033016| 0.928263| 1.013080| 0.8433416| 0.4201698|
-|3  |prod      | 4.016165| 4.001525| 3.571182| 3.931414| 3.2428123| 1.3794470|
+|   |expr      |      min|       lq|     mean|   median|       uq|      max|
+|:--|:---------|--------:|--------:|--------:|--------:|--------:|--------:|
+|1  |product   | 1.000000| 1.000000| 1.000000| 1.000000| 1.000000| 1.000000|
+|2  |product_R | 1.019327| 1.013926| 1.185345| 1.241440| 1.255527| 2.510137|
+|3  |prod      | 4.067645| 4.032420| 4.005220| 4.035221| 3.991033| 3.363648|
 
 _Figure: Benchmarking of product(), product_R() and prod() on n = 100000 data.  Outliers are displayed as crosses.  Times are in milliseconds._
 
@@ -177,8 +177,8 @@ _Figure: Benchmarking of product(), product_R() and prod() on n = 100000 data.  
 > x <- data[["n = 1000000"]]
 > gc()
            used  (Mb) gc trigger  (Mb) max used  (Mb)
-Ncells  5282253 282.2   10014072 534.9 10014072 534.9
-Vcells 10964702  83.7   33943181 259.0 90959857 694.0
+Ncells  5348752 285.7    7916910 422.9  7916910 422.9
+Vcells 11438978  87.3   35130986 268.1 94934136 724.3
 > stats <- microbenchmark(product = product(x, na.rm = FALSE), product_R = product_R(x, na.rm = FALSE), 
 +     prod = prod(x, na.rm = FALSE), unit = "ms")
 ```
@@ -187,18 +187,18 @@ _Table: Benchmarking of product(), product_R() and prod() on n = 1000000 data. T
 
 
 
+|   |expr      |      min|       lq|     mean|   median|       uq|       max|
+|:--|:---------|--------:|--------:|--------:|--------:|--------:|---------:|
+|1  |product   | 22.44630| 24.55837| 25.50037| 25.56487| 26.26367|  32.63564|
+|2  |product_R | 23.68967| 25.63503| 27.83175| 26.16565| 30.08947|  49.42671|
+|3  |prod      | 91.94983| 92.49794| 95.95973| 93.17209| 98.70533| 111.36217|
+
+
 |   |expr      |      min|       lq|     mean|   median|       uq|      max|
 |:--|:---------|--------:|--------:|--------:|--------:|--------:|--------:|
-|1  |product   | 23.81908| 24.62308| 26.04617| 26.53572| 26.72891|  31.8131|
-|2  |product_R | 22.98549| 25.33717| 28.59033| 28.65764| 31.66010|  45.7754|
-|3  |prod      | 90.87081| 92.27975| 92.80046| 92.65868| 93.01210| 100.0587|
-
-
-|   |expr      |       min|       lq|     mean|   median|       uq|      max|
-|:--|:---------|---------:|--------:|--------:|--------:|--------:|--------:|
-|1  |product   | 1.0000000| 1.000000| 1.000000| 1.000000| 1.000000| 1.000000|
-|2  |product_R | 0.9650032| 1.029001| 1.097679| 1.079965| 1.184489| 1.438885|
-|3  |prod      | 3.8150430| 3.747693| 3.562922| 3.491847| 3.479832| 3.145203|
+|1  |product   | 1.000000| 1.000000| 1.000000| 1.000000| 1.000000| 1.000000|
+|2  |product_R | 1.055393| 1.043841| 1.091425| 1.023500| 1.145669| 1.514501|
+|3  |prod      | 4.096436| 3.766453| 3.763072| 3.644536| 3.758246| 3.412288|
 
 _Figure: Benchmarking of product(), product_R() and prod() on n = 1000000 data.  Outliers are displayed as crosses.  Times are in milliseconds._
 
@@ -230,7 +230,7 @@ attached base packages:
 [1] stats     graphics  grDevices utils     datasets  methods   base     
 
 other attached packages:
-[1] microbenchmark_1.4-7   matrixStats_0.60.1     ggplot2_3.3.5         
+[1] microbenchmark_1.4-7   matrixStats_0.60.0     ggplot2_3.3.5         
 [4] knitr_1.33             R.devices_2.17.0       R.utils_2.10.1        
 [7] R.oo_1.24.0            R.methodsS3_1.8.1-9001 history_0.0.1-9000    
 
@@ -256,16 +256,17 @@ loaded via a namespace (and not attached):
 [55] tabby_0.0.1-9001        AnnotationDbi_1.54.1    Biostrings_2.60.2      
 [58] compiler_4.1.1          GenomeInfoDb_1.28.1     rlang_0.4.11           
 [61] grid_4.1.1              RCurl_1.98-1.4          cwhmisc_6.6            
-[64] rappdirs_0.3.3          startup_0.15.0          labeling_0.4.2         
-[67] bitops_1.0-7            base64enc_0.1-3         boot_1.3-28            
-[70] gtable_0.3.0            DBI_1.1.1               markdown_1.1           
-[73] R6_2.5.1                lpSolveAPI_5.5.2.0-17.7 rle_0.9.2              
-[76] dplyr_1.0.7             fastmap_1.1.0           bit_4.0.4              
-[79] utf8_1.2.2              parallel_4.1.1          Rcpp_1.0.7             
-[82] vctrs_0.3.8             png_0.1-7               DEoptimR_1.0-9         
-[85] tidyselect_1.1.1        xfun_0.25               coda_0.19-4            
+[64] rstudioapi_0.13         rappdirs_0.3.3          startup_0.15.0-9000    
+[67] labeling_0.4.2          bitops_1.0-7            base64enc_0.1-3        
+[70] boot_1.3-28             gtable_0.3.0            DBI_1.1.1              
+[73] markdown_1.1            R6_2.5.1                lpSolveAPI_5.5.2.0-17.7
+[76] rle_0.9.2               dplyr_1.0.7             fastmap_1.1.0          
+[79] bit_4.0.4               utf8_1.2.2              parallel_4.1.1         
+[82] Rcpp_1.0.7              vctrs_0.3.8             png_0.1-7              
+[85] DEoptimR_1.0-9          tidyselect_1.1.1        xfun_0.25              
+[88] coda_0.19-4            
 ```
-Total processing time was 21.86 secs.
+Total processing time was 22.3 secs.
 
 
 ### Reproducibility
@@ -282,7 +283,7 @@ html <- matrixStats:::benchmark('product')
 [StackOverflow:rowProds?]: https://stackoverflow.com/questions/20198801/ "Stack Overflow: Row product of matrix and column sum of matrix"
 
 ---------------------------------------
-Copyright Henrik Bengtsson. Last updated on 2021-08-25 18:33:10 (+0200 UTC). Powered by [RSP].
+Copyright Henrik Bengtsson. Last updated on 2021-08-25 22:46:39 (+0200 UTC). Powered by [RSP].
 
 <script>
  var link = document.createElement('link');

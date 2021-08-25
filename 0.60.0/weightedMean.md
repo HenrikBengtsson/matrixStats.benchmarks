@@ -58,8 +58,8 @@ This report benchmark the performance of weightedMean() against alternative meth
 > w <- runif(length(x))
 > gc()
            used  (Mb) gc trigger  (Mb) max used  (Mb)
-Ncells  5297686 283.0   10014072 534.9 10014072 534.9
-Vcells 14307242 109.2   36267018 276.7 90959857 694.0
+Ncells  5364173 286.5    7916910 422.9  7916910 422.9
+Vcells 14781498 112.8   39038428 297.9 94934136 724.3
 > stats <- microbenchmark(weightedMean = weightedMean(x, w = w, na.rm = FALSE), `stats::weighted.mean` = weighted.mean(x, 
 +     w = w, na.rm = FALSE), `stats:::weighted.mean.default` = weighted.mean.default(x, w = w, na.rm = FALSE), 
 +     unit = "ms")
@@ -71,16 +71,16 @@ _Table: Benchmarking of weightedMean(), stats::weighted.mean() and stats:::weigh
 
 |   |expr                          |      min|        lq|      mean|    median|        uq|      max|
 |:--|:-----------------------------|--------:|---------:|---------:|---------:|---------:|--------:|
-|1  |weightedMean                  | 0.003559| 0.0037765| 0.0041382| 0.0040935| 0.0042395| 0.013496|
-|3  |stats:::weighted.mean.default | 0.012524| 0.0129695| 0.0135288| 0.0133020| 0.0138505| 0.018873|
-|2  |stats::weighted.mean          | 0.014844| 0.0155435| 0.0168462| 0.0160565| 0.0166470| 0.073591|
+|1  |weightedMean                  | 0.003274| 0.0036255| 0.0040263| 0.0039425| 0.0041750| 0.014959|
+|3  |stats:::weighted.mean.default | 0.013181| 0.0138400| 0.0143914| 0.0142245| 0.0146580| 0.017979|
+|2  |stats::weighted.mean          | 0.015994| 0.0166495| 0.0178758| 0.0170365| 0.0176105| 0.056818|
 
 
 |   |expr                          |      min|       lq|     mean|   median|       uq|      max|
 |:--|:-----------------------------|--------:|--------:|--------:|--------:|--------:|--------:|
 |1  |weightedMean                  | 1.000000| 1.000000| 1.000000| 1.000000| 1.000000| 1.000000|
-|3  |stats:::weighted.mean.default | 3.518966| 3.434264| 3.269299| 3.249542| 3.267013| 1.398414|
-|2  |stats::weighted.mean          | 4.170834| 4.115848| 4.070952| 3.922438| 3.926642| 5.452801|
+|3  |stats:::weighted.mean.default | 4.025962| 3.817404| 3.574391| 3.607990| 3.510898| 1.201885|
+|2  |stats::weighted.mean          | 4.885156| 4.592332| 4.439814| 4.321243| 4.218084| 3.798249|
 
 _Figure: Benchmarking of weightedMean(), stats::weighted.mean() and stats:::weighted.mean.default() on integer+n = 1000 data.  Outliers are displayed as crosses.  Times are in milliseconds._
 
@@ -93,8 +93,8 @@ _Figure: Benchmarking of weightedMean(), stats::weighted.mean() and stats:::weig
 > w <- runif(length(x))
 > gc()
            used  (Mb) gc trigger  (Mb) max used  (Mb)
-Ncells  5295458 282.9   10014072 534.9 10014072 534.9
-Vcells 10430878  79.6   36267018 276.7 90959857 694.0
+Ncells  5361948 286.4    7916910 422.9  7916910 422.9
+Vcells 10905146  83.2   39038428 297.9 94934136 724.3
 > stats <- microbenchmark(weightedMean = weightedMean(x, w = w, na.rm = FALSE), `stats::weighted.mean` = weighted.mean(x, 
 +     w = w, na.rm = FALSE), `stats:::weighted.mean.default` = weighted.mean.default(x, w = w, na.rm = FALSE), 
 +     unit = "ms")
@@ -106,16 +106,16 @@ _Table: Benchmarking of weightedMean(), stats::weighted.mean() and stats:::weigh
 
 |   |expr                          |      min|        lq|      mean|    median|        uq|      max|
 |:--|:-----------------------------|--------:|---------:|---------:|---------:|---------:|--------:|
-|1  |weightedMean                  | 0.018515| 0.0198685| 0.0215551| 0.0209310| 0.0229140| 0.039717|
-|3  |stats:::weighted.mean.default | 0.077606| 0.0835750| 0.0925514| 0.0917400| 0.1003755| 0.121788|
-|2  |stats::weighted.mean          | 0.079961| 0.0858775| 0.0948469| 0.0940715| 0.1018605| 0.123623|
+|1  |weightedMean                  | 0.016096| 0.0179555| 0.0191847| 0.0190670| 0.0197740| 0.038700|
+|3  |stats:::weighted.mean.default | 0.082614| 0.0898050| 0.0975589| 0.1001015| 0.1031745| 0.123594|
+|2  |stats::weighted.mean          | 0.085836| 0.0925640| 0.1008329| 0.1024425| 0.1054555| 0.132351|
 
 
 |   |expr                          |      min|       lq|     mean|   median|       uq|      max|
 |:--|:-----------------------------|--------:|--------:|--------:|--------:|--------:|--------:|
 |1  |weightedMean                  | 1.000000| 1.000000| 1.000000| 1.000000| 1.000000| 1.000000|
-|3  |stats:::weighted.mean.default | 4.191520| 4.206407| 4.293716| 4.382973| 4.380532| 3.066395|
-|2  |stats::weighted.mean          | 4.318715| 4.322294| 4.400209| 4.494362| 4.445339| 3.112597|
+|3  |stats:::weighted.mean.default | 5.132580| 5.001532| 5.085243| 5.249987| 5.217685| 3.193643|
+|2  |stats::weighted.mean          | 5.332753| 5.155189| 5.255901| 5.372764| 5.333038| 3.419923|
 
 _Figure: Benchmarking of weightedMean(), stats::weighted.mean() and stats:::weighted.mean.default() on integer+n = 10000 data.  Outliers are displayed as crosses.  Times are in milliseconds._
 
@@ -128,8 +128,8 @@ _Figure: Benchmarking of weightedMean(), stats::weighted.mean() and stats:::weig
 > w <- runif(length(x))
 > gc()
            used  (Mb) gc trigger  (Mb) max used  (Mb)
-Ncells  5295530 282.9   10014072 534.9 10014072 534.9
-Vcells 10521438  80.3   36267018 276.7 90959857 694.0
+Ncells  5362020 286.4    7916910 422.9  7916910 422.9
+Vcells 10995706  83.9   39038428 297.9 94934136 724.3
 > stats <- microbenchmark(weightedMean = weightedMean(x, w = w, na.rm = FALSE), `stats::weighted.mean` = weighted.mean(x, 
 +     w = w, na.rm = FALSE), `stats:::weighted.mean.default` = weighted.mean.default(x, w = w, na.rm = FALSE), 
 +     unit = "ms")
@@ -139,18 +139,18 @@ _Table: Benchmarking of weightedMean(), stats::weighted.mean() and stats:::weigh
 
 
 
-|   |expr                          |      min|        lq|      mean|    median|        uq|      max|
-|:--|:-----------------------------|--------:|---------:|---------:|---------:|---------:|--------:|
-|1  |weightedMean                  | 0.131134| 0.1404575| 0.1566883| 0.1545460| 0.1670885| 0.261077|
-|3  |stats:::weighted.mean.default | 0.620419| 0.6507220| 0.7742044| 0.6980520| 0.7523465| 6.229942|
-|2  |stats::weighted.mean          | 0.625575| 0.6631995| 0.7894811| 0.7129135| 0.7775395| 6.581240|
+|   |expr                          |      min|        lq|      mean|    median|        uq|       max|
+|:--|:-----------------------------|--------:|---------:|---------:|---------:|---------:|---------:|
+|1  |weightedMean                  | 0.114370| 0.1327835| 0.1441276| 0.1381935| 0.1535385|  0.218476|
+|2  |stats::weighted.mean          | 0.729577| 0.7686755| 0.9965166| 0.8337565| 1.0613950|  1.684599|
+|3  |stats:::weighted.mean.default | 0.705196| 0.7826270| 1.2020826| 0.8345250| 0.9889665| 12.022602|
 
 
-|   |expr                          |      min|       lq|     mean|   median|       uq|      max|
-|:--|:-----------------------------|--------:|--------:|--------:|--------:|--------:|--------:|
-|1  |weightedMean                  | 1.000000| 1.000000| 1.000000| 1.000000| 1.000000|  1.00000|
-|3  |stats:::weighted.mean.default | 4.731183| 4.632875| 4.941047| 4.516791| 4.502683| 23.86247|
-|2  |stats::weighted.mean          | 4.770502| 4.721709| 5.038544| 4.612953| 4.653459| 25.20804|
+|   |expr                          |      min|       lq|     mean|   median|       uq|       max|
+|:--|:-----------------------------|--------:|--------:|--------:|--------:|--------:|---------:|
+|1  |weightedMean                  | 1.000000| 1.000000| 1.000000| 1.000000| 1.000000|  1.000000|
+|2  |stats::weighted.mean          | 6.379094| 5.788938| 6.914127| 6.033254| 6.912892|  7.710682|
+|3  |stats:::weighted.mean.default | 6.165918| 5.894008| 8.340404| 6.038815| 6.441163| 55.029395|
 
 _Figure: Benchmarking of weightedMean(), stats::weighted.mean() and stats:::weighted.mean.default() on integer+n = 100000 data.  Outliers are displayed as crosses.  Times are in milliseconds._
 
@@ -163,8 +163,8 @@ _Figure: Benchmarking of weightedMean(), stats::weighted.mean() and stats:::weig
 > w <- runif(length(x))
 > gc()
            used  (Mb) gc trigger  (Mb) max used  (Mb)
-Ncells  5295602 282.9   10014072 534.9 10014072 534.9
-Vcells 11421487  87.2   36267018 276.7 90959857 694.0
+Ncells  5362092 286.4    7916910 422.9  7916910 422.9
+Vcells 11895755  90.8   39038428 297.9 94934136 724.3
 > stats <- microbenchmark(weightedMean = weightedMean(x, w = w, na.rm = FALSE), `stats::weighted.mean` = weighted.mean(x, 
 +     w = w, na.rm = FALSE), `stats:::weighted.mean.default` = weighted.mean.default(x, w = w, na.rm = FALSE), 
 +     unit = "ms")
@@ -174,18 +174,18 @@ _Table: Benchmarking of weightedMean(), stats::weighted.mean() and stats:::weigh
 
 
 
-|   |expr                          |      min|       lq|     mean|   median|       uq|       max|
-|:--|:-----------------------------|--------:|--------:|--------:|--------:|--------:|---------:|
-|1  |weightedMean                  | 1.660896| 1.786048| 1.835808| 1.816459| 1.890478|  2.212887|
-|3  |stats:::weighted.mean.default | 7.636246| 8.149544| 9.192913| 8.351570| 8.680095| 15.758206|
-|2  |stats::weighted.mean          | 7.665300| 8.183319| 9.451367| 8.508696| 8.773578| 23.218481|
+|   |expr                          |      min|       lq|      mean|    median|        uq|        max|
+|:--|:-----------------------------|--------:|--------:|---------:|---------:|---------:|----------:|
+|1  |weightedMean                  | 1.406970| 1.603526|  1.722735|  1.670384|  1.825589|   3.217925|
+|3  |stats:::weighted.mean.default | 8.335154| 8.778807| 15.285335|  9.616243| 10.902740| 413.538342|
+|2  |stats::weighted.mean          | 8.467202| 9.058531| 12.420607| 10.031783| 16.389574|  32.838298|
 
 
 |   |expr                          |      min|       lq|     mean|   median|       uq|       max|
 |:--|:-----------------------------|--------:|--------:|--------:|--------:|--------:|---------:|
-|1  |weightedMean                  | 1.000000| 1.000000| 1.000000| 1.000000| 1.000000|  1.000000|
-|3  |stats:::weighted.mean.default | 4.597667| 4.562892| 5.007558| 4.597719| 4.591482|  7.121107|
-|2  |stats::weighted.mean          | 4.615159| 4.581803| 5.148343| 4.684220| 4.640931| 10.492393|
+|1  |weightedMean                  | 1.000000| 1.000000| 1.000000| 1.000000| 1.000000|   1.00000|
+|3  |stats:::weighted.mean.default | 5.924187| 5.474690| 8.872715| 5.756904| 5.972175| 128.51087|
+|2  |stats::weighted.mean          | 6.018040| 5.649133| 7.209820| 6.005673| 8.977688|  10.20481|
 
 _Figure: Benchmarking of weightedMean(), stats::weighted.mean() and stats:::weighted.mean.default() on integer+n = 1000000 data.  Outliers are displayed as crosses.  Times are in milliseconds._
 
@@ -232,8 +232,8 @@ _Figure: Benchmarking of weightedMean(), stats::weighted.mean() and stats:::weig
 > w <- runif(length(x))
 > gc()
            used  (Mb) gc trigger  (Mb) max used  (Mb)
-Ncells  5295674 282.9   10014072 534.9 10014072 534.9
-Vcells 10978518  83.8   36267018 276.7 90959857 694.0
+Ncells  5362164 286.4    7916910 422.9  7916910 422.9
+Vcells 11452790  87.4   39038428 297.9 94934136 724.3
 > stats <- microbenchmark(weightedMean = weightedMean(x, w = w, na.rm = FALSE), `stats::weighted.mean` = weighted.mean(x, 
 +     w = w, na.rm = FALSE), `stats:::weighted.mean.default` = weighted.mean.default(x, w = w, na.rm = FALSE), 
 +     unit = "ms")
@@ -245,16 +245,16 @@ _Table: Benchmarking of weightedMean(), stats::weighted.mean() and stats:::weigh
 
 |   |expr                          |      min|        lq|      mean|    median|        uq|      max|
 |:--|:-----------------------------|--------:|---------:|---------:|---------:|---------:|--------:|
-|1  |weightedMean                  | 0.004116| 0.0045120| 0.0050527| 0.0048290| 0.0050285| 0.020300|
-|3  |stats:::weighted.mean.default | 0.011552| 0.0123095| 0.0129227| 0.0126615| 0.0133640| 0.017120|
-|2  |stats::weighted.mean          | 0.013763| 0.0150240| 0.0160484| 0.0154735| 0.0159065| 0.054085|
+|1  |weightedMean                  | 0.003280| 0.0035030| 0.0039449| 0.0038605| 0.0041225| 0.014271|
+|3  |stats:::weighted.mean.default | 0.011650| 0.0121230| 0.0125530| 0.0123735| 0.0127780| 0.015866|
+|2  |stats::weighted.mean          | 0.014216| 0.0148785| 0.0162031| 0.0153355| 0.0157695| 0.069540|
 
 
-|   |expr                          |      min|       lq|     mean|   median|       uq|       max|
-|:--|:-----------------------------|--------:|--------:|--------:|--------:|--------:|---------:|
-|1  |weightedMean                  | 1.000000| 1.000000| 1.000000| 1.000000| 1.000000| 1.0000000|
-|3  |stats:::weighted.mean.default | 2.806608| 2.728169| 2.557603| 2.621971| 2.657651| 0.8433498|
-|2  |stats::weighted.mean          | 3.343780| 3.329787| 3.176222| 3.204287| 3.163269| 2.6642857|
+|   |expr                          |      min|       lq|     mean|   median|       uq|      max|
+|:--|:-----------------------------|--------:|--------:|--------:|--------:|--------:|--------:|
+|1  |weightedMean                  | 1.000000| 1.000000| 1.000000| 1.000000| 1.000000| 1.000000|
+|3  |stats:::weighted.mean.default | 3.551829| 3.460748| 3.182062| 3.205155| 3.099575| 1.111765|
+|2  |stats::weighted.mean          | 4.334146| 4.247359| 4.107338| 3.972413| 3.825227| 4.872819|
 
 _Figure: Benchmarking of weightedMean(), stats::weighted.mean() and stats:::weighted.mean.default() on double+n = 1000 data.  Outliers are displayed as crosses.  Times are in milliseconds._
 
@@ -267,8 +267,8 @@ _Figure: Benchmarking of weightedMean(), stats::weighted.mean() and stats:::weig
 > w <- runif(length(x))
 > gc()
            used  (Mb) gc trigger  (Mb) max used  (Mb)
-Ncells  5295746 282.9   10014072 534.9 10014072 534.9
-Vcells 10987565  83.9   36267018 276.7 90959857 694.0
+Ncells  5362236 286.4    7916910 422.9  7916910 422.9
+Vcells 11461837  87.5   39038428 297.9 94934136 724.3
 > stats <- microbenchmark(weightedMean = weightedMean(x, w = w, na.rm = FALSE), `stats::weighted.mean` = weighted.mean(x, 
 +     w = w, na.rm = FALSE), `stats:::weighted.mean.default` = weighted.mean.default(x, w = w, na.rm = FALSE), 
 +     unit = "ms")
@@ -278,18 +278,18 @@ _Table: Benchmarking of weightedMean(), stats::weighted.mean() and stats:::weigh
 
 
 
-|   |expr                          |      min|        lq|      mean|   median|        uq|      max|
-|:--|:-----------------------------|--------:|---------:|---------:|--------:|---------:|--------:|
-|1  |weightedMean                  | 0.023078| 0.0236075| 0.0267250| 0.025309| 0.0272555| 0.056999|
-|3  |stats:::weighted.mean.default | 0.069371| 0.0730550| 0.0809800| 0.078131| 0.0872875| 0.108028|
-|2  |stats::weighted.mean          | 0.071854| 0.0760945| 0.0834707| 0.080518| 0.0898335| 0.112304|
+|   |expr                          |      min|        lq|      mean|    median|        uq|      max|
+|:--|:-----------------------------|--------:|---------:|---------:|---------:|---------:|--------:|
+|1  |weightedMean                  | 0.016451| 0.0183110| 0.0194631| 0.0193665| 0.0198590| 0.045951|
+|3  |stats:::weighted.mean.default | 0.076367| 0.0817225| 0.0874114| 0.0874640| 0.0897700| 0.121269|
+|2  |stats::weighted.mean          | 0.077437| 0.0846850| 0.0903972| 0.0912690| 0.0938265| 0.109977|
 
 
 |   |expr                          |      min|       lq|     mean|   median|       uq|      max|
 |:--|:-----------------------------|--------:|--------:|--------:|--------:|--------:|--------:|
 |1  |weightedMean                  | 1.000000| 1.000000| 1.000000| 1.000000| 1.000000| 1.000000|
-|3  |stats:::weighted.mean.default | 3.005936| 3.094567| 3.030128| 3.087084| 3.202565| 1.895261|
-|2  |stats::weighted.mean          | 3.113528| 3.223319| 3.123324| 3.181398| 3.295977| 1.970280|
+|3  |stats:::weighted.mean.default | 4.642089| 4.463028| 4.491125| 4.516252| 4.520369| 2.639094|
+|2  |stats::weighted.mean          | 4.707130| 4.624816| 4.644533| 4.712726| 4.724634| 2.393354|
 
 _Figure: Benchmarking of weightedMean(), stats::weighted.mean() and stats:::weighted.mean.default() on double+n = 10000 data.  Outliers are displayed as crosses.  Times are in milliseconds._
 
@@ -302,8 +302,8 @@ _Figure: Benchmarking of weightedMean(), stats::weighted.mean() and stats:::weig
 > w <- runif(length(x))
 > gc()
            used  (Mb) gc trigger  (Mb) max used  (Mb)
-Ncells  5295818 282.9   10014072 534.9 10014072 534.9
-Vcells 11077985  84.6   36267018 276.7 90959857 694.0
+Ncells  5362308 286.4    7916910 422.9  7916910 422.9
+Vcells 11552257  88.2   39038428 297.9 94934136 724.3
 > stats <- microbenchmark(weightedMean = weightedMean(x, w = w, na.rm = FALSE), `stats::weighted.mean` = weighted.mean(x, 
 +     w = w, na.rm = FALSE), `stats:::weighted.mean.default` = weighted.mean.default(x, w = w, na.rm = FALSE), 
 +     unit = "ms")
@@ -313,18 +313,18 @@ _Table: Benchmarking of weightedMean(), stats::weighted.mean() and stats:::weigh
 
 
 
-|   |expr                          |      min|        lq|      mean|   median|        uq|      max|
-|:--|:-----------------------------|--------:|---------:|---------:|--------:|---------:|--------:|
-|1  |weightedMean                  | 0.164710| 0.1784335| 0.1982688| 0.195026| 0.2091485| 0.317886|
-|3  |stats:::weighted.mean.default | 0.569791| 0.6117630| 0.7455784| 0.660867| 0.7132260| 1.447374|
-|2  |stats::weighted.mean          | 0.571522| 0.6320330| 0.8647449| 0.678335| 0.7181500| 7.232735|
+|   |expr                          |      min|        lq|      mean|   median|       uq|      max|
+|:--|:-----------------------------|--------:|---------:|---------:|--------:|--------:|--------:|
+|1  |weightedMean                  | 0.115135| 0.1317750| 0.1427569| 0.138079| 0.147869| 0.249905|
+|3  |stats:::weighted.mean.default | 0.608082| 0.6768860| 0.9011484| 0.704362| 0.780388| 8.066233|
+|2  |stats::weighted.mean          | 0.596462| 0.6850695| 0.8050036| 0.719753| 0.799573| 1.533540|
 
 
 |   |expr                          |      min|       lq|     mean|   median|       uq|       max|
 |:--|:-----------------------------|--------:|--------:|--------:|--------:|--------:|---------:|
 |1  |weightedMean                  | 1.000000| 1.000000| 1.000000| 1.000000| 1.000000|  1.000000|
-|3  |stats:::weighted.mean.default | 3.459359| 3.428521| 3.760442| 3.388610| 3.410142|  4.553123|
-|2  |stats::weighted.mean          | 3.469868| 3.542121| 4.361477| 3.478177| 3.433685| 22.752606|
+|3  |stats:::weighted.mean.default | 5.281470| 5.136680| 6.312470| 5.101152| 5.277563| 32.277197|
+|2  |stats::weighted.mean          | 5.180545| 5.198782| 5.638984| 5.212617| 5.407306|  6.136492|
 
 _Figure: Benchmarking of weightedMean(), stats::weighted.mean() and stats:::weighted.mean.default() on double+n = 100000 data.  Outliers are displayed as crosses.  Times are in milliseconds._
 
@@ -337,8 +337,8 @@ _Figure: Benchmarking of weightedMean(), stats::weighted.mean() and stats:::weig
 > w <- runif(length(x))
 > gc()
            used  (Mb) gc trigger  (Mb) max used  (Mb)
-Ncells  5295890 282.9   10014072 534.9 10014072 534.9
-Vcells 11978421  91.4   36267018 276.7 90959857 694.0
+Ncells  5362380 286.4    7916910 422.9  7916910 422.9
+Vcells 12452692  95.1   39038428 297.9 94934136 724.3
 > stats <- microbenchmark(weightedMean = weightedMean(x, w = w, na.rm = FALSE), `stats::weighted.mean` = weighted.mean(x, 
 +     w = w, na.rm = FALSE), `stats:::weighted.mean.default` = weighted.mean.default(x, w = w, na.rm = FALSE), 
 +     unit = "ms")
@@ -348,18 +348,18 @@ _Table: Benchmarking of weightedMean(), stats::weighted.mean() and stats:::weigh
 
 
 
-|   |expr                          |      min|       lq|     mean|   median|        uq|        max|
-|:--|:-----------------------------|--------:|--------:|--------:|--------:|---------:|----------:|
-|1  |weightedMean                  | 1.992646| 2.354086|  2.42092| 2.399554|  2.495577|   2.879984|
-|3  |stats:::weighted.mean.default | 7.856080| 8.142919| 13.93657| 8.294887| 12.156408| 382.438572|
-|2  |stats::weighted.mean          | 7.784512| 8.205177| 10.80027| 8.516225| 14.610947|  19.436951|
+|   |expr                          |      min|       lq|      mean|   median|        uq|        max|
+|:--|:-----------------------------|--------:|--------:|---------:|--------:|---------:|----------:|
+|1  |weightedMean                  | 1.565088| 1.716951|  1.815459| 1.782803|  1.900802|   2.440462|
+|2  |stats::weighted.mean          | 8.077002| 8.489081| 15.000146| 9.015730| 15.796859| 417.681015|
+|3  |stats:::weighted.mean.default | 8.077910| 8.561706| 10.497486| 9.104963| 10.068560|  20.628094|
 
 
 |   |expr                          |      min|       lq|     mean|   median|       uq|        max|
 |:--|:-----------------------------|--------:|--------:|--------:|--------:|--------:|----------:|
 |1  |weightedMean                  | 1.000000| 1.000000| 1.000000| 1.000000| 1.000000|   1.000000|
-|3  |stats:::weighted.mean.default | 3.942537| 3.459058| 5.756724| 3.456845| 4.871181| 132.791909|
-|2  |stats::weighted.mean          | 3.906621| 3.485505| 4.461225| 3.549087| 5.854737|   6.748979|
+|2  |stats::weighted.mean          | 5.160734| 4.944275| 8.262454| 5.057052| 8.310628| 171.148338|
+|3  |stats:::weighted.mean.default | 5.161314| 4.986574| 5.782277| 5.107104| 5.297006|   8.452536|
 
 _Figure: Benchmarking of weightedMean(), stats::weighted.mean() and stats:::weighted.mean.default() on double+n = 1000000 data.  Outliers are displayed as crosses.  Times are in milliseconds._
 
@@ -391,7 +391,7 @@ attached base packages:
 [1] stats     graphics  grDevices utils     datasets  methods   base     
 
 other attached packages:
-[1] microbenchmark_1.4-7   matrixStats_0.60.1     ggplot2_3.3.5         
+[1] microbenchmark_1.4-7   matrixStats_0.60.0     ggplot2_3.3.5         
 [4] knitr_1.33             R.devices_2.17.0       R.utils_2.10.1        
 [7] R.oo_1.24.0            R.methodsS3_1.8.1-9001 history_0.0.1-9000    
 
@@ -417,16 +417,17 @@ loaded via a namespace (and not attached):
 [55] tabby_0.0.1-9001        AnnotationDbi_1.54.1    Biostrings_2.60.2      
 [58] compiler_4.1.1          GenomeInfoDb_1.28.1     rlang_0.4.11           
 [61] grid_4.1.1              RCurl_1.98-1.4          cwhmisc_6.6            
-[64] rappdirs_0.3.3          startup_0.15.0          labeling_0.4.2         
-[67] bitops_1.0-7            base64enc_0.1-3         boot_1.3-28            
-[70] gtable_0.3.0            DBI_1.1.1               markdown_1.1           
-[73] R6_2.5.1                lpSolveAPI_5.5.2.0-17.7 rle_0.9.2              
-[76] dplyr_1.0.7             fastmap_1.1.0           bit_4.0.4              
-[79] utf8_1.2.2              parallel_4.1.1          Rcpp_1.0.7             
-[82] vctrs_0.3.8             png_0.1-7               DEoptimR_1.0-9         
-[85] tidyselect_1.1.1        xfun_0.25               coda_0.19-4            
+[64] rstudioapi_0.13         rappdirs_0.3.3          startup_0.15.0-9000    
+[67] labeling_0.4.2          bitops_1.0-7            base64enc_0.1-3        
+[70] boot_1.3-28             gtable_0.3.0            DBI_1.1.1              
+[73] markdown_1.1            R6_2.5.1                lpSolveAPI_5.5.2.0-17.7
+[76] rle_0.9.2               dplyr_1.0.7             fastmap_1.1.0          
+[79] bit_4.0.4               utf8_1.2.2              parallel_4.1.1         
+[82] Rcpp_1.0.7              vctrs_0.3.8             png_0.1-7              
+[85] DEoptimR_1.0-9          tidyselect_1.1.1        xfun_0.25              
+[88] coda_0.19-4            
 ```
-Total processing time was 16.07 secs.
+Total processing time was 18.03 secs.
 
 
 ### Reproducibility
@@ -443,7 +444,7 @@ html <- matrixStats:::benchmark('weightedMean')
 [StackOverflow:rowProds?]: https://stackoverflow.com/questions/20198801/ "Stack Overflow: Row product of matrix and column sum of matrix"
 
 ---------------------------------------
-Copyright Henrik Bengtsson. Last updated on 2021-08-25 18:39:13 (+0200 UTC). Powered by [RSP].
+Copyright Henrik Bengtsson. Last updated on 2021-08-25 22:52:44 (+0200 UTC). Powered by [RSP].
 
 <script>
  var link = document.createElement('link');

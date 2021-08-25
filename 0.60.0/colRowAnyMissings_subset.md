@@ -64,16 +64,16 @@ This report benchmark the performance of colAnyMissings() and rowAnyMissings() o
 > X_S <- X[rows, cols]
 > gc()
           used  (Mb) gc trigger  (Mb) max used  (Mb)
-Ncells 5152517 275.2    7554717 403.5  7554717 403.5
-Vcells 9216626  70.4   31793280 242.6 60508962 461.7
+Ncells 5179685 276.7    7916910 422.9  7916910 422.9
+Vcells 9438286  72.1   33191153 253.3 53339345 407.0
 > colStats <- microbenchmark(colAnyMissings_X_S = colAnyMissings(X_S), `colAnyMissings(X, rows, cols)` = colAnyMissings(X, 
 +     rows = rows, cols = cols), `colAnyMissings(X[rows, cols])` = colAnyMissings(X[rows, cols]), unit = "ms")
 > X <- t(X)
 > X_S <- t(X_S)
 > gc()
           used  (Mb) gc trigger  (Mb) max used  (Mb)
-Ncells 5152047 275.2    7554717 403.5  7554717 403.5
-Vcells 9215186  70.4   31793280 242.6 60508962 461.7
+Ncells 5167805 276.0    7916910 422.9  7916910 422.9
+Vcells 9398484  71.8   33191153 253.3 53339345 407.0
 > rowStats <- microbenchmark(rowAnyMissings_X_S = rowAnyMissings(X_S), `rowAnyMissings(X, cols, rows)` = rowAnyMissings(X, 
 +     rows = cols, cols = rows), `rowAnyMissings(X[cols, rows])` = rowAnyMissings(X[cols, rows]), unit = "ms")
 ```
@@ -82,18 +82,18 @@ _Table: Benchmarking of colAnyMissings_X_S(), colAnyMissings(X, rows, cols)() an
 
 
 
-|   |expr                          |      min|        lq|      mean|    median|       uq|      max|
-|:--|:-----------------------------|--------:|---------:|---------:|---------:|--------:|--------:|
-|1  |colAnyMissings_X_S            | 0.004302| 0.0044680| 0.0078086| 0.0045910| 0.004735| 0.319201|
-|2  |colAnyMissings(X, rows, cols) | 0.004584| 0.0048365| 0.0050485| 0.0049555| 0.005106| 0.007558|
-|3  |colAnyMissings(X[rows, cols]) | 0.005245| 0.0055585| 0.0059659| 0.0056810| 0.005875| 0.020432|
+|   |expr                          |      min|        lq|      mean|    median|        uq|      max|
+|:--|:-----------------------------|--------:|---------:|---------:|---------:|---------:|--------:|
+|1  |colAnyMissings_X_S            | 0.004148| 0.0043350| 0.0080678| 0.0044310| 0.0045380| 0.328684|
+|2  |colAnyMissings(X, rows, cols) | 0.004449| 0.0046215| 0.0049160| 0.0047235| 0.0048575| 0.018754|
+|3  |colAnyMissings(X[rows, cols]) | 0.005104| 0.0053415| 0.0055997| 0.0054735| 0.0056145| 0.012662|
 
 
-|   |expr                          |      min|       lq|      mean|   median|       uq|       max|
-|:--|:-----------------------------|--------:|--------:|---------:|--------:|--------:|---------:|
-|1  |colAnyMissings_X_S            | 1.000000| 1.000000| 1.0000000| 1.000000| 1.000000| 1.0000000|
-|2  |colAnyMissings(X, rows, cols) | 1.065551| 1.082475| 0.6465355| 1.079395| 1.078353| 0.0236779|
-|3  |colAnyMissings(X[rows, cols]) | 1.219200| 1.244069| 0.7640121| 1.237421| 1.240760| 0.0640098|
+|   |expr                          |      min|      lq|      mean|   median|       uq|       max|
+|:--|:-----------------------------|--------:|-------:|---------:|--------:|--------:|---------:|
+|1  |colAnyMissings_X_S            | 1.000000| 1.00000| 1.0000000| 1.000000| 1.000000| 1.0000000|
+|2  |colAnyMissings(X, rows, cols) | 1.072565| 1.06609| 0.6093399| 1.066012| 1.070405| 0.0570578|
+|3  |colAnyMissings(X[rows, cols]) | 1.230473| 1.23218| 0.6940856| 1.235274| 1.237219| 0.0385233|
 
 _Table: Benchmarking of rowAnyMissings_X_S(), rowAnyMissings(X, cols, rows)() and rowAnyMissings(X[cols, rows])() on integer+10x10 data (transposed). The top panel shows times in milliseconds and the bottom panel shows relative times._
 
@@ -101,16 +101,16 @@ _Table: Benchmarking of rowAnyMissings_X_S(), rowAnyMissings(X, cols, rows)() an
 
 |   |expr                          |      min|        lq|      mean|    median|        uq|      max|
 |:--|:-----------------------------|--------:|---------:|---------:|---------:|---------:|--------:|
-|1  |rowAnyMissings_X_S            | 0.004315| 0.0044285| 0.0045575| 0.0044960| 0.0045785| 0.007258|
-|2  |rowAnyMissings(X, cols, rows) | 0.004666| 0.0048425| 0.0082711| 0.0049595| 0.0050640| 0.330566|
-|3  |rowAnyMissings(X[cols, rows]) | 0.005289| 0.0055660| 0.0058302| 0.0057705| 0.0059310| 0.008769|
+|1  |rowAnyMissings_X_S            | 0.004460| 0.0045710| 0.0047036| 0.0046575| 0.0047450| 0.007701|
+|2  |rowAnyMissings(X, cols, rows) | 0.004767| 0.0049695| 0.0083557| 0.0050895| 0.0052170| 0.327541|
+|3  |rowAnyMissings(X[cols, rows]) | 0.005499| 0.0056820| 0.0058936| 0.0058300| 0.0059525| 0.008993|
 
 
-|   |expr                          |      min|       lq|     mean|   median|       uq|       max|
-|:--|:-----------------------------|--------:|--------:|--------:|--------:|--------:|---------:|
-|1  |rowAnyMissings_X_S            | 1.000000| 1.000000| 1.000000| 1.000000| 1.000000|  1.000000|
-|2  |rowAnyMissings(X, cols, rows) | 1.081344| 1.093485| 1.814822| 1.103092| 1.106039| 45.545054|
-|3  |rowAnyMissings(X[cols, rows]) | 1.225724| 1.256859| 1.279240| 1.283474| 1.295402|  1.208184|
+|   |expr                          |      min|       lq|     mean|   median|       uq|      max|
+|:--|:-----------------------------|--------:|--------:|--------:|--------:|--------:|--------:|
+|1  |rowAnyMissings_X_S            | 1.000000| 1.000000| 1.000000| 1.000000| 1.000000|  1.00000|
+|2  |rowAnyMissings(X, cols, rows) | 1.068834| 1.087180| 1.776434| 1.092754| 1.099473| 42.53227|
+|3  |rowAnyMissings(X[cols, rows]) | 1.232960| 1.243054| 1.252996| 1.251745| 1.254478|  1.16777|
 
 _Figure: Benchmarking of colAnyMissings_X_S(), colAnyMissings(X, rows, cols)() and colAnyMissings(X[rows, cols])() on integer+10x10 data  as well as rowAnyMissings_X_S(), rowAnyMissings(X, cols, rows)() and rowAnyMissings(X[cols, rows])() on the same data transposed.  Outliers are displayed as crosses.  Times are in milliseconds._
 
@@ -122,16 +122,16 @@ _Table: Benchmarking of colAnyMissings_X_S() and rowAnyMissings_X_S() on integer
 
 
 
-|   |expr               |   min|     lq|    mean| median|     uq|     max|
-|:--|:------------------|-----:|------:|-------:|------:|------:|-------:|
-|2  |rowAnyMissings_X_S | 4.315| 4.4285| 4.55755|  4.496| 4.5785|   7.258|
-|1  |colAnyMissings_X_S | 4.302| 4.4680| 7.80862|  4.591| 4.7350| 319.201|
+|   |expr               |   min|    lq|    mean| median|    uq|     max|
+|:--|:------------------|-----:|-----:|-------:|------:|-----:|-------:|
+|1  |colAnyMissings_X_S | 4.148| 4.335| 8.06778| 4.4310| 4.538| 328.684|
+|2  |rowAnyMissings_X_S | 4.460| 4.571| 4.70363| 4.6575| 4.745|   7.701|
 
 
-|   |expr               |       min|       lq|     mean|  median|       uq|     max|
-|:--|:------------------|---------:|--------:|--------:|-------:|--------:|-------:|
-|2  |rowAnyMissings_X_S | 1.0000000| 1.000000| 1.000000| 1.00000| 1.000000|  1.0000|
-|1  |colAnyMissings_X_S | 0.9969873| 1.008919| 1.713337| 1.02113| 1.034182| 43.9792|
+|   |expr               |      min|       lq|      mean|   median|       uq|       max|
+|:--|:------------------|--------:|--------:|---------:|--------:|--------:|---------:|
+|1  |colAnyMissings_X_S | 1.000000| 1.000000| 1.0000000| 1.000000| 1.000000| 1.0000000|
+|2  |rowAnyMissings_X_S | 1.075217| 1.054441| 0.5830142| 1.051117| 1.045615| 0.0234298|
 
 _Figure: Benchmarking of colAnyMissings_X_S() and rowAnyMissings_X_S() on integer+10x10 data (original and transposed).  Outliers are displayed as crosses. Times are in milliseconds._
 
@@ -148,16 +148,16 @@ _Figure: Benchmarking of colAnyMissings_X_S() and rowAnyMissings_X_S() on intege
 > X_S <- X[rows, cols]
 > gc()
           used  (Mb) gc trigger  (Mb) max used  (Mb)
-Ncells 5151210 275.2    7554717 403.5  7554717 403.5
-Vcells 9050628  69.1   31793280 242.6 60508962 461.7
+Ncells 5166984 276.0    7916910 422.9  7916910 422.9
+Vcells 9233416  70.5   33191153 253.3 53339345 407.0
 > colStats <- microbenchmark(colAnyMissings_X_S = colAnyMissings(X_S), `colAnyMissings(X, rows, cols)` = colAnyMissings(X, 
 +     rows = rows, cols = cols), `colAnyMissings(X[rows, cols])` = colAnyMissings(X[rows, cols]), unit = "ms")
 > X <- t(X)
 > X_S <- t(X_S)
 > gc()
           used  (Mb) gc trigger  (Mb) max used  (Mb)
-Ncells 5151204 275.2    7554717 403.5  7554717 403.5
-Vcells 9055711  69.1   31793280 242.6 60508962 461.7
+Ncells 5166978 276.0    7916910 422.9  7916910 422.9
+Vcells 9238499  70.5   33191153 253.3 53339345 407.0
 > rowStats <- microbenchmark(rowAnyMissings_X_S = rowAnyMissings(X_S), `rowAnyMissings(X, cols, rows)` = rowAnyMissings(X, 
 +     rows = cols, cols = rows), `rowAnyMissings(X[cols, rows])` = rowAnyMissings(X[cols, rows]), unit = "ms")
 ```
@@ -168,33 +168,33 @@ _Table: Benchmarking of colAnyMissings_X_S(), colAnyMissings(X, rows, cols)() an
 
 |   |expr                          |      min|        lq|      mean|    median|        uq|      max|
 |:--|:-----------------------------|--------:|---------:|---------:|---------:|---------:|--------:|
-|1  |colAnyMissings_X_S            | 0.006219| 0.0066800| 0.0071756| 0.0068640| 0.0070015| 0.021198|
-|2  |colAnyMissings(X, rows, cols) | 0.011787| 0.0121395| 0.0125150| 0.0124395| 0.0127125| 0.016144|
-|3  |colAnyMissings(X[rows, cols]) | 0.015431| 0.0160930| 0.0168862| 0.0163710| 0.0166120| 0.044246|
+|1  |colAnyMissings_X_S            | 0.007100| 0.0077060| 0.0079425| 0.0079700| 0.0080495| 0.011545|
+|2  |colAnyMissings(X, rows, cols) | 0.013799| 0.0144120| 0.0146853| 0.0145945| 0.0147980| 0.018575|
+|3  |colAnyMissings(X[rows, cols]) | 0.018313| 0.0192085| 0.0199999| 0.0194345| 0.0197345| 0.048600|
 
 
-|   |expr                          |      min|       lq|     mean|   median|       uq|       max|
-|:--|:-----------------------------|--------:|--------:|--------:|--------:|--------:|---------:|
-|1  |colAnyMissings_X_S            | 1.000000| 1.000000| 1.000000| 1.000000| 1.000000| 1.0000000|
-|2  |colAnyMissings(X, rows, cols) | 1.895321| 1.817290| 1.744096| 1.812282| 1.815682| 0.7615813|
-|3  |colAnyMissings(X[rows, cols]) | 2.481267| 2.409132| 2.353284| 2.385052| 2.372634| 2.0872724|
+|   |expr                          |      min|       lq|     mean|   median|       uq|      max|
+|:--|:-----------------------------|--------:|--------:|--------:|--------:|--------:|--------:|
+|1  |colAnyMissings_X_S            | 1.000000| 1.000000| 1.000000| 1.000000| 1.000000| 1.000000|
+|2  |colAnyMissings(X, rows, cols) | 1.943521| 1.870231| 1.848942| 1.831179| 1.838375| 1.608922|
+|3  |colAnyMissings(X[rows, cols]) | 2.579296| 2.492668| 2.518074| 2.438457| 2.451643| 4.209615|
 
 _Table: Benchmarking of rowAnyMissings_X_S(), rowAnyMissings(X, cols, rows)() and rowAnyMissings(X[cols, rows])() on integer+100x100 data (transposed). The top panel shows times in milliseconds and the bottom panel shows relative times._
 
 
 
-|   |expr                          |      min|       lq|      mean|   median|        uq|      max|
-|:--|:-----------------------------|--------:|--------:|---------:|--------:|---------:|--------:|
-|1  |rowAnyMissings_X_S            | 0.009812| 0.010610| 0.0109206| 0.010838| 0.0111685| 0.015285|
-|2  |rowAnyMissings(X, cols, rows) | 0.011571| 0.012369| 0.0129339| 0.012585| 0.0127560| 0.039049|
-|3  |rowAnyMissings(X[cols, rows]) | 0.020018| 0.021634| 0.0222673| 0.022038| 0.0223805| 0.036767|
+|   |expr                          |      min|       lq|      mean|    median|       uq|      max|
+|:--|:-----------------------------|--------:|--------:|---------:|---------:|--------:|--------:|
+|1  |rowAnyMissings_X_S            | 0.010208| 0.010779| 0.0112918| 0.0113265| 0.011609| 0.017024|
+|2  |rowAnyMissings(X, cols, rows) | 0.011866| 0.012345| 0.0141362| 0.0130385| 0.013595| 0.067164|
+|3  |rowAnyMissings(X[cols, rows]) | 0.021455| 0.022036| 0.0233730| 0.0231360| 0.023595| 0.034190|
 
 
 |   |expr                          |      min|       lq|     mean|   median|       uq|      max|
 |:--|:-----------------------------|--------:|--------:|--------:|--------:|--------:|--------:|
 |1  |rowAnyMissings_X_S            | 1.000000| 1.000000| 1.000000| 1.000000| 1.000000| 1.000000|
-|2  |rowAnyMissings(X, cols, rows) | 1.179270| 1.165787| 1.184363| 1.161192| 1.142141| 2.554727|
-|3  |rowAnyMissings(X[cols, rows]) | 2.040155| 2.039020| 2.039019| 2.033401| 2.003895| 2.405430|
+|2  |rowAnyMissings(X, cols, rows) | 1.162422| 1.145282| 1.251892| 1.151150| 1.171074| 3.945254|
+|3  |rowAnyMissings(X[cols, rows]) | 2.101783| 2.044345| 2.069908| 2.042643| 2.032475| 2.008341|
 
 _Figure: Benchmarking of colAnyMissings_X_S(), colAnyMissings(X, rows, cols)() and colAnyMissings(X[rows, cols])() on integer+100x100 data  as well as rowAnyMissings_X_S(), rowAnyMissings(X, cols, rows)() and rowAnyMissings(X[cols, rows])() on the same data transposed.  Outliers are displayed as crosses.  Times are in milliseconds._
 
@@ -206,16 +206,16 @@ _Table: Benchmarking of colAnyMissings_X_S() and rowAnyMissings_X_S() on integer
 
 
 
-|   |expr               |   min|    lq|     mean| median|      uq|    max|
-|:--|:------------------|-----:|-----:|--------:|------:|-------:|------:|
-|1  |colAnyMissings_X_S | 6.219|  6.68|  7.17561|  6.864|  7.0015| 21.198|
-|2  |rowAnyMissings_X_S | 9.812| 10.61| 10.92058| 10.838| 11.1685| 15.285|
+|   |expr               |    min|     lq|     mean|  median|      uq|    max|
+|:--|:------------------|------:|------:|--------:|-------:|-------:|------:|
+|1  |colAnyMissings_X_S |  7.100|  7.706|  7.94254|  7.9700|  8.0495| 11.545|
+|2  |rowAnyMissings_X_S | 10.208| 10.779| 11.29183| 11.3265| 11.6090| 17.024|
 
 
-|   |expr               |      min|       lq|     mean|   median|       uq|       max|
-|:--|:------------------|--------:|--------:|--------:|--------:|--------:|---------:|
-|1  |colAnyMissings_X_S | 1.000000| 1.000000| 1.000000| 1.000000| 1.000000| 1.0000000|
-|2  |rowAnyMissings_X_S | 1.577746| 1.588323| 1.521903| 1.578963| 1.595158| 0.7210586|
+|   |expr               |      min|      lq|    mean|   median|       uq|      max|
+|:--|:------------------|--------:|-------:|-------:|--------:|--------:|--------:|
+|1  |colAnyMissings_X_S | 1.000000| 1.00000| 1.00000| 1.000000| 1.000000| 1.000000|
+|2  |rowAnyMissings_X_S | 1.437747| 1.39878| 1.42169| 1.421142| 1.442201| 1.474578|
 
 _Figure: Benchmarking of colAnyMissings_X_S() and rowAnyMissings_X_S() on integer+100x100 data (original and transposed).  Outliers are displayed as crosses. Times are in milliseconds._
 
@@ -232,16 +232,16 @@ _Figure: Benchmarking of colAnyMissings_X_S() and rowAnyMissings_X_S() on intege
 > X_S <- X[rows, cols]
 > gc()
           used  (Mb) gc trigger  (Mb) max used  (Mb)
-Ncells 5151410 275.2    7554717 403.5  7554717 403.5
-Vcells 9051519  69.1   31793280 242.6 60508962 461.7
+Ncells 5167726 276.0    7916910 422.9  7916910 422.9
+Vcells 9237476  70.5   33191153 253.3 53339345 407.0
 > colStats <- microbenchmark(colAnyMissings_X_S = colAnyMissings(X_S), `colAnyMissings(X, rows, cols)` = colAnyMissings(X, 
 +     rows = rows, cols = cols), `colAnyMissings(X[rows, cols])` = colAnyMissings(X[rows, cols]), unit = "ms")
 > X <- t(X)
 > X_S <- t(X_S)
 > gc()
           used  (Mb) gc trigger  (Mb) max used  (Mb)
-Ncells 5151404 275.2    7554717 403.5  7554717 403.5
-Vcells 9056602  69.1   31793280 242.6 60508962 461.7
+Ncells 5167720 276.0    7916910 422.9  7916910 422.9
+Vcells 9242559  70.6   33191153 253.3 53339345 407.0
 > rowStats <- microbenchmark(rowAnyMissings_X_S = rowAnyMissings(X_S), `rowAnyMissings(X, cols, rows)` = rowAnyMissings(X, 
 +     rows = cols, cols = rows), `rowAnyMissings(X[cols, rows])` = rowAnyMissings(X[cols, rows]), unit = "ms")
 ```
@@ -250,35 +250,35 @@ _Table: Benchmarking of colAnyMissings_X_S(), colAnyMissings(X, rows, cols)() an
 
 
 
-|   |expr                          |      min|        lq|      mean|    median|       uq|      max|
-|:--|:-----------------------------|--------:|---------:|---------:|---------:|--------:|--------:|
-|1  |colAnyMissings_X_S            | 0.006395| 0.0067940| 0.0071255| 0.0069090| 0.007032| 0.014904|
-|2  |colAnyMissings(X, rows, cols) | 0.013709| 0.0143335| 0.0147938| 0.0145950| 0.014774| 0.028717|
-|3  |colAnyMissings(X[rows, cols]) | 0.017328| 0.0182390| 0.0194366| 0.0187405| 0.019046| 0.053192|
+|   |expr                          |      min|        lq|      mean|    median|        uq|      max|
+|:--|:-----------------------------|--------:|---------:|---------:|---------:|---------:|--------:|
+|1  |colAnyMissings_X_S            | 0.006233| 0.0065435| 0.0067138| 0.0066620| 0.0068175| 0.009651|
+|2  |colAnyMissings(X, rows, cols) | 0.013542| 0.0141010| 0.0146592| 0.0142715| 0.0144655| 0.029932|
+|3  |colAnyMissings(X[rows, cols]) | 0.017324| 0.0178665| 0.0186964| 0.0184085| 0.0187205| 0.046222|
 
 
-|   |expr                          |      min|       lq|     mean|   median|       uq|      max|
-|:--|:-----------------------------|--------:|--------:|--------:|--------:|--------:|--------:|
-|1  |colAnyMissings_X_S            | 1.000000| 1.000000| 1.000000| 1.000000| 1.000000| 1.000000|
-|2  |colAnyMissings(X, rows, cols) | 2.143706| 2.109729| 2.076161| 2.112462| 2.100967| 1.926798|
-|3  |colAnyMissings(X[rows, cols]) | 2.709617| 2.684575| 2.727742| 2.712477| 2.708476| 3.568975|
+|   |expr                          |     min|       lq|     mean|   median|       uq|      max|
+|:--|:-----------------------------|-------:|--------:|--------:|--------:|--------:|--------:|
+|1  |colAnyMissings_X_S            | 1.00000| 1.000000| 1.000000| 1.000000| 1.000000| 1.000000|
+|2  |colAnyMissings(X, rows, cols) | 2.17263| 2.154963| 2.183439| 2.142225| 2.121819| 3.101440|
+|3  |colAnyMissings(X[rows, cols]) | 2.77940| 2.730419| 2.784765| 2.763209| 2.745948| 4.789348|
 
 _Table: Benchmarking of rowAnyMissings_X_S(), rowAnyMissings(X, cols, rows)() and rowAnyMissings(X[cols, rows])() on integer+1000x10 data (transposed). The top panel shows times in milliseconds and the bottom panel shows relative times._
 
 
 
-|   |expr                          |      min|        lq|      mean|    median|        uq|      max|
-|:--|:-----------------------------|--------:|---------:|---------:|---------:|---------:|--------:|
-|1  |rowAnyMissings_X_S            | 0.008697| 0.0090155| 0.0092539| 0.0092100| 0.0093905| 0.012699|
-|2  |rowAnyMissings(X, cols, rows) | 0.013494| 0.0141215| 0.0144056| 0.0144200| 0.0146495| 0.016596|
-|3  |rowAnyMissings(X[cols, rows]) | 0.021549| 0.0218930| 0.0231503| 0.0226855| 0.0231425| 0.054293|
+|   |expr                          |      min|        lq|      mean|    median|       uq|      max|
+|:--|:-----------------------------|--------:|---------:|---------:|---------:|--------:|--------:|
+|1  |rowAnyMissings_X_S            | 0.008717| 0.0090315| 0.0092624| 0.0092160| 0.009361| 0.013308|
+|2  |rowAnyMissings(X, cols, rows) | 0.013408| 0.0138710| 0.0142628| 0.0141980| 0.014468| 0.023882|
+|3  |rowAnyMissings(X[cols, rows]) | 0.021336| 0.0219555| 0.0230095| 0.0225535| 0.022883| 0.053611|
 
 
-|   |expr                          |      min|       lq|    mean|   median|       uq|      max|
-|:--|:-----------------------------|--------:|--------:|-------:|--------:|--------:|--------:|
-|1  |rowAnyMissings_X_S            | 1.000000| 1.000000| 1.00000| 1.000000| 1.000000| 1.000000|
-|2  |rowAnyMissings(X, cols, rows) | 1.551570| 1.566358| 1.55670| 1.565689| 1.560034| 1.306875|
-|3  |rowAnyMissings(X[cols, rows]) | 2.477751| 2.428373| 2.50167| 2.463138| 2.464459| 4.275376|
+|   |expr                          |      min|       lq|     mean|   median|       uq|      max|
+|:--|:-----------------------------|--------:|--------:|--------:|--------:|--------:|--------:|
+|1  |rowAnyMissings_X_S            | 1.000000| 1.000000| 1.000000| 1.000000| 1.000000| 1.000000|
+|2  |rowAnyMissings(X, cols, rows) | 1.538144| 1.535847| 1.539863| 1.540582| 1.545561| 1.794560|
+|3  |rowAnyMissings(X[cols, rows]) | 2.447631| 2.430992| 2.484182| 2.447211| 2.444504| 4.028479|
 
 _Figure: Benchmarking of colAnyMissings_X_S(), colAnyMissings(X, rows, cols)() and colAnyMissings(X[rows, cols])() on integer+1000x10 data  as well as rowAnyMissings_X_S(), rowAnyMissings(X, cols, rows)() and rowAnyMissings(X[cols, rows])() on the same data transposed.  Outliers are displayed as crosses.  Times are in milliseconds._
 
@@ -292,14 +292,14 @@ _Table: Benchmarking of colAnyMissings_X_S() and rowAnyMissings_X_S() on integer
 
 |   |expr               |   min|     lq|    mean| median|     uq|    max|
 |:--|:------------------|-----:|------:|-------:|------:|------:|------:|
-|1  |colAnyMissings_X_S | 6.395| 6.7940| 7.12553|  6.909| 7.0320| 14.904|
-|2  |rowAnyMissings_X_S | 8.697| 9.0155| 9.25393|  9.210| 9.3905| 12.699|
+|1  |colAnyMissings_X_S | 6.233| 6.5435| 6.71382|  6.662| 6.8175|  9.651|
+|2  |rowAnyMissings_X_S | 8.717| 9.0315| 9.26241|  9.216| 9.3610| 13.308|
 
 
-|   |expr               |      min|      lq|     mean|   median|       uq|       max|
-|:--|:------------------|--------:|-------:|--------:|--------:|--------:|---------:|
-|1  |colAnyMissings_X_S | 1.000000| 1.00000| 1.000000| 1.000000| 1.000000| 1.0000000|
-|2  |rowAnyMissings_X_S | 1.359969| 1.32698| 1.298701| 1.333044| 1.335395| 0.8520531|
+|   |expr               |      min|       lq|     mean|   median|       uq|      max|
+|:--|:------------------|--------:|--------:|--------:|--------:|--------:|--------:|
+|1  |colAnyMissings_X_S | 1.000000| 1.000000| 1.000000| 1.000000| 1.000000| 1.000000|
+|2  |rowAnyMissings_X_S | 1.398524| 1.380225| 1.379604| 1.383368| 1.373084| 1.378925|
 
 _Figure: Benchmarking of colAnyMissings_X_S() and rowAnyMissings_X_S() on integer+1000x10 data (original and transposed).  Outliers are displayed as crosses. Times are in milliseconds._
 
@@ -316,16 +316,16 @@ _Figure: Benchmarking of colAnyMissings_X_S() and rowAnyMissings_X_S() on intege
 > X_S <- X[rows, cols]
 > gc()
           used  (Mb) gc trigger  (Mb) max used  (Mb)
-Ncells 5151615 275.2    7554717 403.5  7554717 403.5
-Vcells 9052431  69.1   31793280 242.6 60508962 461.7
+Ncells 5167931 276.0    7916910 422.9  7916910 422.9
+Vcells 9238388  70.5   33191153 253.3 53339345 407.0
 > colStats <- microbenchmark(colAnyMissings_X_S = colAnyMissings(X_S), `colAnyMissings(X, rows, cols)` = colAnyMissings(X, 
 +     rows = rows, cols = cols), `colAnyMissings(X[rows, cols])` = colAnyMissings(X[rows, cols]), unit = "ms")
 > X <- t(X)
 > X_S <- t(X_S)
 > gc()
           used  (Mb) gc trigger  (Mb) max used  (Mb)
-Ncells 5151609 275.2    7554717 403.5  7554717 403.5
-Vcells 9057514  69.2   31793280 242.6 60508962 461.7
+Ncells 5167925 276.0    7916910 422.9  7916910 422.9
+Vcells 9243471  70.6   33191153 253.3 53339345 407.0
 > rowStats <- microbenchmark(rowAnyMissings_X_S = rowAnyMissings(X_S), `rowAnyMissings(X, cols, rows)` = rowAnyMissings(X, 
 +     rows = cols, cols = rows), `rowAnyMissings(X[cols, rows])` = rowAnyMissings(X[cols, rows]), unit = "ms")
 ```
@@ -336,16 +336,16 @@ _Table: Benchmarking of colAnyMissings_X_S(), colAnyMissings(X, rows, cols)() an
 
 |   |expr                          |      min|        lq|      mean|    median|        uq|      max|
 |:--|:-----------------------------|--------:|---------:|---------:|---------:|---------:|--------:|
-|1  |colAnyMissings_X_S            | 0.009836| 0.0104120| 0.0110378| 0.0107095| 0.0111370| 0.032999|
-|2  |colAnyMissings(X, rows, cols) | 0.016714| 0.0170655| 0.0175686| 0.0173185| 0.0177505| 0.029295|
-|3  |colAnyMissings(X[rows, cols]) | 0.022909| 0.0236430| 0.0244653| 0.0241895| 0.0247200| 0.041551|
+|1  |colAnyMissings_X_S            | 0.009493| 0.0106625| 0.0131547| 0.0112745| 0.0149760| 0.032852|
+|2  |colAnyMissings(X, rows, cols) | 0.016530| 0.0176355| 0.0213137| 0.0180620| 0.0275785| 0.039499|
+|3  |colAnyMissings(X[rows, cols]) | 0.022830| 0.0242240| 0.0283903| 0.0249665| 0.0278665| 0.049946|
 
 
-|   |expr                          |      min|       lq|     mean|   median|       uq|       max|
-|:--|:-----------------------------|--------:|--------:|--------:|--------:|--------:|---------:|
-|1  |colAnyMissings_X_S            | 1.000000| 1.000000| 1.000000| 1.000000| 1.000000| 1.0000000|
-|2  |colAnyMissings(X, rows, cols) | 1.699268| 1.639022| 1.591687| 1.617116| 1.593831| 0.8877542|
-|3  |colAnyMissings(X[rows, cols]) | 2.329097| 2.270745| 2.216513| 2.258696| 2.219628| 1.2591594|
+|   |expr                          |      min|       lq|     mean|   median|       uq|      max|
+|:--|:-----------------------------|--------:|--------:|--------:|--------:|--------:|--------:|
+|1  |colAnyMissings_X_S            | 1.000000| 1.000000| 1.000000| 1.000000| 1.000000| 1.000000|
+|2  |colAnyMissings(X, rows, cols) | 1.741283| 1.653974| 1.620238| 1.602022| 1.841513| 1.202332|
+|3  |colAnyMissings(X[rows, cols]) | 2.404930| 2.271888| 2.158188| 2.214422| 1.860744| 1.520334|
 
 _Table: Benchmarking of rowAnyMissings_X_S(), rowAnyMissings(X, cols, rows)() and rowAnyMissings(X[cols, rows])() on integer+10x1000 data (transposed). The top panel shows times in milliseconds and the bottom panel shows relative times._
 
@@ -353,16 +353,16 @@ _Table: Benchmarking of rowAnyMissings_X_S(), rowAnyMissings(X, cols, rows)() an
 
 |   |expr                          |      min|        lq|      mean|    median|        uq|      max|
 |:--|:-----------------------------|--------:|---------:|---------:|---------:|---------:|--------:|
-|1  |rowAnyMissings_X_S            | 0.009977| 0.0104235| 0.0106332| 0.0105990| 0.0107800| 0.014964|
-|2  |rowAnyMissings(X, cols, rows) | 0.013712| 0.0143585| 0.0149584| 0.0146105| 0.0149260| 0.041389|
-|3  |rowAnyMissings(X[cols, rows]) | 0.021420| 0.0219830| 0.0227103| 0.0225460| 0.0228955| 0.037042|
+|1  |rowAnyMissings_X_S            | 0.009684| 0.0101370| 0.0106166| 0.0106480| 0.0108780| 0.015548|
+|2  |rowAnyMissings(X, cols, rows) | 0.013278| 0.0138390| 0.0146774| 0.0144085| 0.0148805| 0.041930|
+|3  |rowAnyMissings(X[cols, rows]) | 0.020517| 0.0211985| 0.0225933| 0.0220840| 0.0231025| 0.037550|
 
 
 |   |expr                          |      min|       lq|     mean|   median|       uq|      max|
 |:--|:-----------------------------|--------:|--------:|--------:|--------:|--------:|--------:|
 |1  |rowAnyMissings_X_S            | 1.000000| 1.000000| 1.000000| 1.000000| 1.000000| 1.000000|
-|2  |rowAnyMissings(X, cols, rows) | 1.374361| 1.377512| 1.406752| 1.378479| 1.384601| 2.765905|
-|3  |rowAnyMissings(X[cols, rows]) | 2.146938| 2.108985| 2.135781| 2.127182| 2.123887| 2.475408|
+|2  |rowAnyMissings(X, cols, rows) | 1.371128| 1.365197| 1.382499| 1.353165| 1.367944| 2.696810|
+|3  |rowAnyMissings(X[cols, rows]) | 2.118649| 2.091201| 2.128116| 2.074005| 2.123782| 2.415102|
 
 _Figure: Benchmarking of colAnyMissings_X_S(), colAnyMissings(X, rows, cols)() and colAnyMissings(X[rows, cols])() on integer+10x1000 data  as well as rowAnyMissings_X_S(), rowAnyMissings(X, cols, rows)() and rowAnyMissings(X[cols, rows])() on the same data transposed.  Outliers are displayed as crosses.  Times are in milliseconds._
 
@@ -376,14 +376,14 @@ _Table: Benchmarking of colAnyMissings_X_S() and rowAnyMissings_X_S() on integer
 
 |   |expr               |   min|      lq|     mean|  median|     uq|    max|
 |:--|:------------------|-----:|-------:|--------:|-------:|------:|------:|
-|2  |rowAnyMissings_X_S | 9.977| 10.4235| 10.63325| 10.5990| 10.780| 14.964|
-|1  |colAnyMissings_X_S | 9.836| 10.4120| 11.03775| 10.7095| 11.137| 32.999|
+|2  |rowAnyMissings_X_S | 9.684| 10.1370| 10.61658| 10.6480| 10.878| 15.548|
+|1  |colAnyMissings_X_S | 9.493| 10.6625| 13.15470| 11.2745| 14.976| 32.852|
 
 
-|   |expr               |       min|        lq|     mean|   median|       uq|      max|
-|:--|:------------------|---------:|---------:|--------:|--------:|--------:|--------:|
-|2  |rowAnyMissings_X_S | 1.0000000| 1.0000000| 1.000000| 1.000000| 1.000000| 1.000000|
-|1  |colAnyMissings_X_S | 0.9858675| 0.9988967| 1.038041| 1.010425| 1.033117| 2.205226|
+|   |expr               |       min|      lq|     mean|   median|       uq|      max|
+|:--|:------------------|---------:|-------:|--------:|--------:|--------:|--------:|
+|2  |rowAnyMissings_X_S | 1.0000000| 1.00000| 1.000000| 1.000000| 1.000000| 1.000000|
+|1  |colAnyMissings_X_S | 0.9802767| 1.05184| 1.239071| 1.058837| 1.376724| 2.112941|
 
 _Figure: Benchmarking of colAnyMissings_X_S() and rowAnyMissings_X_S() on integer+10x1000 data (original and transposed).  Outliers are displayed as crosses. Times are in milliseconds._
 
@@ -400,16 +400,16 @@ _Figure: Benchmarking of colAnyMissings_X_S() and rowAnyMissings_X_S() on intege
 > X_S <- X[rows, cols]
 > gc()
           used  (Mb) gc trigger  (Mb) max used  (Mb)
-Ncells 5151825 275.2    7554717 403.5  7554717 403.5
-Vcells 9075121  69.3   31793280 242.6 60508962 461.7
+Ncells 5168142 276.1    7916910 422.9  7916910 422.9
+Vcells 9261079  70.7   33191153 253.3 53339345 407.0
 > colStats <- microbenchmark(colAnyMissings_X_S = colAnyMissings(X_S), `colAnyMissings(X, rows, cols)` = colAnyMissings(X, 
 +     rows = rows, cols = cols), `colAnyMissings(X[rows, cols])` = colAnyMissings(X[rows, cols]), unit = "ms")
 > X <- t(X)
 > X_S <- t(X_S)
 > gc()
           used  (Mb) gc trigger  (Mb) max used  (Mb)
-Ncells 5151819 275.2    7554717 403.5  7554717 403.5
-Vcells 9125204  69.7   31793280 242.6 60508962 461.7
+Ncells 5168136 276.1    7916910 422.9  7916910 422.9
+Vcells 9311162  71.1   33191153 253.3 53339345 407.0
 > rowStats <- microbenchmark(rowAnyMissings_X_S = rowAnyMissings(X_S), `rowAnyMissings(X, cols, rows)` = rowAnyMissings(X, 
 +     rows = cols, cols = rows), `rowAnyMissings(X[cols, rows])` = rowAnyMissings(X[cols, rows]), unit = "ms")
 ```
@@ -420,33 +420,33 @@ _Table: Benchmarking of colAnyMissings_X_S(), colAnyMissings(X, rows, cols)() an
 
 |   |expr                          |      min|        lq|      mean|    median|        uq|      max|
 |:--|:-----------------------------|--------:|---------:|---------:|---------:|---------:|--------:|
-|1  |colAnyMissings_X_S            | 0.024088| 0.0251995| 0.0276172| 0.0264200| 0.0287040| 0.067366|
-|2  |colAnyMissings(X, rows, cols) | 0.072278| 0.0752990| 0.0823661| 0.0799520| 0.0864105| 0.153487|
-|3  |colAnyMissings(X[rows, cols]) | 0.107213| 0.1111555| 0.1210023| 0.1181735| 0.1285300| 0.144728|
+|1  |colAnyMissings_X_S            | 0.023285| 0.0245495| 0.0268781| 0.0256835| 0.0279530| 0.057528|
+|2  |colAnyMissings(X, rows, cols) | 0.071859| 0.0744675| 0.0797039| 0.0774855| 0.0838680| 0.151345|
+|3  |colAnyMissings(X[rows, cols]) | 0.105668| 0.1101715| 0.1181411| 0.1176285| 0.1263425| 0.138540|
 
 
 |   |expr                          |      min|       lq|     mean|   median|       uq|      max|
 |:--|:-----------------------------|--------:|--------:|--------:|--------:|--------:|--------:|
 |1  |colAnyMissings_X_S            | 1.000000| 1.000000| 1.000000| 1.000000| 1.000000| 1.000000|
-|2  |colAnyMissings(X, rows, cols) | 3.000581| 2.988115| 2.982423| 3.026192| 3.010399| 2.278405|
-|3  |colAnyMissings(X[rows, cols]) | 4.450888| 4.411020| 4.381412| 4.472880| 4.477773| 2.148384|
+|2  |colAnyMissings(X, rows, cols) | 3.086064| 3.033361| 2.965382| 3.016937| 3.000322| 2.630806|
+|3  |colAnyMissings(X[rows, cols]) | 4.538029| 4.487729| 4.395438| 4.579925| 4.519819| 2.408219|
 
 _Table: Benchmarking of rowAnyMissings_X_S(), rowAnyMissings(X, cols, rows)() and rowAnyMissings(X[cols, rows])() on integer+100x1000 data (transposed). The top panel shows times in milliseconds and the bottom panel shows relative times._
 
 
 
-|   |expr                          |      min|        lq|      mean|    median|        uq|      max|
-|:--|:-----------------------------|--------:|---------:|---------:|---------:|---------:|--------:|
-|1  |rowAnyMissings_X_S            | 0.039288| 0.0409705| 0.0449317| 0.0439430| 0.0468640| 0.075693|
-|2  |rowAnyMissings(X, cols, rows) | 0.061490| 0.0633885| 0.0678970| 0.0646515| 0.0708555| 0.129899|
-|3  |rowAnyMissings(X[cols, rows]) | 0.118240| 0.1224405| 0.1313771| 0.1294105| 0.1394760| 0.156171|
+|   |expr                          |      min|        lq|      mean|   median|        uq|      max|
+|:--|:-----------------------------|--------:|---------:|---------:|--------:|---------:|--------:|
+|1  |rowAnyMissings_X_S            | 0.038863| 0.0404100| 0.0436557| 0.043490| 0.0460685| 0.073559|
+|2  |rowAnyMissings(X, cols, rows) | 0.060459| 0.0623870| 0.0667166| 0.063631| 0.0707165| 0.122293|
+|3  |rowAnyMissings(X[cols, rows]) | 0.117589| 0.1219315| 0.1313749| 0.126885| 0.1405105| 0.198744|
 
 
 |   |expr                          |      min|       lq|     mean|   median|       uq|      max|
 |:--|:-----------------------------|--------:|--------:|--------:|--------:|--------:|--------:|
 |1  |rowAnyMissings_X_S            | 1.000000| 1.000000| 1.000000| 1.000000| 1.000000| 1.000000|
-|2  |rowAnyMissings(X, cols, rows) | 1.565109| 1.547174| 1.511117| 1.471258| 1.511939| 1.716130|
-|3  |rowAnyMissings(X[cols, rows]) | 3.009570| 2.988504| 2.923931| 2.944963| 2.976186| 2.063216|
+|2  |rowAnyMissings(X, cols, rows) | 1.555696| 1.543851| 1.528246| 1.463118| 1.535029| 1.662516|
+|3  |rowAnyMissings(X[cols, rows]) | 3.025731| 3.017360| 3.009344| 2.917567| 3.050034| 2.701831|
 
 _Figure: Benchmarking of colAnyMissings_X_S(), colAnyMissings(X, rows, cols)() and colAnyMissings(X[rows, cols])() on integer+100x1000 data  as well as rowAnyMissings_X_S(), rowAnyMissings(X, cols, rows)() and rowAnyMissings(X[cols, rows])() on the same data transposed.  Outliers are displayed as crosses.  Times are in milliseconds._
 
@@ -458,16 +458,16 @@ _Table: Benchmarking of colAnyMissings_X_S() and rowAnyMissings_X_S() on integer
 
 
 
-|   |expr               |    min|      lq|     mean| median|     uq|    max|
-|:--|:------------------|------:|-------:|--------:|------:|------:|------:|
-|1  |colAnyMissings_X_S | 24.088| 25.1995| 27.61719| 26.420| 28.704| 67.366|
-|2  |rowAnyMissings_X_S | 39.288| 40.9705| 44.93166| 43.943| 46.864| 75.693|
+|   |expr               |    min|      lq|     mean|  median|      uq|    max|
+|:--|:------------------|------:|-------:|--------:|-------:|-------:|------:|
+|1  |colAnyMissings_X_S | 23.285| 24.5495| 26.87811| 25.6835| 27.9530| 57.528|
+|2  |rowAnyMissings_X_S | 38.863| 40.4100| 43.65567| 43.4900| 46.0685| 73.559|
 
 
-|   |expr               |     min|       lq|     mean|   median|       uq|      max|
-|:--|:------------------|-------:|--------:|--------:|--------:|--------:|--------:|
-|1  |colAnyMissings_X_S | 1.00000| 1.000000| 1.000000| 1.000000| 1.000000| 1.000000|
-|2  |rowAnyMissings_X_S | 1.63102| 1.625846| 1.626945| 1.663247| 1.632664| 1.123608|
+|   |expr               |      min|       lq|     mean|   median|      uq|      max|
+|:--|:------------------|--------:|--------:|--------:|--------:|-------:|--------:|
+|1  |colAnyMissings_X_S | 1.000000| 1.000000| 1.000000| 1.000000| 1.00000| 1.000000|
+|2  |rowAnyMissings_X_S | 1.669014| 1.646062| 1.624209| 1.693305| 1.64807| 1.278664|
 
 _Figure: Benchmarking of colAnyMissings_X_S() and rowAnyMissings_X_S() on integer+100x1000 data (original and transposed).  Outliers are displayed as crosses. Times are in milliseconds._
 
@@ -484,16 +484,16 @@ _Figure: Benchmarking of colAnyMissings_X_S() and rowAnyMissings_X_S() on intege
 > X_S <- X[rows, cols]
 > gc()
           used  (Mb) gc trigger  (Mb) max used  (Mb)
-Ncells 5152038 275.2    7554717 403.5  7554717 403.5
-Vcells 9075932  69.3   31793280 242.6 60508962 461.7
+Ncells 5168352 276.1    7916910 422.9  7916910 422.9
+Vcells 9261885  70.7   33191153 253.3 53339345 407.0
 > colStats <- microbenchmark(colAnyMissings_X_S = colAnyMissings(X_S), `colAnyMissings(X, rows, cols)` = colAnyMissings(X, 
 +     rows = rows, cols = cols), `colAnyMissings(X[rows, cols])` = colAnyMissings(X[rows, cols]), unit = "ms")
 > X <- t(X)
 > X_S <- t(X_S)
 > gc()
           used  (Mb) gc trigger  (Mb) max used  (Mb)
-Ncells 5152032 275.2    7554717 403.5  7554717 403.5
-Vcells 9126015  69.7   31793280 242.6 60508962 461.7
+Ncells 5168346 276.1    7916910 422.9  7916910 422.9
+Vcells 9311968  71.1   33191153 253.3 53339345 407.0
 > rowStats <- microbenchmark(rowAnyMissings_X_S = rowAnyMissings(X_S), `rowAnyMissings(X, cols, rows)` = rowAnyMissings(X, 
 +     rows = cols, cols = rows), `rowAnyMissings(X[cols, rows])` = rowAnyMissings(X[cols, rows]), unit = "ms")
 ```
@@ -502,35 +502,35 @@ _Table: Benchmarking of colAnyMissings_X_S(), colAnyMissings(X, rows, cols)() an
 
 
 
-|   |expr                          |      min|       lq|      mean|    median|        uq|      max|
-|:--|:-----------------------------|--------:|--------:|---------:|---------:|---------:|--------:|
-|1  |colAnyMissings_X_S            | 0.022411| 0.023681| 0.0256924| 0.0243875| 0.0265480| 0.056803|
-|2  |colAnyMissings(X, rows, cols) | 0.071343| 0.074385| 0.0794266| 0.0768365| 0.0836865| 0.099432|
-|3  |colAnyMissings(X[rows, cols]) | 0.101773| 0.106157| 0.1145675| 0.1100275| 0.1220625| 0.187347|
+|   |expr                          |      min|        lq|      mean|    median|        uq|      max|
+|:--|:-----------------------------|--------:|---------:|---------:|---------:|---------:|--------:|
+|1  |colAnyMissings_X_S            | 0.022629| 0.0238365| 0.0264090| 0.0253955| 0.0279665| 0.058075|
+|2  |colAnyMissings(X, rows, cols) | 0.073222| 0.0763880| 0.0835409| 0.0845805| 0.0888955| 0.104431|
+|3  |colAnyMissings(X[rows, cols]) | 0.104353| 0.1086115| 0.1188780| 0.1206140| 0.1263750| 0.187801|
 
 
 |   |expr                          |      min|       lq|     mean|   median|       uq|      max|
 |:--|:-----------------------------|--------:|--------:|--------:|--------:|--------:|--------:|
 |1  |colAnyMissings_X_S            | 1.000000| 1.000000| 1.000000| 1.000000| 1.000000| 1.000000|
-|2  |colAnyMissings(X, rows, cols) | 3.183392| 3.141126| 3.091441| 3.150651| 3.152271| 1.750471|
-|3  |colAnyMissings(X[rows, cols]) | 4.541207| 4.482792| 4.459198| 4.511635| 4.597804| 3.298189|
+|2  |colAnyMissings(X, rows, cols) | 3.235759| 3.204665| 3.163352| 3.330531| 3.178642| 1.798209|
+|3  |colAnyMissings(X[rows, cols]) | 4.611472| 4.556521| 4.501424| 4.749424| 4.518799| 3.233767|
 
 _Table: Benchmarking of rowAnyMissings_X_S(), rowAnyMissings(X, cols, rows)() and rowAnyMissings(X[cols, rows])() on integer+1000x100 data (transposed). The top panel shows times in milliseconds and the bottom panel shows relative times._
 
 
 
-|   |expr                          |      min|       lq|      mean|    median|        uq|      max|
-|:--|:-----------------------------|--------:|--------:|---------:|---------:|---------:|--------:|
-|1  |rowAnyMissings_X_S            | 0.048912| 0.049591| 0.0535517| 0.0510945| 0.0566840| 0.069009|
-|2  |rowAnyMissings(X, cols, rows) | 0.063900| 0.065087| 0.0710478| 0.0684935| 0.0738755| 0.160740|
-|3  |rowAnyMissings(X[cols, rows]) | 0.131550| 0.132986| 0.1434484| 0.1371010| 0.1521355| 0.175631|
+|   |expr                          |      min|        lq|      mean|    median|       uq|      max|
+|:--|:-----------------------------|--------:|---------:|---------:|---------:|--------:|--------:|
+|1  |rowAnyMissings_X_S            | 0.048362| 0.0503265| 0.0550694| 0.0540670| 0.058532| 0.068993|
+|2  |rowAnyMissings(X, cols, rows) | 0.063893| 0.0665080| 0.0732756| 0.0712745| 0.076519| 0.170742|
+|3  |rowAnyMissings(X[cols, rows]) | 0.131056| 0.1360320| 0.1489086| 0.1457050| 0.162942| 0.183731|
 
 
-|   |expr                          |      min|       lq|     mean|   median|       uq|      max|
-|:--|:-----------------------------|--------:|--------:|--------:|--------:|--------:|--------:|
-|1  |rowAnyMissings_X_S            | 1.000000| 1.000000| 1.000000| 1.000000| 1.000000| 1.000000|
-|2  |rowAnyMissings(X, cols, rows) | 1.306428| 1.312476| 1.326713| 1.340526| 1.303287| 2.329261|
-|3  |rowAnyMissings(X[cols, rows]) | 2.689524| 2.681656| 2.678689| 2.683283| 2.683923| 2.545045|
+|   |expr                          |      min|      lq|     mean|   median|       uq|      max|
+|:--|:-----------------------------|--------:|-------:|--------:|--------:|--------:|--------:|
+|1  |rowAnyMissings_X_S            | 1.000000| 1.00000| 1.000000| 1.000000| 1.000000| 1.000000|
+|2  |rowAnyMissings(X, cols, rows) | 1.321141| 1.32153| 1.330604| 1.318262| 1.307302| 2.474773|
+|3  |rowAnyMissings(X[cols, rows]) | 2.709896| 2.70299| 2.704016| 2.694897| 2.783811| 2.663038|
 
 _Figure: Benchmarking of colAnyMissings_X_S(), colAnyMissings(X, rows, cols)() and colAnyMissings(X[rows, cols])() on integer+1000x100 data  as well as rowAnyMissings_X_S(), rowAnyMissings(X, cols, rows)() and rowAnyMissings(X[cols, rows])() on the same data transposed.  Outliers are displayed as crosses.  Times are in milliseconds._
 
@@ -542,16 +542,16 @@ _Table: Benchmarking of colAnyMissings_X_S() and rowAnyMissings_X_S() on integer
 
 
 
-|   |expr               |    min|     lq|     mean|  median|     uq|    max|
-|:--|:------------------|------:|------:|--------:|-------:|------:|------:|
-|1  |colAnyMissings_X_S | 22.411| 23.681| 25.69240| 24.3875| 26.548| 56.803|
-|2  |rowAnyMissings_X_S | 48.912| 49.591| 53.55173| 51.0945| 56.684| 69.009|
+|   |expr               |    min|      lq|     mean|  median|      uq|    max|
+|:--|:------------------|------:|-------:|--------:|-------:|-------:|------:|
+|1  |colAnyMissings_X_S | 22.629| 23.8365| 26.40899| 25.3955| 27.9665| 58.075|
+|2  |rowAnyMissings_X_S | 48.362| 50.3265| 55.06940| 54.0670| 58.5320| 68.993|
 
 
-|   |expr               |    min|       lq|     mean|  median|       uq|      max|
-|:--|:------------------|------:|--------:|--------:|-------:|--------:|--------:|
-|1  |colAnyMissings_X_S | 1.0000| 1.000000| 1.000000| 1.00000| 1.000000| 1.000000|
-|2  |rowAnyMissings_X_S | 2.1825| 2.094126| 2.084341| 2.09511| 2.135151| 1.214883|
+|   |expr               |      min|       lq|     mean|   median|       uq|      max|
+|:--|:------------------|--------:|--------:|--------:|--------:|--------:|--------:|
+|1  |colAnyMissings_X_S | 1.000000| 1.000000| 1.000000| 1.000000| 1.000000| 1.000000|
+|2  |rowAnyMissings_X_S | 2.137169| 2.111321| 2.085252| 2.128999| 2.092933| 1.187998|
 
 _Figure: Benchmarking of colAnyMissings_X_S() and rowAnyMissings_X_S() on integer+1000x100 data (original and transposed).  Outliers are displayed as crosses. Times are in milliseconds._
 
@@ -609,16 +609,16 @@ _Figure: Benchmarking of colAnyMissings_X_S() and rowAnyMissings_X_S() on intege
 > X_S <- X[rows, cols]
 > gc()
           used  (Mb) gc trigger  (Mb) max used  (Mb)
-Ncells 5152255 275.2    7554717 403.5  7554717 403.5
-Vcells 9167068  70.0   31793280 242.6 60508962 461.7
+Ncells 5168570 276.1    7916910 422.9  7916910 422.9
+Vcells 9353023  71.4   33191153 253.3 53339345 407.0
 > colStats <- microbenchmark(colAnyMissings_X_S = colAnyMissings(X_S), `colAnyMissings(X, rows, cols)` = colAnyMissings(X, 
 +     rows = rows, cols = cols), `colAnyMissings(X[rows, cols])` = colAnyMissings(X[rows, cols]), unit = "ms")
 > X <- t(X)
 > X_S <- t(X_S)
 > gc()
           used  (Mb) gc trigger  (Mb) max used  (Mb)
-Ncells 5152240 275.2    7554717 403.5  7554717 403.5
-Vcells 9167236  70.0   31793280 242.6 60508962 461.7
+Ncells 5168555 276.1    7916910 422.9  7916910 422.9
+Vcells 9353191  71.4   33191153 253.3 53339345 407.0
 > rowStats <- microbenchmark(rowAnyMissings_X_S = rowAnyMissings(X_S), `rowAnyMissings(X, cols, rows)` = rowAnyMissings(X, 
 +     rows = cols, cols = rows), `rowAnyMissings(X[cols, rows])` = rowAnyMissings(X[cols, rows]), unit = "ms")
 ```
@@ -629,16 +629,16 @@ _Table: Benchmarking of colAnyMissings_X_S(), colAnyMissings(X, rows, cols)() an
 
 |   |expr                          |      min|        lq|      mean|    median|        uq|      max|
 |:--|:-----------------------------|--------:|---------:|---------:|---------:|---------:|--------:|
-|1  |colAnyMissings_X_S            | 0.004277| 0.0044615| 0.0049464| 0.0045515| 0.0046825| 0.037929|
-|2  |colAnyMissings(X, rows, cols) | 0.004664| 0.0048960| 0.0050777| 0.0050020| 0.0051370| 0.007793|
-|3  |colAnyMissings(X[rows, cols]) | 0.005359| 0.0056525| 0.0061233| 0.0057955| 0.0059435| 0.026401|
+|1  |colAnyMissings_X_S            | 0.004388| 0.0044615| 0.0048326| 0.0045765| 0.0046995| 0.025490|
+|2  |colAnyMissings(X, rows, cols) | 0.004705| 0.0049285| 0.0050622| 0.0050105| 0.0051240| 0.007731|
+|3  |colAnyMissings(X[rows, cols]) | 0.005384| 0.0056545| 0.0058520| 0.0057630| 0.0059200| 0.011243|
 
 
 |   |expr                          |      min|       lq|     mean|   median|       uq|       max|
 |:--|:-----------------------------|--------:|--------:|--------:|--------:|--------:|---------:|
 |1  |colAnyMissings_X_S            | 1.000000| 1.000000| 1.000000| 1.000000| 1.000000| 1.0000000|
-|2  |colAnyMissings(X, rows, cols) | 1.090484| 1.097389| 1.026536| 1.098978| 1.097063| 0.2054628|
-|3  |colAnyMissings(X[rows, cols]) | 1.252981| 1.266951| 1.237920| 1.273316| 1.269301| 0.6960637|
+|2  |colAnyMissings(X, rows, cols) | 1.072242| 1.104673| 1.047511| 1.094832| 1.090329| 0.3032954|
+|3  |colAnyMissings(X[rows, cols]) | 1.226983| 1.267399| 1.210950| 1.259259| 1.259708| 0.4410749|
 
 _Table: Benchmarking of rowAnyMissings_X_S(), rowAnyMissings(X, cols, rows)() and rowAnyMissings(X[cols, rows])() on double+10x10 data (transposed). The top panel shows times in milliseconds and the bottom panel shows relative times._
 
@@ -646,16 +646,16 @@ _Table: Benchmarking of rowAnyMissings_X_S(), rowAnyMissings(X, cols, rows)() an
 
 |   |expr                          |      min|        lq|      mean|    median|        uq|      max|
 |:--|:-----------------------------|--------:|---------:|---------:|---------:|---------:|--------:|
-|1  |rowAnyMissings_X_S            | 0.004254| 0.0044060| 0.0045370| 0.0044780| 0.0046095| 0.006705|
-|2  |rowAnyMissings(X, cols, rows) | 0.004607| 0.0047955| 0.0051676| 0.0048735| 0.0050065| 0.028174|
-|3  |rowAnyMissings(X[cols, rows]) | 0.005347| 0.0056920| 0.0058581| 0.0058025| 0.0059410| 0.008402|
+|1  |rowAnyMissings_X_S            | 0.004439| 0.0045850| 0.0047184| 0.0046745| 0.0048005| 0.007243|
+|2  |rowAnyMissings(X, cols, rows) | 0.004812| 0.0049895| 0.0058534| 0.0050725| 0.0052055| 0.044818|
+|3  |rowAnyMissings(X[cols, rows]) | 0.005497| 0.0057685| 0.0059573| 0.0058535| 0.0060335| 0.011667|
 
 
 |   |expr                          |      min|       lq|     mean|   median|       uq|      max|
 |:--|:-----------------------------|--------:|--------:|--------:|--------:|--------:|--------:|
 |1  |rowAnyMissings_X_S            | 1.000000| 1.000000| 1.000000| 1.000000| 1.000000| 1.000000|
-|2  |rowAnyMissings(X, cols, rows) | 1.082981| 1.088402| 1.138988| 1.088321| 1.086126| 4.201939|
-|3  |rowAnyMissings(X[cols, rows]) | 1.256935| 1.291875| 1.291181| 1.295779| 1.288860| 1.253095|
+|2  |rowAnyMissings(X, cols, rows) | 1.084028| 1.088223| 1.240552| 1.085143| 1.084366| 6.187767|
+|3  |rowAnyMissings(X[cols, rows]) | 1.238342| 1.258124| 1.262572| 1.252220| 1.256848| 1.610797|
 
 _Figure: Benchmarking of colAnyMissings_X_S(), colAnyMissings(X, rows, cols)() and colAnyMissings(X[rows, cols])() on double+10x10 data  as well as rowAnyMissings_X_S(), rowAnyMissings(X, cols, rows)() and rowAnyMissings(X[cols, rows])() on the same data transposed.  Outliers are displayed as crosses.  Times are in milliseconds._
 
@@ -669,14 +669,14 @@ _Table: Benchmarking of colAnyMissings_X_S() and rowAnyMissings_X_S() on double+
 
 |   |expr               |   min|     lq|    mean| median|     uq|    max|
 |:--|:------------------|-----:|------:|-------:|------:|------:|------:|
-|2  |rowAnyMissings_X_S | 4.254| 4.4060| 4.53701| 4.4780| 4.6095|  6.705|
-|1  |colAnyMissings_X_S | 4.277| 4.4615| 4.94645| 4.5515| 4.6825| 37.929|
+|1  |colAnyMissings_X_S | 4.388| 4.4615| 4.83257| 4.5765| 4.6995| 25.490|
+|2  |rowAnyMissings_X_S | 4.439| 4.5850| 4.71836| 4.6745| 4.8005|  7.243|
 
 
-|   |expr               |      min|       lq|     mean|   median|       uq|      max|
-|:--|:------------------|--------:|--------:|--------:|--------:|--------:|--------:|
-|2  |rowAnyMissings_X_S | 1.000000| 1.000000| 1.000000| 1.000000| 1.000000| 1.000000|
-|1  |colAnyMissings_X_S | 1.005407| 1.012596| 1.090245| 1.016414| 1.015837| 5.656823|
+|   |expr               |      min|       lq|      mean|   median|       uq|       max|
+|:--|:------------------|--------:|--------:|---------:|--------:|--------:|---------:|
+|1  |colAnyMissings_X_S | 1.000000| 1.000000| 1.0000000| 1.000000| 1.000000| 1.0000000|
+|2  |rowAnyMissings_X_S | 1.011623| 1.027681| 0.9763666| 1.021414| 1.021492| 0.2841506|
 
 _Figure: Benchmarking of colAnyMissings_X_S() and rowAnyMissings_X_S() on double+10x10 data (original and transposed).  Outliers are displayed as crosses. Times are in milliseconds._
 
@@ -693,16 +693,16 @@ _Figure: Benchmarking of colAnyMissings_X_S() and rowAnyMissings_X_S() on double
 > X_S <- X[rows, cols]
 > gc()
           used  (Mb) gc trigger  (Mb) max used  (Mb)
-Ncells 5152452 275.2    7554717 403.5  7554717 403.5
-Vcells 9173045  70.0   31793280 242.6 60508962 461.7
+Ncells 5168769 276.1    7916910 422.9  7916910 422.9
+Vcells 9359005  71.5   33191153 253.3 53339345 407.0
 > colStats <- microbenchmark(colAnyMissings_X_S = colAnyMissings(X_S), `colAnyMissings(X, rows, cols)` = colAnyMissings(X, 
 +     rows = rows, cols = cols), `colAnyMissings(X[rows, cols])` = colAnyMissings(X[rows, cols]), unit = "ms")
 > X <- t(X)
 > X_S <- t(X_S)
 > gc()
           used  (Mb) gc trigger  (Mb) max used  (Mb)
-Ncells 5152446 275.2    7554717 403.5  7554717 403.5
-Vcells 9183128  70.1   31793280 242.6 60508962 461.7
+Ncells 5168763 276.1    7916910 422.9  7916910 422.9
+Vcells 9369088  71.5   33191153 253.3 53339345 407.0
 > rowStats <- microbenchmark(rowAnyMissings_X_S = rowAnyMissings(X_S), `rowAnyMissings(X, cols, rows)` = rowAnyMissings(X, 
 +     rows = cols, cols = rows), `rowAnyMissings(X[cols, rows])` = rowAnyMissings(X[cols, rows]), unit = "ms")
 ```
@@ -713,16 +713,16 @@ _Table: Benchmarking of colAnyMissings_X_S(), colAnyMissings(X, rows, cols)() an
 
 |   |expr                          |      min|        lq|      mean|    median|        uq|      max|
 |:--|:-----------------------------|--------:|---------:|---------:|---------:|---------:|--------:|
-|1  |colAnyMissings_X_S            | 0.008220| 0.0088695| 0.0091020| 0.0090605| 0.0092500| 0.013355|
-|2  |colAnyMissings(X, rows, cols) | 0.015571| 0.0161545| 0.0165665| 0.0164950| 0.0167380| 0.022607|
-|3  |colAnyMissings(X[rows, cols]) | 0.023777| 0.0242605| 0.0252576| 0.0249140| 0.0251475| 0.055066|
+|1  |colAnyMissings_X_S            | 0.008346| 0.0091665| 0.0094162| 0.0093740| 0.0095235| 0.014397|
+|2  |colAnyMissings(X, rows, cols) | 0.016231| 0.0167725| 0.0170888| 0.0169465| 0.0171470| 0.021151|
+|3  |colAnyMissings(X[rows, cols]) | 0.025031| 0.0256580| 0.0262463| 0.0258550| 0.0260510| 0.058321|
 
 
 |   |expr                          |      min|       lq|     mean|   median|       uq|      max|
 |:--|:-----------------------------|--------:|--------:|--------:|--------:|--------:|--------:|
 |1  |colAnyMissings_X_S            | 1.000000| 1.000000| 1.000000| 1.000000| 1.000000| 1.000000|
-|2  |colAnyMissings(X, rows, cols) | 1.894282| 1.821354| 1.820091| 1.820540| 1.809513| 1.692774|
-|3  |colAnyMissings(X[rows, cols]) | 2.892579| 2.735273| 2.774938| 2.749738| 2.718649| 4.123250|
+|2  |colAnyMissings(X, rows, cols) | 1.944764| 1.829760| 1.814840| 1.807819| 1.800493| 1.469126|
+|3  |colAnyMissings(X[rows, cols]) | 2.999161| 2.799105| 2.787364| 2.758161| 2.735444| 4.050913|
 
 _Table: Benchmarking of rowAnyMissings_X_S(), rowAnyMissings(X, cols, rows)() and rowAnyMissings(X[cols, rows])() on double+100x100 data (transposed). The top panel shows times in milliseconds and the bottom panel shows relative times._
 
@@ -730,16 +730,16 @@ _Table: Benchmarking of rowAnyMissings_X_S(), rowAnyMissings(X, cols, rows)() an
 
 |   |expr                          |      min|        lq|      mean|    median|        uq|      max|
 |:--|:-----------------------------|--------:|---------:|---------:|---------:|---------:|--------:|
-|1  |rowAnyMissings_X_S            | 0.008388| 0.0091985| 0.0096174| 0.0094235| 0.0096975| 0.023701|
-|2  |rowAnyMissings(X, cols, rows) | 0.013295| 0.0141895| 0.0149913| 0.0144715| 0.0148260| 0.046042|
-|3  |rowAnyMissings(X[cols, rows]) | 0.023442| 0.0246200| 0.0251257| 0.0251705| 0.0256550| 0.029655|
+|1  |rowAnyMissings_X_S            | 0.009052| 0.0096590| 0.0101291| 0.0099565| 0.0101575| 0.024910|
+|2  |rowAnyMissings(X, cols, rows) | 0.014295| 0.0149705| 0.0156935| 0.0153040| 0.0156770| 0.047241|
+|3  |rowAnyMissings(X[cols, rows]) | 0.025012| 0.0263020| 0.0264998| 0.0264845| 0.0266350| 0.033584|
 
 
 |   |expr                          |      min|       lq|     mean|   median|       uq|      max|
 |:--|:-----------------------------|--------:|--------:|--------:|--------:|--------:|--------:|
 |1  |rowAnyMissings_X_S            | 1.000000| 1.000000| 1.000000| 1.000000| 1.000000| 1.000000|
-|2  |rowAnyMissings(X, cols, rows) | 1.585002| 1.542588| 1.558760| 1.535682| 1.528848| 1.942619|
-|3  |rowAnyMissings(X[cols, rows]) | 2.794707| 2.676523| 2.612514| 2.671035| 2.645527| 1.251213|
+|2  |rowAnyMissings(X, cols, rows) | 1.579209| 1.549902| 1.549346| 1.537086| 1.543392| 1.896467|
+|3  |rowAnyMissings(X[cols, rows]) | 2.763146| 2.723056| 2.616191| 2.660021| 2.622200| 1.348214|
 
 _Figure: Benchmarking of colAnyMissings_X_S(), colAnyMissings(X, rows, cols)() and colAnyMissings(X[rows, cols])() on double+100x100 data  as well as rowAnyMissings_X_S(), rowAnyMissings(X, cols, rows)() and rowAnyMissings(X[cols, rows])() on the same data transposed.  Outliers are displayed as crosses.  Times are in milliseconds._
 
@@ -751,16 +751,16 @@ _Table: Benchmarking of colAnyMissings_X_S() and rowAnyMissings_X_S() on double+
 
 
 
-|   |expr               |   min|     lq|    mean| median|     uq|    max|
-|:--|:------------------|-----:|------:|-------:|------:|------:|------:|
-|1  |colAnyMissings_X_S | 8.220| 8.8695| 9.10204| 9.0605| 9.2500| 13.355|
-|2  |rowAnyMissings_X_S | 8.388| 9.1985| 9.61743| 9.4235| 9.6975| 23.701|
+|   |expr               |   min|     lq|     mean| median|      uq|    max|
+|:--|:------------------|-----:|------:|--------:|------:|-------:|------:|
+|1  |colAnyMissings_X_S | 8.346| 9.1665|  9.41617| 9.3740|  9.5235| 14.397|
+|2  |rowAnyMissings_X_S | 9.052| 9.6590| 10.12914| 9.9565| 10.1575| 24.910|
 
 
-|   |expr               |      min|       lq|     mean|   median|       uq|      max|
-|:--|:------------------|--------:|--------:|--------:|--------:|--------:|--------:|
-|1  |colAnyMissings_X_S | 1.000000| 1.000000| 1.000000| 1.000000| 1.000000| 1.000000|
-|2  |rowAnyMissings_X_S | 1.020438| 1.037093| 1.056624| 1.040064| 1.048378| 1.774691|
+|   |expr               |      min|       lq|     mean|  median|       uq|      max|
+|:--|:------------------|--------:|--------:|--------:|-------:|--------:|--------:|
+|1  |colAnyMissings_X_S | 1.000000| 1.000000| 1.000000| 1.00000| 1.000000| 1.000000|
+|2  |rowAnyMissings_X_S | 1.084591| 1.053728| 1.075718| 1.06214| 1.066572| 1.730222|
 
 _Figure: Benchmarking of colAnyMissings_X_S() and rowAnyMissings_X_S() on double+100x100 data (original and transposed).  Outliers are displayed as crosses. Times are in milliseconds._
 
@@ -777,16 +777,16 @@ _Figure: Benchmarking of colAnyMissings_X_S() and rowAnyMissings_X_S() on double
 > X_S <- X[rows, cols]
 > gc()
           used  (Mb) gc trigger  (Mb) max used  (Mb)
-Ncells 5152652 275.2    7554717 403.5  7554717 403.5
-Vcells 9174496  70.0   31793280 242.6 60508962 461.7
+Ncells 5168968 276.1    7916910 422.9  7916910 422.9
+Vcells 9360456  71.5   33191153 253.3 53339345 407.0
 > colStats <- microbenchmark(colAnyMissings_X_S = colAnyMissings(X_S), `colAnyMissings(X, rows, cols)` = colAnyMissings(X, 
 +     rows = rows, cols = cols), `colAnyMissings(X[rows, cols])` = colAnyMissings(X[rows, cols]), unit = "ms")
 > X <- t(X)
 > X_S <- t(X_S)
 > gc()
           used  (Mb) gc trigger  (Mb) max used  (Mb)
-Ncells 5152646 275.2    7554717 403.5  7554717 403.5
-Vcells 9184579  70.1   31793280 242.6 60508962 461.7
+Ncells 5168962 276.1    7916910 422.9  7916910 422.9
+Vcells 9370539  71.5   33191153 253.3 53339345 407.0
 > rowStats <- microbenchmark(rowAnyMissings_X_S = rowAnyMissings(X_S), `rowAnyMissings(X, cols, rows)` = rowAnyMissings(X, 
 +     rows = cols, cols = rows), `rowAnyMissings(X[cols, rows])` = rowAnyMissings(X[cols, rows]), unit = "ms")
 ```
@@ -797,33 +797,33 @@ _Table: Benchmarking of colAnyMissings_X_S(), colAnyMissings(X, rows, cols)() an
 
 |   |expr                          |      min|        lq|      mean|    median|        uq|      max|
 |:--|:-----------------------------|--------:|---------:|---------:|---------:|---------:|--------:|
-|1  |colAnyMissings_X_S            | 0.007455| 0.0077845| 0.0080190| 0.0079655| 0.0081510| 0.012322|
-|2  |colAnyMissings(X, rows, cols) | 0.015334| 0.0158870| 0.0162866| 0.0161395| 0.0165045| 0.021376|
-|3  |colAnyMissings(X[rows, cols]) | 0.022643| 0.0235985| 0.0247264| 0.0238420| 0.0246600| 0.059187|
+|1  |colAnyMissings_X_S            | 0.007822| 0.0082445| 0.0086023| 0.0084340| 0.0086005| 0.018190|
+|2  |colAnyMissings(X, rows, cols) | 0.016428| 0.0169920| 0.0172895| 0.0172190| 0.0174325| 0.022876|
+|3  |colAnyMissings(X[rows, cols]) | 0.024324| 0.0255395| 0.0264378| 0.0256535| 0.0258835| 0.089559|
 
 
 |   |expr                          |      min|       lq|     mean|   median|       uq|      max|
 |:--|:-----------------------------|--------:|--------:|--------:|--------:|--------:|--------:|
 |1  |colAnyMissings_X_S            | 1.000000| 1.000000| 1.000000| 1.000000| 1.000000| 1.000000|
-|2  |colAnyMissings(X, rows, cols) | 2.056875| 2.040850| 2.030990| 2.026175| 2.024844| 1.734783|
-|3  |colAnyMissings(X[rows, cols]) | 3.037290| 3.031473| 3.083466| 2.993158| 3.025396| 4.803360|
+|2  |colAnyMissings(X, rows, cols) | 2.100230| 2.061010| 2.009872| 2.041617| 2.026917| 1.257614|
+|3  |colAnyMissings(X[rows, cols]) | 3.109691| 3.097762| 3.073333| 3.041676| 3.009534| 4.923529|
 
 _Table: Benchmarking of rowAnyMissings_X_S(), rowAnyMissings(X, cols, rows)() and rowAnyMissings(X[cols, rows])() on double+1000x10 data (transposed). The top panel shows times in milliseconds and the bottom panel shows relative times._
 
 
 
-|   |expr                          |      min|        lq|      mean|    median|        uq|      max|
-|:--|:-----------------------------|--------:|---------:|---------:|---------:|---------:|--------:|
-|1  |rowAnyMissings_X_S            | 0.008632| 0.0089080| 0.0091992| 0.0091230| 0.0093475| 0.014225|
-|2  |rowAnyMissings(X, cols, rows) | 0.015125| 0.0155960| 0.0160501| 0.0158535| 0.0160350| 0.030496|
-|3  |rowAnyMissings(X[cols, rows]) | 0.027394| 0.0277595| 0.0285595| 0.0279830| 0.0287335| 0.064292|
+|   |expr                          |      min|       lq|      mean|    median|        uq|      max|
+|:--|:-----------------------------|--------:|--------:|---------:|---------:|---------:|--------:|
+|1  |rowAnyMissings_X_S            | 0.009308| 0.009641| 0.0098729| 0.0098490| 0.0099945| 0.014667|
+|2  |rowAnyMissings(X, cols, rows) | 0.016732| 0.017037| 0.0173575| 0.0172730| 0.0174600| 0.023676|
+|3  |rowAnyMissings(X[cols, rows]) | 0.029381| 0.029845| 0.0306261| 0.0299695| 0.0301070| 0.073280|
 
 
 |   |expr                          |      min|       lq|     mean|   median|       uq|      max|
 |:--|:-----------------------------|--------:|--------:|--------:|--------:|--------:|--------:|
 |1  |rowAnyMissings_X_S            | 1.000000| 1.000000| 1.000000| 1.000000| 1.000000| 1.000000|
-|2  |rowAnyMissings(X, cols, rows) | 1.752201| 1.750786| 1.744736| 1.737751| 1.715432| 2.143831|
-|3  |rowAnyMissings(X[cols, rows]) | 3.173540| 3.116244| 3.104570| 3.067302| 3.073923| 4.519648|
+|2  |rowAnyMissings(X, cols, rows) | 1.797594| 1.767140| 1.758092| 1.753782| 1.746961| 1.614236|
+|3  |rowAnyMissings(X[cols, rows]) | 3.156532| 3.095633| 3.102039| 3.042898| 3.012357| 4.996250|
 
 _Figure: Benchmarking of colAnyMissings_X_S(), colAnyMissings(X, rows, cols)() and colAnyMissings(X[rows, cols])() on double+1000x10 data  as well as rowAnyMissings_X_S(), rowAnyMissings(X, cols, rows)() and rowAnyMissings(X[cols, rows])() on the same data transposed.  Outliers are displayed as crosses.  Times are in milliseconds._
 
@@ -837,14 +837,14 @@ _Table: Benchmarking of colAnyMissings_X_S() and rowAnyMissings_X_S() on double+
 
 |   |expr               |   min|     lq|    mean| median|     uq|    max|
 |:--|:------------------|-----:|------:|-------:|------:|------:|------:|
-|1  |colAnyMissings_X_S | 7.455| 7.7845| 8.01904| 7.9655| 8.1510| 12.322|
-|2  |rowAnyMissings_X_S | 8.632| 8.9080| 9.19917| 9.1230| 9.3475| 14.225|
+|1  |colAnyMissings_X_S | 7.822| 8.2445| 8.60231|  8.434| 8.6005| 18.190|
+|2  |rowAnyMissings_X_S | 9.308| 9.6410| 9.87290|  9.849| 9.9945| 14.667|
 
 
-|   |expr               |      min|       lq|     mean|   median|       uq|      max|
-|:--|:------------------|--------:|--------:|--------:|--------:|--------:|--------:|
-|1  |colAnyMissings_X_S | 1.000000| 1.000000| 1.000000| 1.000000| 1.000000| 1.000000|
-|2  |rowAnyMissings_X_S | 1.157881| 1.144325| 1.147166| 1.145314| 1.146792| 1.154439|
+|   |expr               |      min|       lq|     mean|   median|       uq|       max|
+|:--|:------------------|--------:|--------:|--------:|--------:|--------:|---------:|
+|1  |colAnyMissings_X_S | 1.000000| 1.000000| 1.000000| 1.000000| 1.000000| 1.0000000|
+|2  |rowAnyMissings_X_S | 1.189977| 1.169386| 1.147703| 1.167773| 1.162084| 0.8063222|
 
 _Figure: Benchmarking of colAnyMissings_X_S() and rowAnyMissings_X_S() on double+1000x10 data (original and transposed).  Outliers are displayed as crosses. Times are in milliseconds._
 
@@ -861,16 +861,16 @@ _Figure: Benchmarking of colAnyMissings_X_S() and rowAnyMissings_X_S() on double
 > X_S <- X[rows, cols]
 > gc()
           used  (Mb) gc trigger  (Mb) max used  (Mb)
-Ncells 5152857 275.2    7554717 403.5  7554717 403.5
-Vcells 9174632  70.0   31793280 242.6 60508962 461.7
+Ncells 5169173 276.1    7916910 422.9  7916910 422.9
+Vcells 9360592  71.5   33191153 253.3 53339345 407.0
 > colStats <- microbenchmark(colAnyMissings_X_S = colAnyMissings(X_S), `colAnyMissings(X, rows, cols)` = colAnyMissings(X, 
 +     rows = rows, cols = cols), `colAnyMissings(X[rows, cols])` = colAnyMissings(X[rows, cols]), unit = "ms")
 > X <- t(X)
 > X_S <- t(X_S)
 > gc()
           used  (Mb) gc trigger  (Mb) max used  (Mb)
-Ncells 5152851 275.2    7554717 403.5  7554717 403.5
-Vcells 9184715  70.1   31793280 242.6 60508962 461.7
+Ncells 5169167 276.1    7916910 422.9  7916910 422.9
+Vcells 9370675  71.5   33191153 253.3 53339345 407.0
 > rowStats <- microbenchmark(rowAnyMissings_X_S = rowAnyMissings(X_S), `rowAnyMissings(X, cols, rows)` = rowAnyMissings(X, 
 +     rows = cols, cols = rows), `rowAnyMissings(X[cols, rows])` = rowAnyMissings(X[cols, rows]), unit = "ms")
 ```
@@ -881,16 +881,16 @@ _Table: Benchmarking of colAnyMissings_X_S(), colAnyMissings(X, rows, cols)() an
 
 |   |expr                          |      min|        lq|      mean|    median|        uq|      max|
 |:--|:-----------------------------|--------:|---------:|---------:|---------:|---------:|--------:|
-|1  |colAnyMissings_X_S            | 0.009799| 0.0107480| 0.0114459| 0.0110510| 0.0113945| 0.032843|
-|2  |colAnyMissings(X, rows, cols) | 0.019005| 0.0196535| 0.0203267| 0.0202120| 0.0205945| 0.036672|
-|3  |colAnyMissings(X[rows, cols]) | 0.027978| 0.0292780| 0.0299326| 0.0295555| 0.0303910| 0.044235|
+|1  |colAnyMissings_X_S            | 0.010344| 0.0110545| 0.0117053| 0.0113650| 0.0116565| 0.038396|
+|2  |colAnyMissings(X, rows, cols) | 0.019378| 0.0207905| 0.0213334| 0.0211430| 0.0215190| 0.038683|
+|3  |colAnyMissings(X[rows, cols]) | 0.029667| 0.0312820| 0.0317273| 0.0315315| 0.0318480| 0.046820|
 
 
 |   |expr                          |      min|       lq|     mean|   median|       uq|      max|
 |:--|:-----------------------------|--------:|--------:|--------:|--------:|--------:|--------:|
 |1  |colAnyMissings_X_S            | 1.000000| 1.000000| 1.000000| 1.000000| 1.000000| 1.000000|
-|2  |colAnyMissings(X, rows, cols) | 1.939484| 1.828573| 1.775896| 1.828975| 1.807407| 1.116585|
-|3  |colAnyMissings(X[rows, cols]) | 2.855189| 2.724042| 2.615142| 2.674464| 2.667164| 1.346862|
+|2  |colAnyMissings(X, rows, cols) | 1.873357| 1.880727| 1.822539| 1.860361| 1.846094| 1.007475|
+|3  |colAnyMissings(X[rows, cols]) | 2.868039| 2.829798| 2.710499| 2.774439| 2.732210| 1.219398|
 
 _Table: Benchmarking of rowAnyMissings_X_S(), rowAnyMissings(X, cols, rows)() and rowAnyMissings(X[cols, rows])() on double+10x1000 data (transposed). The top panel shows times in milliseconds and the bottom panel shows relative times._
 
@@ -898,16 +898,16 @@ _Table: Benchmarking of rowAnyMissings_X_S(), rowAnyMissings(X, cols, rows)() an
 
 |   |expr                          |      min|        lq|      mean|    median|        uq|      max|
 |:--|:-----------------------------|--------:|---------:|---------:|---------:|---------:|--------:|
-|1  |rowAnyMissings_X_S            | 0.010078| 0.0103930| 0.0107354| 0.0106275| 0.0109140| 0.016401|
-|2  |rowAnyMissings(X, cols, rows) | 0.015659| 0.0163835| 0.0170483| 0.0166315| 0.0169985| 0.049461|
-|3  |rowAnyMissings(X[cols, rows]) | 0.025928| 0.0264115| 0.0270707| 0.0267620| 0.0273255| 0.041276|
+|1  |rowAnyMissings_X_S            | 0.010581| 0.0109435| 0.0114484| 0.0111580| 0.0115155| 0.020884|
+|2  |rowAnyMissings(X, cols, rows) | 0.016775| 0.0172455| 0.0184285| 0.0175615| 0.0179125| 0.048828|
+|3  |rowAnyMissings(X[cols, rows]) | 0.027831| 0.0281470| 0.0289391| 0.0284070| 0.0286360| 0.045561|
 
 
 |   |expr                          |      min|       lq|     mean|   median|       uq|      max|
 |:--|:-----------------------------|--------:|--------:|--------:|--------:|--------:|--------:|
 |1  |rowAnyMissings_X_S            | 1.000000| 1.000000| 1.000000| 1.000000| 1.000000| 1.000000|
-|2  |rowAnyMissings(X, cols, rows) | 1.553781| 1.576398| 1.588042| 1.564949| 1.557495| 3.015731|
-|3  |rowAnyMissings(X[cols, rows]) | 2.572733| 2.541278| 2.521621| 2.518184| 2.503711| 2.516676|
+|2  |rowAnyMissings(X, cols, rows) | 1.585389| 1.575867| 1.609695| 1.573893| 1.555512| 2.338058|
+|3  |rowAnyMissings(X[cols, rows]) | 2.630281| 2.572029| 2.527784| 2.545886| 2.486735| 2.181622|
 
 _Figure: Benchmarking of colAnyMissings_X_S(), colAnyMissings(X, rows, cols)() and colAnyMissings(X[rows, cols])() on double+10x1000 data  as well as rowAnyMissings_X_S(), rowAnyMissings(X, cols, rows)() and rowAnyMissings(X[cols, rows])() on the same data transposed.  Outliers are displayed as crosses.  Times are in milliseconds._
 
@@ -919,16 +919,16 @@ _Table: Benchmarking of colAnyMissings_X_S() and rowAnyMissings_X_S() on double+
 
 
 
-|   |expr               |    min|     lq|     mean|  median|      uq|    max|
-|:--|:------------------|------:|------:|--------:|-------:|-------:|------:|
-|2  |rowAnyMissings_X_S | 10.078| 10.393| 10.73544| 10.6275| 10.9140| 16.401|
-|1  |colAnyMissings_X_S |  9.799| 10.748| 11.44587| 11.0510| 11.3945| 32.843|
+|   |expr               |    min|      lq|     mean| median|      uq|    max|
+|:--|:------------------|------:|-------:|--------:|------:|-------:|------:|
+|2  |rowAnyMissings_X_S | 10.581| 10.9435| 11.44842| 11.158| 11.5155| 20.884|
+|1  |colAnyMissings_X_S | 10.344| 11.0545| 11.70533| 11.365| 11.6565| 38.396|
 
 
-|   |expr               |       min|       lq|     mean|   median|       uq|    max|
-|:--|:------------------|---------:|--------:|--------:|--------:|--------:|------:|
-|2  |rowAnyMissings_X_S | 1.0000000| 1.000000| 1.000000| 1.000000| 1.000000| 1.0000|
-|1  |colAnyMissings_X_S | 0.9723159| 1.034158| 1.066176| 1.039849| 1.044026| 2.0025|
+|   |expr               |       min|       lq|     mean|   median|       uq|      max|
+|:--|:------------------|---------:|--------:|--------:|--------:|--------:|--------:|
+|2  |rowAnyMissings_X_S | 1.0000000| 1.000000| 1.000000| 1.000000| 1.000000| 1.000000|
+|1  |colAnyMissings_X_S | 0.9776014| 1.010143| 1.022441| 1.018552| 1.012244| 1.838537|
 
 _Figure: Benchmarking of colAnyMissings_X_S() and rowAnyMissings_X_S() on double+10x1000 data (original and transposed).  Outliers are displayed as crosses. Times are in milliseconds._
 
@@ -945,16 +945,16 @@ _Figure: Benchmarking of colAnyMissings_X_S() and rowAnyMissings_X_S() on double
 > X_S <- X[rows, cols]
 > gc()
           used  (Mb) gc trigger  (Mb) max used  (Mb)
-Ncells 5153067 275.3    7554717 403.5  7554717 403.5
-Vcells 9220139  70.4   31793280 242.6 60508962 461.7
+Ncells 5169375 276.1    7916910 422.9  7916910 422.9
+Vcells 9406085  71.8   33191153 253.3 53339345 407.0
 > colStats <- microbenchmark(colAnyMissings_X_S = colAnyMissings(X_S), `colAnyMissings(X, rows, cols)` = colAnyMissings(X, 
 +     rows = rows, cols = cols), `colAnyMissings(X[rows, cols])` = colAnyMissings(X[rows, cols]), unit = "ms")
 > X <- t(X)
 > X_S <- t(X_S)
 > gc()
           used  (Mb) gc trigger  (Mb) max used  (Mb)
-Ncells 5153061 275.3    7554717 403.5  7554717 403.5
-Vcells 9320222  71.2   31793280 242.6 60508962 461.7
+Ncells 5169378 276.1    7916910 422.9  7916910 422.9
+Vcells 9506183  72.6   33191153 253.3 53339345 407.0
 > rowStats <- microbenchmark(rowAnyMissings_X_S = rowAnyMissings(X_S), `rowAnyMissings(X, cols, rows)` = rowAnyMissings(X, 
 +     rows = cols, cols = rows), `rowAnyMissings(X[cols, rows])` = rowAnyMissings(X[cols, rows]), unit = "ms")
 ```
@@ -965,16 +965,16 @@ _Table: Benchmarking of colAnyMissings_X_S(), colAnyMissings(X, rows, cols)() an
 
 |   |expr                          |      min|        lq|      mean|    median|        uq|      max|
 |:--|:-----------------------------|--------:|---------:|---------:|---------:|---------:|--------:|
-|1  |colAnyMissings_X_S            | 0.032239| 0.0345190| 0.0373605| 0.0355625| 0.0389175| 0.077162|
-|2  |colAnyMissings(X, rows, cols) | 0.084831| 0.0898465| 0.0967389| 0.0927250| 0.1026985| 0.197096|
-|3  |colAnyMissings(X[rows, cols]) | 0.147953| 0.1577955| 0.1670647| 0.1622450| 0.1769550| 0.204306|
+|1  |colAnyMissings_X_S            | 0.034048| 0.0351215| 0.0440976| 0.0387520| 0.0448410| 0.146412|
+|2  |colAnyMissings(X, rows, cols) | 0.091230| 0.0922330| 0.1107537| 0.0990285| 0.1154230| 0.354018|
+|3  |colAnyMissings(X[rows, cols]) | 0.155771| 0.1606975| 0.2006325| 0.1775685| 0.1992585| 0.608693|
 
 
 |   |expr                          |      min|       lq|     mean|   median|       uq|      max|
 |:--|:-----------------------------|--------:|--------:|--------:|--------:|--------:|--------:|
 |1  |colAnyMissings_X_S            | 1.000000| 1.000000| 1.000000| 1.000000| 1.000000| 1.000000|
-|2  |colAnyMissings(X, rows, cols) | 2.631316| 2.602813| 2.589332| 2.607381| 2.638877| 2.554314|
-|3  |colAnyMissings(X[rows, cols]) | 4.589255| 4.571265| 4.471690| 4.562250| 4.546926| 2.647754|
+|2  |colAnyMissings(X, rows, cols) | 2.679453| 2.626112| 2.511562| 2.555442| 2.574050| 2.417957|
+|3  |colAnyMissings(X[rows, cols]) | 4.575041| 4.575474| 4.549743| 4.582176| 4.443668| 4.157398|
 
 _Table: Benchmarking of rowAnyMissings_X_S(), rowAnyMissings(X, cols, rows)() and rowAnyMissings(X[cols, rows])() on double+100x1000 data (transposed). The top panel shows times in milliseconds and the bottom panel shows relative times._
 
@@ -982,16 +982,16 @@ _Table: Benchmarking of rowAnyMissings_X_S(), rowAnyMissings(X, cols, rows)() an
 
 |   |expr                          |      min|        lq|      mean|    median|        uq|      max|
 |:--|:-----------------------------|--------:|---------:|---------:|---------:|---------:|--------:|
-|1  |rowAnyMissings_X_S            | 0.039973| 0.0416690| 0.0477943| 0.0463680| 0.0508210| 0.089759|
-|2  |rowAnyMissings(X, cols, rows) | 0.078650| 0.0812855| 0.0881336| 0.0836035| 0.0943065| 0.197561|
-|3  |rowAnyMissings(X[cols, rows]) | 0.156622| 0.1626100| 0.1802855| 0.1764655| 0.1931520| 0.249521|
+|1  |rowAnyMissings_X_S            | 0.039292| 0.0422935| 0.0483957| 0.0473455| 0.0514780| 0.084118|
+|2  |rowAnyMissings(X, cols, rows) | 0.078304| 0.0811730| 0.0932963| 0.0903220| 0.1004120| 0.195714|
+|3  |rowAnyMissings(X[cols, rows]) | 0.155606| 0.1643830| 0.1861986| 0.1803895| 0.2011725| 0.322185|
 
 
 |   |expr                          |      min|       lq|     mean|   median|       uq|      max|
 |:--|:-----------------------------|--------:|--------:|--------:|--------:|--------:|--------:|
 |1  |rowAnyMissings_X_S            | 1.000000| 1.000000| 1.000000| 1.000000| 1.000000| 1.000000|
-|2  |rowAnyMissings(X, cols, rows) | 1.967578| 1.950743| 1.844019| 1.803043| 1.855660| 2.201016|
-|3  |rowAnyMissings(X[cols, rows]) | 3.918195| 3.902421| 3.772111| 3.805760| 3.800634| 2.779899|
+|2  |rowAnyMissings(X, cols, rows) | 1.992874| 1.919278| 1.927780| 1.907721| 1.950581| 2.326660|
+|3  |rowAnyMissings(X[cols, rows]) | 3.960246| 3.886720| 3.847421| 3.810066| 3.907932| 3.830155|
 
 _Figure: Benchmarking of colAnyMissings_X_S(), colAnyMissings(X, rows, cols)() and colAnyMissings(X[rows, cols])() on double+100x1000 data  as well as rowAnyMissings_X_S(), rowAnyMissings(X, cols, rows)() and rowAnyMissings(X[cols, rows])() on the same data transposed.  Outliers are displayed as crosses.  Times are in milliseconds._
 
@@ -1003,16 +1003,16 @@ _Table: Benchmarking of colAnyMissings_X_S() and rowAnyMissings_X_S() on double+
 
 
 
-|   |expr               |    min|     lq|     mean|  median|      uq|    max|
-|:--|:------------------|------:|------:|--------:|-------:|-------:|------:|
-|1  |colAnyMissings_X_S | 32.239| 34.519| 37.36054| 35.5625| 38.9175| 77.162|
-|2  |rowAnyMissings_X_S | 39.973| 41.669| 47.79433| 46.3680| 50.8210| 89.759|
+|   |expr               |    min|      lq|     mean|  median|     uq|     max|
+|:--|:------------------|------:|-------:|--------:|-------:|------:|-------:|
+|1  |colAnyMissings_X_S | 34.048| 35.1215| 44.09755| 38.7520| 44.841| 146.412|
+|2  |rowAnyMissings_X_S | 39.292| 42.2935| 48.39569| 47.3455| 51.478|  84.118|
 
 
-|   |expr               |      min|       lq|     mean|   median|       uq|      max|
-|:--|:------------------|--------:|--------:|--------:|--------:|--------:|--------:|
-|1  |colAnyMissings_X_S | 1.000000| 1.000000| 1.000000| 1.000000| 1.000000| 1.000000|
-|2  |rowAnyMissings_X_S | 1.239896| 1.207132| 1.279273| 1.303845| 1.305865| 1.163254|
+|   |expr               |      min|       lq|     mean|   median|       uq|       max|
+|:--|:------------------|--------:|--------:|--------:|--------:|--------:|---------:|
+|1  |colAnyMissings_X_S | 1.000000| 1.000000| 1.000000| 1.000000| 1.000000| 1.0000000|
+|2  |rowAnyMissings_X_S | 1.154018| 1.204205| 1.097469| 1.221756| 1.148012| 0.5745294|
 
 _Figure: Benchmarking of colAnyMissings_X_S() and rowAnyMissings_X_S() on double+100x1000 data (original and transposed).  Outliers are displayed as crosses. Times are in milliseconds._
 
@@ -1029,16 +1029,16 @@ _Figure: Benchmarking of colAnyMissings_X_S() and rowAnyMissings_X_S() on double
 > X_S <- X[rows, cols]
 > gc()
           used  (Mb) gc trigger  (Mb) max used  (Mb)
-Ncells 5153280 275.3    7554717 403.5  7554717 403.5
-Vcells 9220283  70.4   31793280 242.6 60508962 461.7
+Ncells 5169594 276.1    7916910 422.9  7916910 422.9
+Vcells 9406241  71.8   33191153 253.3 53339345 407.0
 > colStats <- microbenchmark(colAnyMissings_X_S = colAnyMissings(X_S), `colAnyMissings(X, rows, cols)` = colAnyMissings(X, 
 +     rows = rows, cols = cols), `colAnyMissings(X[rows, cols])` = colAnyMissings(X[rows, cols]), unit = "ms")
 > X <- t(X)
 > X_S <- t(X_S)
 > gc()
           used  (Mb) gc trigger  (Mb) max used  (Mb)
-Ncells 5153274 275.3    7554717 403.5  7554717 403.5
-Vcells 9320366  71.2   31793280 242.6 60508962 461.7
+Ncells 5169588 276.1    7916910 422.9  7916910 422.9
+Vcells 9506324  72.6   33191153 253.3 53339345 407.0
 > rowStats <- microbenchmark(rowAnyMissings_X_S = rowAnyMissings(X_S), `rowAnyMissings(X, cols, rows)` = rowAnyMissings(X, 
 +     rows = cols, cols = rows), `rowAnyMissings(X[cols, rows])` = rowAnyMissings(X[cols, rows]), unit = "ms")
 ```
@@ -1049,33 +1049,33 @@ _Table: Benchmarking of colAnyMissings_X_S(), colAnyMissings(X, rows, cols)() an
 
 |   |expr                          |      min|        lq|      mean|    median|        uq|      max|
 |:--|:-----------------------------|--------:|---------:|---------:|---------:|---------:|--------:|
-|1  |colAnyMissings_X_S            | 0.030513| 0.0329195| 0.0352316| 0.0338725| 0.0355635| 0.074655|
-|2  |colAnyMissings(X, rows, cols) | 0.082638| 0.0882730| 0.0939315| 0.0911855| 0.0977810| 0.140810|
-|3  |colAnyMissings(X[rows, cols]) | 0.141159| 0.1519920| 0.1619428| 0.1577925| 0.1666085| 0.302915|
+|1  |colAnyMissings_X_S            | 0.032072| 0.0333985| 0.0364890| 0.0344315| 0.0385225| 0.078187|
+|2  |colAnyMissings(X, rows, cols) | 0.087265| 0.0906555| 0.0989272| 0.0970015| 0.1054295| 0.142899|
+|3  |colAnyMissings(X[rows, cols]) | 0.149542| 0.1552250| 0.1703300| 0.1632410| 0.1845645| 0.301601|
 
 
 |   |expr                          |      min|       lq|     mean|   median|       uq|      max|
 |:--|:-----------------------------|--------:|--------:|--------:|--------:|--------:|--------:|
 |1  |colAnyMissings_X_S            | 1.000000| 1.000000| 1.000000| 1.000000| 1.000000| 1.000000|
-|2  |colAnyMissings(X, rows, cols) | 2.708288| 2.681481| 2.666120| 2.692022| 2.749476| 1.886143|
-|3  |colAnyMissings(X[rows, cols]) | 4.626192| 4.617081| 4.596526| 4.658425| 4.684817| 4.057531|
+|2  |colAnyMissings(X, rows, cols) | 2.720909| 2.714358| 2.711151| 2.817231| 2.736829| 1.827657|
+|3  |colAnyMissings(X[rows, cols]) | 4.662696| 4.647664| 4.667980| 4.741037| 4.791083| 3.857432|
 
 _Table: Benchmarking of rowAnyMissings_X_S(), rowAnyMissings(X, cols, rows)() and rowAnyMissings(X[cols, rows])() on double+1000x100 data (transposed). The top panel shows times in milliseconds and the bottom panel shows relative times._
 
 
 
-|   |expr                          |      min|        lq|      mean|   median|        uq|      max|
-|:--|:-----------------------------|--------:|---------:|---------:|--------:|---------:|--------:|
-|1  |rowAnyMissings_X_S            | 0.038513| 0.0400895| 0.0433214| 0.041616| 0.0448955| 0.072520|
-|2  |rowAnyMissings(X, cols, rows) | 0.081297| 0.0841060| 0.0901526| 0.087003| 0.0935080| 0.225039|
-|3  |rowAnyMissings(X[cols, rows]) | 0.157928| 0.1636275| 0.1742764| 0.169459| 0.1836120| 0.215931|
+|   |expr                          |      min|        lq|      mean|    median|        uq|      max|
+|:--|:-----------------------------|--------:|---------:|---------:|---------:|---------:|--------:|
+|1  |rowAnyMissings_X_S            | 0.038018| 0.0399420| 0.0437088| 0.0419460| 0.0469310| 0.064317|
+|2  |rowAnyMissings(X, cols, rows) | 0.081108| 0.0841790| 0.0925800| 0.0873920| 0.0974285| 0.226235|
+|3  |rowAnyMissings(X[cols, rows]) | 0.156725| 0.1634655| 0.1775411| 0.1706385| 0.1938320| 0.220626|
 
 
 |   |expr                          |      min|       lq|     mean|   median|       uq|      max|
 |:--|:-----------------------------|--------:|--------:|--------:|--------:|--------:|--------:|
 |1  |rowAnyMissings_X_S            | 1.000000| 1.000000| 1.000000| 1.000000| 1.000000| 1.000000|
-|2  |rowAnyMissings(X, cols, rows) | 2.110898| 2.097956| 2.081018| 2.090614| 2.082792| 3.103130|
-|3  |rowAnyMissings(X[cols, rows]) | 4.100641| 4.081555| 4.022873| 4.071968| 4.089764| 2.977537|
+|2  |rowAnyMissings(X, cols, rows) | 2.133411| 2.107531| 2.118107| 2.083441| 2.075995| 3.517499|
+|3  |rowAnyMissings(X[cols, rows]) | 4.122389| 4.092572| 4.061904| 4.068052| 4.130148| 3.430291|
 
 _Figure: Benchmarking of colAnyMissings_X_S(), colAnyMissings(X, rows, cols)() and colAnyMissings(X[rows, cols])() on double+1000x100 data  as well as rowAnyMissings_X_S(), rowAnyMissings(X, cols, rows)() and rowAnyMissings(X[cols, rows])() on the same data transposed.  Outliers are displayed as crosses.  Times are in milliseconds._
 
@@ -1089,14 +1089,14 @@ _Table: Benchmarking of colAnyMissings_X_S() and rowAnyMissings_X_S() on double+
 
 |   |expr               |    min|      lq|     mean|  median|      uq|    max|
 |:--|:------------------|------:|-------:|--------:|-------:|-------:|------:|
-|1  |colAnyMissings_X_S | 30.513| 32.9195| 35.23155| 33.8725| 35.5635| 74.655|
-|2  |rowAnyMissings_X_S | 38.513| 40.0895| 43.32139| 41.6160| 44.8955| 72.520|
+|1  |colAnyMissings_X_S | 32.072| 33.3985| 36.48901| 34.4315| 38.5225| 78.187|
+|2  |rowAnyMissings_X_S | 38.018| 39.9420| 43.70883| 41.9460| 46.9310| 64.317|
 
 
 |   |expr               |      min|       lq|     mean|   median|       uq|       max|
 |:--|:------------------|--------:|--------:|--------:|--------:|--------:|---------:|
 |1  |colAnyMissings_X_S | 1.000000| 1.000000| 1.000000| 1.000000| 1.000000| 1.0000000|
-|2  |rowAnyMissings_X_S | 1.262183| 1.217804| 1.229619| 1.228607| 1.262404| 0.9714018|
+|2  |rowAnyMissings_X_S | 1.185395| 1.195922| 1.197863| 1.218245| 1.218275| 0.8226048|
 
 _Figure: Benchmarking of colAnyMissings_X_S() and rowAnyMissings_X_S() on double+1000x100 data (original and transposed).  Outliers are displayed as crosses. Times are in milliseconds._
 
@@ -1132,7 +1132,7 @@ attached base packages:
 other attached packages:
 [1] microbenchmark_1.4-7   matrixStats_0.60.0     ggplot2_3.3.5         
 [4] knitr_1.33             R.devices_2.17.0       R.utils_2.10.1        
-[7] R.oo_1.24.0            R.methodsS3_1.8.1-9001
+[7] R.oo_1.24.0            R.methodsS3_1.8.1-9001 history_0.0.1-9000    
 
 loaded via a namespace (and not attached):
  [1] Biobase_2.52.0          httr_1.4.2              splines_4.1.1          
@@ -1151,20 +1151,22 @@ loaded via a namespace (and not attached):
 [40] magrittr_2.0.1          crayon_1.4.1            statnet.common_4.5.0   
 [43] memoise_2.0.0           laeken_0.5.1            fansi_0.5.0            
 [46] R.cache_0.15.0          MASS_7.3-54             R.rsp_0.44.0           
-[49] tools_4.1.1             lifecycle_1.0.0         S4Vectors_0.30.0       
-[52] trust_0.1-8             munsell_0.5.0           AnnotationDbi_1.54.1   
-[55] Biostrings_2.60.2       compiler_4.1.1          GenomeInfoDb_1.28.1    
-[58] rlang_0.4.11            grid_4.1.1              RCurl_1.98-1.4         
-[61] cwhmisc_6.6             rappdirs_0.3.3          labeling_0.4.2         
-[64] bitops_1.0-7            base64enc_0.1-3         boot_1.3-28            
-[67] gtable_0.3.0            DBI_1.1.1               markdown_1.1           
-[70] R6_2.5.1                lpSolveAPI_5.5.2.0-17.7 rle_0.9.2              
-[73] dplyr_1.0.7             fastmap_1.1.0           bit_4.0.4              
-[76] utf8_1.2.2              parallel_4.1.1          Rcpp_1.0.7             
-[79] vctrs_0.3.8             png_0.1-7               DEoptimR_1.0-9         
-[82] tidyselect_1.1.1        xfun_0.25               coda_0.19-4            
+[49] progressr_0.8.0         tools_4.1.1             lifecycle_1.0.0        
+[52] S4Vectors_0.30.0        trust_0.1-8             munsell_0.5.0          
+[55] tabby_0.0.1-9001        AnnotationDbi_1.54.1    Biostrings_2.60.2      
+[58] compiler_4.1.1          GenomeInfoDb_1.28.1     rlang_0.4.11           
+[61] grid_4.1.1              RCurl_1.98-1.4          cwhmisc_6.6            
+[64] rstudioapi_0.13         rappdirs_0.3.3          startup_0.15.0         
+[67] labeling_0.4.2          bitops_1.0-7            base64enc_0.1-3        
+[70] boot_1.3-28             gtable_0.3.0            DBI_1.1.1              
+[73] markdown_1.1            R6_2.5.1                lpSolveAPI_5.5.2.0-17.7
+[76] rle_0.9.2               dplyr_1.0.7             fastmap_1.1.0          
+[79] bit_4.0.4               utf8_1.2.2              parallel_4.1.1         
+[82] Rcpp_1.0.7              vctrs_0.3.8             png_0.1-7              
+[85] DEoptimR_1.0-9          tidyselect_1.1.1        xfun_0.25              
+[88] coda_0.19-4            
 ```
-Total processing time was 21.4 secs.
+Total processing time was 22.25 secs.
 
 
 ### Reproducibility
@@ -1181,7 +1183,7 @@ html <- matrixStats:::benchmark('colRowAnyMissings_subset')
 [StackOverflow:rowProds?]: https://stackoverflow.com/questions/20198801/ "Stack Overflow: Row product of matrix and column sum of matrix"
 
 ---------------------------------------
-Copyright Dongcan Jiang. Last updated on 2021-08-25 17:34:55 (+0200 UTC). Powered by [RSP].
+Copyright Dongcan Jiang. Last updated on 2021-08-25 22:10:35 (+0200 UTC). Powered by [RSP].
 
 <script>
  var link = document.createElement('link');

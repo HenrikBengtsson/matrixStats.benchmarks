@@ -94,24 +94,24 @@ as below
 +     OP = OP, na.rm = FALSE), unit = "ms")
 > gc()
            used  (Mb) gc trigger  (Mb) max used  (Mb)
-Ncells  5350176 285.8   10014072 534.9 10014072 534.9
-Vcells 10378312  79.2   36267018 276.7 90959857 694.0
+Ncells  5416661 289.3    7916910 422.9  7916910 422.9
+Vcells 10852572  82.8   39038428 297.9 94934136 724.3
 ```
 
 _Table: Benchmarking of x_OP_y() and x_OP_y_R() on integer+10x10+add data. The top panel shows times in milliseconds and the bottom panel shows relative times._
 
 
 
-|   |expr     |      min|        lq|      mean|   median|       uq|       max|
-|:--|:--------|--------:|---------:|---------:|--------:|--------:|---------:|
-|2  |x_OP_y_R | 0.001537| 0.0018340| 0.1105488| 0.001975| 0.002121| 10.837878|
-|1  |x_OP_y   | 0.003982| 0.0042995| 0.0046387| 0.004408| 0.004572|  0.019423|
+|   |expr     |      min|       lq|      mean|    median|        uq|       max|
+|:--|:--------|--------:|--------:|---------:|---------:|---------:|---------:|
+|2  |x_OP_y_R | 0.001745| 0.001982| 0.1183098| 0.0021305| 0.0022645| 11.599051|
+|1  |x_OP_y   | 0.004163| 0.004512| 0.0048525| 0.0046405| 0.0047880|  0.020428|
 
 
 |   |expr     |      min|       lq|      mean|   median|       uq|       max|
 |:--|:--------|--------:|--------:|---------:|--------:|--------:|---------:|
 |2  |x_OP_y_R | 1.000000| 1.000000| 1.0000000| 1.000000| 1.000000| 1.0000000|
-|1  |x_OP_y   | 2.590761| 2.344329| 0.0419608| 2.231899| 2.155587| 0.0017921|
+|1  |x_OP_y   | 2.385673| 2.276488| 0.0410153| 2.178127| 2.114374| 0.0017612|
 
 _Figure: Benchmarking of x_OP_y() and x_OP_y_R() on integer+10x10+add data.  Outliers are displayed as crosses.  Times are in milliseconds._
 
@@ -124,24 +124,24 @@ _Figure: Benchmarking of x_OP_y() and x_OP_y_R() on integer+10x10+add data.  Out
 +     OP = OP, na.rm = FALSE), unit = "ms")
 > gc()
            used  (Mb) gc trigger  (Mb) max used  (Mb)
-Ncells  5347786 285.7   10014072 534.9 10014072 534.9
-Vcells 10069449  76.9   36267018 276.7 90959857 694.0
+Ncells  5414272 289.2    7916910 422.9  7916910 422.9
+Vcells 10543711  80.5   39038428 297.9 94934136 724.3
 ```
 
 _Table: Benchmarking of x_OP_y() and x_OP_y_R() on integer+10x10+sub data. The top panel shows times in milliseconds and the bottom panel shows relative times._
 
 
 
-|   |expr     |      min|        lq|      mean|    median|        uq|      max|
-|:--|:--------|--------:|---------:|---------:|---------:|---------:|--------:|
-|2  |x_OP_y_R | 0.001890| 0.0021620| 0.0024241| 0.0022405| 0.0023710| 0.013430|
-|1  |x_OP_y   | 0.004391| 0.0047615| 0.0051270| 0.0048935| 0.0050605| 0.023877|
+|   |expr     |      min|        lq|      mean|   median|        uq|      max|
+|:--|:--------|--------:|---------:|---------:|--------:|---------:|--------:|
+|2  |x_OP_y_R | 0.001894| 0.0021235| 0.0024287| 0.002221| 0.0023725| 0.014630|
+|1  |x_OP_y   | 0.004264| 0.0045435| 0.0049544| 0.004725| 0.0048815| 0.023081|
 
 
-|   |expr     |     min|       lq|    mean|   median|       uq|      max|
-|:--|:--------|-------:|--------:|-------:|--------:|--------:|--------:|
-|2  |x_OP_y_R | 1.00000| 1.000000| 1.00000| 1.000000| 1.000000| 1.000000|
-|1  |x_OP_y   | 2.32328| 2.202359| 2.11499| 2.184111| 2.134332| 1.777885|
+|   |expr     |     min|       lq|     mean|  median|       uq|      max|
+|:--|:--------|-------:|--------:|--------:|-------:|--------:|--------:|
+|2  |x_OP_y_R | 1.00000| 1.000000| 1.000000| 1.00000| 1.000000| 1.000000|
+|1  |x_OP_y   | 2.25132| 2.139628| 2.039918| 2.12742| 2.057534| 1.577649|
 
 _Figure: Benchmarking of x_OP_y() and x_OP_y_R() on integer+10x10+sub data.  Outliers are displayed as crosses.  Times are in milliseconds._
 
@@ -154,24 +154,24 @@ _Figure: Benchmarking of x_OP_y() and x_OP_y_R() on integer+10x10+sub data.  Out
 +     OP = OP, na.rm = FALSE), unit = "ms")
 > gc()
            used  (Mb) gc trigger  (Mb) max used  (Mb)
-Ncells  5347849 285.7   10014072 534.9 10014072 534.9
-Vcells 10070003  76.9   36267018 276.7 90959857 694.0
+Ncells  5414335 289.2    7916910 422.9  7916910 422.9
+Vcells 10544265  80.5   39038428 297.9 94934136 724.3
 ```
 
 _Table: Benchmarking of x_OP_y() and x_OP_y_R() on integer+10x10+mul data. The top panel shows times in milliseconds and the bottom panel shows relative times._
 
 
 
-|   |expr     |      min|       lq|      mean|    median|       uq|      max|
-|:--|:--------|--------:|--------:|---------:|---------:|--------:|--------:|
-|2  |x_OP_y_R | 0.001966| 0.002262| 0.0026530| 0.0023955| 0.002566| 0.017876|
-|1  |x_OP_y   | 0.004475| 0.004787| 0.0054388| 0.0049015| 0.005095| 0.025136|
+|   |expr     |      min|        lq|      mean|    median|       uq|      max|
+|:--|:--------|--------:|---------:|---------:|---------:|--------:|--------:|
+|2  |x_OP_y_R | 0.003216| 0.0037275| 0.0043916| 0.0039460| 0.004395| 0.028018|
+|1  |x_OP_y   | 0.006908| 0.0079355| 0.0087393| 0.0083035| 0.008720| 0.036743|
 
 
-|   |expr     |      min|       lq|     mean|   median|       uq|      max|
-|:--|:--------|--------:|--------:|--------:|--------:|--------:|--------:|
-|2  |x_OP_y_R | 1.000000| 1.000000| 1.000000| 1.000000| 1.000000| 1.000000|
-|1  |x_OP_y   | 2.276195| 2.116269| 2.050087| 2.046128| 1.985581| 1.406131|
+|   |expr     |     min|       lq|    mean|   median|       uq|      max|
+|:--|:--------|-------:|--------:|-------:|--------:|--------:|--------:|
+|2  |x_OP_y_R | 1.00000| 1.000000| 1.00000| 1.000000| 1.000000| 1.000000|
+|1  |x_OP_y   | 2.14801| 2.128907| 1.98999| 2.104283| 1.984073| 1.311407|
 
 _Figure: Benchmarking of x_OP_y() and x_OP_y_R() on integer+10x10+mul data.  Outliers are displayed as crosses.  Times are in milliseconds._
 
@@ -184,24 +184,24 @@ _Figure: Benchmarking of x_OP_y() and x_OP_y_R() on integer+10x10+mul data.  Out
 +     OP = OP, na.rm = FALSE), unit = "ms")
 > gc()
            used  (Mb) gc trigger  (Mb) max used  (Mb)
-Ncells  5347912 285.7   10014072 534.9 10014072 534.9
-Vcells 10070045  76.9   36267018 276.7 90959857 694.0
+Ncells  5414398 289.2    7916910 422.9  7916910 422.9
+Vcells 10544307  80.5   39038428 297.9 94934136 724.3
 ```
 
 _Table: Benchmarking of x_OP_y() and x_OP_y_R() on integer+10x10+div data. The top panel shows times in milliseconds and the bottom panel shows relative times._
 
 
 
-|   |expr     |      min|        lq|      mean|    median|        uq|      max|
-|:--|:--------|--------:|---------:|---------:|---------:|---------:|--------:|
-|2  |x_OP_y_R | 0.001803| 0.0020755| 0.0023724| 0.0022145| 0.0023495| 0.013835|
-|1  |x_OP_y   | 0.004429| 0.0047600| 0.0051106| 0.0049045| 0.0050715| 0.022852|
+|   |expr     |      min|        lq|      mean|   median|        uq|      max|
+|:--|:--------|--------:|---------:|---------:|--------:|---------:|--------:|
+|2  |x_OP_y_R | 0.001823| 0.0020715| 0.0023296| 0.002185| 0.0023045| 0.012960|
+|1  |x_OP_y   | 0.004233| 0.0044860| 0.0048927| 0.004663| 0.0048520| 0.021008|
 
 
-|   |expr     |      min|       lq|     mean|   median|       uq|      max|
-|:--|:--------|--------:|--------:|--------:|--------:|--------:|--------:|
-|2  |x_OP_y_R | 1.000000| 1.000000| 1.000000| 1.000000| 1.000000| 1.000000|
-|1  |x_OP_y   | 2.456462| 2.293423| 2.154195| 2.214721| 2.158544| 1.651753|
+|   |expr     |      min|      lq|     mean|   median|       uq|      max|
+|:--|:--------|--------:|-------:|--------:|--------:|--------:|--------:|
+|2  |x_OP_y_R | 1.000000| 1.00000| 1.000000| 1.000000| 1.000000| 1.000000|
+|1  |x_OP_y   | 2.321997| 2.16558| 2.100246| 2.134096| 2.105446| 1.620988|
 
 _Figure: Benchmarking of x_OP_y() and x_OP_y_R() on integer+10x10+div data.  Outliers are displayed as crosses.  Times are in milliseconds._
 
@@ -223,24 +223,24 @@ _Figure: Benchmarking of x_OP_y() and x_OP_y_R() on integer+10x10+div data.  Out
 +     OP = OP, na.rm = FALSE), unit = "ms")
 > gc()
            used  (Mb) gc trigger  (Mb) max used  (Mb)
-Ncells  5347975 285.7   10014072 534.9 10014072 534.9
-Vcells 10070129  76.9   36267018 276.7 90959857 694.0
+Ncells  5414461 289.2    7916910 422.9  7916910 422.9
+Vcells 10544391  80.5   39038428 297.9 94934136 724.3
 ```
 
 _Table: Benchmarking of x_OP_y() and x_OP_y_R() on integer+100x100+add data. The top panel shows times in milliseconds and the bottom panel shows relative times._
 
 
 
-|   |expr     |      min|        lq|      mean|    median|        uq|      max|
-|:--|:--------|--------:|---------:|---------:|---------:|---------:|--------:|
-|2  |x_OP_y_R | 0.030740| 0.0322435| 0.0338879| 0.0330155| 0.0353695| 0.047705|
-|1  |x_OP_y   | 0.058096| 0.0603765| 0.0629508| 0.0612960| 0.0655840| 0.092930|
+|   |expr     |      min|        lq|      mean|   median|        uq|      max|
+|:--|:--------|--------:|---------:|---------:|--------:|---------:|--------:|
+|2  |x_OP_y_R | 0.034646| 0.0350260| 0.0354890| 0.035195| 0.0354515| 0.043266|
+|1  |x_OP_y   | 0.043786| 0.0441645| 0.0452476| 0.044425| 0.0449440| 0.077183|
 
 
-|   |expr     |      min|       lq|    mean|   median|       uq|      max|
-|:--|:--------|--------:|--------:|-------:|--------:|--------:|--------:|
-|2  |x_OP_y_R | 1.000000| 1.000000| 1.00000| 1.000000| 1.000000| 1.000000|
-|1  |x_OP_y   | 1.889915| 1.872517| 1.85762| 1.856583| 1.854253| 1.948014|
+|   |expr     |      min|       lq|     mean|   median|      uq|      max|
+|:--|:--------|--------:|--------:|--------:|--------:|-------:|--------:|
+|2  |x_OP_y_R | 1.000000| 1.000000| 1.000000| 1.000000| 1.00000| 1.000000|
+|1  |x_OP_y   | 1.263811| 1.260906| 1.274974| 1.262253| 1.26776| 1.783918|
 
 _Figure: Benchmarking of x_OP_y() and x_OP_y_R() on integer+100x100+add data.  Outliers are displayed as crosses.  Times are in milliseconds._
 
@@ -253,8 +253,8 @@ _Figure: Benchmarking of x_OP_y() and x_OP_y_R() on integer+100x100+add data.  O
 +     OP = OP, na.rm = FALSE), unit = "ms")
 > gc()
            used  (Mb) gc trigger  (Mb) max used  (Mb)
-Ncells  5348038 285.7   10014072 534.9 10014072 534.9
-Vcells 10070377  76.9   36267018 276.7 90959857 694.0
+Ncells  5414524 289.2    7916910 422.9  7916910 422.9
+Vcells 10544649  80.5   39038428 297.9 94934136 724.3
 ```
 
 _Table: Benchmarking of x_OP_y() and x_OP_y_R() on integer+100x100+sub data. The top panel shows times in milliseconds and the bottom panel shows relative times._
@@ -263,14 +263,14 @@ _Table: Benchmarking of x_OP_y() and x_OP_y_R() on integer+100x100+sub data. The
 
 |   |expr     |      min|        lq|      mean|    median|        uq|      max|
 |:--|:--------|--------:|---------:|---------:|---------:|---------:|--------:|
-|2  |x_OP_y_R | 0.030301| 0.0309450| 0.0329735| 0.0320995| 0.0342020| 0.047821|
-|1  |x_OP_y   | 0.054410| 0.0566225| 0.0591763| 0.0573625| 0.0612765| 0.092431|
+|2  |x_OP_y_R | 0.033759| 0.0341715| 0.0349730| 0.0344345| 0.0346845| 0.053023|
+|1  |x_OP_y   | 0.038221| 0.0387550| 0.0405948| 0.0391650| 0.0396120| 0.062740|
 
 
-|   |expr     |     min|       lq|     mean|   median|       uq|      max|
-|:--|:--------|-------:|--------:|--------:|--------:|--------:|--------:|
-|2  |x_OP_y_R | 1.00000| 1.000000| 1.000000| 1.000000| 1.000000| 1.000000|
-|1  |x_OP_y   | 1.79565| 1.829779| 1.794662| 1.787022| 1.791606| 1.932854|
+|   |expr     |      min|       lq|     mean|   median|       uq|     max|
+|:--|:--------|--------:|--------:|--------:|--------:|--------:|-------:|
+|2  |x_OP_y_R | 1.000000| 1.000000| 1.000000| 1.000000| 1.000000| 1.00000|
+|1  |x_OP_y   | 1.132172| 1.134132| 1.160748| 1.137377| 1.142066| 1.18326|
 
 _Figure: Benchmarking of x_OP_y() and x_OP_y_R() on integer+100x100+sub data.  Outliers are displayed as crosses.  Times are in milliseconds._
 
@@ -283,24 +283,24 @@ _Figure: Benchmarking of x_OP_y() and x_OP_y_R() on integer+100x100+sub data.  O
 +     OP = OP, na.rm = FALSE), unit = "ms")
 > gc()
            used  (Mb) gc trigger  (Mb) max used  (Mb)
-Ncells  5348101 285.7   10014072 534.9 10014072 534.9
-Vcells 10070675  76.9   36267018 276.7 90959857 694.0
+Ncells  5414587 289.2    7916910 422.9  7916910 422.9
+Vcells 10544938  80.5   39038428 297.9 94934136 724.3
 ```
 
 _Table: Benchmarking of x_OP_y() and x_OP_y_R() on integer+100x100+mul data. The top panel shows times in milliseconds and the bottom panel shows relative times._
 
 
 
-|   |expr     |      min|        lq|      mean|    median|        uq|      max|
-|:--|:--------|--------:|---------:|---------:|---------:|---------:|--------:|
-|2  |x_OP_y_R | 0.045139| 0.0473950| 0.0503183| 0.0492025| 0.0528305| 0.071638|
-|1  |x_OP_y   | 0.052855| 0.0554855| 0.0587904| 0.0579455| 0.0618280| 0.084542|
+|   |expr     |      min|       lq|      mean|   median|        uq|      max|
+|:--|:--------|--------:|--------:|---------:|--------:|---------:|--------:|
+|1  |x_OP_y   | 0.041876| 0.044042| 0.0451193| 0.044389| 0.0446395| 0.077881|
+|2  |x_OP_y_R | 0.050367| 0.052719| 0.0534964| 0.053060| 0.0533685| 0.068363|
 
 
-|   |expr     |      min|       lq|     mean|   median|       uq|      max|
-|:--|:--------|--------:|--------:|--------:|--------:|--------:|--------:|
-|2  |x_OP_y_R | 1.000000| 1.000000| 1.000000| 1.000000| 1.000000| 1.000000|
-|1  |x_OP_y   | 1.170939| 1.170704| 1.168369| 1.177694| 1.170309| 1.180128|
+|   |expr     |      min|       lq|     mean|   median|       uq|       max|
+|:--|:--------|--------:|--------:|--------:|--------:|--------:|---------:|
+|1  |x_OP_y   | 1.000000| 1.000000| 1.000000| 1.000000| 1.000000| 1.0000000|
+|2  |x_OP_y_R | 1.202765| 1.197016| 1.185666| 1.195341| 1.195544| 0.8777879|
 
 _Figure: Benchmarking of x_OP_y() and x_OP_y_R() on integer+100x100+mul data.  Outliers are displayed as crosses.  Times are in milliseconds._
 
@@ -313,24 +313,24 @@ _Figure: Benchmarking of x_OP_y() and x_OP_y_R() on integer+100x100+mul data.  O
 +     OP = OP, na.rm = FALSE), unit = "ms")
 > gc()
            used  (Mb) gc trigger  (Mb) max used  (Mb)
-Ncells  5348164 285.7   10014072 534.9 10014072 534.9
-Vcells 10070717  76.9   36267018 276.7 90959857 694.0
+Ncells  5414650 289.2    7916910 422.9  7916910 422.9
+Vcells 10544980  80.5   39038428 297.9 94934136 724.3
 ```
 
 _Table: Benchmarking of x_OP_y() and x_OP_y_R() on integer+100x100+div data. The top panel shows times in milliseconds and the bottom panel shows relative times._
 
 
 
-|   |expr     |      min|       lq|      mean|    median|        uq|      max|
-|:--|:--------|--------:|--------:|---------:|---------:|---------:|--------:|
-|2  |x_OP_y_R | 0.019217| 0.020252| 0.0217968| 0.0211305| 0.0217700| 0.039852|
-|1  |x_OP_y   | 0.048887| 0.051111| 0.0539126| 0.0530380| 0.0549215| 0.074484|
+|   |expr     |      min|        lq|      mean|   median|        uq|      max|
+|:--|:--------|--------:|---------:|---------:|--------:|---------:|--------:|
+|2  |x_OP_y_R | 0.022659| 0.0234705| 0.0254748| 0.024179| 0.0246615| 0.053463|
+|1  |x_OP_y   | 0.030212| 0.0309920| 0.0331072| 0.031794| 0.0326425| 0.063958|
 
 
 |   |expr     |      min|       lq|     mean|   median|       uq|      max|
 |:--|:--------|--------:|--------:|--------:|--------:|--------:|--------:|
 |2  |x_OP_y_R | 1.000000| 1.000000| 1.000000| 1.000000| 1.000000| 1.000000|
-|1  |x_OP_y   | 2.543945| 2.523751| 2.473415| 2.510021| 2.522807| 1.869015|
+|1  |x_OP_y   | 1.333333| 1.320466| 1.299605| 1.314943| 1.323622| 1.196304|
 
 _Figure: Benchmarking of x_OP_y() and x_OP_y_R() on integer+100x100+div data.  Outliers are displayed as crosses.  Times are in milliseconds._
 
@@ -352,24 +352,24 @@ _Figure: Benchmarking of x_OP_y() and x_OP_y_R() on integer+100x100+div data.  O
 +     OP = OP, na.rm = FALSE), unit = "ms")
 > gc()
            used  (Mb) gc trigger  (Mb) max used  (Mb)
-Ncells  5348227 285.7   10014072 534.9 10014072 534.9
-Vcells 10071513  76.9   36267018 276.7 90959857 694.0
+Ncells  5414713 289.2    7916910 422.9  7916910 422.9
+Vcells 10545772  80.5   39038428 297.9 94934136 724.3
 ```
 
 _Table: Benchmarking of x_OP_y() and x_OP_y_R() on integer+1000x10+add data. The top panel shows times in milliseconds and the bottom panel shows relative times._
 
 
 
-|   |expr     |      min|        lq|      mean|    median|        uq|      max|
-|:--|:--------|--------:|---------:|---------:|---------:|---------:|--------:|
-|2  |x_OP_y_R | 0.030640| 0.0321435| 0.0340990| 0.0332185| 0.0343725| 0.072899|
-|1  |x_OP_y   | 0.055215| 0.0574605| 0.0610642| 0.0595235| 0.0620765| 0.098880|
+|   |expr     |      min|       lq|     mean|    median|        uq|      max|
+|:--|:--------|--------:|--------:|--------:|---------:|---------:|--------:|
+|2  |x_OP_y_R | 0.033730| 0.034406| 0.036349| 0.0359005| 0.0365170| 0.067853|
+|1  |x_OP_y   | 0.041315| 0.043006| 0.043675| 0.0433825| 0.0437765| 0.061877|
 
 
-|   |expr     |      min|       lq|     mean|   median|       uq|      max|
-|:--|:--------|--------:|--------:|--------:|--------:|--------:|--------:|
-|2  |x_OP_y_R | 1.000000| 1.000000| 1.000000| 1.000000| 1.000000| 1.000000|
-|1  |x_OP_y   | 1.802056| 1.787624| 1.790792| 1.791878| 1.805993| 1.356397|
+|   |expr     |      min|       lq|     mean|   median|       uq|       max|
+|:--|:--------|--------:|--------:|--------:|--------:|--------:|---------:|
+|2  |x_OP_y_R | 1.000000| 1.000000| 1.000000| 1.000000| 1.000000| 1.0000000|
+|1  |x_OP_y   | 1.224874| 1.249956| 1.201545| 1.208409| 1.198798| 0.9119273|
 
 _Figure: Benchmarking of x_OP_y() and x_OP_y_R() on integer+1000x10+add data.  Outliers are displayed as crosses.  Times are in milliseconds._
 
@@ -382,8 +382,8 @@ _Figure: Benchmarking of x_OP_y() and x_OP_y_R() on integer+1000x10+add data.  O
 +     OP = OP, na.rm = FALSE), unit = "ms")
 > gc()
            used  (Mb) gc trigger  (Mb) max used  (Mb)
-Ncells  5348290 285.7   10014072 534.9 10014072 534.9
-Vcells 10071555  76.9   36267018 276.7 90959857 694.0
+Ncells  5414776 289.2    7916910 422.9  7916910 422.9
+Vcells 10545814  80.5   39038428 297.9 94934136 724.3
 ```
 
 _Table: Benchmarking of x_OP_y() and x_OP_y_R() on integer+1000x10+sub data. The top panel shows times in milliseconds and the bottom panel shows relative times._
@@ -392,14 +392,14 @@ _Table: Benchmarking of x_OP_y() and x_OP_y_R() on integer+1000x10+sub data. The
 
 |   |expr     |      min|        lq|      mean|    median|        uq|      max|
 |:--|:--------|--------:|---------:|---------:|---------:|---------:|--------:|
-|2  |x_OP_y_R | 0.031358| 0.0330815| 0.0359023| 0.0359345| 0.0366190| 0.070319|
-|1  |x_OP_y   | 0.049506| 0.0523580| 0.0546984| 0.0542050| 0.0563695| 0.074503|
+|1  |x_OP_y   | 0.037287| 0.0379045| 0.0387342| 0.0381430| 0.0384760| 0.055843|
+|2  |x_OP_y_R | 0.038794| 0.0392505| 0.0402957| 0.0395215| 0.0400815| 0.071242|
 
 
-|   |expr     |      min|       lq|     mean|   median|       uq|    max|
-|:--|:--------|--------:|--------:|--------:|--------:|--------:|------:|
-|2  |x_OP_y_R | 1.000000| 1.000000| 1.000000| 1.000000| 1.000000| 1.0000|
-|1  |x_OP_y   | 1.578736| 1.582697| 1.523532| 1.508439| 1.539351| 1.0595|
+|   |expr     |      min|      lq|     mean|  median|       uq|      max|
+|:--|:--------|--------:|-------:|--------:|-------:|--------:|--------:|
+|1  |x_OP_y   | 1.000000| 1.00000| 1.000000| 1.00000| 1.000000| 1.000000|
+|2  |x_OP_y_R | 1.040416| 1.03551| 1.040315| 1.03614| 1.041727| 1.275755|
 
 _Figure: Benchmarking of x_OP_y() and x_OP_y_R() on integer+1000x10+sub data.  Outliers are displayed as crosses.  Times are in milliseconds._
 
@@ -412,24 +412,24 @@ _Figure: Benchmarking of x_OP_y() and x_OP_y_R() on integer+1000x10+sub data.  O
 +     OP = OP, na.rm = FALSE), unit = "ms")
 > gc()
            used  (Mb) gc trigger  (Mb) max used  (Mb)
-Ncells  5348353 285.7   10014072 534.9 10014072 534.9
-Vcells 10071983  76.9   36267018 276.7 90959857 694.0
+Ncells  5414839 289.2    7916910 422.9  7916910 422.9
+Vcells 10546241  80.5   39038428 297.9 94934136 724.3
 ```
 
 _Table: Benchmarking of x_OP_y() and x_OP_y_R() on integer+1000x10+mul data. The top panel shows times in milliseconds and the bottom panel shows relative times._
 
 
 
-|   |expr     |      min|        lq|      mean|    median|        uq|      max|
-|:--|:--------|--------:|---------:|---------:|---------:|---------:|--------:|
-|2  |x_OP_y_R | 0.045334| 0.0472720| 0.0496856| 0.0492085| 0.0513765| 0.060349|
-|1  |x_OP_y   | 0.051785| 0.0542515| 0.0572929| 0.0561300| 0.0588195| 0.089114|
+|   |expr     |      min|        lq|      mean|    median|       uq|      max|
+|:--|:--------|--------:|---------:|---------:|---------:|--------:|--------:|
+|1  |x_OP_y   | 0.041016| 0.0428595| 0.0437888| 0.0433315| 0.043798| 0.067717|
+|2  |x_OP_y_R | 0.050557| 0.0527605| 0.0540048| 0.0530630| 0.053369| 0.096236|
 
 
-|   |expr     |      min|       lq|     mean|   median|       uq|      max|
-|:--|:--------|--------:|--------:|--------:|--------:|--------:|--------:|
-|2  |x_OP_y_R | 1.000000| 1.000000| 1.000000| 1.000000| 1.000000| 1.000000|
-|1  |x_OP_y   | 1.142299| 1.147646| 1.153107| 1.140657| 1.144872| 1.476644|
+|   |expr     |      min|       lq|   mean|   median|       uq|     max|
+|:--|:--------|--------:|--------:|------:|--------:|--------:|-------:|
+|1  |x_OP_y   | 1.000000| 1.000000| 1.0000| 1.000000| 1.000000| 1.00000|
+|2  |x_OP_y_R | 1.232617| 1.231011| 1.2333| 1.224583| 1.218526| 1.42115|
 
 _Figure: Benchmarking of x_OP_y() and x_OP_y_R() on integer+1000x10+mul data.  Outliers are displayed as crosses.  Times are in milliseconds._
 
@@ -442,8 +442,8 @@ _Figure: Benchmarking of x_OP_y() and x_OP_y_R() on integer+1000x10+mul data.  O
 +     OP = OP, na.rm = FALSE), unit = "ms")
 > gc()
            used  (Mb) gc trigger  (Mb) max used  (Mb)
-Ncells  5348416 285.7   10014072 534.9 10014072 534.9
-Vcells 10072025  76.9   36267018 276.7 90959857 694.0
+Ncells  5414902 289.2    7916910 422.9  7916910 422.9
+Vcells 10546283  80.5   39038428 297.9 94934136 724.3
 ```
 
 _Table: Benchmarking of x_OP_y() and x_OP_y_R() on integer+1000x10+div data. The top panel shows times in milliseconds and the bottom panel shows relative times._
@@ -452,14 +452,14 @@ _Table: Benchmarking of x_OP_y() and x_OP_y_R() on integer+1000x10+div data. The
 
 |   |expr     |      min|        lq|      mean|    median|        uq|      max|
 |:--|:--------|--------:|---------:|---------:|---------:|---------:|--------:|
-|2  |x_OP_y_R | 0.021581| 0.0226485| 0.0242090| 0.0236830| 0.0245510| 0.037548|
-|1  |x_OP_y   | 0.055274| 0.0566605| 0.0597714| 0.0588525| 0.0606555| 0.076671|
+|2  |x_OP_y_R | 0.023405| 0.0239570| 0.0250790| 0.0242255| 0.0246195| 0.055720|
+|1  |x_OP_y   | 0.030221| 0.0307675| 0.0315555| 0.0310515| 0.0314290| 0.049751|
 
 
-|   |expr     |      min|       lq|     mean|  median|       uq|      max|
-|:--|:--------|--------:|--------:|--------:|-------:|--------:|--------:|
-|2  |x_OP_y_R | 1.000000| 1.000000| 1.000000| 1.00000| 1.000000| 1.000000|
-|1  |x_OP_y   | 2.561234| 2.501733| 2.468978| 2.48501| 2.470592| 2.041946|
+|   |expr     |     min|      lq|     mean|   median|      uq|       max|
+|:--|:--------|-------:|-------:|--------:|--------:|-------:|---------:|
+|2  |x_OP_y_R | 1.00000| 1.00000| 1.000000| 1.000000| 1.00000| 1.0000000|
+|1  |x_OP_y   | 1.29122| 1.28428| 1.258245| 1.281769| 1.27659| 0.8928751|
 
 _Figure: Benchmarking of x_OP_y() and x_OP_y_R() on integer+1000x10+div data.  Outliers are displayed as crosses.  Times are in milliseconds._
 
@@ -481,24 +481,24 @@ _Figure: Benchmarking of x_OP_y() and x_OP_y_R() on integer+1000x10+div data.  O
 +     OP = OP, na.rm = FALSE), unit = "ms")
 > gc()
            used  (Mb) gc trigger  (Mb) max used  (Mb)
-Ncells  5348479 285.7   10014072 534.9 10014072 534.9
-Vcells 10072010  76.9   36267018 276.7 90959857 694.0
+Ncells  5414965 289.2    7916910 422.9  7916910 422.9
+Vcells 10546278  80.5   39038428 297.9 94934136 724.3
 ```
 
 _Table: Benchmarking of x_OP_y() and x_OP_y_R() on integer+10x1000+add data. The top panel shows times in milliseconds and the bottom panel shows relative times._
 
 
 
-|   |expr     |      min|        lq|      mean|   median|        uq|      max|
-|:--|:--------|--------:|---------:|---------:|--------:|---------:|--------:|
-|2  |x_OP_y_R | 0.030805| 0.0317525| 0.0338801| 0.033139| 0.0348565| 0.049900|
-|1  |x_OP_y   | 0.057153| 0.0596050| 0.0630557| 0.062468| 0.0647595| 0.095871|
+|   |expr     |      min|        lq|      mean|    median|        uq|      max|
+|:--|:--------|--------:|---------:|---------:|---------:|---------:|--------:|
+|2  |x_OP_y_R | 0.034933| 0.0351745| 0.0367221| 0.0354380| 0.0371110| 0.070618|
+|1  |x_OP_y   | 0.043174| 0.0436910| 0.0454902| 0.0440975| 0.0458815| 0.074519|
 
 
-|   |expr     |      min|       lq|     mean|  median|       uq|      max|
-|:--|:--------|--------:|--------:|--------:|-------:|--------:|--------:|
-|2  |x_OP_y_R | 1.000000| 1.000000| 1.000000| 1.00000| 1.000000| 1.000000|
-|1  |x_OP_y   | 1.855316| 1.877175| 1.861144| 1.88503| 1.857889| 1.921263|
+|   |expr     |      min|       lq|    mean|   median|       uq|      max|
+|:--|:--------|--------:|--------:|-------:|--------:|--------:|--------:|
+|2  |x_OP_y_R | 1.000000| 1.000000| 1.00000| 1.000000| 1.000000| 1.000000|
+|1  |x_OP_y   | 1.235909| 1.242121| 1.23877| 1.244356| 1.236331| 1.055241|
 
 _Figure: Benchmarking of x_OP_y() and x_OP_y_R() on integer+10x1000+add data.  Outliers are displayed as crosses.  Times are in milliseconds._
 
@@ -511,8 +511,8 @@ _Figure: Benchmarking of x_OP_y() and x_OP_y_R() on integer+10x1000+add data.  O
 +     OP = OP, na.rm = FALSE), unit = "ms")
 > gc()
            used  (Mb) gc trigger  (Mb) max used  (Mb)
-Ncells  5348542 285.7   10014072 534.9 10014072 534.9
-Vcells 10072052  76.9   36267018 276.7 90959857 694.0
+Ncells  5415028 289.2    7916910 422.9  7916910 422.9
+Vcells 10546320  80.5   39038428 297.9 94934136 724.3
 ```
 
 _Table: Benchmarking of x_OP_y() and x_OP_y_R() on integer+10x1000+sub data. The top panel shows times in milliseconds and the bottom panel shows relative times._
@@ -521,14 +521,14 @@ _Table: Benchmarking of x_OP_y() and x_OP_y_R() on integer+10x1000+sub data. The
 
 |   |expr     |      min|        lq|      mean|    median|       uq|      max|
 |:--|:--------|--------:|---------:|---------:|---------:|--------:|--------:|
-|2  |x_OP_y_R | 0.030495| 0.0309280| 0.0337407| 0.0322520| 0.033891| 0.062243|
-|1  |x_OP_y   | 0.055286| 0.0568985| 0.0599171| 0.0596755| 0.060924| 0.085506|
+|2  |x_OP_y_R | 0.033951| 0.0344830| 0.0370768| 0.0359955| 0.036847| 0.071624|
+|1  |x_OP_y   | 0.037570| 0.0383995| 0.0414510| 0.0398795| 0.041676| 0.097974|
 
 
 |   |expr     |      min|       lq|     mean|   median|       uq|      max|
 |:--|:--------|--------:|--------:|--------:|--------:|--------:|--------:|
 |2  |x_OP_y_R | 1.000000| 1.000000| 1.000000| 1.000000| 1.000000| 1.000000|
-|1  |x_OP_y   | 1.812953| 1.839708| 1.775812| 1.850288| 1.797645| 1.373745|
+|1  |x_OP_y   | 1.106595| 1.113578| 1.117976| 1.107902| 1.131055| 1.367893|
 
 _Figure: Benchmarking of x_OP_y() and x_OP_y_R() on integer+10x1000+sub data.  Outliers are displayed as crosses.  Times are in milliseconds._
 
@@ -541,24 +541,24 @@ _Figure: Benchmarking of x_OP_y() and x_OP_y_R() on integer+10x1000+sub data.  O
 +     OP = OP, na.rm = FALSE), unit = "ms")
 > gc()
            used  (Mb) gc trigger  (Mb) max used  (Mb)
-Ncells  5348605 285.7   10014072 534.9 10014072 534.9
-Vcells 10072616  76.9   36267018 276.7 90959857 694.0
+Ncells  5415091 289.2    7916910 422.9  7916910 422.9
+Vcells 10546362  80.5   39038428 297.9 94934136 724.3
 ```
 
 _Table: Benchmarking of x_OP_y() and x_OP_y_R() on integer+10x1000+mul data. The top panel shows times in milliseconds and the bottom panel shows relative times._
 
 
 
-|   |expr     |      min|       lq|      mean|    median|       uq|      max|
-|:--|:--------|--------:|--------:|---------:|---------:|--------:|--------:|
-|2  |x_OP_y_R | 0.045504| 0.048769| 0.0509615| 0.0508195| 0.052930| 0.069355|
-|1  |x_OP_y   | 0.054706| 0.058915| 0.0613681| 0.0612675| 0.063792| 0.095293|
+|   |expr     |      min|        lq|      mean|  median|        uq|      max|
+|:--|:--------|--------:|---------:|---------:|-------:|---------:|--------:|
+|1  |x_OP_y   | 0.034669| 0.0364845| 0.0387897| 0.03765| 0.0391755| 0.070359|
+|2  |x_OP_y_R | 0.042301| 0.0440145| 0.0465300| 0.04560| 0.0473990| 0.063301|
 
 
-|   |expr     |      min|       lq|     mean|  median|       uq|      max|
-|:--|:--------|--------:|--------:|--------:|-------:|--------:|--------:|
-|2  |x_OP_y_R | 1.000000| 1.000000| 1.000000| 1.00000| 1.000000| 1.000000|
-|1  |x_OP_y   | 1.202224| 1.208042| 1.204204| 1.20559| 1.205214| 1.373989|
+|   |expr     |      min|       lq|     mean|   median|       uq|       max|
+|:--|:--------|--------:|--------:|--------:|--------:|--------:|---------:|
+|1  |x_OP_y   | 1.000000| 1.000000| 1.000000| 1.000000| 1.000000| 1.0000000|
+|2  |x_OP_y_R | 1.220139| 1.206389| 1.199544| 1.211155| 1.209914| 0.8996859|
 
 _Figure: Benchmarking of x_OP_y() and x_OP_y_R() on integer+10x1000+mul data.  Outliers are displayed as crosses.  Times are in milliseconds._
 
@@ -571,8 +571,8 @@ _Figure: Benchmarking of x_OP_y() and x_OP_y_R() on integer+10x1000+mul data.  O
 +     OP = OP, na.rm = FALSE), unit = "ms")
 > gc()
            used  (Mb) gc trigger  (Mb) max used  (Mb)
-Ncells  5348668 285.7   10014072 534.9 10014072 534.9
-Vcells 10072658  76.9   36267018 276.7 90959857 694.0
+Ncells  5415154 289.3    7916910 422.9  7916910 422.9
+Vcells 10546963  80.5   39038428 297.9 94934136 724.3
 ```
 
 _Table: Benchmarking of x_OP_y() and x_OP_y_R() on integer+10x1000+div data. The top panel shows times in milliseconds and the bottom panel shows relative times._
@@ -581,14 +581,14 @@ _Table: Benchmarking of x_OP_y() and x_OP_y_R() on integer+10x1000+div data. The
 
 |   |expr     |      min|       lq|      mean|    median|        uq|      max|
 |:--|:--------|--------:|--------:|---------:|---------:|---------:|--------:|
-|2  |x_OP_y_R | 0.020956| 0.022160| 0.0234105| 0.0229805| 0.0238755| 0.035075|
-|1  |x_OP_y   | 0.054923| 0.057421| 0.0601220| 0.0585070| 0.0617775| 0.084653|
+|2  |x_OP_y_R | 0.019543| 0.020177| 0.0210901| 0.0208365| 0.0211265| 0.034680|
+|1  |x_OP_y   | 0.026204| 0.026877| 0.0285741| 0.0274720| 0.0283100| 0.060968|
 
 
-|   |expr     |      min|     lq|    mean|   median|       uq|      max|
-|:--|:--------|--------:|------:|-------:|--------:|--------:|--------:|
-|2  |x_OP_y_R | 1.000000| 1.0000| 1.00000| 1.000000| 1.000000| 1.000000|
-|1  |x_OP_y   | 2.620872| 2.5912| 2.56817| 2.545941| 2.587485| 2.413485|
+|   |expr     |      min|       lq|     mean|   median|       uq|      max|
+|:--|:--------|--------:|--------:|--------:|--------:|--------:|--------:|
+|2  |x_OP_y_R | 1.000000| 1.000000| 1.000000| 1.000000| 1.000000| 1.000000|
+|1  |x_OP_y   | 1.340838| 1.332061| 1.354858| 1.318456| 1.340023| 1.758016|
 
 _Figure: Benchmarking of x_OP_y() and x_OP_y_R() on integer+10x1000+div data.  Outliers are displayed as crosses.  Times are in milliseconds._
 
@@ -610,24 +610,24 @@ _Figure: Benchmarking of x_OP_y() and x_OP_y_R() on integer+10x1000+div data.  O
 +     OP = OP, na.rm = FALSE), unit = "ms")
 > gc()
            used  (Mb) gc trigger  (Mb) max used  (Mb)
-Ncells  5348731 285.7   10014072 534.9 10014072 534.9
-Vcells 10072742  76.9   36267018 276.7 90959857 694.0
+Ncells  5415217 289.3    7916910 422.9  7916910 422.9
+Vcells 10547047  80.5   39038428 297.9 94934136 724.3
 ```
 
 _Table: Benchmarking of x_OP_y() and x_OP_y_R() on integer+100x1000+add data. The top panel shows times in milliseconds and the bottom panel shows relative times._
 
 
 
-|   |expr     |      min|        lq|      mean|    median|        uq|      max|
-|:--|:--------|--------:|---------:|---------:|---------:|---------:|--------:|
-|2  |x_OP_y_R | 0.272405| 0.3163565| 0.3303714| 0.3224475| 0.3438365| 0.402515|
-|1  |x_OP_y   | 0.485176| 0.4921530| 0.5236957| 0.5030515| 0.5492690| 0.625360|
+|   |expr     |      min|       lq|      mean|   median|        uq|      max|
+|:--|:--------|--------:|--------:|---------:|--------:|---------:|--------:|
+|2  |x_OP_y_R | 0.206595| 0.222928| 0.2581896| 0.252993| 0.2810800| 0.395533|
+|1  |x_OP_y   | 0.256061| 0.287432| 0.3177830| 0.308237| 0.3420815| 0.414349|
 
 
 |   |expr     |      min|       lq|     mean|   median|       uq|      max|
 |:--|:--------|--------:|--------:|--------:|--------:|--------:|--------:|
 |2  |x_OP_y_R | 1.000000| 1.000000| 1.000000| 1.000000| 1.000000| 1.000000|
-|1  |x_OP_y   | 1.781083| 1.555691| 1.585172| 1.560104| 1.597471| 1.553632|
+|1  |x_OP_y   | 1.239435| 1.289349| 1.230813| 1.218362| 1.217025| 1.047571|
 
 _Figure: Benchmarking of x_OP_y() and x_OP_y_R() on integer+100x1000+add data.  Outliers are displayed as crosses.  Times are in milliseconds._
 
@@ -640,24 +640,24 @@ _Figure: Benchmarking of x_OP_y() and x_OP_y_R() on integer+100x1000+add data.  
 +     OP = OP, na.rm = FALSE), unit = "ms")
 > gc()
            used  (Mb) gc trigger  (Mb) max used  (Mb)
-Ncells  5348794 285.7   10014072 534.9 10014072 534.9
-Vcells 10072784  76.9   36267018 276.7 90959857 694.0
+Ncells  5415280 289.3    7916910 422.9  7916910 422.9
+Vcells 10547089  80.5   39038428 297.9 94934136 724.3
 ```
 
 _Table: Benchmarking of x_OP_y() and x_OP_y_R() on integer+100x1000+sub data. The top panel shows times in milliseconds and the bottom panel shows relative times._
 
 
 
-|   |expr     |      min|        lq|      mean|    median|       uq|     max|
-|:--|:--------|--------:|---------:|---------:|---------:|--------:|-------:|
-|2  |x_OP_y_R | 0.194327| 0.1949845| 0.2297504| 0.2168935| 0.247345| 0.34896|
-|1  |x_OP_y   | 0.347679| 0.3541165| 0.4132739| 0.3990610| 0.452306| 0.59901|
+|   |expr     |      min|       lq|      mean|   median|       uq|      max|
+|:--|:--------|--------:|--------:|---------:|--------:|--------:|--------:|
+|2  |x_OP_y_R | 0.207133| 0.226874| 0.2563974| 0.253889| 0.269979| 0.399060|
+|1  |x_OP_y   | 0.214268| 0.236916| 0.2648584| 0.263563| 0.280436| 0.379632|
 
 
-|   |expr     |      min|       lq|     mean|   median|       uq|      max|
-|:--|:--------|--------:|--------:|--------:|--------:|--------:|--------:|
-|2  |x_OP_y_R | 1.000000| 1.000000| 1.000000| 1.000000| 1.000000| 1.000000|
-|1  |x_OP_y   | 1.789144| 1.816126| 1.798795| 1.839894| 1.828644| 1.716558|
+|   |expr     |      min|       lq|     mean|   median|       uq|       max|
+|:--|:--------|--------:|--------:|--------:|--------:|--------:|---------:|
+|2  |x_OP_y_R | 1.000000| 1.000000| 1.000000| 1.000000| 1.000000| 1.0000000|
+|1  |x_OP_y   | 1.034447| 1.044263| 1.032999| 1.038103| 1.038733| 0.9513156|
 
 _Figure: Benchmarking of x_OP_y() and x_OP_y_R() on integer+100x1000+sub data.  Outliers are displayed as crosses.  Times are in milliseconds._
 
@@ -670,8 +670,8 @@ _Figure: Benchmarking of x_OP_y() and x_OP_y_R() on integer+100x1000+sub data.  
 +     OP = OP, na.rm = FALSE), unit = "ms")
 > gc()
            used  (Mb) gc trigger  (Mb) max used  (Mb)
-Ncells  5348857 285.7   10014072 534.9 10014072 534.9
-Vcells 10073482  76.9   36267018 276.7 90959857 694.0
+Ncells  5415343 289.3    7916910 422.9  7916910 422.9
+Vcells 10547766  80.5   39038428 297.9 94934136 724.3
 ```
 
 _Table: Benchmarking of x_OP_y() and x_OP_y_R() on integer+100x1000+mul data. The top panel shows times in milliseconds and the bottom panel shows relative times._
@@ -680,14 +680,14 @@ _Table: Benchmarking of x_OP_y() and x_OP_y_R() on integer+100x1000+mul data. Th
 
 |   |expr     |      min|        lq|      mean|    median|        uq|      max|
 |:--|:--------|--------:|---------:|---------:|---------:|---------:|--------:|
-|2  |x_OP_y_R | 0.310599| 0.3113010| 0.3686567| 0.3365975| 0.4043435| 0.650920|
-|1  |x_OP_y   | 0.351273| 0.3519605| 0.4071710| 0.3806045| 0.4572300| 0.589233|
+|1  |x_OP_y   | 0.263325| 0.2876820| 0.3101268| 0.3162695| 0.3285000| 0.384502|
+|2  |x_OP_y_R | 0.336725| 0.3789075| 0.4059591| 0.4085335| 0.4303695| 0.493282|
 
 
-|   |expr     |      min|       lq|     mean|   median|       uq|       max|
-|:--|:--------|--------:|--------:|--------:|--------:|--------:|---------:|
-|2  |x_OP_y_R | 1.000000| 1.000000| 1.000000| 1.000000| 1.000000| 1.0000000|
-|1  |x_OP_y   | 1.130953| 1.130612| 1.104472| 1.130741| 1.130796| 0.9052311|
+|   |expr     |      min|       lq|    mean|   median|       uq|      max|
+|:--|:--------|--------:|--------:|-------:|--------:|--------:|--------:|
+|1  |x_OP_y   | 1.000000| 1.000000| 1.00000| 1.000000| 1.000000| 1.000000|
+|2  |x_OP_y_R | 1.278743| 1.317105| 1.30901| 1.291726| 1.310105| 1.282911|
 
 _Figure: Benchmarking of x_OP_y() and x_OP_y_R() on integer+100x1000+mul data.  Outliers are displayed as crosses.  Times are in milliseconds._
 
@@ -700,24 +700,24 @@ _Figure: Benchmarking of x_OP_y() and x_OP_y_R() on integer+100x1000+mul data.  
 +     OP = OP, na.rm = FALSE), unit = "ms")
 > gc()
            used  (Mb) gc trigger  (Mb) max used  (Mb)
-Ncells  5348920 285.7   10014072 534.9 10014072 534.9
-Vcells 10073524  76.9   36267018 276.7 90959857 694.0
+Ncells  5415406 289.3    7916910 422.9  7916910 422.9
+Vcells 10547808  80.5   39038428 297.9 94934136 724.3
 ```
 
 _Table: Benchmarking of x_OP_y() and x_OP_y_R() on integer+100x1000+div data. The top panel shows times in milliseconds and the bottom panel shows relative times._
 
 
 
-|   |expr     |      min|        lq|      mean|    median|        uq|      max|
-|:--|:--------|--------:|---------:|---------:|---------:|---------:|--------:|
-|2  |x_OP_y_R | 0.158337| 0.1791110| 0.2954767| 0.3582175| 0.3802295| 0.492017|
-|1  |x_OP_y   | 0.409199| 0.4521825| 0.5487595| 0.5694260| 0.5971825| 0.961430|
+|   |expr     |      min|        lq|      mean|   median|        uq|      max|
+|:--|:--------|--------:|---------:|---------:|--------:|---------:|--------:|
+|2  |x_OP_y_R | 0.173549| 0.1982010| 0.3415812| 0.405323| 0.4422375| 0.520576|
+|1  |x_OP_y   | 0.215580| 0.2433185| 0.3719319| 0.424221| 0.4789150| 0.528031|
 
 
-|   |expr     |      min|       lq|   mean|  median|       uq|      max|
-|:--|:--------|--------:|--------:|------:|-------:|--------:|--------:|
-|2  |x_OP_y_R | 1.000000| 1.000000| 1.0000| 1.00000| 1.000000| 1.000000|
-|1  |x_OP_y   | 2.584355| 2.524594| 1.8572| 1.58961| 1.570584| 1.954058|
+|   |expr     |      min|       lq|     mean|   median|       uq|      max|
+|:--|:--------|--------:|--------:|--------:|--------:|--------:|--------:|
+|2  |x_OP_y_R | 1.000000| 1.000000| 1.000000| 1.000000| 1.000000| 1.000000|
+|1  |x_OP_y   | 1.242185| 1.227635| 1.088853| 1.046625| 1.082936| 1.014321|
 
 _Figure: Benchmarking of x_OP_y() and x_OP_y_R() on integer+100x1000+div data.  Outliers are displayed as crosses.  Times are in milliseconds._
 
@@ -739,24 +739,24 @@ _Figure: Benchmarking of x_OP_y() and x_OP_y_R() on integer+100x1000+div data.  
 +     OP = OP, na.rm = FALSE), unit = "ms")
 > gc()
            used  (Mb) gc trigger  (Mb) max used  (Mb)
-Ncells  5348983 285.7   10014072 534.9 10014072 534.9
-Vcells 10074016  76.9   36267018 276.7 90959857 694.0
+Ncells  5415469 289.3    7916910 422.9  7916910 422.9
+Vcells 10548300  80.5   39038428 297.9 94934136 724.3
 ```
 
 _Table: Benchmarking of x_OP_y() and x_OP_y_R() on integer+1000x100+add data. The top panel shows times in milliseconds and the bottom panel shows relative times._
 
 
 
-|   |expr     |      min|        lq|      mean|    median|       uq|      max|
-|:--|:--------|--------:|---------:|---------:|---------:|--------:|--------:|
-|2  |x_OP_y_R | 0.259968| 0.3237895| 0.3353871| 0.3314085| 0.356282| 0.413562|
-|1  |x_OP_y   | 0.474361| 0.4840340| 0.5192371| 0.4979335| 0.551690| 0.630375|
+|   |expr     |      min|        lq|      mean|    median|        uq|      max|
+|:--|:--------|--------:|---------:|---------:|---------:|---------:|--------:|
+|2  |x_OP_y_R | 0.218424| 0.2357295| 0.2557380| 0.2600620| 0.2721125| 0.312178|
+|1  |x_OP_y   | 0.248858| 0.2639385| 0.2916061| 0.2966775| 0.3095995| 0.371030|
 
 
-|   |expr     |     min|       lq|     mean|   median|       uq|      max|
-|:--|:--------|-------:|--------:|--------:|--------:|--------:|--------:|
-|2  |x_OP_y_R | 1.00000| 1.000000| 1.000000| 1.000000| 1.000000| 1.000000|
-|1  |x_OP_y   | 1.82469| 1.494903| 1.548173| 1.502477| 1.548464| 1.524258|
+|   |expr     |      min|       lq|     mean|   median|       uq|      max|
+|:--|:--------|--------:|--------:|--------:|--------:|--------:|--------:|
+|2  |x_OP_y_R | 1.000000| 1.000000| 1.000000| 1.000000| 1.000000| 1.000000|
+|1  |x_OP_y   | 1.139334| 1.119667| 1.140253| 1.140795| 1.137763| 1.188521|
 
 _Figure: Benchmarking of x_OP_y() and x_OP_y_R() on integer+1000x100+add data.  Outliers are displayed as crosses.  Times are in milliseconds._
 
@@ -769,24 +769,24 @@ _Figure: Benchmarking of x_OP_y() and x_OP_y_R() on integer+1000x100+add data.  
 +     OP = OP, na.rm = FALSE), unit = "ms")
 > gc()
            used  (Mb) gc trigger  (Mb) max used  (Mb)
-Ncells  5349046 285.7   10014072 534.9 10014072 534.9
-Vcells 10074817  76.9   36267018 276.7 90959857 694.0
+Ncells  5415532 289.3    7916910 422.9  7916910 422.9
+Vcells 10548342  80.5   39038428 297.9 94934136 724.3
 ```
 
 _Table: Benchmarking of x_OP_y() and x_OP_y_R() on integer+1000x100+sub data. The top panel shows times in milliseconds and the bottom panel shows relative times._
 
 
 
-|   |expr     |      min|        lq|      mean|    median|        uq|      max|
-|:--|:--------|--------:|---------:|---------:|---------:|---------:|--------:|
-|2  |x_OP_y_R | 0.236937| 0.2408225| 0.2803514| 0.2727265| 0.3052170| 0.474327|
-|1  |x_OP_y   | 0.339646| 0.3440325| 0.4000211| 0.3797275| 0.4429895| 0.613672|
+|   |expr     |      min|       lq|      mean|    median|       uq|      max|
+|:--|:--------|--------:|--------:|---------:|---------:|--------:|--------:|
+|1  |x_OP_y   | 0.204926| 0.240084| 0.2728040| 0.2592890| 0.312930| 0.392250|
+|2  |x_OP_y_R | 0.234384| 0.271386| 0.3122882| 0.3026965| 0.339439| 0.498607|
 
 
-|   |expr     |      min|       lq|     mean|   median|       uq|      max|
-|:--|:--------|--------:|--------:|--------:|--------:|--------:|--------:|
-|2  |x_OP_y_R | 1.000000| 1.000000| 1.000000| 1.000000| 1.000000| 1.000000|
-|1  |x_OP_y   | 1.433487| 1.428573| 1.426856| 1.392338| 1.451392| 1.293774|
+|   |expr     |      min|       lq|     mean|  median|       uq|      max|
+|:--|:--------|--------:|--------:|--------:|-------:|--------:|--------:|
+|1  |x_OP_y   | 1.000000| 1.000000| 1.000000| 1.00000| 1.000000| 1.000000|
+|2  |x_OP_y_R | 1.143749| 1.130379| 1.144734| 1.16741| 1.084712| 1.271146|
 
 _Figure: Benchmarking of x_OP_y() and x_OP_y_R() on integer+1000x100+sub data.  Outliers are displayed as crosses.  Times are in milliseconds._
 
@@ -799,24 +799,24 @@ _Figure: Benchmarking of x_OP_y() and x_OP_y_R() on integer+1000x100+sub data.  
 +     OP = OP, na.rm = FALSE), unit = "ms")
 > gc()
            used  (Mb) gc trigger  (Mb) max used  (Mb)
-Ncells  5349109 285.7   10014072 534.9 10014072 534.9
-Vcells 10074859  76.9   36267018 276.7 90959857 694.0
+Ncells  5415595 289.3    7916910 422.9  7916910 422.9
+Vcells 10549168  80.5   39038428 297.9 94934136 724.3
 ```
 
 _Table: Benchmarking of x_OP_y() and x_OP_y_R() on integer+1000x100+mul data. The top panel shows times in milliseconds and the bottom panel shows relative times._
 
 
 
-|   |expr     |      min|        lq|      mean|   median|        uq|      max|
-|:--|:--------|--------:|---------:|---------:|--------:|---------:|--------:|
-|2  |x_OP_y_R | 0.310455| 0.3109865| 0.3606852| 0.333080| 0.3914650| 0.542960|
-|1  |x_OP_y   | 0.343240| 0.3442655| 0.3975342| 0.374303| 0.4330615| 0.587176|
+|   |expr     |      min|       lq|      mean|    median|        uq|      max|
+|:--|:--------|--------:|--------:|---------:|---------:|---------:|--------:|
+|1  |x_OP_y   | 0.243579| 0.272916| 0.3246984| 0.3000865| 0.3279790| 0.733109|
+|2  |x_OP_y_R | 0.318497| 0.356502| 0.4213620| 0.4039185| 0.4390145| 0.974944|
 
 
-|   |expr     |      min|       lq|     mean|   median|       uq|      max|
-|:--|:--------|--------:|--------:|--------:|--------:|--------:|--------:|
-|2  |x_OP_y_R | 1.000000| 1.000000| 1.000000| 1.000000| 1.000000| 1.000000|
-|1  |x_OP_y   | 1.105603| 1.107011| 1.102164| 1.123763| 1.106259| 1.081435|
+|   |expr     |      min|      lq|     mean|   median|       uq|      max|
+|:--|:--------|--------:|-------:|--------:|--------:|--------:|--------:|
+|1  |x_OP_y   | 1.000000| 1.00000| 1.000000| 1.000000| 1.000000| 1.000000|
+|2  |x_OP_y_R | 1.307572| 1.30627| 1.297703| 1.346007| 1.338545| 1.329876|
 
 _Figure: Benchmarking of x_OP_y() and x_OP_y_R() on integer+1000x100+mul data.  Outliers are displayed as crosses.  Times are in milliseconds._
 
@@ -829,24 +829,24 @@ _Figure: Benchmarking of x_OP_y() and x_OP_y_R() on integer+1000x100+mul data.  
 +     OP = OP, na.rm = FALSE), unit = "ms")
 > gc()
            used  (Mb) gc trigger  (Mb) max used  (Mb)
-Ncells  5349172 285.7   10014072 534.9 10014072 534.9
-Vcells 10074901  76.9   36267018 276.7 90959857 694.0
+Ncells  5415658 289.3    7916910 422.9  7916910 422.9
+Vcells 10549210  80.5   39038428 297.9 94934136 724.3
 ```
 
 _Table: Benchmarking of x_OP_y() and x_OP_y_R() on integer+1000x100+div data. The top panel shows times in milliseconds and the bottom panel shows relative times._
 
 
 
-|   |expr     |      min|        lq|      mean|    median|        uq|      max|
-|:--|:--------|--------:|---------:|---------:|---------:|---------:|--------:|
-|2  |x_OP_y_R | 0.157131| 0.1789320| 0.2878814| 0.3603345| 0.3728455| 0.427058|
-|1  |x_OP_y   | 0.401173| 0.4501595| 0.5330756| 0.5609090| 0.5839040| 0.684871|
+|   |expr     |      min|       lq|      mean|   median|        uq|      max|
+|:--|:--------|--------:|--------:|---------:|--------:|---------:|--------:|
+|2  |x_OP_y_R | 0.179733| 0.216987| 0.3375957| 0.392457| 0.4359585| 0.500883|
+|1  |x_OP_y   | 0.214625| 0.250102| 0.3697244| 0.418205| 0.4710770| 0.520053|
 
 
 |   |expr     |      min|       lq|     mean|   median|       uq|      max|
 |:--|:--------|--------:|--------:|--------:|--------:|--------:|--------:|
 |2  |x_OP_y_R | 1.000000| 1.000000| 1.000000| 1.000000| 1.000000| 1.000000|
-|1  |x_OP_y   | 2.553112| 2.515813| 1.851719| 1.556634| 1.566075| 1.603695|
+|1  |x_OP_y   | 1.194132| 1.152613| 1.095169| 1.065607| 1.080555| 1.038272|
 
 _Figure: Benchmarking of x_OP_y() and x_OP_y_R() on integer+1000x100+div data.  Outliers are displayed as crosses.  Times are in milliseconds._
 
@@ -908,24 +908,24 @@ _Figure: Benchmarking of x_OP_y() and x_OP_y_R() on integer+1000x100+div data.  
 +     OP = OP, na.rm = FALSE), unit = "ms")
 > gc()
            used  (Mb) gc trigger  (Mb) max used  (Mb)
-Ncells  5349235 285.7   10014072 534.9 10014072 534.9
-Vcells 10189509  77.8   36267018 276.7 90959857 694.0
+Ncells  5415721 289.3    7916910 422.9  7916910 422.9
+Vcells 10663818  81.4   39038428 297.9 94934136 724.3
 ```
 
 _Table: Benchmarking of x_OP_y() and x_OP_y_R() on double+10x10+add data. The top panel shows times in milliseconds and the bottom panel shows relative times._
 
 
 
-|   |expr     |      min|        lq|      mean|   median|       uq|      max|
-|:--|:--------|--------:|---------:|---------:|--------:|--------:|--------:|
-|2  |x_OP_y_R | 0.001623| 0.0018775| 0.0021400| 0.001998| 0.002138| 0.013756|
-|1  |x_OP_y   | 0.004141| 0.0045135| 0.0048743| 0.004649| 0.004779| 0.023828|
+|   |expr     |      min|        lq|      mean|    median|        uq|      max|
+|:--|:--------|--------:|---------:|---------:|---------:|---------:|--------:|
+|2  |x_OP_y_R | 0.001636| 0.0018535| 0.0021567| 0.0019715| 0.0021135| 0.015436|
+|1  |x_OP_y   | 0.004026| 0.0043050| 0.0046818| 0.0044380| 0.0046495| 0.021790|
 
 
-|   |expr     |      min|       lq|     mean|   median|       uq|     max|
-|:--|:--------|--------:|--------:|--------:|--------:|--------:|-------:|
-|2  |x_OP_y_R | 1.000000| 1.000000| 1.000000| 1.000000| 1.000000| 1.00000|
-|1  |x_OP_y   | 2.551448| 2.403995| 2.277697| 2.326827| 2.235267| 1.73219|
+|   |expr     |     min|       lq|     mean|   median|       uq|      max|
+|:--|:--------|-------:|--------:|--------:|--------:|--------:|--------:|
+|2  |x_OP_y_R | 1.00000| 1.000000| 1.000000| 1.000000| 1.000000| 1.000000|
+|1  |x_OP_y   | 2.46088| 2.322633| 2.170772| 2.251078| 2.199905| 1.411635|
 
 _Figure: Benchmarking of x_OP_y() and x_OP_y_R() on double+10x10+add data.  Outliers are displayed as crosses.  Times are in milliseconds._
 
@@ -938,24 +938,24 @@ _Figure: Benchmarking of x_OP_y() and x_OP_y_R() on double+10x10+add data.  Outl
 +     OP = OP, na.rm = FALSE), unit = "ms")
 > gc()
            used  (Mb) gc trigger  (Mb) max used  (Mb)
-Ncells  5349298 285.7   10014072 534.9 10014072 534.9
-Vcells 10190468  77.8   36267018 276.7 90959857 694.0
+Ncells  5415784 289.3    7916910 422.9  7916910 422.9
+Vcells 10664780  81.4   39038428 297.9 94934136 724.3
 ```
 
 _Table: Benchmarking of x_OP_y() and x_OP_y_R() on double+10x10+sub data. The top panel shows times in milliseconds and the bottom panel shows relative times._
 
 
 
-|   |expr     |      min|        lq|      mean|    median|        uq|      max|
-|:--|:--------|--------:|---------:|---------:|---------:|---------:|--------:|
-|2  |x_OP_y_R | 0.001722| 0.0019680| 0.0022309| 0.0020855| 0.0022000| 0.014209|
-|1  |x_OP_y   | 0.004285| 0.0045305| 0.0049194| 0.0046755| 0.0048565| 0.023073|
+|   |expr     |      min|        lq|      mean|   median|       uq|      max|
+|:--|:--------|--------:|---------:|---------:|--------:|--------:|--------:|
+|2  |x_OP_y_R | 0.001827| 0.0020375| 0.0023971| 0.002163| 0.002267| 0.022385|
+|1  |x_OP_y   | 0.004158| 0.0044960| 0.0049764| 0.004698| 0.004911| 0.026761|
 
 
-|   |expr     |      min|       lq|     mean|   median|     uq|     max|
-|:--|:--------|--------:|--------:|--------:|--------:|------:|-------:|
-|2  |x_OP_y_R | 1.000000| 1.000000| 1.000000| 1.000000| 1.0000| 1.00000|
-|1  |x_OP_y   | 2.488386| 2.302083| 2.205136| 2.241908| 2.2075| 1.62383|
+|   |expr     |      min|       lq|     mean|   median|       uq|      max|
+|:--|:--------|--------:|--------:|--------:|--------:|--------:|--------:|
+|2  |x_OP_y_R | 1.000000| 1.000000| 1.000000| 1.000000| 1.000000| 1.000000|
+|1  |x_OP_y   | 2.275862| 2.206626| 2.075986| 2.171983| 2.166299| 1.195488|
 
 _Figure: Benchmarking of x_OP_y() and x_OP_y_R() on double+10x10+sub data.  Outliers are displayed as crosses.  Times are in milliseconds._
 
@@ -968,8 +968,8 @@ _Figure: Benchmarking of x_OP_y() and x_OP_y_R() on double+10x10+sub data.  Outl
 +     OP = OP, na.rm = FALSE), unit = "ms")
 > gc()
            used  (Mb) gc trigger  (Mb) max used  (Mb)
-Ncells  5349361 285.7   10014072 534.9 10014072 534.9
-Vcells 10190510  77.8   36267018 276.7 90959857 694.0
+Ncells  5415847 289.3    7916910 422.9  7916910 422.9
+Vcells 10664822  81.4   39038428 297.9 94934136 724.3
 ```
 
 _Table: Benchmarking of x_OP_y() and x_OP_y_R() on double+10x10+mul data. The top panel shows times in milliseconds and the bottom panel shows relative times._
@@ -978,14 +978,14 @@ _Table: Benchmarking of x_OP_y() and x_OP_y_R() on double+10x10+mul data. The to
 
 |   |expr     |      min|        lq|      mean|    median|       uq|      max|
 |:--|:--------|--------:|---------:|---------:|---------:|--------:|--------:|
-|2  |x_OP_y_R | 0.001579| 0.0019385| 0.0021715| 0.0021080| 0.002194| 0.008696|
-|1  |x_OP_y   | 0.004291| 0.0044825| 0.0049030| 0.0046295| 0.004780| 0.027721|
+|2  |x_OP_y_R | 0.001600| 0.0019155| 0.0021650| 0.0020500| 0.002230| 0.008718|
+|1  |x_OP_y   | 0.004074| 0.0043510| 0.0048329| 0.0045505| 0.004805| 0.028044|
 
 
-|   |expr     |      min|       lq|     mean|   median|       uq|      max|
-|:--|:--------|--------:|--------:|--------:|--------:|--------:|--------:|
-|2  |x_OP_y_R | 1.000000| 1.000000| 1.000000| 1.000000| 1.000000| 1.000000|
-|1  |x_OP_y   | 2.717543| 2.312355| 2.257896| 2.196157| 2.178669| 3.187788|
+|   |expr     |     min|      lq|     mean|   median|       uq|      max|
+|:--|:--------|-------:|-------:|--------:|--------:|--------:|--------:|
+|2  |x_OP_y_R | 1.00000| 1.00000| 1.000000| 1.000000| 1.000000| 1.000000|
+|1  |x_OP_y   | 2.54625| 2.27147| 2.232264| 2.219756| 2.154708| 3.216793|
 
 _Figure: Benchmarking of x_OP_y() and x_OP_y_R() on double+10x10+mul data.  Outliers are displayed as crosses.  Times are in milliseconds._
 
@@ -998,24 +998,24 @@ _Figure: Benchmarking of x_OP_y() and x_OP_y_R() on double+10x10+mul data.  Outl
 +     OP = OP, na.rm = FALSE), unit = "ms")
 > gc()
            used  (Mb) gc trigger  (Mb) max used  (Mb)
-Ncells  5349424 285.7   10014072 534.9 10014072 534.9
-Vcells 10190552  77.8   36267018 276.7 90959857 694.0
+Ncells  5415910 289.3    7916910 422.9  7916910 422.9
+Vcells 10664864  81.4   39038428 297.9 94934136 724.3
 ```
 
 _Table: Benchmarking of x_OP_y() and x_OP_y_R() on double+10x10+div data. The top panel shows times in milliseconds and the bottom panel shows relative times._
 
 
 
-|   |expr     |      min|        lq|      mean|    median|        uq|      max|
-|:--|:--------|--------:|---------:|---------:|---------:|---------:|--------:|
-|2  |x_OP_y_R | 0.001687| 0.0019715| 0.0022436| 0.0021245| 0.0022325| 0.012961|
-|1  |x_OP_y   | 0.004201| 0.0045640| 0.0049111| 0.0047055| 0.0048635| 0.022288|
+|   |expr     |      min|        lq|      mean|   median|       uq|      max|
+|:--|:--------|--------:|---------:|---------:|--------:|--------:|--------:|
+|2  |x_OP_y_R | 0.001672| 0.0020015| 0.0024178| 0.002125| 0.002333| 0.019550|
+|1  |x_OP_y   | 0.004130| 0.0043345| 0.0049909| 0.004536| 0.004753| 0.024665|
 
 
-|   |expr     |      min|       lq|     mean|   median|       uq|     max|
-|:--|:--------|--------:|--------:|--------:|--------:|--------:|-------:|
-|2  |x_OP_y_R | 1.000000| 1.000000| 1.000000| 1.000000| 1.000000| 1.00000|
-|1  |x_OP_y   | 2.490219| 2.314989| 2.188928| 2.214874| 2.178499| 1.71962|
+|   |expr     |      min|       lq|     mean|   median|       uq|      max|
+|:--|:--------|--------:|--------:|--------:|--------:|--------:|--------:|
+|2  |x_OP_y_R | 1.000000| 1.000000| 1.000000| 1.000000| 1.000000| 1.000000|
+|1  |x_OP_y   | 2.470096| 2.165626| 2.064233| 2.134588| 2.037291| 1.261637|
 
 _Figure: Benchmarking of x_OP_y() and x_OP_y_R() on double+10x10+div data.  Outliers are displayed as crosses.  Times are in milliseconds._
 
@@ -1037,8 +1037,8 @@ _Figure: Benchmarking of x_OP_y() and x_OP_y_R() on double+10x10+div data.  Outl
 +     OP = OP, na.rm = FALSE), unit = "ms")
 > gc()
            used  (Mb) gc trigger  (Mb) max used  (Mb)
-Ncells  5349487 285.7   10014072 534.9 10014072 534.9
-Vcells 10190678  77.8   36267018 276.7 90959857 694.0
+Ncells  5415973 289.3    7916910 422.9  7916910 422.9
+Vcells 10664990  81.4   39038428 297.9 94934136 724.3
 ```
 
 _Table: Benchmarking of x_OP_y() and x_OP_y_R() on double+100x100+add data. The top panel shows times in milliseconds and the bottom panel shows relative times._
@@ -1047,14 +1047,14 @@ _Table: Benchmarking of x_OP_y() and x_OP_y_R() on double+100x100+add data. The 
 
 |   |expr     |      min|        lq|      mean|    median|        uq|      max|
 |:--|:--------|--------:|---------:|---------:|---------:|---------:|--------:|
-|2  |x_OP_y_R | 0.015719| 0.0170345| 0.0184104| 0.0177745| 0.0183055| 0.033125|
-|1  |x_OP_y   | 0.033147| 0.0351520| 0.0371898| 0.0362635| 0.0369595| 0.067355|
+|2  |x_OP_y_R | 0.015937| 0.0169795| 0.0179701| 0.0173535| 0.0177465| 0.050092|
+|1  |x_OP_y   | 0.017434| 0.0187035| 0.0198595| 0.0191415| 0.0197625| 0.051765|
 
 
-|   |expr     |      min|       lq|     mean|   median|       uq|      max|
-|:--|:--------|--------:|--------:|--------:|--------:|--------:|--------:|
-|2  |x_OP_y_R | 1.000000| 1.000000| 1.000000| 1.000000| 1.000000| 1.000000|
-|1  |x_OP_y   | 2.108722| 2.063577| 2.020048| 2.040198| 2.019038| 2.033358|
+|   |expr     |      min|       lq|     mean|   median|     uq|      max|
+|:--|:--------|--------:|--------:|--------:|--------:|------:|--------:|
+|2  |x_OP_y_R | 1.000000| 1.000000| 1.000000| 1.000000| 1.0000| 1.000000|
+|1  |x_OP_y   | 1.093932| 1.101534| 1.105138| 1.103034| 1.1136| 1.033399|
 
 _Figure: Benchmarking of x_OP_y() and x_OP_y_R() on double+100x100+add data.  Outliers are displayed as crosses.  Times are in milliseconds._
 
@@ -1067,24 +1067,24 @@ _Figure: Benchmarking of x_OP_y() and x_OP_y_R() on double+100x100+add data.  Ou
 +     OP = OP, na.rm = FALSE), unit = "ms")
 > gc()
            used  (Mb) gc trigger  (Mb) max used  (Mb)
-Ncells  5349550 285.7   10014072 534.9 10014072 534.9
-Vcells 10190720  77.8   36267018 276.7 90959857 694.0
+Ncells  5416036 289.3    7916910 422.9  7916910 422.9
+Vcells 10665032  81.4   39038428 297.9 94934136 724.3
 ```
 
 _Table: Benchmarking of x_OP_y() and x_OP_y_R() on double+100x100+sub data. The top panel shows times in milliseconds and the bottom panel shows relative times._
 
 
 
-|   |expr     |      min|        lq|      mean|    median|        uq|      max|
-|:--|:--------|--------:|---------:|---------:|---------:|---------:|--------:|
-|2  |x_OP_y_R | 0.016880| 0.0177155| 0.0193898| 0.0184270| 0.0190765| 0.036735|
-|1  |x_OP_y   | 0.035634| 0.0361930| 0.0383148| 0.0373945| 0.0379810| 0.073671|
+|   |expr     |      min|        lq|      mean|    median|        uq|     max|
+|:--|:--------|--------:|---------:|---------:|---------:|---------:|-------:|
+|1  |x_OP_y   | 0.018938| 0.0194895| 0.0206191| 0.0197555| 0.0202410| 0.05393|
+|2  |x_OP_y_R | 0.019021| 0.0195865| 0.0204662| 0.0198735| 0.0201755| 0.05138|
 
 
-|   |expr     |      min|       lq|     mean|   median|       uq|      max|
-|:--|:--------|--------:|--------:|--------:|--------:|--------:|--------:|
-|2  |x_OP_y_R | 1.000000| 1.000000| 1.000000| 1.000000| 1.000000| 1.000000|
-|1  |x_OP_y   | 2.111019| 2.043013| 1.976024| 2.029332| 1.990984| 2.005472|
+|   |expr     |      min|       lq|      mean|   median|       uq|       max|
+|:--|:--------|--------:|--------:|---------:|--------:|--------:|---------:|
+|1  |x_OP_y   | 1.000000| 1.000000| 1.0000000| 1.000000| 1.000000| 1.0000000|
+|2  |x_OP_y_R | 1.004383| 1.004977| 0.9925855| 1.005973| 0.996764| 0.9527165|
 
 _Figure: Benchmarking of x_OP_y() and x_OP_y_R() on double+100x100+sub data.  Outliers are displayed as crosses.  Times are in milliseconds._
 
@@ -1097,24 +1097,24 @@ _Figure: Benchmarking of x_OP_y() and x_OP_y_R() on double+100x100+sub data.  Ou
 +     OP = OP, na.rm = FALSE), unit = "ms")
 > gc()
            used  (Mb) gc trigger  (Mb) max used  (Mb)
-Ncells  5349613 285.8   10014072 534.9 10014072 534.9
-Vcells 10190762  77.8   36267018 276.7 90959857 694.0
+Ncells  5416099 289.3    7916910 422.9  7916910 422.9
+Vcells 10665074  81.4   39038428 297.9 94934136 724.3
 ```
 
 _Table: Benchmarking of x_OP_y() and x_OP_y_R() on double+100x100+mul data. The top panel shows times in milliseconds and the bottom panel shows relative times._
 
 
 
-|   |expr     |      min|        lq|      mean|   median|        uq|      max|
-|:--|:--------|--------:|---------:|---------:|--------:|---------:|--------:|
-|2  |x_OP_y_R | 0.013489| 0.0143085| 0.0157961| 0.014733| 0.0151640| 0.046594|
-|1  |x_OP_y   | 0.025436| 0.0259275| 0.0285322| 0.026373| 0.0294375| 0.051689|
+|   |expr     |      min|        lq|      mean|    median|        uq|      max|
+|:--|:--------|--------:|---------:|---------:|---------:|---------:|--------:|
+|2  |x_OP_y_R | 0.016980| 0.0177195| 0.0188028| 0.0180590| 0.0184470| 0.037352|
+|1  |x_OP_y   | 0.018799| 0.0195505| 0.0212312| 0.0199105| 0.0203675| 0.051589|
 
 
 |   |expr     |      min|       lq|     mean|   median|       uq|      max|
 |:--|:--------|--------:|--------:|--------:|--------:|--------:|--------:|
 |2  |x_OP_y_R | 1.000000| 1.000000| 1.000000| 1.000000| 1.000000| 1.000000|
-|1  |x_OP_y   | 1.885685| 1.812035| 1.806285| 1.790063| 1.941275| 1.109349|
+|1  |x_OP_y   | 1.107126| 1.103333| 1.129153| 1.102525| 1.104109| 1.381158|
 
 _Figure: Benchmarking of x_OP_y() and x_OP_y_R() on double+100x100+mul data.  Outliers are displayed as crosses.  Times are in milliseconds._
 
@@ -1127,24 +1127,24 @@ _Figure: Benchmarking of x_OP_y() and x_OP_y_R() on double+100x100+mul data.  Ou
 +     OP = OP, na.rm = FALSE), unit = "ms")
 > gc()
            used  (Mb) gc trigger  (Mb) max used  (Mb)
-Ncells  5349676 285.8   10014072 534.9 10014072 534.9
-Vcells 10191929  77.8   36267018 276.7 90959857 694.0
+Ncells  5416162 289.3    7916910 422.9  7916910 422.9
+Vcells 10666221  81.4   39038428 297.9 94934136 724.3
 ```
 
 _Table: Benchmarking of x_OP_y() and x_OP_y_R() on double+100x100+div data. The top panel shows times in milliseconds and the bottom panel shows relative times._
 
 
 
-|   |expr     |      min|        lq|      mean|    median|        uq|      max|
-|:--|:--------|--------:|---------:|---------:|---------:|---------:|--------:|
-|2  |x_OP_y_R | 0.016460| 0.0177615| 0.0195727| 0.0184085| 0.0189330| 0.037223|
-|1  |x_OP_y   | 0.034431| 0.0362465| 0.0388870| 0.0375160| 0.0385065| 0.072591|
+|   |expr     |      min|        lq|      mean|    median|       uq|      max|
+|:--|:--------|--------:|---------:|---------:|---------:|--------:|--------:|
+|2  |x_OP_y_R | 0.019233| 0.0197785| 0.0207181| 0.0199875| 0.020269| 0.052269|
+|1  |x_OP_y   | 0.021696| 0.0223820| 0.0230580| 0.0227015| 0.023075| 0.040945|
 
 
-|   |expr     |      min|       lq|     mean|   median|      uq|      max|
-|:--|:--------|--------:|--------:|--------:|--------:|-------:|--------:|
-|2  |x_OP_y_R | 1.000000| 1.000000| 1.000000| 1.000000| 1.00000| 1.000000|
-|1  |x_OP_y   | 2.091798| 2.040734| 1.986795| 2.037972| 2.03383| 1.950165|
+|   |expr     |      min|       lq|     mean|   median|       uq|       max|
+|:--|:--------|--------:|--------:|--------:|--------:|--------:|---------:|
+|2  |x_OP_y_R | 1.000000| 1.000000| 1.000000| 1.000000| 1.000000| 1.0000000|
+|1  |x_OP_y   | 1.128061| 1.131633| 1.112938| 1.135785| 1.138438| 0.7833515|
 
 _Figure: Benchmarking of x_OP_y() and x_OP_y_R() on double+100x100+div data.  Outliers are displayed as crosses.  Times are in milliseconds._
 
@@ -1166,24 +1166,24 @@ _Figure: Benchmarking of x_OP_y() and x_OP_y_R() on double+100x100+div data.  Ou
 +     OP = OP, na.rm = FALSE), unit = "ms")
 > gc()
            used  (Mb) gc trigger  (Mb) max used  (Mb)
-Ncells  5349739 285.8   10014072 534.9 10014072 534.9
-Vcells 10192871  77.8   36267018 276.7 90959857 694.0
+Ncells  5416225 289.3    7916910 422.9  7916910 422.9
+Vcells 10667163  81.4   39038428 297.9 94934136 724.3
 ```
 
 _Table: Benchmarking of x_OP_y() and x_OP_y_R() on double+1000x10+add data. The top panel shows times in milliseconds and the bottom panel shows relative times._
 
 
 
-|   |expr     |      min|       lq|      mean|   median|       uq|      max|
-|:--|:--------|--------:|--------:|---------:|--------:|--------:|--------:|
-|2  |x_OP_y_R | 0.013611| 0.014715| 0.0168680| 0.015136| 0.016178| 0.046787|
-|1  |x_OP_y   | 0.028111| 0.028634| 0.0321155| 0.029328| 0.030053| 0.062657|
+|   |expr     |      min|       lq|      mean|   median|        uq|      max|
+|:--|:--------|--------:|--------:|---------:|--------:|---------:|--------:|
+|2  |x_OP_y_R | 0.015873| 0.016901| 0.0185272| 0.017479| 0.0183390| 0.048790|
+|1  |x_OP_y   | 0.017227| 0.018503| 0.0193969| 0.019042| 0.0196345| 0.037878|
 
 
-|   |expr     |      min|       lq|     mean|   median|       uq|      max|
-|:--|:--------|--------:|--------:|--------:|--------:|--------:|--------:|
-|2  |x_OP_y_R | 1.000000| 1.000000| 1.000000| 1.000000| 1.000000| 1.000000|
-|1  |x_OP_y   | 2.065315| 1.945906| 1.903927| 1.937632| 1.857646| 1.339197|
+|   |expr     |      min|       lq|     mean|   median|       uq|       max|
+|:--|:--------|--------:|--------:|--------:|--------:|--------:|---------:|
+|2  |x_OP_y_R | 1.000000| 1.000000| 1.000000| 1.000000| 1.000000| 1.0000000|
+|1  |x_OP_y   | 1.085302| 1.094787| 1.046944| 1.089422| 1.070642| 0.7763476|
 
 _Figure: Benchmarking of x_OP_y() and x_OP_y_R() on double+1000x10+add data.  Outliers are displayed as crosses.  Times are in milliseconds._
 
@@ -1196,24 +1196,24 @@ _Figure: Benchmarking of x_OP_y() and x_OP_y_R() on double+1000x10+add data.  Ou
 +     OP = OP, na.rm = FALSE), unit = "ms")
 > gc()
            used  (Mb) gc trigger  (Mb) max used  (Mb)
-Ncells  5349802 285.8   10014072 534.9 10014072 534.9
-Vcells 10192913  77.8   36267018 276.7 90959857 694.0
+Ncells  5416288 289.3    7916910 422.9  7916910 422.9
+Vcells 10667205  81.4   39038428 297.9 94934136 724.3
 ```
 
 _Table: Benchmarking of x_OP_y() and x_OP_y_R() on double+1000x10+sub data. The top panel shows times in milliseconds and the bottom panel shows relative times._
 
 
 
-|   |expr     |      min|        lq|      mean|    median|        uq|      max|
-|:--|:--------|--------:|---------:|---------:|---------:|---------:|--------:|
-|2  |x_OP_y_R | 0.015233| 0.0160120| 0.0261187| 0.0273335| 0.0356400| 0.043568|
-|1  |x_OP_y   | 0.031189| 0.0317265| 0.0454132| 0.0341300| 0.0628775| 0.075333|
+|   |expr     |      min|       lq|      mean|    median|        uq|      max|
+|:--|:--------|--------:|--------:|---------:|---------:|---------:|--------:|
+|1  |x_OP_y   | 0.017902| 0.018679| 0.0196484| 0.0191175| 0.0200615| 0.036702|
+|2  |x_OP_y_R | 0.018442| 0.018923| 0.0203766| 0.0193960| 0.0202425| 0.050510|
 
 
-|   |expr     |      min|      lq|    mean|   median|      uq|     max|
-|:--|:--------|--------:|-------:|-------:|--------:|-------:|-------:|
-|2  |x_OP_y_R | 1.000000| 1.00000| 1.00000| 1.000000| 1.00000| 1.00000|
-|1  |x_OP_y   | 2.047463| 1.98142| 1.73872| 1.248651| 1.76424| 1.72909|
+|   |expr     |      min|       lq|     mean|   median|       uq|      max|
+|:--|:--------|--------:|--------:|--------:|--------:|--------:|--------:|
+|1  |x_OP_y   | 1.000000| 1.000000| 1.000000| 1.000000| 1.000000| 1.000000|
+|2  |x_OP_y_R | 1.030164| 1.013063| 1.037062| 1.014568| 1.009022| 1.376219|
 
 _Figure: Benchmarking of x_OP_y() and x_OP_y_R() on double+1000x10+sub data.  Outliers are displayed as crosses.  Times are in milliseconds._
 
@@ -1226,24 +1226,24 @@ _Figure: Benchmarking of x_OP_y() and x_OP_y_R() on double+1000x10+sub data.  Ou
 +     OP = OP, na.rm = FALSE), unit = "ms")
 > gc()
            used  (Mb) gc trigger  (Mb) max used  (Mb)
-Ncells  5349865 285.8   10014072 534.9 10014072 534.9
-Vcells 10192955  77.8   36267018 276.7 90959857 694.0
+Ncells  5416351 289.3    7916910 422.9  7916910 422.9
+Vcells 10667247  81.4   39038428 297.9 94934136 724.3
 ```
 
 _Table: Benchmarking of x_OP_y() and x_OP_y_R() on double+1000x10+mul data. The top panel shows times in milliseconds and the bottom panel shows relative times._
 
 
 
-|   |expr     |      min|        lq|      mean|   median|        uq|      max|
-|:--|:--------|--------:|---------:|---------:|--------:|---------:|--------:|
-|2  |x_OP_y_R | 0.015540| 0.0167485| 0.0181830| 0.017432| 0.0181995| 0.034775|
-|1  |x_OP_y   | 0.028494| 0.0305755| 0.0341685| 0.032008| 0.0348370| 0.077209|
+|   |expr     |      min|        lq|      mean|    median|       uq|      max|
+|:--|:--------|--------:|---------:|---------:|---------:|--------:|--------:|
+|2  |x_OP_y_R | 0.016905| 0.0175890| 0.0180825| 0.0179005| 0.018162| 0.025523|
+|1  |x_OP_y   | 0.018776| 0.0193595| 0.0208565| 0.0197540| 0.020330| 0.069348|
 
 
-|   |expr     |      min|       lq|     mean|   median|       uq|      max|
-|:--|:--------|--------:|--------:|--------:|--------:|--------:|--------:|
-|2  |x_OP_y_R | 1.000000| 1.000000| 1.000000| 1.000000| 1.000000| 1.000000|
-|1  |x_OP_y   | 1.833591| 1.825567| 1.879141| 1.836163| 1.914173| 2.220244|
+|   |expr     |      min|       lq|     mean|   median|      uq|      max|
+|:--|:--------|--------:|--------:|--------:|--------:|-------:|--------:|
+|2  |x_OP_y_R | 1.000000| 1.000000| 1.000000| 1.000000| 1.00000| 1.000000|
+|1  |x_OP_y   | 1.110677| 1.100659| 1.153409| 1.103545| 1.11937| 2.717079|
 
 _Figure: Benchmarking of x_OP_y() and x_OP_y_R() on double+1000x10+mul data.  Outliers are displayed as crosses.  Times are in milliseconds._
 
@@ -1256,24 +1256,24 @@ _Figure: Benchmarking of x_OP_y() and x_OP_y_R() on double+1000x10+mul data.  Ou
 +     OP = OP, na.rm = FALSE), unit = "ms")
 > gc()
            used  (Mb) gc trigger  (Mb) max used  (Mb)
-Ncells  5349928 285.8   10014072 534.9 10014072 534.9
-Vcells 10192997  77.8   36267018 276.7 90959857 694.0
+Ncells  5416414 289.3    7916910 422.9  7916910 422.9
+Vcells 10667289  81.4   39038428 297.9 94934136 724.3
 ```
 
 _Table: Benchmarking of x_OP_y() and x_OP_y_R() on double+1000x10+div data. The top panel shows times in milliseconds and the bottom panel shows relative times._
 
 
 
-|   |expr     |      min|       lq|      mean|    median|        uq|      max|
-|:--|:--------|--------:|--------:|---------:|---------:|---------:|--------:|
-|2  |x_OP_y_R | 0.018005| 0.019140| 0.0205125| 0.0196180| 0.0205260| 0.039790|
-|1  |x_OP_y   | 0.036430| 0.038272| 0.0406146| 0.0397065| 0.0401775| 0.070359|
+|   |expr     |      min|        lq|      mean|    median|        uq|      max|
+|:--|:--------|--------:|---------:|---------:|---------:|---------:|--------:|
+|2  |x_OP_y_R | 0.019284| 0.0197845| 0.0203245| 0.0199935| 0.0203230| 0.037019|
+|1  |x_OP_y   | 0.021935| 0.0224130| 0.0235238| 0.0228125| 0.0231405| 0.055052|
 
 
 |   |expr     |      min|       lq|     mean|   median|       uq|      max|
 |:--|:--------|--------:|--------:|--------:|--------:|--------:|--------:|
 |2  |x_OP_y_R | 1.000000| 1.000000| 1.000000| 1.000000| 1.000000| 1.000000|
-|1  |x_OP_y   | 2.023327| 1.999582| 1.979992| 2.023983| 1.957396| 1.768258|
+|1  |x_OP_y   | 1.137471| 1.132856| 1.157411| 1.140996| 1.138636| 1.487128|
 
 _Figure: Benchmarking of x_OP_y() and x_OP_y_R() on double+1000x10+div data.  Outliers are displayed as crosses.  Times are in milliseconds._
 
@@ -1295,24 +1295,24 @@ _Figure: Benchmarking of x_OP_y() and x_OP_y_R() on double+1000x10+div data.  Ou
 +     OP = OP, na.rm = FALSE), unit = "ms")
 > gc()
            used  (Mb) gc trigger  (Mb) max used  (Mb)
-Ncells  5349991 285.8   10014072 534.9 10014072 534.9
-Vcells 10192055  77.8   36267018 276.7 90959857 694.0
+Ncells  5416477 289.3    7916910 422.9  7916910 422.9
+Vcells 10666347  81.4   39038428 297.9 94934136 724.3
 ```
 
 _Table: Benchmarking of x_OP_y() and x_OP_y_R() on double+10x1000+add data. The top panel shows times in milliseconds and the bottom panel shows relative times._
 
 
 
-|   |expr     |      min|       lq|      mean|    median|        uq|      max|
-|:--|:--------|--------:|--------:|---------:|---------:|---------:|--------:|
-|2  |x_OP_y_R | 0.016546| 0.017528| 0.0188231| 0.0180905| 0.0186395| 0.031963|
-|1  |x_OP_y   | 0.036048| 0.036902| 0.0393472| 0.0381295| 0.0386665| 0.069424|
+|   |expr     |      min|        lq|      mean|   median|        uq|      max|
+|:--|:--------|--------:|---------:|---------:|--------:|---------:|--------:|
+|2  |x_OP_y_R | 0.016938| 0.0177040| 0.0182197| 0.017965| 0.0183240| 0.025058|
+|1  |x_OP_y   | 0.018568| 0.0191845| 0.0202301| 0.019488| 0.0199165| 0.051692|
 
 
 |   |expr     |      min|       lq|     mean|   median|       uq|      max|
 |:--|:--------|--------:|--------:|--------:|--------:|--------:|--------:|
 |2  |x_OP_y_R | 1.000000| 1.000000| 1.000000| 1.000000| 1.000000| 1.000000|
-|1  |x_OP_y   | 2.178653| 2.105317| 2.090366| 2.107709| 2.074439| 2.172011|
+|1  |x_OP_y   | 1.096233| 1.083625| 1.110345| 1.084776| 1.086908| 2.062894|
 
 _Figure: Benchmarking of x_OP_y() and x_OP_y_R() on double+10x1000+add data.  Outliers are displayed as crosses.  Times are in milliseconds._
 
@@ -1325,8 +1325,8 @@ _Figure: Benchmarking of x_OP_y() and x_OP_y_R() on double+10x1000+add data.  Ou
 +     OP = OP, na.rm = FALSE), unit = "ms")
 > gc()
            used  (Mb) gc trigger  (Mb) max used  (Mb)
-Ncells  5350054 285.8   10014072 534.9 10014072 534.9
-Vcells 10193417  77.8   36267018 276.7 90959857 694.0
+Ncells  5416540 289.3    7916910 422.9  7916910 422.9
+Vcells 10667717  81.4   39038428 297.9 94934136 724.3
 ```
 
 _Table: Benchmarking of x_OP_y() and x_OP_y_R() on double+10x1000+sub data. The top panel shows times in milliseconds and the bottom panel shows relative times._
@@ -1335,14 +1335,14 @@ _Table: Benchmarking of x_OP_y() and x_OP_y_R() on double+10x1000+sub data. The 
 
 |   |expr     |      min|        lq|      mean|    median|        uq|      max|
 |:--|:--------|--------:|---------:|---------:|---------:|---------:|--------:|
-|2  |x_OP_y_R | 0.017592| 0.0187625| 0.0200561| 0.0193825| 0.0200055| 0.033273|
-|1  |x_OP_y   | 0.038218| 0.0400670| 0.0419824| 0.0406180| 0.0419465| 0.071145|
+|1  |x_OP_y   | 0.017948| 0.0191505| 0.0202394| 0.0195675| 0.0199100| 0.049754|
+|2  |x_OP_y_R | 0.018297| 0.0190745| 0.0200302| 0.0198000| 0.0202385| 0.033064|
 
 
-|   |expr     |      min|       lq|     mean|   median|       uq|     max|
-|:--|:--------|--------:|--------:|--------:|--------:|--------:|-------:|
-|2  |x_OP_y_R | 1.000000| 1.000000| 1.000000| 1.000000| 1.000000| 1.00000|
-|1  |x_OP_y   | 2.172465| 2.135483| 2.093251| 2.095602| 2.096748| 2.13822|
+|   |expr     |      min|        lq|      mean|   median|       uq|       max|
+|:--|:--------|--------:|---------:|---------:|--------:|--------:|---------:|
+|1  |x_OP_y   | 1.000000| 1.0000000| 1.0000000| 1.000000| 1.000000| 1.0000000|
+|2  |x_OP_y_R | 1.019445| 0.9960314| 0.9896627| 1.011882| 1.016499| 0.6645496|
 
 _Figure: Benchmarking of x_OP_y() and x_OP_y_R() on double+10x1000+sub data.  Outliers are displayed as crosses.  Times are in milliseconds._
 
@@ -1355,24 +1355,24 @@ _Figure: Benchmarking of x_OP_y() and x_OP_y_R() on double+10x1000+sub data.  Ou
 +     OP = OP, na.rm = FALSE), unit = "ms")
 > gc()
            used  (Mb) gc trigger  (Mb) max used  (Mb)
-Ncells  5350117 285.8   10014072 534.9 10014072 534.9
-Vcells 10193459  77.8   36267018 276.7 90959857 694.0
+Ncells  5416603 289.3    7916910 422.9  7916910 422.9
+Vcells 10667759  81.4   39038428 297.9 94934136 724.3
 ```
 
 _Table: Benchmarking of x_OP_y() and x_OP_y_R() on double+10x1000+mul data. The top panel shows times in milliseconds and the bottom panel shows relative times._
 
 
 
-|   |expr     |      min|       lq|      mean|    median|        uq|      max|
-|:--|:--------|--------:|--------:|---------:|---------:|---------:|--------:|
-|2  |x_OP_y_R | 0.016140| 0.016899| 0.0184080| 0.0176830| 0.0183220| 0.030725|
-|1  |x_OP_y   | 0.034028| 0.034759| 0.0374059| 0.0361375| 0.0377585| 0.068489|
+|   |expr     |      min|        lq|      mean|    median|        uq|      max|
+|:--|:--------|--------:|---------:|---------:|---------:|---------:|--------:|
+|2  |x_OP_y_R | 0.015709| 0.0169650| 0.0178209| 0.0172535| 0.0176375| 0.048522|
+|1  |x_OP_y   | 0.017060| 0.0184585| 0.0196658| 0.0189410| 0.0195765| 0.049231|
 
 
-|   |expr     |      min|       lq|     mean|  median|       uq|      max|
-|:--|:--------|--------:|--------:|--------:|-------:|--------:|--------:|
-|2  |x_OP_y_R | 1.000000| 1.000000| 1.000000| 1.00000| 1.000000| 1.000000|
-|1  |x_OP_y   | 2.108302| 2.056867| 2.032041| 2.04363| 2.060828| 2.229097|
+|   |expr     |      min|       lq|     mean|   median|       uq|      max|
+|:--|:--------|--------:|--------:|--------:|--------:|--------:|--------:|
+|2  |x_OP_y_R | 1.000000| 1.000000| 1.000000| 1.000000| 1.000000| 1.000000|
+|1  |x_OP_y   | 1.086002| 1.088034| 1.103527| 1.097806| 1.109936| 1.014612|
 
 _Figure: Benchmarking of x_OP_y() and x_OP_y_R() on double+10x1000+mul data.  Outliers are displayed as crosses.  Times are in milliseconds._
 
@@ -1385,8 +1385,8 @@ _Figure: Benchmarking of x_OP_y() and x_OP_y_R() on double+10x1000+mul data.  Ou
 +     OP = OP, na.rm = FALSE), unit = "ms")
 > gc()
            used  (Mb) gc trigger  (Mb) max used  (Mb)
-Ncells  5350180 285.8   10014072 534.9 10014072 534.9
-Vcells 10193501  77.8   36267018 276.7 90959857 694.0
+Ncells  5416666 289.3    7916910 422.9  7916910 422.9
+Vcells 10667801  81.4   39038428 297.9 94934136 724.3
 ```
 
 _Table: Benchmarking of x_OP_y() and x_OP_y_R() on double+10x1000+div data. The top panel shows times in milliseconds and the bottom panel shows relative times._
@@ -1395,14 +1395,14 @@ _Table: Benchmarking of x_OP_y() and x_OP_y_R() on double+10x1000+div data. The 
 
 |   |expr     |      min|        lq|      mean|    median|        uq|      max|
 |:--|:--------|--------:|---------:|---------:|---------:|---------:|--------:|
-|2  |x_OP_y_R | 0.017959| 0.0191865| 0.0206461| 0.0198145| 0.0202885| 0.043385|
-|1  |x_OP_y   | 0.037922| 0.0399080| 0.0414031| 0.0406685| 0.0417695| 0.068863|
+|2  |x_OP_y_R | 0.018263| 0.0193205| 0.0200639| 0.0198605| 0.0203415| 0.029922|
+|1  |x_OP_y   | 0.021068| 0.0219500| 0.0234009| 0.0224820| 0.0229995| 0.054567|
 
 
 |   |expr     |      min|       lq|     mean|   median|       uq|      max|
 |:--|:--------|--------:|--------:|--------:|--------:|--------:|--------:|
 |2  |x_OP_y_R | 1.000000| 1.000000| 1.000000| 1.000000| 1.000000| 1.000000|
-|1  |x_OP_y   | 2.111588| 2.080004| 2.005373| 2.052462| 2.058777| 1.587254|
+|1  |x_OP_y   | 1.153589| 1.136099| 1.166319| 1.131996| 1.130669| 1.823641|
 
 _Figure: Benchmarking of x_OP_y() and x_OP_y_R() on double+10x1000+div data.  Outliers are displayed as crosses.  Times are in milliseconds._
 
@@ -1424,8 +1424,8 @@ _Figure: Benchmarking of x_OP_y() and x_OP_y_R() on double+10x1000+div data.  Ou
 +     OP = OP, na.rm = FALSE), unit = "ms")
 > gc()
            used  (Mb) gc trigger  (Mb) max used  (Mb)
-Ncells  5350243 285.8   10014072 534.9 10014072 534.9
-Vcells 10193627  77.8   36267018 276.7 90959857 694.0
+Ncells  5416729 289.3    7916910 422.9  7916910 422.9
+Vcells 10667927  81.4   39038428 297.9 94934136 724.3
 ```
 
 _Table: Benchmarking of x_OP_y() and x_OP_y_R() on double+100x1000+add data. The top panel shows times in milliseconds and the bottom panel shows relative times._
@@ -1434,14 +1434,14 @@ _Table: Benchmarking of x_OP_y() and x_OP_y_R() on double+100x1000+add data. The
 
 |   |expr     |      min|        lq|      mean|    median|        uq|      max|
 |:--|:--------|--------:|---------:|---------:|---------:|---------:|--------:|
-|2  |x_OP_y_R | 0.144763| 0.3083995| 0.3313139| 0.3176285| 0.3698325| 0.939247|
-|1  |x_OP_y   | 0.302595| 0.4105535| 0.4637066| 0.4456520| 0.5161370| 0.621752|
+|1  |x_OP_y   | 0.126234| 0.1426845| 0.2809578| 0.3434185| 0.3911035| 0.445408|
+|2  |x_OP_y_R | 0.134252| 0.1541160| 0.2975768| 0.3517350| 0.3876935| 0.452414|
 
 
-|   |expr     |      min|       lq|     mean|   median|       uq|       max|
-|:--|:--------|--------:|--------:|--------:|--------:|--------:|---------:|
-|2  |x_OP_y_R | 1.000000| 1.000000| 1.000000| 1.000000| 1.000000| 1.0000000|
-|1  |x_OP_y   | 2.090279| 1.331239| 1.399599| 1.403061| 1.395597| 0.6619686|
+|   |expr     |      min|       lq|     mean|   median|        uq|      max|
+|:--|:--------|--------:|--------:|--------:|--------:|---------:|--------:|
+|1  |x_OP_y   | 1.000000| 1.000000| 1.000000| 1.000000| 1.0000000| 1.000000|
+|2  |x_OP_y_R | 1.063517| 1.080117| 1.059151| 1.024217| 0.9912811| 1.015729|
 
 _Figure: Benchmarking of x_OP_y() and x_OP_y_R() on double+100x1000+add data.  Outliers are displayed as crosses.  Times are in milliseconds._
 
@@ -1454,24 +1454,24 @@ _Figure: Benchmarking of x_OP_y() and x_OP_y_R() on double+100x1000+add data.  O
 +     OP = OP, na.rm = FALSE), unit = "ms")
 > gc()
            used  (Mb) gc trigger  (Mb) max used  (Mb)
-Ncells  5350306 285.8   10014072 534.9 10014072 534.9
-Vcells 10193669  77.8   36267018 276.7 90959857 694.0
+Ncells  5416792 289.3    7916910 422.9  7916910 422.9
+Vcells 10667969  81.4   39038428 297.9 94934136 724.3
 ```
 
 _Table: Benchmarking of x_OP_y() and x_OP_y_R() on double+100x1000+sub data. The top panel shows times in milliseconds and the bottom panel shows relative times._
 
 
 
-|   |expr     |      min|        lq|      mean|    median|        uq|      max|
-|:--|:--------|--------:|---------:|---------:|---------:|---------:|--------:|
-|2  |x_OP_y_R | 0.164955| 0.3213385| 0.3683738| 0.3464090| 0.4147895| 0.615198|
-|1  |x_OP_y   | 0.339357| 0.4365410| 0.5246037| 0.4904545| 0.5842420| 0.852817|
+|   |expr     |      min|        lq|      mean|   median|        uq|      max|
+|:--|:--------|--------:|---------:|---------:|--------:|---------:|--------:|
+|1  |x_OP_y   | 0.119238| 0.1326565| 0.2733983| 0.341503| 0.3836775| 0.413903|
+|2  |x_OP_y_R | 0.147918| 0.1673165| 0.3080147| 0.361057| 0.4063995| 0.448076|
 
 
-|   |expr     |     min|       lq|     mean|   median|       uq|      max|
-|:--|:--------|-------:|--------:|--------:|--------:|--------:|--------:|
-|2  |x_OP_y_R | 1.00000| 1.000000| 1.000000| 1.000000| 1.000000| 1.000000|
-|1  |x_OP_y   | 2.05727| 1.358508| 1.424107| 1.415825| 1.408527| 1.386248|
+|   |expr     |      min|       lq|     mean|   median|       uq|      max|
+|:--|:--------|--------:|--------:|--------:|--------:|--------:|--------:|
+|1  |x_OP_y   | 1.000000| 1.000000| 1.000000| 1.000000| 1.000000| 1.000000|
+|2  |x_OP_y_R | 1.240527| 1.261276| 1.126615| 1.057259| 1.059222| 1.082563|
 
 _Figure: Benchmarking of x_OP_y() and x_OP_y_R() on double+100x1000+sub data.  Outliers are displayed as crosses.  Times are in milliseconds._
 
@@ -1484,24 +1484,24 @@ _Figure: Benchmarking of x_OP_y() and x_OP_y_R() on double+100x1000+sub data.  O
 +     OP = OP, na.rm = FALSE), unit = "ms")
 > gc()
            used  (Mb) gc trigger  (Mb) max used  (Mb)
-Ncells  5350369 285.8   10014072 534.9 10014072 534.9
-Vcells 10193711  77.8   36267018 276.7 90959857 694.0
+Ncells  5416855 289.3    7916910 422.9  7916910 422.9
+Vcells 10668011  81.4   39038428 297.9 94934136 724.3
 ```
 
 _Table: Benchmarking of x_OP_y() and x_OP_y_R() on double+100x1000+mul data. The top panel shows times in milliseconds and the bottom panel shows relative times._
 
 
 
-|   |expr     |      min|        lq|      mean|   median|       uq|      max|
-|:--|:--------|--------:|---------:|---------:|--------:|--------:|--------:|
-|2  |x_OP_y_R | 0.144207| 0.3090365| 0.3241946| 0.324480| 0.363608| 0.473435|
-|1  |x_OP_y   | 0.293972| 0.3931230| 0.4417605| 0.413686| 0.494115| 0.597389|
+|   |expr     |      min|        lq|      mean|   median|        uq|      max|
+|:--|:--------|--------:|---------:|---------:|--------:|---------:|--------:|
+|1  |x_OP_y   | 0.122301| 0.1324765| 0.2802148| 0.344373| 0.3888135| 0.552690|
+|2  |x_OP_y_R | 0.129927| 0.1464740| 0.2970998| 0.354247| 0.4025355| 0.521488|
 
 
-|   |expr     |      min|       lq|    mean|  median|       uq|      max|
-|:--|:--------|--------:|--------:|-------:|-------:|--------:|--------:|
-|2  |x_OP_y_R | 1.000000| 1.000000| 1.00000| 1.00000| 1.000000| 1.000000|
-|1  |x_OP_y   | 2.038542| 1.272093| 1.36264| 1.27492| 1.358922| 1.261818|
+|   |expr     |      min|      lq|     mean|   median|       uq|       max|
+|:--|:--------|--------:|-------:|--------:|--------:|--------:|---------:|
+|1  |x_OP_y   | 1.000000| 1.00000| 1.000000| 1.000000| 1.000000| 1.0000000|
+|2  |x_OP_y_R | 1.062354| 1.10566| 1.060257| 1.028672| 1.035292| 0.9435452|
 
 _Figure: Benchmarking of x_OP_y() and x_OP_y_R() on double+100x1000+mul data.  Outliers are displayed as crosses.  Times are in milliseconds._
 
@@ -1514,8 +1514,8 @@ _Figure: Benchmarking of x_OP_y() and x_OP_y_R() on double+100x1000+mul data.  O
 +     OP = OP, na.rm = FALSE), unit = "ms")
 > gc()
            used  (Mb) gc trigger  (Mb) max used  (Mb)
-Ncells  5350432 285.8   10014072 534.9 10014072 534.9
-Vcells 10193753  77.8   36267018 276.7 90959857 694.0
+Ncells  5416918 289.3    7916910 422.9  7916910 422.9
+Vcells 10668053  81.4   39038428 297.9 94934136 724.3
 ```
 
 _Table: Benchmarking of x_OP_y() and x_OP_y_R() on double+100x1000+div data. The top panel shows times in milliseconds and the bottom panel shows relative times._
@@ -1524,14 +1524,14 @@ _Table: Benchmarking of x_OP_y() and x_OP_y_R() on double+100x1000+div data. The
 
 |   |expr     |      min|        lq|      mean|    median|        uq|      max|
 |:--|:--------|--------:|---------:|---------:|---------:|---------:|--------:|
-|2  |x_OP_y_R | 0.164653| 0.3218685| 0.3402826| 0.3306960| 0.3813825| 0.480358|
-|1  |x_OP_y   | 0.339729| 0.4356965| 0.4843611| 0.4569015| 0.5423775| 0.652258|
+|1  |x_OP_y   | 0.144130| 0.1598995| 0.2913056| 0.3468255| 0.4011815| 0.441631|
+|2  |x_OP_y_R | 0.142693| 0.1662600| 0.3057355| 0.3545605| 0.4060015| 0.455083|
 
 
-|   |expr     |      min|       lq|     mean|   median|       uq|      max|
-|:--|:--------|--------:|--------:|--------:|--------:|--------:|--------:|
-|2  |x_OP_y_R | 1.000000| 1.000000| 1.000000| 1.000000| 1.000000| 1.000000|
-|1  |x_OP_y   | 2.063303| 1.353647| 1.423408| 1.381636| 1.422135| 1.357858|
+|   |expr     |       min|       lq|     mean|   median|       uq|     max|
+|:--|:--------|---------:|--------:|--------:|--------:|--------:|-------:|
+|1  |x_OP_y   | 1.0000000| 1.000000| 1.000000| 1.000000| 1.000000| 1.00000|
+|2  |x_OP_y_R | 0.9900298| 1.039778| 1.049535| 1.022302| 1.012015| 1.03046|
 
 _Figure: Benchmarking of x_OP_y() and x_OP_y_R() on double+100x1000+div data.  Outliers are displayed as crosses.  Times are in milliseconds._
 
@@ -1553,24 +1553,24 @@ _Figure: Benchmarking of x_OP_y() and x_OP_y_R() on double+100x1000+div data.  O
 +     OP = OP, na.rm = FALSE), unit = "ms")
 > gc()
            used  (Mb) gc trigger  (Mb) max used  (Mb)
-Ncells  5350495 285.8   10014072 534.9 10014072 534.9
-Vcells 10194695  77.8   36267018 276.7 90959857 694.0
+Ncells  5416981 289.3    7916910 422.9  7916910 422.9
+Vcells 10668995  81.4   39038428 297.9 94934136 724.3
 ```
 
 _Table: Benchmarking of x_OP_y() and x_OP_y_R() on double+1000x100+add data. The top panel shows times in milliseconds and the bottom panel shows relative times._
 
 
 
-|   |expr     |      min|        lq|      mean|    median|        uq|      max|
-|:--|:--------|--------:|---------:|---------:|---------:|---------:|--------:|
-|2  |x_OP_y_R | 0.144756| 0.3103565| 0.3367669| 0.3289825| 0.3864120| 0.490058|
-|1  |x_OP_y   | 0.288813| 0.4012470| 0.4517341| 0.4337260| 0.5056755| 0.636178|
+|   |expr     |      min|        lq|      mean|    median|       uq|      max|
+|:--|:--------|--------:|---------:|---------:|---------:|--------:|--------:|
+|1  |x_OP_y   | 0.130862| 0.1433530| 0.2965059| 0.3681460| 0.395757| 0.487060|
+|2  |x_OP_y_R | 0.139765| 0.1530895| 0.3111418| 0.3809985| 0.406488| 0.480899|
 
 
-|   |expr     |      min|       lq|     mean|   median|       uq|      max|
-|:--|:--------|--------:|--------:|--------:|--------:|--------:|--------:|
-|2  |x_OP_y_R | 1.000000| 1.000000| 1.000000| 1.000000| 1.000000| 1.000000|
-|1  |x_OP_y   | 1.995171| 1.292858| 1.341385| 1.318386| 1.308643| 1.298169|
+|   |expr     |      min|      lq|     mean|   median|       uq|       max|
+|:--|:--------|--------:|-------:|--------:|--------:|--------:|---------:|
+|1  |x_OP_y   | 1.000000| 1.00000| 1.000000| 1.000000| 1.000000| 1.0000000|
+|2  |x_OP_y_R | 1.068034| 1.06792| 1.049362| 1.034911| 1.027115| 0.9873506|
 
 _Figure: Benchmarking of x_OP_y() and x_OP_y_R() on double+1000x100+add data.  Outliers are displayed as crosses.  Times are in milliseconds._
 
@@ -1583,24 +1583,24 @@ _Figure: Benchmarking of x_OP_y() and x_OP_y_R() on double+1000x100+add data.  O
 +     OP = OP, na.rm = FALSE), unit = "ms")
 > gc()
            used  (Mb) gc trigger  (Mb) max used  (Mb)
-Ncells  5350558 285.8   10014072 534.9 10014072 534.9
-Vcells 10196329  77.8   36267018 276.7 90959857 694.0
+Ncells  5417044 289.4    7916910 422.9  7916910 422.9
+Vcells 10670627  81.5   39038428 297.9 94934136 724.3
 ```
 
 _Table: Benchmarking of x_OP_y() and x_OP_y_R() on double+1000x100+sub data. The top panel shows times in milliseconds and the bottom panel shows relative times._
 
 
 
-|   |expr     |      min|       lq|      mean|    median|        uq|      max|
-|:--|:--------|--------:|--------:|---------:|---------:|---------:|--------:|
-|2  |x_OP_y_R | 0.164633| 0.321633| 0.3507613| 0.3428310| 0.3955045| 0.486230|
-|1  |x_OP_y   | 0.328470| 0.427562| 0.4703479| 0.4393535| 0.5177525| 0.648418|
+|   |expr     |      min|        lq|      mean|    median|        uq|      max|
+|:--|:--------|--------:|---------:|---------:|---------:|---------:|--------:|
+|1  |x_OP_y   | 0.126619| 0.1427050| 0.2913081| 0.3531805| 0.3961785| 0.441303|
+|2  |x_OP_y_R | 0.152317| 0.1669595| 0.3057430| 0.3648710| 0.4167585| 0.453241|
 
 
 |   |expr     |      min|       lq|     mean|   median|       uq|      max|
 |:--|:--------|--------:|--------:|--------:|--------:|--------:|--------:|
-|2  |x_OP_y_R | 1.000000| 1.000000| 1.000000| 1.000000| 1.000000| 1.000000|
-|1  |x_OP_y   | 1.995165| 1.329347| 1.340934| 1.281545| 1.309094| 1.333562|
+|1  |x_OP_y   | 1.000000| 1.000000| 1.000000| 1.000000| 1.000000| 1.000000|
+|2  |x_OP_y_R | 1.202955| 1.169963| 1.049552| 1.033101| 1.051946| 1.027052|
 
 _Figure: Benchmarking of x_OP_y() and x_OP_y_R() on double+1000x100+sub data.  Outliers are displayed as crosses.  Times are in milliseconds._
 
@@ -1613,24 +1613,24 @@ _Figure: Benchmarking of x_OP_y() and x_OP_y_R() on double+1000x100+sub data.  O
 +     OP = OP, na.rm = FALSE), unit = "ms")
 > gc()
            used  (Mb) gc trigger  (Mb) max used  (Mb)
-Ncells  5350621 285.8   10014072 534.9 10014072 534.9
-Vcells 10196371  77.8   36267018 276.7 90959857 694.0
+Ncells  5417107 289.4    7916910 422.9  7916910 422.9
+Vcells 10670669  81.5   39038428 297.9 94934136 724.3
 ```
 
 _Table: Benchmarking of x_OP_y() and x_OP_y_R() on double+1000x100+mul data. The top panel shows times in milliseconds and the bottom panel shows relative times._
 
 
 
-|   |expr     |      min|        lq|      mean|   median|       uq|      max|
-|:--|:--------|--------:|---------:|---------:|--------:|--------:|--------:|
-|2  |x_OP_y_R | 0.145343| 0.3098375| 0.3334421| 0.331356| 0.384423| 0.493688|
-|1  |x_OP_y   | 0.249462| 0.3871015| 0.4331455| 0.418163| 0.485754| 0.597608|
+|   |expr     |      min|       lq|      mean|   median|        uq|      max|
+|:--|:--------|--------:|--------:|---------:|--------:|---------:|--------:|
+|1  |x_OP_y   | 0.130735| 0.142609| 0.2874260| 0.350753| 0.3958225| 0.447575|
+|2  |x_OP_y_R | 0.139397| 0.152527| 0.2977497| 0.357040| 0.4032735| 0.449363|
 
 
 |   |expr     |      min|       lq|     mean|   median|       uq|      max|
 |:--|:--------|--------:|--------:|--------:|--------:|--------:|--------:|
-|2  |x_OP_y_R | 1.000000| 1.000000| 1.000000| 1.000000| 1.000000| 1.000000|
-|1  |x_OP_y   | 1.716368| 1.249369| 1.299012| 1.261975| 1.263592| 1.210497|
+|1  |x_OP_y   | 1.000000| 1.000000| 1.000000| 1.000000| 1.000000| 1.000000|
+|2  |x_OP_y_R | 1.066256| 1.069547| 1.035918| 1.017924| 1.018824| 1.003995|
 
 _Figure: Benchmarking of x_OP_y() and x_OP_y_R() on double+1000x100+mul data.  Outliers are displayed as crosses.  Times are in milliseconds._
 
@@ -1643,24 +1643,24 @@ _Figure: Benchmarking of x_OP_y() and x_OP_y_R() on double+1000x100+mul data.  O
 +     OP = OP, na.rm = FALSE), unit = "ms")
 > gc()
            used  (Mb) gc trigger  (Mb) max used  (Mb)
-Ncells  5350684 285.8   10014072 534.9 10014072 534.9
-Vcells 10196413  77.8   36267018 276.7 90959857 694.0
+Ncells  5417170 289.4    7916910 422.9  7916910 422.9
+Vcells 10670711  81.5   39038428 297.9 94934136 724.3
 ```
 
 _Table: Benchmarking of x_OP_y() and x_OP_y_R() on double+1000x100+div data. The top panel shows times in milliseconds and the bottom panel shows relative times._
 
 
 
-|   |expr     |      min|        lq|      mean|    median|       uq|      max|
-|:--|:--------|--------:|---------:|---------:|---------:|--------:|--------:|
-|2  |x_OP_y_R | 0.165631| 0.3195440| 0.3590820| 0.3377795| 0.402101| 1.133268|
-|1  |x_OP_y   | 0.328736| 0.4283845| 0.4796671| 0.4621275| 0.535362| 0.662927|
+|   |expr     |      min|        lq|      mean|    median|        uq|      max|
+|:--|:--------|--------:|---------:|---------:|---------:|---------:|--------:|
+|2  |x_OP_y_R | 0.152285| 0.1729235| 0.3116299| 0.3647405| 0.4177895| 0.470703|
+|1  |x_OP_y   | 0.155192| 0.1752165| 0.3124604| 0.3659615| 0.4216820| 0.461336|
 
 
-|   |expr     |      min|       lq|     mean|   median|       uq|       max|
-|:--|:--------|--------:|--------:|--------:|--------:|--------:|---------:|
-|2  |x_OP_y_R | 1.000000| 1.000000| 1.000000| 1.000000| 1.000000| 1.0000000|
-|1  |x_OP_y   | 1.984749| 1.340612| 1.335815| 1.368134| 1.331412| 0.5849693|
+|   |expr     |      min|      lq|     mean|   median|       uq|    max|
+|:--|:--------|--------:|-------:|--------:|--------:|--------:|------:|
+|2  |x_OP_y_R | 1.000000| 1.00000| 1.000000| 1.000000| 1.000000| 1.0000|
+|1  |x_OP_y   | 1.019089| 1.01326| 1.002665| 1.003348| 1.009317| 0.9801|
 
 _Figure: Benchmarking of x_OP_y() and x_OP_y_R() on double+1000x100+div data.  Outliers are displayed as crosses.  Times are in milliseconds._
 
@@ -1693,7 +1693,7 @@ attached base packages:
 [1] stats     graphics  grDevices utils     datasets  methods   base     
 
 other attached packages:
-[1] microbenchmark_1.4-7   matrixStats_0.60.1     ggplot2_3.3.5         
+[1] microbenchmark_1.4-7   matrixStats_0.60.0     ggplot2_3.3.5         
 [4] knitr_1.33             R.devices_2.17.0       R.utils_2.10.1        
 [7] R.oo_1.24.0            R.methodsS3_1.8.1-9001 history_0.0.1-9000    
 
@@ -1719,17 +1719,17 @@ loaded via a namespace (and not attached):
 [55] munsell_0.5.0           tabby_0.0.1-9001        AnnotationDbi_1.54.1   
 [58] Biostrings_2.60.2       compiler_4.1.1          GenomeInfoDb_1.28.1    
 [61] rlang_0.4.11            grid_4.1.1              RCurl_1.98-1.4         
-[64] cwhmisc_6.6             rappdirs_0.3.3          startup_0.15.0         
-[67] labeling_0.4.2          bitops_1.0-7            base64enc_0.1-3        
-[70] boot_1.3-28             gtable_0.3.0            DBI_1.1.1              
-[73] markdown_1.1            R6_2.5.1                lpSolveAPI_5.5.2.0-17.7
-[76] rle_0.9.2               dplyr_1.0.7             fastmap_1.1.0          
-[79] bit_4.0.4               utf8_1.2.2              parallel_4.1.1         
-[82] Rcpp_1.0.7              vctrs_0.3.8             png_0.1-7              
-[85] DEoptimR_1.0-9          tidyselect_1.1.1        xfun_0.25              
-[88] coda_0.19-4            
+[64] cwhmisc_6.6             rstudioapi_0.13         rappdirs_0.3.3         
+[67] startup_0.15.0-9000     labeling_0.4.2          bitops_1.0-7           
+[70] base64enc_0.1-3         boot_1.3-28             gtable_0.3.0           
+[73] DBI_1.1.1               markdown_1.1            R6_2.5.1               
+[76] lpSolveAPI_5.5.2.0-17.7 rle_0.9.2               dplyr_1.0.7            
+[79] fastmap_1.1.0           bit_4.0.4               utf8_1.2.2             
+[82] parallel_4.1.1          Rcpp_1.0.7              vctrs_0.3.8            
+[85] png_0.1-7               DEoptimR_1.0-9          tidyselect_1.1.1       
+[88] xfun_0.25               coda_0.19-4            
 ```
-Total processing time was 1.13 mins.
+Total processing time was 1.18 mins.
 
 
 ### Reproducibility
@@ -1746,7 +1746,7 @@ html <- matrixStats:::benchmark('x_OP_y')
 [StackOverflow:rowProds?]: https://stackoverflow.com/questions/20198801/ "Stack Overflow: Row product of matrix and column sum of matrix"
 
 ---------------------------------------
-Copyright Henrik Bengtsson. Last updated on 2021-08-25 18:41:23 (+0200 UTC). Powered by [RSP].
+Copyright Henrik Bengtsson. Last updated on 2021-08-25 22:55:01 (+0200 UTC). Powered by [RSP].
 
 <script>
  var link = document.createElement('link');

@@ -61,8 +61,8 @@ This report benchmark the performance of colTabulates() and rowTabulates() on su
 > X_S <- X[rows, cols]
 > gc()
            used  (Mb) gc trigger  (Mb) max used  (Mb)
-Ncells  5256044 280.8   10014072 534.9 10014072 534.9
-Vcells 10110398  77.2   18204443 138.9 18204443 138.9
+Ncells  5309434 283.6    7916910 422.9  7916910 422.9
+Vcells 10540301  80.5   33191153 253.3 53339345 407.0
 > colStats <- microbenchmark(colTabulates_X_S = colTabulates(X_S, na.rm = FALSE), `colTabulates(X, rows, cols)` = colTabulates(X, 
 +     rows = rows, cols = cols, na.rm = FALSE), `colTabulates(X[rows, cols])` = colTabulates(X[rows, 
 +     cols], na.rm = FALSE), unit = "ms")
@@ -70,8 +70,8 @@ Vcells 10110398  77.2   18204443 138.9 18204443 138.9
 > X_S <- t(X_S)
 > gc()
            used  (Mb) gc trigger  (Mb) max used  (Mb)
-Ncells  5242916 280.1   10014072 534.9 10014072 534.9
-Vcells 10066348  76.9   18204443 138.9 18204443 138.9
+Ncells  5309717 283.6    7916910 422.9  7916910 422.9
+Vcells 10541349  80.5   33191153 253.3 53339345 407.0
 > rowStats <- microbenchmark(rowTabulates_X_S = rowTabulates(X_S, na.rm = FALSE), `rowTabulates(X, cols, rows)` = rowTabulates(X, 
 +     rows = cols, cols = rows, na.rm = FALSE), `rowTabulates(X[cols, rows])` = rowTabulates(X[cols, 
 +     rows], na.rm = FALSE), unit = "ms")
@@ -81,35 +81,35 @@ _Table: Benchmarking of colTabulates_X_S(), colTabulates(X, rows, cols)() and co
 
 
 
-|   |expr                        |      min|        lq|      mean|    median|        uq|      max|
-|:--|:---------------------------|--------:|---------:|---------:|---------:|---------:|--------:|
-|3  |colTabulates(X[rows, cols]) | 0.151009| 0.1610185| 0.1809626| 0.1766225| 0.1931910| 0.252638|
-|2  |colTabulates(X, rows, cols) | 0.151165| 0.1640640| 0.1847375| 0.1790240| 0.1981055| 0.244262|
-|1  |colTabulates_X_S            | 0.149719| 0.1643230| 0.1900001| 0.1792095| 0.1987365| 0.887026|
+|   |expr                        |      min|        lq|      mean|    median|       uq|      max|
+|:--|:---------------------------|--------:|---------:|---------:|---------:|--------:|--------:|
+|3  |colTabulates(X[rows, cols]) | 0.150281| 0.1653295| 0.1796339| 0.1741140| 0.187048| 0.253773|
+|1  |colTabulates_X_S            | 0.146889| 0.1653320| 0.1862859| 0.1749945| 0.194673| 0.647950|
+|2  |colTabulates(X, rows, cols) | 0.150339| 0.1660475| 0.1836304| 0.1767630| 0.197752| 0.241339|
 
 
 |   |expr                        |       min|       lq|     mean|   median|       uq|       max|
 |:--|:---------------------------|---------:|--------:|--------:|--------:|--------:|---------:|
 |3  |colTabulates(X[rows, cols]) | 1.0000000| 1.000000| 1.000000| 1.000000| 1.000000| 1.0000000|
-|2  |colTabulates(X, rows, cols) | 1.0010331| 1.018914| 1.020860| 1.013597| 1.025439| 0.9668458|
-|1  |colTabulates_X_S            | 0.9914575| 1.020522| 1.049941| 1.014647| 1.028705| 3.5110553|
+|1  |colTabulates_X_S            | 0.9774289| 1.000015| 1.037031| 1.005057| 1.040765| 2.5532661|
+|2  |colTabulates(X, rows, cols) | 1.0003859| 1.004343| 1.022248| 1.015214| 1.057226| 0.9510035|
 
 _Table: Benchmarking of rowTabulates_X_S(), rowTabulates(X, cols, rows)() and rowTabulates(X[cols, rows])() on 10x10 data (transposed). The top panel shows times in milliseconds and the bottom panel shows relative times._
 
 
 
-|   |expr                        |      min|        lq|      mean|    median|        uq|      max|
-|:--|:---------------------------|--------:|---------:|---------:|---------:|---------:|--------:|
-|3  |rowTabulates(X[cols, rows]) | 0.139393| 0.1533665| 0.1676920| 0.1633115| 0.1748370| 0.215074|
-|1  |rowTabulates_X_S            | 0.138685| 0.1521220| 0.1723728| 0.1668255| 0.1891935| 0.222001|
-|2  |rowTabulates(X, cols, rows) | 0.139782| 0.1534110| 0.1783054| 0.1672140| 0.1836175| 0.854712|
+|   |expr                        |      min|        lq|      mean|    median|       uq|      max|
+|:--|:---------------------------|--------:|---------:|---------:|---------:|--------:|--------:|
+|3  |rowTabulates(X[cols, rows]) | 0.141842| 0.1508515| 0.1665028| 0.1619565| 0.171552| 0.218309|
+|2  |rowTabulates(X, cols, rows) | 0.141860| 0.1513865| 0.1741077| 0.1639945| 0.179348| 0.641714|
+|1  |rowTabulates_X_S            | 0.139307| 0.1497235| 0.1715243| 0.1653250| 0.190447| 0.221781|
 
 
-|   |expr                        |       min|        lq|     mean|   median|       uq|      max|
-|:--|:---------------------------|---------:|---------:|--------:|--------:|--------:|--------:|
-|3  |rowTabulates(X[cols, rows]) | 1.0000000| 1.0000000| 1.000000| 1.000000| 1.000000| 1.000000|
-|1  |rowTabulates_X_S            | 0.9949208| 0.9918855| 1.027913| 1.021517| 1.082114| 1.032207|
-|2  |rowTabulates(X, cols, rows) | 1.0027907| 1.0002902| 1.063291| 1.023896| 1.050221| 3.974037|
+|   |expr                        |      min|        lq|     mean|   median|       uq|      max|
+|:--|:---------------------------|--------:|---------:|--------:|--------:|--------:|--------:|
+|3  |rowTabulates(X[cols, rows]) | 1.000000| 1.0000000| 1.000000| 1.000000| 1.000000| 1.000000|
+|2  |rowTabulates(X, cols, rows) | 1.000127| 1.0035465| 1.045674| 1.012584| 1.045444| 2.939476|
+|1  |rowTabulates_X_S            | 0.982128| 0.9925224| 1.030159| 1.020799| 1.110141| 1.015904|
 
 _Figure: Benchmarking of colTabulates_X_S(), colTabulates(X, rows, cols)() and colTabulates(X[rows, cols])() on 10x10 data  as well as rowTabulates_X_S(), rowTabulates(X, cols, rows)() and rowTabulates(X[cols, rows])() on the same data transposed.  Outliers are displayed as crosses.  Times are in milliseconds._
 
@@ -121,16 +121,16 @@ _Table: Benchmarking of colTabulates_X_S() and rowTabulates_X_S() on 10x10 data 
 
 
 
-|   |expr             |     min|      lq|     mean|   median|       uq|     max|
-|:--|:----------------|-------:|-------:|--------:|--------:|--------:|-------:|
-|2  |rowTabulates_X_S | 138.685| 152.122| 172.3728| 166.8255| 189.1935| 222.001|
-|1  |colTabulates_X_S | 149.719| 164.323| 190.0001| 179.2095| 198.7365| 887.026|
+|   |expr             |     min|       lq|     mean|   median|      uq|     max|
+|:--|:----------------|-------:|--------:|--------:|--------:|-------:|-------:|
+|2  |rowTabulates_X_S | 139.307| 149.7235| 171.5243| 165.3250| 190.447| 221.781|
+|1  |colTabulates_X_S | 146.889| 165.3320| 186.2859| 174.9945| 194.673| 647.950|
 
 
 |   |expr             |      min|       lq|     mean|   median|      uq|      max|
 |:--|:----------------|--------:|--------:|--------:|--------:|-------:|--------:|
 |2  |rowTabulates_X_S | 1.000000| 1.000000| 1.000000| 1.000000| 1.00000| 1.000000|
-|1  |colTabulates_X_S | 1.079562| 1.080205| 1.102263| 1.074233| 1.05044| 3.995595|
+|1  |colTabulates_X_S | 1.054427| 1.104249| 1.086061| 1.058488| 1.02219| 2.921576|
 
 _Figure: Benchmarking of colTabulates_X_S() and rowTabulates_X_S() on 10x10 data (original and transposed).  Outliers are displayed as crosses. Times are in milliseconds._
 
@@ -146,18 +146,18 @@ _Figure: Benchmarking of colTabulates_X_S() and rowTabulates_X_S() on 10x10 data
 > cols <- sample.int(ncol(X), size = ncol(X) * 0.7)
 > X_S <- X[rows, cols]
 > gc()
-          used  (Mb) gc trigger  (Mb) max used  (Mb)
-Ncells 5242483 280.0   10014072 534.9 10014072 534.9
-Vcells 9736847  74.3   18204443 138.9 18204443 138.9
+           used  (Mb) gc trigger  (Mb) max used  (Mb)
+Ncells  5308760 283.6    7916910 422.9  7916910 422.9
+Vcells 10210647  78.0   33191153 253.3 53339345 407.0
 > colStats <- microbenchmark(colTabulates_X_S = colTabulates(X_S, na.rm = FALSE), `colTabulates(X, rows, cols)` = colTabulates(X, 
 +     rows = rows, cols = cols, na.rm = FALSE), `colTabulates(X[rows, cols])` = colTabulates(X[rows, 
 +     cols], na.rm = FALSE), unit = "ms")
 > X <- t(X)
 > X_S <- t(X_S)
 > gc()
-          used  (Mb) gc trigger  (Mb) max used  (Mb)
-Ncells 5242459 280.0   10014072 534.9 10014072 534.9
-Vcells 9741900  74.4   18204443 138.9 18204443 138.9
+           used  (Mb) gc trigger  (Mb) max used  (Mb)
+Ncells  5308754 283.6    7916910 422.9  7916910 422.9
+Vcells 10215730  78.0   33191153 253.3 53339345 407.0
 > rowStats <- microbenchmark(rowTabulates_X_S = rowTabulates(X_S, na.rm = FALSE), `rowTabulates(X, cols, rows)` = rowTabulates(X, 
 +     rows = cols, cols = rows, na.rm = FALSE), `rowTabulates(X[cols, rows])` = rowTabulates(X[cols, 
 +     rows], na.rm = FALSE), unit = "ms")
@@ -167,35 +167,35 @@ _Table: Benchmarking of colTabulates_X_S(), colTabulates(X, rows, cols)() and co
 
 
 
-|   |expr                        |      min|        lq|      mean|    median|        uq|      max|
-|:--|:---------------------------|--------:|---------:|---------:|---------:|---------:|--------:|
-|1  |colTabulates_X_S            | 0.522317| 0.5275005| 0.5729339| 0.5312860| 0.5716865| 0.861498|
-|2  |colTabulates(X, rows, cols) | 0.530816| 0.5371605| 0.5809852| 0.5400515| 0.5773740| 0.911449|
-|3  |colTabulates(X[rows, cols]) | 0.531373| 0.5374220| 0.5875828| 0.5417020| 0.5973690| 1.058547|
+|   |expr                        |      min|        lq|      mean|   median|        uq|      max|
+|:--|:---------------------------|--------:|---------:|---------:|--------:|---------:|--------:|
+|1  |colTabulates_X_S            | 0.307639| 0.3102545| 0.3538999| 0.322167| 0.3870175| 0.524295|
+|3  |colTabulates(X[rows, cols]) | 0.315670| 0.3194630| 0.3664192| 0.326460| 0.4035855| 0.677059|
+|2  |colTabulates(X, rows, cols) | 0.316056| 0.3197015| 0.3617558| 0.328848| 0.3983450| 0.565299|
 
 
 |   |expr                        |      min|       lq|     mean|   median|       uq|      max|
 |:--|:---------------------------|--------:|--------:|--------:|--------:|--------:|--------:|
 |1  |colTabulates_X_S            | 1.000000| 1.000000| 1.000000| 1.000000| 1.000000| 1.000000|
-|2  |colTabulates(X, rows, cols) | 1.016272| 1.018313| 1.014053| 1.016499| 1.009949| 1.057982|
-|3  |colTabulates(X[rows, cols]) | 1.017338| 1.018809| 1.025568| 1.019605| 1.044924| 1.228728|
+|3  |colTabulates(X[rows, cols]) | 1.026105| 1.029680| 1.035375| 1.013325| 1.042809| 1.291370|
+|2  |colTabulates(X, rows, cols) | 1.027360| 1.030449| 1.022198| 1.020738| 1.029269| 1.078208|
 
 _Table: Benchmarking of rowTabulates_X_S(), rowTabulates(X, cols, rows)() and rowTabulates(X[cols, rows])() on 100x100 data (transposed). The top panel shows times in milliseconds and the bottom panel shows relative times._
 
 
 
-|   |expr                        |      min|        lq|      mean|    median|        uq|      max|
-|:--|:---------------------------|--------:|---------:|---------:|---------:|---------:|--------:|
-|1  |rowTabulates_X_S            | 0.446488| 0.4499495| 0.5033332| 0.4552435| 0.5295020| 0.760410|
-|3  |rowTabulates(X[cols, rows]) | 0.453621| 0.4575675| 0.4970904| 0.4600420| 0.5046835| 0.758181|
-|2  |rowTabulates(X, cols, rows) | 0.452757| 0.4578215| 0.5032538| 0.4616400| 0.5106520| 0.923905|
+|   |expr                        |      min|        lq|      mean|    median|       uq|      max|
+|:--|:---------------------------|--------:|---------:|---------:|---------:|--------:|--------:|
+|1  |rowTabulates_X_S            | 0.356096| 0.3629345| 0.4151751| 0.3671960| 0.456039| 0.702722|
+|2  |rowTabulates(X, cols, rows) | 0.365645| 0.3715305| 0.4177823| 0.3751515| 0.437584| 0.794211|
+|3  |rowTabulates(X[cols, rows]) | 0.363943| 0.3707835| 0.4126707| 0.3759640| 0.435015| 0.619920|
 
 
 |   |expr                        |      min|       lq|      mean|   median|        uq|       max|
 |:--|:---------------------------|--------:|--------:|---------:|--------:|---------:|---------:|
 |1  |rowTabulates_X_S            | 1.000000| 1.000000| 1.0000000| 1.000000| 1.0000000| 1.0000000|
-|3  |rowTabulates(X[cols, rows]) | 1.015976| 1.016931| 0.9875970| 1.010541| 0.9531286| 0.9970687|
-|2  |rowTabulates(X, cols, rows) | 1.014041| 1.017495| 0.9998421| 1.014051| 0.9644005| 1.2150090|
+|2  |rowTabulates(X, cols, rows) | 1.026816| 1.023685| 1.0062798| 1.021665| 0.9595320| 1.1301923|
+|3  |rowTabulates(X[cols, rows]) | 1.022036| 1.021626| 0.9939679| 1.023878| 0.9538987| 0.8821696|
 
 _Figure: Benchmarking of colTabulates_X_S(), colTabulates(X, rows, cols)() and colTabulates(X[rows, cols])() on 100x100 data  as well as rowTabulates_X_S(), rowTabulates(X, cols, rows)() and rowTabulates(X[cols, rows])() on the same data transposed.  Outliers are displayed as crosses.  Times are in milliseconds._
 
@@ -207,16 +207,16 @@ _Table: Benchmarking of colTabulates_X_S() and rowTabulates_X_S() on 100x100 dat
 
 
 
-|   |expr             |     min|       lq|     mean|   median|       uq|     max|
-|:--|:----------------|-------:|--------:|--------:|--------:|--------:|-------:|
-|2  |rowTabulates_X_S | 446.488| 449.9495| 503.3332| 455.2435| 529.5020| 760.410|
-|1  |colTabulates_X_S | 522.317| 527.5005| 572.9339| 531.2860| 571.6865| 861.498|
+|   |expr             |     min|       lq|     mean|  median|       uq|     max|
+|:--|:----------------|-------:|--------:|--------:|-------:|--------:|-------:|
+|1  |colTabulates_X_S | 307.639| 310.2545| 353.8999| 322.167| 387.0175| 524.295|
+|2  |rowTabulates_X_S | 356.096| 362.9345| 415.1751| 367.196| 456.0390| 702.722|
 
 
-|   |expr             |      min|       lq|    mean|   median|       uq|      max|
-|:--|:----------------|--------:|--------:|-------:|--------:|--------:|--------:|
-|2  |rowTabulates_X_S | 1.000000| 1.000000| 1.00000| 1.000000| 1.000000| 1.000000|
-|1  |colTabulates_X_S | 1.169834| 1.172355| 1.13828| 1.167037| 1.079668| 1.132939|
+|   |expr             |      min|       lq|     mean|   median|       uq|      max|
+|:--|:----------------|--------:|--------:|--------:|--------:|--------:|--------:|
+|1  |colTabulates_X_S | 1.000000| 1.000000| 1.000000| 1.000000| 1.000000| 1.000000|
+|2  |rowTabulates_X_S | 1.157512| 1.169796| 1.173143| 1.139769| 1.178342| 1.340318|
 
 _Figure: Benchmarking of colTabulates_X_S() and rowTabulates_X_S() on 100x100 data (original and transposed).  Outliers are displayed as crosses. Times are in milliseconds._
 
@@ -232,18 +232,18 @@ _Figure: Benchmarking of colTabulates_X_S() and rowTabulates_X_S() on 100x100 da
 > cols <- sample.int(ncol(X), size = ncol(X) * 0.7)
 > X_S <- X[rows, cols]
 > gc()
-          used  (Mb) gc trigger  (Mb) max used  (Mb)
-Ncells 5243225 280.1   10014072 534.9 10014072 534.9
-Vcells 9740893  74.4   18204443 138.9 18204443 138.9
+           used  (Mb) gc trigger  (Mb) max used  (Mb)
+Ncells  5309508 283.6    7916910 422.9  7916910 422.9
+Vcells 10214715  78.0   33191153 253.3 53339345 407.0
 > colStats <- microbenchmark(colTabulates_X_S = colTabulates(X_S, na.rm = FALSE), `colTabulates(X, rows, cols)` = colTabulates(X, 
 +     rows = rows, cols = cols, na.rm = FALSE), `colTabulates(X[rows, cols])` = colTabulates(X[rows, 
 +     cols], na.rm = FALSE), unit = "ms")
 > X <- t(X)
 > X_S <- t(X_S)
 > gc()
-          used  (Mb) gc trigger  (Mb) max used  (Mb)
-Ncells 5243201 280.1   10014072 534.9 10014072 534.9
-Vcells 9745946  74.4   18204443 138.9 18204443 138.9
+           used  (Mb) gc trigger  (Mb) max used  (Mb)
+Ncells  5309496 283.6    7916910 422.9  7916910 422.9
+Vcells 10219788  78.0   33191153 253.3 53339345 407.0
 > rowStats <- microbenchmark(rowTabulates_X_S = rowTabulates(X_S, na.rm = FALSE), `rowTabulates(X, cols, rows)` = rowTabulates(X, 
 +     rows = cols, cols = rows, na.rm = FALSE), `rowTabulates(X[cols, rows])` = rowTabulates(X[cols, 
 +     rows], na.rm = FALSE), unit = "ms")
@@ -255,33 +255,33 @@ _Table: Benchmarking of colTabulates_X_S(), colTabulates(X, rows, cols)() and co
 
 |   |expr                        |      min|        lq|      mean|    median|        uq|      max|
 |:--|:---------------------------|--------:|---------:|---------:|---------:|---------:|--------:|
-|1  |colTabulates_X_S            | 0.499478| 0.5029295| 0.5436228| 0.5055335| 0.5492720| 0.838090|
-|2  |colTabulates(X, rows, cols) | 0.508259| 0.5124580| 0.5486142| 0.5147820| 0.5320350| 0.863078|
-|3  |colTabulates(X[rows, cols]) | 0.509271| 0.5122330| 0.5532272| 0.5148910| 0.5553895| 1.001522|
+|2  |colTabulates(X, rows, cols) | 0.297316| 0.3009685| 0.3384937| 0.3038785| 0.3711730| 0.510221|
+|3  |colTabulates(X[rows, cols]) | 0.297245| 0.3014635| 0.3396631| 0.3055995| 0.3749480| 0.632409|
+|1  |colTabulates_X_S            | 0.288750| 0.2923220| 0.3324583| 0.3125580| 0.3669625| 0.483274|
 
 
-|   |expr                        |      min|       lq|     mean|   median|        uq|      max|
-|:--|:---------------------------|--------:|--------:|--------:|--------:|---------:|--------:|
-|1  |colTabulates_X_S            | 1.000000| 1.000000| 1.000000| 1.000000| 1.0000000| 1.000000|
-|2  |colTabulates(X, rows, cols) | 1.017580| 1.018946| 1.009182| 1.018295| 0.9686185| 1.029815|
-|3  |colTabulates(X[rows, cols]) | 1.019607| 1.018499| 1.017667| 1.018510| 1.0111375| 1.195005|
+|   |expr                        |       min|        lq|      mean|   median|        uq|       max|
+|:--|:---------------------------|---------:|---------:|---------:|--------:|---------:|---------:|
+|2  |colTabulates(X, rows, cols) | 1.0000000| 1.0000000| 1.0000000| 1.000000| 1.0000000| 1.0000000|
+|3  |colTabulates(X[rows, cols]) | 0.9997612| 1.0016447| 1.0034547| 1.005663| 1.0101705| 1.2394805|
+|1  |colTabulates_X_S            | 0.9711889| 0.9712711| 0.9821697| 1.028562| 0.9886562| 0.9471856|
 
 _Table: Benchmarking of rowTabulates_X_S(), rowTabulates(X, cols, rows)() and rowTabulates(X[cols, rows])() on 1000x10 data (transposed). The top panel shows times in milliseconds and the bottom panel shows relative times._
 
 
 
-|   |expr                        |      min|        lq|      mean|    median|        uq|      max|
-|:--|:---------------------------|--------:|---------:|---------:|---------:|---------:|--------:|
-|1  |rowTabulates_X_S            | 0.455789| 0.4587940| 0.4922219| 0.4609715| 0.4773135| 0.749875|
-|3  |rowTabulates(X[cols, rows]) | 0.464902| 0.4692515| 0.5015481| 0.4714010| 0.5081000| 0.936767|
-|2  |rowTabulates(X, cols, rows) | 0.465717| 0.4693890| 0.5020811| 0.4723345| 0.5120115| 0.687687|
+|   |expr                        |      min|       lq|      mean|    median|        uq|      max|
+|:--|:---------------------------|--------:|--------:|---------:|---------:|---------:|--------:|
+|1  |rowTabulates_X_S            | 0.351603| 0.355973| 0.3964701| 0.3597425| 0.4121985| 0.603988|
+|3  |rowTabulates(X[cols, rows]) | 0.361078| 0.365708| 0.4092195| 0.3737970| 0.4421335| 0.740101|
+|2  |rowTabulates(X, cols, rows) | 0.360883| 0.366581| 0.4112318| 0.3779340| 0.4498420| 0.604123|
 
 
-|   |expr                        |      min|       lq|     mean|   median|       uq|       max|
-|:--|:---------------------------|--------:|--------:|--------:|--------:|--------:|---------:|
-|1  |rowTabulates_X_S            | 1.000000| 1.000000| 1.000000| 1.000000| 1.000000| 1.0000000|
-|3  |rowTabulates(X[cols, rows]) | 1.019994| 1.022793| 1.018947| 1.022625| 1.064499| 1.2492309|
-|2  |rowTabulates(X, cols, rows) | 1.021782| 1.023093| 1.020030| 1.024650| 1.072694| 0.9170688|
+|   |expr                        |      min|       lq|     mean|   median|       uq|      max|
+|:--|:---------------------------|--------:|--------:|--------:|--------:|--------:|--------:|
+|1  |rowTabulates_X_S            | 1.000000| 1.000000| 1.000000| 1.000000| 1.000000| 1.000000|
+|3  |rowTabulates(X[cols, rows]) | 1.026948| 1.027348| 1.032157| 1.039068| 1.072623| 1.225357|
+|2  |rowTabulates(X, cols, rows) | 1.026393| 1.029800| 1.037233| 1.050568| 1.091324| 1.000223|
 
 _Figure: Benchmarking of colTabulates_X_S(), colTabulates(X, rows, cols)() and colTabulates(X[rows, cols])() on 1000x10 data  as well as rowTabulates_X_S(), rowTabulates(X, cols, rows)() and rowTabulates(X[cols, rows])() on the same data transposed.  Outliers are displayed as crosses.  Times are in milliseconds._
 
@@ -293,16 +293,16 @@ _Table: Benchmarking of colTabulates_X_S() and rowTabulates_X_S() on 1000x10 dat
 
 
 
-|   |expr             |     min|       lq|     mean|   median|       uq|     max|
-|:--|:----------------|-------:|--------:|--------:|--------:|--------:|-------:|
-|2  |rowTabulates_X_S | 455.789| 458.7940| 492.2219| 460.9715| 477.3135| 749.875|
-|1  |colTabulates_X_S | 499.478| 502.9295| 543.6228| 505.5335| 549.2720| 838.090|
+|   |expr             |     min|      lq|     mean|   median|       uq|     max|
+|:--|:----------------|-------:|-------:|--------:|--------:|--------:|-------:|
+|1  |colTabulates_X_S | 288.750| 292.322| 332.4583| 312.5580| 366.9625| 483.274|
+|2  |rowTabulates_X_S | 351.603| 355.973| 396.4701| 359.7425| 412.1985| 603.988|
 
 
-|   |expr             |      min|       lq|     mean|  median|       uq|     max|
-|:--|:----------------|--------:|--------:|--------:|-------:|--------:|-------:|
-|2  |rowTabulates_X_S | 1.000000| 1.000000| 1.000000| 1.00000| 1.000000| 1.00000|
-|1  |colTabulates_X_S | 1.095854| 1.096199| 1.104426| 1.09667| 1.150757| 1.11764|
+|   |expr             |      min|       lq|     mean|   median|       uq|      max|
+|:--|:----------------|--------:|--------:|--------:|--------:|--------:|--------:|
+|1  |colTabulates_X_S | 1.000000| 1.000000| 1.000000| 1.000000| 1.000000| 1.000000|
+|2  |rowTabulates_X_S | 1.217673| 1.217743| 1.192541| 1.150962| 1.123271| 1.249784|
 
 _Figure: Benchmarking of colTabulates_X_S() and rowTabulates_X_S() on 1000x10 data (original and transposed).  Outliers are displayed as crosses. Times are in milliseconds._
 
@@ -318,18 +318,18 @@ _Figure: Benchmarking of colTabulates_X_S() and rowTabulates_X_S() on 1000x10 da
 > cols <- sample.int(ncol(X), size = ncol(X) * 0.7)
 > X_S <- X[rows, cols]
 > gc()
-          used  (Mb) gc trigger  (Mb) max used  (Mb)
-Ncells 5243430 280.1   10014072 534.9 10014072 534.9
-Vcells 9741815  74.4   18204443 138.9 18204443 138.9
+           used  (Mb) gc trigger  (Mb) max used  (Mb)
+Ncells  5309713 283.6    7916910 422.9  7916910 422.9
+Vcells 10215623  78.0   33191153 253.3 53339345 407.0
 > colStats <- microbenchmark(colTabulates_X_S = colTabulates(X_S, na.rm = FALSE), `colTabulates(X, rows, cols)` = colTabulates(X, 
 +     rows = rows, cols = cols, na.rm = FALSE), `colTabulates(X[rows, cols])` = colTabulates(X[rows, 
 +     cols], na.rm = FALSE), unit = "ms")
 > X <- t(X)
 > X_S <- t(X_S)
 > gc()
-          used  (Mb) gc trigger  (Mb) max used  (Mb)
-Ncells 5243406 280.1   10014072 534.9 10014072 534.9
-Vcells 9746868  74.4   18204443 138.9 18204443 138.9
+           used  (Mb) gc trigger  (Mb) max used  (Mb)
+Ncells  5309701 283.6    7916910 422.9  7916910 422.9
+Vcells 10220696  78.0   33191153 253.3 53339345 407.0
 > rowStats <- microbenchmark(rowTabulates_X_S = rowTabulates(X_S, na.rm = FALSE), `rowTabulates(X, cols, rows)` = rowTabulates(X, 
 +     rows = cols, cols = rows, na.rm = FALSE), `rowTabulates(X[cols, rows])` = rowTabulates(X[cols, 
 +     rows], na.rm = FALSE), unit = "ms")
@@ -339,18 +339,18 @@ _Table: Benchmarking of colTabulates_X_S(), colTabulates(X, rows, cols)() and co
 
 
 
-|   |expr                        |      min|        lq|      mean|   median|        uq|      max|
-|:--|:---------------------------|--------:|---------:|---------:|--------:|---------:|--------:|
-|1  |colTabulates_X_S            | 0.614965| 0.6211175| 0.6903914| 0.629071| 0.7397655| 1.182354|
-|3  |colTabulates(X[rows, cols]) | 0.622942| 0.6296670| 0.6949086| 0.635966| 0.7583885| 1.028045|
-|2  |colTabulates(X, rows, cols) | 0.624179| 0.6299115| 0.7658446| 0.636375| 0.7580595| 8.022479|
+|   |expr                        |      min|        lq|      mean|    median|        uq|      max|
+|:--|:---------------------------|--------:|---------:|---------:|---------:|---------:|--------:|
+|2  |colTabulates(X, rows, cols) | 0.370650| 0.3817230| 0.4278961| 0.3962655| 0.4416970| 0.779126|
+|1  |colTabulates_X_S            | 0.356538| 0.3702745| 0.4375368| 0.4087925| 0.4876355| 0.755414|
+|3  |colTabulates(X[rows, cols]) | 0.369907| 0.3894570| 0.4410350| 0.4158055| 0.4752500| 0.663778|
 
 
-|   |expr                        |      min|       lq|     mean|   median|       uq|      max|
-|:--|:---------------------------|--------:|--------:|--------:|--------:|--------:|--------:|
-|1  |colTabulates_X_S            | 1.000000| 1.000000| 1.000000| 1.000000| 1.000000| 1.000000|
-|3  |colTabulates(X[rows, cols]) | 1.012971| 1.013765| 1.006543| 1.010961| 1.025174| 0.869490|
-|2  |colTabulates(X, rows, cols) | 1.014983| 1.014158| 1.109290| 1.011611| 1.024730| 6.785175|
+|   |expr                        |       min|        lq|     mean|   median|       uq|       max|
+|:--|:---------------------------|---------:|---------:|--------:|--------:|--------:|---------:|
+|2  |colTabulates(X, rows, cols) | 1.0000000| 1.0000000| 1.000000| 1.000000| 1.000000| 1.0000000|
+|1  |colTabulates_X_S            | 0.9619263| 0.9700084| 1.022531| 1.031613| 1.104005| 0.9695659|
+|3  |colTabulates(X[rows, cols]) | 0.9979954| 1.0202608| 1.030706| 1.049310| 1.075964| 0.8519521|
 
 _Table: Benchmarking of rowTabulates_X_S(), rowTabulates(X, cols, rows)() and rowTabulates(X[cols, rows])() on 10x1000 data (transposed). The top panel shows times in milliseconds and the bottom panel shows relative times._
 
@@ -358,16 +358,16 @@ _Table: Benchmarking of rowTabulates_X_S(), rowTabulates(X, cols, rows)() and ro
 
 |   |expr                        |      min|        lq|      mean|    median|        uq|      max|
 |:--|:---------------------------|--------:|---------:|---------:|---------:|---------:|--------:|
-|1  |rowTabulates_X_S            | 0.474173| 0.4805480| 0.5327155| 0.4909510| 0.5676800| 0.810492|
-|2  |rowTabulates(X, cols, rows) | 0.485647| 0.4899650| 0.6115058| 0.4974925| 0.5903175| 7.559936|
-|3  |rowTabulates(X[cols, rows]) | 0.486574| 0.4903195| 0.5489115| 0.5053585| 0.6058915| 0.819504|
+|1  |rowTabulates_X_S            | 0.380852| 0.3903555| 0.4295531| 0.4136260| 0.4515630| 0.587730|
+|2  |rowTabulates(X, cols, rows) | 0.390755| 0.4066595| 0.4425441| 0.4189230| 0.4496990| 0.922018|
+|3  |rowTabulates(X[cols, rows]) | 0.390353| 0.4055215| 0.4536265| 0.4255615| 0.4983025| 0.728833|
 
 
-|   |expr                        |      min|       lq|     mean|   median|       uq|      max|
-|:--|:---------------------------|--------:|--------:|--------:|--------:|--------:|--------:|
-|1  |rowTabulates_X_S            | 1.000000| 1.000000| 1.000000| 1.000000| 1.000000| 1.000000|
-|2  |rowTabulates(X, cols, rows) | 1.024198| 1.019596| 1.147903| 1.013324| 1.039877| 9.327589|
-|3  |rowTabulates(X[cols, rows]) | 1.026153| 1.020334| 1.030403| 1.029346| 1.067312| 1.011119|
+|   |expr                        |      min|       lq|     mean|   median|        uq|      max|
+|:--|:---------------------------|--------:|--------:|--------:|--------:|---------:|--------:|
+|1  |rowTabulates_X_S            | 1.000000| 1.000000| 1.000000| 1.000000| 1.0000000| 1.000000|
+|2  |rowTabulates(X, cols, rows) | 1.026002| 1.041767| 1.030243| 1.012806| 0.9958721| 1.568778|
+|3  |rowTabulates(X[cols, rows]) | 1.024947| 1.038852| 1.056043| 1.028856| 1.1035060| 1.240081|
 
 _Figure: Benchmarking of colTabulates_X_S(), colTabulates(X, rows, cols)() and colTabulates(X[rows, cols])() on 10x1000 data  as well as rowTabulates_X_S(), rowTabulates(X, cols, rows)() and rowTabulates(X[cols, rows])() on the same data transposed.  Outliers are displayed as crosses.  Times are in milliseconds._
 
@@ -379,16 +379,16 @@ _Table: Benchmarking of colTabulates_X_S() and rowTabulates_X_S() on 10x1000 dat
 
 
 
-|   |expr             |     min|       lq|     mean|  median|       uq|      max|
-|:--|:----------------|-------:|--------:|--------:|-------:|--------:|--------:|
-|2  |rowTabulates_X_S | 474.173| 480.5480| 532.7155| 490.951| 567.6800|  810.492|
-|1  |colTabulates_X_S | 614.965| 621.1175| 690.3914| 629.071| 739.7655| 1182.354|
+|   |expr             |     min|       lq|     mean|   median|       uq|     max|
+|:--|:----------------|-------:|--------:|--------:|--------:|--------:|-------:|
+|1  |colTabulates_X_S | 356.538| 370.2745| 437.5369| 408.7925| 487.6355| 755.414|
+|2  |rowTabulates_X_S | 380.852| 390.3555| 429.5531| 413.6260| 451.5630| 587.730|
 
 
-|   |expr             |      min|       lq|     mean|   median|       uq|     max|
-|:--|:----------------|--------:|--------:|--------:|--------:|--------:|-------:|
-|2  |rowTabulates_X_S | 1.000000| 1.000000| 1.000000| 1.000000| 1.000000| 1.00000|
-|1  |colTabulates_X_S | 1.296921| 1.292519| 1.295985| 1.281332| 1.303138| 1.45881|
+|   |expr             |      min|       lq|     mean|   median|        uq|       max|
+|:--|:----------------|--------:|--------:|--------:|--------:|---------:|---------:|
+|1  |colTabulates_X_S | 1.000000| 1.000000| 1.000000| 1.000000| 1.0000000| 1.0000000|
+|2  |rowTabulates_X_S | 1.068195| 1.054233| 0.981753| 1.011824| 0.9260257| 0.7780237|
 
 _Figure: Benchmarking of colTabulates_X_S() and rowTabulates_X_S() on 10x1000 data (original and transposed).  Outliers are displayed as crosses. Times are in milliseconds._
 
@@ -404,18 +404,18 @@ _Figure: Benchmarking of colTabulates_X_S() and rowTabulates_X_S() on 10x1000 da
 > cols <- sample.int(ncol(X), size = ncol(X) * 0.7)
 > X_S <- X[rows, cols]
 > gc()
-          used  (Mb) gc trigger  (Mb) max used  (Mb)
-Ncells 5243642 280.1   10014072 534.9 10014072 534.9
-Vcells 9764520  74.5   18204443 138.9 18204443 138.9
+           used  (Mb) gc trigger  (Mb) max used  (Mb)
+Ncells  5309923 283.6    7916910 422.9  7916910 422.9
+Vcells 10238300  78.2   33191153 253.3 53339345 407.0
 > colStats <- microbenchmark(colTabulates_X_S = colTabulates(X_S, na.rm = FALSE), `colTabulates(X, rows, cols)` = colTabulates(X, 
 +     rows = rows, cols = cols, na.rm = FALSE), `colTabulates(X[rows, cols])` = colTabulates(X[rows, 
 +     cols], na.rm = FALSE), unit = "ms")
 > X <- t(X)
 > X_S <- t(X_S)
 > gc()
-          used  (Mb) gc trigger  (Mb) max used  (Mb)
-Ncells 5243618 280.1   10014072 534.9 10014072 534.9
-Vcells 9814573  74.9   18204443 138.9 18204443 138.9
+           used  (Mb) gc trigger  (Mb) max used  (Mb)
+Ncells  5309911 283.6    7916910 422.9  7916910 422.9
+Vcells 10288373  78.5   33191153 253.3 53339345 407.0
 > rowStats <- microbenchmark(rowTabulates_X_S = rowTabulates(X_S, na.rm = FALSE), `rowTabulates(X, cols, rows)` = rowTabulates(X, 
 +     rows = cols, cols = rows, na.rm = FALSE), `rowTabulates(X[cols, rows])` = rowTabulates(X[cols, 
 +     rows], na.rm = FALSE), unit = "ms")
@@ -425,35 +425,35 @@ _Table: Benchmarking of colTabulates_X_S(), colTabulates(X, rows, cols)() and co
 
 
 
+|   |expr                        |      min|       lq|     mean|   median|       uq|      max|
+|:--|:---------------------------|--------:|--------:|--------:|--------:|--------:|--------:|
+|1  |colTabulates_X_S            | 1.614644| 1.670087| 1.809777| 1.739087| 1.868170| 2.792142|
+|2  |colTabulates(X, rows, cols) | 1.709986| 1.735956| 2.042918| 1.793670| 2.004110| 9.707371|
+|3  |colTabulates(X[rows, cols]) | 1.690566| 1.731372| 1.880456| 1.807530| 1.983262| 2.527533|
+
+
 |   |expr                        |      min|       lq|     mean|   median|       uq|       max|
 |:--|:---------------------------|--------:|--------:|--------:|--------:|--------:|---------:|
-|1  |colTabulates_X_S            | 3.759400| 3.780391| 4.035043| 3.800411| 3.841439| 10.823046|
-|3  |colTabulates(X[rows, cols]) | 3.836896| 3.852677| 4.027414| 3.873057| 3.947249|  9.741157|
-|2  |colTabulates(X, rows, cols) | 3.835721| 3.856041| 4.139364| 3.880559| 3.969575| 10.716803|
-
-
-|   |expr                        |      min|       lq|      mean|   median|       uq|       max|
-|:--|:---------------------------|--------:|--------:|---------:|--------:|--------:|---------:|
-|1  |colTabulates_X_S            | 1.000000| 1.000000| 1.0000000| 1.000000| 1.000000| 1.0000000|
-|3  |colTabulates(X[rows, cols]) | 1.020614| 1.019121| 0.9981092| 1.019115| 1.027544| 0.9000384|
-|2  |colTabulates(X, rows, cols) | 1.020301| 1.020011| 1.0258537| 1.021089| 1.033356| 0.9901836|
+|1  |colTabulates_X_S            | 1.000000| 1.000000| 1.000000| 1.000000| 1.000000| 1.0000000|
+|2  |colTabulates(X, rows, cols) | 1.059048| 1.039441| 1.128823| 1.031386| 1.072767| 3.4766753|
+|3  |colTabulates(X[rows, cols]) | 1.047021| 1.036696| 1.039054| 1.039355| 1.061607| 0.9052308|
 
 _Table: Benchmarking of rowTabulates_X_S(), rowTabulates(X, cols, rows)() and rowTabulates(X[cols, rows])() on 100x1000 data (transposed). The top panel shows times in milliseconds and the bottom panel shows relative times._
 
 
 
-|   |expr                        |      min|       lq|     mean|   median|       uq|       max|
-|:--|:---------------------------|--------:|--------:|--------:|--------:|--------:|---------:|
-|1  |rowTabulates_X_S            | 3.014200| 3.066573| 3.469396| 3.152881| 3.272551| 15.835145|
-|2  |rowTabulates(X, cols, rows) | 3.087744| 3.167903| 3.392660| 3.244073| 3.379069|  9.809676|
-|3  |rowTabulates(X[cols, rows]) | 3.082890| 3.166672| 3.537586| 3.248928| 3.391440|  9.527255|
+|   |expr                        |      min|       lq|     mean|   median|       uq|      max|
+|:--|:---------------------------|--------:|--------:|--------:|--------:|--------:|--------:|
+|1  |rowTabulates_X_S            | 2.154210| 2.189722| 2.387819| 2.204312| 2.278773| 9.721865|
+|2  |rowTabulates(X, cols, rows) | 2.250677| 2.261482| 2.347641| 2.301795| 2.335865| 3.481036|
+|3  |rowTabulates(X[cols, rows]) | 2.247985| 2.261612| 2.406939| 2.308937| 2.462567| 3.282493|
 
 
 |   |expr                        |      min|       lq|      mean|   median|       uq|       max|
 |:--|:---------------------------|--------:|--------:|---------:|--------:|--------:|---------:|
 |1  |rowTabulates_X_S            | 1.000000| 1.000000| 1.0000000| 1.000000| 1.000000| 1.0000000|
-|2  |rowTabulates(X, cols, rows) | 1.024399| 1.033043| 0.9778822| 1.028924| 1.032549| 0.6194876|
-|3  |rowTabulates(X[cols, rows]) | 1.022789| 1.032642| 1.0196547| 1.030463| 1.036329| 0.6016525|
+|2  |rowTabulates(X, cols, rows) | 1.044781| 1.032771| 0.9831739| 1.044224| 1.025054| 0.3580626|
+|3  |rowTabulates(X[cols, rows]) | 1.043531| 1.032831| 1.0080076| 1.047464| 1.080655| 0.3376403|
 
 _Figure: Benchmarking of colTabulates_X_S(), colTabulates(X, rows, cols)() and colTabulates(X[rows, cols])() on 100x1000 data  as well as rowTabulates_X_S(), rowTabulates(X, cols, rows)() and rowTabulates(X[cols, rows])() on the same data transposed.  Outliers are displayed as crosses.  Times are in milliseconds._
 
@@ -465,16 +465,16 @@ _Table: Benchmarking of colTabulates_X_S() and rowTabulates_X_S() on 100x1000 da
 
 
 
-|   |expr             |    min|       lq|     mean|   median|       uq|      max|
-|:--|:----------------|------:|--------:|--------:|--------:|--------:|--------:|
-|2  |rowTabulates_X_S | 3.0142| 3.066573| 3.469396| 3.152881| 3.272551| 15.83515|
-|1  |colTabulates_X_S | 3.7594| 3.780391| 4.035043| 3.800411| 3.841439| 10.82305|
+|   |expr             |      min|       lq|     mean|   median|       uq|      max|
+|:--|:----------------|--------:|--------:|--------:|--------:|--------:|--------:|
+|1  |colTabulates_X_S | 1.614644| 1.670087| 1.809777| 1.739087| 1.868170| 2.792142|
+|2  |rowTabulates_X_S | 2.154210| 2.189722| 2.387819| 2.204312| 2.278773| 9.721865|
 
 
-|   |expr             |     min|       lq|     mean|   median|       uq|       max|
-|:--|:----------------|-------:|--------:|--------:|--------:|--------:|---------:|
-|2  |rowTabulates_X_S | 1.00000| 1.000000| 1.000000| 1.000000| 1.000000| 1.0000000|
-|1  |colTabulates_X_S | 1.24723| 1.232774| 1.163039| 1.205377| 1.173836| 0.6834826|
+|   |expr             |     min|       lq|     mean|   median|       uq|      max|
+|:--|:----------------|-------:|--------:|--------:|--------:|--------:|--------:|
+|1  |colTabulates_X_S | 1.00000| 1.000000| 1.000000| 1.000000| 1.000000| 1.000000|
+|2  |rowTabulates_X_S | 1.33417| 1.311143| 1.319399| 1.267511| 1.219789| 3.481866|
 
 _Figure: Benchmarking of colTabulates_X_S() and rowTabulates_X_S() on 100x1000 data (original and transposed).  Outliers are displayed as crosses. Times are in milliseconds._
 
@@ -490,18 +490,18 @@ _Figure: Benchmarking of colTabulates_X_S() and rowTabulates_X_S() on 100x1000 d
 > cols <- sample.int(ncol(X), size = ncol(X) * 0.7)
 > X_S <- X[rows, cols]
 > gc()
-          used  (Mb) gc trigger  (Mb) max used  (Mb)
-Ncells 5243855 280.1   10014072 534.9 10014072 534.9
-Vcells 9765323  74.6   18204443 138.9 18204443 138.9
+           used  (Mb) gc trigger  (Mb) max used  (Mb)
+Ncells  5310142 283.6    7916910 422.9  7916910 422.9
+Vcells 10239135  78.2   33191153 253.3 53339345 407.0
 > colStats <- microbenchmark(colTabulates_X_S = colTabulates(X_S, na.rm = FALSE), `colTabulates(X, rows, cols)` = colTabulates(X, 
 +     rows = rows, cols = cols, na.rm = FALSE), `colTabulates(X[rows, cols])` = colTabulates(X[rows, 
 +     cols], na.rm = FALSE), unit = "ms")
 > X <- t(X)
 > X_S <- t(X_S)
 > gc()
-          used  (Mb) gc trigger  (Mb) max used  (Mb)
-Ncells 5243831 280.1   10014072 534.9 10014072 534.9
-Vcells 9815376  74.9   18204443 138.9 18204443 138.9
+           used  (Mb) gc trigger  (Mb) max used  (Mb)
+Ncells  5310124 283.6    7916910 422.9  7916910 422.9
+Vcells 10289198  78.6   33191153 253.3 53339345 407.0
 > rowStats <- microbenchmark(rowTabulates_X_S = rowTabulates(X_S, na.rm = FALSE), `rowTabulates(X, cols, rows)` = rowTabulates(X, 
 +     rows = cols, cols = rows, na.rm = FALSE), `rowTabulates(X[cols, rows])` = rowTabulates(X[cols, 
 +     rows], na.rm = FALSE), unit = "ms")
@@ -513,16 +513,16 @@ _Table: Benchmarking of colTabulates_X_S(), colTabulates(X, rows, cols)() and co
 
 |   |expr                        |      min|       lq|     mean|   median|       uq|      max|
 |:--|:---------------------------|--------:|--------:|--------:|--------:|--------:|--------:|
-|1  |colTabulates_X_S            | 3.588208| 3.612041| 3.864418| 3.655861| 3.798428| 10.54866|
-|2  |colTabulates(X, rows, cols) | 3.666814| 3.680913| 3.924507| 3.723051| 3.889658| 10.51650|
-|3  |colTabulates(X[rows, cols]) | 3.664411| 3.682879| 4.003330| 3.727177| 3.998614| 10.32995|
+|1  |colTabulates_X_S            | 1.461543| 1.495653| 1.590567| 1.521579| 1.592432| 2.555754|
+|3  |colTabulates(X[rows, cols]) | 1.523949| 1.557709| 1.644528| 1.586893| 1.639164| 2.559557|
+|2  |colTabulates(X, rows, cols) | 1.539389| 1.560374| 1.749221| 1.591442| 1.769149| 8.832614|
 
 
-|   |expr                        |      min|       lq|     mean|   median|       uq|       max|
-|:--|:---------------------------|--------:|--------:|--------:|--------:|--------:|---------:|
-|1  |colTabulates_X_S            | 1.000000| 1.000000| 1.000000| 1.000000| 1.000000| 1.0000000|
-|2  |colTabulates(X, rows, cols) | 1.021907| 1.019068| 1.015549| 1.018379| 1.024018| 0.9969512|
-|3  |colTabulates(X[rows, cols]) | 1.021237| 1.019612| 1.035946| 1.019507| 1.052702| 0.9792672|
+|   |expr                        |      min|       lq|     mean|   median|       uq|      max|
+|:--|:---------------------------|--------:|--------:|--------:|--------:|--------:|--------:|
+|1  |colTabulates_X_S            | 1.000000| 1.000000| 1.000000| 1.000000| 1.000000| 1.000000|
+|3  |colTabulates(X[rows, cols]) | 1.042699| 1.041491| 1.033926| 1.042925| 1.029346| 1.001488|
+|2  |colTabulates(X, rows, cols) | 1.053263| 1.043273| 1.099747| 1.045915| 1.110973| 3.455972|
 
 _Table: Benchmarking of rowTabulates_X_S(), rowTabulates(X, cols, rows)() and rowTabulates(X[cols, rows])() on 1000x100 data (transposed). The top panel shows times in milliseconds and the bottom panel shows relative times._
 
@@ -530,16 +530,16 @@ _Table: Benchmarking of rowTabulates_X_S(), rowTabulates(X, cols, rows)() and ro
 
 |   |expr                        |      min|       lq|     mean|   median|       uq|      max|
 |:--|:---------------------------|--------:|--------:|--------:|--------:|--------:|--------:|
-|1  |rowTabulates_X_S            | 3.050377| 3.214294| 3.647955| 3.239802| 3.438365| 9.529411|
-|3  |rowTabulates(X[cols, rows]) | 3.128312| 3.239903| 3.479604| 3.309030| 3.409248| 5.946195|
-|2  |rowTabulates(X, cols, rows) | 3.133778| 3.301239| 3.570663| 3.327745| 3.515243| 9.570654|
+|1  |rowTabulates_X_S            | 2.219772| 2.260161| 2.401932| 2.300524| 2.312773| 8.983898|
+|2  |rowTabulates(X, cols, rows) | 2.310645| 2.325799| 2.437679| 2.370543| 2.398989| 3.921769|
+|3  |rowTabulates(X[cols, rows]) | 2.311351| 2.326789| 2.413981| 2.373002| 2.388675| 3.713551|
 
 
-|   |expr                        |      min|       lq|      mean|   median|        uq|       max|
-|:--|:---------------------------|--------:|--------:|---------:|--------:|---------:|---------:|
-|1  |rowTabulates_X_S            | 1.000000| 1.000000| 1.0000000| 1.000000| 1.0000000| 1.0000000|
-|3  |rowTabulates(X[cols, rows]) | 1.025549| 1.007967| 0.9538507| 1.021368| 0.9915319| 0.6239835|
-|2  |rowTabulates(X, cols, rows) | 1.027341| 1.027049| 0.9788123| 1.027144| 1.0223590| 1.0043280|
+|   |expr                        |      min|       lq|     mean|   median|       uq|       max|
+|:--|:---------------------------|--------:|--------:|--------:|--------:|--------:|---------:|
+|1  |rowTabulates_X_S            | 1.000000| 1.000000| 1.000000| 1.000000| 1.000000| 1.0000000|
+|2  |rowTabulates(X, cols, rows) | 1.040938| 1.029041| 1.014882| 1.030436| 1.037278| 0.4365331|
+|3  |rowTabulates(X[cols, rows]) | 1.041256| 1.029479| 1.005016| 1.031505| 1.032819| 0.4133563|
 
 _Figure: Benchmarking of colTabulates_X_S(), colTabulates(X, rows, cols)() and colTabulates(X[rows, cols])() on 1000x100 data  as well as rowTabulates_X_S(), rowTabulates(X, cols, rows)() and rowTabulates(X[cols, rows])() on the same data transposed.  Outliers are displayed as crosses.  Times are in milliseconds._
 
@@ -551,16 +551,16 @@ _Table: Benchmarking of colTabulates_X_S() and rowTabulates_X_S() on 1000x100 da
 
 
 
-|   |expr             |      min|       lq|     mean|   median|       uq|       max|
-|:--|:----------------|--------:|--------:|--------:|--------:|--------:|---------:|
-|2  |rowTabulates_X_S | 3.050377| 3.214294| 3.647955| 3.239802| 3.438365|  9.529411|
-|1  |colTabulates_X_S | 3.588208| 3.612041| 3.864418| 3.655861| 3.798428| 10.548658|
+|   |expr             |      min|       lq|     mean|   median|       uq|      max|
+|:--|:----------------|--------:|--------:|--------:|--------:|--------:|--------:|
+|1  |colTabulates_X_S | 1.461543| 1.495653| 1.590567| 1.521579| 1.592432| 2.555754|
+|2  |rowTabulates_X_S | 2.219772| 2.260161| 2.401932| 2.300524| 2.312773| 8.983898|
 
 
 |   |expr             |      min|       lq|     mean|   median|       uq|      max|
 |:--|:----------------|--------:|--------:|--------:|--------:|--------:|--------:|
-|2  |rowTabulates_X_S | 1.000000| 1.000000| 1.000000| 1.000000| 1.000000| 1.000000|
-|1  |colTabulates_X_S | 1.176316| 1.123743| 1.059338| 1.128421| 1.104719| 1.106958|
+|1  |colTabulates_X_S | 1.000000| 1.000000| 1.000000| 1.000000| 1.000000| 1.000000|
+|2  |rowTabulates_X_S | 1.518787| 1.511152| 1.510111| 1.511932| 1.452352| 3.515165|
 
 _Figure: Benchmarking of colTabulates_X_S() and rowTabulates_X_S() on 1000x100 data (original and transposed).  Outliers are displayed as crosses. Times are in milliseconds._
 
@@ -593,7 +593,7 @@ attached base packages:
 [1] stats     graphics  grDevices utils     datasets  methods   base     
 
 other attached packages:
-[1] microbenchmark_1.4-7   matrixStats_0.60.1     ggplot2_3.3.5         
+[1] microbenchmark_1.4-7   matrixStats_0.60.0     ggplot2_3.3.5         
 [4] knitr_1.33             R.devices_2.17.0       R.utils_2.10.1        
 [7] R.oo_1.24.0            R.methodsS3_1.8.1-9001 history_0.0.1-9000    
 
@@ -619,16 +619,17 @@ loaded via a namespace (and not attached):
 [55] tabby_0.0.1-9001        AnnotationDbi_1.54.1    Biostrings_2.60.2      
 [58] compiler_4.1.1          GenomeInfoDb_1.28.1     rlang_0.4.11           
 [61] grid_4.1.1              RCurl_1.98-1.4          cwhmisc_6.6            
-[64] rappdirs_0.3.3          startup_0.15.0          labeling_0.4.2         
-[67] bitops_1.0-7            base64enc_0.1-3         boot_1.3-28            
-[70] gtable_0.3.0            DBI_1.1.1               markdown_1.1           
-[73] R6_2.5.1                lpSolveAPI_5.5.2.0-17.7 rle_0.9.2              
-[76] dplyr_1.0.7             fastmap_1.1.0           bit_4.0.4              
-[79] utf8_1.2.2              parallel_4.1.1          Rcpp_1.0.7             
-[82] vctrs_0.3.8             png_0.1-7               DEoptimR_1.0-9         
-[85] tidyselect_1.1.1        xfun_0.25               coda_0.19-4            
+[64] rstudioapi_0.13         rappdirs_0.3.3          startup_0.15.0         
+[67] labeling_0.4.2          bitops_1.0-7            base64enc_0.1-3        
+[70] boot_1.3-28             gtable_0.3.0            DBI_1.1.1              
+[73] markdown_1.1            R6_2.5.1                lpSolveAPI_5.5.2.0-17.7
+[76] rle_0.9.2               dplyr_1.0.7             fastmap_1.1.0          
+[79] bit_4.0.4               utf8_1.2.2              parallel_4.1.1         
+[82] Rcpp_1.0.7              vctrs_0.3.8             png_0.1-7              
+[85] DEoptimR_1.0-9          tidyselect_1.1.1        xfun_0.25              
+[88] coda_0.19-4            
 ```
-Total processing time was 17.36 secs.
+Total processing time was 15.24 secs.
 
 
 ### Reproducibility
@@ -645,7 +646,7 @@ html <- matrixStats:::benchmark('colRowTabulates_subset')
 [StackOverflow:rowProds?]: https://stackoverflow.com/questions/20198801/ "Stack Overflow: Row product of matrix and column sum of matrix"
 
 ---------------------------------------
-Copyright Dongcan Jiang. Last updated on 2021-08-25 18:16:28 (+0200 UTC). Powered by [RSP].
+Copyright Dongcan Jiang. Last updated on 2021-08-25 22:30:18 (+0200 UTC). Powered by [RSP].
 
 <script>
  var link = document.createElement('link');

@@ -64,9 +64,9 @@ This report benchmark the performance of colOrderStats() and rowOrderStats() aga
 ```r
 > X <- data[["10x10"]]
 > gc()
-          used  (Mb) gc trigger  (Mb) max used  (Mb)
-Ncells 5217850 278.7   10014072 534.9 10014072 534.9
-Vcells 9906684  75.6   18204443 138.9 18204443 138.9
+           used  (Mb) gc trigger  (Mb) max used  (Mb)
+Ncells  5268993 281.4    7916910 422.9  7916910 422.9
+Vcells 10308904  78.7   33191153 253.3 53339345 407.0
 > probs <- 0.3
 > which <- round(probs * nrow(X))
 > colStats <- microbenchmark(colOrderStats = colOrderStats(X, which = which, na.rm = FALSE), `apply+quantile` = apply(X, 
@@ -74,9 +74,9 @@ Vcells 9906684  75.6   18204443 138.9 18204443 138.9
 +     which = which), unit = "ms")
 > X <- t(X)
 > gc()
-          used  (Mb) gc trigger  (Mb) max used  (Mb)
-Ncells 5202317 277.9   10014072 534.9 10014072 534.9
-Vcells 9855579  75.2   18204443 138.9 18204443 138.9
+           used  (Mb) gc trigger  (Mb) max used  (Mb)
+Ncells  5268593 281.4    7916910 422.9  7916910 422.9
+Vcells 10308148  78.7   33191153 253.3 53339345 407.0
 > rowStats <- microbenchmark(rowOrderStats = rowOrderStats(X, which = which, na.rm = FALSE), `apply+quantile` = apply(X, 
 +     MARGIN = 1L, FUN = quantile, probs = probs, na.rm = FALSE, type = 3L), rowQ = rowQ(X, which = which), 
 +     unit = "ms")
@@ -89,16 +89,16 @@ _Table: Benchmarking of colOrderStats(), apply+quantile() and rowQ(t(X))() on in
 
 |   |expr           |      min|        lq|      mean|    median|        uq|      max|
 |:--|:--------------|--------:|---------:|---------:|---------:|---------:|--------:|
-|1  |colOrderStats  | 0.002277| 0.0037095| 0.0062338| 0.0069905| 0.0075335| 0.022869|
-|3  |rowQ(t(X))     | 0.012875| 0.0169205| 0.0226490| 0.0227330| 0.0257480| 0.088824|
-|2  |apply+quantile | 0.979853| 0.9971835| 1.1217904| 1.0213070| 1.2209520| 1.879289|
+|1  |colOrderStats  | 0.002696| 0.0040795| 0.0068101| 0.0076690| 0.0082185| 0.023402|
+|3  |rowQ(t(X))     | 0.012791| 0.0170745| 0.0231401| 0.0242875| 0.0264040| 0.095805|
+|2  |apply+quantile | 0.967434| 0.9957945| 1.1205770| 1.0281635| 1.2197775| 1.863193|
 
 
-|   |expr           |       min|         lq|       mean|     median|       uq|       max|
-|:--|:--------------|---------:|----------:|----------:|----------:|--------:|---------:|
-|1  |colOrderStats  |   1.00000|   1.000000|   1.000000|   1.000000|   1.0000|  1.000000|
-|3  |rowQ(t(X))     |   5.65437|   4.561396|   3.633228|   3.251985|   3.4178|  3.884035|
-|2  |apply+quantile | 430.32631| 268.818844| 179.951755| 146.099278| 162.0697| 82.176265|
+|   |expr           |        min|         lq|       mean|     median|         uq|       max|
+|:--|:--------------|----------:|----------:|----------:|----------:|----------:|---------:|
+|1  |colOrderStats  |   1.000000|   1.000000|   1.000000|   1.000000|   1.000000|  1.000000|
+|3  |rowQ(t(X))     |   4.744436|   4.185439|   3.397911|   3.166971|   3.212752|  4.093881|
+|2  |apply+quantile | 358.840505| 244.097193| 164.546098| 134.067479| 148.418507| 79.616828|
 
 _Table: Benchmarking of rowOrderStats(), apply+quantile() and rowQ() on integer+10x10 data (transposed). The top panel shows times in milliseconds and the bottom panel shows relative times._
 
@@ -106,16 +106,16 @@ _Table: Benchmarking of rowOrderStats(), apply+quantile() and rowQ() on integer+
 
 |   |expr           |      min|        lq|      mean|    median|        uq|      max|
 |:--|:--------------|--------:|---------:|---------:|---------:|---------:|--------:|
-|1  |rowOrderStats  | 0.002720| 0.0040365| 0.0065744| 0.0070375| 0.0077355| 0.021098|
-|3  |rowQ           | 0.009198| 0.0124940| 0.0177217| 0.0184255| 0.0206645| 0.064325|
-|2  |apply+quantile | 0.977569| 0.9968520| 1.1177035| 1.0328565| 1.2173570| 1.945734|
+|1  |rowOrderStats  | 0.003241| 0.0047355| 0.0073055| 0.0078115| 0.0086075| 0.025496|
+|3  |rowQ           | 0.009712| 0.0126775| 0.0182256| 0.0182200| 0.0215470| 0.085881|
+|2  |apply+quantile | 0.971351| 0.9916710| 1.1221177| 1.0329925| 1.2133460| 1.988212|
 
 
-|   |expr           |        min|         lq|       mean|     median|         uq|       max|
-|:--|:--------------|----------:|----------:|----------:|----------:|----------:|---------:|
-|1  |rowOrderStats  |   1.000000|   1.000000|   1.000000|   1.000000|   1.000000|  1.000000|
-|3  |rowQ           |   3.381618|   3.095256|   2.695571|   2.618188|   2.671385|  3.048867|
-|2  |apply+quantile | 359.400368| 246.959495| 170.008964| 146.764689| 157.372762| 92.223623|
+|   |expr           |        min|        lq|       mean|     median|         uq|       max|
+|:--|:--------------|----------:|---------:|----------:|----------:|----------:|---------:|
+|1  |rowOrderStats  |   1.000000|   1.00000|   1.000000|   1.000000|   1.000000|  1.000000|
+|3  |rowQ           |   2.996606|   2.67712|   2.494763|   2.332459|   2.503282|  3.368411|
+|2  |apply+quantile | 299.707189| 209.41210| 153.598182| 132.239967| 140.963811| 77.981330|
 
 _Figure: Benchmarking of colOrderStats(), apply+quantile() and rowQ(t(X))() on integer+10x10 data  as well as rowOrderStats(), apply+quantile() and rowQ() on the same data transposed.  Outliers are displayed as crosses.  Times are in milliseconds._
 
@@ -129,14 +129,14 @@ _Table: Benchmarking of colOrderStats() and rowOrderStats() on integer+10x10 dat
 
 |   |expr          |   min|     lq|    mean| median|     uq|    max|
 |:--|:-------------|-----:|------:|-------:|------:|------:|------:|
-|1  |colOrderStats | 2.277| 3.7095| 6.23384| 6.9905| 7.5335| 22.869|
-|2  |rowOrderStats | 2.720| 4.0365| 6.57438| 7.0375| 7.7355| 21.098|
+|1  |colOrderStats | 2.696| 4.0795| 6.81011| 7.6690| 8.2185| 23.402|
+|2  |rowOrderStats | 3.241| 4.7355| 7.30554| 7.8115| 8.6075| 25.496|
 
 
-|   |expr          |      min|       lq|     mean|   median|       uq|       max|
-|:--|:-------------|--------:|--------:|--------:|--------:|--------:|---------:|
-|1  |colOrderStats | 1.000000| 1.000000| 1.000000| 1.000000| 1.000000| 1.0000000|
-|2  |rowOrderStats | 1.194554| 1.088152| 1.054628| 1.006723| 1.026814| 0.9225589|
+|   |expr          |      min|       lq|     mean|   median|       uq|      max|
+|:--|:-------------|--------:|--------:|--------:|--------:|--------:|--------:|
+|1  |colOrderStats | 1.000000| 1.000000| 1.000000| 1.000000| 1.000000| 1.000000|
+|2  |rowOrderStats | 1.202151| 1.160804| 1.072749| 1.018581| 1.047332| 1.089479|
 
 _Figure: Benchmarking of colOrderStats() and rowOrderStats() on integer+10x10 data (original and transposed).  Outliers are displayed as crosses. Times are in milliseconds._
 
@@ -150,8 +150,8 @@ _Figure: Benchmarking of colOrderStats() and rowOrderStats() on integer+10x10 da
 > X <- data[["100x100"]]
 > gc()
           used  (Mb) gc trigger  (Mb) max used  (Mb)
-Ncells 5200890 277.8   10014072 534.9 10014072 534.9
-Vcells 9472172  72.3   18204443 138.9 18204443 138.9
+Ncells 5267154 281.3    7916910 422.9  7916910 422.9
+Vcells 9924721  75.8   33191153 253.3 53339345 407.0
 > probs <- 0.3
 > which <- round(probs * nrow(X))
 > colStats <- microbenchmark(colOrderStats = colOrderStats(X, which = which, na.rm = FALSE), `apply+quantile` = apply(X, 
@@ -160,8 +160,8 @@ Vcells 9472172  72.3   18204443 138.9 18204443 138.9
 > X <- t(X)
 > gc()
           used  (Mb) gc trigger  (Mb) max used  (Mb)
-Ncells 5200865 277.8   10014072 534.9 10014072 534.9
-Vcells 9477248  72.4   18204443 138.9 18204443 138.9
+Ncells 5267141 281.3    7916910 422.9  7916910 422.9
+Vcells 9929817  75.8   33191153 253.3 53339345 407.0
 > rowStats <- microbenchmark(rowOrderStats = rowOrderStats(X, which = which, na.rm = FALSE), `apply+quantile` = apply(X, 
 +     MARGIN = 1L, FUN = quantile, probs = probs, na.rm = FALSE, type = 3L), rowQ = rowQ(X, which = which), 
 +     unit = "ms")
@@ -172,35 +172,35 @@ _Table: Benchmarking of colOrderStats(), apply+quantile() and rowQ(t(X))() on in
 
 
 
-|   |expr           |      min|         lq|       mean|    median|         uq|       max|
-|:--|:--------------|--------:|----------:|----------:|---------:|----------:|---------:|
-|1  |colOrderStats  | 0.117390|  0.1224335|  0.1308260|  0.128500|  0.1348435|  0.220342|
-|3  |rowQ(t(X))     | 0.262537|  0.2726975|  0.2950904|  0.291378|  0.3067820|  0.499846|
-|2  |apply+quantile | 9.843446| 10.0718040| 10.6472955| 10.352370| 10.6585710| 20.540022|
+|   |expr           |      min|         lq|       mean|     median|        uq|       max|
+|:--|:--------------|--------:|----------:|----------:|----------:|---------:|---------:|
+|1  |colOrderStats  | 0.112696|  0.1198725|  0.1333702|  0.1301970|  0.139149|  0.228078|
+|3  |rowQ(t(X))     | 0.262352|  0.2933835|  0.3195194|  0.3156015|  0.338109|  0.516138|
+|2  |apply+quantile | 9.852266| 10.3477290| 11.2146593| 10.6187180| 10.960147| 21.946198|
 
 
 |   |expr           |       min|        lq|      mean|    median|        uq|       max|
 |:--|:--------------|---------:|---------:|---------:|---------:|---------:|---------:|
 |1  |colOrderStats  |  1.000000|  1.000000|  1.000000|  1.000000|  1.000000|  1.000000|
-|3  |rowQ(t(X))     |  2.236451|  2.227311|  2.255595|  2.267533|  2.275097|  2.268501|
-|2  |apply+quantile | 83.852509| 82.263465| 81.385177| 80.563191| 79.044010| 93.218823|
+|3  |rowQ(t(X))     |  2.327962|  2.447463|  2.395733|  2.424031|  2.429834|  2.262989|
+|2  |apply+quantile | 87.423387| 86.322793| 84.086682| 81.558853| 78.765543| 96.222336|
 
 _Table: Benchmarking of rowOrderStats(), apply+quantile() and rowQ() on integer+100x100 data (transposed). The top panel shows times in milliseconds and the bottom panel shows relative times._
 
 
 
-|   |expr           |      min|        lq|       mean|    median|        uq|       max|
-|:--|:--------------|--------:|---------:|----------:|---------:|---------:|---------:|
-|1  |rowOrderStats  | 0.115980|  0.119652|  0.1296522|  0.127189|  0.134426|  0.209684|
-|3  |rowQ           | 0.248259|  0.254860|  0.2707108|  0.263823|  0.279873|  0.460877|
-|2  |apply+quantile | 9.850088| 10.070405| 10.6494615| 10.337008| 10.667867| 20.484820|
+|   |expr           |      min|        lq|       mean|     median|        uq|       max|
+|:--|:--------------|--------:|---------:|----------:|----------:|---------:|---------:|
+|1  |rowOrderStats  | 0.114631|  0.123835|  0.1378341|  0.1363480|  0.143007|  0.216123|
+|3  |rowQ           | 0.251249|  0.267076|  0.2964444|  0.2872305|  0.308534|  0.480030|
+|2  |apply+quantile | 9.892499| 10.383088| 11.3716474| 10.6375765| 11.341401| 31.489385|
 
 
-|   |expr           |       min|       lq|      mean|   median|        uq|      max|
-|:--|:--------------|---------:|--------:|---------:|--------:|---------:|--------:|
-|1  |rowOrderStats  |  1.000000|  1.00000|  1.000000|  1.00000|  1.000000|  1.00000|
-|3  |rowQ           |  2.140533|  2.13001|  2.087977|  2.07426|  2.081986|  2.19796|
-|2  |apply+quantile | 84.929195| 84.16412| 82.138687| 81.27282| 79.358662| 97.69377|
+|   |expr           |       min|        lq|      mean|    median|        uq|        max|
+|:--|:--------------|---------:|---------:|---------:|---------:|---------:|----------:|
+|1  |rowOrderStats  |  1.000000|  1.000000|  1.000000|  1.000000|  1.000000|   1.000000|
+|3  |rowQ           |  2.191807|  2.156709|  2.150733|  2.106599|  2.157475|   2.221096|
+|2  |apply+quantile | 86.298637| 83.846146| 82.502430| 78.017840| 79.306611| 145.701221|
 
 _Figure: Benchmarking of colOrderStats(), apply+quantile() and rowQ(t(X))() on integer+100x100 data  as well as rowOrderStats(), apply+quantile() and rowQ() on the same data transposed.  Outliers are displayed as crosses.  Times are in milliseconds._
 
@@ -212,16 +212,16 @@ _Table: Benchmarking of colOrderStats() and rowOrderStats() on integer+100x100 d
 
 
 
-|   |expr          |    min|       lq|     mean|  median|       uq|     max|
-|:--|:-------------|------:|--------:|--------:|-------:|--------:|-------:|
-|2  |rowOrderStats | 115.98| 119.6520| 129.6522| 127.189| 134.4260| 209.684|
-|1  |colOrderStats | 117.39| 122.4335| 130.8260| 128.500| 134.8435| 220.342|
+|   |expr          |     min|       lq|     mean|  median|      uq|     max|
+|:--|:-------------|-------:|--------:|--------:|-------:|-------:|-------:|
+|1  |colOrderStats | 112.696| 119.8725| 133.3702| 130.197| 139.149| 228.078|
+|2  |rowOrderStats | 114.631| 123.8350| 137.8341| 136.348| 143.007| 216.123|
 
 
-|   |expr          |      min|       lq|     mean|   median|       uq|      max|
-|:--|:-------------|--------:|--------:|--------:|--------:|--------:|--------:|
-|2  |rowOrderStats | 1.000000| 1.000000| 1.000000| 1.000000| 1.000000| 1.000000|
-|1  |colOrderStats | 1.012157| 1.023247| 1.009053| 1.010307| 1.003106| 1.050829|
+|   |expr          |     min|       lq|    mean|   median|       uq|       max|
+|:--|:-------------|-------:|--------:|-------:|--------:|--------:|---------:|
+|1  |colOrderStats | 1.00000| 1.000000| 1.00000| 1.000000| 1.000000| 1.0000000|
+|2  |rowOrderStats | 1.01717| 1.033056| 1.03347| 1.047244| 1.027726| 0.9475837|
 
 _Figure: Benchmarking of colOrderStats() and rowOrderStats() on integer+100x100 data (original and transposed).  Outliers are displayed as crosses. Times are in milliseconds._
 
@@ -235,8 +235,8 @@ _Figure: Benchmarking of colOrderStats() and rowOrderStats() on integer+100x100 
 > X <- data[["1000x10"]]
 > gc()
           used  (Mb) gc trigger  (Mb) max used  (Mb)
-Ncells 5201643 277.8   10014072 534.9 10014072 534.9
-Vcells 9475938  72.3   18204443 138.9 18204443 138.9
+Ncells 5267906 281.4    7916910 422.9  7916910 422.9
+Vcells 9928491  75.8   33191153 253.3 53339345 407.0
 > probs <- 0.3
 > which <- round(probs * nrow(X))
 > colStats <- microbenchmark(colOrderStats = colOrderStats(X, which = which, na.rm = FALSE), `apply+quantile` = apply(X, 
@@ -245,8 +245,8 @@ Vcells 9475938  72.3   18204443 138.9 18204443 138.9
 > X <- t(X)
 > gc()
           used  (Mb) gc trigger  (Mb) max used  (Mb)
-Ncells 5201618 277.8   10014072 534.9 10014072 534.9
-Vcells 9481014  72.4   18204443 138.9 18204443 138.9
+Ncells 5267893 281.4    7916910 422.9  7916910 422.9
+Vcells 9933587  75.8   33191153 253.3 53339345 407.0
 > rowStats <- microbenchmark(rowOrderStats = rowOrderStats(X, which = which, na.rm = FALSE), `apply+quantile` = apply(X, 
 +     MARGIN = 1L, FUN = quantile, probs = probs, na.rm = FALSE, type = 3L), rowQ = rowQ(X, which = which), 
 +     unit = "ms")
@@ -257,35 +257,35 @@ _Table: Benchmarking of colOrderStats(), apply+quantile() and rowQ(t(X))() on in
 
 
 
-|   |expr           |      min|        lq|      mean|    median|        uq|      max|
-|:--|:--------------|--------:|---------:|---------:|---------:|---------:|--------:|
-|1  |colOrderStats  | 0.105066| 0.1104105| 0.1186371| 0.1118315| 0.1198820| 0.193480|
-|3  |rowQ(t(X))     | 0.248991| 0.2559815| 0.2761120| 0.2607885| 0.2831995| 0.429521|
-|2  |apply+quantile | 1.300855| 1.3281655| 1.4193031| 1.3402580| 1.3649095| 2.418032|
+|   |expr           |      min|       lq|     mean|    median|        uq|      max|
+|:--|:--------------|--------:|--------:|--------:|---------:|---------:|--------:|
+|1  |colOrderStats  | 0.098422| 0.104614| 0.118827| 0.1064520| 0.1326415| 0.187660|
+|3  |rowQ(t(X))     | 0.248614| 0.259805| 0.293965| 0.2642845| 0.3266160| 0.467678|
+|2  |apply+quantile | 1.296365| 1.330771| 1.483508| 1.3457475| 1.5813485| 2.455765|
 
 
-|   |expr           |       min|        lq|      mean|    median|        uq|       max|
-|:--|:--------------|---------:|---------:|---------:|---------:|---------:|---------:|
-|1  |colOrderStats  |  1.000000|  1.000000|  1.000000|  1.000000|  1.000000|  1.000000|
-|3  |rowQ(t(X))     |  2.369853|  2.318452|  2.327366|  2.331977|  2.362319|  2.219976|
-|2  |apply+quantile | 12.381313| 12.029340| 11.963398| 11.984620| 11.385442| 12.497581|
+|   |expr           |     min|        lq|     mean|    median|        uq|       max|
+|:--|:--------------|-------:|---------:|--------:|---------:|---------:|---------:|
+|1  |colOrderStats  |  1.0000|  1.000000|  1.00000|  1.000000|  1.000000|  1.000000|
+|3  |rowQ(t(X))     |  2.5260|  2.483463|  2.47389|  2.482664|  2.462397|  2.492156|
+|2  |apply+quantile | 13.1715| 12.720773| 12.48460| 12.641825| 11.921974| 13.086246|
 
 _Table: Benchmarking of rowOrderStats(), apply+quantile() and rowQ() on integer+1000x10 data (transposed). The top panel shows times in milliseconds and the bottom panel shows relative times._
 
 
 
-|   |expr           |      min|        lq|      mean|    median|        uq|      max|
-|:--|:--------------|--------:|---------:|---------:|---------:|---------:|--------:|
-|1  |rowOrderStats  | 0.103968| 0.1079900| 0.1204027| 0.1107330| 0.1307580| 0.203923|
-|3  |rowQ           | 0.234099| 0.2404655| 0.2581090| 0.2449645| 0.2507585| 0.425593|
-|2  |apply+quantile | 1.299901| 1.3311475| 1.4307268| 1.3486175| 1.4576280| 2.387854|
+|   |expr           |      min|        lq|      mean|   median|        uq|      max|
+|:--|:--------------|--------:|---------:|---------:|--------:|---------:|--------:|
+|1  |rowOrderStats  | 0.102752| 0.1091865| 0.1258468| 0.118961| 0.1349435| 0.199299|
+|3  |rowQ           | 0.234847| 0.2428325| 0.2709517| 0.247500| 0.2789235| 0.437303|
+|2  |apply+quantile | 1.287010| 1.3353315| 1.5055949| 1.393209| 1.6603835| 2.479970|
 
 
-|   |expr           |       min|        lq|      mean|    median|       uq|       max|
-|:--|:--------------|---------:|---------:|---------:|---------:|--------:|---------:|
-|1  |rowOrderStats  |  1.000000|  1.000000|  1.000000|  1.000000|  1.00000|  1.000000|
-|3  |rowQ           |  2.251645|  2.226739|  2.143714|  2.212209|  1.91773|  2.087028|
-|2  |apply+quantile | 12.502895| 12.326581| 11.882847| 12.179003| 11.14752| 11.709587|
+|   |expr           |       min|        lq|      mean|    median|        uq|       max|
+|:--|:--------------|---------:|---------:|---------:|---------:|---------:|---------:|
+|1  |rowOrderStats  |  1.000000|  1.000000|  1.000000|  1.000000|  1.000000|  1.000000|
+|3  |rowQ           |  2.285571|  2.224016|  2.153028|  2.080514|  2.066965|  2.194206|
+|2  |apply+quantile | 12.525401| 12.229822| 11.963714| 11.711477| 12.304287| 12.443464|
 
 _Figure: Benchmarking of colOrderStats(), apply+quantile() and rowQ(t(X))() on integer+1000x10 data  as well as rowOrderStats(), apply+quantile() and rowQ() on the same data transposed.  Outliers are displayed as crosses.  Times are in milliseconds._
 
@@ -297,16 +297,16 @@ _Table: Benchmarking of colOrderStats() and rowOrderStats() on integer+1000x10 d
 
 
 
-|   |expr          |     min|       lq|     mean|   median|      uq|     max|
-|:--|:-------------|-------:|--------:|--------:|--------:|-------:|-------:|
-|2  |rowOrderStats | 103.968| 107.9900| 120.4027| 110.7330| 130.758| 203.923|
-|1  |colOrderStats | 105.066| 110.4105| 118.6371| 111.8315| 119.882| 193.480|
+|   |expr          |     min|       lq|     mean|  median|       uq|     max|
+|:--|:-------------|-------:|--------:|--------:|-------:|--------:|-------:|
+|1  |colOrderStats |  98.422| 104.6140| 118.8270| 106.452| 132.6415| 187.660|
+|2  |rowOrderStats | 102.752| 109.1865| 125.8468| 118.961| 134.9435| 199.299|
 
 
-|   |expr          |      min|       lq|      mean|  median|        uq|       max|
-|:--|:-------------|--------:|--------:|---------:|-------:|---------:|---------:|
-|2  |rowOrderStats | 1.000000| 1.000000| 1.0000000| 1.00000| 1.0000000| 1.0000000|
-|1  |colOrderStats | 1.010561| 1.022414| 0.9853361| 1.00992| 0.9168234| 0.9487895|
+|   |expr          |      min|       lq|     mean|   median|       uq|      max|
+|:--|:-------------|--------:|--------:|--------:|--------:|--------:|--------:|
+|1  |colOrderStats | 1.000000| 1.000000| 1.000000| 1.000000| 1.000000| 1.000000|
+|2  |rowOrderStats | 1.043994| 1.043708| 1.059076| 1.117508| 1.017355| 1.062022|
 
 _Figure: Benchmarking of colOrderStats() and rowOrderStats() on integer+1000x10 data (original and transposed).  Outliers are displayed as crosses. Times are in milliseconds._
 
@@ -320,8 +320,8 @@ _Figure: Benchmarking of colOrderStats() and rowOrderStats() on integer+1000x10 
 > X <- data[["10x1000"]]
 > gc()
           used  (Mb) gc trigger  (Mb) max used  (Mb)
-Ncells 5201853 277.9   10014072 534.9 10014072 534.9
-Vcells 9476729  72.4   18204443 138.9 18204443 138.9
+Ncells 5268119 281.4    7916910 422.9  7916910 422.9
+Vcells 9929302  75.8   33191153 253.3 53339345 407.0
 > probs <- 0.3
 > which <- round(probs * nrow(X))
 > colStats <- microbenchmark(colOrderStats = colOrderStats(X, which = which, na.rm = FALSE), `apply+quantile` = apply(X, 
@@ -330,8 +330,8 @@ Vcells 9476729  72.4   18204443 138.9 18204443 138.9
 > X <- t(X)
 > gc()
           used  (Mb) gc trigger  (Mb) max used  (Mb)
-Ncells 5201828 277.9   10014072 534.9 10014072 534.9
-Vcells 9481805  72.4   18204443 138.9 18204443 138.9
+Ncells 5268106 281.4    7916910 422.9  7916910 422.9
+Vcells 9934398  75.8   33191153 253.3 53339345 407.0
 > rowStats <- microbenchmark(rowOrderStats = rowOrderStats(X, which = which, na.rm = FALSE), `apply+quantile` = apply(X, 
 +     MARGIN = 1L, FUN = quantile, probs = probs, na.rm = FALSE, type = 3L), rowQ = rowQ(X, which = which), 
 +     unit = "ms")
@@ -342,35 +342,35 @@ _Table: Benchmarking of colOrderStats(), apply+quantile() and rowQ(t(X))() on in
 
 
 
-|   |expr           |       min|         lq|        mean|      median|         uq|        max|
-|:--|:--------------|---------:|----------:|-----------:|-----------:|----------:|----------:|
-|1  |colOrderStats  |  0.109928|  0.1185525|   0.1417330|   0.1286855|   0.141222|   1.288544|
-|3  |rowQ(t(X))     |  0.259257|  0.2732155|   0.2997709|   0.3064275|   0.315101|   0.426096|
-|2  |apply+quantile | 93.518097| 98.1598435| 101.3663394| 100.0871905| 104.034092| 143.538878|
+|   |expr           |       min|         lq|        mean|      median|          uq|        max|
+|:--|:--------------|---------:|----------:|-----------:|-----------:|-----------:|----------:|
+|1  |colOrderStats  |  0.106230|  0.1184025|   0.1325111|   0.1353985|   0.1408785|   0.169106|
+|3  |rowQ(t(X))     |  0.262032|  0.2868610|   0.3188044|   0.3226335|   0.3341315|   0.626759|
+|2  |apply+quantile | 96.181601| 99.3469295| 106.3187530| 101.5473330| 113.0622695| 155.929175|
 
 
-|   |expr           |        min|         lq|       mean|     median|         uq|         max|
-|:--|:--------------|----------:|----------:|----------:|----------:|----------:|-----------:|
-|1  |colOrderStats  |   1.000000|   1.000000|   1.000000|   1.000000|   1.000000|   1.0000000|
-|3  |rowQ(t(X))     |   2.358426|   2.304595|   2.115039|   2.381212|   2.231246|   0.3306802|
-|2  |apply+quantile | 850.721354| 827.986280| 715.192274| 777.765875| 736.670575| 111.3961789|
+|   |expr           |        min|         lq|       mean|     median|         uq|        max|
+|:--|:--------------|----------:|----------:|----------:|----------:|----------:|----------:|
+|1  |colOrderStats  |   1.000000|   1.000000|   1.000000|   1.000000|   1.000000|   1.000000|
+|3  |rowQ(t(X))     |   2.466648|   2.422761|   2.405869|   2.382844|   2.371771|   3.706309|
+|2  |apply+quantile | 905.409028| 839.061080| 802.338408| 749.988611| 802.551628| 922.079495|
 
 _Table: Benchmarking of rowOrderStats(), apply+quantile() and rowQ() on integer+10x1000 data (transposed). The top panel shows times in milliseconds and the bottom panel shows relative times._
 
 
 
-|   |expr           |       min|         lq|        mean|      median|          uq|        max|
-|:--|:--------------|---------:|----------:|-----------:|-----------:|-----------:|----------:|
-|1  |rowOrderStats  |  0.109617|  0.1201490|   0.1334914|   0.1363200|   0.1415175|   0.220985|
-|3  |rowQ           |  0.249495|  0.2567665|   0.2768149|   0.2811095|   0.2915915|   0.339734|
-|2  |apply+quantile | 94.255153| 98.4414970| 101.4256367| 100.0950190| 102.6840910| 124.025919|
+|   |expr           |       min|        lq|        mean|      median|          uq|        max|
+|:--|:--------------|---------:|---------:|-----------:|-----------:|-----------:|----------:|
+|1  |rowOrderStats  |  0.110268|  0.119608|   0.1342096|   0.1360050|   0.1418945|   0.224281|
+|3  |rowQ           |  0.244519|  0.267329|   0.2898009|   0.2979575|   0.3066390|   0.363698|
+|2  |apply+quantile | 95.641533| 98.592619| 105.7131246| 102.1516005| 110.3810980| 139.159159|
 
 
-|   |expr           |        min|         lq|       mean|    median|         uq|        max|
-|:--|:--------------|----------:|----------:|----------:|---------:|----------:|----------:|
-|1  |rowOrderStats  |   1.000000|   1.000000|   1.000000|   1.00000|   1.000000|   1.000000|
-|3  |rowQ           |   2.276061|   2.137067|   2.073653|   2.06213|   2.060462|   1.537362|
-|2  |apply+quantile | 859.858900| 819.328475| 759.791429| 734.26510| 725.592884| 561.241347|
+|   |expr           |        min|         lq|       mean|     median|         uq|        max|
+|:--|:--------------|----------:|----------:|----------:|----------:|----------:|----------:|
+|1  |rowOrderStats  |   1.000000|   1.000000|   1.000000|   1.000000|   1.000000|   1.000000|
+|3  |rowQ           |   2.217497|   2.235043|   2.159316|   2.190783|   2.161035|   1.621617|
+|2  |apply+quantile | 867.355289| 824.297860| 787.671797| 751.087096| 777.909630| 620.467891|
 
 _Figure: Benchmarking of colOrderStats(), apply+quantile() and rowQ(t(X))() on integer+10x1000 data  as well as rowOrderStats(), apply+quantile() and rowQ() on the same data transposed.  Outliers are displayed as crosses.  Times are in milliseconds._
 
@@ -382,16 +382,16 @@ _Table: Benchmarking of colOrderStats() and rowOrderStats() on integer+10x1000 d
 
 
 
-|   |expr          |     min|       lq|     mean|   median|       uq|      max|
-|:--|:-------------|-------:|--------:|--------:|--------:|--------:|--------:|
-|1  |colOrderStats | 109.928| 118.5525| 141.7330| 128.6855| 141.2220| 1288.544|
-|2  |rowOrderStats | 109.617| 120.1490| 133.4914| 136.3200| 141.5175|  220.985|
+|   |expr          |     min|       lq|     mean|   median|       uq|     max|
+|:--|:-------------|-------:|--------:|--------:|--------:|--------:|-------:|
+|1  |colOrderStats | 106.230| 118.4025| 132.5111| 135.3985| 140.8785| 169.106|
+|2  |rowOrderStats | 110.268| 119.6080| 134.2096| 136.0050| 141.8945| 224.281|
 
 
-|   |expr          |       min|       lq|      mean|   median|       uq|       max|
-|:--|:-------------|---------:|--------:|---------:|--------:|--------:|---------:|
-|1  |colOrderStats | 1.0000000| 1.000000| 1.0000000| 1.000000| 1.000000| 1.0000000|
-|2  |rowOrderStats | 0.9971709| 1.013467| 0.9418514| 1.059327| 1.002093| 0.1714998|
+|   |expr          |      min|       lq|     mean|   median|       uq|      max|
+|:--|:-------------|--------:|--------:|--------:|--------:|--------:|--------:|
+|1  |colOrderStats | 1.000000| 1.000000| 1.000000| 1.000000| 1.000000| 1.000000|
+|2  |rowOrderStats | 1.038012| 1.010181| 1.012818| 1.004479| 1.007212| 1.326275|
 
 _Figure: Benchmarking of colOrderStats() and rowOrderStats() on integer+10x1000 data (original and transposed).  Outliers are displayed as crosses. Times are in milliseconds._
 
@@ -405,8 +405,8 @@ _Figure: Benchmarking of colOrderStats() and rowOrderStats() on integer+10x1000 
 > X <- data[["100x1000"]]
 > gc()
           used  (Mb) gc trigger  (Mb) max used  (Mb)
-Ncells 5202041 277.9   10014072 534.9 10014072 534.9
-Vcells 9477266  72.4   18204443 138.9 18204443 138.9
+Ncells 5268317 281.4    7916910 422.9  7916910 422.9
+Vcells 9929864  75.8   33191153 253.3 53339345 407.0
 > probs <- 0.3
 > which <- round(probs * nrow(X))
 > colStats <- microbenchmark(colOrderStats = colOrderStats(X, which = which, na.rm = FALSE), `apply+quantile` = apply(X, 
@@ -415,8 +415,8 @@ Vcells 9477266  72.4   18204443 138.9 18204443 138.9
 > X <- t(X)
 > gc()
           used  (Mb) gc trigger  (Mb) max used  (Mb)
-Ncells 5202034 277.9   10014072 534.9 10014072 534.9
-Vcells 9527372  72.7   18204443 138.9 18204443 138.9
+Ncells 5268310 281.4    7916910 422.9  7916910 422.9
+Vcells 9979970  76.2   33191153 253.3 53339345 407.0
 > rowStats <- microbenchmark(rowOrderStats = rowOrderStats(X, which = which, na.rm = FALSE), `apply+quantile` = apply(X, 
 +     MARGIN = 1L, FUN = quantile, probs = probs, na.rm = FALSE, type = 3L), rowQ = rowQ(X, which = which), 
 +     unit = "ms")
@@ -429,33 +429,33 @@ _Table: Benchmarking of colOrderStats(), apply+quantile() and rowQ(t(X))() on in
 
 |   |expr           |       min|         lq|       mean|     median|         uq|        max|
 |:--|:--------------|---------:|----------:|----------:|----------:|----------:|----------:|
-|1  |colOrderStats  |  1.157845|   1.213953|   1.234198|   1.224630|   1.245397|   1.432396|
-|3  |rowQ(t(X))     |  2.597985|   2.739488|   2.786799|   2.780934|   2.822903|   3.370532|
-|2  |apply+quantile | 99.890458| 104.622961| 111.669022| 106.378083| 109.481696| 501.989168|
+|1  |colOrderStats  |  1.094231|   1.136381|   1.163202|   1.147848|   1.169412|   1.408941|
+|3  |rowQ(t(X))     |  2.580665|   2.743460|   2.815210|   2.796856|   2.857670|   3.469139|
+|2  |apply+quantile | 99.850530| 102.400393| 111.541354| 105.009742| 113.243274| 479.710773|
 
 
-|   |expr           |       min|        lq|      mean|    median|        uq|        max|
-|:--|:--------------|---------:|---------:|---------:|---------:|---------:|----------:|
-|1  |colOrderStats  |  1.000000|  1.000000|  1.000000|  1.000000|  1.000000|   1.000000|
-|3  |rowQ(t(X))     |  2.243811|  2.256667|  2.257983|  2.270836|  2.266668|   2.353073|
-|2  |apply+quantile | 86.272738| 86.183700| 90.478991| 86.865488| 87.909038| 350.454182|
+|   |expr           |       min|        lq|      mean|    median|       uq|        max|
+|:--|:--------------|---------:|---------:|---------:|---------:|--------:|----------:|
+|1  |colOrderStats  |  1.000000|  1.000000|  1.000000|  1.000000|  1.00000|   1.000000|
+|3  |rowQ(t(X))     |  2.358428|  2.414207|  2.420225|  2.436608|  2.44368|   2.462232|
+|2  |apply+quantile | 91.251783| 90.110929| 95.891670| 91.484014| 96.83775| 340.476126|
 
 _Table: Benchmarking of rowOrderStats(), apply+quantile() and rowQ() on integer+100x1000 data (transposed). The top panel shows times in milliseconds and the bottom panel shows relative times._
 
 
 
-|   |expr           |        min|         lq|       mean|     median|         uq|        max|
-|:--|:--------------|----------:|----------:|----------:|----------:|----------:|----------:|
-|1  |rowOrderStats  |   1.137886|   1.177669|   1.231614|   1.202450|   1.230497|   1.835848|
-|3  |rowQ           |   2.471096|   2.610102|   2.700019|   2.667047|   2.734402|   3.588285|
-|2  |apply+quantile | 100.859321| 104.295258| 108.024195| 105.967891| 108.328292| 129.970021|
+|   |expr           |       min|         lq|       mean|     median|         uq|        max|
+|:--|:--------------|---------:|----------:|----------:|----------:|----------:|----------:|
+|1  |rowOrderStats  |  1.106748|   1.143976|   1.257766|   1.178274|   1.361804|   1.843151|
+|3  |rowQ           |  2.467096|   2.595877|   2.759856|   2.657094|   2.731810|   3.781953|
+|2  |apply+quantile | 98.673225| 101.006087| 108.751764| 103.918194| 114.444600| 133.235542|
 
 
-|   |expr           |       min|        lq|      mean|    median|        uq|       max|
-|:--|:--------------|---------:|---------:|---------:|---------:|---------:|---------:|
-|1  |rowOrderStats  |  1.000000|  1.000000|  1.000000|  1.000000|  1.000000|  1.000000|
-|3  |rowQ           |  2.171655|  2.216328|  2.192261|  2.218011|  2.222194|  1.954565|
-|2  |apply+quantile | 88.637457| 88.560719| 87.709473| 88.126651| 88.036246| 70.795633|
+|   |expr           |      min|        lq|      mean|    median|        uq|       max|
+|:--|:--------------|--------:|---------:|---------:|---------:|---------:|---------:|
+|1  |rowOrderStats  |  1.00000|  1.000000|  1.000000|  1.000000|  1.000000|  1.000000|
+|3  |rowQ           |  2.22914|  2.269171|  2.194252|  2.255073|  2.006023|  2.051895|
+|2  |apply+quantile | 89.15600| 88.293886| 86.464198| 88.195270| 84.038966| 72.286829|
 
 _Figure: Benchmarking of colOrderStats(), apply+quantile() and rowQ(t(X))() on integer+100x1000 data  as well as rowOrderStats(), apply+quantile() and rowQ() on the same data transposed.  Outliers are displayed as crosses.  Times are in milliseconds._
 
@@ -467,16 +467,16 @@ _Table: Benchmarking of colOrderStats() and rowOrderStats() on integer+100x1000 
 
 
 
-|   |expr          |      min|       lq|     mean|  median|       uq|      max|
-|:--|:-------------|--------:|--------:|--------:|-------:|--------:|--------:|
-|2  |rowOrderStats | 1.137886| 1.177669| 1.231614| 1.20245| 1.230497| 1.835848|
-|1  |colOrderStats | 1.157845| 1.213953| 1.234198| 1.22463| 1.245397| 1.432396|
+|   |expr          |      min|       lq|     mean|   median|       uq|      max|
+|:--|:-------------|--------:|--------:|--------:|--------:|--------:|--------:|
+|1  |colOrderStats | 1.094231| 1.136381| 1.163202| 1.147848| 1.169412| 1.408941|
+|2  |rowOrderStats | 1.106748| 1.143976| 1.257766| 1.178274| 1.361804| 1.843151|
 
 
-|   |expr          |     min|      lq|     mean|   median|      uq|       max|
-|:--|:-------------|-------:|-------:|--------:|--------:|-------:|---------:|
-|2  |rowOrderStats | 1.00000| 1.00000| 1.000000| 1.000000| 1.00000| 1.0000000|
-|1  |colOrderStats | 1.01754| 1.03081| 1.002099| 1.018446| 1.01211| 0.7802367|
+|   |expr          |      min|       lq|     mean|   median|      uq|      max|
+|:--|:-------------|--------:|--------:|--------:|--------:|-------:|--------:|
+|1  |colOrderStats | 1.000000| 1.000000| 1.000000| 1.000000| 1.00000| 1.000000|
+|2  |rowOrderStats | 1.011439| 1.006683| 1.081297| 1.026507| 1.16452| 1.308182|
 
 _Figure: Benchmarking of colOrderStats() and rowOrderStats() on integer+100x1000 data (original and transposed).  Outliers are displayed as crosses. Times are in milliseconds._
 
@@ -490,8 +490,8 @@ _Figure: Benchmarking of colOrderStats() and rowOrderStats() on integer+100x1000
 > X <- data[["1000x100"]]
 > gc()
           used  (Mb) gc trigger  (Mb) max used  (Mb)
-Ncells 5202245 277.9   10014072 534.9 10014072 534.9
-Vcells 9477983  72.4   18204443 138.9 18204443 138.9
+Ncells 5268523 281.4    7916910 422.9  7916910 422.9
+Vcells 9930551  75.8   33191153 253.3 53339345 407.0
 > probs <- 0.3
 > which <- round(probs * nrow(X))
 > colStats <- microbenchmark(colOrderStats = colOrderStats(X, which = which, na.rm = FALSE), `apply+quantile` = apply(X, 
@@ -500,8 +500,8 @@ Vcells 9477983  72.4   18204443 138.9 18204443 138.9
 > X <- t(X)
 > gc()
           used  (Mb) gc trigger  (Mb) max used  (Mb)
-Ncells 5202238 277.9   10014072 534.9 10014072 534.9
-Vcells 9528089  72.7   18204443 138.9 18204443 138.9
+Ncells 5268516 281.4    7916910 422.9  7916910 422.9
+Vcells 9980657  76.2   33191153 253.3 53339345 407.0
 > rowStats <- microbenchmark(rowOrderStats = rowOrderStats(X, which = which, na.rm = FALSE), `apply+quantile` = apply(X, 
 +     MARGIN = 1L, FUN = quantile, probs = probs, na.rm = FALSE, type = 3L), rowQ = rowQ(X, which = which), 
 +     unit = "ms")
@@ -514,16 +514,16 @@ _Table: Benchmarking of colOrderStats(), apply+quantile() and rowQ(t(X))() on in
 
 |   |expr           |       min|        lq|      mean|    median|        uq|       max|
 |:--|:--------------|---------:|---------:|---------:|---------:|---------:|---------:|
-|1  |colOrderStats  |  1.074953|  1.102823|  1.172822|  1.133409|  1.163547|  1.791877|
-|3  |rowQ(t(X))     |  2.455245|  2.579754|  2.898464|  2.657698|  2.712531| 10.259204|
-|2  |apply+quantile | 12.745655| 12.996520| 13.556921| 13.178492| 13.356571| 23.253353|
+|1  |colOrderStats  |  1.000228|  1.031149|  1.085712|  1.049727|  1.064769|  1.664438|
+|3  |rowQ(t(X))     |  2.456597|  2.544971|  2.637770|  2.604957|  2.641396|  3.699383|
+|2  |apply+quantile | 12.478874| 12.736728| 13.620464| 13.066946| 13.445725| 23.872654|
 
 
-|   |expr           |       min|        lq|      mean|    median|       uq|       max|
-|:--|:--------------|---------:|---------:|---------:|---------:|--------:|---------:|
-|1  |colOrderStats  |  1.000000|  1.000000|  1.000000|  1.000000|  1.00000|  1.000000|
-|3  |rowQ(t(X))     |  2.284049|  2.339229|  2.471359|  2.344872|  2.33126|  5.725395|
-|2  |apply+quantile | 11.856942| 11.784780| 11.559233| 11.627310| 11.47918| 12.977092|
+|   |expr           |       min|        lq|      mean|    median|        uq|       max|
+|:--|:--------------|---------:|---------:|---------:|---------:|---------:|---------:|
+|1  |colOrderStats  |  1.000000|  1.000000|  1.000000|  1.000000|  1.000000|  1.000000|
+|3  |rowQ(t(X))     |  2.456037|  2.468091|  2.429529|  2.481556|  2.480721|  2.222602|
+|2  |apply+quantile | 12.476029| 12.351970| 12.545187| 12.447947| 12.627827| 14.342772|
 
 _Table: Benchmarking of rowOrderStats(), apply+quantile() and rowQ() on integer+1000x100 data (transposed). The top panel shows times in milliseconds and the bottom panel shows relative times._
 
@@ -531,16 +531,16 @@ _Table: Benchmarking of rowOrderStats(), apply+quantile() and rowQ() on integer+
 
 |   |expr           |       min|        lq|      mean|    median|        uq|       max|
 |:--|:--------------|---------:|---------:|---------:|---------:|---------:|---------:|
-|1  |rowOrderStats  |  1.064912|  1.092694|  1.131035|  1.117860|  1.139615|  1.409038|
-|3  |rowQ           |  2.317403|  2.417442|  2.562800|  2.462683|  2.511760| 10.417455|
-|2  |apply+quantile | 12.699172| 13.037314| 13.637346| 13.196927| 13.361855| 22.798941|
+|1  |rowOrderStats  |  1.048300|  1.066629|  1.108719|  1.080034|  1.098993|  1.391298|
+|3  |rowQ           |  2.315365|  2.386404|  2.474760|  2.419234|  2.468002|  3.200212|
+|2  |apply+quantile | 12.497515| 12.707541| 13.419533| 12.870615| 13.129853| 24.063661|
 
 
-|   |expr           |       min|        lq|      mean|    median|        uq|      max|
-|:--|:--------------|---------:|---------:|---------:|---------:|---------:|--------:|
-|1  |rowOrderStats  |  1.000000|  1.000000|  1.000000|  1.000000|  1.000000|  1.00000|
-|3  |rowQ           |  2.176145|  2.212368|  2.265889|  2.203034|  2.204042|  7.39331|
-|2  |apply+quantile | 11.925090| 11.931344| 12.057405| 11.805532| 11.724880| 16.18050|
+|   |expr           |       min|        lq|     mean|    median|        uq|       max|
+|:--|:--------------|---------:|---------:|--------:|---------:|---------:|---------:|
+|1  |rowOrderStats  |  1.000000|  1.000000|  1.00000|  1.000000|  1.000000|  1.000000|
+|3  |rowQ           |  2.208686|  2.237332|  2.23209|  2.239962|  2.245694|  2.300163|
+|2  |apply+quantile | 11.921697| 11.913735| 12.10364| 11.916866| 11.947167| 17.295835|
 
 _Figure: Benchmarking of colOrderStats(), apply+quantile() and rowQ(t(X))() on integer+1000x100 data  as well as rowOrderStats(), apply+quantile() and rowQ() on the same data transposed.  Outliers are displayed as crosses.  Times are in milliseconds._
 
@@ -554,14 +554,14 @@ _Table: Benchmarking of colOrderStats() and rowOrderStats() on integer+1000x100 
 
 |   |expr          |      min|       lq|     mean|   median|       uq|      max|
 |:--|:-------------|--------:|--------:|--------:|--------:|--------:|--------:|
-|2  |rowOrderStats | 1.064912| 1.092694| 1.131035| 1.117860| 1.139615| 1.409038|
-|1  |colOrderStats | 1.074953| 1.102823| 1.172822| 1.133409| 1.163547| 1.791877|
+|1  |colOrderStats | 1.000228| 1.031149| 1.085712| 1.049727| 1.064769| 1.664438|
+|2  |rowOrderStats | 1.048300| 1.066629| 1.108719| 1.080034| 1.098993| 1.391298|
 
 
-|   |expr          |      min|       lq|     mean|  median|    uq|      max|
-|:--|:-------------|--------:|--------:|--------:|-------:|-----:|--------:|
-|2  |rowOrderStats | 1.000000| 1.000000| 1.000000| 1.00000| 1.000| 1.000000|
-|1  |colOrderStats | 1.009429| 1.009269| 1.036946| 1.01391| 1.021| 1.271702|
+|   |expr          |      min|       lq|    mean|   median|       uq|       max|
+|:--|:-------------|--------:|--------:|-------:|--------:|--------:|---------:|
+|1  |colOrderStats | 1.000000| 1.000000| 1.00000| 1.000000| 1.000000| 1.0000000|
+|2  |rowOrderStats | 1.048061| 1.034408| 1.02119| 1.028871| 1.032142| 0.8358966|
 
 _Figure: Benchmarking of colOrderStats() and rowOrderStats() on integer+1000x100 data (original and transposed).  Outliers are displayed as crosses. Times are in milliseconds._
 
@@ -615,9 +615,9 @@ _Figure: Benchmarking of colOrderStats() and rowOrderStats() on integer+1000x100
 ```r
 > X <- data[["10x10"]]
 > gc()
-          used  (Mb) gc trigger  (Mb) max used  (Mb)
-Ncells 5202478 277.9   10014072 534.9 10014072 534.9
-Vcells 9593912  73.2   18204443 138.9 18204443 138.9
+           used  (Mb) gc trigger  (Mb) max used  (Mb)
+Ncells  5268737 281.4    7916910 422.9  7916910 422.9
+Vcells 10046448  76.7   33191153 253.3 53339345 407.0
 > probs <- 0.3
 > which <- round(probs * nrow(X))
 > colStats <- microbenchmark(colOrderStats = colOrderStats(X, which = which, na.rm = FALSE), `apply+quantile` = apply(X, 
@@ -625,9 +625,9 @@ Vcells 9593912  73.2   18204443 138.9 18204443 138.9
 +     which = which), unit = "ms")
 > X <- t(X)
 > gc()
-          used  (Mb) gc trigger  (Mb) max used  (Mb)
-Ncells 5202444 277.9   10014072 534.9 10014072 534.9
-Vcells 9594073  73.2   18204443 138.9 18204443 138.9
+           used  (Mb) gc trigger  (Mb) max used  (Mb)
+Ncells  5268721 281.4    7916910 422.9  7916910 422.9
+Vcells 10046639  76.7   33191153 253.3 53339345 407.0
 > rowStats <- microbenchmark(rowOrderStats = rowOrderStats(X, which = which, na.rm = FALSE), `apply+quantile` = apply(X, 
 +     MARGIN = 1L, FUN = quantile, probs = probs, na.rm = FALSE, type = 3L), rowQ = rowQ(X, which = which), 
 +     unit = "ms")
@@ -638,35 +638,35 @@ _Table: Benchmarking of colOrderStats(), apply+quantile() and rowQ(t(X))() on do
 
 
 
-|   |expr           |      min|        lq|      mean|    median|        uq|      max|
-|:--|:--------------|--------:|---------:|---------:|---------:|---------:|--------:|
-|1  |colOrderStats  | 0.002742| 0.0041260| 0.0065636| 0.0070555| 0.0080860| 0.023024|
-|3  |rowQ(t(X))     | 0.007021| 0.0096015| 0.0142159| 0.0144080| 0.0165855| 0.065153|
-|2  |apply+quantile | 0.981140| 1.0022785| 1.1302159| 1.0295235| 1.2150130| 1.920563|
+|   |expr           |      min|        lq|      mean|    median|       uq|      max|
+|:--|:--------------|--------:|---------:|---------:|---------:|--------:|--------:|
+|1  |colOrderStats  | 0.003037| 0.0045715| 0.0076381| 0.0077320| 0.009290| 0.023805|
+|3  |rowQ(t(X))     | 0.007160| 0.0099600| 0.0155814| 0.0153995| 0.017574| 0.063005|
+|2  |apply+quantile | 0.973489| 0.9986500| 1.1800871| 1.0863325| 1.255721| 2.261965|
 
 
 |   |expr           |       min|         lq|       mean|     median|         uq|       max|
 |:--|:--------------|---------:|----------:|----------:|----------:|----------:|---------:|
 |1  |colOrderStats  |   1.00000|   1.000000|   1.000000|   1.000000|   1.000000|  1.000000|
-|3  |rowQ(t(X))     |   2.56054|   2.327072|   2.165862|   2.042095|   2.051138|  2.829786|
-|2  |apply+quantile | 357.81911| 242.917717| 172.193728| 145.917866| 150.261316| 83.415697|
+|3  |rowQ(t(X))     |   2.35759|   2.178716|   2.039951|   1.991658|   1.891711|  2.646713|
+|2  |apply+quantile | 320.54297| 218.451274| 154.499481| 140.498254| 135.169107| 95.020584|
 
 _Table: Benchmarking of rowOrderStats(), apply+quantile() and rowQ() on double+10x10 data (transposed). The top panel shows times in milliseconds and the bottom panel shows relative times._
 
 
 
-|   |expr           |      min|        lq|      mean|   median|       uq|      max|
-|:--|:--------------|--------:|---------:|---------:|--------:|--------:|--------:|
-|1  |rowOrderStats  | 0.002753| 0.0043340| 0.0069728| 0.007167| 0.008300| 0.023902|
-|3  |rowQ           | 0.004336| 0.0059390| 0.0093762| 0.009142| 0.011591| 0.041073|
-|2  |apply+quantile | 0.981800| 0.9991015| 1.1284831| 1.025079| 1.221162| 2.305244|
+|   |expr           |      min|        lq|      mean|   median|        uq|      max|
+|:--|:--------------|--------:|---------:|---------:|--------:|---------:|--------:|
+|1  |rowOrderStats  | 0.003124| 0.0049355| 0.0074758| 0.007844| 0.0088045| 0.024017|
+|3  |rowQ           | 0.004296| 0.0057030| 0.0094352| 0.008322| 0.0117090| 0.041540|
+|2  |apply+quantile | 0.962671| 0.9832850| 1.1041419| 1.003078| 1.2174365| 1.869213|
 
 
-|   |expr           |        min|         lq|       mean|     median|         uq|       max|
-|:--|:--------------|----------:|----------:|----------:|----------:|----------:|---------:|
-|1  |rowOrderStats  |   1.000000|   1.000000|   1.000000|   1.000000|   1.000000|  1.000000|
-|3  |rowQ           |   1.575009|   1.370328|   1.344692|   1.275569|   1.396506|  1.718392|
-|2  |apply+quantile | 356.629132| 230.526419| 161.841195| 143.027557| 147.127892| 96.445653|
+|   |expr           |       min|         lq|       mean|     median|         uq|       max|
+|:--|:--------------|---------:|----------:|----------:|----------:|----------:|---------:|
+|1  |rowOrderStats  |   1.00000|   1.000000|   1.000000|   1.000000|   1.000000|  1.000000|
+|3  |rowQ           |   1.37516|   1.155506|   1.262093|   1.060938|   1.329888|  1.729608|
+|2  |apply+quantile | 308.15333| 199.227029| 147.695090| 127.878442| 138.274348| 77.828746|
 
 _Figure: Benchmarking of colOrderStats(), apply+quantile() and rowQ(t(X))() on double+10x10 data  as well as rowOrderStats(), apply+quantile() and rowQ() on the same data transposed.  Outliers are displayed as crosses.  Times are in milliseconds._
 
@@ -678,16 +678,16 @@ _Table: Benchmarking of colOrderStats() and rowOrderStats() on double+10x10 data
 
 
 
-|   |expr          |   min|    lq|    mean| median|    uq|    max|
-|:--|:-------------|-----:|-----:|-------:|------:|-----:|------:|
-|1  |colOrderStats | 2.742| 4.126| 6.56363| 7.0555| 8.086| 23.024|
-|2  |rowOrderStats | 2.753| 4.334| 6.97278| 7.1670| 8.300| 23.902|
+|   |expr          |   min|     lq|    mean| median|     uq|    max|
+|:--|:-------------|-----:|------:|-------:|------:|------:|------:|
+|1  |colOrderStats | 3.037| 4.5715| 7.63813|  7.732| 9.2900| 23.805|
+|2  |rowOrderStats | 3.124| 4.9355| 7.47582|  7.844| 8.8045| 24.017|
 
 
-|   |expr          |      min|       lq|     mean|   median|       uq|      max|
-|:--|:-------------|--------:|--------:|--------:|--------:|--------:|--------:|
-|1  |colOrderStats | 1.000000| 1.000000| 1.000000| 1.000000| 1.000000| 1.000000|
-|2  |rowOrderStats | 1.004012| 1.050412| 1.062336| 1.015803| 1.026466| 1.038134|
+|   |expr          |      min|       lq|    mean|   median|        uq|      max|
+|:--|:-------------|--------:|--------:|-------:|--------:|---------:|--------:|
+|1  |colOrderStats | 1.000000| 1.000000| 1.00000| 1.000000| 1.0000000| 1.000000|
+|2  |rowOrderStats | 1.028647| 1.079624| 0.97875| 1.014485| 0.9477395| 1.008906|
 
 _Figure: Benchmarking of colOrderStats() and rowOrderStats() on double+10x10 data (original and transposed).  Outliers are displayed as crosses. Times are in milliseconds._
 
@@ -700,9 +700,9 @@ _Figure: Benchmarking of colOrderStats() and rowOrderStats() on double+10x10 dat
 ```r
 > X <- data[["100x100"]]
 > gc()
-          used  (Mb) gc trigger  (Mb) max used  (Mb)
-Ncells 5202675 277.9   10014072 534.9 10014072 534.9
-Vcells 9594904  73.3   18204443 138.9 18204443 138.9
+           used  (Mb) gc trigger  (Mb) max used  (Mb)
+Ncells  5268939 281.4    7916910 422.9  7916910 422.9
+Vcells 10047454  76.7   33191153 253.3 53339345 407.0
 > probs <- 0.3
 > which <- round(probs * nrow(X))
 > colStats <- microbenchmark(colOrderStats = colOrderStats(X, which = which, na.rm = FALSE), `apply+quantile` = apply(X, 
@@ -710,9 +710,9 @@ Vcells 9594904  73.3   18204443 138.9 18204443 138.9
 +     which = which), unit = "ms")
 > X <- t(X)
 > gc()
-          used  (Mb) gc trigger  (Mb) max used  (Mb)
-Ncells 5202650 277.9   10014072 534.9 10014072 534.9
-Vcells 9604980  73.3   18204443 138.9 18204443 138.9
+           used  (Mb) gc trigger  (Mb) max used  (Mb)
+Ncells  5268926 281.4    7916910 422.9  7916910 422.9
+Vcells 10057550  76.8   33191153 253.3 53339345 407.0
 > rowStats <- microbenchmark(rowOrderStats = rowOrderStats(X, which = which, na.rm = FALSE), `apply+quantile` = apply(X, 
 +     MARGIN = 1L, FUN = quantile, probs = probs, na.rm = FALSE, type = 3L), rowQ = rowQ(X, which = which), 
 +     unit = "ms")
@@ -723,35 +723,35 @@ _Table: Benchmarking of colOrderStats(), apply+quantile() and rowQ(t(X))() on do
 
 
 
-|   |expr           |       min|         lq|       mean|     median|         uq|       max|
-|:--|:--------------|---------:|----------:|----------:|----------:|----------:|---------:|
-|1  |colOrderStats  |  0.161637|  0.1666510|  0.1781173|  0.1735935|  0.1827015|  0.291775|
-|3  |rowQ(t(X))     |  0.201080|  0.2137145|  0.2314542|  0.2290115|  0.2427635|  0.378546|
-|2  |apply+quantile | 10.001547| 10.2965930| 10.9614352| 10.6640075| 10.9505975| 21.385853|
+|   |expr           |      min|       lq|       mean|    median|         uq|       max|
+|:--|:--------------|--------:|--------:|----------:|---------:|----------:|---------:|
+|1  |colOrderStats  | 0.159234| 0.164046|  0.1781320|  0.171400|  0.1813475|  0.296304|
+|3  |rowQ(t(X))     | 0.200370| 0.207436|  0.2308721|  0.228722|  0.2434720|  0.389825|
+|2  |apply+quantile | 9.790375| 9.918190| 10.6659672| 10.095773| 10.4156785| 19.801831|
 
 
-|   |expr           |       min|        lq|      mean|   median|        uq|      max|
-|:--|:--------------|---------:|---------:|---------:|--------:|---------:|--------:|
-|1  |colOrderStats  |  1.000000|  1.000000|  1.000000|  1.00000|  1.000000|  1.00000|
-|3  |rowQ(t(X))     |  1.244022|  1.282407|  1.299449|  1.31924|  1.328744|  1.29739|
-|2  |apply+quantile | 61.876594| 61.785366| 61.540556| 61.43091| 59.937097| 73.29570|
+|   |expr           |       min|        lq|      mean|    median|        uq|       max|
+|:--|:--------------|---------:|---------:|---------:|---------:|---------:|---------:|
+|1  |colOrderStats  |  1.000000|  1.000000|  1.000000|  1.000000|  1.000000|  1.000000|
+|3  |rowQ(t(X))     |  1.258337|  1.264499|  1.296073|  1.334434|  1.342572|  1.315625|
+|2  |apply+quantile | 61.484199| 60.459813| 59.876751| 58.901829| 57.434916| 66.829442|
 
 _Table: Benchmarking of rowOrderStats(), apply+quantile() and rowQ() on double+100x100 data (transposed). The top panel shows times in milliseconds and the bottom panel shows relative times._
 
 
 
-|   |expr           |      min|         lq|       mean|     median|         uq|       max|
-|:--|:--------------|--------:|----------:|----------:|----------:|----------:|---------:|
-|1  |rowOrderStats  | 0.163738|  0.1663495|  0.1793452|  0.1747645|  0.1823795|  0.288053|
-|3  |rowQ           | 0.182006|  0.1853900|  0.2025034|  0.1993070|  0.2114665|  0.337959|
-|2  |apply+quantile | 9.951751| 10.1658505| 11.1339476| 10.7597475| 10.9634590| 40.452476|
+|   |expr           |      min|        lq|       mean|     median|        uq|       max|
+|:--|:--------------|--------:|---------:|----------:|----------:|---------:|---------:|
+|1  |rowOrderStats  | 0.158055| 0.1641440|  0.1756856|  0.1724485|  0.178935|  0.279081|
+|3  |rowQ           | 0.182181| 0.1850165|  0.2008740|  0.1970900|  0.208571|  0.340016|
+|2  |apply+quantile | 9.799377| 9.9113060| 10.6413272| 10.0514415| 10.304956| 19.579858|
 
 
-|   |expr           |       min|        lq|      mean|    median|        uq|        max|
-|:--|:--------------|---------:|---------:|---------:|---------:|---------:|----------:|
-|1  |rowOrderStats  |  1.000000|  1.000000|  1.000000|  1.000000|  1.000000|   1.000000|
-|3  |rowQ           |  1.111568|  1.114461|  1.129127|  1.140432|  1.159486|   1.173253|
-|2  |apply+quantile | 60.778506| 61.111398| 62.081119| 61.567123| 60.113439| 140.434142|
+|   |expr           |       min|       lq|      mean|    median|        uq|       max|
+|:--|:--------------|---------:|--------:|---------:|---------:|---------:|---------:|
+|1  |rowOrderStats  |  1.000000|  1.00000|  1.000000|  1.000000|  1.000000|  1.000000|
+|3  |rowQ           |  1.152643|  1.12716|  1.143371|  1.142892|  1.165624|  1.218342|
+|2  |apply+quantile | 61.999791| 60.38177| 60.570273| 58.286628| 57.590497| 70.158334|
 
 _Figure: Benchmarking of colOrderStats(), apply+quantile() and rowQ(t(X))() on double+100x100 data  as well as rowOrderStats(), apply+quantile() and rowQ() on the same data transposed.  Outliers are displayed as crosses.  Times are in milliseconds._
 
@@ -763,16 +763,16 @@ _Table: Benchmarking of colOrderStats() and rowOrderStats() on double+100x100 da
 
 
 
-|   |expr          |     min|       lq|     mean|   median|       uq|     max|
-|:--|:-------------|-------:|--------:|--------:|--------:|--------:|-------:|
-|1  |colOrderStats | 161.637| 166.6510| 178.1173| 173.5935| 182.7015| 291.775|
-|2  |rowOrderStats | 163.738| 166.3495| 179.3451| 174.7645| 182.3795| 288.053|
+|   |expr          |     min|      lq|     mean|   median|       uq|     max|
+|:--|:-------------|-------:|-------:|--------:|--------:|--------:|-------:|
+|1  |colOrderStats | 159.234| 164.046| 178.1320| 171.4000| 181.3475| 296.304|
+|2  |rowOrderStats | 158.055| 164.144| 175.6856| 172.4485| 178.9350| 279.081|
 
 
-|   |expr          |      min|        lq|     mean|   median|        uq|       max|
-|:--|:-------------|--------:|---------:|--------:|--------:|---------:|---------:|
-|1  |colOrderStats | 1.000000| 1.0000000| 1.000000| 1.000000| 1.0000000| 1.0000000|
-|2  |rowOrderStats | 1.012998| 0.9981908| 1.006894| 1.006746| 0.9982376| 0.9872436|
+|   |expr          |       min|       lq|      mean|   median|        uq|       max|
+|:--|:-------------|---------:|--------:|---------:|--------:|---------:|---------:|
+|1  |colOrderStats | 1.0000000| 1.000000| 1.0000000| 1.000000| 1.0000000| 1.0000000|
+|2  |rowOrderStats | 0.9925958| 1.000597| 0.9862664| 1.006117| 0.9866968| 0.9418739|
 
 _Figure: Benchmarking of colOrderStats() and rowOrderStats() on double+100x100 data (original and transposed).  Outliers are displayed as crosses. Times are in milliseconds._
 
@@ -785,9 +785,9 @@ _Figure: Benchmarking of colOrderStats() and rowOrderStats() on double+100x100 d
 ```r
 > X <- data[["1000x10"]]
 > gc()
-          used  (Mb) gc trigger  (Mb) max used  (Mb)
-Ncells 5202885 277.9   10014072 534.9 10014072 534.9
-Vcells 9595998  73.3   18204443 138.9 18204443 138.9
+           used  (Mb) gc trigger  (Mb) max used  (Mb)
+Ncells  5269142 281.5    7916910 422.9  7916910 422.9
+Vcells 10048535  76.7   33191153 253.3 53339345 407.0
 > probs <- 0.3
 > which <- round(probs * nrow(X))
 > colStats <- microbenchmark(colOrderStats = colOrderStats(X, which = which, na.rm = FALSE), `apply+quantile` = apply(X, 
@@ -795,9 +795,9 @@ Vcells 9595998  73.3   18204443 138.9 18204443 138.9
 +     which = which), unit = "ms")
 > X <- t(X)
 > gc()
-          used  (Mb) gc trigger  (Mb) max used  (Mb)
-Ncells 5202860 277.9   10014072 534.9 10014072 534.9
-Vcells 9606074  73.3   18204443 138.9 18204443 138.9
+           used  (Mb) gc trigger  (Mb) max used  (Mb)
+Ncells  5269135 281.5    7916910 422.9  7916910 422.9
+Vcells 10058641  76.8   33191153 253.3 53339345 407.0
 > rowStats <- microbenchmark(rowOrderStats = rowOrderStats(X, which = which, na.rm = FALSE), `apply+quantile` = apply(X, 
 +     MARGIN = 1L, FUN = quantile, probs = probs, na.rm = FALSE, type = 3L), rowQ = rowQ(X, which = which), 
 +     unit = "ms")
@@ -808,18 +808,18 @@ _Table: Benchmarking of colOrderStats(), apply+quantile() and rowQ(t(X))() on do
 
 
 
-|   |expr           |      min|        lq|      mean|   median|        uq|      max|
-|:--|:--------------|--------:|---------:|---------:|--------:|---------:|--------:|
-|1  |colOrderStats  | 0.143297| 0.1488795| 0.1658540| 0.157431| 0.1782210| 0.249518|
-|3  |rowQ(t(X))     | 0.183885| 0.1933230| 0.2153411| 0.207059| 0.2311905| 0.303121|
-|2  |apply+quantile | 1.363168| 1.3905470| 1.5639195| 1.481826| 1.6482725| 2.845490|
+|   |expr           |      min|        lq|      mean|    median|        uq|      max|
+|:--|:--------------|--------:|---------:|---------:|---------:|---------:|--------:|
+|1  |colOrderStats  | 0.142024| 0.1461710| 0.1578909| 0.1475745| 0.1641990| 0.239373|
+|3  |rowQ(t(X))     | 0.183253| 0.1886075| 0.2020745| 0.1912965| 0.2098465| 0.314868|
+|2  |apply+quantile | 1.336363| 1.3544730| 1.4502797| 1.3682845| 1.4041375| 2.435306|
 
 
 |   |expr           |      min|       lq|     mean|   median|       uq|       max|
 |:--|:--------------|--------:|--------:|--------:|--------:|--------:|---------:|
 |1  |colOrderStats  | 1.000000| 1.000000| 1.000000| 1.000000| 1.000000|  1.000000|
-|3  |rowQ(t(X))     | 1.283244| 1.298520| 1.298378| 1.315236| 1.297212|  1.214826|
-|2  |apply+quantile | 9.512886| 9.340084| 9.429497| 9.412543| 9.248475| 11.403947|
+|3  |rowQ(t(X))     | 1.290296| 1.290321| 1.279836| 1.296271| 1.278001|  1.315386|
+|2  |apply+quantile | 9.409417| 9.266359| 9.185327| 9.271822| 8.551438| 10.173687|
 
 _Table: Benchmarking of rowOrderStats(), apply+quantile() and rowQ() on double+1000x10 data (transposed). The top panel shows times in milliseconds and the bottom panel shows relative times._
 
@@ -827,16 +827,16 @@ _Table: Benchmarking of rowOrderStats(), apply+quantile() and rowQ() on double+1
 
 |   |expr           |      min|        lq|      mean|    median|        uq|      max|
 |:--|:--------------|--------:|---------:|---------:|---------:|---------:|--------:|
-|1  |rowOrderStats  | 0.146327| 0.1501025| 0.1675792| 0.1522760| 0.1776965| 0.324316|
-|3  |rowQ           | 0.165925| 0.1680990| 0.1835545| 0.1719295| 0.1760880| 0.392308|
-|2  |apply+quantile | 1.345456| 1.3708010| 1.4856172| 1.3855640| 1.4797415| 2.660331|
+|1  |rowOrderStats  | 0.143845| 0.1473475| 0.1602536| 0.1504175| 0.1648415| 0.235791|
+|3  |rowQ           | 0.165287| 0.1677205| 0.1785729| 0.1710720| 0.1724895| 0.273577|
+|2  |apply+quantile | 1.337604| 1.3558695| 1.4447214| 1.3651035| 1.4166895| 2.374248|
 
 
-|   |expr           |      min|       lq|     mean|   median|       uq|      max|
-|:--|:--------------|--------:|--------:|--------:|--------:|--------:|--------:|
-|1  |rowOrderStats  | 1.000000| 1.000000| 1.000000| 1.000000| 1.000000| 1.000000|
-|3  |rowQ           | 1.133933| 1.119895| 1.095330| 1.129065| 0.990948| 1.209647|
-|2  |apply+quantile | 9.194858| 9.132433| 8.865167| 9.099031| 8.327353| 8.202898|
+|   |expr           |      min|       lq|     mean|   median|       uq|       max|
+|:--|:--------------|--------:|--------:|--------:|--------:|--------:|---------:|
+|1  |rowOrderStats  | 1.000000| 1.000000| 1.000000| 1.000000| 1.000000|  1.000000|
+|3  |rowQ           | 1.149063| 1.138265| 1.114314| 1.137315| 1.046396|  1.160252|
+|2  |apply+quantile | 9.298926| 9.201849| 9.015218| 9.075430| 8.594253| 10.069290|
 
 _Figure: Benchmarking of colOrderStats(), apply+quantile() and rowQ(t(X))() on double+1000x10 data  as well as rowOrderStats(), apply+quantile() and rowQ() on the same data transposed.  Outliers are displayed as crosses.  Times are in milliseconds._
 
@@ -848,16 +848,16 @@ _Table: Benchmarking of colOrderStats() and rowOrderStats() on double+1000x10 da
 
 
 
-|   |expr          |     min|       lq|     mean|  median|       uq|     max|
-|:--|:-------------|-------:|--------:|--------:|-------:|--------:|-------:|
-|2  |rowOrderStats | 146.327| 150.1025| 167.5792| 152.276| 177.6965| 324.316|
-|1  |colOrderStats | 143.297| 148.8795| 165.8540| 157.431| 178.2210| 249.518|
+|   |expr          |     min|       lq|     mean|   median|       uq|     max|
+|:--|:-------------|-------:|--------:|--------:|--------:|--------:|-------:|
+|1  |colOrderStats | 142.024| 146.1710| 157.8909| 147.5745| 164.1990| 239.373|
+|2  |rowOrderStats | 143.845| 147.3475| 160.2536| 150.4175| 164.8415| 235.791|
 
 
-|   |expr          |      min|        lq|      mean|   median|       uq|       max|
-|:--|:-------------|--------:|---------:|---------:|--------:|--------:|---------:|
-|2  |rowOrderStats | 1.000000| 1.0000000| 1.0000000| 1.000000| 1.000000| 1.0000000|
-|1  |colOrderStats | 0.979293| 0.9918522| 0.9897052| 1.033853| 1.002952| 0.7693669|
+|   |expr          |      min|       lq|     mean|   median|       uq|       max|
+|:--|:-------------|--------:|--------:|--------:|--------:|--------:|---------:|
+|1  |colOrderStats | 1.000000| 1.000000| 1.000000| 1.000000| 1.000000| 1.0000000|
+|2  |rowOrderStats | 1.012822| 1.008049| 1.014964| 1.019265| 1.003913| 0.9850359|
 
 _Figure: Benchmarking of colOrderStats() and rowOrderStats() on double+1000x10 data (original and transposed).  Outliers are displayed as crosses. Times are in milliseconds._
 
@@ -870,9 +870,9 @@ _Figure: Benchmarking of colOrderStats() and rowOrderStats() on double+1000x10 d
 ```r
 > X <- data[["10x1000"]]
 > gc()
-          used  (Mb) gc trigger  (Mb) max used  (Mb)
-Ncells 5203095 277.9   10014072 534.9 10014072 534.9
-Vcells 9596139  73.3   18204443 138.9 18204443 138.9
+           used  (Mb) gc trigger  (Mb) max used  (Mb)
+Ncells  5269361 281.5    7916910 422.9  7916910 422.9
+Vcells 10048689  76.7   33191153 253.3 53339345 407.0
 > probs <- 0.3
 > which <- round(probs * nrow(X))
 > colStats <- microbenchmark(colOrderStats = colOrderStats(X, which = which, na.rm = FALSE), `apply+quantile` = apply(X, 
@@ -880,9 +880,9 @@ Vcells 9596139  73.3   18204443 138.9 18204443 138.9
 +     which = which), unit = "ms")
 > X <- t(X)
 > gc()
-          used  (Mb) gc trigger  (Mb) max used  (Mb)
-Ncells 5203070 277.9   10014072 534.9 10014072 534.9
-Vcells 9606215  73.3   18204443 138.9 18204443 138.9
+           used  (Mb) gc trigger  (Mb) max used  (Mb)
+Ncells  5269348 281.5    7916910 422.9  7916910 422.9
+Vcells 10058785  76.8   33191153 253.3 53339345 407.0
 > rowStats <- microbenchmark(rowOrderStats = rowOrderStats(X, which = which, na.rm = FALSE), `apply+quantile` = apply(X, 
 +     MARGIN = 1L, FUN = quantile, probs = probs, na.rm = FALSE, type = 3L), rowQ = rowQ(X, which = which), 
 +     unit = "ms")
@@ -893,35 +893,35 @@ _Table: Benchmarking of colOrderStats(), apply+quantile() and rowQ(t(X))() on do
 
 
 
-|   |expr           |       min|         lq|        mean|     median|         uq|        max|
-|:--|:--------------|---------:|----------:|-----------:|----------:|----------:|----------:|
-|1  |colOrderStats  |  0.155995|  0.1623235|   0.1740644|  0.1709410|   0.184274|   0.243185|
-|3  |rowQ(t(X))     |  0.196044|  0.2052960|   0.2296766|  0.2335985|   0.245024|   0.326073|
-|2  |apply+quantile | 94.204933| 98.0530615| 101.3089040| 99.9628065| 103.910623| 121.773068|
+|   |expr           |       min|        lq|        mean|     median|          uq|        max|
+|:--|:--------------|---------:|---------:|-----------:|----------:|-----------:|----------:|
+|1  |colOrderStats  |  0.154163|  0.162138|   0.1819935|   0.177852|   0.1932265|   0.381979|
+|3  |rowQ(t(X))     |  0.195936|  0.202935|   0.2373036|   0.238204|   0.2505650|   0.420127|
+|2  |apply+quantile | 92.160882| 94.907494| 104.1634842| 103.480934| 111.8881590| 147.368139|
 
 
 |   |expr           |        min|         lq|       mean|     median|         uq|        max|
 |:--|:--------------|----------:|----------:|----------:|----------:|----------:|----------:|
 |1  |colOrderStats  |   1.000000|   1.000000|   1.000000|   1.000000|   1.000000|   1.000000|
-|3  |rowQ(t(X))     |   1.256733|   1.264734|   1.319492|   1.366545|   1.329672|   1.340843|
-|2  |apply+quantile | 603.897131| 604.059557| 582.019599| 584.779582| 563.891938| 500.742513|
+|3  |rowQ(t(X))     |   1.270966|   1.251619|   1.303913|   1.339338|   1.296742|   1.099869|
+|2  |apply+quantile | 597.814534| 585.350097| 572.347246| 581.837334| 579.051833| 385.801678|
 
 _Table: Benchmarking of rowOrderStats(), apply+quantile() and rowQ() on double+10x1000 data (transposed). The top panel shows times in milliseconds and the bottom panel shows relative times._
 
 
 
-|   |expr           |       min|         lq|        mean|     median|          uq|        max|
-|:--|:--------------|---------:|----------:|-----------:|----------:|-----------:|----------:|
-|1  |rowOrderStats  |  0.156893|  0.1640635|   0.1793138|  0.1761895|   0.1860925|   0.292306|
-|3  |rowQ           |  0.180294|  0.1854920|   0.2019398|  0.2019455|   0.2170060|   0.250631|
-|2  |apply+quantile | 93.920465| 98.5095640| 101.7649902| 99.9045750| 105.1572530| 144.579025|
+|   |expr           |       min|        lq|        mean|      median|          uq|        max|
+|:--|:--------------|---------:|---------:|-----------:|-----------:|-----------:|----------:|
+|1  |rowOrderStats  |  0.152145|  0.155938|   0.1818978|   0.1711180|   0.1938690|   0.284398|
+|3  |rowQ           |  0.178293|  0.185625|   0.2130232|   0.2082955|   0.2244185|   0.374109|
+|2  |apply+quantile | 92.913468| 95.367881| 109.1533500| 104.0716180| 112.7420030| 469.248856|
 
 
 |   |expr           |        min|         lq|       mean|     median|         uq|         max|
 |:--|:--------------|----------:|----------:|----------:|----------:|----------:|-----------:|
-|1  |rowOrderStats  |   1.000000|   1.000000|   1.000000|   1.000000|   1.000000|   1.0000000|
-|3  |rowQ           |   1.149153|   1.130611|   1.126181|   1.146184|   1.166119|   0.8574268|
-|2  |apply+quantile | 598.627504| 600.435587| 567.524460| 567.029108| 565.080554| 494.6153175|
+|1  |rowOrderStats  |   1.000000|   1.000000|   1.000000|   1.000000|   1.000000|    1.000000|
+|3  |rowQ           |   1.171862|   1.190377|   1.171115|   1.217262|   1.157578|    1.315442|
+|2  |apply+quantile | 610.690249| 611.575636| 600.080749| 608.186269| 581.537033| 1649.972419|
 
 _Figure: Benchmarking of colOrderStats(), apply+quantile() and rowQ(t(X))() on double+10x1000 data  as well as rowOrderStats(), apply+quantile() and rowQ() on the same data transposed.  Outliers are displayed as crosses.  Times are in milliseconds._
 
@@ -933,16 +933,16 @@ _Table: Benchmarking of colOrderStats() and rowOrderStats() on double+10x1000 da
 
 
 
-|   |expr          |     min|       lq|     mean|   median|       uq|     max|
-|:--|:-------------|-------:|--------:|--------:|--------:|--------:|-------:|
-|1  |colOrderStats | 155.995| 162.3235| 174.0644| 170.9410| 184.2740| 243.185|
-|2  |rowOrderStats | 156.893| 164.0635| 179.3138| 176.1895| 186.0925| 292.306|
+|   |expr          |     min|      lq|     mean|  median|       uq|     max|
+|:--|:-------------|-------:|-------:|--------:|-------:|--------:|-------:|
+|2  |rowOrderStats | 152.145| 155.938| 181.8978| 171.118| 193.8690| 284.398|
+|1  |colOrderStats | 154.163| 162.138| 181.9935| 177.852| 193.2265| 381.979|
 
 
-|   |expr          |      min|       lq|     mean|   median|       uq|     max|
-|:--|:-------------|--------:|--------:|--------:|--------:|--------:|-------:|
-|1  |colOrderStats | 1.000000| 1.000000| 1.000000| 1.000000| 1.000000| 1.00000|
-|2  |rowOrderStats | 1.005757| 1.010719| 1.030158| 1.030704| 1.009869| 1.20199|
+|   |expr          |      min|       lq|     mean|   median|        uq|      max|
+|:--|:-------------|--------:|--------:|--------:|--------:|---------:|--------:|
+|2  |rowOrderStats | 1.000000| 1.000000| 1.000000| 1.000000| 1.0000000| 1.000000|
+|1  |colOrderStats | 1.013264| 1.039759| 1.000526| 1.039353| 0.9966859| 1.343114|
 
 _Figure: Benchmarking of colOrderStats() and rowOrderStats() on double+10x1000 data (original and transposed).  Outliers are displayed as crosses. Times are in milliseconds._
 
@@ -955,9 +955,9 @@ _Figure: Benchmarking of colOrderStats() and rowOrderStats() on double+10x1000 d
 ```r
 > X <- data[["100x1000"]]
 > gc()
-          used  (Mb) gc trigger  (Mb) max used  (Mb)
-Ncells 5203283 277.9   10014072 534.9 10014072 534.9
-Vcells 9597384  73.3   18204443 138.9 18204443 138.9
+           used  (Mb) gc trigger  (Mb) max used  (Mb)
+Ncells  5269559 281.5    7916910 422.9  7916910 422.9
+Vcells 10049953  76.7   33191153 253.3 53339345 407.0
 > probs <- 0.3
 > which <- round(probs * nrow(X))
 > colStats <- microbenchmark(colOrderStats = colOrderStats(X, which = which, na.rm = FALSE), `apply+quantile` = apply(X, 
@@ -965,9 +965,9 @@ Vcells 9597384  73.3   18204443 138.9 18204443 138.9
 +     which = which), unit = "ms")
 > X <- t(X)
 > gc()
-          used  (Mb) gc trigger  (Mb) max used  (Mb)
-Ncells 5203276 277.9   10014072 534.9 10014072 534.9
-Vcells 9697490  74.0   18204443 138.9 18204443 138.9
+           used  (Mb) gc trigger  (Mb) max used  (Mb)
+Ncells  5269552 281.5    7916910 422.9  7916910 422.9
+Vcells 10150059  77.5   33191153 253.3 53339345 407.0
 > rowStats <- microbenchmark(rowOrderStats = rowOrderStats(X, which = which, na.rm = FALSE), `apply+quantile` = apply(X, 
 +     MARGIN = 1L, FUN = quantile, probs = probs, na.rm = FALSE, type = 3L), rowQ = rowQ(X, which = which), 
 +     unit = "ms")
@@ -980,16 +980,16 @@ _Table: Benchmarking of colOrderStats(), apply+quantile() and rowQ(t(X))() on do
 
 |   |expr           |       min|         lq|       mean|     median|         uq|        max|
 |:--|:--------------|---------:|----------:|----------:|----------:|----------:|----------:|
-|1  |colOrderStats  |  1.588688|   1.653754|   1.699227|   1.681342|   1.712535|   2.128049|
-|3  |rowQ(t(X))     |  2.009317|   2.100964|   2.194944|   2.152049|   2.288346|   2.683397|
-|2  |apply+quantile | 99.857959| 104.917203| 108.852521| 106.433538| 112.336720| 133.604193|
+|1  |colOrderStats  |  1.555946|   1.593685|   1.705558|   1.639018|   1.762477|   2.196162|
+|3  |rowQ(t(X))     |  1.977714|   2.047141|   2.196313|   2.124277|   2.263879|   2.796600|
+|2  |apply+quantile | 99.757448| 102.091683| 112.674087| 111.503829| 120.630390| 141.425606|
 
 
 |   |expr           |       min|        lq|      mean|    median|        uq|       max|
 |:--|:--------------|---------:|---------:|---------:|---------:|---------:|---------:|
 |1  |colOrderStats  |  1.000000|  1.000000|  1.000000|  1.000000|  1.000000|  1.000000|
-|3  |rowQ(t(X))     |  1.264765|  1.270421|  1.291731|  1.279959|  1.336233|  1.260966|
-|2  |apply+quantile | 62.855614| 63.441844| 64.060009| 63.302711| 65.596744| 62.782480|
+|3  |rowQ(t(X))     |  1.271068|  1.284533|  1.287738|  1.296067|  1.284488|  1.273403|
+|2  |apply+quantile | 64.113696| 64.060139| 66.062878| 68.030896| 68.443687| 64.396709|
 
 _Table: Benchmarking of rowOrderStats(), apply+quantile() and rowQ() on double+100x1000 data (transposed). The top panel shows times in milliseconds and the bottom panel shows relative times._
 
@@ -997,16 +997,16 @@ _Table: Benchmarking of rowOrderStats(), apply+quantile() and rowQ() on double+1
 
 |   |expr           |       min|         lq|       mean|     median|         uq|        max|
 |:--|:--------------|---------:|----------:|----------:|----------:|----------:|----------:|
-|1  |rowOrderStats  |  1.611538|   1.676751|   1.759398|   1.711192|   1.759205|   2.698358|
-|3  |rowQ           |  1.781139|   1.871182|   1.990476|   1.960216|   2.060423|   2.722695|
-|2  |apply+quantile | 99.793524| 105.523846| 112.699275| 107.067109| 111.471564| 497.401334|
+|1  |rowOrderStats  |  1.554991|   1.632132|   1.830091|   1.796809|   1.974303|   2.697267|
+|3  |rowQ           |  1.784679|   1.919428|   2.117967|   2.011407|   2.316472|   2.942045|
+|2  |apply+quantile | 99.274605| 102.748784| 113.301328| 109.262997| 122.898668| 153.237316|
 
 
-|   |expr           |       min|        lq|      mean|    median|        uq|        max|
-|:--|:--------------|---------:|---------:|---------:|---------:|---------:|----------:|
-|1  |rowOrderStats  |  1.000000|  1.000000|  1.000000|  1.000000|  1.000000|   1.000000|
-|3  |rowQ           |  1.105242|  1.115957|  1.131339|  1.145526|  1.171224|   1.009019|
-|2  |apply+quantile | 61.924400| 62.933541| 64.055578| 62.568711| 63.364720| 184.334819|
+|   |expr           |      min|        lq|      mean|    median|        uq|      max|
+|:--|:--------------|--------:|---------:|---------:|---------:|---------:|--------:|
+|1  |rowOrderStats  |  1.00000|  1.000000|  1.000000|  1.000000|  1.000000|  1.00000|
+|3  |rowQ           |  1.14771|  1.176025|  1.157301|  1.119433|  1.173311|  1.09075|
+|2  |apply+quantile | 63.84256| 62.953722| 61.910211| 60.809484| 62.249126| 56.81207|
 
 _Figure: Benchmarking of colOrderStats(), apply+quantile() and rowQ(t(X))() on double+100x1000 data  as well as rowOrderStats(), apply+quantile() and rowQ() on the same data transposed.  Outliers are displayed as crosses.  Times are in milliseconds._
 
@@ -1020,14 +1020,14 @@ _Table: Benchmarking of colOrderStats() and rowOrderStats() on double+100x1000 d
 
 |   |expr          |      min|       lq|     mean|   median|       uq|      max|
 |:--|:-------------|--------:|--------:|--------:|--------:|--------:|--------:|
-|1  |colOrderStats | 1.588688| 1.653754| 1.699227| 1.681342| 1.712535| 2.128049|
-|2  |rowOrderStats | 1.611538| 1.676751| 1.759398| 1.711192| 1.759205| 2.698358|
+|1  |colOrderStats | 1.555946| 1.593685| 1.705558| 1.639018| 1.762477| 2.196162|
+|2  |rowOrderStats | 1.554991| 1.632132| 1.830091| 1.796809| 1.974303| 2.697267|
 
 
-|   |expr          |      min|       lq|     mean|   median|       uq|      max|
-|:--|:-------------|--------:|--------:|--------:|--------:|--------:|--------:|
-|1  |colOrderStats | 1.000000| 1.000000| 1.000000| 1.000000| 1.000000| 1.000000|
-|2  |rowOrderStats | 1.014383| 1.013906| 1.035411| 1.017754| 1.027252| 1.267996|
+|   |expr          |       min|       lq|     mean|   median|       uq|      max|
+|:--|:-------------|---------:|--------:|--------:|--------:|--------:|--------:|
+|1  |colOrderStats | 1.0000000| 1.000000| 1.000000| 1.000000| 1.000000| 1.000000|
+|2  |rowOrderStats | 0.9993862| 1.024125| 1.073016| 1.096272| 1.120187| 1.228173|
 
 _Figure: Benchmarking of colOrderStats() and rowOrderStats() on double+100x1000 data (original and transposed).  Outliers are displayed as crosses. Times are in milliseconds._
 
@@ -1040,9 +1040,9 @@ _Figure: Benchmarking of colOrderStats() and rowOrderStats() on double+100x1000 
 ```r
 > X <- data[["1000x100"]]
 > gc()
-          used  (Mb) gc trigger  (Mb) max used  (Mb)
-Ncells 5203487 277.9   10014072 534.9 10014072 534.9
-Vcells 9597519  73.3   18204443 138.9 18204443 138.9
+           used  (Mb) gc trigger  (Mb) max used  (Mb)
+Ncells  5269765 281.5    7916910 422.9  7916910 422.9
+Vcells 10050090  76.7   33191153 253.3 53339345 407.0
 > probs <- 0.3
 > which <- round(probs * nrow(X))
 > colStats <- microbenchmark(colOrderStats = colOrderStats(X, which = which, na.rm = FALSE), `apply+quantile` = apply(X, 
@@ -1050,9 +1050,9 @@ Vcells 9597519  73.3   18204443 138.9 18204443 138.9
 +     which = which), unit = "ms")
 > X <- t(X)
 > gc()
-          used  (Mb) gc trigger  (Mb) max used  (Mb)
-Ncells 5203480 277.9   10014072 534.9 10014072 534.9
-Vcells 9697625  74.0   18204443 138.9 18204443 138.9
+           used  (Mb) gc trigger  (Mb) max used  (Mb)
+Ncells  5269758 281.5    7916910 422.9  7916910 422.9
+Vcells 10150196  77.5   33191153 253.3 53339345 407.0
 > rowStats <- microbenchmark(rowOrderStats = rowOrderStats(X, which = which, na.rm = FALSE), `apply+quantile` = apply(X, 
 +     MARGIN = 1L, FUN = quantile, probs = probs, na.rm = FALSE, type = 3L), rowQ = rowQ(X, which = which), 
 +     unit = "ms")
@@ -1063,35 +1063,35 @@ _Table: Benchmarking of colOrderStats(), apply+quantile() and rowQ(t(X))() on do
 
 
 
-|   |expr           |       min|        lq|      mean|    median|        uq|       max|
-|:--|:--------------|---------:|---------:|---------:|---------:|---------:|---------:|
-|1  |colOrderStats  |  1.562944|  1.610527|  1.703747|  1.659879|  1.693137|  2.594458|
-|3  |rowQ(t(X))     |  1.972797|  2.079943|  2.324106|  2.170528|  2.259642|  9.127260|
-|2  |apply+quantile | 13.205669| 13.428299| 14.225447| 13.652881| 13.849725| 23.153676|
+|   |expr           |       min|        lq|      mean|    median|        uq|        max|
+|:--|:--------------|---------:|---------:|---------:|---------:|---------:|----------:|
+|1  |colOrderStats  |  1.539583|  1.578974|  1.684997|  1.616098|  1.686859|   2.587708|
+|3  |rowQ(t(X))     |  1.947817|  2.044525|  2.186409|  2.152943|  2.250532|   2.861674|
+|2  |apply+quantile | 13.097905| 13.304177| 18.186724| 13.550524| 14.384415| 401.092755|
 
 
-|   |expr           |      min|       lq|     mean|   median|       uq|      max|
-|:--|:--------------|--------:|--------:|--------:|--------:|--------:|--------:|
-|1  |colOrderStats  | 1.000000| 1.000000| 1.000000| 1.000000| 1.000000| 1.000000|
-|3  |rowQ(t(X))     | 1.262231| 1.291467| 1.364115| 1.307642| 1.334589| 3.517983|
-|2  |apply+quantile | 8.449227| 8.337829| 8.349508| 8.225224| 8.179920| 8.924283|
+|   |expr           |      min|       lq|      mean|   median|       uq|        max|
+|:--|:--------------|--------:|--------:|---------:|--------:|--------:|----------:|
+|1  |colOrderStats  | 1.000000| 1.000000|  1.000000| 1.000000| 1.000000|   1.000000|
+|3  |rowQ(t(X))     | 1.265159| 1.294844|  1.297574| 1.332186| 1.334155|   1.105872|
+|2  |apply+quantile | 8.507437| 8.425834| 10.793326| 8.384717| 8.527335| 154.999233|
 
 _Table: Benchmarking of rowOrderStats(), apply+quantile() and rowQ() on double+1000x100 data (transposed). The top panel shows times in milliseconds and the bottom panel shows relative times._
 
 
 
-|   |expr           |       min|        lq|      mean|    median|        uq|       max|
-|:--|:--------------|---------:|---------:|---------:|---------:|---------:|---------:|
-|1  |rowOrderStats  |  1.591957|  1.640457|  1.692097|  1.662904|  1.703416|  2.269126|
-|3  |rowQ           |  1.774648|  1.831710|  1.906126|  1.879911|  1.941709|  2.794412|
-|2  |apply+quantile | 13.291173| 13.540199| 14.396198| 13.714916| 13.981152| 23.418167|
+|   |expr           |       min|        lq|      mean|    median|        uq|      max|
+|:--|:--------------|---------:|---------:|---------:|---------:|---------:|--------:|
+|1  |rowOrderStats  |  1.568821|  1.602634|  1.728957|  1.660126|  1.802472|  2.20168|
+|3  |rowQ           |  1.769227|  1.788807|  1.941000|  1.904701|  2.020622|  2.48365|
+|2  |apply+quantile | 13.182057| 13.385584| 14.576939| 13.653866| 14.562729| 26.42372|
 
 
-|   |expr           |      min|       lq|     mean|   median|       uq|       max|
-|:--|:--------------|--------:|--------:|--------:|--------:|--------:|---------:|
-|1  |rowOrderStats  | 1.000000| 1.000000| 1.000000| 1.000000| 1.000000|  1.000000|
-|3  |rowQ           | 1.114759| 1.116585| 1.126487| 1.130499| 1.139892|  1.231493|
-|2  |apply+quantile | 8.348952| 8.253917| 8.507903| 8.247570| 8.207714| 10.320347|
+|   |expr           |      min|       lq|     mean|   median|       uq|      max|
+|:--|:--------------|--------:|--------:|--------:|--------:|--------:|--------:|
+|1  |rowOrderStats  | 1.000000| 1.000000| 1.000000| 1.000000| 1.000000|  1.00000|
+|3  |rowQ           | 1.127743| 1.116167| 1.122642| 1.147323| 1.121028|  1.12807|
+|2  |apply+quantile | 8.402525| 8.352240| 8.431058| 8.224597| 8.079308| 12.00162|
 
 _Figure: Benchmarking of colOrderStats(), apply+quantile() and rowQ(t(X))() on double+1000x100 data  as well as rowOrderStats(), apply+quantile() and rowQ() on the same data transposed.  Outliers are displayed as crosses.  Times are in milliseconds._
 
@@ -1105,14 +1105,14 @@ _Table: Benchmarking of colOrderStats() and rowOrderStats() on double+1000x100 d
 
 |   |expr          |      min|       lq|     mean|   median|       uq|      max|
 |:--|:-------------|--------:|--------:|--------:|--------:|--------:|--------:|
-|1  |colOrderStats | 1.562944| 1.610527| 1.703747| 1.659879| 1.693137| 2.594458|
-|2  |rowOrderStats | 1.591957| 1.640457| 1.692097| 1.662904| 1.703416| 2.269126|
+|1  |colOrderStats | 1.539583| 1.578974| 1.684997| 1.616098| 1.686859| 2.587708|
+|2  |rowOrderStats | 1.568821| 1.602634| 1.728957| 1.660126| 1.802472| 2.201680|
 
 
-|   |expr          |      min|       lq|      mean|   median|       uq|      max|
-|:--|:-------------|--------:|--------:|---------:|--------:|--------:|--------:|
-|1  |colOrderStats | 1.000000| 1.000000| 1.0000000| 1.000000| 1.000000| 1.000000|
-|2  |rowOrderStats | 1.018563| 1.018584| 0.9931623| 1.001822| 1.006071| 0.874605|
+|   |expr          |      min|       lq|     mean|   median|       uq|       max|
+|:--|:-------------|--------:|--------:|--------:|--------:|--------:|---------:|
+|1  |colOrderStats | 1.000000| 1.000000| 1.000000| 1.000000| 1.000000| 1.0000000|
+|2  |rowOrderStats | 1.018991| 1.014984| 1.026089| 1.027243| 1.068537| 0.8508224|
 
 _Figure: Benchmarking of colOrderStats() and rowOrderStats() on double+1000x100 data (original and transposed).  Outliers are displayed as crosses. Times are in milliseconds._
 
@@ -1146,7 +1146,7 @@ attached base packages:
 [1] stats     graphics  grDevices utils     datasets  methods   base     
 
 other attached packages:
-[1] microbenchmark_1.4-7   matrixStats_0.60.1     ggplot2_3.3.5         
+[1] microbenchmark_1.4-7   matrixStats_0.60.0     ggplot2_3.3.5         
 [4] knitr_1.33             R.devices_2.17.0       R.utils_2.10.1        
 [7] R.oo_1.24.0            R.methodsS3_1.8.1-9001 history_0.0.1-9000    
 
@@ -1172,16 +1172,17 @@ loaded via a namespace (and not attached):
 [55] tabby_0.0.1-9001        AnnotationDbi_1.54.1    Biostrings_2.60.2      
 [58] compiler_4.1.1          GenomeInfoDb_1.28.1     rlang_0.4.11           
 [61] grid_4.1.1              RCurl_1.98-1.4          cwhmisc_6.6            
-[64] rappdirs_0.3.3          startup_0.15.0          labeling_0.4.2         
-[67] bitops_1.0-7            base64enc_0.1-3         boot_1.3-28            
-[70] gtable_0.3.0            DBI_1.1.1               markdown_1.1           
-[73] R6_2.5.1                lpSolveAPI_5.5.2.0-17.7 rle_0.9.2              
-[76] dplyr_1.0.7             fastmap_1.1.0           bit_4.0.4              
-[79] utf8_1.2.2              parallel_4.1.1          Rcpp_1.0.7             
-[82] vctrs_0.3.8             png_0.1-7               DEoptimR_1.0-9         
-[85] tidyselect_1.1.1        xfun_0.25               coda_0.19-4            
+[64] rstudioapi_0.13         rappdirs_0.3.3          startup_0.15.0         
+[67] labeling_0.4.2          bitops_1.0-7            base64enc_0.1-3        
+[70] boot_1.3-28             gtable_0.3.0            DBI_1.1.1              
+[73] markdown_1.1            R6_2.5.1                lpSolveAPI_5.5.2.0-17.7
+[76] rle_0.9.2               dplyr_1.0.7             fastmap_1.1.0          
+[79] bit_4.0.4               utf8_1.2.2              parallel_4.1.1         
+[82] Rcpp_1.0.7              vctrs_0.3.8             png_0.1-7              
+[85] DEoptimR_1.0-9          tidyselect_1.1.1        xfun_0.25              
+[88] coda_0.19-4            
 ```
-Total processing time was 2.03 mins.
+Total processing time was 2.09 mins.
 
 
 ### Reproducibility
@@ -1198,7 +1199,7 @@ html <- matrixStats:::benchmark('colOrderStats')
 [StackOverflow:rowProds?]: https://stackoverflow.com/questions/20198801/ "Stack Overflow: Row product of matrix and column sum of matrix"
 
 ---------------------------------------
-Copyright Henrik Bengtsson. Last updated on 2021-08-25 18:10:53 (+0200 UTC). Powered by [RSP].
+Copyright Henrik Bengtsson. Last updated on 2021-08-25 22:24:27 (+0200 UTC). Powered by [RSP].
 
 <script>
  var link = document.createElement('link');

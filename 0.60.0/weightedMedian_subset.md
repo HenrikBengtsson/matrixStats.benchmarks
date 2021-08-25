@@ -55,8 +55,8 @@ This report benchmark the performance of weightedMedian() on subsetted computati
 > w_S <- x[idxs]
 > gc()
            used  (Mb) gc trigger  (Mb) max used  (Mb)
-Ncells  5299023 283.0   10014072 534.9 10014072 534.9
-Vcells 12117385  92.5   36267018 276.7 90959857 694.0
+Ncells  5365471 286.6    7916910 422.9  7916910 422.9
+Vcells 12591581  96.1   39038428 297.9 94934136 724.3
 > stats <- microbenchmark(weightedMedian_x_w_S = weightedMedian(x_S, w = w_S, ties = "mean", na.rm = FALSE), 
 +     `weightedMedian(x, w, idxs)` = weightedMedian(x, w = w, idxs = idxs, ties = "mean", na.rm = FALSE), 
 +     `weightedMedian(x[idxs], w[idxs])` = weightedMedian(x[idxs], w = w[idxs], ties = "mean", na.rm = FALSE), 
@@ -67,18 +67,18 @@ _Table: Benchmarking of weightedMedian_x_w_S(), weightedMedian(x, w, idxs)() and
 
 
 
-|   |expr                             |      min|        lq|      mean|   median|        uq|      max|
-|:--|:--------------------------------|--------:|---------:|---------:|--------:|---------:|--------:|
-|1  |weightedMedian_x_w_S             | 0.021443| 0.0251025| 0.0271225| 0.026804| 0.0282705| 0.047560|
-|2  |weightedMedian(x, w, idxs)       | 0.036465| 0.0395575| 0.0426756| 0.042146| 0.0441290| 0.082310|
-|3  |weightedMedian(x[idxs], w[idxs]) | 0.038810| 0.0413350| 0.0445521| 0.043823| 0.0461040| 0.062696|
+|   |expr                             |      min|        lq|      mean|    median|        uq|      max|
+|:--|:--------------------------------|--------:|---------:|---------:|---------:|---------:|--------:|
+|1  |weightedMedian_x_w_S             | 0.025993| 0.0296005| 0.0311789| 0.0308535| 0.0322230| 0.047863|
+|2  |weightedMedian(x, w, idxs)       | 0.039677| 0.0421460| 0.0442247| 0.0431995| 0.0448555| 0.099545|
+|3  |weightedMedian(x[idxs], w[idxs]) | 0.043383| 0.0454240| 0.0482020| 0.0468850| 0.0490145| 0.080744|
 
 
 |   |expr                             |      min|       lq|     mean|   median|       uq|      max|
 |:--|:--------------------------------|--------:|--------:|--------:|--------:|--------:|--------:|
 |1  |weightedMedian_x_w_S             | 1.000000| 1.000000| 1.000000| 1.000000| 1.000000| 1.000000|
-|2  |weightedMedian(x, w, idxs)       | 1.700555| 1.575839| 1.573440| 1.572377| 1.560956| 1.730656|
-|3  |weightedMedian(x[idxs], w[idxs]) | 1.809915| 1.646649| 1.642626| 1.634942| 1.630817| 1.318251|
+|2  |weightedMedian(x, w, idxs)       | 1.526449| 1.423827| 1.418417| 1.400149| 1.392034| 2.079790|
+|3  |weightedMedian(x[idxs], w[idxs]) | 1.669026| 1.534569| 1.545980| 1.519601| 1.521103| 1.686982|
 
 _Figure: Benchmarking of weightedMedian_x_w_S(), weightedMedian(x, w, idxs)() and weightedMedian(x[idxs], w[idxs])() on n = 1000 data.  Outliers are displayed as crosses.  Times are in milliseconds._
 
@@ -94,8 +94,8 @@ _Figure: Benchmarking of weightedMedian_x_w_S(), weightedMedian(x, w, idxs)() an
 > w_S <- x[idxs]
 > gc()
            used  (Mb) gc trigger  (Mb) max used  (Mb)
-Ncells  5296127 282.9   10014072 534.9 10014072 534.9
-Vcells 10004675  76.4   36267018 276.7 90959857 694.0
+Ncells  5362619 286.4    7916910 422.9  7916910 422.9
+Vcells 10478946  80.0   39038428 297.9 94934136 724.3
 > stats <- microbenchmark(weightedMedian_x_w_S = weightedMedian(x_S, w = w_S, ties = "mean", na.rm = FALSE), 
 +     `weightedMedian(x, w, idxs)` = weightedMedian(x, w = w, idxs = idxs, ties = "mean", na.rm = FALSE), 
 +     `weightedMedian(x[idxs], w[idxs])` = weightedMedian(x[idxs], w = w[idxs], ties = "mean", na.rm = FALSE), 
@@ -106,18 +106,18 @@ _Table: Benchmarking of weightedMedian_x_w_S(), weightedMedian(x, w, idxs)() and
 
 
 
-|   |expr                             |      min|        lq|      mean|    median|        uq|      max|
-|:--|:--------------------------------|--------:|---------:|---------:|---------:|---------:|--------:|
-|1  |weightedMedian_x_w_S             | 0.244262| 0.2471205| 0.2703237| 0.2494420| 0.2914660| 0.428905|
-|2  |weightedMedian(x, w, idxs)       | 0.407964| 0.4128625| 0.4430486| 0.4162755| 0.4462365| 0.652644|
-|3  |weightedMedian(x[idxs], w[idxs]) | 0.413223| 0.4196540| 0.4736506| 0.4250915| 0.5171680| 0.778880|
+|   |expr                             |      min|       lq|      mean|   median|        uq|      max|
+|:--|:--------------------------------|--------:|--------:|---------:|--------:|---------:|--------:|
+|1  |weightedMedian_x_w_S             | 0.229462| 0.234522| 0.2660686| 0.238139| 0.2971940| 0.390752|
+|2  |weightedMedian(x, w, idxs)       | 0.392851| 0.396198| 0.4424426| 0.402958| 0.4701835| 0.669262|
+|3  |weightedMedian(x[idxs], w[idxs]) | 0.405238| 0.409998| 0.4850652| 0.422549| 0.5320350| 0.787552|
 
 
-|   |expr                             |     min|       lq|     mean|   median|       uq|      max|
-|:--|:--------------------------------|-------:|--------:|--------:|--------:|--------:|--------:|
-|1  |weightedMedian_x_w_S             | 1.00000| 1.000000| 1.000000| 1.000000| 1.000000| 1.000000|
-|2  |weightedMedian(x, w, idxs)       | 1.67019| 1.670693| 1.638956| 1.668827| 1.531007| 1.521652|
-|3  |weightedMedian(x[idxs], w[idxs]) | 1.69172| 1.698176| 1.752161| 1.704170| 1.774368| 1.815973|
+|   |expr                             |      min|       lq|     mean|   median|       uq|      max|
+|:--|:--------------------------------|--------:|--------:|--------:|--------:|--------:|--------:|
+|1  |weightedMedian_x_w_S             | 1.000000| 1.000000| 1.000000| 1.000000| 1.000000| 1.000000|
+|2  |weightedMedian(x, w, idxs)       | 1.712052| 1.689385| 1.662889| 1.692113| 1.582076| 1.712754|
+|3  |weightedMedian(x[idxs], w[idxs]) | 1.766035| 1.748228| 1.823083| 1.774380| 1.790194| 2.015478|
 
 _Figure: Benchmarking of weightedMedian_x_w_S(), weightedMedian(x, w, idxs)() and weightedMedian(x[idxs], w[idxs])() on n = 10000 data.  Outliers are displayed as crosses.  Times are in milliseconds._
 
@@ -133,8 +133,8 @@ _Figure: Benchmarking of weightedMedian_x_w_S(), weightedMedian(x, w, idxs)() an
 > w_S <- x[idxs]
 > gc()
            used  (Mb) gc trigger  (Mb) max used  (Mb)
-Ncells  5296199 282.9   10014072 534.9 10014072 534.9
-Vcells 10252735  78.3   36267018 276.7 90959857 694.0
+Ncells  5362691 286.4    7916910 422.9  7916910 422.9
+Vcells 10727006  81.9   39038428 297.9 94934136 724.3
 > stats <- microbenchmark(weightedMedian_x_w_S = weightedMedian(x_S, w = w_S, ties = "mean", na.rm = FALSE), 
 +     `weightedMedian(x, w, idxs)` = weightedMedian(x, w = w, idxs = idxs, ties = "mean", na.rm = FALSE), 
 +     `weightedMedian(x[idxs], w[idxs])` = weightedMedian(x[idxs], w = w[idxs], ties = "mean", na.rm = FALSE), 
@@ -147,16 +147,16 @@ _Table: Benchmarking of weightedMedian_x_w_S(), weightedMedian(x, w, idxs)() and
 
 |   |expr                             |      min|       lq|     mean|   median|       uq|      max|
 |:--|:--------------------------------|--------:|--------:|--------:|--------:|--------:|--------:|
-|1  |weightedMedian_x_w_S             | 2.839281| 2.948170| 3.007003| 2.987866| 3.008385| 4.572285|
-|2  |weightedMedian(x, w, idxs)       | 5.076841| 5.437518| 5.520403| 5.532769| 5.597500| 6.592248|
-|3  |weightedMedian(x[idxs], w[idxs]) | 5.116508| 5.646842| 5.732607| 5.720603| 5.790544| 7.935587|
+|1  |weightedMedian_x_w_S             | 2.720068| 2.735365| 2.815580| 2.746850| 2.768208| 4.629788|
+|2  |weightedMedian(x, w, idxs)       | 4.895023| 4.938561| 5.062165| 4.983714| 5.079594| 6.634633|
+|3  |weightedMedian(x[idxs], w[idxs]) | 4.984670| 5.080361| 5.375530| 5.206656| 5.393571| 8.634173|
 
 
 |   |expr                             |      min|       lq|     mean|   median|       uq|      max|
 |:--|:--------------------------------|--------:|--------:|--------:|--------:|--------:|--------:|
 |1  |weightedMedian_x_w_S             | 1.000000| 1.000000| 1.000000| 1.000000| 1.000000| 1.000000|
-|2  |weightedMedian(x, w, idxs)       | 1.788073| 1.844370| 1.835849| 1.851746| 1.860633| 1.441784|
-|3  |weightedMedian(x[idxs], w[idxs]) | 1.802043| 1.915372| 1.906419| 1.914612| 1.924802| 1.735585|
+|2  |weightedMedian(x, w, idxs)       | 1.799596| 1.805449| 1.797912| 1.814338| 1.834976| 1.433032|
+|3  |weightedMedian(x[idxs], w[idxs]) | 1.832553| 1.857288| 1.909209| 1.895501| 1.948398| 1.864918|
 
 _Figure: Benchmarking of weightedMedian_x_w_S(), weightedMedian(x, w, idxs)() and weightedMedian(x[idxs], w[idxs])() on n = 100000 data.  Outliers are displayed as crosses.  Times are in milliseconds._
 
@@ -187,7 +187,7 @@ attached base packages:
 [1] stats     graphics  grDevices utils     datasets  methods   base     
 
 other attached packages:
-[1] microbenchmark_1.4-7   matrixStats_0.60.1     ggplot2_3.3.5         
+[1] microbenchmark_1.4-7   matrixStats_0.60.0     ggplot2_3.3.5         
 [4] knitr_1.33             R.devices_2.17.0       R.utils_2.10.1        
 [7] R.oo_1.24.0            R.methodsS3_1.8.1-9001 history_0.0.1-9000    
 
@@ -213,16 +213,17 @@ loaded via a namespace (and not attached):
 [55] tabby_0.0.1-9001        AnnotationDbi_1.54.1    Biostrings_2.60.2      
 [58] compiler_4.1.1          GenomeInfoDb_1.28.1     rlang_0.4.11           
 [61] grid_4.1.1              RCurl_1.98-1.4          cwhmisc_6.6            
-[64] rappdirs_0.3.3          startup_0.15.0          labeling_0.4.2         
-[67] bitops_1.0-7            base64enc_0.1-3         boot_1.3-28            
-[70] gtable_0.3.0            DBI_1.1.1               markdown_1.1           
-[73] R6_2.5.1                lpSolveAPI_5.5.2.0-17.7 rle_0.9.2              
-[76] dplyr_1.0.7             fastmap_1.1.0           bit_4.0.4              
-[79] utf8_1.2.2              parallel_4.1.1          Rcpp_1.0.7             
-[82] vctrs_0.3.8             png_0.1-7               DEoptimR_1.0-9         
-[85] tidyselect_1.1.1        xfun_0.25               coda_0.19-4            
+[64] rstudioapi_0.13         rappdirs_0.3.3          startup_0.15.0-9000    
+[67] labeling_0.4.2          bitops_1.0-7            base64enc_0.1-3        
+[70] boot_1.3-28             gtable_0.3.0            DBI_1.1.1              
+[73] markdown_1.1            R6_2.5.1                lpSolveAPI_5.5.2.0-17.7
+[76] rle_0.9.2               dplyr_1.0.7             fastmap_1.1.0          
+[79] bit_4.0.4               utf8_1.2.2              parallel_4.1.1         
+[82] Rcpp_1.0.7              vctrs_0.3.8             png_0.1-7              
+[85] DEoptimR_1.0-9          tidyselect_1.1.1        xfun_0.25              
+[88] coda_0.19-4            
 ```
-Total processing time was 4.6 secs.
+Total processing time was 4.74 secs.
 
 
 ### Reproducibility
@@ -239,7 +240,7 @@ html <- matrixStats:::benchmark('weightedMedian_subset')
 [StackOverflow:rowProds?]: https://stackoverflow.com/questions/20198801/ "Stack Overflow: Row product of matrix and column sum of matrix"
 
 ---------------------------------------
-Copyright Dongcan Jiang. Last updated on 2021-08-25 18:39:19 (+0200 UTC). Powered by [RSP].
+Copyright Dongcan Jiang. Last updated on 2021-08-25 22:52:50 (+0200 UTC). Powered by [RSP].
 
 <script>
  var link = document.createElement('link');

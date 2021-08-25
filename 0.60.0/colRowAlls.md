@@ -63,15 +63,15 @@ This report benchmark the performance of colAlls() and rowAlls() against alterna
 > X <- data[["10x10"]]
 > gc()
           used  (Mb) gc trigger  (Mb) max used  (Mb)
-Ncells 5150533 275.1    7554717 403.5  7554717 403.5
-Vcells 9239688  70.5   31793280 242.6 60508962 461.7
+Ncells 5178000 276.6    7916910 422.9  7916910 422.9
+Vcells 9439896  72.1   33191153 253.3 53339345 407.0
 > colStats <- microbenchmark(colAlls = colAlls(X), `apply+all` = apply(X, MARGIN = 2L, FUN = all), 
 +     `colSums==n` = (colSums(X) == nrow(X)), unit = "ms")
 > X <- t(X)
 > gc()
           used  (Mb) gc trigger  (Mb) max used  (Mb)
-Ncells 5149472 275.1    7554717 403.5  7554717 403.5
-Vcells 9236837  70.5   31793280 242.6 60508962 461.7
+Ncells 5164311 275.9    7916910 422.9  7916910 422.9
+Vcells 9394591  71.7   33191153 253.3 53339345 407.0
 > rowStats <- microbenchmark(rowAlls = rowAlls(X), `apply+all` = apply(X, MARGIN = 1L, FUN = all), 
 +     `rowSums==n` = (rowSums(X) == ncol(X)), unit = "ms")
 ```
@@ -80,35 +80,35 @@ _Table: Benchmarking of colAlls(), apply+all() and colSums==n() on 10x10 data. T
 
 
 
-|   |expr       |      min|        lq|      mean|    median|        uq|      max|
-|:--|:----------|--------:|---------:|---------:|---------:|---------:|--------:|
-|1  |colAlls    | 0.002918| 0.0033565| 0.0041968| 0.0040640| 0.0044475| 0.018750|
-|3  |colSums==n | 0.006144| 0.0067145| 0.0077428| 0.0074020| 0.0080225| 0.040135|
-|2  |apply+all  | 0.031453| 0.0329830| 0.0343677| 0.0335135| 0.0342750| 0.098318|
+|   |expr       |      min|        lq|      mean|    median|       uq|      max|
+|:--|:----------|--------:|---------:|---------:|---------:|--------:|--------:|
+|1  |colAlls    | 0.002918| 0.0033165| 0.0040829| 0.0040155| 0.004426| 0.015997|
+|3  |colSums==n | 0.006390| 0.0069745| 0.0081633| 0.0076470| 0.008282| 0.041658|
+|2  |apply+all  | 0.032027| 0.0346345| 0.0360910| 0.0352475| 0.036222| 0.086653|
 
 
 |   |expr       |       min|       lq|     mean|   median|       uq|      max|
 |:--|:----------|---------:|--------:|--------:|--------:|--------:|--------:|
-|1  |colAlls    |  1.000000| 1.000000| 1.000000| 1.000000| 1.000000| 1.000000|
-|3  |colSums==n |  2.105552| 2.000447| 1.844934| 1.821358| 1.803822| 2.140533|
-|2  |apply+all  | 10.778958| 9.826605| 8.189062| 8.246432| 7.706577| 5.243627|
+|1  |colAlls    |  1.000000|  1.00000| 1.000000| 1.000000| 1.000000| 1.000000|
+|3  |colSums==n |  2.189856|  2.10297| 1.999383| 1.904371| 1.871215| 2.604113|
+|2  |apply+all  | 10.975668| 10.44309| 8.839505| 8.777861| 8.183913| 5.416828|
 
 _Table: Benchmarking of rowAlls(), apply+all() and rowSums==n() on 10x10 data (transposed). The top panel shows times in milliseconds and the bottom panel shows relative times._
 
 
 
-|   |expr       |      min|        lq|      mean|   median|        uq|      max|
-|:--|:----------|--------:|---------:|---------:|--------:|---------:|--------:|
-|1  |rowAlls    | 0.003131| 0.0034790| 0.0042836| 0.004219| 0.0045750| 0.020576|
-|3  |rowSums==n | 0.006852| 0.0074665| 0.0086175| 0.008125| 0.0087430| 0.047619|
-|2  |apply+all  | 0.031011| 0.0329180| 0.0349817| 0.033767| 0.0350575| 0.089383|
+|   |expr       |      min|        lq|      mean|    median|        uq|      max|
+|:--|:----------|--------:|---------:|---------:|---------:|---------:|--------:|
+|1  |rowAlls    | 0.002918| 0.0032065| 0.0039516| 0.0039845| 0.0042960| 0.017575|
+|3  |rowSums==n | 0.006662| 0.0073095| 0.0084375| 0.0079800| 0.0085190| 0.053558|
+|2  |apply+all  | 0.030570| 0.0324275| 0.0341682| 0.0330865| 0.0341165| 0.081091|
 
 
-|   |expr       |      min|       lq|     mean|   median|       uq|      max|
-|:--|:----------|--------:|--------:|--------:|--------:|--------:|--------:|
-|1  |rowAlls    | 1.000000| 1.000000| 1.000000| 1.000000| 1.000000| 1.000000|
-|3  |rowSums==n | 2.188438| 2.146163| 2.011771| 1.925812| 1.911038| 2.314298|
-|2  |apply+all  | 9.904503| 9.461914| 8.166497| 8.003555| 7.662841| 4.344042|
+|   |expr       |       min|        lq|     mean|   median|       uq|      max|
+|:--|:----------|---------:|---------:|--------:|--------:|--------:|--------:|
+|1  |rowAlls    |  1.000000|  1.000000| 1.000000| 1.000000| 1.000000| 1.000000|
+|3  |rowSums==n |  2.283071|  2.279588| 2.135227| 2.002761| 1.983007| 3.047397|
+|2  |apply+all  | 10.476354| 10.113052| 8.646735| 8.303802| 7.941457| 4.613997|
 
 _Figure: Benchmarking of colAlls(), apply+all() and colSums==n() on 10x10 data  as well as rowAlls(), apply+all() and rowSums==n() on the same data transposed.  Outliers are displayed as crosses.  Times are in milliseconds._
 
@@ -120,16 +120,16 @@ _Table: Benchmarking of colAlls() and rowAlls() on 10x10 data (original and tran
 
 
 
-|   |expr    |   min|     lq|    mean| median|     uq|    max|
-|:--|:-------|-----:|------:|-------:|------:|------:|------:|
-|1  |colAlls | 2.918| 3.3565| 4.19678|  4.064| 4.4475| 18.750|
-|2  |rowAlls | 3.131| 3.4790| 4.28356|  4.219| 4.5750| 20.576|
+|   |expr    |   min|     lq|    mean| median|    uq|    max|
+|:--|:-------|-----:|------:|-------:|------:|-----:|------:|
+|2  |rowAlls | 2.918| 3.2065| 3.95157| 3.9845| 4.296| 17.575|
+|1  |colAlls | 2.918| 3.3165| 4.08292| 4.0155| 4.426| 15.997|
 
 
-|   |expr    |      min|       lq|     mean|  median|       uq|      max|
-|:--|:-------|--------:|--------:|--------:|-------:|--------:|--------:|
-|1  |colAlls | 1.000000| 1.000000| 1.000000| 1.00000| 1.000000| 1.000000|
-|2  |rowAlls | 1.072995| 1.036496| 1.020678| 1.03814| 1.028668| 1.097387|
+|   |expr    | min|       lq|    mean|  median|       uq|       max|
+|:--|:-------|---:|--------:|-------:|-------:|--------:|---------:|
+|2  |rowAlls |   1| 1.000000| 1.00000| 1.00000| 1.000000| 1.0000000|
+|1  |colAlls |   1| 1.034305| 1.03324| 1.00778| 1.030261| 0.9102134|
 
 _Figure: Benchmarking of colAlls() and rowAlls() on 10x10 data (original and transposed).  Outliers are displayed as crosses. Times are in milliseconds._
 
@@ -142,16 +142,16 @@ _Figure: Benchmarking of colAlls() and rowAlls() on 10x10 data (original and tra
 ```r
 > X <- data[["100x100"]]
 > gc()
-          used (Mb) gc trigger  (Mb) max used  (Mb)
-Ncells 5148480  275    7554717 403.5  7554717 403.5
-Vcells 9043608   69   31793280 242.6 60508962 461.7
+          used  (Mb) gc trigger  (Mb) max used  (Mb)
+Ncells 5162874 275.8    7916910 422.9  7916910 422.9
+Vcells 9200790  70.2   33191153 253.3 53339345 407.0
 > colStats <- microbenchmark(colAlls = colAlls(X), `apply+all` = apply(X, MARGIN = 2L, FUN = all), 
 +     `colSums==n` = (colSums(X) == nrow(X)), unit = "ms")
 > X <- t(X)
 > gc()
           used  (Mb) gc trigger  (Mb) max used  (Mb)
-Ncells 5148474 275.0    7554717 403.5  7554717 403.5
-Vcells 9048651  69.1   31793280 242.6 60508962 461.7
+Ncells 5162868 275.8    7916910 422.9  7916910 422.9
+Vcells 9205833  70.3   33191153 253.3 53339345 407.0
 > rowStats <- microbenchmark(rowAlls = rowAlls(X), `apply+all` = apply(X, MARGIN = 1L, FUN = all), 
 +     `rowSums==n` = (rowSums(X) == ncol(X)), unit = "ms")
 ```
@@ -160,18 +160,18 @@ _Table: Benchmarking of colAlls(), apply+all() and colSums==n() on 100x100 data.
 
 
 
-|   |expr       |      min|        lq|      mean|    median|        uq|      max|
-|:--|:----------|--------:|---------:|---------:|---------:|---------:|--------:|
-|1  |colAlls    | 0.003003| 0.0037215| 0.0046176| 0.0043775| 0.0049355| 0.021854|
-|3  |colSums==n | 0.014897| 0.0162430| 0.0179133| 0.0172200| 0.0186230| 0.043087|
-|2  |apply+all  | 0.185221| 0.1932455| 0.2057807| 0.1999520| 0.2128350| 0.289380|
+|   |expr       |      min|        lq|      mean|    median|       uq|      max|
+|:--|:----------|--------:|---------:|---------:|---------:|--------:|--------:|
+|1  |colAlls    | 0.002933| 0.0038555| 0.0049758| 0.0047205| 0.005187| 0.025572|
+|3  |colSums==n | 0.015744| 0.0178695| 0.0200639| 0.0191665| 0.021673| 0.048562|
+|2  |apply+all  | 0.194001| 0.2085905| 0.2306413| 0.2294020| 0.250898| 0.341773|
 
 
-|   |expr       |       min|        lq|      mean|    median|        uq|       max|
-|:--|:----------|---------:|---------:|---------:|---------:|---------:|---------:|
-|1  |colAlls    |  1.000000|  1.000000|  1.000000|  1.000000|  1.000000|  1.000000|
-|3  |colSums==n |  4.960706|  4.364638|  3.879389|  3.933752|  3.773275|  1.971584|
-|2  |apply+all  | 61.678655| 51.926777| 44.564807| 45.677213| 43.123290| 13.241512|
+|   |expr       |       min|        lq|      mean|    median|       uq|      max|
+|:--|:----------|---------:|---------:|---------:|---------:|--------:|--------:|
+|1  |colAlls    |  1.000000|  1.000000|  1.000000|  1.000000|  1.00000|  1.00000|
+|3  |colSums==n |  5.367883|  4.634807|  4.032323|  4.060269|  4.17833|  1.89903|
+|2  |apply+all  | 66.144221| 54.102062| 46.352981| 48.596971| 48.37054| 13.36513|
 
 _Table: Benchmarking of rowAlls(), apply+all() and rowSums==n() on 100x100 data (transposed). The top panel shows times in milliseconds and the bottom panel shows relative times._
 
@@ -179,16 +179,16 @@ _Table: Benchmarking of rowAlls(), apply+all() and rowSums==n() on 100x100 data 
 
 |   |expr       |      min|        lq|      mean|    median|        uq|      max|
 |:--|:----------|--------:|---------:|---------:|---------:|---------:|--------:|
-|1  |rowAlls    | 0.007909| 0.0088315| 0.0099847| 0.0096090| 0.0104510| 0.024828|
-|3  |rowSums==n | 0.045126| 0.0469080| 0.0506294| 0.0485945| 0.0537605| 0.079351|
-|2  |apply+all  | 0.187023| 0.1894875| 0.2121799| 0.2010720| 0.2274755| 0.315524|
+|1  |rowAlls    | 0.007883| 0.0091750| 0.0103561| 0.0098445| 0.0107805| 0.025822|
+|3  |rowSums==n | 0.045572| 0.0481485| 0.0536306| 0.0524420| 0.0584220| 0.085888|
+|2  |apply+all  | 0.185799| 0.1944955| 0.2200996| 0.2165005| 0.2421380| 0.335716|
 
 
 |   |expr       |       min|        lq|      mean|    median|        uq|       max|
 |:--|:----------|---------:|---------:|---------:|---------:|---------:|---------:|
 |1  |rowAlls    |  1.000000|  1.000000|  1.000000|  1.000000|  1.000000|  1.000000|
-|3  |rowSums==n |  5.705652|  5.311442|  5.070705|  5.057186|  5.144053|  3.196029|
-|2  |apply+all  | 23.646858| 21.455868| 21.250526| 20.925383| 21.765908| 12.708394|
+|3  |rowSums==n |  5.781048|  5.247793|  5.178666|  5.327035|  5.419229|  3.326156|
+|2  |apply+all  | 23.569580| 21.198420| 21.253200| 21.992026| 22.460739| 13.001162|
 
 _Figure: Benchmarking of colAlls(), apply+all() and colSums==n() on 100x100 data  as well as rowAlls(), apply+all() and rowSums==n() on the same data transposed.  Outliers are displayed as crosses.  Times are in milliseconds._
 
@@ -200,16 +200,16 @@ _Table: Benchmarking of colAlls() and rowAlls() on 100x100 data (original and tr
 
 
 
-|   |expr    |   min|     lq|    mean| median|      uq|    max|
-|:--|:-------|-----:|------:|-------:|------:|-------:|------:|
-|1  |colAlls | 3.003| 3.7215| 4.61756| 4.3775|  4.9355| 21.854|
-|2  |rowAlls | 7.909| 8.8315| 9.98469| 9.6090| 10.4510| 24.828|
+|   |expr    |   min|     lq|     mean| median|      uq|    max|
+|:--|:-------|-----:|------:|--------:|------:|-------:|------:|
+|1  |colAlls | 2.933| 3.8555|  4.97576| 4.7205|  5.1870| 25.572|
+|2  |rowAlls | 7.883| 9.1750| 10.35607| 9.8445| 10.7805| 25.822|
 
 
-|   |expr    |    min|       lq|    mean|   median|       uq|      max|
-|:--|:-------|------:|--------:|-------:|--------:|--------:|--------:|
-|1  |colAlls | 1.0000| 1.000000| 1.00000| 1.000000| 1.000000| 1.000000|
-|2  |rowAlls | 2.6337| 2.373102| 2.16233| 2.195089| 2.117516| 1.136085|
+|   |expr    |      min|       lq|     mean|   median|       uq|      max|
+|:--|:-------|--------:|--------:|--------:|--------:|--------:|--------:|
+|1  |colAlls | 1.000000| 1.000000| 1.000000| 1.000000| 1.000000| 1.000000|
+|2  |rowAlls | 2.687692| 2.379717| 2.081304| 2.085478| 2.078369| 1.009776|
 
 _Figure: Benchmarking of colAlls() and rowAlls() on 100x100 data (original and transposed).  Outliers are displayed as crosses. Times are in milliseconds._
 
@@ -222,16 +222,16 @@ _Figure: Benchmarking of colAlls() and rowAlls() on 100x100 data (original and t
 ```r
 > X <- data[["1000x10"]]
 > gc()
-          used (Mb) gc trigger  (Mb) max used  (Mb)
-Ncells 5148690  275    7554717 403.5  7554717 403.5
-Vcells 9043957   69   31793280 242.6 60508962 461.7
+          used  (Mb) gc trigger  (Mb) max used  (Mb)
+Ncells 5163624 275.8    7916910 422.9  7916910 422.9
+Vcells 9204309  70.3   33191153 253.3 53339345 407.0
 > colStats <- microbenchmark(colAlls = colAlls(X), `apply+all` = apply(X, MARGIN = 2L, FUN = all), 
 +     `colSums==n` = (colSums(X) == nrow(X)), unit = "ms")
 > X <- t(X)
 > gc()
           used  (Mb) gc trigger  (Mb) max used  (Mb)
-Ncells 5148684 275.0    7554717 403.5  7554717 403.5
-Vcells 9049000  69.1   31793280 242.6 60508962 461.7
+Ncells 5163618 275.8    7916910 422.9  7916910 422.9
+Vcells 9209352  70.3   33191153 253.3 53339345 407.0
 > rowStats <- microbenchmark(rowAlls = rowAlls(X), `apply+all` = apply(X, MARGIN = 1L, FUN = all), 
 +     `rowSums==n` = (rowSums(X) == ncol(X)), unit = "ms")
 ```
@@ -242,16 +242,16 @@ _Table: Benchmarking of colAlls(), apply+all() and colSums==n() on 1000x10 data.
 
 |   |expr       |      min|        lq|      mean|    median|        uq|      max|
 |:--|:----------|--------:|---------:|---------:|---------:|---------:|--------:|
-|1  |colAlls    | 0.002817| 0.0034285| 0.0042329| 0.0040995| 0.0046200| 0.016481|
-|3  |colSums==n | 0.016044| 0.0181735| 0.0190806| 0.0187910| 0.0199965| 0.036544|
-|2  |apply+all  | 0.098271| 0.1040460| 0.1137659| 0.1115025| 0.1206515| 0.187787|
+|1  |colAlls    | 0.002853| 0.0035520| 0.0043257| 0.0041145| 0.0047010| 0.017084|
+|3  |colSums==n | 0.017351| 0.0194050| 0.0207849| 0.0201080| 0.0213510| 0.038464|
+|2  |apply+all  | 0.106709| 0.1122245| 0.1243842| 0.1259220| 0.1296695| 0.202048|
 
 
-|   |expr       |       min|        lq|      mean|   median|        uq|       max|
-|:--|:----------|---------:|---------:|---------:|--------:|---------:|---------:|
-|1  |colAlls    |  1.000000|  1.000000|  1.000000|  1.00000|  1.000000|  1.000000|
-|3  |colSums==n |  5.695421|  5.300715|  4.507666|  4.58373|  4.328247|  2.217341|
-|2  |apply+all  | 34.884984| 30.347382| 26.876461| 27.19905| 26.115043| 11.394151|
+|   |expr       |       min|        lq|      mean|    median|       uq|       max|
+|:--|:----------|---------:|---------:|---------:|---------:|--------:|---------:|
+|1  |colAlls    |  1.000000|  1.000000|  1.000000|  1.000000|  1.00000|  1.000000|
+|3  |colSums==n |  6.081668|  5.463119|  4.805017|  4.887107|  4.54180|  2.251463|
+|2  |apply+all  | 37.402383| 31.594735| 28.754896| 30.604448| 27.58339| 11.826738|
 
 _Table: Benchmarking of rowAlls(), apply+all() and rowSums==n() on 1000x10 data (transposed). The top panel shows times in milliseconds and the bottom panel shows relative times._
 
@@ -259,16 +259,16 @@ _Table: Benchmarking of rowAlls(), apply+all() and rowSums==n() on 1000x10 data 
 
 |   |expr       |      min|        lq|      mean|    median|        uq|      max|
 |:--|:----------|--------:|---------:|---------:|---------:|---------:|--------:|
-|1  |rowAlls    | 0.007922| 0.0094025| 0.0102764| 0.0099355| 0.0110375| 0.023926|
-|2  |apply+all  | 0.093410| 0.1003720| 0.1087573| 0.1023900| 0.1186135| 0.187298|
-|3  |rowSums==n | 0.163078| 0.1747950| 0.1826127| 0.1759425| 0.1881325| 0.220207|
+|1  |rowAlls    | 0.008121| 0.0095930| 0.0124842| 0.0107530| 0.0134965| 0.025416|
+|2  |apply+all  | 0.096428| 0.1016105| 0.1246757| 0.1089125| 0.1305395| 0.250102|
+|3  |rowSums==n | 0.167941| 0.1753380| 0.1949295| 0.1870195| 0.2103385| 0.262439|
 
 
-|   |expr       |      min|       lq|     mean|   median|       uq|     max|
-|:--|:----------|--------:|--------:|--------:|--------:|--------:|-------:|
-|1  |rowAlls    |  1.00000|  1.00000|  1.00000|  1.00000|  1.00000| 1.00000|
-|2  |apply+all  | 11.79121| 10.67503| 10.58318| 10.30547| 10.74641| 7.82822|
-|3  |rowSums==n | 20.58546| 18.59027| 17.77005| 17.70847| 17.04485| 9.20367|
+|   |expr       |      min|       lq|      mean|   median|       uq|       max|
+|:--|:----------|--------:|--------:|---------:|--------:|--------:|---------:|
+|1  |rowAlls    |  1.00000|  1.00000|  1.000000|  1.00000|  1.00000|  1.000000|
+|2  |apply+all  | 11.87391| 10.59215|  9.986648| 10.12857|  9.67210|  9.840337|
+|3  |rowSums==n | 20.67984| 18.27770| 15.614044| 17.39231| 15.58467| 10.325740|
 
 _Figure: Benchmarking of colAlls(), apply+all() and colSums==n() on 1000x10 data  as well as rowAlls(), apply+all() and rowSums==n() on the same data transposed.  Outliers are displayed as crosses.  Times are in milliseconds._
 
@@ -280,16 +280,16 @@ _Table: Benchmarking of colAlls() and rowAlls() on 1000x10 data (original and tr
 
 
 
-|   |expr    |   min|     lq|     mean| median|      uq|    max|
-|:--|:-------|-----:|------:|--------:|------:|-------:|------:|
-|1  |colAlls | 2.817| 3.4285|  4.23292| 4.0995|  4.6200| 16.481|
-|2  |rowAlls | 7.922| 9.4025| 10.27643| 9.9355| 11.0375| 23.926|
+|   |expr    |   min|    lq|     mean|  median|      uq|    max|
+|:--|:-------|-----:|-----:|--------:|-------:|-------:|------:|
+|1  |colAlls | 2.853| 3.552|  4.32567|  4.1145|  4.7010| 17.084|
+|2  |rowAlls | 8.121| 9.593| 12.48424| 10.7530| 13.4965| 25.416|
 
 
-|   |expr    |      min|       lq|    mean|   median|       uq|      max|
-|:--|:-------|--------:|--------:|-------:|--------:|--------:|--------:|
-|1  |colAlls | 1.000000| 1.000000| 1.00000| 1.000000| 1.000000| 1.000000|
-|2  |rowAlls | 2.812212| 2.742453| 2.42774| 2.423588| 2.389069| 1.451732|
+|   |expr    |      min|       lq|     mean|  median|       uq|      max|
+|:--|:-------|--------:|--------:|--------:|-------:|--------:|--------:|
+|1  |colAlls | 1.000000| 1.000000| 1.000000| 1.00000| 1.000000| 1.000000|
+|2  |rowAlls | 2.846477| 2.700732| 2.886082| 2.61344| 2.870985| 1.487708|
 
 _Figure: Benchmarking of colAlls() and rowAlls() on 1000x10 data (original and transposed).  Outliers are displayed as crosses. Times are in milliseconds._
 
@@ -303,15 +303,15 @@ _Figure: Benchmarking of colAlls() and rowAlls() on 1000x10 data (original and t
 > X <- data[["10x1000"]]
 > gc()
           used  (Mb) gc trigger  (Mb) max used  (Mb)
-Ncells 5148900 275.0    7554717 403.5  7554717 403.5
-Vcells 9044691  69.1   31793280 242.6 60508962 461.7
+Ncells 5163838 275.8    7916910 422.9  7916910 422.9
+Vcells 9205044  70.3   33191153 253.3 53339345 407.0
 > colStats <- microbenchmark(colAlls = colAlls(X), `apply+all` = apply(X, MARGIN = 2L, FUN = all), 
 +     `colSums==n` = (colSums(X) == nrow(X)), unit = "ms")
 > X <- t(X)
 > gc()
           used  (Mb) gc trigger  (Mb) max used  (Mb)
-Ncells 5148894 275.0    7554717 403.5  7554717 403.5
-Vcells 9049734  69.1   31793280 242.6 60508962 461.7
+Ncells 5163832 275.8    7916910 422.9  7916910 422.9
+Vcells 9210087  70.3   33191153 253.3 53339345 407.0
 > rowStats <- microbenchmark(rowAlls = rowAlls(X), `apply+all` = apply(X, MARGIN = 1L, FUN = all), 
 +     `rowSums==n` = (rowSums(X) == ncol(X)), unit = "ms")
 ```
@@ -322,33 +322,33 @@ _Table: Benchmarking of colAlls(), apply+all() and colSums==n() on 10x1000 data.
 
 |   |expr       |      min|        lq|      mean|    median|        uq|      max|
 |:--|:----------|--------:|---------:|---------:|---------:|---------:|--------:|
-|1  |colAlls    | 0.010314| 0.0116700| 0.0136652| 0.0129505| 0.0141205| 0.033960|
-|3  |colSums==n | 0.013467| 0.0142745| 0.0164115| 0.0155565| 0.0168685| 0.036367|
-|2  |apply+all  | 0.863742| 0.8992895| 0.9806520| 0.9105520| 1.0401035| 1.370018|
+|1  |colAlls    | 0.009408| 0.0118870| 0.0140773| 0.0128055| 0.0148165| 0.035856|
+|3  |colSums==n | 0.013396| 0.0143105| 0.0170158| 0.0159030| 0.0184325| 0.039828|
+|2  |apply+all  | 0.858664| 0.8714435| 1.0008542| 0.9282170| 1.0878390| 1.492602|
 
 
 |   |expr       |       min|        lq|      mean|    median|        uq|       max|
 |:--|:----------|---------:|---------:|---------:|---------:|---------:|---------:|
 |1  |colAlls    |  1.000000|  1.000000|  1.000000|  1.000000|  1.000000|  1.000000|
-|3  |colSums==n |  1.305701|  1.223179|  1.200972|  1.201228|  1.194611|  1.070877|
-|2  |apply+all  | 83.744619| 77.059940| 71.762618| 70.310181| 73.659113| 40.342108|
+|3  |colSums==n |  1.423895|  1.203878|  1.208737|  1.241888|  1.244052|  1.110776|
+|2  |apply+all  | 91.269558| 73.310633| 71.096930| 72.485807| 73.420781| 41.627677|
 
 _Table: Benchmarking of rowAlls(), apply+all() and rowSums==n() on 10x1000 data (transposed). The top panel shows times in milliseconds and the bottom panel shows relative times._
 
 
 
-|   |expr       |      min|       lq|      mean|    median|        uq|      max|
-|:--|:----------|--------:|--------:|---------:|---------:|---------:|--------:|
-|1  |rowAlls    | 0.013420| 0.016358| 0.0192083| 0.0180665| 0.0197855| 0.055622|
-|3  |rowSums==n | 0.028342| 0.030043| 0.0328776| 0.0312045| 0.0343005| 0.056918|
-|2  |apply+all  | 0.862426| 0.899349| 0.9762671| 0.9195950| 1.0517430| 1.370981|
+|   |expr       |      min|        lq|      mean|    median|        uq|      max|
+|:--|:----------|--------:|---------:|---------:|---------:|---------:|--------:|
+|1  |rowAlls    | 0.014285| 0.0186485| 0.0226967| 0.0210525| 0.0241460| 0.067273|
+|3  |rowSums==n | 0.028580| 0.0311925| 0.0361926| 0.0347380| 0.0387395| 0.062046|
+|2  |apply+all  | 0.859912| 0.8921850| 1.0275150| 0.9945310| 1.1099595| 1.457040|
 
 
-|   |expr       |       min|        lq|      mean|    median|        uq|      max|
-|:--|:----------|---------:|---------:|---------:|---------:|---------:|--------:|
-|1  |rowAlls    |  1.000000|  1.000000|  1.000000|  1.000000|  1.000000|  1.00000|
-|3  |rowSums==n |  2.111922|  1.836594|  1.711632|  1.727202|  1.733618|  1.02330|
-|2  |apply+all  | 64.264233| 54.979154| 50.825141| 50.900562| 53.157262| 24.64818|
+|   |expr       |      min|        lq|     mean|    median|        uq|        max|
+|:--|:----------|--------:|---------:|--------:|---------:|---------:|----------:|
+|1  |rowAlls    |  1.00000|  1.000000|  1.00000|  1.000000|  1.000000|  1.0000000|
+|3  |rowSums==n |  2.00070|  1.672655|  1.59462|  1.650065|  1.604386|  0.9223017|
+|2  |apply+all  | 60.19685| 47.842186| 45.27160| 47.240518| 45.968670| 21.6586149|
 
 _Figure: Benchmarking of colAlls(), apply+all() and colSums==n() on 10x1000 data  as well as rowAlls(), apply+all() and rowSums==n() on the same data transposed.  Outliers are displayed as crosses.  Times are in milliseconds._
 
@@ -360,16 +360,16 @@ _Table: Benchmarking of colAlls() and rowAlls() on 10x1000 data (original and tr
 
 
 
-|   |expr    |    min|     lq|     mean|  median|      uq|    max|
-|:--|:-------|------:|------:|--------:|-------:|-------:|------:|
-|1  |colAlls | 10.314| 11.670| 13.66522| 12.9505| 14.1205| 33.960|
-|2  |rowAlls | 13.420| 16.358| 19.20835| 18.0665| 19.7855| 55.622|
+|   |expr    |    min|      lq|     mean|  median|      uq|    max|
+|:--|:-------|------:|-------:|--------:|-------:|-------:|------:|
+|1  |colAlls |  9.408| 11.8870| 14.07732| 12.8055| 14.8165| 35.856|
+|2  |rowAlls | 14.285| 18.6485| 22.69668| 21.0525| 24.1460| 67.273|
 
 
-|   |expr    |      min|       lq|     mean|   median|      uq|      max|
-|:--|:-------|--------:|--------:|--------:|--------:|-------:|--------:|
-|1  |colAlls | 1.000000| 1.000000| 1.000000| 1.000000| 1.00000| 1.000000|
-|2  |rowAlls | 1.301144| 1.401714| 1.405638| 1.395043| 1.40119| 1.637868|
+|   |expr    |      min|       lq|     mean|  median|      uq|      max|
+|:--|:-------|--------:|--------:|--------:|-------:|-------:|--------:|
+|1  |colAlls | 1.000000| 1.000000| 1.000000| 1.00000| 1.00000| 1.000000|
+|2  |rowAlls | 1.518389| 1.568815| 1.612287| 1.64402| 1.62967| 1.876199|
 
 _Figure: Benchmarking of colAlls() and rowAlls() on 10x1000 data (original and transposed).  Outliers are displayed as crosses. Times are in milliseconds._
 
@@ -383,15 +383,15 @@ _Figure: Benchmarking of colAlls() and rowAlls() on 10x1000 data (original and t
 > X <- data[["100x1000"]]
 > gc()
           used  (Mb) gc trigger  (Mb) max used  (Mb)
-Ncells 5149118 275.0    7554717 403.5  7554717 403.5
-Vcells 9045223  69.1   31793280 242.6 60508962 461.7
+Ncells 5164047 275.8    7916910 422.9  7916910 422.9
+Vcells 9205557  70.3   33191153 253.3 53339345 407.0
 > colStats <- microbenchmark(colAlls = colAlls(X), `apply+all` = apply(X, MARGIN = 2L, FUN = all), 
 +     `colSums==n` = (colSums(X) == nrow(X)), unit = "ms")
 > X <- t(X)
 > gc()
           used  (Mb) gc trigger  (Mb) max used  (Mb)
-Ncells 5149100 275.0    7554717 403.5  7554717 403.5
-Vcells 9095246  69.4   31793280 242.6 60508962 461.7
+Ncells 5164035 275.8    7916910 422.9  7916910 422.9
+Vcells 9255590  70.7   33191153 253.3 53339345 407.0
 > rowStats <- microbenchmark(rowAlls = rowAlls(X), `apply+all` = apply(X, MARGIN = 1L, FUN = all), 
 +     `rowSums==n` = (rowSums(X) == ncol(X)), unit = "ms")
 ```
@@ -400,35 +400,35 @@ _Table: Benchmarking of colAlls(), apply+all() and colSums==n() on 100x1000 data
 
 
 
-|   |expr       |      min|        lq|      mean|    median|        uq|      max|
-|:--|:----------|--------:|---------:|---------:|---------:|---------:|--------:|
-|1  |colAlls    | 0.011964| 0.0130605| 0.0158352| 0.0146500| 0.0173355| 0.035828|
-|3  |colSums==n | 0.081069| 0.0820550| 0.0886361| 0.0838885| 0.0894805| 0.138382|
-|2  |apply+all  | 1.368872| 1.4064470| 1.6080554| 1.4597955| 1.8375235| 2.466868|
+|   |expr       |      min|        lq|      mean|    median|       uq|      max|
+|:--|:----------|--------:|---------:|---------:|---------:|--------:|--------:|
+|1  |colAlls    | 0.011273| 0.0132780| 0.0157696| 0.0147690| 0.016544| 0.040375|
+|3  |colSums==n | 0.081055| 0.0825335| 0.0932127| 0.0871075| 0.095800| 0.193283|
+|2  |apply+all  | 1.347308| 1.3854070| 1.5263032| 1.3998815| 1.611465| 2.504890|
 
 
-|   |expr       |        min|         lq|     mean|    median|         uq|       max|
-|:--|:----------|----------:|----------:|--------:|---------:|----------:|---------:|
-|1  |colAlls    |   1.000000|   1.000000|   1.0000|  1.000000|   1.000000|  1.000000|
-|3  |colSums==n |   6.776078|   6.282684|   5.5974|  5.726178|   5.161691|  3.862398|
-|2  |apply+all  | 114.415914| 107.687072| 101.5492| 99.644744| 105.997721| 68.853076|
+|   |expr       |        min|         lq|     mean|    median|        uq|       max|
+|:--|:----------|----------:|----------:|--------:|---------:|---------:|---------:|
+|1  |colAlls    |   1.000000|   1.000000|  1.00000|  1.000000|  1.000000|  1.000000|
+|3  |colSums==n |   7.190189|   6.215808|  5.91093|  5.897996|  5.790619|  4.787195|
+|2  |apply+all  | 119.516367| 104.338530| 96.78800| 94.785124| 97.404769| 62.040619|
 
 _Table: Benchmarking of rowAlls(), apply+all() and rowSums==n() on 100x1000 data (transposed). The top panel shows times in milliseconds and the bottom panel shows relative times._
 
 
 
-|   |expr       |      min|        lq|      mean|    median|       uq|      max|
-|:--|:----------|--------:|---------:|---------:|---------:|--------:|--------:|
-|1  |rowAlls    | 0.036898| 0.0388985| 0.0438769| 0.0410200| 0.044618| 0.096445|
-|3  |rowSums==n | 0.224336| 0.2256480| 0.2498376| 0.2271085| 0.256642| 0.382797|
-|2  |apply+all  | 1.365460| 1.3785360| 1.4710983| 1.4104955| 1.434454| 2.434237|
+|   |expr       |      min|        lq|      mean|    median|        uq|      max|
+|:--|:----------|--------:|---------:|---------:|---------:|---------:|--------:|
+|1  |rowAlls    | 0.036765| 0.0383855| 0.0443383| 0.0407925| 0.0451965| 0.108958|
+|3  |rowSums==n | 0.224237| 0.2258145| 0.2543480| 0.2275955| 0.2768195| 0.412877|
+|2  |apply+all  | 1.350284| 1.3681070| 1.4806585| 1.3936725| 1.5038460| 2.501126|
 
 
-|   |expr       |       min|        lq|      mean|    median|        uq|      max|
-|:--|:----------|---------:|---------:|---------:|---------:|---------:|--------:|
-|1  |rowAlls    |  1.000000|  1.000000|  1.000000|  1.000000|  1.000000|  1.00000|
-|3  |rowSums==n |  6.079896|  5.800943|  5.694061|  5.536531|  5.751983|  3.96907|
-|2  |apply+all  | 37.006342| 35.439310| 33.527870| 34.385556| 32.149659| 25.23964|
+|   |expr       |       min|        lq|      mean|    median|        uq|       max|
+|:--|:----------|---------:|---------:|---------:|---------:|---------:|---------:|
+|1  |rowAlls    |  1.000000|  1.000000|  1.000000|  1.000000|  1.000000|  1.000000|
+|3  |rowSums==n |  6.099198|  5.882807|  5.736533|  5.579347|  6.124799|  3.789322|
+|2  |apply+all  | 36.727431| 35.641245| 33.394586| 34.164920| 33.273506| 22.954955|
 
 _Figure: Benchmarking of colAlls(), apply+all() and colSums==n() on 100x1000 data  as well as rowAlls(), apply+all() and rowSums==n() on the same data transposed.  Outliers are displayed as crosses.  Times are in milliseconds._
 
@@ -440,16 +440,16 @@ _Table: Benchmarking of colAlls() and rowAlls() on 100x1000 data (original and t
 
 
 
-|   |expr    |    min|      lq|     mean| median|      uq|    max|
-|:--|:-------|------:|-------:|--------:|------:|-------:|------:|
-|1  |colAlls | 11.964| 13.0605| 15.83523|  14.65| 17.3355| 35.828|
-|2  |rowAlls | 36.898| 38.8985| 43.87688|  41.02| 44.6180| 96.445|
+|   |expr    |    min|      lq|     mean|  median|      uq|     max|
+|:--|:-------|------:|-------:|--------:|-------:|-------:|-------:|
+|1  |colAlls | 11.273| 13.2780| 15.76955| 14.7690| 16.5440|  40.375|
+|2  |rowAlls | 36.765| 38.3855| 44.33828| 40.7925| 45.1965| 108.958|
 
 
-|   |expr    |      min|       lq|    mean| median|       uq|      max|
-|:--|:-------|--------:|--------:|-------:|------:|--------:|--------:|
-|1  |colAlls | 1.000000| 1.000000| 1.00000|    1.0| 1.000000| 1.000000|
-|2  |rowAlls | 3.084086| 2.978332| 2.77084|    2.8| 2.573794| 2.691889|
+|   |expr    |      min|      lq|     mean|   median|       uq|     max|
+|:--|:-------|--------:|-------:|--------:|--------:|--------:|-------:|
+|1  |colAlls | 1.000000| 1.00000| 1.000000| 1.000000| 1.000000| 1.00000|
+|2  |rowAlls | 3.261332| 2.89091| 2.811639| 2.762035| 2.731897| 2.69865|
 
 _Figure: Benchmarking of colAlls() and rowAlls() on 100x1000 data (original and transposed).  Outliers are displayed as crosses. Times are in milliseconds._
 
@@ -463,15 +463,15 @@ _Figure: Benchmarking of colAlls() and rowAlls() on 100x1000 data (original and 
 > X <- data[["1000x100"]]
 > gc()
           used  (Mb) gc trigger  (Mb) max used  (Mb)
-Ncells 5149322 275.1    7554717 403.5  7554717 403.5
-Vcells 9045871  69.1   31793280 242.6 60508962 461.7
+Ncells 5164253 275.9    7916910 422.9  7916910 422.9
+Vcells 9206220  70.3   33191153 253.3 53339345 407.0
 > colStats <- microbenchmark(colAlls = colAlls(X), `apply+all` = apply(X, MARGIN = 2L, FUN = all), 
 +     `colSums==n` = (colSums(X) == nrow(X)), unit = "ms")
 > X <- t(X)
 > gc()
           used  (Mb) gc trigger  (Mb) max used  (Mb)
-Ncells 5149304 275.1    7554717 403.5  7554717 403.5
-Vcells 9095894  69.4   31793280 242.6 60508962 461.7
+Ncells 5164241 275.9    7916910 422.9  7916910 422.9
+Vcells 9256253  70.7   33191153 253.3 53339345 407.0
 > rowStats <- microbenchmark(rowAlls = rowAlls(X), `apply+all` = apply(X, MARGIN = 1L, FUN = all), 
 +     `rowSums==n` = (rowSums(X) == ncol(X)), unit = "ms")
 ```
@@ -482,33 +482,33 @@ _Table: Benchmarking of colAlls(), apply+all() and colSums==n() on 1000x100 data
 
 |   |expr       |      min|        lq|      mean|    median|        uq|      max|
 |:--|:----------|--------:|---------:|---------:|---------:|---------:|--------:|
-|1  |colAlls    | 0.003046| 0.0037545| 0.0049458| 0.0044750| 0.0054060| 0.023367|
-|3  |colSums==n | 0.083081| 0.0843195| 0.0968749| 0.0875120| 0.1087330| 0.163231|
-|2  |apply+all  | 0.627474| 0.6329915| 0.7170966| 0.6644215| 0.7969595| 1.063117|
+|1  |colAlls    | 0.002754| 0.0036585| 0.0047849| 0.0042275| 0.0053800| 0.022840|
+|3  |colSums==n | 0.082708| 0.0839100| 0.0986052| 0.0910275| 0.1086585| 0.168674|
+|2  |apply+all  | 0.624761| 0.6350055| 0.7332335| 0.6904375| 0.7986980| 1.114454|
 
 
-|   |expr       |       min|        lq|     mean|    median|        uq|       max|
-|:--|:----------|---------:|---------:|--------:|---------:|---------:|---------:|
-|1  |colAlls    |   1.00000|   1.00000|   1.0000|   1.00000|   1.00000|  1.000000|
-|3  |colSums==n |  27.27544|  22.45825|  19.5873|  19.55575|  20.11339|  6.985535|
-|2  |apply+all  | 205.99934| 168.59542| 144.9910| 148.47408| 147.42129| 45.496512|
+|   |expr       |       min|        lq|      mean|    median|        uq|       max|
+|:--|:----------|---------:|---------:|---------:|---------:|---------:|---------:|
+|1  |colAlls    |   1.00000|   1.00000|   1.00000|   1.00000|   1.00000|  1.000000|
+|3  |colSums==n |  30.03195|  22.93563|  20.60766|  21.53223|  20.19675|  7.385026|
+|2  |apply+all  | 226.85585| 173.56991| 153.23969| 163.32052| 148.45688| 48.793958|
 
 _Table: Benchmarking of rowAlls(), apply+all() and rowSums==n() on 1000x100 data (transposed). The top panel shows times in milliseconds and the bottom panel shows relative times._
 
 
 
-|   |expr       |      min|       lq|      mean|    median|        uq|      max|
-|:--|:----------|--------:|--------:|---------:|---------:|---------:|--------:|
-|1  |rowAlls    | 0.041174| 0.042177| 0.0474964| 0.0434830| 0.0523475| 0.079514|
-|3  |rowSums==n | 0.324240| 0.325178| 0.3620055| 0.3266855| 0.3951480| 0.519060|
-|2  |apply+all  | 0.636505| 0.640815| 0.6994189| 0.6455085| 0.7184415| 1.119608|
+|   |expr       |      min|        lq|      mean|    median|        uq|      max|
+|:--|:----------|--------:|---------:|---------:|---------:|---------:|--------:|
+|1  |rowAlls    | 0.040793| 0.0419205| 0.0475654| 0.0435670| 0.0531445| 0.082903|
+|3  |rowSums==n | 0.324184| 0.3255680| 0.3669326| 0.3330525| 0.4075610| 0.550911|
+|2  |apply+all  | 0.628847| 0.6355465| 0.7025238| 0.6401720| 0.7288735| 1.145160|
 
 
-|   |expr       |       min|        lq|      mean|    median|        uq|       max|
-|:--|:----------|---------:|---------:|---------:|---------:|---------:|---------:|
-|1  |rowAlls    |  1.000000|  1.000000|  1.000000|  1.000000|  1.000000|  1.000000|
-|3  |rowSums==n |  7.874873|  7.709842|  7.621741|  7.512948|  7.548555|  6.527907|
-|2  |apply+all  | 15.458906| 15.193470| 14.725715| 14.845077| 13.724466| 14.080640|
+|   |expr       |      min|       lq|      mean|    median|        uq|       max|
+|:--|:----------|--------:|--------:|---------:|---------:|---------:|---------:|
+|1  |rowAlls    |  1.00000|  1.00000|  1.000000|  1.000000|  1.000000|  1.000000|
+|3  |rowSums==n |  7.94705|  7.76632|  7.714273|  7.644605|  7.668921|  6.645248|
+|2  |apply+all  | 15.41556| 15.16076| 14.769633| 14.693966| 13.714938| 13.813252|
 
 _Figure: Benchmarking of colAlls(), apply+all() and colSums==n() on 1000x100 data  as well as rowAlls(), apply+all() and rowSums==n() on the same data transposed.  Outliers are displayed as crosses.  Times are in milliseconds._
 
@@ -520,16 +520,16 @@ _Table: Benchmarking of colAlls() and rowAlls() on 1000x100 data (original and t
 
 
 
-|   |expr    |    min|      lq|     mean| median|      uq|    max|
-|:--|:-------|------:|-------:|--------:|------:|-------:|------:|
-|1  |colAlls |  3.046|  3.7545|  4.94580|  4.475|  5.4060| 23.367|
-|2  |rowAlls | 41.174| 42.1770| 47.49643| 43.483| 52.3475| 79.514|
+|   |expr    |    min|      lq|     mean|  median|      uq|    max|
+|:--|:-------|------:|-------:|--------:|-------:|-------:|------:|
+|1  |colAlls |  2.754|  3.6585|  4.78488|  4.2275|  5.3800| 22.840|
+|2  |rowAlls | 40.793| 41.9205| 47.56542| 43.5670| 53.1445| 82.903|
 
 
-|   |expr    |     min|       lq|     mean|   median|       uq|      max|
-|:--|:-------|-------:|--------:|--------:|--------:|--------:|--------:|
-|1  |colAlls |  1.0000|  1.00000| 1.000000| 1.000000| 1.000000| 1.000000|
-|2  |rowAlls | 13.5174| 11.23372| 9.603387| 9.716871| 9.683222| 3.402833|
+|   |expr    |      min|       lq|     mean|   median|      uq|      max|
+|:--|:-------|--------:|--------:|--------:|--------:|-------:|--------:|
+|1  |colAlls |  1.00000|  1.00000| 1.000000|  1.00000| 1.00000| 1.000000|
+|2  |rowAlls | 14.81227| 11.45838| 9.940776| 10.30562| 9.87816| 3.629729|
 
 _Figure: Benchmarking of colAlls() and rowAlls() on 1000x100 data (original and transposed).  Outliers are displayed as crosses. Times are in milliseconds._
 
@@ -564,7 +564,7 @@ attached base packages:
 other attached packages:
 [1] microbenchmark_1.4-7   matrixStats_0.60.0     ggplot2_3.3.5         
 [4] knitr_1.33             R.devices_2.17.0       R.utils_2.10.1        
-[7] R.oo_1.24.0            R.methodsS3_1.8.1-9001
+[7] R.oo_1.24.0            R.methodsS3_1.8.1-9001 history_0.0.1-9000    
 
 loaded via a namespace (and not attached):
  [1] Biobase_2.52.0          httr_1.4.2              splines_4.1.1          
@@ -583,20 +583,22 @@ loaded via a namespace (and not attached):
 [40] magrittr_2.0.1          crayon_1.4.1            statnet.common_4.5.0   
 [43] memoise_2.0.0           laeken_0.5.1            fansi_0.5.0            
 [46] R.cache_0.15.0          MASS_7.3-54             R.rsp_0.44.0           
-[49] tools_4.1.1             lifecycle_1.0.0         S4Vectors_0.30.0       
-[52] trust_0.1-8             munsell_0.5.0           AnnotationDbi_1.54.1   
-[55] Biostrings_2.60.2       compiler_4.1.1          GenomeInfoDb_1.28.1    
-[58] rlang_0.4.11            grid_4.1.1              RCurl_1.98-1.4         
-[61] cwhmisc_6.6             rappdirs_0.3.3          labeling_0.4.2         
-[64] bitops_1.0-7            base64enc_0.1-3         boot_1.3-28            
-[67] gtable_0.3.0            DBI_1.1.1               markdown_1.1           
-[70] R6_2.5.1                lpSolveAPI_5.5.2.0-17.7 rle_0.9.2              
-[73] dplyr_1.0.7             fastmap_1.1.0           bit_4.0.4              
-[76] utf8_1.2.2              parallel_4.1.1          Rcpp_1.0.7             
-[79] vctrs_0.3.8             png_0.1-7               DEoptimR_1.0-9         
-[82] tidyselect_1.1.1        xfun_0.25               coda_0.19-4            
+[49] progressr_0.8.0         tools_4.1.1             lifecycle_1.0.0        
+[52] S4Vectors_0.30.0        trust_0.1-8             munsell_0.5.0          
+[55] tabby_0.0.1-9001        AnnotationDbi_1.54.1    Biostrings_2.60.2      
+[58] compiler_4.1.1          GenomeInfoDb_1.28.1     rlang_0.4.11           
+[61] grid_4.1.1              RCurl_1.98-1.4          cwhmisc_6.6            
+[64] rstudioapi_0.13         rappdirs_0.3.3          startup_0.15.0         
+[67] labeling_0.4.2          bitops_1.0-7            base64enc_0.1-3        
+[70] boot_1.3-28             gtable_0.3.0            DBI_1.1.1              
+[73] markdown_1.1            R6_2.5.1                lpSolveAPI_5.5.2.0-17.7
+[76] rle_0.9.2               dplyr_1.0.7             fastmap_1.1.0          
+[79] bit_4.0.4               utf8_1.2.2              parallel_4.1.1         
+[82] Rcpp_1.0.7              vctrs_0.3.8             png_0.1-7              
+[85] DEoptimR_1.0-9          tidyselect_1.1.1        xfun_0.25              
+[88] coda_0.19-4            
 ```
-Total processing time was 11.34 secs.
+Total processing time was 11.79 secs.
 
 
 ### Reproducibility
@@ -613,7 +615,7 @@ html <- matrixStats:::benchmark('colAlls')
 [StackOverflow:rowProds?]: https://stackoverflow.com/questions/20198801/ "Stack Overflow: Row product of matrix and column sum of matrix"
 
 ---------------------------------------
-Copyright Henrik Bengtsson. Last updated on 2021-08-25 17:34:32 (+0200 UTC). Powered by [RSP].
+Copyright Henrik Bengtsson. Last updated on 2021-08-25 22:10:11 (+0200 UTC). Powered by [RSP].
 
 <script>
  var link = document.createElement('link');

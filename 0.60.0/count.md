@@ -55,8 +55,8 @@ This report benchmark the performance of count() against alternative methods.
 > x <- data[["n = 1000"]]
 > gc()
            used  (Mb) gc trigger  (Mb) max used  (Mb)
-Ncells  5274240 281.7   10014072 534.9 10014072 534.9
-Vcells 37031976 282.6   56374685 430.2 52456991 400.3
+Ncells  5340860 285.3    7916910 422.9  7916910 422.9
+Vcells 37506549 286.2   57645510 439.9 53339345 407.0
 > stats <- microbenchmark(count = count(x, value), `sum(x == value)` = sum(x == value), unit = "ms")
 ```
 
@@ -64,16 +64,16 @@ _Table: Benchmarking of count() and sum(x == value)() on integer+n = 1000 data. 
 
 
 
-|   |expr            |      min|       lq|      mean|    median|        uq|      max|
-|:--|:---------------|--------:|--------:|---------:|---------:|---------:|--------:|
-|1  |count           | 0.003118| 0.003270| 0.0036467| 0.0034130| 0.0035765| 0.023930|
-|2  |sum(x == value) | 0.004409| 0.004524| 0.0047229| 0.0046015| 0.0047110| 0.013909|
+|   |expr            |      min|        lq|      mean|    median|        uq|      max|
+|:--|:---------------|--------:|---------:|---------:|---------:|---------:|--------:|
+|1  |count           | 0.003120| 0.0032720| 0.0036362| 0.0034155| 0.0035445| 0.023587|
+|2  |sum(x == value) | 0.004364| 0.0044715| 0.0046578| 0.0045425| 0.0046575| 0.013465|
 
 
-|   |expr            |      min|       lq|     mean|   median|      uq|       max|
-|:--|:---------------|--------:|--------:|--------:|--------:|-------:|---------:|
-|1  |count           | 1.000000| 1.000000| 1.000000| 1.000000| 1.00000| 1.0000000|
-|2  |sum(x == value) | 1.414047| 1.383486| 1.295104| 1.348227| 1.31721| 0.5812369|
+|   |expr            |      min|       lq|     mean|   median|       uq|       max|
+|:--|:---------------|--------:|--------:|--------:|--------:|--------:|---------:|
+|1  |count           | 1.000000| 1.000000| 1.000000| 1.000000| 1.000000| 1.0000000|
+|2  |sum(x == value) | 1.398718| 1.366595| 1.280956| 1.329966| 1.314008| 0.5708653|
 
 _Figure: Benchmarking of count() and sum(x == value)() on integer+n = 1000 data.  Outliers are displayed as crosses.  Times are in milliseconds._
 
@@ -85,8 +85,8 @@ _Figure: Benchmarking of count() and sum(x == value)() on integer+n = 1000 data.
 > x <- data[["n = 10000"]]
 > gc()
            used  (Mb) gc trigger  (Mb) max used  (Mb)
-Ncells  5272004 281.6   10014072 534.9 10014072 534.9
-Vcells 15396708 117.5   56374685 430.2 52456991 400.3
+Ncells  5338627 285.2    7916910 422.9  7916910 422.9
+Vcells 15871293 121.1   57645510 439.9 53339345 407.0
 > stats <- microbenchmark(count = count(x, value), `sum(x == value)` = sum(x == value), unit = "ms")
 ```
 
@@ -94,16 +94,16 @@ _Table: Benchmarking of count() and sum(x == value)() on integer+n = 10000 data.
 
 
 
-|   |expr            |      min|        lq|      mean|    median|       uq|      max|
-|:--|:---------------|--------:|---------:|---------:|---------:|--------:|--------:|
-|1  |count           | 0.003139| 0.0033745| 0.0040944| 0.0036925| 0.004353| 0.023147|
-|2  |sum(x == value) | 0.038632| 0.0390080| 0.0395326| 0.0392225| 0.039380| 0.050216|
+|   |expr            |      min|        lq|      mean|   median|        uq|      max|
+|:--|:---------------|--------:|---------:|---------:|--------:|---------:|--------:|
+|1  |count           | 0.003210| 0.0034375| 0.0043672| 0.003896| 0.0042845| 0.024847|
+|2  |sum(x == value) | 0.038699| 0.0389085| 0.0401716| 0.039055| 0.0392785| 0.057316|
 
 
-|   |expr            |     min|       lq|     mean|   median|       uq|      max|
-|:--|:---------------|-------:|--------:|--------:|--------:|--------:|--------:|
-|1  |count           |  1.0000|  1.00000| 1.000000|  1.00000| 1.000000| 1.000000|
-|2  |sum(x == value) | 12.3071| 11.55964| 9.655377| 10.62221| 9.046634| 2.169439|
+|   |expr            |      min|       lq|     mean|   median|       uq|      max|
+|:--|:---------------|--------:|--------:|--------:|--------:|--------:|--------:|
+|1  |count           |  1.00000|  1.00000| 1.000000|  1.00000| 1.000000| 1.000000|
+|2  |sum(x == value) | 12.05576| 11.31884| 9.198576| 10.02438| 9.167581| 2.306757|
 
 _Figure: Benchmarking of count() and sum(x == value)() on integer+n = 10000 data.  Outliers are displayed as crosses.  Times are in milliseconds._
 
@@ -115,8 +115,8 @@ _Figure: Benchmarking of count() and sum(x == value)() on integer+n = 10000 data
 > x <- data[["n = 100000"]]
 > gc()
            used  (Mb) gc trigger  (Mb) max used  (Mb)
-Ncells  5272067 281.6   10014072 534.9 10014072 534.9
-Vcells 15396750 117.5   56374685 430.2 52456991 400.3
+Ncells  5338690 285.2    7916910 422.9  7916910 422.9
+Vcells 15871335 121.1   57645510 439.9 53339345 407.0
 > stats <- microbenchmark(count = count(x, value), `sum(x == value)` = sum(x == value), unit = "ms")
 ```
 
@@ -124,16 +124,16 @@ _Table: Benchmarking of count() and sum(x == value)() on integer+n = 100000 data
 
 
 
-|   |expr            |      min|        lq|      mean|    median|        uq|      max|
-|:--|:---------------|--------:|---------:|---------:|---------:|---------:|--------:|
-|1  |count           | 0.002263| 0.0028120| 0.0044868| 0.0037615| 0.0046915| 0.039745|
-|2  |sum(x == value) | 0.303394| 0.3393075| 0.3923716| 0.4079745| 0.4396080| 0.484555|
+|   |expr            |      min|        lq|      mean|    median|        uq|     max|
+|:--|:---------------|--------:|---------:|---------:|---------:|---------:|-------:|
+|1  |count           | 0.002458| 0.0028375| 0.0039312| 0.0036480| 0.0044205| 0.02412|
+|2  |sum(x == value) | 0.293736| 0.3039170| 0.3315467| 0.3196135| 0.3615910| 0.40162|
 
 
-|   |expr            |      min|       lq|     mean|   median|       uq|     max|
-|:--|:---------------|--------:|--------:|--------:|--------:|--------:|-------:|
-|1  |count           |   1.0000|   1.0000|  1.00000|   1.0000|  1.00000|  1.0000|
-|2  |sum(x == value) | 134.0672| 120.6641| 87.45098| 108.4606| 93.70308| 12.1916|
+|   |expr            |     min|       lq|     mean|   median|       uq|      max|
+|:--|:---------------|-------:|--------:|--------:|--------:|--------:|--------:|
+|1  |count           |   1.000|   1.0000|  1.00000|  1.00000|  1.00000|  1.00000|
+|2  |sum(x == value) | 119.502| 107.1073| 84.33685| 87.61335| 81.79867| 16.65091|
 
 _Figure: Benchmarking of count() and sum(x == value)() on integer+n = 100000 data.  Outliers are displayed as crosses.  Times are in milliseconds._
 
@@ -145,8 +145,8 @@ _Figure: Benchmarking of count() and sum(x == value)() on integer+n = 100000 dat
 > x <- data[["n = 1000000"]]
 > gc()
            used  (Mb) gc trigger  (Mb) max used  (Mb)
-Ncells  5272130 281.6   10014072 534.9 10014072 534.9
-Vcells 15397305 117.5   56374685 430.2 52456991 400.3
+Ncells  5338753 285.2    7916910 422.9  7916910 422.9
+Vcells 15871890 121.1   57645510 439.9 53339345 407.0
 > stats <- microbenchmark(count = count(x, value), `sum(x == value)` = sum(x == value), unit = "ms")
 ```
 
@@ -154,16 +154,16 @@ _Table: Benchmarking of count() and sum(x == value)() on integer+n = 1000000 dat
 
 
 
-|   |expr            |      min|        lq|      mean|   median|       uq|       max|
-|:--|:---------------|--------:|---------:|---------:|--------:|--------:|---------:|
-|1  |count           | 0.001953| 0.0023275| 0.0098711| 0.008268| 0.015683|  0.032828|
-|2  |sum(x == value) | 3.414393| 3.5548685| 3.9045726| 3.611772| 3.749227| 22.020614|
+|   |expr            |      min|        lq|      mean|    median|        uq|      max|
+|:--|:---------------|--------:|---------:|---------:|---------:|---------:|--------:|
+|1  |count           | 0.001994| 0.0024515| 0.0110779| 0.0095445| 0.0191595|  0.03722|
+|2  |sum(x == value) | 3.525143| 3.5498585| 4.0291448| 3.6116965| 3.9686680| 21.94083|
 
 
-|   |expr            |      min|       lq|     mean|   median|       uq|      max|
-|:--|:---------------|--------:|--------:|--------:|--------:|--------:|--------:|
-|1  |count           |    1.000|    1.000|   1.0000|   1.0000|   1.0000|   1.0000|
-|2  |sum(x == value) | 1748.281| 1527.333| 395.5552| 436.8374| 239.0632| 670.7876|
+|   |expr            |      min|       lq|     mean|  median|       uq|      max|
+|:--|:---------------|--------:|--------:|--------:|-------:|--------:|--------:|
+|1  |count           |    1.000|    1.000|   1.0000|   1.000|   1.0000|   1.0000|
+|2  |sum(x == value) | 1767.875| 1448.035| 363.7111| 378.406| 207.1384| 589.4904|
 
 _Figure: Benchmarking of count() and sum(x == value)() on integer+n = 1000000 data.  Outliers are displayed as crosses.  Times are in milliseconds._
 
@@ -175,8 +175,8 @@ _Figure: Benchmarking of count() and sum(x == value)() on integer+n = 1000000 da
 > x <- data[["n = 10000000"]]
 > gc()
            used  (Mb) gc trigger  (Mb) max used  (Mb)
-Ncells  5272193 281.6   10014072 534.9 10014072 534.9
-Vcells 15397347 117.5   56374685 430.2 55899660 426.5
+Ncells  5338816 285.2    7916910 422.9  7916910 422.9
+Vcells 15871932 121.1   57645510 439.9 57374079 437.8
 > stats <- microbenchmark(count = count(x, value), `sum(x == value)` = sum(x == value), unit = "ms")
 ```
 
@@ -184,16 +184,16 @@ _Table: Benchmarking of count() and sum(x == value)() on integer+n = 10000000 da
 
 
 
-|   |expr            |       min|         lq|       mean|     median|         uq|       max|
-|:--|:---------------|---------:|----------:|----------:|----------:|----------:|---------:|
-|1  |count           |  0.001992|  0.0024975|  0.0147433|  0.0037145|  0.0276605|  0.088028|
-|2  |sum(x == value) | 34.627272| 36.7752280| 39.6182004| 37.1369675| 37.6467285| 58.548260|
+|   |expr            |       min|        lq|       mean|    median|         uq|        max|
+|:--|:---------------|---------:|---------:|----------:|---------:|----------:|----------:|
+|1  |count           |  0.001994|  0.002471|  0.0145752|  0.003806|  0.0284725|   0.033778|
+|2  |sum(x == value) | 35.821991| 36.044041| 43.5296509| 36.527983| 37.7079685| 448.575286|
 
 
-|   |expr            |      min|       lq|     mean|   median|       uq|      max|
-|:--|:---------------|--------:|--------:|--------:|--------:|--------:|--------:|
-|1  |count           |     1.00|     1.00|    1.000|    1.000|    1.000|   1.0000|
-|2  |sum(x == value) | 17383.17| 14724.82| 2687.206| 9997.838| 1361.028| 665.1095|
+|   |expr            |      min|       lq|     mean|   median|       uq|     max|
+|:--|:---------------|--------:|--------:|--------:|--------:|--------:|-------:|
+|1  |count           |     1.00|     1.00|    1.000|    1.000|    1.000|     1.0|
+|2  |sum(x == value) | 17964.89| 14586.82| 2986.562| 9597.473| 1324.365| 13280.1|
 
 _Figure: Benchmarking of count() and sum(x == value)() on integer+n = 10000000 data.  Outliers are displayed as crosses.  Times are in milliseconds._
 
@@ -238,8 +238,8 @@ _Figure: Benchmarking of count() and sum(x == value)() on integer+n = 10000000 d
 > x <- data[["n = 1000"]]
 > gc()
            used  (Mb) gc trigger  (Mb) max used  (Mb)
-Ncells  5272256 281.6   10014072 534.9 10014072 534.9
-Vcells 20953219 159.9   56374685 430.2 55899660 426.5
+Ncells  5338879 285.2    7916910 422.9  7916910 422.9
+Vcells 21427804 163.5   57645510 439.9 57374079 437.8
 > stats <- microbenchmark(count = count(x, value), `sum(x == value)` = sum(x == value), unit = "ms")
 ```
 
@@ -249,14 +249,14 @@ _Table: Benchmarking of count() and sum(x == value)() on double+n = 1000 data. T
 
 |   |expr            |      min|       lq|      mean|   median|        uq|      max|
 |:--|:---------------|--------:|--------:|---------:|--------:|---------:|--------:|
-|1  |count           | 0.003071| 0.003191| 0.0036095| 0.003400| 0.0035095| 0.024533|
-|2  |sum(x == value) | 0.003962| 0.004108| 0.0043238| 0.004187| 0.0043090| 0.013816|
+|1  |count           | 0.003213| 0.003367| 0.0038157| 0.003506| 0.0036730| 0.028853|
+|2  |sum(x == value) | 0.003962| 0.004087| 0.0044005| 0.004177| 0.0043135| 0.014167|
 
 
-|   |expr            |      min|       lq|     mean|   median|      uq|       max|
-|:--|:---------------|--------:|--------:|--------:|--------:|-------:|---------:|
-|1  |count           | 1.000000| 1.000000| 1.000000| 1.000000| 1.00000| 1.0000000|
-|2  |sum(x == value) | 1.290134| 1.287371| 1.197915| 1.231471| 1.22781| 0.5631598|
+|   |expr            |      min|      lq|     mean|   median|       uq|       max|
+|:--|:---------------|--------:|-------:|--------:|--------:|--------:|---------:|
+|1  |count           | 1.000000| 1.00000| 1.000000| 1.000000| 1.000000| 1.0000000|
+|2  |sum(x == value) | 1.233116| 1.21384| 1.153242| 1.191386| 1.174381| 0.4910061|
 
 _Figure: Benchmarking of count() and sum(x == value)() on double+n = 1000 data.  Outliers are displayed as crosses.  Times are in milliseconds._
 
@@ -268,8 +268,8 @@ _Figure: Benchmarking of count() and sum(x == value)() on double+n = 1000 data. 
 > x <- data[["n = 10000"]]
 > gc()
            used  (Mb) gc trigger  (Mb) max used  (Mb)
-Ncells  5272319 281.6   10014072 534.9 10014072 534.9
-Vcells 20953260 159.9   56374685 430.2 55899660 426.5
+Ncells  5338942 285.2    7916910 422.9  7916910 422.9
+Vcells 21427845 163.5   57645510 439.9 57374079 437.8
 > stats <- microbenchmark(count = count(x, value), `sum(x == value)` = sum(x == value), unit = "ms")
 ```
 
@@ -279,14 +279,14 @@ _Table: Benchmarking of count() and sum(x == value)() on double+n = 10000 data. 
 
 |   |expr            |      min|        lq|      mean|    median|       uq|      max|
 |:--|:---------------|--------:|---------:|---------:|---------:|--------:|--------:|
-|1  |count           | 0.003125| 0.0033260| 0.0040976| 0.0036220| 0.004325| 0.028168|
-|2  |sum(x == value) | 0.034449| 0.0348505| 0.0353574| 0.0350945| 0.035276| 0.046724|
+|1  |count           | 0.003353| 0.0035805| 0.0044607| 0.0039775| 0.004524| 0.041792|
+|2  |sum(x == value) | 0.034566| 0.0348665| 0.0362590| 0.0362600| 0.036475| 0.049126|
 
 
-|   |expr            |      min|      lq|    mean|  median|       uq|      max|
-|:--|:---------------|--------:|-------:|-------:|-------:|--------:|--------:|
-|1  |count           |  1.00000|  1.0000| 1.00000| 1.00000| 1.000000| 1.000000|
-|2  |sum(x == value) | 11.02368| 10.4782| 8.62872| 9.68926| 8.156301| 1.658762|
+|   |expr            |      min|       lq|     mean|   median|       uq|      max|
+|:--|:---------------|--------:|--------:|--------:|--------:|--------:|--------:|
+|1  |count           |  1.00000| 1.000000| 1.000000| 1.000000| 1.000000| 1.000000|
+|2  |sum(x == value) | 10.30898| 9.737886| 8.128577| 9.116279| 8.062555| 1.175488|
 
 _Figure: Benchmarking of count() and sum(x == value)() on double+n = 10000 data.  Outliers are displayed as crosses.  Times are in milliseconds._
 
@@ -298,8 +298,8 @@ _Figure: Benchmarking of count() and sum(x == value)() on double+n = 10000 data.
 > x <- data[["n = 100000"]]
 > gc()
            used  (Mb) gc trigger  (Mb) max used  (Mb)
-Ncells  5272382 281.6   10014072 534.9 10014072 534.9
-Vcells 20953584 159.9   56374685 430.2 55899660 426.5
+Ncells  5339005 285.2    7916910 422.9  7916910 422.9
+Vcells 21428169 163.5   57645510 439.9 57374079 437.8
 > stats <- microbenchmark(count = count(x, value), `sum(x == value)` = sum(x == value), unit = "ms")
 ```
 
@@ -307,16 +307,16 @@ _Table: Benchmarking of count() and sum(x == value)() on double+n = 100000 data.
 
 
 
-|   |expr            |      min|        lq|      mean|    median|        uq|      max|
-|:--|:---------------|--------:|---------:|---------:|---------:|---------:|--------:|
-|1  |count           | 0.002403| 0.0028275| 0.0040434| 0.0035590| 0.0046065| 0.023956|
-|2  |sum(x == value) | 0.279619| 0.3045800| 0.3559442| 0.3501445| 0.4059805| 0.449880|
+|   |expr            |      min|       lq|      mean|   median|        uq|      max|
+|:--|:---------------|--------:|--------:|---------:|--------:|---------:|--------:|
+|1  |count           | 0.002589| 0.003010| 0.0041296| 0.003672| 0.0046585| 0.024336|
+|2  |sum(x == value) | 0.262221| 0.271943| 0.3024479| 0.299344| 0.3333360| 0.369890|
 
 
-|   |expr            |      min|       lq|     mean|   median|      uq|      max|
-|:--|:---------------|--------:|--------:|--------:|--------:|-------:|--------:|
-|1  |count           |   1.0000|   1.0000|  1.00000|  1.00000|  1.0000|  1.00000|
-|2  |sum(x == value) | 116.3625| 107.7206| 88.03156| 98.38283| 88.1321| 18.77943|
+|   |expr            |      min|       lq|     mean|  median|       uq|      max|
+|:--|:---------------|--------:|--------:|--------:|-------:|--------:|--------:|
+|1  |count           |   1.0000|  1.00000|  1.00000|  1.0000|  1.00000|  1.00000|
+|2  |sum(x == value) | 101.2827| 90.34651| 73.23974| 81.5207| 71.55436| 15.19929|
 
 _Figure: Benchmarking of count() and sum(x == value)() on double+n = 100000 data.  Outliers are displayed as crosses.  Times are in milliseconds._
 
@@ -328,8 +328,8 @@ _Figure: Benchmarking of count() and sum(x == value)() on double+n = 100000 data
 > x <- data[["n = 1000000"]]
 > gc()
            used  (Mb) gc trigger  (Mb) max used  (Mb)
-Ncells  5272445 281.6   10014072 534.9 10014072 534.9
-Vcells 20953955 159.9   56374685 430.2 55899660 426.5
+Ncells  5339068 285.2    7916910 422.9  7916910 422.9
+Vcells 21428541 163.5   57645510 439.9 57374079 437.8
 > stats <- microbenchmark(count = count(x, value), `sum(x == value)` = sum(x == value), unit = "ms")
 ```
 
@@ -337,16 +337,16 @@ _Table: Benchmarking of count() and sum(x == value)() on double+n = 1000000 data
 
 
 
-|   |expr            |      min|        lq|      mean|   median|        uq|       max|
-|:--|:---------------|--------:|---------:|---------:|--------:|---------:|---------:|
-|1  |count           | 0.001925| 0.0023275| 0.0101983| 0.009331| 0.0173095|  0.034838|
-|2  |sum(x == value) | 3.203372| 3.4179615| 3.7580135| 3.466082| 3.7748140| 18.754039|
+|   |expr            |      min|       lq|      mean|   median|       uq|       max|
+|:--|:---------------|--------:|--------:|---------:|--------:|--------:|---------:|
+|1  |count           | 0.001974| 0.002463| 0.0101218| 0.009207| 0.016290|  0.033455|
+|2  |sum(x == value) | 3.327507| 3.421146| 3.9162957| 3.604121| 4.058308| 19.164505|
 
 
 |   |expr            |      min|       lq|     mean|   median|       uq|      max|
 |:--|:---------------|--------:|--------:|--------:|--------:|--------:|--------:|
 |1  |count           |    1.000|    1.000|   1.0000|   1.0000|   1.0000|   1.0000|
-|2  |sum(x == value) | 1664.089| 1468.512| 368.4927| 371.4587| 218.0776| 538.3213|
+|2  |sum(x == value) | 1685.667| 1389.016| 386.9173| 391.4544| 249.1288| 572.8443|
 
 _Figure: Benchmarking of count() and sum(x == value)() on double+n = 1000000 data.  Outliers are displayed as crosses.  Times are in milliseconds._
 
@@ -358,8 +358,8 @@ _Figure: Benchmarking of count() and sum(x == value)() on double+n = 1000000 dat
 > x <- data[["n = 10000000"]]
 > gc()
            used  (Mb) gc trigger  (Mb) max used  (Mb)
-Ncells  5272508 281.6   10014072 534.9 10014072 534.9
-Vcells 20953997 159.9   56374685 430.2 55956209 427.0
+Ncells  5339131 285.2    7916910 422.9  7916910 422.9
+Vcells 21428583 163.5   57645510 439.9 57430649 438.2
 > stats <- microbenchmark(count = count(x, value), `sum(x == value)` = sum(x == value), unit = "ms")
 ```
 
@@ -367,16 +367,16 @@ _Table: Benchmarking of count() and sum(x == value)() on double+n = 10000000 dat
 
 
 
-|   |expr            |       min|        lq|       mean|     median|        uq|       max|
-|:--|:---------------|---------:|---------:|----------:|----------:|---------:|---------:|
-|1  |count           |  0.002007|  0.002486|  0.0137447|  0.0038345|  0.026847|  0.034247|
-|2  |sum(x == value) | 32.953386| 33.892199| 37.2655222| 34.2938075| 34.918139| 57.909918|
+|   |expr            |       min|         lq|      mean|     median|        uq|       max|
+|:--|:---------------|---------:|----------:|---------:|----------:|---------:|---------:|
+|1  |count           |  0.001941|  0.0024535|  0.013511|  0.0037645|  0.025913|  0.031865|
+|2  |sum(x == value) | 32.971714| 33.0920835| 37.258351| 33.4237675| 35.454502| 66.968885|
 
 
-|   |expr            |      min|       lq|     mean|   median|       uq|      max|
-|:--|:---------------|--------:|--------:|--------:|--------:|--------:|--------:|
-|1  |count           |     1.00|     1.00|    1.000|    1.000|    1.000|    1.000|
-|2  |sum(x == value) | 16419.23| 13633.23| 2711.271| 8943.489| 1300.635| 1690.949|
+|   |expr            |      min|      lq|     mean|   median|       uq|      max|
+|:--|:---------------|--------:|-------:|--------:|--------:|--------:|--------:|
+|1  |count           |     1.00|     1.0|    1.000|    1.000|    1.000|    1.000|
+|2  |sum(x == value) | 16986.97| 13487.7| 2757.623| 8878.674| 1368.213| 2101.644|
 
 _Figure: Benchmarking of count() and sum(x == value)() on double+n = 10000000 data.  Outliers are displayed as crosses.  Times are in milliseconds._
 
@@ -408,7 +408,7 @@ attached base packages:
 [1] stats     graphics  grDevices utils     datasets  methods   base     
 
 other attached packages:
-[1] microbenchmark_1.4-7   matrixStats_0.60.1     ggplot2_3.3.5         
+[1] microbenchmark_1.4-7   matrixStats_0.60.0     ggplot2_3.3.5         
 [4] knitr_1.33             R.devices_2.17.0       R.utils_2.10.1        
 [7] R.oo_1.24.0            R.methodsS3_1.8.1-9001 history_0.0.1-9000    
 
@@ -434,16 +434,17 @@ loaded via a namespace (and not attached):
 [55] tabby_0.0.1-9001        AnnotationDbi_1.54.1    Biostrings_2.60.2      
 [58] compiler_4.1.1          GenomeInfoDb_1.28.1     rlang_0.4.11           
 [61] grid_4.1.1              RCurl_1.98-1.4          cwhmisc_6.6            
-[64] rappdirs_0.3.3          startup_0.15.0          labeling_0.4.2         
-[67] bitops_1.0-7            base64enc_0.1-3         boot_1.3-28            
-[70] gtable_0.3.0            DBI_1.1.1               markdown_1.1           
-[73] R6_2.5.1                lpSolveAPI_5.5.2.0-17.7 rle_0.9.2              
-[76] dplyr_1.0.7             fastmap_1.1.0           bit_4.0.4              
-[79] utf8_1.2.2              parallel_4.1.1          Rcpp_1.0.7             
-[82] vctrs_0.3.8             png_0.1-7               DEoptimR_1.0-9         
-[85] tidyselect_1.1.1        xfun_0.25               coda_0.19-4            
+[64] rstudioapi_0.13         rappdirs_0.3.3          startup_0.15.0-9000    
+[67] labeling_0.4.2          bitops_1.0-7            base64enc_0.1-3        
+[70] boot_1.3-28             gtable_0.3.0            DBI_1.1.1              
+[73] markdown_1.1            R6_2.5.1                lpSolveAPI_5.5.2.0-17.7
+[76] rle_0.9.2               dplyr_1.0.7             fastmap_1.1.0          
+[79] bit_4.0.4               utf8_1.2.2              parallel_4.1.1         
+[82] Rcpp_1.0.7              vctrs_0.3.8             png_0.1-7              
+[85] DEoptimR_1.0-9          tidyselect_1.1.1        xfun_0.25              
+[88] coda_0.19-4            
 ```
-Total processing time was 22.11 secs.
+Total processing time was 23.11 secs.
 
 
 ### Reproducibility
@@ -460,7 +461,7 @@ html <- matrixStats:::benchmark('count')
 [StackOverflow:rowProds?]: https://stackoverflow.com/questions/20198801/ "Stack Overflow: Row product of matrix and column sum of matrix"
 
 ---------------------------------------
-Copyright Henrik Bengtsson. Last updated on 2021-08-25 18:20:57 (+0200 UTC). Powered by [RSP].
+Copyright Henrik Bengtsson. Last updated on 2021-08-25 22:34:41 (+0200 UTC). Powered by [RSP].
 
 <script>
  var link = document.createElement('link');

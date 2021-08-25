@@ -64,8 +64,8 @@ as below
 > x <- data[["n = 1000"]]
 > gc()
            used  (Mb) gc trigger  (Mb) max used  (Mb)
-Ncells  5141016 274.6    7554717 403.5  7554717 403.5
-Vcells 36079187 275.3   62096248 473.8 60508962 461.7
+Ncells  5163671 275.8    7916910 422.9  7916910 422.9
+Vcells 36206829 276.3   64826470 494.6 53339345 407.0
 > stats <- microbenchmark(anyMissing = anyMissing(x), anyNA = anyNA(x), any_is.na = any_is.na(x), unit = "ms")
 ```
 
@@ -75,16 +75,16 @@ _Table: Benchmarking of anyMissing(), anyNA() and any_is.na() on integer+n = 100
 
 |   |expr       |      min|        lq|      mean|    median|        uq|      max|
 |:--|:----------|--------:|---------:|---------:|---------:|---------:|--------:|
-|2  |anyNA      | 0.000932| 0.0009525| 0.0010318| 0.0009590| 0.0009630| 0.007838|
-|1  |anyMissing | 0.001580| 0.0016495| 0.0018018| 0.0017275| 0.0017710| 0.009327|
-|3  |any_is.na  | 0.003187| 0.0032840| 0.0034622| 0.0033505| 0.0034375| 0.010593|
+|2  |anyNA      | 0.000972| 0.0009930| 0.0010744| 0.0009990| 0.0010035| 0.008498|
+|1  |anyMissing | 0.001612| 0.0016695| 0.0018263| 0.0017375| 0.0018010| 0.009970|
+|3  |any_is.na  | 0.003324| 0.0034300| 0.0035909| 0.0035045| 0.0035825| 0.010350|
 
 
 |   |expr       |      min|       lq|     mean|   median|       uq|      max|
 |:--|:----------|--------:|--------:|--------:|--------:|--------:|--------:|
 |2  |anyNA      | 1.000000| 1.000000| 1.000000| 1.000000| 1.000000| 1.000000|
-|1  |anyMissing | 1.695279| 1.731758| 1.746252| 1.801356| 1.839045| 1.189972|
-|3  |any_is.na  | 3.419528| 3.447769| 3.355463| 3.493743| 3.569574| 1.351493|
+|1  |anyMissing | 1.658436| 1.681269| 1.699766| 1.739239| 1.794719| 1.173217|
+|3  |any_is.na  | 3.419753| 3.454179| 3.342126| 3.508008| 3.570005| 1.217934|
 
 _Figure: Benchmarking of anyMissing(), anyNA() and any_is.na() on integer+n = 1000 data.  Outliers are displayed as crosses.  Times are in milliseconds._
 
@@ -96,8 +96,8 @@ _Figure: Benchmarking of anyMissing(), anyNA() and any_is.na() on integer+n = 10
 > x <- data[["n = 10000"]]
 > gc()
            used  (Mb) gc trigger  (Mb) max used  (Mb)
-Ncells  5138697 274.5    7554717 403.5  7554717 403.5
-Vcells 14462896 110.4   49676999 379.1 60508962 461.7
+Ncells  5148952 275.0    7916910 422.9  7916910 422.9
+Vcells 14530232 110.9   51861176 395.7 53339345 407.0
 > stats <- microbenchmark(anyMissing = anyMissing(x), anyNA = anyNA(x), any_is.na = any_is.na(x), unit = "ms")
 ```
 
@@ -105,18 +105,18 @@ _Table: Benchmarking of anyMissing(), anyNA() and any_is.na() on integer+n = 100
 
 
 
-|   |expr       |      min|        lq|      mean|    median|        uq|      max|
-|:--|:----------|--------:|---------:|---------:|---------:|---------:|--------:|
-|2  |anyNA      | 0.008215| 0.0082560| 0.0084587| 0.0083575| 0.0086220| 0.009859|
-|1  |anyMissing | 0.009090| 0.0093215| 0.0096898| 0.0095680| 0.0098200| 0.019653|
-|3  |any_is.na  | 0.022686| 0.0230555| 0.0241736| 0.0237540| 0.0240565| 0.043329|
+|   |expr       |      min|       lq|      mean|    median|       uq|      max|
+|:--|:----------|--------:|--------:|---------:|---------:|--------:|--------:|
+|2  |anyNA      | 0.007916| 0.008230| 0.0082227| 0.0082540| 0.008288| 0.009485|
+|1  |anyMissing | 0.008685| 0.009058| 0.0092577| 0.0091685| 0.009296| 0.018353|
+|3  |any_is.na  | 0.021791| 0.022941| 0.0236603| 0.0230715| 0.023256| 0.037433|
 
 
 |   |expr       |      min|       lq|     mean|   median|       uq|      max|
 |:--|:----------|--------:|--------:|--------:|--------:|--------:|--------:|
 |2  |anyNA      | 1.000000| 1.000000| 1.000000| 1.000000| 1.000000| 1.000000|
-|1  |anyMissing | 1.106513| 1.129058| 1.145540| 1.144840| 1.138947| 1.993407|
-|3  |any_is.na  | 2.761534| 2.792575| 2.857825| 2.842237| 2.790130| 4.394868|
+|1  |anyMissing | 1.097145| 1.100607| 1.125864| 1.110795| 1.121622| 1.934950|
+|3  |any_is.na  | 2.752779| 2.787485| 2.877425| 2.795190| 2.805985| 3.946547|
 
 _Figure: Benchmarking of anyMissing(), anyNA() and any_is.na() on integer+n = 10000 data.  Outliers are displayed as crosses.  Times are in milliseconds._
 
@@ -128,8 +128,8 @@ _Figure: Benchmarking of anyMissing(), anyNA() and any_is.na() on integer+n = 10
 > x <- data[["n = 100000"]]
 > gc()
            used  (Mb) gc trigger  (Mb) max used  (Mb)
-Ncells  5138769 274.5    7554717 403.5  7554717 403.5
-Vcells 14463456 110.4   49676999 379.1 60508962 461.7
+Ncells  5149024 275.0    7916910 422.9  7916910 422.9
+Vcells 14530792 110.9   51861176 395.7 53339345 407.0
 > stats <- microbenchmark(anyMissing = anyMissing(x), anyNA = anyNA(x), any_is.na = any_is.na(x), unit = "ms")
 ```
 
@@ -137,18 +137,18 @@ _Table: Benchmarking of anyMissing(), anyNA() and any_is.na() on integer+n = 100
 
 
 
-|   |expr       |      min|        lq|      mean|    median|        uq|      max|
-|:--|:----------|--------:|---------:|---------:|---------:|---------:|--------:|
-|1  |anyMissing | 0.066023| 0.0666535| 0.0702758| 0.0686415| 0.0710525| 0.093471|
-|2  |anyNA      | 0.064970| 0.0671620| 0.0708709| 0.0694480| 0.0746080| 0.095391|
-|3  |any_is.na  | 0.178035| 0.1838700| 0.1950726| 0.1897075| 0.2040080| 0.239236|
+|   |expr       |      min|        lq|      mean|   median|        uq|      max|
+|:--|:----------|--------:|---------:|---------:|--------:|---------:|--------:|
+|1  |anyMissing | 0.061841| 0.0640520| 0.0681089| 0.066161| 0.0692500| 0.089427|
+|2  |anyNA      | 0.061046| 0.0629745| 0.0685628| 0.067154| 0.0719905| 0.093012|
+|3  |any_is.na  | 0.166982| 0.1773790| 0.1887365| 0.183707| 0.1999245| 0.232223|
 
 
-|   |expr       |      min|       lq|     mean|   median|       uq|      max|
-|:--|:----------|--------:|--------:|--------:|--------:|--------:|--------:|
-|1  |anyMissing | 1.000000| 1.000000| 1.000000| 1.000000| 1.000000| 1.000000|
-|2  |anyNA      | 0.984051| 1.007629| 1.008469| 1.011750| 1.050040| 1.020541|
-|3  |any_is.na  | 2.696560| 2.758595| 2.775816| 2.763743| 2.871229| 2.559468|
+|   |expr       |       min|        lq|     mean|   median|       uq|      max|
+|:--|:----------|---------:|---------:|--------:|--------:|--------:|--------:|
+|1  |anyMissing | 1.0000000| 1.0000000| 1.000000| 1.000000| 1.000000| 1.000000|
+|2  |anyNA      | 0.9871445| 0.9831777| 1.006664| 1.015009| 1.039574| 1.040089|
+|3  |any_is.na  | 2.7001827| 2.7692968| 2.771099| 2.776666| 2.886996| 2.596788|
 
 _Figure: Benchmarking of anyMissing(), anyNA() and any_is.na() on integer+n = 100000 data.  Outliers are displayed as crosses.  Times are in milliseconds._
 
@@ -160,8 +160,8 @@ _Figure: Benchmarking of anyMissing(), anyNA() and any_is.na() on integer+n = 10
 > x <- data[["n = 1000000"]]
 > gc()
            used  (Mb) gc trigger  (Mb) max used  (Mb)
-Ncells  5138841 274.5    7554717 403.5  7554717 403.5
-Vcells 14463505 110.4   49676999 379.1 60508962 461.7
+Ncells  5149096 275.0    7916910 422.9  7916910 422.9
+Vcells 14530841 110.9   51861176 395.7 53339345 407.0
 > stats <- microbenchmark(anyMissing = anyMissing(x), anyNA = anyNA(x), any_is.na = any_is.na(x), unit = "ms")
 ```
 
@@ -169,18 +169,18 @@ _Table: Benchmarking of anyMissing(), anyNA() and any_is.na() on integer+n = 100
 
 
 
-|   |expr       |      min|       lq|      mean|    median|        uq|       max|
-|:--|:----------|--------:|--------:|---------:|---------:|---------:|---------:|
-|2  |anyNA      | 0.514275| 0.518547| 0.5642649| 0.5440435| 0.5807950|  0.924993|
-|1  |anyMissing | 0.515185| 0.518091| 0.5692186| 0.5444945| 0.5859165|  0.937705|
-|3  |any_is.na  | 1.465245| 1.928379| 2.5035786| 2.6341605| 2.6686555| 15.123326|
+|   |expr       |      min|        lq|      mean|   median|        uq|       max|
+|:--|:----------|--------:|---------:|---------:|--------:|---------:|---------:|
+|1  |anyMissing | 0.515029| 0.5219540| 0.5792179| 0.553552| 0.5985170|  0.951800|
+|2  |anyNA      | 0.514339| 0.5227355| 0.5769336| 0.561902| 0.6034585|  0.940549|
+|3  |any_is.na  | 1.521723| 2.6115725| 2.6934416| 2.670834| 2.7072815| 16.097313|
 
 
-|   |expr       |      min|        lq|     mean|   median|       uq|       max|
-|:--|:----------|--------:|---------:|--------:|--------:|--------:|---------:|
-|2  |anyNA      | 1.000000| 1.0000000| 1.000000| 1.000000| 1.000000|  1.000000|
-|1  |anyMissing | 1.001769| 0.9991206| 1.008779| 1.000829| 1.008818|  1.013743|
-|3  |any_is.na  | 2.849147| 3.7188124| 4.436885| 4.841820| 4.594832| 16.349665|
+|   |expr       |       min|       lq|      mean|   median|       uq|        max|
+|:--|:----------|---------:|--------:|---------:|--------:|--------:|----------:|
+|1  |anyMissing | 1.0000000| 1.000000| 1.0000000| 1.000000| 1.000000|  1.0000000|
+|2  |anyNA      | 0.9986603| 1.001497| 0.9960563| 1.015084| 1.008256|  0.9881792|
+|3  |any_is.na  | 2.9546356| 5.003453| 4.6501355| 4.824901| 4.523316| 16.9124953|
 
 _Figure: Benchmarking of anyMissing(), anyNA() and any_is.na() on integer+n = 1000000 data.  Outliers are displayed as crosses.  Times are in milliseconds._
 
@@ -192,8 +192,8 @@ _Figure: Benchmarking of anyMissing(), anyNA() and any_is.na() on integer+n = 10
 > x <- data[["n = 10000000"]]
 > gc()
            used  (Mb) gc trigger  (Mb) max used  (Mb)
-Ncells  5138913 274.5    7554717 403.5  7554717 403.5
-Vcells 14463553 110.4   49676999 379.1 60508962 461.7
+Ncells  5149168 275.0    7916910 422.9  7916910 422.9
+Vcells 14530889 110.9   51861176 395.7 53339345 407.0
 > stats <- microbenchmark(anyMissing = anyMissing(x), anyNA = anyNA(x), any_is.na = any_is.na(x), unit = "ms")
 ```
 
@@ -203,16 +203,16 @@ _Table: Benchmarking of anyMissing(), anyNA() and any_is.na() on integer+n = 100
 
 |   |expr       |       min|        lq|      mean|    median|        uq|       max|
 |:--|:----------|---------:|---------:|---------:|---------:|---------:|---------:|
-|2  |anyNA      |  5.842845|  5.855958|  5.982816|  5.863521|  5.981532|  8.801755|
-|1  |anyMissing |  5.843110|  5.862911|  5.982810|  5.876239|  6.008984|  8.159616|
-|3  |any_is.na  | 26.119474| 26.397007| 29.512692| 26.430464| 27.458759| 46.960310|
+|1  |anyMissing |  5.848424|  5.865406|  6.048396|  5.882955|  6.068394|  8.021888|
+|2  |anyNA      |  5.844971|  5.857822|  6.027307|  5.894444|  6.105414|  8.685206|
+|3  |any_is.na  | 26.199254| 26.274106| 29.676210| 26.781044| 28.138399| 47.873792|
 
 
-|   |expr       |      min|       lq|     mean|   median|      uq|       max|
-|:--|:----------|--------:|--------:|--------:|--------:|-------:|---------:|
-|2  |anyNA      | 1.000000| 1.000000| 1.000000| 1.000000| 1.00000| 1.0000000|
-|1  |anyMissing | 1.000045| 1.001187| 0.999999| 1.002169| 1.00459| 0.9270442|
-|3  |any_is.na  | 4.470335| 4.507718| 4.932910| 4.507610| 4.59059| 5.3353348|
+|   |expr       |       min|        lq|      mean|   median|       uq|      max|
+|:--|:----------|---------:|---------:|---------:|--------:|--------:|--------:|
+|1  |anyMissing | 1.0000000| 1.0000000| 1.0000000| 1.000000| 1.000000| 1.000000|
+|2  |anyNA      | 0.9994096| 0.9987068| 0.9965133| 1.001953| 1.006100| 1.082688|
+|3  |any_is.na  | 4.4797118| 4.4795031| 4.9064596| 4.552312| 4.636877| 5.967896|
 
 _Figure: Benchmarking of anyMissing(), anyNA() and any_is.na() on integer+n = 10000000 data.  Outliers are displayed as crosses.  Times are in milliseconds._
 
@@ -257,8 +257,8 @@ _Figure: Benchmarking of anyMissing(), anyNA() and any_is.na() on integer+n = 10
 > x <- data[["n = 1000"]]
 > gc()
            used  (Mb) gc trigger  (Mb) max used  (Mb)
-Ncells  5138994 274.5    7554717 403.5  7554717 403.5
-Vcells 20019582 152.8   49676999 379.1 60508962 461.7
+Ncells  5149249 275.0    7916910 422.9  7916910 422.9
+Vcells 20086917 153.3   51861176 395.7 53339345 407.0
 > stats <- microbenchmark(anyMissing = anyMissing(x), anyNA = anyNA(x), any_is.na = any_is.na(x), unit = "ms")
 ```
 
@@ -266,18 +266,18 @@ _Table: Benchmarking of anyMissing(), anyNA() and any_is.na() on double+n = 1000
 
 
 
-|   |expr       |      min|        lq|      mean|    median|        uq|      max|
-|:--|:----------|--------:|---------:|---------:|---------:|---------:|--------:|
-|2  |anyNA      | 0.000761| 0.0007945| 0.0008405| 0.0008090| 0.0008280| 0.003556|
-|1  |anyMissing | 0.001584| 0.0016880| 0.0019895| 0.0017640| 0.0018250| 0.024104|
-|3  |any_is.na  | 0.003185| 0.0032950| 0.0034871| 0.0033695| 0.0034585| 0.011913|
+|   |expr       |      min|       lq|      mean|    median|       uq|      max|
+|:--|:----------|--------:|--------:|---------:|---------:|--------:|--------:|
+|2  |anyNA      | 0.000793| 0.000831| 0.0008824| 0.0008540| 0.000877| 0.003541|
+|1  |anyMissing | 0.001611| 0.001701| 0.0018396| 0.0017520| 0.001788| 0.010478|
+|3  |any_is.na  | 0.003313| 0.003404| 0.0035686| 0.0034675| 0.003555| 0.011881|
 
 
 |   |expr       |      min|       lq|     mean|   median|       uq|      max|
 |:--|:----------|--------:|--------:|--------:|--------:|--------:|--------:|
 |2  |anyNA      | 1.000000| 1.000000| 1.000000| 1.000000| 1.000000| 1.000000|
-|1  |anyMissing | 2.081472| 2.124607| 2.367091| 2.180470| 2.204106| 6.778403|
-|3  |any_is.na  | 4.185282| 4.147262| 4.148888| 4.165019| 4.176932| 3.350112|
+|1  |anyMissing | 2.031526| 2.046931| 2.084802| 2.051522| 2.038769| 2.959051|
+|3  |any_is.na  | 4.177806| 4.096270| 4.044141| 4.060304| 4.053592| 3.355267|
 
 _Figure: Benchmarking of anyMissing(), anyNA() and any_is.na() on double+n = 1000 data.  Outliers are displayed as crosses.  Times are in milliseconds._
 
@@ -289,8 +289,8 @@ _Figure: Benchmarking of anyMissing(), anyNA() and any_is.na() on double+n = 100
 > x <- data[["n = 10000"]]
 > gc()
            used  (Mb) gc trigger  (Mb) max used  (Mb)
-Ncells  5139057 274.5    7554717 403.5  7554717 403.5
-Vcells 20019614 152.8   49676999 379.1 60508962 461.7
+Ncells  5149312 275.1    7916910 422.9  7916910 422.9
+Vcells 20086949 153.3   51861176 395.7 53339345 407.0
 > stats <- microbenchmark(anyMissing = anyMissing(x), anyNA = anyNA(x), any_is.na = any_is.na(x), unit = "ms")
 ```
 
@@ -298,18 +298,18 @@ _Table: Benchmarking of anyMissing(), anyNA() and any_is.na() on double+n = 1000
 
 
 
-|   |expr       |      min|        lq|      mean|   median|       uq|      max|
-|:--|:----------|--------:|---------:|---------:|--------:|--------:|--------:|
-|2  |anyNA      | 0.006334| 0.0064525| 0.0065983| 0.006557| 0.006728| 0.008134|
-|1  |anyMissing | 0.008783| 0.0089710| 0.0093156| 0.009184| 0.009462| 0.019927|
-|3  |any_is.na  | 0.021782| 0.0221210| 0.0237176| 0.022804| 0.023314| 0.041985|
+|   |expr       |      min|        lq|      mean|    median|        uq|      max|
+|:--|:----------|--------:|---------:|---------:|---------:|---------:|--------:|
+|2  |anyNA      | 0.006867| 0.0069195| 0.0069878| 0.0069675| 0.0070210| 0.008277|
+|1  |anyMissing | 0.009443| 0.0095595| 0.0098173| 0.0096610| 0.0098070| 0.023121|
+|3  |any_is.na  | 0.023518| 0.0238790| 0.0249262| 0.0240365| 0.0243365| 0.032825|
 
 
-|   |expr       |      min|       lq|     mean|  median|       uq|      max|
-|:--|:----------|--------:|--------:|--------:|-------:|--------:|--------:|
-|2  |anyNA      | 1.000000| 1.000000| 1.000000| 1.00000| 1.000000| 1.000000|
-|1  |anyMissing | 1.386643| 1.390314| 1.411820| 1.40064| 1.406362| 2.449840|
-|3  |any_is.na  | 3.438901| 3.428284| 3.594515| 3.47781| 3.465220| 5.161667|
+|   |expr       |      min|       lq|     mean|   median|       uq|      max|
+|:--|:----------|--------:|--------:|--------:|--------:|--------:|--------:|
+|2  |anyNA      | 1.000000| 1.000000| 1.000000| 1.000000| 1.000000| 1.000000|
+|1  |anyMissing | 1.375127| 1.381530| 1.404934| 1.386581| 1.396810| 2.793403|
+|3  |any_is.na  | 3.424785| 3.450972| 3.567128| 3.449803| 3.466244| 3.965809|
 
 _Figure: Benchmarking of anyMissing(), anyNA() and any_is.na() on double+n = 10000 data.  Outliers are displayed as crosses.  Times are in milliseconds._
 
@@ -321,8 +321,8 @@ _Figure: Benchmarking of anyMissing(), anyNA() and any_is.na() on double+n = 100
 > x <- data[["n = 100000"]]
 > gc()
            used  (Mb) gc trigger  (Mb) max used  (Mb)
-Ncells  5139129 274.5    7554717 403.5  7554717 403.5
-Vcells 20019964 152.8   49676999 379.1 60508962 461.7
+Ncells  5149384 275.1    7916910 422.9  7916910 422.9
+Vcells 20087301 153.3   51861176 395.7 53339345 407.0
 > stats <- microbenchmark(anyMissing = anyMissing(x), anyNA = anyNA(x), any_is.na = any_is.na(x), unit = "ms")
 ```
 
@@ -330,18 +330,18 @@ _Table: Benchmarking of anyMissing(), anyNA() and any_is.na() on double+n = 1000
 
 
 
-|   |expr       |      min|        lq|      mean|   median|        uq|      max|
-|:--|:----------|--------:|---------:|---------:|--------:|---------:|--------:|
-|2  |anyNA      | 0.049606| 0.0528705| 0.0581679| 0.056372| 0.0624215| 0.099473|
-|1  |anyMissing | 0.061199| 0.0653640| 0.0695352| 0.067544| 0.0725370| 0.091714|
-|3  |any_is.na  | 0.164416| 0.1783195| 0.2011054| 0.191613| 0.2199450| 0.289780|
+|   |expr       |      min|        lq|      mean|    median|        uq|      max|
+|:--|:----------|--------:|---------:|---------:|---------:|---------:|--------:|
+|2  |anyNA      | 0.054290| 0.0562365| 0.0626705| 0.0603040| 0.0699925| 0.104676|
+|1  |anyMissing | 0.066935| 0.0674195| 0.0741177| 0.0696535| 0.0801185| 0.100784|
+|3  |any_is.na  | 0.177212| 0.1890785| 0.2157648| 0.2116110| 0.2306565| 0.315970|
 
 
 |   |expr       |      min|       lq|     mean|   median|       uq|       max|
 |:--|:----------|--------:|--------:|--------:|--------:|--------:|---------:|
 |2  |anyNA      | 1.000000| 1.000000| 1.000000| 1.000000| 1.000000| 1.0000000|
-|1  |anyMissing | 1.233702| 1.236304| 1.195423| 1.198184| 1.162052| 0.9219989|
-|3  |any_is.na  | 3.314438| 3.372760| 3.457326| 3.399081| 3.523546| 2.9131523|
+|1  |anyMissing | 1.232916| 1.198857| 1.182657| 1.155039| 1.144673| 0.9628186|
+|3  |any_is.na  | 3.264174| 3.362202| 3.442843| 3.509071| 3.295446| 3.0185525|
 
 _Figure: Benchmarking of anyMissing(), anyNA() and any_is.na() on double+n = 100000 data.  Outliers are displayed as crosses.  Times are in milliseconds._
 
@@ -353,8 +353,8 @@ _Figure: Benchmarking of anyMissing(), anyNA() and any_is.na() on double+n = 100
 > x <- data[["n = 1000000"]]
 > gc()
            used  (Mb) gc trigger  (Mb) max used  (Mb)
-Ncells  5139201 274.5    7554717 403.5  7554717 403.5
-Vcells 20020373 152.8   49676999 379.1 60508962 461.7
+Ncells  5149456 275.1    7916910 422.9  7916910 422.9
+Vcells 20087711 153.3   51861176 395.7 53339345 407.0
 > stats <- microbenchmark(anyMissing = anyMissing(x), anyNA = anyNA(x), any_is.na = any_is.na(x), unit = "ms")
 ```
 
@@ -362,18 +362,18 @@ _Table: Benchmarking of anyMissing(), anyNA() and any_is.na() on double+n = 1000
 
 
 
-|   |expr       |      min|        lq|      mean|    median|        uq|       max|
-|:--|:----------|--------:|---------:|---------:|---------:|---------:|---------:|
-|2  |anyNA      | 0.487668| 0.5512765| 0.6011896| 0.5987780| 0.6290655|  0.957132|
-|1  |anyMissing | 0.575719| 0.6167405| 0.6780884| 0.6690375| 0.6963880|  1.035305|
-|3  |any_is.na  | 1.681125| 2.0274250| 2.6076032| 2.7228080| 2.7617915| 13.714425|
+|   |expr       |      min|        lq|      mean|    median|        uq|        max|
+|:--|:----------|--------:|---------:|---------:|---------:|---------:|----------:|
+|2  |anyNA      | 0.503375| 0.6143685| 0.6559521| 0.6444355| 0.6954275|   1.006697|
+|1  |anyMissing | 0.596418| 0.6815280| 0.7438912| 0.7286160| 0.7760745|   1.093139|
+|3  |any_is.na  | 1.996976| 2.7094350| 6.3041081| 2.8472080| 3.0822495| 345.290288|
 
 
-|   |expr       |      min|       lq|     mean|   median|       uq|       max|
-|:--|:----------|--------:|--------:|--------:|--------:|--------:|---------:|
-|2  |anyNA      | 1.000000| 1.000000| 1.000000| 1.000000| 1.000000|  1.000000|
-|1  |anyMissing | 1.180555| 1.118750| 1.127911| 1.117338| 1.107020|  1.081674|
-|3  |any_is.na  | 3.447274| 3.677692| 4.337406| 4.547275| 4.390308| 14.328666|
+|   |expr       |      min|       lq|     mean|   median|       uq|        max|
+|:--|:----------|--------:|--------:|--------:|--------:|--------:|----------:|
+|2  |anyNA      | 1.000000| 1.000000| 1.000000| 1.000000| 1.000000|   1.000000|
+|1  |anyMissing | 1.184838| 1.109315| 1.134063| 1.130627| 1.115968|   1.085867|
+|3  |any_is.na  | 3.967174| 4.410114| 9.610623| 4.418143| 4.432165| 342.993262|
 
 _Figure: Benchmarking of anyMissing(), anyNA() and any_is.na() on double+n = 1000000 data.  Outliers are displayed as crosses.  Times are in milliseconds._
 
@@ -385,8 +385,8 @@ _Figure: Benchmarking of anyMissing(), anyNA() and any_is.na() on double+n = 100
 > x <- data[["n = 10000000"]]
 > gc()
            used  (Mb) gc trigger  (Mb) max used  (Mb)
-Ncells  5139273 274.5    7554717 403.5  7554717 403.5
-Vcells 20020421 152.8   49676999 379.1 60508962 461.7
+Ncells  5149528 275.1    7916910 422.9  7916910 422.9
+Vcells 20087759 153.3   51861176 395.7 53339345 407.0
 > stats <- microbenchmark(anyMissing = anyMissing(x), anyNA = anyNA(x), any_is.na = any_is.na(x), unit = "ms")
 ```
 
@@ -396,16 +396,16 @@ _Table: Benchmarking of anyMissing(), anyNA() and any_is.na() on double+n = 1000
 
 |   |expr       |       min|        lq|      mean|    median|        uq|       max|
 |:--|:----------|---------:|---------:|---------:|---------:|---------:|---------:|
-|2  |anyNA      |  6.323672|  6.575435|  6.830069|  6.841031|  7.022868|  8.268138|
-|1  |anyMissing |  6.862550|  7.352603|  7.600620|  7.656812|  7.870972|  8.502758|
-|3  |any_is.na  | 27.025922| 28.323738| 32.071603| 29.361263| 30.960706| 46.329896|
+|2  |anyNA      |  6.393673|  6.873240|  7.116991|  7.101120|  7.292291|  9.152997|
+|1  |anyMissing |  7.086472|  7.780927|  7.996667|  8.033691|  8.175902|  9.866361|
+|3  |any_is.na  | 27.671734| 29.550325| 33.280614| 30.928559| 32.484887| 53.175226|
 
 
 |   |expr       |      min|       lq|     mean|   median|       uq|      max|
 |:--|:----------|--------:|--------:|--------:|--------:|--------:|--------:|
 |2  |anyNA      | 1.000000| 1.000000| 1.000000| 1.000000| 1.000000| 1.000000|
-|1  |anyMissing | 1.085216| 1.118193| 1.112818| 1.119248| 1.120763| 1.028376|
-|3  |any_is.na  | 4.273770| 4.307508| 4.695648| 4.291935| 4.408556| 5.603426|
+|1  |anyMissing | 1.108357| 1.132061| 1.123602| 1.131327| 1.121171| 1.077938|
+|3  |any_is.na  | 4.327987| 4.299330| 4.676220| 4.355448| 4.454689| 5.809597|
 
 _Figure: Benchmarking of anyMissing(), anyNA() and any_is.na() on double+n = 10000000 data.  Outliers are displayed as crosses.  Times are in milliseconds._
 
@@ -439,7 +439,7 @@ attached base packages:
 other attached packages:
 [1] microbenchmark_1.4-7   matrixStats_0.60.0     ggplot2_3.3.5         
 [4] knitr_1.33             R.devices_2.17.0       R.utils_2.10.1        
-[7] R.oo_1.24.0            R.methodsS3_1.8.1-9001
+[7] R.oo_1.24.0            R.methodsS3_1.8.1-9001 history_0.0.1-9000    
 
 loaded via a namespace (and not attached):
  [1] Biobase_2.52.0          httr_1.4.2              splines_4.1.1          
@@ -458,20 +458,22 @@ loaded via a namespace (and not attached):
 [40] magrittr_2.0.1          crayon_1.4.1            statnet.common_4.5.0   
 [43] memoise_2.0.0           laeken_0.5.1            fansi_0.5.0            
 [46] R.cache_0.15.0          MASS_7.3-54             R.rsp_0.44.0           
-[49] tools_4.1.1             lifecycle_1.0.0         S4Vectors_0.30.0       
-[52] trust_0.1-8             munsell_0.5.0           AnnotationDbi_1.54.1   
-[55] Biostrings_2.60.2       compiler_4.1.1          GenomeInfoDb_1.28.1    
-[58] rlang_0.4.11            grid_4.1.1              RCurl_1.98-1.4         
-[61] cwhmisc_6.6             rappdirs_0.3.3          labeling_0.4.2         
-[64] bitops_1.0-7            base64enc_0.1-3         boot_1.3-28            
-[67] gtable_0.3.0            DBI_1.1.1               markdown_1.1           
-[70] R6_2.5.1                lpSolveAPI_5.5.2.0-17.7 rle_0.9.2              
-[73] dplyr_1.0.7             fastmap_1.1.0           bit_4.0.4              
-[76] utf8_1.2.2              parallel_4.1.1          Rcpp_1.0.7             
-[79] vctrs_0.3.8             png_0.1-7               DEoptimR_1.0-9         
-[82] tidyselect_1.1.1        xfun_0.25               coda_0.19-4            
+[49] progressr_0.8.0         tools_4.1.1             lifecycle_1.0.0        
+[52] S4Vectors_0.30.0        trust_0.1-8             munsell_0.5.0          
+[55] tabby_0.0.1-9001        AnnotationDbi_1.54.1    Biostrings_2.60.2      
+[58] compiler_4.1.1          GenomeInfoDb_1.28.1     rlang_0.4.11           
+[61] grid_4.1.1              RCurl_1.98-1.4          cwhmisc_6.6            
+[64] rstudioapi_0.13         rappdirs_0.3.3          startup_0.15.0         
+[67] labeling_0.4.2          bitops_1.0-7            base64enc_0.1-3        
+[70] boot_1.3-28             gtable_0.3.0            DBI_1.1.1              
+[73] markdown_1.1            R6_2.5.1                lpSolveAPI_5.5.2.0-17.7
+[76] rle_0.9.2               dplyr_1.0.7             fastmap_1.1.0          
+[79] bit_4.0.4               utf8_1.2.2              parallel_4.1.1         
+[82] Rcpp_1.0.7              vctrs_0.3.8             png_0.1-7              
+[85] DEoptimR_1.0-9          tidyselect_1.1.1        xfun_0.25              
+[88] coda_0.19-4            
 ```
-Total processing time was 18.28 secs.
+Total processing time was 19.11 secs.
 
 
 ### Reproducibility
@@ -488,7 +490,7 @@ html <- matrixStats:::benchmark('anyMissing')
 [StackOverflow:rowProds?]: https://stackoverflow.com/questions/20198801/ "Stack Overflow: Row product of matrix and column sum of matrix"
 
 ---------------------------------------
-Copyright Henrik Bengtsson. Last updated on 2021-08-25 17:33:28 (+0200 UTC). Powered by [RSP].
+Copyright Henrik Bengtsson. Last updated on 2021-08-25 22:09:06 (+0200 UTC). Powered by [RSP].
 
 <script>
  var link = document.createElement('link');

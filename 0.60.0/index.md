@@ -109,7 +109,7 @@ _Note: Each of the above reports takes up to several minutes to complete._
 [StackOverflow:rowProds?]: https://stackoverflow.com/questions/20198801/ "Stack Overflow: Row product of matrix and column sum of matrix"
 
 ---------------------------------------
-Copyright Henrik Bengtsson. Last updated on 2021-08-25 18:41:23 (+0200 UTC). Powered by [RSP].
+Copyright Henrik Bengtsson. Last updated on 2021-08-25 22:55:01 (+0200 UTC). Powered by [RSP].
 
 <script>
  var link = document.createElement('link');

@@ -55,8 +55,8 @@ This report benchmark the performance of anyMissing() on subsetted computation.
 > x_S <- x[idxs]
 > gc()
            used  (Mb) gc trigger  (Mb) max used  (Mb)
-Ncells  5140303 274.6    7554717 403.5  7554717 403.5
-Vcells 25581056 195.2   64600258 492.9 60508962 461.7
+Ncells  5162916 275.8    7916910 422.9  7916910 422.9
+Vcells 25710602 196.2   53955392 411.7 50098692 382.3
 > stats <- microbenchmark(anyMissing_x_S = anyMissing(x_S), `anyMissing(x, idxs)` = anyMissing(x, idxs = idxs), 
 +     `anyMissing(x[idxs])` = anyMissing(x[idxs]), unit = "ms")
 ```
@@ -67,16 +67,16 @@ _Table: Benchmarking of anyMissing_x_S(), anyMissing(x, idxs)() and anyMissing(x
 
 |   |expr                |      min|        lq|      mean|    median|        uq|      max|
 |:--|:-------------------|--------:|---------:|---------:|---------:|---------:|--------:|
-|1  |anyMissing_x_S      | 0.001327| 0.0013615| 0.0014276| 0.0014210| 0.0014515| 0.002049|
-|2  |anyMissing(x, idxs) | 0.002927| 0.0029710| 0.0030389| 0.0030065| 0.0030520| 0.004198|
-|3  |anyMissing(x[idxs]) | 0.003938| 0.0040710| 0.0051453| 0.0041525| 0.0042375| 0.101906|
+|1  |anyMissing_x_S      | 0.001299| 0.0013310| 0.0014001| 0.0013850| 0.0014175| 0.002203|
+|2  |anyMissing(x, idxs) | 0.002861| 0.0029085| 0.0029626| 0.0029380| 0.0029755| 0.004156|
+|3  |anyMissing(x[idxs]) | 0.003853| 0.0039675| 0.0052384| 0.0040435| 0.0041210| 0.121189|
 
 
 |   |expr                |      min|       lq|     mean|   median|       uq|       max|
 |:--|:-------------------|--------:|--------:|--------:|--------:|--------:|---------:|
 |1  |anyMissing_x_S      | 1.000000| 1.000000| 1.000000| 1.000000| 1.000000|  1.000000|
-|2  |anyMissing(x, idxs) | 2.205727| 2.182152| 2.128721| 2.115763| 2.102652|  2.048804|
-|3  |anyMissing(x[idxs]) | 2.967596| 2.990085| 3.604239| 2.922238| 2.919394| 49.734505|
+|2  |anyMissing(x, idxs) | 2.202463| 2.185199| 2.116021| 2.121300| 2.099118|  1.886518|
+|3  |anyMissing(x[idxs]) | 2.966128| 2.980841| 3.741459| 2.919495| 2.907231| 55.010894|
 
 _Figure: Benchmarking of anyMissing_x_S(), anyMissing(x, idxs)() and anyMissing(x[idxs])() on integer+n = 1000 data.  Outliers are displayed as crosses.  Times are in milliseconds._
 
@@ -89,9 +89,9 @@ _Figure: Benchmarking of anyMissing_x_S(), anyMissing(x, idxs)() and anyMissing(
 > idxs <- sample.int(length(x), size = length(x) * 0.7)
 > x_S <- x[idxs]
 > gc()
-           used  (Mb) gc trigger  (Mb) max used  (Mb)
-Ncells  5137897 274.4    7554717 403.5  7554717 403.5
-Vcells 14469459 110.4   51680207 394.3 60508962 461.7
+           used (Mb) gc trigger  (Mb) max used  (Mb)
+Ncells  5148112  275    7916910 422.9  7916910 422.9
+Vcells 14536728  111   53955392 411.7 50098692 382.3
 > stats <- microbenchmark(anyMissing_x_S = anyMissing(x_S), `anyMissing(x, idxs)` = anyMissing(x, idxs = idxs), 
 +     `anyMissing(x[idxs])` = anyMissing(x[idxs]), unit = "ms")
 ```
@@ -100,18 +100,18 @@ _Table: Benchmarking of anyMissing_x_S(), anyMissing(x, idxs)() and anyMissing(x
 
 
 
-|   |expr                |      min|        lq|      mean|    median|        uq|      max|
-|:--|:-------------------|--------:|---------:|---------:|---------:|---------:|--------:|
-|1  |anyMissing_x_S      | 0.006163| 0.0065100| 0.0066384| 0.0066270| 0.0067740| 0.008303|
-|2  |anyMissing(x, idxs) | 0.019662| 0.0204755| 0.0208237| 0.0206255| 0.0212635| 0.023060|
-|3  |anyMissing(x[idxs]) | 0.025390| 0.0267540| 0.0279973| 0.0275520| 0.0282160| 0.046383|
+|   |expr                |      min|       lq|      mean|    median|        uq|      max|
+|:--|:-------------------|--------:|--------:|---------:|---------:|---------:|--------:|
+|1  |anyMissing_x_S      | 0.006821| 0.006938| 0.0071182| 0.0070145| 0.0071065| 0.012310|
+|2  |anyMissing(x, idxs) | 0.021872| 0.021980| 0.0226106| 0.0220715| 0.0222115| 0.037837|
+|3  |anyMissing(x[idxs]) | 0.028426| 0.028889| 0.0302136| 0.0292280| 0.0297295| 0.067615|
 
 
-|   |expr                |      min|       lq|     mean|   median|       uq|      max|
-|:--|:-------------------|--------:|--------:|--------:|--------:|--------:|--------:|
-|1  |anyMissing_x_S      | 1.000000| 1.000000| 1.000000| 1.000000| 1.000000| 1.000000|
-|2  |anyMissing(x, idxs) | 3.190329| 3.145238| 3.136852| 3.112343| 3.138987| 2.777309|
-|3  |anyMissing(x[idxs]) | 4.119747| 4.109677| 4.217464| 4.157537| 4.165338| 5.586294|
+|   |expr                |      min|      lq|     mean|   median|       uq|      max|
+|:--|:-------------------|--------:|-------:|--------:|--------:|--------:|--------:|
+|1  |anyMissing_x_S      | 1.000000| 1.00000| 1.000000| 1.000000| 1.000000| 1.000000|
+|2  |anyMissing(x, idxs) | 3.206568| 3.16806| 3.176452| 3.146554| 3.125519| 3.073680|
+|3  |anyMissing(x[idxs]) | 4.167424| 4.16388| 4.244565| 4.166797| 4.183424| 5.492689|
 
 _Figure: Benchmarking of anyMissing_x_S(), anyMissing(x, idxs)() and anyMissing(x[idxs])() on integer+n = 10000 data.  Outliers are displayed as crosses.  Times are in milliseconds._
 
@@ -125,8 +125,8 @@ _Figure: Benchmarking of anyMissing_x_S(), anyMissing(x, idxs)() and anyMissing(
 > x_S <- x[idxs]
 > gc()
            used  (Mb) gc trigger  (Mb) max used  (Mb)
-Ncells  5137969 274.4    7554717 403.5  7554717 403.5
-Vcells 14533019 110.9   51680207 394.3 60508962 461.7
+Ncells  5148184 275.0    7916910 422.9  7916910 422.9
+Vcells 14600288 111.4   53955392 411.7 50098692 382.3
 > stats <- microbenchmark(anyMissing_x_S = anyMissing(x_S), `anyMissing(x, idxs)` = anyMissing(x, idxs = idxs), 
 +     `anyMissing(x[idxs])` = anyMissing(x[idxs]), unit = "ms")
 ```
@@ -135,18 +135,18 @@ _Table: Benchmarking of anyMissing_x_S(), anyMissing(x, idxs)() and anyMissing(x
 
 
 
-|   |expr                |      min|        lq|      mean|    median|        uq|      max|
-|:--|:-------------------|--------:|---------:|---------:|---------:|---------:|--------:|
-|1  |anyMissing_x_S      | 0.038997| 0.0404510| 0.0472189| 0.0465865| 0.0517335| 0.074773|
-|2  |anyMissing(x, idxs) | 0.163357| 0.1728070| 0.1920446| 0.1894745| 0.2022090| 0.259642|
-|3  |anyMissing(x[idxs]) | 0.194488| 0.2165725| 0.2375825| 0.2312910| 0.2568565| 0.387467|
+|   |expr                |      min|       lq|      mean|   median|        uq|      max|
+|:--|:-------------------|--------:|--------:|---------:|--------:|---------:|--------:|
+|1  |anyMissing_x_S      | 0.045269| 0.047030| 0.0565744| 0.055161| 0.0605690| 0.097646|
+|2  |anyMissing(x, idxs) | 0.189848| 0.196721| 0.2237074| 0.210139| 0.2433385| 0.385652|
+|3  |anyMissing(x[idxs]) | 0.222029| 0.238814| 0.2838194| 0.268992| 0.2986360| 0.765679|
 
 
 |   |expr                |      min|       lq|     mean|   median|       uq|      max|
 |:--|:-------------------|--------:|--------:|--------:|--------:|--------:|--------:|
 |1  |anyMissing_x_S      | 1.000000| 1.000000| 1.000000| 1.000000| 1.000000| 1.000000|
-|2  |anyMissing(x, idxs) | 4.188963| 4.272008| 4.067115| 4.067155| 3.908666| 3.472403|
-|3  |anyMissing(x[idxs]) | 4.987255| 5.353947| 5.031516| 4.964765| 4.964994| 5.181911|
+|2  |anyMissing(x, idxs) | 4.193775| 4.182883| 3.954212| 3.809557| 4.017542| 3.949491|
+|3  |anyMissing(x[idxs]) | 4.904659| 5.077908| 5.016743| 4.876489| 4.930509| 7.841376|
 
 _Figure: Benchmarking of anyMissing_x_S(), anyMissing(x, idxs)() and anyMissing(x[idxs])() on integer+n = 100000 data.  Outliers are displayed as crosses.  Times are in milliseconds._
 
@@ -160,8 +160,8 @@ _Figure: Benchmarking of anyMissing_x_S(), anyMissing(x, idxs)() and anyMissing(
 > x_S <- x[idxs]
 > gc()
            used  (Mb) gc trigger  (Mb) max used  (Mb)
-Ncells  5138041 274.5    7554717 403.5  7554717 403.5
-Vcells 15163068 115.7   51680207 394.3 60508962 461.7
+Ncells  5148256 275.0    7916910 422.9  7916910 422.9
+Vcells 15230337 116.2   53955392 411.7 50098692 382.3
 > stats <- microbenchmark(anyMissing_x_S = anyMissing(x_S), `anyMissing(x, idxs)` = anyMissing(x, idxs = idxs), 
 +     `anyMissing(x[idxs])` = anyMissing(x[idxs]), unit = "ms")
 ```
@@ -170,18 +170,18 @@ _Table: Benchmarking of anyMissing_x_S(), anyMissing(x, idxs)() and anyMissing(x
 
 
 
-|   |expr                |      min|       lq|      mean|   median|       uq|      max|
-|:--|:-------------------|--------:|--------:|---------:|--------:|--------:|--------:|
-|1  |anyMissing_x_S      | 0.426673| 0.485420| 0.5038016| 0.500727| 0.513361| 0.801380|
-|2  |anyMissing(x, idxs) | 2.216429| 2.432800| 2.5897703| 2.570868| 2.653917| 4.301883|
-|3  |anyMissing(x[idxs]) | 2.980059| 4.042264| 4.1752017| 4.250540| 4.441886| 4.807413|
+|   |expr                |      min|        lq|      mean|    median|        uq|       max|
+|:--|:-------------------|--------:|---------:|---------:|---------:|---------:|---------:|
+|1  |anyMissing_x_S      | 0.454448| 0.5216525| 0.5786677| 0.5436835| 0.5899715|  1.079747|
+|2  |anyMissing(x, idxs) | 2.487519| 2.7614475| 3.4705498| 3.3085560| 3.8648375|  7.685493|
+|3  |anyMissing(x[idxs]) | 3.827613| 4.4859705| 5.4221502| 4.9909670| 5.9684330| 10.399041|
 
 
-|   |expr                |      min|       lq|     mean|   median|       uq|      max|
-|:--|:-------------------|--------:|--------:|--------:|--------:|--------:|--------:|
-|1  |anyMissing_x_S      | 1.000000| 1.000000| 1.000000| 1.000000| 1.000000| 1.000000|
-|2  |anyMissing(x, idxs) | 5.194678| 5.011742| 5.140457| 5.134271| 5.169690| 5.368094|
-|3  |anyMissing(x[idxs]) | 6.984410| 8.327355| 8.287393| 8.488736| 8.652558| 5.998918|
+|   |expr                |      min|       lq|     mean|   median|        uq|      max|
+|:--|:-------------------|--------:|--------:|--------:|--------:|---------:|--------:|
+|1  |anyMissing_x_S      | 1.000000| 1.000000| 1.000000| 1.000000|  1.000000| 1.000000|
+|2  |anyMissing(x, idxs) | 5.473715| 5.293653| 5.997483| 6.085445|  6.550889| 7.117865|
+|3  |anyMissing(x[idxs]) | 8.422554| 8.599538| 9.370058| 9.179913| 10.116477| 9.630998|
 
 _Figure: Benchmarking of anyMissing_x_S(), anyMissing(x, idxs)() and anyMissing(x[idxs])() on integer+n = 1000000 data.  Outliers are displayed as crosses.  Times are in milliseconds._
 
@@ -195,8 +195,8 @@ _Figure: Benchmarking of anyMissing_x_S(), anyMissing(x, idxs)() and anyMissing(
 > x_S <- x[idxs]
 > gc()
            used  (Mb) gc trigger  (Mb) max used  (Mb)
-Ncells  5138107 274.5    7554717 403.5  7554717 403.5
-Vcells 21463311 163.8   51680207 394.3 60508962 461.7
+Ncells  5148328 275.0    7916910 422.9  7916910 422.9
+Vcells 21530590 164.3   53955392 411.7 50658010 386.5
 > stats <- microbenchmark(anyMissing_x_S = anyMissing(x_S), `anyMissing(x, idxs)` = anyMissing(x, idxs = idxs), 
 +     `anyMissing(x[idxs])` = anyMissing(x[idxs]), unit = "ms")
 ```
@@ -207,16 +207,16 @@ _Table: Benchmarking of anyMissing_x_S(), anyMissing(x, idxs)() and anyMissing(x
 
 |   |expr                |        min|         lq|       mean|     median|        uq|       max|
 |:--|:-------------------|----------:|----------:|----------:|----------:|---------:|---------:|
-|1  |anyMissing_x_S      |   6.464153|   7.753406|   9.161021|   8.867178|  11.19263|  11.80728|
-|2  |anyMissing(x, idxs) | 100.388399| 113.965239| 117.622991| 116.606566| 120.83405| 130.42449|
-|3  |anyMissing(x[idxs]) | 121.444221| 135.327861| 143.207631| 136.883026| 145.15309| 490.72584|
+|1  |anyMissing_x_S      |   6.390179|   7.663246|   8.921722|   8.455134|  10.36377|  13.00473|
+|2  |anyMissing(x, idxs) |  87.748499| 111.039786| 115.822160| 115.685753| 122.27734| 141.40928|
+|3  |anyMissing(x[idxs]) | 119.607946| 135.674981| 140.726406| 139.743561| 144.71224| 168.76377|
 
 
 |   |expr                |      min|       lq|     mean|   median|       uq|      max|
 |:--|:-------------------|--------:|--------:|--------:|--------:|--------:|--------:|
 |1  |anyMissing_x_S      |  1.00000|  1.00000|  1.00000|  1.00000|  1.00000|  1.00000|
-|2  |anyMissing(x, idxs) | 15.53002| 14.69873| 12.83951| 13.15036| 10.79586| 11.04611|
-|3  |anyMissing(x[idxs]) | 18.78734| 17.45399| 15.63228| 15.43705| 12.96863| 41.56129|
+|2  |anyMissing(x, idxs) | 13.73177| 14.48992| 12.98204| 13.68231| 11.79853| 10.87368|
+|3  |anyMissing(x[idxs]) | 18.71746| 17.70464| 15.77346| 16.52766| 13.96328| 12.97711|
 
 _Figure: Benchmarking of anyMissing_x_S(), anyMissing(x, idxs)() and anyMissing(x[idxs])() on integer+n = 10000000 data.  Outliers are displayed as crosses.  Times are in milliseconds._
 
@@ -264,8 +264,8 @@ _Figure: Benchmarking of anyMissing_x_S(), anyMissing(x, idxs)() and anyMissing(
 > x_S <- x[idxs]
 > gc()
            used  (Mb) gc trigger  (Mb) max used  (Mb)
-Ncells  5138194 274.5    7554717 403.5  7554717 403.5
-Vcells 20020187 152.8   51680207 394.3 60508962 461.7
+Ncells  5148409 275.0    7916910 422.9  7916910 422.9
+Vcells 20087457 153.3   53955392 411.7 53032641 404.7
 > stats <- microbenchmark(anyMissing_x_S = anyMissing(x_S), `anyMissing(x, idxs)` = anyMissing(x, idxs = idxs), 
 +     `anyMissing(x[idxs])` = anyMissing(x[idxs]), unit = "ms")
 ```
@@ -276,16 +276,16 @@ _Table: Benchmarking of anyMissing_x_S(), anyMissing(x, idxs)() and anyMissing(x
 
 |   |expr                |      min|        lq|      mean|    median|        uq|      max|
 |:--|:-------------------|--------:|---------:|---------:|---------:|---------:|--------:|
-|1  |anyMissing_x_S      | 0.001341| 0.0014345| 0.0014952| 0.0014645| 0.0015315| 0.002608|
-|2  |anyMissing(x, idxs) | 0.002939| 0.0030245| 0.0030954| 0.0030640| 0.0031505| 0.004242|
-|3  |anyMissing(x[idxs]) | 0.003628| 0.0037765| 0.0040082| 0.0038525| 0.0039725| 0.015499|
+|1  |anyMissing_x_S      | 0.001356| 0.0014020| 0.0014909| 0.0014710| 0.0015125| 0.002507|
+|2  |anyMissing(x, idxs) | 0.003008| 0.0030575| 0.0032146| 0.0030975| 0.0031555| 0.009546|
+|3  |anyMissing(x[idxs]) | 0.003724| 0.0039190| 0.0047963| 0.0039910| 0.0041330| 0.049398|
 
 
-|   |expr                |      min|       lq|     mean|   median|       uq|      max|
-|:--|:-------------------|--------:|--------:|--------:|--------:|--------:|--------:|
-|1  |anyMissing_x_S      | 1.000000| 1.000000| 1.000000| 1.000000| 1.000000| 1.000000|
-|2  |anyMissing(x, idxs) | 2.191648| 2.108400| 2.070197| 2.092182| 2.057133| 1.626534|
-|3  |anyMissing(x[idxs]) | 2.705444| 2.632625| 2.680642| 2.630591| 2.593862| 5.942868|
+|   |expr                |      min|       lq|     mean|  median|       uq|       max|
+|:--|:-------------------|--------:|--------:|--------:|-------:|--------:|---------:|
+|1  |anyMissing_x_S      | 1.000000| 1.000000| 1.000000| 1.00000| 1.000000|  1.000000|
+|2  |anyMissing(x, idxs) | 2.218289| 2.180813| 2.156126| 2.10571| 2.086281|  3.807738|
+|3  |anyMissing(x[idxs]) | 2.746313| 2.795292| 3.217042| 2.71312| 2.732562| 19.704029|
 
 _Figure: Benchmarking of anyMissing_x_S(), anyMissing(x, idxs)() and anyMissing(x[idxs])() on double+n = 1000 data.  Outliers are displayed as crosses.  Times are in milliseconds._
 
@@ -299,8 +299,8 @@ _Figure: Benchmarking of anyMissing_x_S(), anyMissing(x, idxs)() and anyMissing(
 > x_S <- x[idxs]
 > gc()
            used  (Mb) gc trigger  (Mb) max used  (Mb)
-Ncells  5138257 274.5    7554717 403.5  7554717 403.5
-Vcells 20029977 152.9   51680207 394.3 60508962 461.7
+Ncells  5148472 275.0    7916910 422.9  7916910 422.9
+Vcells 20097246 153.4   53955392 411.7 53032641 404.7
 > stats <- microbenchmark(anyMissing_x_S = anyMissing(x_S), `anyMissing(x, idxs)` = anyMissing(x, idxs = idxs), 
 +     `anyMissing(x[idxs])` = anyMissing(x[idxs]), unit = "ms")
 ```
@@ -311,16 +311,16 @@ _Table: Benchmarking of anyMissing_x_S(), anyMissing(x, idxs)() and anyMissing(x
 
 |   |expr                |      min|        lq|      mean|    median|        uq|      max|
 |:--|:-------------------|--------:|---------:|---------:|---------:|---------:|--------:|
-|1  |anyMissing_x_S      | 0.006196| 0.0064660| 0.0070112| 0.0066955| 0.0069295| 0.021459|
-|2  |anyMissing(x, idxs) | 0.020214| 0.0208585| 0.0215437| 0.0215805| 0.0222285| 0.024264|
-|3  |anyMissing(x[idxs]) | 0.023090| 0.0246035| 0.0255807| 0.0251715| 0.0259005| 0.048884|
+|1  |anyMissing_x_S      | 0.006850| 0.0072490| 0.0094397| 0.0075730| 0.0132905| 0.016769|
+|2  |anyMissing(x, idxs) | 0.023116| 0.0235495| 0.0286511| 0.0238020| 0.0282000| 0.049185|
+|3  |anyMissing(x[idxs]) | 0.026394| 0.0276825| 0.0337686| 0.0282005| 0.0330330| 0.065500|
 
 
 |   |expr                |      min|       lq|     mean|   median|       uq|      max|
 |:--|:-------------------|--------:|--------:|--------:|--------:|--------:|--------:|
 |1  |anyMissing_x_S      | 1.000000| 1.000000| 1.000000| 1.000000| 1.000000| 1.000000|
-|2  |anyMissing(x, idxs) | 3.262427| 3.225874| 3.072729| 3.223135| 3.207807| 1.130714|
-|3  |anyMissing(x[idxs]) | 3.726598| 3.805057| 3.648529| 3.759465| 3.737716| 2.278018|
+|2  |anyMissing(x, idxs) | 3.374598| 3.248655| 3.035167| 3.143008| 2.121816| 2.933091|
+|3  |anyMissing(x[idxs]) | 3.853139| 3.818803| 3.577295| 3.723822| 2.485460| 3.906017|
 
 _Figure: Benchmarking of anyMissing_x_S(), anyMissing(x, idxs)() and anyMissing(x[idxs])() on double+n = 10000 data.  Outliers are displayed as crosses.  Times are in milliseconds._
 
@@ -334,8 +334,8 @@ _Figure: Benchmarking of anyMissing_x_S(), anyMissing(x, idxs)() and anyMissing(
 > x_S <- x[idxs]
 > gc()
            used  (Mb) gc trigger  (Mb) max used  (Mb)
-Ncells  5138329 274.5    7554717 403.5  7554717 403.5
-Vcells 20124892 153.6   51680207 394.3 60508962 461.7
+Ncells  5148544 275.0    7916910 422.9  7916910 422.9
+Vcells 20192161 154.1   53955392 411.7 53032641 404.7
 > stats <- microbenchmark(anyMissing_x_S = anyMissing(x_S), `anyMissing(x, idxs)` = anyMissing(x, idxs = idxs), 
 +     `anyMissing(x[idxs])` = anyMissing(x[idxs]), unit = "ms")
 ```
@@ -346,16 +346,16 @@ _Table: Benchmarking of anyMissing_x_S(), anyMissing(x, idxs)() and anyMissing(x
 
 |   |expr                |      min|        lq|      mean|    median|        uq|      max|
 |:--|:-------------------|--------:|---------:|---------:|---------:|---------:|--------:|
-|1  |anyMissing_x_S      | 0.037624| 0.0408995| 0.0473138| 0.0461260| 0.0519580| 0.083511|
-|2  |anyMissing(x, idxs) | 0.168429| 0.1777740| 0.1994929| 0.1951085| 0.2137245| 0.257943|
-|3  |anyMissing(x[idxs]) | 0.229641| 0.2531110| 0.2783283| 0.2781095| 0.2921920| 0.515543|
+|1  |anyMissing_x_S      | 0.040801| 0.0458760| 0.0535020| 0.0495030| 0.0560180| 0.115687|
+|2  |anyMissing(x, idxs) | 0.177440| 0.1994325| 0.2273533| 0.2125495| 0.2316585| 0.549579|
+|3  |anyMissing(x[idxs]) | 0.263107| 0.2803375| 0.3378248| 0.2959000| 0.3937720| 1.195971|
 
 
-|   |expr                |      min|       lq|     mean|   median|       uq|      max|
-|:--|:-------------------|--------:|--------:|--------:|--------:|--------:|--------:|
-|1  |anyMissing_x_S      | 1.000000| 1.000000| 1.000000| 1.000000| 1.000000| 1.000000|
-|2  |anyMissing(x, idxs) | 4.476637| 4.346606| 4.216382| 4.229903| 4.113409| 3.088731|
-|3  |anyMissing(x[idxs]) | 6.103578| 6.188609| 5.882607| 6.029344| 5.623619| 6.173354|
+|   |expr                |      min|       lq|     mean|   median|       uq|       max|
+|:--|:-------------------|--------:|--------:|--------:|--------:|--------:|---------:|
+|1  |anyMissing_x_S      | 1.000000| 1.000000| 1.000000| 1.000000| 1.000000|  1.000000|
+|2  |anyMissing(x, idxs) | 4.348913| 4.347208| 4.249433| 4.293669| 4.135430|  4.750568|
+|3  |anyMissing(x[idxs]) | 6.448543| 6.110766| 6.314242| 5.977416| 7.029383| 10.337990|
 
 _Figure: Benchmarking of anyMissing_x_S(), anyMissing(x, idxs)() and anyMissing(x[idxs])() on double+n = 100000 data.  Outliers are displayed as crosses.  Times are in milliseconds._
 
@@ -369,8 +369,8 @@ _Figure: Benchmarking of anyMissing_x_S(), anyMissing(x, idxs)() and anyMissing(
 > x_S <- x[idxs]
 > gc()
            used  (Mb) gc trigger  (Mb) max used  (Mb)
-Ncells  5138401 274.5    7554717 403.5  7554717 403.5
-Vcells 21069941 160.8   51680207 394.3 60508962 461.7
+Ncells  5148616 275.0    7916910 422.9  7916910 422.9
+Vcells 21137210 161.3   53955392 411.7 53032641 404.7
 > stats <- microbenchmark(anyMissing_x_S = anyMissing(x_S), `anyMissing(x, idxs)` = anyMissing(x, idxs = idxs), 
 +     `anyMissing(x[idxs])` = anyMissing(x[idxs]), unit = "ms")
 ```
@@ -379,18 +379,18 @@ _Table: Benchmarking of anyMissing_x_S(), anyMissing(x, idxs)() and anyMissing(x
 
 
 
-|   |expr                |      min|        lq|      mean|   median|        uq|       max|
-|:--|:-------------------|--------:|---------:|---------:|--------:|---------:|---------:|
-|1  |anyMissing_x_S      | 0.600300| 0.7144645| 0.7250892| 0.726865| 0.7457135|  0.820312|
-|2  |anyMissing(x, idxs) | 5.023077| 5.1314840| 5.2410905| 5.203080| 5.2903465|  6.302668|
-|3  |anyMissing(x[idxs]) | 6.530380| 9.3744010| 9.4388623| 9.552219| 9.7520410| 22.154733|
+|   |expr                |      min|       lq|       mean|    median|        uq|       max|
+|:--|:-------------------|--------:|--------:|----------:|---------:|---------:|---------:|
+|1  |anyMissing_x_S      | 0.635010| 0.746746|  0.7843915|  0.762187|  0.786418|  1.741441|
+|2  |anyMissing(x, idxs) | 5.124992| 5.398494|  6.3265125|  5.801729|  6.654898| 11.951174|
+|3  |anyMissing(x[idxs]) | 6.766017| 9.684119| 10.3313381| 10.067975| 10.829647| 22.629365|
 
 
-|   |expr                |       min|       lq|      mean|    median|        uq|       max|
-|:--|:-------------------|---------:|--------:|---------:|---------:|---------:|---------:|
-|1  |anyMissing_x_S      |  1.000000|  1.00000|  1.000000|  1.000000|  1.000000|  1.000000|
-|2  |anyMissing(x, idxs) |  8.367611|  7.18228|  7.228201|  7.158247|  7.094342|  7.683257|
-|3  |anyMissing(x[idxs]) | 10.878527| 13.12088| 13.017519| 13.141668| 13.077463| 27.007691|
+|   |expr                |       min|        lq|      mean|   median|        uq|       max|
+|:--|:-------------------|---------:|---------:|---------:|--------:|---------:|---------:|
+|1  |anyMissing_x_S      |  1.000000|  1.000000|  1.000000|  1.00000|  1.000000|  1.000000|
+|2  |anyMissing(x, idxs) |  8.070726|  7.229358|  8.065504|  7.61195|  8.462292|  6.862807|
+|3  |anyMissing(x[idxs]) | 10.654977| 12.968425| 13.171150| 13.20932| 13.770853| 12.994620|
 
 _Figure: Benchmarking of anyMissing_x_S(), anyMissing(x, idxs)() and anyMissing(x[idxs])() on double+n = 1000000 data.  Outliers are displayed as crosses.  Times are in milliseconds._
 
@@ -404,8 +404,8 @@ _Figure: Benchmarking of anyMissing_x_S(), anyMissing(x, idxs)() and anyMissing(
 > x_S <- x[idxs]
 > gc()
            used  (Mb) gc trigger  (Mb) max used  (Mb)
-Ncells  5138473 274.5    7554717 403.5  7554717 403.5
-Vcells 30520423 232.9   51680207 394.3 60508962 461.7
+Ncells  5148688 275.0    7916910 422.9  7916910 422.9
+Vcells 30587693 233.4   53955392 411.7 53339345 407.0
 > stats <- microbenchmark(anyMissing_x_S = anyMissing(x_S), `anyMissing(x, idxs)` = anyMissing(x, idxs = idxs), 
 +     `anyMissing(x[idxs])` = anyMissing(x[idxs]), unit = "ms")
 ```
@@ -414,18 +414,18 @@ _Table: Benchmarking of anyMissing_x_S(), anyMissing(x, idxs)() and anyMissing(x
 
 
 
-|   |expr                |       min|         lq|      mean|     median|        uq|       max|
-|:--|:-------------------|---------:|----------:|---------:|----------:|---------:|---------:|
-|1  |anyMissing_x_S      |   7.12606|   8.358239|  10.34582|   9.904466|  13.06794|  14.05714|
-|2  |anyMissing(x, idxs) | 109.35108| 143.128878| 149.19289| 148.965075| 159.09753| 173.11788|
-|3  |anyMissing(x[idxs]) | 155.76093| 169.543543| 177.67001| 176.808220| 184.03351| 198.40736|
+|   |expr                |        min|         lq|      mean|    median|        uq|       max|
+|:--|:-------------------|----------:|----------:|---------:|---------:|---------:|---------:|
+|1  |anyMissing_x_S      |   6.503693|   8.108895|  10.21231|   9.51436|  12.53715|  16.24656|
+|2  |anyMissing(x, idxs) |  96.152599| 132.862656| 148.87533| 149.98104| 165.32895| 194.07407|
+|3  |anyMissing(x[idxs]) | 138.857610| 172.913414| 180.78766| 181.79698| 187.64958| 222.23205|
 
 
 |   |expr                |      min|       lq|     mean|   median|       uq|      max|
 |:--|:-------------------|--------:|--------:|--------:|--------:|--------:|--------:|
 |1  |anyMissing_x_S      |  1.00000|  1.00000|  1.00000|  1.00000|  1.00000|  1.00000|
-|2  |anyMissing(x, idxs) | 15.34524| 17.12429| 14.42059| 15.04019| 12.17465| 12.31530|
-|3  |anyMissing(x[idxs]) | 21.85793| 20.28460| 17.17312| 17.85136| 14.08283| 14.11435|
+|2  |anyMissing(x, idxs) | 14.78431| 16.38480| 14.57803| 15.76365| 13.18712| 11.94555|
+|3  |anyMissing(x[idxs]) | 21.35058| 21.32392| 17.70292| 19.10764| 14.96748| 13.67872|
 
 _Figure: Benchmarking of anyMissing_x_S(), anyMissing(x, idxs)() and anyMissing(x[idxs])() on double+n = 10000000 data.  Outliers are displayed as crosses.  Times are in milliseconds._
 
@@ -459,7 +459,7 @@ attached base packages:
 other attached packages:
 [1] microbenchmark_1.4-7   matrixStats_0.60.0     ggplot2_3.3.5         
 [4] knitr_1.33             R.devices_2.17.0       R.utils_2.10.1        
-[7] R.oo_1.24.0            R.methodsS3_1.8.1-9001
+[7] R.oo_1.24.0            R.methodsS3_1.8.1-9001 history_0.0.1-9000    
 
 loaded via a namespace (and not attached):
  [1] Biobase_2.52.0          httr_1.4.2              splines_4.1.1          
@@ -478,20 +478,22 @@ loaded via a namespace (and not attached):
 [40] magrittr_2.0.1          crayon_1.4.1            statnet.common_4.5.0   
 [43] memoise_2.0.0           laeken_0.5.1            fansi_0.5.0            
 [46] R.cache_0.15.0          MASS_7.3-54             R.rsp_0.44.0           
-[49] tools_4.1.1             lifecycle_1.0.0         S4Vectors_0.30.0       
-[52] trust_0.1-8             munsell_0.5.0           AnnotationDbi_1.54.1   
-[55] Biostrings_2.60.2       compiler_4.1.1          GenomeInfoDb_1.28.1    
-[58] rlang_0.4.11            grid_4.1.1              RCurl_1.98-1.4         
-[61] cwhmisc_6.6             rappdirs_0.3.3          labeling_0.4.2         
-[64] bitops_1.0-7            base64enc_0.1-3         boot_1.3-28            
-[67] gtable_0.3.0            DBI_1.1.1               markdown_1.1           
-[70] R6_2.5.1                lpSolveAPI_5.5.2.0-17.7 rle_0.9.2              
-[73] dplyr_1.0.7             fastmap_1.1.0           bit_4.0.4              
-[76] utf8_1.2.2              parallel_4.1.1          Rcpp_1.0.7             
-[79] vctrs_0.3.8             png_0.1-7               DEoptimR_1.0-9         
-[82] tidyselect_1.1.1        xfun_0.25               coda_0.19-4            
+[49] progressr_0.8.0         tools_4.1.1             lifecycle_1.0.0        
+[52] S4Vectors_0.30.0        trust_0.1-8             munsell_0.5.0          
+[55] tabby_0.0.1-9001        AnnotationDbi_1.54.1    Biostrings_2.60.2      
+[58] compiler_4.1.1          GenomeInfoDb_1.28.1     rlang_0.4.11           
+[61] grid_4.1.1              RCurl_1.98-1.4          cwhmisc_6.6            
+[64] rstudioapi_0.13         rappdirs_0.3.3          startup_0.15.0         
+[67] labeling_0.4.2          bitops_1.0-7            base64enc_0.1-3        
+[70] boot_1.3-28             gtable_0.3.0            DBI_1.1.1              
+[73] markdown_1.1            R6_2.5.1                lpSolveAPI_5.5.2.0-17.7
+[76] rle_0.9.2               dplyr_1.0.7             fastmap_1.1.0          
+[79] bit_4.0.4               utf8_1.2.2              parallel_4.1.1         
+[82] Rcpp_1.0.7              vctrs_0.3.8             png_0.1-7              
+[85] DEoptimR_1.0-9          tidyselect_1.1.1        xfun_0.25              
+[88] coda_0.19-4            
 ```
-Total processing time was 1.24 mins.
+Total processing time was 1.26 mins.
 
 
 ### Reproducibility
@@ -508,7 +510,7 @@ html <- matrixStats:::benchmark('anyMissing_subset')
 [StackOverflow:rowProds?]: https://stackoverflow.com/questions/20198801/ "Stack Overflow: Row product of matrix and column sum of matrix"
 
 ---------------------------------------
-Copyright Dongcan Jiang. Last updated on 2021-08-25 17:33:09 (+0200 UTC). Powered by [RSP].
+Copyright Dongcan Jiang. Last updated on 2021-08-25 22:08:46 (+0200 UTC). Powered by [RSP].
 
 <script>
  var link = document.createElement('link');

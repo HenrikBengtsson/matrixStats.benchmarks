@@ -54,8 +54,8 @@ This report benchmark the performance of product() on subsetted computation.
 > x_S <- x[idxs]
 > gc()
            used  (Mb) gc trigger  (Mb) max used  (Mb)
-Ncells  5284339 282.3   10014072 534.9 10014072 534.9
-Vcells 26102040 199.2   53036220 404.7 90959857 694.0
+Ncells  5350371 285.8    7916910 422.9  7916910 422.9
+Vcells 26574849 202.8   54892165 418.8 94934136 724.3
 > stats <- microbenchmark(product_x_S = product(x_S, na.rm = FALSE), `product(x, idxs)` = product(x, 
 +     idxs = idxs, na.rm = FALSE), `product(x[idxs])` = product(x[idxs], na.rm = FALSE), unit = "ms")
 ```
@@ -66,16 +66,16 @@ _Table: Benchmarking of product_x_S(), product(x, idxs)() and product(x[idxs])()
 
 |   |expr             |      min|        lq|      mean|    median|        uq|      max|
 |:--|:----------------|--------:|---------:|---------:|---------:|---------:|--------:|
-|1  |product_x_S      | 0.021505| 0.0226665| 0.0232906| 0.0233025| 0.0237565| 0.030386|
-|3  |product(x[idxs]) | 0.024060| 0.0252895| 0.0262169| 0.0258975| 0.0264675| 0.048788|
-|2  |product(x, idxs) | 0.028183| 0.0291450| 0.0297966| 0.0297745| 0.0303755| 0.033803|
+|1  |product_x_S      | 0.018551| 0.0192720| 0.0198941| 0.0197205| 0.0202295| 0.034530|
+|2  |product(x, idxs) | 0.019637| 0.0204445| 0.0213027| 0.0210520| 0.0218930| 0.028677|
+|3  |product(x[idxs]) | 0.020544| 0.0216435| 0.0226630| 0.0222330| 0.0228465| 0.050459|
 
 
-|   |expr             |      min|       lq|     mean|   median|       uq|      max|
-|:--|:----------------|--------:|--------:|--------:|--------:|--------:|--------:|
-|1  |product_x_S      | 1.000000| 1.000000| 1.000000| 1.000000| 1.000000| 1.000000|
-|3  |product(x[idxs]) | 1.118810| 1.115721| 1.125644| 1.111361| 1.114116| 1.605608|
-|2  |product(x, idxs) | 1.310532| 1.285818| 1.279339| 1.277738| 1.278619| 1.112453|
+|   |expr             |      min|       lq|     mean|   median|       uq|       max|
+|:--|:----------------|--------:|--------:|--------:|--------:|--------:|---------:|
+|1  |product_x_S      | 1.000000| 1.000000| 1.000000| 1.000000| 1.000000| 1.0000000|
+|2  |product(x, idxs) | 1.058541| 1.060840| 1.070806| 1.067519| 1.082231| 0.8304952|
+|3  |product(x[idxs]) | 1.107434| 1.123054| 1.139185| 1.127406| 1.129366| 1.4613090|
 
 _Figure: Benchmarking of product_x_S(), product(x, idxs)() and product(x[idxs])() on n = 1000 data.  Outliers are displayed as crosses.  Times are in milliseconds._
 
@@ -89,8 +89,8 @@ _Figure: Benchmarking of product_x_S(), product(x, idxs)() and product(x[idxs])(
 > x_S <- x[idxs]
 > gc()
            used  (Mb) gc trigger  (Mb) max used  (Mb)
-Ncells  5281286 282.1   10014072 534.9 10014072 534.9
-Vcells 10971130  83.8   42428976 323.8 90959857 694.0
+Ncells  5347786 285.7    7916910 422.9  7916910 422.9
+Vcells 11445402  87.4   43913732 335.1 94934136 724.3
 > stats <- microbenchmark(product_x_S = product(x_S, na.rm = FALSE), `product(x, idxs)` = product(x, 
 +     idxs = idxs, na.rm = FALSE), `product(x[idxs])` = product(x[idxs], na.rm = FALSE), unit = "ms")
 ```
@@ -101,16 +101,16 @@ _Table: Benchmarking of product_x_S(), product(x, idxs)() and product(x[idxs])()
 
 |   |expr             |      min|        lq|      mean|    median|        uq|      max|
 |:--|:----------------|--------:|---------:|---------:|---------:|---------:|--------:|
-|1  |product_x_S      | 0.161022| 0.1702040| 0.1996902| 0.1945270| 0.2185675| 0.267262|
-|3  |product(x[idxs]) | 0.175093| 0.1818295| 0.2124554| 0.2028875| 0.2301930| 0.333496|
-|2  |product(x, idxs) | 0.191405| 0.2002220| 0.2390451| 0.2336930| 0.2701410| 0.328458|
+|1  |product_x_S      | 0.153597| 0.1589205| 0.1889438| 0.1857690| 0.2083460| 0.256036|
+|3  |product(x[idxs]) | 0.167638| 0.1726615| 0.2010916| 0.1930770| 0.2192160| 0.311540|
+|2  |product(x, idxs) | 0.183204| 0.1894220| 0.2252754| 0.2187645| 0.2458025| 0.311680|
 
 
 |   |expr             |      min|       lq|     mean|   median|       uq|      max|
 |:--|:----------------|--------:|--------:|--------:|--------:|--------:|--------:|
 |1  |product_x_S      | 1.000000| 1.000000| 1.000000| 1.000000| 1.000000| 1.000000|
-|3  |product(x[idxs]) | 1.087386| 1.068303| 1.063925| 1.042979| 1.053190| 1.247824|
-|2  |product(x, idxs) | 1.188689| 1.176365| 1.197080| 1.201340| 1.235961| 1.228974|
+|3  |product(x[idxs]) | 1.091414| 1.086465| 1.064293| 1.039339| 1.052173| 1.216782|
+|2  |product(x, idxs) | 1.192758| 1.191929| 1.192288| 1.177616| 1.179780| 1.217329|
 
 _Figure: Benchmarking of product_x_S(), product(x, idxs)() and product(x[idxs])() on n = 10000 data.  Outliers are displayed as crosses.  Times are in milliseconds._
 
@@ -124,8 +124,8 @@ _Figure: Benchmarking of product_x_S(), product(x, idxs)() and product(x[idxs])(
 > x_S <- x[idxs]
 > gc()
            used  (Mb) gc trigger  (Mb) max used  (Mb)
-Ncells  5281358 282.1   10014072 534.9 10014072 534.9
-Vcells 11066190  84.5   33943181 259.0 90959857 694.0
+Ncells  5347858 285.7    7916910 422.9  7916910 422.9
+Vcells 11540462  88.1   35130986 268.1 94934136 724.3
 > stats <- microbenchmark(product_x_S = product(x_S, na.rm = FALSE), `product(x, idxs)` = product(x, 
 +     idxs = idxs, na.rm = FALSE), `product(x[idxs])` = product(x[idxs], na.rm = FALSE), unit = "ms")
 ```
@@ -136,16 +136,16 @@ _Table: Benchmarking of product_x_S(), product(x, idxs)() and product(x[idxs])()
 
 |   |expr             |      min|       lq|     mean|   median|       uq|      max|
 |:--|:----------------|--------:|--------:|--------:|--------:|--------:|--------:|
-|1  |product_x_S      | 1.618102| 1.797979| 1.836850| 1.807363| 1.856732| 2.655251|
-|3  |product(x[idxs]) | 1.805745| 2.000580| 2.042931| 2.008487| 2.027536| 3.085068|
-|2  |product(x, idxs) | 2.339383| 2.608563| 2.656796| 2.615314| 2.689261| 3.412401|
+|1  |product_x_S      | 1.549952| 1.688692| 1.730460| 1.727593| 1.733352| 2.548933|
+|3  |product(x[idxs]) | 1.738329| 1.899376| 1.951108| 1.935016| 1.943423| 2.839429|
+|2  |product(x, idxs) | 2.248668| 2.495837| 2.498071| 2.513803| 2.519142| 2.849638|
 
 
 |   |expr             |      min|       lq|     mean|   median|       uq|      max|
 |:--|:----------------|--------:|--------:|--------:|--------:|--------:|--------:|
 |1  |product_x_S      | 1.000000| 1.000000| 1.000000| 1.000000| 1.000000| 1.000000|
-|3  |product(x[idxs]) | 1.115965| 1.112682| 1.112192| 1.111280| 1.091991| 1.161874|
-|2  |product(x, idxs) | 1.445757| 1.450830| 1.446387| 1.447033| 1.448383| 1.285152|
+|3  |product(x[idxs]) | 1.121537| 1.124761| 1.127508| 1.120065| 1.121194| 1.113968|
+|2  |product(x, idxs) | 1.450799| 1.477970| 1.443588| 1.455089| 1.453335| 1.117973|
 
 _Figure: Benchmarking of product_x_S(), product(x, idxs)() and product(x[idxs])() on n = 100000 data.  Outliers are displayed as crosses.  Times are in milliseconds._
 
@@ -159,8 +159,8 @@ _Figure: Benchmarking of product_x_S(), product(x, idxs)() and product(x[idxs])(
 > x_S <- x[idxs]
 > gc()
            used  (Mb) gc trigger  (Mb) max used  (Mb)
-Ncells  5281430 282.1   10014072 534.9 10014072 534.9
-Vcells 12011239  91.7   33943181 259.0 90959857 694.0
+Ncells  5347930 285.7    7916910 422.9  7916910 422.9
+Vcells 12485511  95.3   35130986 268.1 94934136 724.3
 > stats <- microbenchmark(product_x_S = product(x_S, na.rm = FALSE), `product(x, idxs)` = product(x, 
 +     idxs = idxs, na.rm = FALSE), `product(x[idxs])` = product(x[idxs], na.rm = FALSE), unit = "ms")
 ```
@@ -171,16 +171,16 @@ _Table: Benchmarking of product_x_S(), product(x, idxs)() and product(x[idxs])()
 
 |   |expr             |      min|       lq|     mean|   median|       uq|      max|
 |:--|:----------------|--------:|--------:|--------:|--------:|--------:|--------:|
-|1  |product_x_S      | 16.33600| 17.40443| 19.19524| 18.54330| 21.47322| 24.04240|
-|3  |product(x[idxs]) | 23.69342| 26.69620| 28.04704| 27.47381| 29.68485| 37.98521|
-|2  |product(x, idxs) | 48.84762| 53.29354| 57.11390| 55.82199| 59.34093| 74.87089|
+|1  |product_x_S      | 15.60263| 17.33577| 19.97094| 19.25093| 22.90886| 30.71439|
+|3  |product(x[idxs]) | 24.81399| 28.14037| 30.92797| 30.11235| 33.43813| 47.27077|
+|2  |product(x, idxs) | 50.91459| 58.90147| 65.89198| 64.07197| 71.18637| 95.78670|
 
 
 |   |expr             |      min|       lq|     mean|   median|       uq|      max|
 |:--|:----------------|--------:|--------:|--------:|--------:|--------:|--------:|
 |1  |product_x_S      | 1.000000| 1.000000| 1.000000| 1.000000| 1.000000| 1.000000|
-|3  |product(x[idxs]) | 1.450381| 1.533874| 1.461145| 1.481603| 1.382413| 1.579926|
-|2  |product(x, idxs) | 2.990183| 3.062068| 2.975420| 3.010359| 2.763486| 3.114119|
+|3  |product(x[idxs]) | 1.590372| 1.623255| 1.548649| 1.564203| 1.459616| 1.539043|
+|2  |product(x, idxs) | 3.263205| 3.397684| 3.299392| 3.328254| 3.107373| 3.118626|
 
 _Figure: Benchmarking of product_x_S(), product(x, idxs)() and product(x[idxs])() on n = 1000000 data.  Outliers are displayed as crosses.  Times are in milliseconds._
 
@@ -212,7 +212,7 @@ attached base packages:
 [1] stats     graphics  grDevices utils     datasets  methods   base     
 
 other attached packages:
-[1] microbenchmark_1.4-7   matrixStats_0.60.1     ggplot2_3.3.5         
+[1] microbenchmark_1.4-7   matrixStats_0.60.0     ggplot2_3.3.5         
 [4] knitr_1.33             R.devices_2.17.0       R.utils_2.10.1        
 [7] R.oo_1.24.0            R.methodsS3_1.8.1-9001 history_0.0.1-9000    
 
@@ -238,16 +238,17 @@ loaded via a namespace (and not attached):
 [55] tabby_0.0.1-9001        AnnotationDbi_1.54.1    Biostrings_2.60.2      
 [58] compiler_4.1.1          GenomeInfoDb_1.28.1     rlang_0.4.11           
 [61] grid_4.1.1              RCurl_1.98-1.4          cwhmisc_6.6            
-[64] rappdirs_0.3.3          startup_0.15.0          labeling_0.4.2         
-[67] bitops_1.0-7            base64enc_0.1-3         boot_1.3-28            
-[70] gtable_0.3.0            DBI_1.1.1               markdown_1.1           
-[73] R6_2.5.1                lpSolveAPI_5.5.2.0-17.7 rle_0.9.2              
-[76] dplyr_1.0.7             fastmap_1.1.0           bit_4.0.4              
-[79] utf8_1.2.2              parallel_4.1.1          Rcpp_1.0.7             
-[82] vctrs_0.3.8             png_0.1-7               DEoptimR_1.0-9         
-[85] tidyselect_1.1.1        xfun_0.25               coda_0.19-4            
+[64] rstudioapi_0.13         rappdirs_0.3.3          startup_0.15.0-9000    
+[67] labeling_0.4.2          bitops_1.0-7            base64enc_0.1-3        
+[70] boot_1.3-28             gtable_0.3.0            DBI_1.1.1              
+[73] markdown_1.1            R6_2.5.1                lpSolveAPI_5.5.2.0-17.7
+[76] rle_0.9.2               dplyr_1.0.7             fastmap_1.1.0          
+[79] bit_4.0.4               utf8_1.2.2              parallel_4.1.1         
+[82] Rcpp_1.0.7              vctrs_0.3.8             png_0.1-7              
+[85] DEoptimR_1.0-9          tidyselect_1.1.1        xfun_0.25              
+[88] coda_0.19-4            
 ```
-Total processing time was 15.37 secs.
+Total processing time was 16.47 secs.
 
 
 ### Reproducibility
@@ -264,7 +265,7 @@ html <- matrixStats:::benchmark('product_subset')
 [StackOverflow:rowProds?]: https://stackoverflow.com/questions/20198801/ "Stack Overflow: Row product of matrix and column sum of matrix"
 
 ---------------------------------------
-Copyright Dongcan Jiang. Last updated on 2021-08-25 18:32:46 (+0200 UTC). Powered by [RSP].
+Copyright Dongcan Jiang. Last updated on 2021-08-25 22:46:16 (+0200 UTC). Powered by [RSP].
 
 <script>
  var link = document.createElement('link');

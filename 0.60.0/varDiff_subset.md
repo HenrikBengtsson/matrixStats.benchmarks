@@ -55,8 +55,8 @@ This report benchmark the performance of varDiff() on subsetted computation.
 > x_S <- x[idxs]
 > gc()
            used  (Mb) gc trigger  (Mb) max used  (Mb)
-Ncells  5296199 282.9   10014072 534.9 10014072 534.9
-Vcells 10679084  81.5   36267018 276.7 90959857 694.0
+Ncells  5362844 286.5    7916910 422.9  7916910 422.9
+Vcells 11153947  85.1   39038428 297.9 94934136 724.3
 > stats <- microbenchmark(varDiff_x_S = varDiff(x_S), `varDiff(x, idxs)` = varDiff(x, idxs = idxs), 
 +     `varDiff(x[idxs])` = varDiff(x[idxs]), unit = "ms")
 ```
@@ -65,18 +65,18 @@ _Table: Benchmarking of varDiff_x_S(), varDiff(x, idxs)() and varDiff(x[idxs])()
 
 
 
-|   |expr             |      min|        lq|      mean|    median|        uq|      max|
-|:--|:----------------|--------:|---------:|---------:|---------:|---------:|--------:|
-|1  |varDiff_x_S      | 0.020509| 0.0209975| 0.0219535| 0.0215830| 0.0221995| 0.038077|
-|3  |varDiff(x[idxs]) | 0.023265| 0.0242420| 0.0277240| 0.0248055| 0.0257845| 0.279807|
-|2  |varDiff(x, idxs) | 0.023435| 0.0240220| 0.0253961| 0.0248935| 0.0258295| 0.055670|
+|   |expr             |      min|        lq|      mean|    median|       uq|      max|
+|:--|:----------------|--------:|---------:|---------:|---------:|--------:|--------:|
+|1  |varDiff_x_S      | 0.022212| 0.0226885| 0.0236181| 0.0228800| 0.023157| 0.087388|
+|3  |varDiff(x[idxs]) | 0.025511| 0.0260000| 0.0290972| 0.0262840| 0.026625| 0.281070|
+|2  |varDiff(x, idxs) | 0.025429| 0.0260535| 0.0264321| 0.0263085| 0.026717| 0.030500|
 
 
-|   |expr             |      min|       lq|     mean|   median|       uq|      max|
-|:--|:----------------|--------:|--------:|--------:|--------:|--------:|--------:|
-|1  |varDiff_x_S      | 1.000000| 1.000000| 1.000000| 1.000000| 1.000000| 1.000000|
-|3  |varDiff(x[idxs]) | 1.134380| 1.154518| 1.262854| 1.149307| 1.161490| 7.348452|
-|2  |varDiff(x, idxs) | 1.142669| 1.144041| 1.156815| 1.153385| 1.163517| 1.462038|
+|   |expr             |      min|       lq|     mean|   median|       uq|       max|
+|:--|:----------------|--------:|--------:|--------:|--------:|--------:|---------:|
+|1  |varDiff_x_S      | 1.000000| 1.000000| 1.000000| 1.000000| 1.000000| 1.0000000|
+|3  |varDiff(x[idxs]) | 1.148523| 1.145955| 1.231988| 1.148776| 1.149760| 3.2163455|
+|2  |varDiff(x, idxs) | 1.144832| 1.148313| 1.119146| 1.149847| 1.153733| 0.3490182|
 
 _Figure: Benchmarking of varDiff_x_S(), varDiff(x, idxs)() and varDiff(x[idxs])() on integer+n = 1000 data.  Outliers are displayed as crosses.  Times are in milliseconds._
 
@@ -91,8 +91,8 @@ _Figure: Benchmarking of varDiff_x_S(), varDiff(x, idxs)() and varDiff(x[idxs])(
 > x_S <- x[idxs]
 > gc()
            used  (Mb) gc trigger  (Mb) max used  (Mb)
-Ncells  5293424 282.7   10014072 534.9 10014072 534.9
-Vcells 10425454  79.6   36267018 276.7 90959857 694.0
+Ncells  5359912 286.3    7916910 422.9  7916910 422.9
+Vcells 10899708  83.2   39038428 297.9 94934136 724.3
 > stats <- microbenchmark(varDiff_x_S = varDiff(x_S), `varDiff(x, idxs)` = varDiff(x, idxs = idxs), 
 +     `varDiff(x[idxs])` = varDiff(x[idxs]), unit = "ms")
 ```
@@ -101,18 +101,18 @@ _Table: Benchmarking of varDiff_x_S(), varDiff(x, idxs)() and varDiff(x[idxs])()
 
 
 
-|   |expr             |      min|        lq|      mean|   median|        uq|      max|
-|:--|:----------------|--------:|---------:|---------:|--------:|---------:|--------:|
-|1  |varDiff_x_S      | 0.062275| 0.0645075| 0.0709465| 0.069039| 0.0758035| 0.094059|
-|2  |varDiff(x, idxs) | 0.080415| 0.0838640| 0.0917455| 0.089034| 0.0977895| 0.119980|
-|3  |varDiff(x[idxs]) | 0.080075| 0.0829730| 0.0905623| 0.089186| 0.0947095| 0.191540|
+|   |expr             |      min|        lq|      mean|    median|        uq|      max|
+|:--|:----------------|--------:|---------:|---------:|---------:|---------:|--------:|
+|1  |varDiff_x_S      | 0.066079| 0.0671120| 0.0757118| 0.0753615| 0.0830735| 0.096079|
+|3  |varDiff(x[idxs]) | 0.084400| 0.0867175| 0.0959805| 0.0942560| 0.1029010| 0.181812|
+|2  |varDiff(x, idxs) | 0.083807| 0.0856580| 0.0961852| 0.0946705| 0.1064495| 0.119259|
 
 
 |   |expr             |      min|       lq|     mean|   median|       uq|      max|
 |:--|:----------------|--------:|--------:|--------:|--------:|--------:|--------:|
 |1  |varDiff_x_S      | 1.000000| 1.000000| 1.000000| 1.000000| 1.000000| 1.000000|
-|2  |varDiff(x, idxs) | 1.291289| 1.300066| 1.293165| 1.289619| 1.290039| 1.275582|
-|3  |varDiff(x[idxs]) | 1.285829| 1.286253| 1.276488| 1.291821| 1.249408| 2.036381|
+|3  |varDiff(x[idxs]) | 1.277259| 1.292131| 1.267709| 1.250718| 1.238674| 1.892318|
+|2  |varDiff(x, idxs) | 1.268285| 1.276344| 1.270412| 1.256218| 1.281389| 1.241260|
 
 _Figure: Benchmarking of varDiff_x_S(), varDiff(x, idxs)() and varDiff(x[idxs])() on integer+n = 10000 data.  Outliers are displayed as crosses.  Times are in milliseconds._
 
@@ -127,8 +127,8 @@ _Figure: Benchmarking of varDiff_x_S(), varDiff(x, idxs)() and varDiff(x[idxs])(
 > x_S <- x[idxs]
 > gc()
            used  (Mb) gc trigger  (Mb) max used  (Mb)
-Ncells  5293496 282.8   10014072 534.9 10014072 534.9
-Vcells 10489014  80.1   36267018 276.7 90959857 694.0
+Ncells  5359984 286.3    7916910 422.9  7916910 422.9
+Vcells 10963268  83.7   39038428 297.9 94934136 724.3
 > stats <- microbenchmark(varDiff_x_S = varDiff(x_S), `varDiff(x, idxs)` = varDiff(x, idxs = idxs), 
 +     `varDiff(x[idxs])` = varDiff(x[idxs]), unit = "ms")
 ```
@@ -137,18 +137,18 @@ _Table: Benchmarking of varDiff_x_S(), varDiff(x, idxs)() and varDiff(x[idxs])()
 
 
 
-|   |expr             |      min|        lq|      mean|    median|        uq|      max|
-|:--|:----------------|--------:|---------:|---------:|---------:|---------:|--------:|
-|1  |varDiff_x_S      | 0.395233| 0.4454115| 0.5855049| 0.6385485| 0.6592685| 0.813972|
-|2  |varDiff(x, idxs) | 0.543839| 0.6095295| 0.7722526| 0.8577425| 0.8816000| 1.111210|
-|3  |varDiff(x[idxs]) | 0.543154| 0.6954690| 0.8724052| 0.8695985| 0.8863880| 6.705216|
+|   |expr             |      min|        lq|      mean|   median|        uq|       max|
+|:--|:----------------|--------:|---------:|---------:|--------:|---------:|---------:|
+|1  |varDiff_x_S      | 0.413811| 0.5045290| 0.5857393| 0.544012| 0.6621690|  1.213714|
+|3  |varDiff(x[idxs]) | 0.561553| 0.6705570| 0.9228240| 0.789193| 0.8980275| 13.785594|
+|2  |varDiff(x, idxs) | 0.560413| 0.7139785| 0.7980298| 0.835218| 0.8945030|  0.995830|
 
 
-|   |expr             |      min|       lq|     mean|   median|       uq|      max|
-|:--|:----------------|--------:|--------:|--------:|--------:|--------:|--------:|
-|1  |varDiff_x_S      | 1.000000| 1.000000| 1.000000| 1.000000| 1.000000| 1.000000|
-|2  |varDiff(x, idxs) | 1.375996| 1.368464| 1.318952| 1.343269| 1.337240| 1.365170|
-|3  |varDiff(x[idxs]) | 1.374263| 1.561408| 1.490005| 1.361836| 1.344502| 8.237649|
+|   |expr             |      min|       lq|     mean|   median|       uq|        max|
+|:--|:----------------|--------:|--------:|--------:|--------:|--------:|----------:|
+|1  |varDiff_x_S      | 1.000000| 1.000000| 1.000000| 1.000000| 1.000000|  1.0000000|
+|3  |varDiff(x[idxs]) | 1.357028| 1.329075| 1.575486| 1.450690| 1.356191| 11.3581898|
+|2  |varDiff(x, idxs) | 1.354273| 1.415139| 1.362432| 1.535293| 1.350868|  0.8204816|
 
 _Figure: Benchmarking of varDiff_x_S(), varDiff(x, idxs)() and varDiff(x[idxs])() on integer+n = 100000 data.  Outliers are displayed as crosses.  Times are in milliseconds._
 
@@ -163,8 +163,8 @@ _Figure: Benchmarking of varDiff_x_S(), varDiff(x, idxs)() and varDiff(x[idxs])(
 > x_S <- x[idxs]
 > gc()
            used  (Mb) gc trigger  (Mb) max used  (Mb)
-Ncells  5293568 282.8   10014072 534.9 10014072 534.9
-Vcells 11119063  84.9   36267018 276.7 90959857 694.0
+Ncells  5360056 286.3    7916910 422.9  7916910 422.9
+Vcells 11593317  88.5   39038428 297.9 94934136 724.3
 > stats <- microbenchmark(varDiff_x_S = varDiff(x_S), `varDiff(x, idxs)` = varDiff(x, idxs = idxs), 
 +     `varDiff(x[idxs])` = varDiff(x[idxs]), unit = "ms")
 ```
@@ -173,18 +173,18 @@ _Table: Benchmarking of varDiff_x_S(), varDiff(x, idxs)() and varDiff(x[idxs])()
 
 
 
-|   |expr             |      min|       lq|     mean|   median|       uq|      max|
-|:--|:----------------|--------:|--------:|--------:|--------:|--------:|--------:|
-|1  |varDiff_x_S      | 4.174903| 4.655493| 5.336827| 4.826992| 5.052267| 11.60798|
-|3  |varDiff(x[idxs]) | 7.311236| 8.060641| 8.627136| 8.248974| 8.528911| 14.54669|
-|2  |varDiff(x, idxs) | 7.411955| 8.066027| 8.735824| 8.259386| 8.496720| 17.20912|
+|   |expr             |      min|       lq|      mean|   median|       uq|      max|
+|:--|:----------------|--------:|--------:|---------:|--------:|--------:|--------:|
+|1  |varDiff_x_S      | 4.635450| 5.266083|  5.782645| 5.402392|  5.53224| 12.76769|
+|2  |varDiff(x, idxs) | 8.392257| 8.700843| 10.176747| 8.977796| 10.06822| 36.72024|
+|3  |varDiff(x[idxs]) | 8.040496| 8.723145| 10.411642| 9.023121| 11.38572| 18.65386|
 
 
 |   |expr             |      min|       lq|     mean|   median|       uq|      max|
 |:--|:----------------|--------:|--------:|--------:|--------:|--------:|--------:|
 |1  |varDiff_x_S      | 1.000000| 1.000000| 1.000000| 1.000000| 1.000000| 1.000000|
-|3  |varDiff(x[idxs]) | 1.751235| 1.731426| 1.616529| 1.708927| 1.688135| 1.253163|
-|2  |varDiff(x, idxs) | 1.775360| 1.732583| 1.636895| 1.711084| 1.681764| 1.482525|
+|2  |varDiff(x, idxs) | 1.810451| 1.652242| 1.759878| 1.661819| 1.819917| 2.876029|
+|3  |varDiff(x[idxs]) | 1.734566| 1.656477| 1.800498| 1.670209| 2.058066| 1.461021|
 
 _Figure: Benchmarking of varDiff_x_S(), varDiff(x, idxs)() and varDiff(x[idxs])() on integer+n = 1000000 data.  Outliers are displayed as crosses.  Times are in milliseconds._
 
@@ -233,8 +233,8 @@ _Figure: Benchmarking of varDiff_x_S(), varDiff(x, idxs)() and varDiff(x[idxs])(
 > x_S <- x[idxs]
 > gc()
            used  (Mb) gc trigger  (Mb) max used  (Mb)
-Ncells  5293643 282.8   10014072 534.9 10014072 534.9
-Vcells 10975877  83.8   36267018 276.7 90959857 694.0
+Ncells  5360131 286.3    7916910 422.9  7916910 422.9
+Vcells 11450125  87.4   39038428 297.9 94934136 724.3
 > stats <- microbenchmark(varDiff_x_S = varDiff(x_S), `varDiff(x, idxs)` = varDiff(x, idxs = idxs), 
 +     `varDiff(x[idxs])` = varDiff(x[idxs]), unit = "ms")
 ```
@@ -243,18 +243,18 @@ _Table: Benchmarking of varDiff_x_S(), varDiff(x, idxs)() and varDiff(x[idxs])()
 
 
 
-|   |expr             |      min|       lq|      mean|   median|        uq|      max|
-|:--|:----------------|--------:|--------:|---------:|--------:|---------:|--------:|
-|1  |varDiff_x_S      | 0.018944| 0.019472| 0.0202807| 0.019815| 0.0202755| 0.038001|
-|2  |varDiff(x, idxs) | 0.021358| 0.022517| 0.0231609| 0.022911| 0.0234170| 0.038064|
-|3  |varDiff(x[idxs]) | 0.022124| 0.022534| 0.0236383| 0.022927| 0.0234470| 0.081002|
+|   |expr             |      min|        lq|      mean|    median|        uq|      max|
+|:--|:----------------|--------:|---------:|---------:|---------:|---------:|--------:|
+|1  |varDiff_x_S      | 0.019873| 0.0202375| 0.0205991| 0.0204165| 0.0208305| 0.022106|
+|2  |varDiff(x, idxs) | 0.022824| 0.0232165| 0.0238168| 0.0234755| 0.0237265| 0.040249|
+|3  |varDiff(x[idxs]) | 0.022967| 0.0233720| 0.0242683| 0.0236040| 0.0238445| 0.080263|
 
 
 |   |expr             |      min|       lq|     mean|   median|       uq|      max|
 |:--|:----------------|--------:|--------:|--------:|--------:|--------:|--------:|
 |1  |varDiff_x_S      | 1.000000| 1.000000| 1.000000| 1.000000| 1.000000| 1.000000|
-|2  |varDiff(x, idxs) | 1.127428| 1.156378| 1.142016| 1.156245| 1.154941| 1.001658|
-|3  |varDiff(x[idxs]) | 1.167863| 1.157251| 1.165556| 1.157053| 1.156420| 2.131575|
+|2  |varDiff(x, idxs) | 1.148493| 1.147202| 1.156203| 1.149830| 1.139027| 1.820727|
+|3  |varDiff(x[idxs]) | 1.155689| 1.154886| 1.178122| 1.156124| 1.144692| 3.630824|
 
 _Figure: Benchmarking of varDiff_x_S(), varDiff(x, idxs)() and varDiff(x[idxs])() on double+n = 1000 data.  Outliers are displayed as crosses.  Times are in milliseconds._
 
@@ -269,8 +269,8 @@ _Figure: Benchmarking of varDiff_x_S(), varDiff(x, idxs)() and varDiff(x[idxs])(
 > x_S <- x[idxs]
 > gc()
            used  (Mb) gc trigger  (Mb) max used  (Mb)
-Ncells  5293712 282.8   10014072 534.9 10014072 534.9
-Vcells 10985627  83.9   36267018 276.7 90959857 694.0
+Ncells  5360200 286.3    7916910 422.9  7916910 422.9
+Vcells 11459871  87.5   39038428 297.9 94934136 724.3
 > stats <- microbenchmark(varDiff_x_S = varDiff(x_S), `varDiff(x, idxs)` = varDiff(x, idxs = idxs), 
 +     `varDiff(x[idxs])` = varDiff(x[idxs]), unit = "ms")
 ```
@@ -281,16 +281,16 @@ _Table: Benchmarking of varDiff_x_S(), varDiff(x, idxs)() and varDiff(x[idxs])()
 
 |   |expr             |      min|        lq|      mean|    median|        uq|      max|
 |:--|:----------------|--------:|---------:|---------:|---------:|---------:|--------:|
-|1  |varDiff_x_S      | 0.052934| 0.0552275| 0.0605207| 0.0593815| 0.0633180| 0.077216|
-|3  |varDiff(x[idxs]) | 0.069586| 0.0743330| 0.0812365| 0.0786265| 0.0842850| 0.180938|
-|2  |varDiff(x, idxs) | 0.069799| 0.0737955| 0.0804967| 0.0786970| 0.0853845| 0.108852|
+|1  |varDiff_x_S      | 0.051286| 0.0566970| 0.0604725| 0.0604575| 0.0612570| 0.119799|
+|2  |varDiff(x, idxs) | 0.070962| 0.0764785| 0.0825251| 0.0808835| 0.0832660| 0.159821|
+|3  |varDiff(x[idxs]) | 0.068973| 0.0763860| 0.0826795| 0.0809315| 0.0841145| 0.157204|
 
 
 |   |expr             |      min|       lq|     mean|   median|       uq|      max|
 |:--|:----------------|--------:|--------:|--------:|--------:|--------:|--------:|
 |1  |varDiff_x_S      | 1.000000| 1.000000| 1.000000| 1.000000| 1.000000| 1.000000|
-|3  |varDiff(x[idxs]) | 1.314580| 1.345942| 1.342294| 1.324091| 1.331138| 2.343271|
-|2  |varDiff(x, idxs) | 1.318604| 1.336209| 1.330070| 1.325278| 1.348503| 1.409708|
+|2  |varDiff(x, idxs) | 1.383652| 1.348899| 1.364672| 1.337857| 1.359290| 1.334076|
+|3  |varDiff(x[idxs]) | 1.344870| 1.347267| 1.367225| 1.338651| 1.373141| 1.312231|
 
 _Figure: Benchmarking of varDiff_x_S(), varDiff(x, idxs)() and varDiff(x[idxs])() on double+n = 10000 data.  Outliers are displayed as crosses.  Times are in milliseconds._
 
@@ -305,8 +305,8 @@ _Figure: Benchmarking of varDiff_x_S(), varDiff(x, idxs)() and varDiff(x[idxs])(
 > x_S <- x[idxs]
 > gc()
            used  (Mb) gc trigger  (Mb) max used  (Mb)
-Ncells  5293784 282.8   10014072 534.9 10014072 534.9
-Vcells 11080478  84.6   36267018 276.7 90959857 694.0
+Ncells  5360272 286.3    7916910 422.9  7916910 422.9
+Vcells 11554724  88.2   39038428 297.9 94934136 724.3
 > stats <- microbenchmark(varDiff_x_S = varDiff(x_S), `varDiff(x, idxs)` = varDiff(x, idxs = idxs), 
 +     `varDiff(x[idxs])` = varDiff(x[idxs]), unit = "ms")
 ```
@@ -317,16 +317,16 @@ _Table: Benchmarking of varDiff_x_S(), varDiff(x, idxs)() and varDiff(x[idxs])()
 
 |   |expr             |      min|        lq|      mean|    median|        uq|      max|
 |:--|:----------------|--------:|---------:|---------:|---------:|---------:|--------:|
-|1  |varDiff_x_S      | 0.328229| 0.3897245| 0.4818524| 0.4988730| 0.5156460| 0.658200|
-|2  |varDiff(x, idxs) | 0.506545| 0.6103270| 0.8265359| 0.8176980| 0.8369545| 6.858407|
-|3  |varDiff(x[idxs]) | 0.505543| 0.7289950| 0.7888124| 0.8212155| 0.8428925| 1.096381|
+|1  |varDiff_x_S      | 0.288761| 0.3207845| 0.4215957| 0.3459820| 0.3860495| 6.478759|
+|2  |varDiff(x, idxs) | 0.462206| 0.4887105| 0.5596582| 0.5506450| 0.5942060| 0.767178|
+|3  |varDiff(x[idxs]) | 0.462960| 0.5058240| 0.5859137| 0.5544025| 0.6596335| 0.924736|
 
 
 |   |expr             |      min|       lq|     mean|   median|       uq|       max|
 |:--|:----------------|--------:|--------:|--------:|--------:|--------:|---------:|
-|1  |varDiff_x_S      | 1.000000| 1.000000| 1.000000| 1.000000| 1.000000|  1.000000|
-|2  |varDiff(x, idxs) | 1.543267| 1.566047| 1.715330| 1.639091| 1.623118| 10.419944|
-|3  |varDiff(x[idxs]) | 1.540214| 1.870539| 1.637042| 1.646141| 1.634634|  1.665726|
+|1  |varDiff_x_S      | 1.000000| 1.000000| 1.000000| 1.000000| 1.000000| 1.0000000|
+|2  |varDiff(x, idxs) | 1.600652| 1.523485| 1.327476| 1.591542| 1.539196| 0.1184143|
+|3  |varDiff(x[idxs]) | 1.603264| 1.576834| 1.389752| 1.602403| 1.708676| 0.1427335|
 
 _Figure: Benchmarking of varDiff_x_S(), varDiff(x, idxs)() and varDiff(x[idxs])() on double+n = 100000 data.  Outliers are displayed as crosses.  Times are in milliseconds._
 
@@ -341,8 +341,8 @@ _Figure: Benchmarking of varDiff_x_S(), varDiff(x, idxs)() and varDiff(x[idxs])(
 > x_S <- x[idxs]
 > gc()
            used  (Mb) gc trigger  (Mb) max used  (Mb)
-Ncells  5293856 282.8   10014072 534.9 10014072 534.9
-Vcells 12025896  91.8   36267018 276.7 90959857 694.0
+Ncells  5360344 286.3    7916910 422.9  7916910 422.9
+Vcells 12500132  95.4   39038428 297.9 94934136 724.3
 > stats <- microbenchmark(varDiff_x_S = varDiff(x_S), `varDiff(x, idxs)` = varDiff(x, idxs = idxs), 
 +     `varDiff(x[idxs])` = varDiff(x[idxs]), unit = "ms")
 ```
@@ -351,18 +351,18 @@ _Table: Benchmarking of varDiff_x_S(), varDiff(x, idxs)() and varDiff(x[idxs])()
 
 
 
-|   |expr             |      min|        lq|      mean|    median|        uq|      max|
-|:--|:----------------|--------:|---------:|---------:|---------:|---------:|--------:|
-|1  |varDiff_x_S      |  4.30456|  4.959998|  5.515964|  5.240379|  5.384191| 12.37939|
-|3  |varDiff(x[idxs]) | 10.59371| 11.457294| 12.457903| 11.542540| 11.721156| 31.98568|
-|2  |varDiff(x, idxs) | 10.80408| 11.469357| 12.328250| 11.568504| 11.683411| 20.37290|
+|   |expr             |       min|        lq|     mean|    median|        uq|      max|
+|:--|:----------------|---------:|---------:|--------:|---------:|---------:|--------:|
+|1  |varDiff_x_S      |  3.927409|  4.711675|  5.06201|  4.806298|  4.896624| 13.03601|
+|3  |varDiff(x[idxs]) | 10.176256| 11.106651| 12.07334| 11.327246| 11.979828| 20.81063|
+|2  |varDiff(x, idxs) | 10.679407| 11.178492| 12.12324| 11.399456| 11.807109| 23.43775|
 
 
 |   |expr             |      min|       lq|     mean|   median|       uq|      max|
 |:--|:----------------|--------:|--------:|--------:|--------:|--------:|--------:|
 |1  |varDiff_x_S      | 1.000000| 1.000000| 1.000000| 1.000000| 1.000000| 1.000000|
-|3  |varDiff(x[idxs]) | 2.461044| 2.309940| 2.258518| 2.202616| 2.176958| 2.583784|
-|2  |varDiff(x, idxs) | 2.509915| 2.312372| 2.235013| 2.207570| 2.169947| 1.645711|
+|3  |varDiff(x[idxs]) | 2.591086| 2.357262| 2.385088| 2.356750| 2.446548| 1.596395|
+|2  |varDiff(x, idxs) | 2.719199| 2.372509| 2.394945| 2.371774| 2.411275| 1.797923|
 
 _Figure: Benchmarking of varDiff_x_S(), varDiff(x, idxs)() and varDiff(x[idxs])() on double+n = 1000000 data.  Outliers are displayed as crosses.  Times are in milliseconds._
 
@@ -394,7 +394,7 @@ attached base packages:
 [1] stats     graphics  grDevices utils     datasets  methods   base     
 
 other attached packages:
-[1] microbenchmark_1.4-7   matrixStats_0.60.1     ggplot2_3.3.5         
+[1] microbenchmark_1.4-7   matrixStats_0.60.0     ggplot2_3.3.5         
 [4] knitr_1.33             R.devices_2.17.0       R.utils_2.10.1        
 [7] R.oo_1.24.0            R.methodsS3_1.8.1-9001 history_0.0.1-9000    
 
@@ -420,16 +420,17 @@ loaded via a namespace (and not attached):
 [55] tabby_0.0.1-9001        AnnotationDbi_1.54.1    Biostrings_2.60.2      
 [58] compiler_4.1.1          GenomeInfoDb_1.28.1     rlang_0.4.11           
 [61] grid_4.1.1              RCurl_1.98-1.4          cwhmisc_6.6            
-[64] rappdirs_0.3.3          startup_0.15.0          labeling_0.4.2         
-[67] bitops_1.0-7            base64enc_0.1-3         boot_1.3-28            
-[70] gtable_0.3.0            DBI_1.1.1               markdown_1.1           
-[73] R6_2.5.1                lpSolveAPI_5.5.2.0-17.7 rle_0.9.2              
-[76] dplyr_1.0.7             fastmap_1.1.0           bit_4.0.4              
-[79] utf8_1.2.2              parallel_4.1.1          Rcpp_1.0.7             
-[82] vctrs_0.3.8             png_0.1-7               DEoptimR_1.0-9         
-[85] tidyselect_1.1.1        xfun_0.25               coda_0.19-4            
+[64] rstudioapi_0.13         rappdirs_0.3.3          startup_0.15.0-9000    
+[67] labeling_0.4.2          bitops_1.0-7            base64enc_0.1-3        
+[70] boot_1.3-28             gtable_0.3.0            DBI_1.1.1              
+[73] markdown_1.1            R6_2.5.1                lpSolveAPI_5.5.2.0-17.7
+[76] rle_0.9.2               dplyr_1.0.7             fastmap_1.1.0          
+[79] bit_4.0.4               utf8_1.2.2              parallel_4.1.1         
+[82] Rcpp_1.0.7              vctrs_0.3.8             png_0.1-7              
+[85] DEoptimR_1.0-9          tidyselect_1.1.1        xfun_0.25              
+[88] coda_0.19-4            
 ```
-Total processing time was 13.77 secs.
+Total processing time was 14.48 secs.
 
 
 ### Reproducibility
@@ -446,7 +447,7 @@ html <- matrixStats:::benchmark('varDiff_subset')
 [StackOverflow:rowProds?]: https://stackoverflow.com/questions/20198801/ "Stack Overflow: Row product of matrix and column sum of matrix"
 
 ---------------------------------------
-Copyright Dongcan Jiang. Last updated on 2021-08-25 18:38:25 (+0200 UTC). Powered by [RSP].
+Copyright Dongcan Jiang. Last updated on 2021-08-25 22:51:52 (+0200 UTC). Powered by [RSP].
 
 <script>
  var link = document.createElement('link');

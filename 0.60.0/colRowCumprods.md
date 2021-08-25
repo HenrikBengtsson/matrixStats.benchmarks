@@ -64,15 +64,15 @@ This report benchmark the performance of colCumprods() and rowCumprods() against
 > X <- data[["10x10"]]
 > gc()
           used  (Mb) gc trigger  (Mb) max used  (Mb)
-Ncells 5178024 276.6    7554717 403.5  7554717 403.5
-Vcells 9452439  72.2   31793280 242.6 60508962 461.7
+Ncells 5218434 278.7    7916910 422.9  7916910 422.9
+Vcells 9906905  75.6   33191153 253.3 53339345 407.0
 > colStats <- microbenchmark(colCumprods = colCumprods(X), `apply+cumprod` = apply(X, MARGIN = 2L, 
 +     FUN = cumprod), unit = "ms")
 > X <- t(X)
 > gc()
           used  (Mb) gc trigger  (Mb) max used  (Mb)
-Ncells 5176956 276.5    7554717 403.5  7554717 403.5
-Vcells 9449426  72.1   31793280 242.6 60508962 461.7
+Ncells 5204744 278.0    7916910 422.9  7916910 422.9
+Vcells 9861448  75.3   33191153 253.3 53339345 407.0
 > rowStats <- microbenchmark(rowCumprods = rowCumprods(X), `apply+cumprod` = apply(X, MARGIN = 1L, 
 +     FUN = cumprod), unit = "ms")
 ```
@@ -81,31 +81,31 @@ _Table: Benchmarking of colCumprods() and apply+cumprod() on integer+10x10 data.
 
 
 
-|   |expr          |      min|        lq|      mean|    median|        uq|      max|
-|:--|:-------------|--------:|---------:|---------:|---------:|---------:|--------:|
-|1  |colCumprods   | 0.002372| 0.0025460| 0.0034677| 0.0035590| 0.0039095| 0.013346|
-|2  |apply+cumprod | 0.045177| 0.0462435| 0.0481721| 0.0467145| 0.0473715| 0.131500|
+|   |expr          |      min|        lq|      mean|    median|       uq|      max|
+|:--|:-------------|--------:|---------:|---------:|---------:|--------:|--------:|
+|1  |colCumprods   | 0.002276| 0.0025275| 0.0032295| 0.0028850| 0.003557| 0.015081|
+|2  |apply+cumprod | 0.042929| 0.0449480| 0.0477027| 0.0459065| 0.047163| 0.162532|
 
 
-|   |expr          |      min|      lq|     mean|   median|       uq|      max|
-|:--|:-------------|--------:|-------:|--------:|--------:|--------:|--------:|
-|1  |colCumprods   |  1.00000|  1.0000|  1.00000|  1.00000|  1.00000| 1.000000|
-|2  |apply+cumprod | 19.04595| 18.1632| 13.89154| 13.12574| 12.11702| 9.853139|
+|   |expr          |     min|       lq|     mean|   median|       uq|      max|
+|:--|:-------------|-------:|--------:|--------:|--------:|--------:|--------:|
+|1  |colCumprods   |  1.0000|  1.00000|  1.00000|  1.00000|  1.00000|  1.00000|
+|2  |apply+cumprod | 18.8616| 17.78358| 14.77102| 15.91213| 13.25921| 10.77727|
 
 _Table: Benchmarking of rowCumprods() and apply+cumprod() on integer+10x10 data (transposed). The top panel shows times in milliseconds and the bottom panel shows relative times._
 
 
 
-|   |expr          |      min|        lq|      mean|    median|        uq|      max|
-|:--|:-------------|--------:|---------:|---------:|---------:|---------:|--------:|
-|1  |rowCumprods   | 0.002431| 0.0028240| 0.0037362| 0.0038555| 0.0040230| 0.013634|
-|2  |apply+cumprod | 0.045651| 0.0464255| 0.0480907| 0.0468075| 0.0473975| 0.126061|
+|   |expr          |      min|        lq|      mean|   median|        uq|      max|
+|:--|:-------------|--------:|---------:|---------:|--------:|---------:|--------:|
+|1  |rowCumprods   | 0.002377| 0.0028930| 0.0035815| 0.003685| 0.0038685| 0.013845|
+|2  |apply+cumprod | 0.045675| 0.0470545| 0.0489029| 0.047617| 0.0480500| 0.130832|
 
 
-|   |expr          |      min|       lq|    mean|   median|       uq|      max|
-|:--|:-------------|--------:|--------:|-------:|--------:|--------:|--------:|
-|1  |rowCumprods   |  1.00000|  1.00000|  1.0000|  1.00000|  1.00000| 1.000000|
-|2  |apply+cumprod | 18.77869| 16.43962| 12.8717| 12.14045| 11.78163| 9.246076|
+|   |expr          |     min|       lq|     mean|   median|       uq|      max|
+|:--|:-------------|-------:|--------:|--------:|--------:|--------:|--------:|
+|1  |rowCumprods   |  1.0000|  1.00000|  1.00000|  1.00000|  1.00000| 1.000000|
+|2  |apply+cumprod | 19.2154| 16.26495| 13.65418| 12.92185| 12.42083| 9.449765|
 
 _Figure: Benchmarking of colCumprods() and apply+cumprod() on integer+10x10 data  as well as rowCumprods() and apply+cumprod() on the same data transposed.  Outliers are displayed as crosses.  Times are in milliseconds._
 
@@ -117,16 +117,16 @@ _Table: Benchmarking of colCumprods() and rowCumprods() on integer+10x10 data (o
 
 
 
-|   |expr        |   min|    lq|    mean| median|     uq|    max|
-|:--|:-----------|-----:|-----:|-------:|------:|------:|------:|
-|1  |colCumprods | 2.372| 2.546| 3.46773| 3.5590| 3.9095| 13.346|
-|2  |rowCumprods | 2.431| 2.824| 3.73616| 3.8555| 4.0230| 13.634|
+|   |expr        |   min|     lq|    mean| median|     uq|    max|
+|:--|:-----------|-----:|------:|-------:|------:|------:|------:|
+|1  |colCumprods | 2.276| 2.5275| 3.22948|  2.885| 3.5570| 15.081|
+|2  |rowCumprods | 2.377| 2.8930| 3.58153|  3.685| 3.8685| 13.845|
 
 
-|   |expr        |      min|       lq|     mean|  median|       uq|     max|
-|:--|:-----------|--------:|--------:|--------:|-------:|--------:|-------:|
-|1  |colCumprods | 1.000000| 1.000000| 1.000000| 1.00000| 1.000000| 1.00000|
-|2  |rowCumprods | 1.024873| 1.109191| 1.077408| 1.08331| 1.029032| 1.02158|
+|   |expr        |      min|       lq|     mean|   median|       uq|       max|
+|:--|:-----------|--------:|--------:|--------:|--------:|--------:|---------:|
+|1  |colCumprods | 1.000000| 1.000000| 1.000000| 1.000000| 1.000000| 1.0000000|
+|2  |rowCumprods | 1.044376| 1.144609| 1.109011| 1.277296| 1.087574| 0.9180426|
 
 _Figure: Benchmarking of colCumprods() and rowCumprods() on integer+10x10 data (original and transposed).  Outliers are displayed as crosses. Times are in milliseconds._
 
@@ -139,15 +139,15 @@ _Figure: Benchmarking of colCumprods() and rowCumprods() on integer+10x10 data (
 > X <- data[["100x100"]]
 > gc()
           used  (Mb) gc trigger  (Mb) max used  (Mb)
-Ncells 5175500 276.5    7554717 403.5  7554717 403.5
-Vcells 9066350  69.2   31793280 242.6 60508962 461.7
+Ncells 5203306 277.9    7916910 422.9  7916910 422.9
+Vcells 9477850  72.4   33191153 253.3 53339345 407.0
 > colStats <- microbenchmark(colCumprods = colCumprods(X), `apply+cumprod` = apply(X, MARGIN = 2L, 
 +     FUN = cumprod), unit = "ms")
 > X <- t(X)
 > gc()
           used  (Mb) gc trigger  (Mb) max used  (Mb)
-Ncells 5175494 276.5    7554717 403.5  7554717 403.5
-Vcells 9071393  69.3   31793280 242.6 60508962 461.7
+Ncells 5203300 277.9    7916910 422.9  7916910 422.9
+Vcells 9482893  72.4   33191153 253.3 53339345 407.0
 > rowStats <- microbenchmark(rowCumprods = rowCumprods(X), `apply+cumprod` = apply(X, MARGIN = 1L, 
 +     FUN = cumprod), unit = "ms")
 ```
@@ -156,31 +156,31 @@ _Table: Benchmarking of colCumprods() and apply+cumprod() on integer+100x100 dat
 
 
 
-|   |expr          |      min|        lq|      mean|   median|       uq|      max|
-|:--|:-------------|--------:|---------:|---------:|--------:|--------:|--------:|
-|1  |colCumprods   | 0.025893| 0.0270315| 0.0293369| 0.028194| 0.030885| 0.047076|
-|2  |apply+cumprod | 0.254374| 0.2642505| 0.2931011| 0.275177| 0.310580| 0.482404|
+|   |expr          |      min|        lq|      mean|    median|        uq|      max|
+|:--|:-------------|--------:|---------:|---------:|---------:|---------:|--------:|
+|1  |colCumprods   | 0.026066| 0.0277180| 0.0303940| 0.0289365| 0.0322705| 0.050303|
+|2  |apply+cumprod | 0.256745| 0.2694895| 0.3040831| 0.2967080| 0.3323485| 0.488569|
 
 
 |   |expr          |      min|       lq|     mean|   median|       uq|      max|
 |:--|:-------------|--------:|--------:|--------:|--------:|--------:|--------:|
-|1  |colCumprods   | 1.000000| 1.000000| 1.000000| 1.000000|  1.00000|  1.00000|
-|2  |apply+cumprod | 9.824045| 9.775651| 9.990884| 9.760126| 10.05601| 10.24734|
+|1  |colCumprods   | 1.000000| 1.000000|  1.00000|  1.00000|  1.00000| 1.000000|
+|2  |apply+cumprod | 9.849804| 9.722545| 10.00471| 10.25376| 10.29883| 9.712522|
 
 _Table: Benchmarking of rowCumprods() and apply+cumprod() on integer+100x100 data (transposed). The top panel shows times in milliseconds and the bottom panel shows relative times._
 
 
 
-|   |expr          |      min|       lq|      mean|    median|        uq|      max|
-|:--|:-------------|--------:|--------:|---------:|---------:|---------:|--------:|
-|1  |rowCumprods   | 0.032446| 0.035186| 0.0391806| 0.0368565| 0.0421665| 0.067779|
-|2  |apply+cumprod | 0.251339| 0.267078| 0.3057960| 0.2910230| 0.3403490| 0.493983|
+|   |expr          |      min|        lq|      mean|    median|        uq|      max|
+|:--|:-------------|--------:|---------:|---------:|---------:|---------:|--------:|
+|1  |rowCumprods   | 0.032413| 0.0343935| 0.0386037| 0.0361505| 0.0402575| 0.062581|
+|2  |apply+cumprod | 0.248389| 0.2592440| 0.3038023| 0.2847105| 0.3224585| 0.579472|
 
 
-|   |expr          |      min|       lq|     mean|   median|      uq|      max|
-|:--|:-------------|--------:|--------:|--------:|--------:|-------:|--------:|
-|1  |rowCumprods   | 1.000000| 1.000000| 1.000000| 1.000000| 1.00000| 1.000000|
-|2  |apply+cumprod | 7.746379| 7.590462| 7.804773| 7.896111| 8.07155| 7.288142|
+|   |expr          |      min|       lq|     mean| median|       uq|      max|
+|:--|:-------------|--------:|--------:|--------:|------:|--------:|--------:|
+|1  |rowCumprods   | 1.000000| 1.000000| 1.000000| 1.0000| 1.000000| 1.000000|
+|2  |apply+cumprod | 7.663252| 7.537587| 7.869765| 7.8757| 8.009899| 9.259552|
 
 _Figure: Benchmarking of colCumprods() and apply+cumprod() on integer+100x100 data  as well as rowCumprods() and apply+cumprod() on the same data transposed.  Outliers are displayed as crosses.  Times are in milliseconds._
 
@@ -194,14 +194,14 @@ _Table: Benchmarking of colCumprods() and rowCumprods() on integer+100x100 data 
 
 |   |expr        |    min|      lq|     mean|  median|      uq|    max|
 |:--|:-----------|------:|-------:|--------:|-------:|-------:|------:|
-|1  |colCumprods | 25.893| 27.0315| 29.33686| 28.1940| 30.8850| 47.076|
-|2  |rowCumprods | 32.446| 35.1860| 39.18064| 36.8565| 42.1665| 67.779|
+|1  |colCumprods | 26.066| 27.7180| 30.39400| 28.9365| 32.2705| 50.303|
+|2  |rowCumprods | 32.413| 34.3935| 38.60373| 36.1505| 40.2575| 62.581|
 
 
-|   |expr        |     min|       lq|     mean|   median|       uq|      max|
-|:--|:-----------|-------:|--------:|--------:|--------:|--------:|--------:|
-|1  |colCumprods | 1.00000| 1.000000| 1.000000| 1.000000| 1.000000| 1.000000|
-|2  |rowCumprods | 1.25308| 1.301667| 1.335543| 1.307246| 1.365274| 1.439778|
+|   |expr        |      min|       lq|    mean|   median|       uq|      max|
+|:--|:-----------|--------:|--------:|-------:|--------:|--------:|--------:|
+|1  |colCumprods | 1.000000| 1.000000| 1.00000| 1.000000| 1.000000| 1.000000|
+|2  |rowCumprods | 1.243497| 1.240836| 1.27011| 1.249305| 1.247502| 1.244081|
 
 _Figure: Benchmarking of colCumprods() and rowCumprods() on integer+100x100 data (original and transposed).  Outliers are displayed as crosses. Times are in milliseconds._
 
@@ -214,15 +214,15 @@ _Figure: Benchmarking of colCumprods() and rowCumprods() on integer+100x100 data
 > X <- data[["1000x10"]]
 > gc()
           used  (Mb) gc trigger  (Mb) max used  (Mb)
-Ncells 5175690 276.5    7554717 403.5  7554717 403.5
-Vcells 9066690  69.2   31793280 242.6 60508962 461.7
+Ncells 5204038 278.0    7916910 422.9  7916910 422.9
+Vcells 9481366  72.4   33191153 253.3 53339345 407.0
 > colStats <- microbenchmark(colCumprods = colCumprods(X), `apply+cumprod` = apply(X, MARGIN = 2L, 
 +     FUN = cumprod), unit = "ms")
 > X <- t(X)
 > gc()
           used  (Mb) gc trigger  (Mb) max used  (Mb)
-Ncells 5175684 276.5    7554717 403.5  7554717 403.5
-Vcells 9071733  69.3   31793280 242.6 60508962 461.7
+Ncells 5204032 278.0    7916910 422.9  7916910 422.9
+Vcells 9486409  72.4   33191153 253.3 53339345 407.0
 > rowStats <- microbenchmark(rowCumprods = rowCumprods(X), `apply+cumprod` = apply(X, MARGIN = 1L, 
 +     FUN = cumprod), unit = "ms")
 ```
@@ -231,31 +231,31 @@ _Table: Benchmarking of colCumprods() and apply+cumprod() on integer+1000x10 dat
 
 
 
-|   |expr          |      min|        lq|      mean|    median|       uq|      max|
-|:--|:-------------|--------:|---------:|---------:|---------:|--------:|--------:|
-|1  |colCumprods   | 0.026555| 0.0288340| 0.0313220| 0.0312675| 0.033018| 0.051575|
-|2  |apply+cumprod | 0.157826| 0.1716085| 0.1937528| 0.1884020| 0.209066| 0.301239|
+|   |expr          |      min|        lq|      mean|    median|        uq|      max|
+|:--|:-------------|--------:|---------:|---------:|---------:|---------:|--------:|
+|1  |colCumprods   | 0.024857| 0.0266135| 0.0289418| 0.0285575| 0.0301910| 0.060870|
+|2  |apply+cumprod | 0.157447| 0.1673045| 0.1842770| 0.1833200| 0.1960545| 0.311474|
 
 
-|   |expr          |      min|       lq|    mean|  median|      uq|      max|
-|:--|:-------------|--------:|--------:|-------:|-------:|-------:|--------:|
-|1  |colCumprods   | 1.000000| 1.000000| 1.00000| 1.00000| 1.00000| 1.000000|
-|2  |apply+cumprod | 5.943363| 5.951602| 6.18583| 6.02549| 6.33188| 5.840795|
+|   |expr          |      min|       lq|     mean|   median|       uq|      max|
+|:--|:-------------|--------:|--------:|--------:|--------:|--------:|--------:|
+|1  |colCumprods   | 1.000000| 1.000000| 1.000000| 1.000000| 1.000000| 1.000000|
+|2  |apply+cumprod | 6.334111| 6.286452| 6.367162| 6.419329| 6.493806| 5.117036|
 
 _Table: Benchmarking of rowCumprods() and apply+cumprod() on integer+1000x10 data (transposed). The top panel shows times in milliseconds and the bottom panel shows relative times._
 
 
 
-|   |expr          |      min|       lq|      mean|    median|        uq|      max|
-|:--|:-------------|--------:|--------:|---------:|---------:|---------:|--------:|
-|1  |rowCumprods   | 0.033026| 0.034428| 0.0372024| 0.0360015| 0.0392770| 0.056054|
-|2  |apply+cumprod | 0.152555| 0.161052| 0.1787728| 0.1735250| 0.1903835| 0.297116|
+|   |expr          |      min|        lq|      mean|    median|       uq|      max|
+|:--|:-------------|--------:|---------:|---------:|---------:|--------:|--------:|
+|1  |rowCumprods   | 0.033903| 0.0363210| 0.0396467| 0.0390005| 0.042471| 0.057180|
+|2  |apply+cumprod | 0.166161| 0.1724105| 0.1887558| 0.1877015| 0.200694| 0.290792|
 
 
 |   |expr          |      min|       lq|     mean|   median|       uq|      max|
 |:--|:-------------|--------:|--------:|--------:|--------:|--------:|--------:|
 |1  |rowCumprods   | 1.000000| 1.000000| 1.000000| 1.000000| 1.000000| 1.000000|
-|2  |apply+cumprod | 4.619239| 4.677937| 4.805407| 4.819938| 4.847201| 5.300532|
+|2  |apply+cumprod | 4.901071| 4.746854| 4.760942| 4.812797| 4.725436| 5.085554|
 
 _Figure: Benchmarking of colCumprods() and apply+cumprod() on integer+1000x10 data  as well as rowCumprods() and apply+cumprod() on the same data transposed.  Outliers are displayed as crosses.  Times are in milliseconds._
 
@@ -267,16 +267,16 @@ _Table: Benchmarking of colCumprods() and rowCumprods() on integer+1000x10 data 
 
 
 
-|   |expr        |    min|     lq|     mean|  median|     uq|    max|
-|:--|:-----------|------:|------:|--------:|-------:|------:|------:|
-|1  |colCumprods | 26.555| 28.834| 31.32203| 31.2675| 33.018| 51.575|
-|2  |rowCumprods | 33.026| 34.428| 37.20243| 36.0015| 39.277| 56.054|
+|   |expr        |    min|      lq|     mean|  median|     uq|   max|
+|:--|:-----------|------:|-------:|--------:|-------:|------:|-----:|
+|1  |colCumprods | 24.857| 26.6135| 28.94178| 28.5575| 30.191| 60.87|
+|2  |rowCumprods | 33.903| 36.3210| 39.64672| 39.0005| 42.471| 57.18|
 
 
-|   |expr        |      min|       lq|    mean|   median|       uq|      max|
-|:--|:-----------|--------:|--------:|-------:|--------:|--------:|--------:|
-|1  |colCumprods | 1.000000| 1.000000| 1.00000| 1.000000| 1.000000| 1.000000|
-|2  |rowCumprods | 1.243683| 1.194007| 1.18774| 1.151403| 1.189563| 1.086844|
+|   |expr        |      min|       lq|     mean|   median|       uq|      max|
+|:--|:-----------|--------:|--------:|--------:|--------:|--------:|--------:|
+|1  |colCumprods | 1.000000| 1.000000| 1.000000| 1.000000| 1.000000| 1.000000|
+|2  |rowCumprods | 1.363922| 1.364758| 1.369878| 1.365683| 1.406744| 0.939379|
 
 _Figure: Benchmarking of colCumprods() and rowCumprods() on integer+1000x10 data (original and transposed).  Outliers are displayed as crosses. Times are in milliseconds._
 
@@ -289,15 +289,15 @@ _Figure: Benchmarking of colCumprods() and rowCumprods() on integer+1000x10 data
 > X <- data[["10x1000"]]
 > gc()
           used  (Mb) gc trigger  (Mb) max used  (Mb)
-Ncells 5175878 276.5    7554717 403.5  7554717 403.5
-Vcells 9067374  69.2   31793280 242.6 60508962 461.7
+Ncells 5204226 278.0    7916910 422.9  7916910 422.9
+Vcells 9482052  72.4   33191153 253.3 53339345 407.0
 > colStats <- microbenchmark(colCumprods = colCumprods(X), `apply+cumprod` = apply(X, MARGIN = 2L, 
 +     FUN = cumprod), unit = "ms")
 > X <- t(X)
 > gc()
           used  (Mb) gc trigger  (Mb) max used  (Mb)
-Ncells 5175872 276.5    7554717 403.5  7554717 403.5
-Vcells 9072417  69.3   31793280 242.6 60508962 461.7
+Ncells 5204220 278.0    7916910 422.9  7916910 422.9
+Vcells 9487095  72.4   33191153 253.3 53339345 407.0
 > rowStats <- microbenchmark(rowCumprods = rowCumprods(X), `apply+cumprod` = apply(X, MARGIN = 1L, 
 +     FUN = cumprod), unit = "ms")
 ```
@@ -306,31 +306,31 @@ _Table: Benchmarking of colCumprods() and apply+cumprod() on integer+10x1000 dat
 
 
 
-|   |expr          |      min|       lq|      mean|   median|       uq|      max|
-|:--|:-------------|--------:|--------:|---------:|--------:|--------:|--------:|
-|1  |colCumprods   | 0.021037| 0.022581| 0.0271792| 0.025019| 0.030057| 0.048105|
-|2  |apply+cumprod | 0.923671| 0.967107| 1.0991210| 1.057970| 1.191586| 1.532380|
+|   |expr          |      min|        lq|      mean|    median|        uq|      max|
+|:--|:-------------|--------:|---------:|---------:|---------:|---------:|--------:|
+|1  |colCumprods   | 0.021124| 0.0226045| 0.0269961| 0.0253885| 0.0292555| 0.053620|
+|2  |apply+cumprod | 0.909392| 0.9494455| 1.0832734| 1.0568940| 1.1696135| 1.559529|
 
 
-|   |expr          |      min|       lq|     mean|   median|       uq|     max|
-|:--|:-------------|--------:|--------:|--------:|--------:|--------:|-------:|
-|1  |colCumprods   |  1.00000|  1.00000|  1.00000|  1.00000|  1.00000|  1.0000|
-|2  |apply+cumprod | 43.90697| 42.82835| 40.43981| 42.28668| 39.64421| 31.8549|
+|   |expr          |      min|      lq|     mean|   median|       uq|      max|
+|:--|:-------------|--------:|-------:|--------:|--------:|--------:|--------:|
+|1  |colCumprods   |  1.00000|  1.0000|  1.00000|  1.00000|  1.00000|  1.00000|
+|2  |apply+cumprod | 43.05018| 42.0025| 40.12705| 41.62885| 39.97927| 29.08484|
 
 _Table: Benchmarking of rowCumprods() and apply+cumprod() on integer+10x1000 data (transposed). The top panel shows times in milliseconds and the bottom panel shows relative times._
 
 
 
-|   |expr          |      min|        lq|      mean|   median|        uq|      max|
-|:--|:-------------|--------:|---------:|---------:|--------:|---------:|--------:|
-|1  |rowCumprods   | 0.023854| 0.0251335| 0.0285194| 0.026325| 0.0305315| 0.051174|
-|2  |apply+cumprod | 0.968060| 0.9834990| 1.0817697| 0.994157| 1.1774500| 1.540775|
+|   |expr          |      min|        lq|      mean|    median|        uq|      max|
+|:--|:-------------|--------:|---------:|---------:|---------:|---------:|--------:|
+|1  |rowCumprods   | 0.024064| 0.0252535| 0.0296163| 0.0275465| 0.0317855| 0.060211|
+|2  |apply+cumprod | 0.922854| 0.9723930| 1.0861168| 1.0374410| 1.1854125| 1.790418|
 
 
-|   |expr          |      min|     lq|   mean|   median|       uq|      max|
-|:--|:-------------|--------:|------:|------:|--------:|--------:|--------:|
-|1  |rowCumprods   |  1.00000|  1.000|  1.000|  1.00000|  1.00000|  1.00000|
-|2  |apply+cumprod | 40.58271| 39.131| 37.931| 37.76475| 38.56509| 30.10855|
+|   |expr          |      min|       lq|    mean|   median|       uq|      max|
+|:--|:-------------|--------:|--------:|-------:|--------:|--------:|--------:|
+|1  |rowCumprods   |  1.00000|  1.00000|  1.0000|  1.00000|  1.00000|  1.00000|
+|2  |apply+cumprod | 38.34998| 38.50528| 36.6729| 37.66145| 37.29413| 29.73573|
 
 _Figure: Benchmarking of colCumprods() and apply+cumprod() on integer+10x1000 data  as well as rowCumprods() and apply+cumprod() on the same data transposed.  Outliers are displayed as crosses.  Times are in milliseconds._
 
@@ -342,16 +342,16 @@ _Table: Benchmarking of colCumprods() and rowCumprods() on integer+10x1000 data 
 
 
 
-|   |expr        |    min|      lq|     mean| median|      uq|    max|
-|:--|:-----------|------:|-------:|--------:|------:|-------:|------:|
-|1  |colCumprods | 21.037| 22.5810| 27.17918| 25.019| 30.0570| 48.105|
-|2  |rowCumprods | 23.854| 25.1335| 28.51941| 26.325| 30.5315| 51.174|
+|   |expr        |    min|      lq|     mean|  median|      uq|    max|
+|:--|:-----------|------:|-------:|--------:|-------:|-------:|------:|
+|1  |colCumprods | 21.124| 22.6045| 26.99609| 25.3885| 29.2555| 53.620|
+|2  |rowCumprods | 24.064| 25.2535| 29.61633| 27.5465| 31.7855| 60.211|
 
 
-|   |expr        |      min|       lq|     mean| median|       uq|      max|
-|:--|:-----------|--------:|--------:|--------:|------:|--------:|--------:|
-|1  |colCumprods | 1.000000| 1.000000| 1.000000| 1.0000| 1.000000| 1.000000|
-|2  |rowCumprods | 1.133907| 1.113037| 1.049311| 1.0522| 1.015787| 1.063798|
+|   |expr        |      min|       lq|    mean|   median|      uq|      max|
+|:--|:-----------|--------:|--------:|-------:|--------:|-------:|--------:|
+|1  |colCumprods | 1.000000| 1.000000| 1.00000| 1.000000| 1.00000| 1.000000|
+|2  |rowCumprods | 1.139178| 1.117189| 1.09706| 1.084999| 1.08648| 1.122921|
 
 _Figure: Benchmarking of colCumprods() and rowCumprods() on integer+10x1000 data (original and transposed).  Outliers are displayed as crosses. Times are in milliseconds._
 
@@ -364,15 +364,15 @@ _Figure: Benchmarking of colCumprods() and rowCumprods() on integer+10x1000 data
 > X <- data[["100x1000"]]
 > gc()
           used  (Mb) gc trigger  (Mb) max used  (Mb)
-Ncells 5176068 276.5    7554717 403.5  7554717 403.5
-Vcells 9067876  69.2   31793280 242.6 60508962 461.7
+Ncells 5204412 278.0    7916910 422.9  7916910 422.9
+Vcells 9482539  72.4   33191153 253.3 53339345 407.0
 > colStats <- microbenchmark(colCumprods = colCumprods(X), `apply+cumprod` = apply(X, MARGIN = 2L, 
 +     FUN = cumprod), unit = "ms")
 > X <- t(X)
 > gc()
           used  (Mb) gc trigger  (Mb) max used  (Mb)
-Ncells 5176056 276.5    7554717 403.5  7554717 403.5
-Vcells 9117909  69.6   31793280 242.6 60508962 461.7
+Ncells 5204400 278.0    7916910 422.9  7916910 422.9
+Vcells 9532572  72.8   33191153 253.3 53339345 407.0
 > rowStats <- microbenchmark(rowCumprods = rowCumprods(X), `apply+cumprod` = apply(X, MARGIN = 1L, 
 +     FUN = cumprod), unit = "ms")
 ```
@@ -381,31 +381,31 @@ _Table: Benchmarking of colCumprods() and apply+cumprod() on integer+100x1000 da
 
 
 
-|   |expr          |      min|        lq|      mean|    median|        uq|      max|
-|:--|:-------------|--------:|---------:|---------:|---------:|---------:|--------:|
-|1  |colCumprods   | 0.189411| 0.1971045| 0.2205661| 0.2121985| 0.2389065|  0.33686|
-|2  |apply+cumprod | 1.834509| 1.8671805| 2.4449273| 2.0209890| 2.3176440| 18.11043|
+|   |expr          |      min|       lq|     mean|   median|        uq|       max|
+|:--|:-------------|--------:|--------:|--------:|--------:|---------:|---------:|
+|1  |colCumprods   | 0.192213| 0.218718| 0.237096| 0.233236| 0.2516265|  0.307654|
+|2  |apply+cumprod | 1.857093| 2.025908| 2.603234| 2.214641| 2.4522365| 19.043625|
 
 
-|   |expr          |      min|       lq|     mean|   median|      uq|      max|
-|:--|:-------------|--------:|--------:|--------:|--------:|-------:|--------:|
-|1  |colCumprods   | 1.000000| 1.000000|  1.00000| 1.000000| 1.00000|  1.00000|
-|2  |apply+cumprod | 9.685335| 9.473049| 11.08478| 9.524049| 9.70105| 53.76247|
+|   |expr          |      min|       lq|     mean|   median|       uq|      max|
+|:--|:-------------|--------:|--------:|--------:|--------:|--------:|--------:|
+|1  |colCumprods   | 1.000000| 1.000000|  1.00000| 1.000000| 1.000000|  1.00000|
+|2  |apply+cumprod | 9.661641| 9.262649| 10.97966| 9.495282| 9.745541| 61.89949|
 
 _Table: Benchmarking of rowCumprods() and apply+cumprod() on integer+100x1000 data (transposed). The top panel shows times in milliseconds and the bottom panel shows relative times._
 
 
 
-|   |expr          |      min|        lq|      mean|   median|       uq|       max|
-|:--|:-------------|--------:|---------:|---------:|--------:|--------:|---------:|
-|1  |rowCumprods   | 0.233216| 0.2477915| 0.2854197| 0.270051| 0.298229|  0.602251|
-|2  |apply+cumprod | 1.838343| 1.9619630| 2.6074069| 2.139464| 2.415271| 19.145657|
+|   |expr          |      min|        lq|      mean|    median|        uq|       max|
+|:--|:-------------|--------:|---------:|---------:|---------:|---------:|---------:|
+|1  |rowCumprods   | 0.233535| 0.2666795| 0.2892378| 0.2857985| 0.3083355|  0.406547|
+|2  |apply+cumprod | 1.877209| 2.0892115| 2.6503312| 2.2804735| 2.4822040| 19.068182|
 
 
 |   |expr          |      min|       lq|     mean|   median|       uq|      max|
 |:--|:-------------|--------:|--------:|--------:|--------:|--------:|--------:|
 |1  |rowCumprods   | 1.000000| 1.000000| 1.000000| 1.000000| 1.000000|  1.00000|
-|2  |apply+cumprod | 7.882577| 7.917798| 9.135343| 7.922446| 8.098714| 31.79016|
+|2  |apply+cumprod | 8.038234| 7.834166| 9.163157| 7.979305| 8.050335| 46.90277|
 
 _Figure: Benchmarking of colCumprods() and apply+cumprod() on integer+100x1000 data  as well as rowCumprods() and apply+cumprod() on the same data transposed.  Outliers are displayed as crosses.  Times are in milliseconds._
 
@@ -419,14 +419,14 @@ _Table: Benchmarking of colCumprods() and rowCumprods() on integer+100x1000 data
 
 |   |expr        |     min|       lq|     mean|   median|       uq|     max|
 |:--|:-----------|-------:|--------:|--------:|--------:|--------:|-------:|
-|1  |colCumprods | 189.411| 197.1045| 220.5661| 212.1985| 238.9065| 336.860|
-|2  |rowCumprods | 233.216| 247.7915| 285.4197| 270.0510| 298.2290| 602.251|
+|1  |colCumprods | 192.213| 218.7180| 237.0960| 233.2360| 251.6265| 307.654|
+|2  |rowCumprods | 233.535| 266.6795| 289.2378| 285.7985| 308.3355| 406.547|
 
 
-|   |expr        |     min|       lq|     mean|   median|       uq|      max|
-|:--|:-----------|-------:|--------:|--------:|--------:|--------:|--------:|
-|1  |colCumprods | 1.00000| 1.000000| 1.000000| 1.000000| 1.000000| 1.000000|
-|2  |rowCumprods | 1.23127| 1.257158| 1.294032| 1.272634| 1.248308| 1.787838|
+|   |expr        |     min|       lq|     mean|   median|      uq|      max|
+|:--|:-----------|-------:|--------:|--------:|--------:|-------:|--------:|
+|1  |colCumprods | 1.00000| 1.000000| 1.000000| 1.000000| 1.00000| 1.000000|
+|2  |rowCumprods | 1.21498| 1.219285| 1.219918| 1.225362| 1.22537| 1.321442|
 
 _Figure: Benchmarking of colCumprods() and rowCumprods() on integer+100x1000 data (original and transposed).  Outliers are displayed as crosses. Times are in milliseconds._
 
@@ -439,15 +439,15 @@ _Figure: Benchmarking of colCumprods() and rowCumprods() on integer+100x1000 dat
 > X <- data[["1000x100"]]
 > gc()
           used  (Mb) gc trigger  (Mb) max used  (Mb)
-Ncells 5176256 276.5    7554717 403.5  7554717 403.5
-Vcells 9068454  69.2   31793280 242.6 60508962 461.7
+Ncells 5204605 278.0    7916910 422.9  7916910 422.9
+Vcells 9483099  72.4   33191153 253.3 53339345 407.0
 > colStats <- microbenchmark(colCumprods = colCumprods(X), `apply+cumprod` = apply(X, MARGIN = 2L, 
 +     FUN = cumprod), unit = "ms")
 > X <- t(X)
 > gc()
           used  (Mb) gc trigger  (Mb) max used  (Mb)
-Ncells 5176250 276.5    7554717 403.5  7554717 403.5
-Vcells 9118497  69.6   31793280 242.6 60508962 461.7
+Ncells 5204599 278.0    7916910 422.9  7916910 422.9
+Vcells 9533142  72.8   33191153 253.3 53339345 407.0
 > rowStats <- microbenchmark(rowCumprods = rowCumprods(X), `apply+cumprod` = apply(X, MARGIN = 1L, 
 +     FUN = cumprod), unit = "ms")
 ```
@@ -456,31 +456,31 @@ _Table: Benchmarking of colCumprods() and apply+cumprod() on integer+1000x100 da
 
 
 
-|   |expr          |      min|       lq|      mean|    median|       uq|      max|
-|:--|:-------------|--------:|--------:|---------:|---------:|--------:|--------:|
-|1  |colCumprods   | 0.183418| 0.202439| 0.2214825| 0.2151115| 0.236207| 0.342695|
-|2  |apply+cumprod | 1.033932| 1.122478| 1.3740782| 1.2345975| 1.340109| 7.435716|
+|   |expr          |      min|       lq|      mean|    median|        uq|      max|
+|:--|:-------------|--------:|--------:|---------:|---------:|---------:|--------:|
+|1  |colCumprods   | 0.188189| 0.210303| 0.2285379| 0.2252015| 0.2403785| 0.349567|
+|2  |apply+cumprod | 1.060915| 1.159491| 1.4324526| 1.2974905| 1.3982185| 7.410537|
 
 
-|   |expr          |      min|       lq|     mean|   median|       uq|      max|
-|:--|:-------------|--------:|--------:|--------:|--------:|--------:|--------:|
-|1  |colCumprods   | 1.000000| 1.000000| 1.000000| 1.000000| 1.000000|  1.00000|
-|2  |apply+cumprod | 5.637026| 5.544774| 6.204003| 5.739338| 5.673452| 21.69777|
+|   |expr          |      min|       lq|   mean|   median|       uq|      max|
+|:--|:-------------|--------:|--------:|------:|--------:|--------:|--------:|
+|1  |colCumprods   | 1.000000| 1.000000| 1.0000| 1.000000| 1.000000|  1.00000|
+|2  |apply+cumprod | 5.637497| 5.513433| 6.2679| 5.761465| 5.816737| 21.19919|
 
 _Table: Benchmarking of rowCumprods() and apply+cumprod() on integer+1000x100 data (transposed). The top panel shows times in milliseconds and the bottom panel shows relative times._
 
 
 
-|   |expr          |      min|       lq|      mean|    median|        uq|        max|
-|:--|:-------------|--------:|--------:|---------:|---------:|---------:|----------:|
-|1  |rowCumprods   | 0.242087| 0.287937| 0.3226864| 0.3078185| 0.3367915|   0.492306|
-|2  |apply+cumprod | 1.031691| 1.242941| 4.9544688| 1.3472695| 1.5128780| 349.810214|
+|   |expr          |      min|        lq|      mean|    median|       uq|      max|
+|:--|:-------------|--------:|---------:|---------:|---------:|--------:|--------:|
+|1  |rowCumprods   | 0.242658| 0.2768575| 0.2976501| 0.2971445| 0.309726| 0.412638|
+|2  |apply+cumprod | 1.032783| 1.1748890| 1.4189550| 1.2837250| 1.386918| 7.382424|
 
 
-|   |expr          |      min|       lq|     mean|   median|       uq|      max|
-|:--|:-------------|--------:|--------:|--------:|--------:|--------:|--------:|
-|1  |rowCumprods   | 1.000000| 1.000000|  1.00000| 1.000000| 1.000000|   1.0000|
-|2  |apply+cumprod | 4.261654| 4.316712| 15.35382| 4.376831| 4.492031| 710.5544|
+|   |expr          |      min|      lq|     mean|   median|       uq|     max|
+|:--|:-------------|--------:|-------:|--------:|--------:|--------:|-------:|
+|1  |rowCumprods   | 1.000000| 1.00000| 1.000000| 1.000000| 1.000000|  1.0000|
+|2  |apply+cumprod | 4.256126| 4.24366| 4.767191| 4.320205| 4.477887| 17.8908|
 
 _Figure: Benchmarking of colCumprods() and apply+cumprod() on integer+1000x100 data  as well as rowCumprods() and apply+cumprod() on the same data transposed.  Outliers are displayed as crosses.  Times are in milliseconds._
 
@@ -492,16 +492,16 @@ _Table: Benchmarking of colCumprods() and rowCumprods() on integer+1000x100 data
 
 
 
-|   |expr        |     min|      lq|     mean|   median|       uq|     max|
-|:--|:-----------|-------:|-------:|--------:|--------:|--------:|-------:|
-|1  |colCumprods | 183.418| 202.439| 221.4825| 215.1115| 236.2070| 342.695|
-|2  |rowCumprods | 242.087| 287.937| 322.6864| 307.8185| 336.7915| 492.306|
+|   |expr        |     min|       lq|     mean|   median|       uq|     max|
+|:--|:-----------|-------:|--------:|--------:|--------:|--------:|-------:|
+|1  |colCumprods | 188.189| 210.3030| 228.5379| 225.2015| 240.3785| 349.567|
+|2  |rowCumprods | 242.658| 276.8575| 297.6501| 297.1445| 309.7260| 412.638|
 
 
-|   |expr        |      min|      lq|     mean|   median|       uq|      max|
-|:--|:-----------|--------:|-------:|--------:|--------:|--------:|--------:|
-|1  |colCumprods | 1.000000| 1.00000| 1.000000| 1.000000| 1.000000| 1.000000|
-|2  |rowCumprods | 1.319865| 1.42234| 1.456938| 1.430972| 1.425832| 1.436572|
+|   |expr        |      min|      lq|    mean|   median|       uq|      max|
+|:--|:-----------|--------:|-------:|-------:|--------:|--------:|--------:|
+|1  |colCumprods | 1.000000| 1.00000| 1.00000| 1.000000| 1.000000| 1.000000|
+|2  |rowCumprods | 1.289438| 1.31647| 1.30241| 1.319461| 1.288493| 1.180426|
 
 _Figure: Benchmarking of colCumprods() and rowCumprods() on integer+1000x100 data (original and transposed).  Outliers are displayed as crosses. Times are in milliseconds._
 
@@ -555,15 +555,15 @@ _Figure: Benchmarking of colCumprods() and rowCumprods() on integer+1000x100 dat
 > X <- data[["10x10"]]
 > gc()
           used  (Mb) gc trigger  (Mb) max used  (Mb)
-Ncells 5176456 276.5    7554717 403.5  7554717 403.5
-Vcells 9184808  70.1   31793280 242.6 60508962 461.7
+Ncells 5204805 278.0    7916910 422.9  7916910 422.9
+Vcells 9599476  73.3   33191153 253.3 53339345 407.0
 > colStats <- microbenchmark(colCumprods = colCumprods(X), `apply+cumprod` = apply(X, MARGIN = 2L, 
 +     FUN = cumprod), unit = "ms")
 > X <- t(X)
 > gc()
           used  (Mb) gc trigger  (Mb) max used  (Mb)
-Ncells 5176441 276.5    7554717 403.5  7554717 403.5
-Vcells 9184936  70.1   31793280 242.6 60508962 461.7
+Ncells 5204790 278.0    7916910 422.9  7916910 422.9
+Vcells 9599604  73.3   33191153 253.3 53339345 407.0
 > rowStats <- microbenchmark(rowCumprods = rowCumprods(X), `apply+cumprod` = apply(X, MARGIN = 1L, 
 +     FUN = cumprod), unit = "ms")
 ```
@@ -572,31 +572,31 @@ _Table: Benchmarking of colCumprods() and apply+cumprod() on double+10x10 data. 
 
 
 
-|   |expr          |      min|       lq|      mean|   median|        uq|      max|
-|:--|:-------------|--------:|--------:|---------:|--------:|---------:|--------:|
-|1  |colCumprods   | 0.002254| 0.002590| 0.0033109| 0.002874| 0.0036885| 0.013994|
-|2  |apply+cumprod | 0.043162| 0.044066| 0.0476829| 0.045102| 0.0461590| 0.140434|
+|   |expr          |      min|        lq|      mean|    median|        uq|      max|
+|:--|:-------------|--------:|---------:|---------:|---------:|---------:|--------:|
+|1  |colCumprods   | 0.001963| 0.0021960| 0.0027747| 0.0025365| 0.0031060| 0.013481|
+|2  |apply+cumprod | 0.037692| 0.0387235| 0.0408208| 0.0394760| 0.0402135| 0.134046|
 
 
-|   |expr          |      min|      lq|     mean|   median|      uq|     max|
-|:--|:-------------|--------:|-------:|--------:|--------:|-------:|-------:|
-|1  |colCumprods   |  1.00000|  1.0000|  1.00000|  1.00000|  1.0000|  1.0000|
-|2  |apply+cumprod | 19.14907| 17.0139| 14.40167| 15.69311| 12.5143| 10.0353|
+|   |expr          |      min|       lq|    mean|   median|       uq|      max|
+|:--|:-------------|--------:|--------:|-------:|--------:|--------:|--------:|
+|1  |colCumprods   |  1.00000|  1.00000|  1.0000|  1.00000|  1.00000| 1.000000|
+|2  |apply+cumprod | 19.20122| 17.63365| 14.7117| 15.56318| 12.94704| 9.943328|
 
 _Table: Benchmarking of rowCumprods() and apply+cumprod() on double+10x10 data (transposed). The top panel shows times in milliseconds and the bottom panel shows relative times._
 
 
 
-|   |expr          |      min|       lq|      mean|    median|        uq|      max|
-|:--|:-------------|--------:|--------:|---------:|---------:|---------:|--------:|
-|1  |rowCumprods   | 0.002271| 0.002749| 0.0035532| 0.0036795| 0.0038970| 0.016303|
-|2  |apply+cumprod | 0.044810| 0.045791| 0.0476815| 0.0462015| 0.0466195| 0.143873|
+|   |expr          |      min|        lq|      mean|   median|       uq|      max|
+|:--|:-------------|--------:|---------:|---------:|--------:|--------:|--------:|
+|1  |rowCumprods   | 0.002208| 0.0026775| 0.0033424| 0.003423| 0.003610| 0.015228|
+|2  |apply+cumprod | 0.045010| 0.0459455| 0.0474587| 0.046297| 0.046759| 0.122212|
 
 
-|   |expr          |     min|       lq|     mean|   median|       uq|     max|
-|:--|:-------------|-------:|--------:|--------:|--------:|--------:|-------:|
-|1  |rowCumprods   |  1.0000|  1.00000|  1.00000|  1.00000|  1.00000| 1.00000|
-|2  |apply+cumprod | 19.7314| 16.65733| 13.41921| 12.55646| 11.96292| 8.82494|
+|   |expr          |      min|       lq|     mean|   median|       uq|      max|
+|:--|:-------------|--------:|--------:|--------:|--------:|--------:|--------:|
+|1  |rowCumprods   |  1.00000|  1.00000|  1.00000|  1.00000|  1.00000| 1.000000|
+|2  |apply+cumprod | 20.38496| 17.15985| 14.19885| 13.52527| 12.95263| 8.025479|
 
 _Figure: Benchmarking of colCumprods() and apply+cumprod() on double+10x10 data  as well as rowCumprods() and apply+cumprod() on the same data transposed.  Outliers are displayed as crosses.  Times are in milliseconds._
 
@@ -608,16 +608,16 @@ _Table: Benchmarking of colCumprods() and rowCumprods() on double+10x10 data (or
 
 
 
-|   |expr        |   min|    lq|    mean| median|     uq|    max|
-|:--|:-----------|-----:|-----:|-------:|------:|------:|------:|
-|1  |colCumprods | 2.254| 2.590| 3.31093| 2.8740| 3.6885| 13.994|
-|2  |rowCumprods | 2.271| 2.749| 3.55323| 3.6795| 3.8970| 16.303|
+|   |expr        |   min|     lq|    mean| median|    uq|    max|
+|:--|:-----------|-----:|------:|-------:|------:|-----:|------:|
+|1  |colCumprods | 1.963| 2.1960| 2.77472| 2.5365| 3.106| 13.481|
+|2  |rowCumprods | 2.208| 2.6775| 3.34243| 3.4230| 3.610| 15.228|
 
 
-|   |expr        |      min|      lq|     mean|   median|       uq|      max|
-|:--|:-----------|--------:|-------:|--------:|--------:|--------:|--------:|
-|1  |colCumprods | 1.000000| 1.00000| 1.000000| 1.000000| 1.000000| 1.000000|
-|2  |rowCumprods | 1.007542| 1.06139| 1.073182| 1.280271| 1.056527| 1.164999|
+|   |expr        |      min|       lq|     mean|   median|       uq|     max|
+|:--|:-----------|--------:|--------:|--------:|--------:|--------:|-------:|
+|1  |colCumprods | 1.000000| 1.000000| 1.000000| 1.000000| 1.000000| 1.00000|
+|2  |rowCumprods | 1.124809| 1.219262| 1.204601| 1.349497| 1.162267| 1.12959|
 
 _Figure: Benchmarking of colCumprods() and rowCumprods() on double+10x10 data (original and transposed).  Outliers are displayed as crosses. Times are in milliseconds._
 
@@ -630,15 +630,15 @@ _Figure: Benchmarking of colCumprods() and rowCumprods() on double+10x10 data (o
 > X <- data[["100x100"]]
 > gc()
           used  (Mb) gc trigger  (Mb) max used  (Mb)
-Ncells 5176636 276.5    7554717 403.5  7554717 403.5
-Vcells 9184920  70.1   31793280 242.6 60508962 461.7
+Ncells 5204980 278.0    7916910 422.9  7916910 422.9
+Vcells 9599583  73.3   33191153 253.3 53339345 407.0
 > colStats <- microbenchmark(colCumprods = colCumprods(X), `apply+cumprod` = apply(X, MARGIN = 2L, 
 +     FUN = cumprod), unit = "ms")
 > X <- t(X)
 > gc()
           used  (Mb) gc trigger  (Mb) max used  (Mb)
-Ncells 5176630 276.5    7554717 403.5  7554717 403.5
-Vcells 9194963  70.2   31793280 242.6 60508962 461.7
+Ncells 5204974 278.0    7916910 422.9  7916910 422.9
+Vcells 9609626  73.4   33191153 253.3 53339345 407.0
 > rowStats <- microbenchmark(rowCumprods = rowCumprods(X), `apply+cumprod` = apply(X, MARGIN = 1L, 
 +     FUN = cumprod), unit = "ms")
 ```
@@ -649,29 +649,29 @@ _Table: Benchmarking of colCumprods() and apply+cumprod() on double+100x100 data
 
 |   |expr          |      min|        lq|      mean|    median|        uq|      max|
 |:--|:-------------|--------:|---------:|---------:|---------:|---------:|--------:|
-|1  |colCumprods   | 0.013571| 0.0147175| 0.0160408| 0.0155285| 0.0166885| 0.037705|
-|2  |apply+cumprod | 0.234854| 0.2430365| 0.2686147| 0.2542310| 0.2893535| 0.440114|
+|1  |colCumprods   | 0.013744| 0.0150235| 0.0170667| 0.0163440| 0.0177015| 0.036787|
+|2  |apply+cumprod | 0.236768| 0.2559470| 0.2833312| 0.2734325| 0.2986060| 0.492447|
 
 
-|   |expr          |      min|       lq|     mean|  median|      uq|      max|
-|:--|:-------------|--------:|--------:|--------:|-------:|-------:|--------:|
-|1  |colCumprods   |  1.00000|  1.00000|  1.00000|  1.0000|  1.0000|  1.00000|
-|2  |apply+cumprod | 17.30558| 16.51344| 16.74576| 16.3719| 17.3385| 11.67256|
+|   |expr          |      min|       lq|     mean|   median|       uq|      max|
+|:--|:-------------|--------:|--------:|--------:|--------:|--------:|--------:|
+|1  |colCumprods   |  1.00000|  1.00000|  1.00000|  1.00000|  1.00000|  1.00000|
+|2  |apply+cumprod | 17.22701| 17.03644| 16.60143| 16.72984| 16.86897| 13.38644|
 
 _Table: Benchmarking of rowCumprods() and apply+cumprod() on double+100x100 data (transposed). The top panel shows times in milliseconds and the bottom panel shows relative times._
 
 
 
-|   |expr          |      min|       lq|      mean|    median|       uq|      max|
-|:--|:-------------|--------:|--------:|---------:|---------:|--------:|--------:|
-|1  |rowCumprods   | 0.010797| 0.012184| 0.0150912| 0.0130685| 0.015574| 0.029981|
-|2  |apply+cumprod | 0.238625| 0.248507| 0.2961374| 0.2773955| 0.311679| 0.500705|
+|   |expr          |      min|        lq|      mean|    median|        uq|      max|
+|:--|:-------------|--------:|---------:|---------:|---------:|---------:|--------:|
+|1  |rowCumprods   | 0.012419| 0.0132775| 0.0150558| 0.0139935| 0.0149275| 0.045979|
+|2  |apply+cumprod | 0.234897| 0.2496335| 0.2808525| 0.2729390| 0.3032490| 0.449333|
 
 
-|   |expr          |      min|       lq|     mean|   median|       uq|      max|
-|:--|:-------------|--------:|--------:|--------:|--------:|--------:|--------:|
-|1  |rowCumprods   |  1.00000|  1.00000|  1.00000|  1.00000|  1.00000|  1.00000|
-|2  |apply+cumprod | 22.10105| 20.39618| 19.62323| 21.22627| 20.01278| 16.70074|
+|   |expr          |      min|       lq|     mean|  median|       uq|     max|
+|:--|:-------------|--------:|--------:|--------:|-------:|--------:|-------:|
+|1  |rowCumprods   |  1.00000|  1.00000|  1.00000|  1.0000|  1.00000| 1.00000|
+|2  |apply+cumprod | 18.91432| 18.80124| 18.65411| 19.5047| 20.31479| 9.77257|
 
 _Figure: Benchmarking of colCumprods() and apply+cumprod() on double+100x100 data  as well as rowCumprods() and apply+cumprod() on the same data transposed.  Outliers are displayed as crosses.  Times are in milliseconds._
 
@@ -685,14 +685,14 @@ _Table: Benchmarking of colCumprods() and rowCumprods() on double+100x100 data (
 
 |   |expr        |    min|      lq|     mean|  median|      uq|    max|
 |:--|:-----------|------:|-------:|--------:|-------:|-------:|------:|
-|2  |rowCumprods | 10.797| 12.1840| 15.09117| 13.0685| 15.5740| 29.981|
-|1  |colCumprods | 13.571| 14.7175| 16.04076| 15.5285| 16.6885| 37.705|
+|2  |rowCumprods | 12.419| 13.2775| 15.05580| 13.9935| 14.9275| 45.979|
+|1  |colCumprods | 13.744| 15.0235| 17.06668| 16.3440| 17.7015| 36.787|
 
 
-|   |expr        |      min|       lq|     mean|   median|       uq|     max|
-|:--|:-----------|--------:|--------:|--------:|--------:|--------:|-------:|
-|2  |rowCumprods | 1.000000| 1.000000| 1.000000| 1.000000| 1.000000| 1.00000|
-|1  |colCumprods | 1.256923| 1.207937| 1.062924| 1.188239| 1.071562| 1.25763|
+|   |expr        |      min|       lq|     mean|   median|       uq|       max|
+|:--|:-----------|--------:|--------:|--------:|--------:|--------:|---------:|
+|2  |rowCumprods | 1.000000| 1.000000| 1.000000| 1.000000| 1.000000| 1.0000000|
+|1  |colCumprods | 1.106691| 1.131501| 1.133562| 1.167971| 1.185831| 0.8000826|
 
 _Figure: Benchmarking of colCumprods() and rowCumprods() on double+100x100 data (original and transposed).  Outliers are displayed as crosses. Times are in milliseconds._
 
@@ -705,15 +705,15 @@ _Figure: Benchmarking of colCumprods() and rowCumprods() on double+100x100 data 
 > X <- data[["1000x10"]]
 > gc()
           used  (Mb) gc trigger  (Mb) max used  (Mb)
-Ncells 5176826 276.5    7554717 403.5  7554717 403.5
-Vcells 9185802  70.1   31793280 242.6 60508962 461.7
+Ncells 5205172 278.0    7916910 422.9  7916910 422.9
+Vcells 9600470  73.3   33191153 253.3 53339345 407.0
 > colStats <- microbenchmark(colCumprods = colCumprods(X), `apply+cumprod` = apply(X, MARGIN = 2L, 
 +     FUN = cumprod), unit = "ms")
 > X <- t(X)
 > gc()
           used  (Mb) gc trigger  (Mb) max used  (Mb)
-Ncells 5176820 276.5    7554717 403.5  7554717 403.5
-Vcells 9195845  70.2   31793280 242.6 60508962 461.7
+Ncells 5205166 278.0    7916910 422.9  7916910 422.9
+Vcells 9610513  73.4   33191153 253.3 53339345 407.0
 > rowStats <- microbenchmark(rowCumprods = rowCumprods(X), `apply+cumprod` = apply(X, MARGIN = 1L, 
 +     FUN = cumprod), unit = "ms")
 ```
@@ -724,29 +724,29 @@ _Table: Benchmarking of colCumprods() and apply+cumprod() on double+1000x10 data
 
 |   |expr          |      min|        lq|      mean|    median|        uq|      max|
 |:--|:-------------|--------:|---------:|---------:|---------:|---------:|--------:|
-|1  |colCumprods   | 0.026498| 0.0296915| 0.0334566| 0.0325120| 0.0350240| 0.080223|
-|2  |apply+cumprod | 0.403400| 0.4349455| 0.4899405| 0.4804875| 0.5232965| 0.727385|
+|1  |colCumprods   | 0.027122| 0.0320995| 0.0371901| 0.0344585| 0.0405005| 0.085127|
+|2  |apply+cumprod | 0.412845| 0.4747850| 0.5193167| 0.5002615| 0.5624670| 0.715780|
 
 
-|   |expr          |      min|       lq|     mean|   median|       uq|      max|
-|:--|:-------------|--------:|--------:|--------:|--------:|--------:|--------:|
-|1  |colCumprods   |  1.00000|  1.00000|  1.00000|  1.00000|  1.00000| 1.000000|
-|2  |apply+cumprod | 15.22379| 14.64882| 14.64407| 14.77877| 14.94108| 9.067038|
+|   |expr          |      min|       lq|     mean|  median|      uq|      max|
+|:--|:-------------|--------:|--------:|--------:|-------:|-------:|--------:|
+|1  |colCumprods   |  1.00000|  1.00000|  1.00000|  1.0000|  1.0000| 1.000000|
+|2  |apply+cumprod | 15.22178| 14.79104| 13.96385| 14.5178| 13.8879| 8.408378|
 
 _Table: Benchmarking of rowCumprods() and apply+cumprod() on double+1000x10 data (transposed). The top panel shows times in milliseconds and the bottom panel shows relative times._
 
 
 
-|   |expr          |      min|       lq|      mean|    median|       uq|      max|
-|:--|:-------------|--------:|--------:|---------:|---------:|--------:|--------:|
-|1  |rowCumprods   | 0.026815| 0.030436| 0.0337566| 0.0325290| 0.036281| 0.055896|
-|2  |apply+cumprod | 0.393967| 0.429862| 0.4897734| 0.4789495| 0.529875| 0.704232|
+|   |expr          |      min|        lq|      mean|    median|        uq|      max|
+|:--|:-------------|--------:|---------:|---------:|---------:|---------:|--------:|
+|1  |rowCumprods   | 0.025907| 0.0310365| 0.0340336| 0.0327145| 0.0352570| 0.069214|
+|2  |apply+cumprod | 0.412143| 0.4502965| 0.4934302| 0.4859855| 0.5216145| 0.679230|
 
 
 |   |expr          |      min|       lq|     mean|   median|       uq|      max|
 |:--|:-------------|--------:|--------:|--------:|--------:|--------:|--------:|
-|1  |rowCumprods   |  1.00000|  1.00000|  1.00000|  1.00000|  1.00000|  1.00000|
-|2  |apply+cumprod | 14.69204| 14.12347| 14.50897| 14.72377| 14.60475| 12.59897|
+|1  |rowCumprods   |  1.00000|  1.00000|  1.00000|  1.00000|  1.00000| 1.000000|
+|2  |apply+cumprod | 15.90856| 14.50861| 14.49832| 14.85535| 14.79464| 9.813477|
 
 _Figure: Benchmarking of colCumprods() and apply+cumprod() on double+1000x10 data  as well as rowCumprods() and apply+cumprod() on the same data transposed.  Outliers are displayed as crosses.  Times are in milliseconds._
 
@@ -758,16 +758,16 @@ _Table: Benchmarking of colCumprods() and rowCumprods() on double+1000x10 data (
 
 
 
-|   |expr        |    min|      lq|     mean| median|     uq|    max|
-|:--|:-----------|------:|-------:|--------:|------:|------:|------:|
-|1  |colCumprods | 26.498| 29.6915| 33.45659| 32.512| 35.024| 80.223|
-|2  |rowCumprods | 26.815| 30.4360| 33.75659| 32.529| 36.281| 55.896|
+|   |expr        |    min|      lq|     mean|  median|      uq|    max|
+|:--|:-----------|------:|-------:|--------:|-------:|-------:|------:|
+|2  |rowCumprods | 25.907| 31.0365| 34.03362| 32.7145| 35.2570| 69.214|
+|1  |colCumprods | 27.122| 32.0995| 37.19009| 34.4585| 40.5005| 85.127|
 
 
-|   |expr        |      min|       lq|     mean|   median|      uq|       max|
-|:--|:-----------|--------:|--------:|--------:|--------:|-------:|---------:|
-|1  |colCumprods | 1.000000| 1.000000| 1.000000| 1.000000| 1.00000| 1.0000000|
-|2  |rowCumprods | 1.011963| 1.025075| 1.008967| 1.000523| 1.03589| 0.6967578|
+|   |expr        |      min|      lq|     mean|  median|       uq|     max|
+|:--|:-----------|--------:|-------:|--------:|-------:|--------:|-------:|
+|2  |rowCumprods | 1.000000| 1.00000| 1.000000| 1.00000| 1.000000| 1.00000|
+|1  |colCumprods | 1.046898| 1.03425| 1.092746| 1.05331| 1.148722| 1.22991|
 
 _Figure: Benchmarking of colCumprods() and rowCumprods() on double+1000x10 data (original and transposed).  Outliers are displayed as crosses. Times are in milliseconds._
 
@@ -780,15 +780,15 @@ _Figure: Benchmarking of colCumprods() and rowCumprods() on double+1000x10 data 
 > X <- data[["10x1000"]]
 > gc()
           used  (Mb) gc trigger  (Mb) max used  (Mb)
-Ncells 5177014 276.5    7554717 403.5  7554717 403.5
-Vcells 9186832  70.1   31793280 242.6 60508962 461.7
+Ncells 5205360 278.0    7916910 422.9  7916910 422.9
+Vcells 9601512  73.3   33191153 253.3 53339345 407.0
 > colStats <- microbenchmark(colCumprods = colCumprods(X), `apply+cumprod` = apply(X, MARGIN = 2L, 
 +     FUN = cumprod), unit = "ms")
 > X <- t(X)
 > gc()
           used  (Mb) gc trigger  (Mb) max used  (Mb)
-Ncells 5177008 276.5    7554717 403.5  7554717 403.5
-Vcells 9196875  70.2   31793280 242.6 60508962 461.7
+Ncells 5205354 278.0    7916910 422.9  7916910 422.9
+Vcells 9611555  73.4   33191153 253.3 53339345 407.0
 > rowStats <- microbenchmark(rowCumprods = rowCumprods(X), `apply+cumprod` = apply(X, MARGIN = 1L, 
 +     FUN = cumprod), unit = "ms")
 ```
@@ -797,31 +797,31 @@ _Table: Benchmarking of colCumprods() and apply+cumprod() on double+10x1000 data
 
 
 
-|   |expr          |      min|        lq|      mean|   median|       uq|      max|
-|:--|:-------------|--------:|---------:|---------:|--------:|--------:|--------:|
-|1  |colCumprods   | 0.008684| 0.0121465| 0.0135451| 0.013405| 0.014560| 0.032205|
-|2  |apply+cumprod | 0.860432| 0.9087650| 1.0485481| 1.034054| 1.145485| 1.458175|
+|   |expr          |      min|        lq|      mean|    median|       uq|      max|
+|:--|:-------------|--------:|---------:|---------:|---------:|--------:|--------:|
+|1  |colCumprods   | 0.009387| 0.0119355| 0.0141167| 0.0131270| 0.014437| 0.038537|
+|2  |apply+cumprod | 0.897687| 0.9131300| 1.0391664| 0.9775385| 1.136804| 1.786624|
 
 
 |   |expr          |      min|       lq|     mean|   median|       uq|      max|
 |:--|:-------------|--------:|--------:|--------:|--------:|--------:|--------:|
 |1  |colCumprods   |  1.00000|  1.00000|  1.00000|  1.00000|  1.00000|  1.00000|
-|2  |apply+cumprod | 99.08245| 74.81703| 77.41173| 77.13943| 78.67342| 45.27791|
+|2  |apply+cumprod | 95.63087| 76.50538| 73.61277| 74.46778| 78.74243| 46.36126|
 
 _Table: Benchmarking of rowCumprods() and apply+cumprod() on double+10x1000 data (transposed). The top panel shows times in milliseconds and the bottom panel shows relative times._
 
 
 
-|   |expr          |      min|        lq|      mean|    median|        uq|      max|
-|:--|:-------------|--------:|---------:|---------:|---------:|---------:|--------:|
-|1  |rowCumprods   | 0.009201| 0.0118765| 0.0131436| 0.0125485| 0.0134815| 0.029998|
-|2  |apply+cumprod | 0.900963| 0.9176905| 1.0382635| 0.9594270| 1.0937745| 2.000790|
+|   |expr          |      min|        lq|      mean|   median|       uq|      max|
+|:--|:-------------|--------:|---------:|---------:|--------:|--------:|--------:|
+|1  |rowCumprods   | 0.008247| 0.0115815| 0.0138269| 0.012521| 0.014407| 0.037626|
+|2  |apply+cumprod | 0.878591| 0.9197755| 1.0632066| 1.012345| 1.127908| 2.487850|
 
 
-|   |expr          |      min|       lq|     mean|  median|       uq|      max|
-|:--|:-------------|--------:|--------:|--------:|-------:|--------:|--------:|
-|1  |rowCumprods   |  1.00000|  1.00000|  1.00000|  1.0000|  1.00000|  1.00000|
-|2  |apply+cumprod | 97.92012| 77.26944| 78.99378| 76.4575| 81.13151| 66.69745|
+|   |expr          |      min|       lq|     mean|   median|       uq|     max|
+|:--|:-------------|--------:|--------:|--------:|--------:|--------:|-------:|
+|1  |rowCumprods   |   1.0000|  1.00000|  1.00000|  1.00000|  1.00000|  1.0000|
+|2  |apply+cumprod | 106.5346| 79.41765| 76.89384| 80.85177| 78.28889| 66.1205|
 
 _Figure: Benchmarking of colCumprods() and apply+cumprod() on double+10x1000 data  as well as rowCumprods() and apply+cumprod() on the same data transposed.  Outliers are displayed as crosses.  Times are in milliseconds._
 
@@ -833,16 +833,16 @@ _Table: Benchmarking of colCumprods() and rowCumprods() on double+10x1000 data (
 
 
 
-|   |expr        |   min|      lq|     mean|  median|      uq|    max|
-|:--|:-----------|-----:|-------:|--------:|-------:|-------:|------:|
-|2  |rowCumprods | 9.201| 11.8765| 13.14361| 12.5485| 13.4815| 29.998|
-|1  |colCumprods | 8.684| 12.1465| 13.54508| 13.4050| 14.5600| 32.205|
+|   |expr        |   min|      lq|     mean| median|     uq|    max|
+|:--|:-----------|-----:|-------:|--------:|------:|------:|------:|
+|2  |rowCumprods | 8.247| 11.5815| 13.82694| 12.521| 14.407| 37.626|
+|1  |colCumprods | 9.387| 11.9355| 14.11666| 13.127| 14.437| 38.537|
 
 
-|   |expr        |       min|       lq|     mean|   median|       uq|      max|
-|:--|:-----------|---------:|--------:|--------:|--------:|--------:|--------:|
-|2  |rowCumprods | 1.0000000| 1.000000| 1.000000| 1.000000| 1.000000| 1.000000|
-|1  |colCumprods | 0.9438105| 1.022734| 1.030545| 1.068255| 1.079999| 1.073572|
+|   |expr        |      min|       lq|     mean|   median|       uq|      max|
+|:--|:-----------|--------:|--------:|--------:|--------:|--------:|--------:|
+|2  |rowCumprods | 1.000000| 1.000000| 1.000000| 1.000000| 1.000000| 1.000000|
+|1  |colCumprods | 1.138232| 1.030566| 1.020953| 1.048399| 1.002082| 1.024212|
 
 _Figure: Benchmarking of colCumprods() and rowCumprods() on double+10x1000 data (original and transposed).  Outliers are displayed as crosses. Times are in milliseconds._
 
@@ -855,15 +855,15 @@ _Figure: Benchmarking of colCumprods() and rowCumprods() on double+10x1000 data 
 > X <- data[["100x1000"]]
 > gc()
           used  (Mb) gc trigger  (Mb) max used  (Mb)
-Ncells 5177204 276.5    7554717 403.5  7554717 403.5
-Vcells 9186963  70.1   31793280 242.6 60508962 461.7
+Ncells 5205546 278.1    7916910 422.9  7916910 422.9
+Vcells 9601639  73.3   33191153 253.3 53339345 407.0
 > colStats <- microbenchmark(colCumprods = colCumprods(X), `apply+cumprod` = apply(X, MARGIN = 2L, 
 +     FUN = cumprod), unit = "ms")
 > X <- t(X)
 > gc()
           used  (Mb) gc trigger  (Mb) max used  (Mb)
-Ncells 5177192 276.5    7554717 403.5  7554717 403.5
-Vcells 9286996  70.9   31793280 242.6 60508962 461.7
+Ncells 5205534 278.1    7916910 422.9  7916910 422.9
+Vcells 9701672  74.1   33191153 253.3 53339345 407.0
 > rowStats <- microbenchmark(rowCumprods = rowCumprods(X), `apply+cumprod` = apply(X, MARGIN = 1L, 
 +     FUN = cumprod), unit = "ms")
 ```
@@ -872,31 +872,31 @@ _Table: Benchmarking of colCumprods() and apply+cumprod() on double+100x1000 dat
 
 
 
-|   |expr          |      min|       lq|      mean|   median|        uq|      max|
-|:--|:-------------|--------:|--------:|---------:|--------:|---------:|--------:|
-|1  |colCumprods   | 0.097752| 0.112771| 0.2417146| 0.119342| 0.1314885| 12.02079|
-|2  |apply+cumprod | 1.657828| 1.769645| 2.1181516| 1.963027| 2.1174625| 15.02812|
+|   |expr          |      min|        lq|     mean|    median|        uq|      max|
+|:--|:-------------|--------:|---------:|--------:|---------:|---------:|--------:|
+|1  |colCumprods   | 0.104298| 0.1213275| 0.273692| 0.1322565| 0.1474345| 13.07530|
+|2  |apply+cumprod | 1.817213| 2.0556005| 2.424008| 2.1965345| 2.5138735| 15.43967|
 
 
 |   |expr          |      min|       lq|     mean|   median|       uq|      max|
 |:--|:-------------|--------:|--------:|--------:|--------:|--------:|--------:|
 |1  |colCumprods   |  1.00000|  1.00000| 1.000000|  1.00000|  1.00000| 1.000000|
-|2  |apply+cumprod | 16.95953| 15.69238| 8.763027| 16.44876| 16.10378| 1.250178|
+|2  |apply+cumprod | 17.42328| 16.94258| 8.856703| 16.60814| 17.05078| 1.180827|
 
 _Table: Benchmarking of rowCumprods() and apply+cumprod() on double+100x1000 data (transposed). The top panel shows times in milliseconds and the bottom panel shows relative times._
 
 
 
-|   |expr          |      min|        lq|      mean|    median|       uq|      max|
-|:--|:-------------|--------:|---------:|---------:|---------:|--------:|--------:|
-|1  |rowCumprods   | 0.070030| 0.0768055| 0.2173295| 0.0872305| 0.095519| 12.93826|
-|2  |apply+cumprod | 1.664397| 1.7278870| 2.1009819| 1.8998410| 2.139187| 14.30946|
+|   |expr          |      min|       lq|      mean|   median|        uq|       max|
+|:--|:-------------|--------:|--------:|---------:|--------:|---------:|---------:|
+|1  |rowCumprods   | 0.070852| 0.082701| 0.0979202| 0.096008| 0.1078345|  0.166844|
+|2  |apply+cumprod | 1.711892| 1.993286| 2.4320129| 2.129755| 2.3170945| 15.179939|
 
 
-|   |expr          |      min|       lq|     mean|   median|       uq|     max|
-|:--|:-------------|--------:|--------:|--------:|--------:|--------:|-------:|
-|1  |rowCumprods   |  1.00000|  1.00000| 1.000000|  1.00000|  1.00000| 1.00000|
-|2  |apply+cumprod | 23.76691| 22.49692| 9.667267| 21.77955| 22.39541| 1.10598|
+|   |expr          |      min|       lq|     mean|  median|       uq|      max|
+|:--|:-------------|--------:|--------:|--------:|-------:|--------:|--------:|
+|1  |rowCumprods   |  1.00000|  1.00000|  1.00000|  1.0000|  1.00000|  1.00000|
+|2  |apply+cumprod | 24.16152| 24.10232| 24.83669| 22.1831| 21.48751| 90.98283|
 
 _Figure: Benchmarking of colCumprods() and apply+cumprod() on double+100x1000 data  as well as rowCumprods() and apply+cumprod() on the same data transposed.  Outliers are displayed as crosses.  Times are in milliseconds._
 
@@ -908,16 +908,16 @@ _Table: Benchmarking of colCumprods() and rowCumprods() on double+100x1000 data 
 
 
 
-|   |expr        |    min|       lq|     mean|   median|       uq|      max|
-|:--|:-----------|------:|--------:|--------:|--------:|--------:|--------:|
-|2  |rowCumprods | 70.030|  76.8055| 217.3295|  87.2305|  95.5190| 12938.26|
-|1  |colCumprods | 97.752| 112.7710| 241.7146| 119.3420| 131.4885| 12020.79|
+|   |expr        |     min|       lq|      mean|   median|       uq|       max|
+|:--|:-----------|-------:|--------:|---------:|--------:|--------:|---------:|
+|2  |rowCumprods |  70.852|  82.7010|  97.92018|  96.0080| 107.8345|   166.844|
+|1  |colCumprods | 104.298| 121.3275| 273.69196| 132.2565| 147.4345| 13075.299|
 
 
-|   |expr        |      min|       lq|     mean|   median|       uq|       max|
-|:--|:-----------|--------:|--------:|--------:|--------:|--------:|---------:|
-|2  |rowCumprods | 1.000000| 1.000000| 1.000000| 1.000000| 1.000000| 1.0000000|
-|1  |colCumprods | 1.395859| 1.468267| 1.112203| 1.368122| 1.376569| 0.9290886|
+|   |expr        |      min|       lq|     mean|   median|       uq|      max|
+|:--|:-----------|--------:|--------:|--------:|--------:|--------:|--------:|
+|2  |rowCumprods | 1.000000| 1.000000| 1.000000| 1.000000| 1.000000|  1.00000|
+|1  |colCumprods | 1.472054| 1.467062| 2.795052| 1.377557| 1.367229| 78.36841|
 
 _Figure: Benchmarking of colCumprods() and rowCumprods() on double+100x1000 data (original and transposed).  Outliers are displayed as crosses. Times are in milliseconds._
 
@@ -930,15 +930,15 @@ _Figure: Benchmarking of colCumprods() and rowCumprods() on double+100x1000 data
 > X <- data[["1000x100"]]
 > gc()
           used  (Mb) gc trigger  (Mb) max used  (Mb)
-Ncells 5177390 276.6    7554717 403.5  7554717 403.5
-Vcells 9188180  70.2   31793280 242.6 60508962 461.7
+Ncells 5205739 278.1    7916910 422.9  7916910 422.9
+Vcells 9602856  73.3   33191153 253.3 53339345 407.0
 > colStats <- microbenchmark(colCumprods = colCumprods(X), `apply+cumprod` = apply(X, MARGIN = 2L, 
 +     FUN = cumprod), unit = "ms")
 > X <- t(X)
 > gc()
           used  (Mb) gc trigger  (Mb) max used  (Mb)
-Ncells 5177384 276.6    7554717 403.5  7554717 403.5
-Vcells 9288223  70.9   31793280 242.6 60508962 461.7
+Ncells 5205733 278.1    7916910 422.9  7916910 422.9
+Vcells 9702899  74.1   33191153 253.3 53339345 407.0
 > rowStats <- microbenchmark(rowCumprods = rowCumprods(X), `apply+cumprod` = apply(X, MARGIN = 1L, 
 +     FUN = cumprod), unit = "ms")
 ```
@@ -947,31 +947,31 @@ _Table: Benchmarking of colCumprods() and apply+cumprod() on double+1000x100 dat
 
 
 
-|   |expr          |      min|        lq|      mean|    median|        uq|      max|
-|:--|:-------------|--------:|---------:|---------:|---------:|---------:|--------:|
-|1  |colCumprods   | 0.239211| 0.2420125| 0.2563065| 0.2487605| 0.2616535| 0.423280|
-|2  |apply+cumprod | 3.546034| 3.5697345| 3.8604746| 3.5943745| 3.7626660| 9.656664|
+|   |expr          |      min|        lq|      mean|    median|        uq|       max|
+|:--|:-------------|--------:|---------:|---------:|---------:|---------:|---------:|
+|1  |colCumprods   | 0.239273| 0.2436585| 0.2621753| 0.2541975| 0.2654105|  0.431607|
+|2  |apply+cumprod | 3.586672| 3.6197690| 3.9729681| 3.6671295| 3.9296190| 10.165060|
 
 
-|   |expr          |      min|       lq|     mean|   median|       uq|      max|
-|:--|:-------------|--------:|--------:|--------:|--------:|--------:|--------:|
-|1  |colCumprods   |  1.00000|  1.00000|  1.00000|  1.00000|  1.00000|  1.00000|
-|2  |apply+cumprod | 14.82388| 14.75021| 15.06195| 14.44914| 14.38034| 22.81389|
+|   |expr          |      min|       lq|     mean|  median|       uq|      max|
+|:--|:-------------|--------:|--------:|--------:|-------:|--------:|--------:|
+|1  |colCumprods   |  1.00000|  1.00000|  1.00000|  1.0000|  1.00000|  1.00000|
+|2  |apply+cumprod | 14.98987| 14.85591| 15.15386| 14.4263| 14.80582| 23.55166|
 
 _Table: Benchmarking of rowCumprods() and apply+cumprod() on double+1000x100 data (transposed). The top panel shows times in milliseconds and the bottom panel shows relative times._
 
 
 
-|   |expr          |      min|       lq|      mean|   median|       uq|      max|
-|:--|:-------------|--------:|--------:|---------:|--------:|--------:|--------:|
-|1  |rowCumprods   | 0.209255| 0.213030| 0.2268368| 0.216964| 0.226974| 0.322498|
-|2  |apply+cumprod | 3.578487| 3.589807| 3.8898114| 3.619201| 3.785734| 9.873523|
+|   |expr          |      min|       lq|      mean|    median|       uq|       max|
+|:--|:-------------|--------:|--------:|---------:|---------:|--------:|---------:|
+|1  |rowCumprods   | 0.210453| 0.216730| 0.2336882| 0.2255365| 0.237798|  0.362024|
+|2  |apply+cumprod | 3.628790| 3.655593| 4.0744468| 3.6975880| 4.065031| 10.928963|
 
 
-|   |expr          |      min|       lq|     mean|   median|       uq|      max|
-|:--|:-------------|--------:|--------:|--------:|--------:|--------:|--------:|
-|1  |rowCumprods   |  1.00000|  1.00000|  1.00000|  1.00000|  1.00000|  1.00000|
-|2  |apply+cumprod | 17.10108| 16.85118| 17.14806| 16.68112| 16.67915| 30.61577|
+|   |expr          |      min|       lq|    mean|   median|       uq|     max|
+|:--|:-------------|--------:|--------:|-------:|--------:|--------:|-------:|
+|1  |rowCumprods   |  1.00000|  1.00000|  1.0000|  1.00000|  1.00000|  1.0000|
+|2  |apply+cumprod | 17.24276| 16.86704| 17.4354| 16.39463| 17.09447| 30.1885|
 
 _Figure: Benchmarking of colCumprods() and apply+cumprod() on double+1000x100 data  as well as rowCumprods() and apply+cumprod() on the same data transposed.  Outliers are displayed as crosses.  Times are in milliseconds._
 
@@ -985,14 +985,14 @@ _Table: Benchmarking of colCumprods() and rowCumprods() on double+1000x100 data 
 
 |   |expr        |     min|       lq|     mean|   median|       uq|     max|
 |:--|:-----------|-------:|--------:|--------:|--------:|--------:|-------:|
-|2  |rowCumprods | 209.255| 213.0300| 226.8368| 216.9640| 226.9740| 322.498|
-|1  |colCumprods | 239.211| 242.0125| 256.3065| 248.7605| 261.6535| 423.280|
+|2  |rowCumprods | 210.453| 216.7300| 233.6882| 225.5365| 237.7980| 362.024|
+|1  |colCumprods | 239.273| 243.6585| 262.1753| 254.1975| 265.4105| 431.607|
 
 
 |   |expr        |      min|       lq|     mean|   median|       uq|      max|
 |:--|:-----------|--------:|--------:|--------:|--------:|--------:|--------:|
 |2  |rowCumprods | 1.000000| 1.000000| 1.000000| 1.000000| 1.000000| 1.000000|
-|1  |colCumprods | 1.143155| 1.136049| 1.129916| 1.146552| 1.152791| 1.312504|
+|1  |colCumprods | 1.136943| 1.124249| 1.121902| 1.127079| 1.116118| 1.192206|
 
 _Figure: Benchmarking of colCumprods() and rowCumprods() on double+1000x100 data (original and transposed).  Outliers are displayed as crosses. Times are in milliseconds._
 
@@ -1028,7 +1028,7 @@ attached base packages:
 other attached packages:
 [1] microbenchmark_1.4-7   matrixStats_0.60.0     ggplot2_3.3.5         
 [4] knitr_1.33             R.devices_2.17.0       R.utils_2.10.1        
-[7] R.oo_1.24.0            R.methodsS3_1.8.1-9001
+[7] R.oo_1.24.0            R.methodsS3_1.8.1-9001 history_0.0.1-9000    
 
 loaded via a namespace (and not attached):
  [1] Biobase_2.52.0          httr_1.4.2              splines_4.1.1          
@@ -1047,20 +1047,22 @@ loaded via a namespace (and not attached):
 [40] magrittr_2.0.1          crayon_1.4.1            statnet.common_4.5.0   
 [43] memoise_2.0.0           laeken_0.5.1            fansi_0.5.0            
 [46] R.cache_0.15.0          MASS_7.3-54             R.rsp_0.44.0           
-[49] tools_4.1.1             lifecycle_1.0.0         S4Vectors_0.30.0       
-[52] trust_0.1-8             munsell_0.5.0           AnnotationDbi_1.54.1   
-[55] Biostrings_2.60.2       compiler_4.1.1          GenomeInfoDb_1.28.1    
-[58] rlang_0.4.11            grid_4.1.1              RCurl_1.98-1.4         
-[61] cwhmisc_6.6             rappdirs_0.3.3          labeling_0.4.2         
-[64] bitops_1.0-7            base64enc_0.1-3         boot_1.3-28            
-[67] gtable_0.3.0            DBI_1.1.1               markdown_1.1           
-[70] R6_2.5.1                lpSolveAPI_5.5.2.0-17.7 rle_0.9.2              
-[73] dplyr_1.0.7             fastmap_1.1.0           bit_4.0.4              
-[76] utf8_1.2.2              parallel_4.1.1          Rcpp_1.0.7             
-[79] vctrs_0.3.8             png_0.1-7               DEoptimR_1.0-9         
-[82] tidyselect_1.1.1        xfun_0.25               coda_0.19-4            
+[49] progressr_0.8.0         tools_4.1.1             lifecycle_1.0.0        
+[52] S4Vectors_0.30.0        trust_0.1-8             munsell_0.5.0          
+[55] tabby_0.0.1-9001        AnnotationDbi_1.54.1    Biostrings_2.60.2      
+[58] compiler_4.1.1          GenomeInfoDb_1.28.1     rlang_0.4.11           
+[61] grid_4.1.1              RCurl_1.98-1.4          cwhmisc_6.6            
+[64] rstudioapi_0.13         rappdirs_0.3.3          startup_0.15.0         
+[67] labeling_0.4.2          bitops_1.0-7            base64enc_0.1-3        
+[70] boot_1.3-28             gtable_0.3.0            DBI_1.1.1              
+[73] markdown_1.1            R6_2.5.1                lpSolveAPI_5.5.2.0-17.7
+[76] rle_0.9.2               dplyr_1.0.7             fastmap_1.1.0          
+[79] bit_4.0.4               utf8_1.2.2              parallel_4.1.1         
+[82] Rcpp_1.0.7              vctrs_0.3.8             png_0.1-7              
+[85] DEoptimR_1.0-9          tidyselect_1.1.1        xfun_0.25              
+[88] coda_0.19-4            
 ```
-Total processing time was 25.41 secs.
+Total processing time was 25.21 secs.
 
 
 ### Reproducibility
@@ -1077,7 +1079,7 @@ html <- matrixStats:::benchmark('colCumprods')
 [StackOverflow:rowProds?]: https://stackoverflow.com/questions/20198801/ "Stack Overflow: Row product of matrix and column sum of matrix"
 
 ---------------------------------------
-Copyright Henrik Bengtsson. Last updated on 2021-08-25 17:38:38 (+0200 UTC). Powered by [RSP].
+Copyright Henrik Bengtsson. Last updated on 2021-08-25 22:14:21 (+0200 UTC). Powered by [RSP].
 
 <script>
  var link = document.createElement('link');

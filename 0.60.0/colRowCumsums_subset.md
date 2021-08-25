@@ -63,16 +63,16 @@ This report benchmark the performance of colCumsums() and rowCumsums() on subset
 > X_S <- X[rows, cols]
 > gc()
           used  (Mb) gc trigger  (Mb) max used  (Mb)
-Ncells 5180371 276.7    7554717 403.5  7554717 403.5
-Vcells 9404630  71.8   31793280 242.6 60508962 461.7
+Ncells 5221525 278.9    7916910 422.9  7916910 422.9
+Vcells 9882645  75.4   33191153 253.3 53339345 407.0
 > colStats <- microbenchmark(colCumsums_X_S = colCumsums(X_S), `colCumsums(X, rows, cols)` = colCumsums(X, 
 +     rows = rows, cols = cols), `colCummins(X[rows, cols])` = colCumsums(X[rows, cols]), unit = "ms")
 > X <- t(X)
 > X_S <- t(X_S)
 > gc()
           used  (Mb) gc trigger  (Mb) max used  (Mb)
-Ncells 5179652 276.7    7554717 403.5  7554717 403.5
-Vcells 9402803  71.8   31793280 242.6 60508962 461.7
+Ncells 5208790 278.2    7916910 422.9  7916910 422.9
+Vcells 9840435  75.1   33191153 253.3 53339345 407.0
 > rowStats <- microbenchmark(rowCumsums_X_S = rowCumsums(X_S), `rowCumsums(X, cols, rows)` = rowCumsums(X, 
 +     rows = cols, cols = rows), `rowCumsums(X[cols, rows])` = rowCumsums(X[cols, rows]), unit = "ms")
 ```
@@ -81,18 +81,18 @@ _Table: Benchmarking of colCumsums_X_S(), colCumsums(X, rows, cols)() and colCum
 
 
 
-|   |expr                      |      min|       lq|      mean|    median|       uq|      max|
-|:--|:-------------------------|--------:|--------:|---------:|---------:|--------:|--------:|
-|1  |colCumsums_X_S            | 0.002356| 0.002507| 0.0040079| 0.0025865| 0.002674| 0.142918|
-|2  |colCumsums(X, rows, cols) | 0.002612| 0.002903| 0.0030392| 0.0029825| 0.003087| 0.005309|
-|3  |colCummins(X[rows, cols]) | 0.003050| 0.003576| 0.0037638| 0.0036640| 0.003789| 0.008609|
+|   |expr                      |      min|        lq|      mean|    median|        uq|      max|
+|:--|:-------------------------|--------:|---------:|---------:|---------:|---------:|--------:|
+|1  |colCumsums_X_S            | 0.002187| 0.0023425| 0.0038885| 0.0024185| 0.0025225| 0.146407|
+|2  |colCumsums(X, rows, cols) | 0.002436| 0.0026880| 0.0028176| 0.0027590| 0.0028480| 0.005069|
+|3  |colCummins(X[rows, cols]) | 0.002996| 0.0034180| 0.0035988| 0.0035370| 0.0036645| 0.007258|
 
 
 |   |expr                      |      min|       lq|      mean|   median|       uq|       max|
 |:--|:-------------------------|--------:|--------:|---------:|--------:|--------:|---------:|
 |1  |colCumsums_X_S            | 1.000000| 1.000000| 1.0000000| 1.000000| 1.000000| 1.0000000|
-|2  |colCumsums(X, rows, cols) | 1.108659| 1.157958| 0.7583149| 1.153103| 1.154450| 0.0371472|
-|3  |colCummins(X[rows, cols]) | 1.294567| 1.426406| 0.9391022| 1.416586| 1.416978| 0.0602373|
+|2  |colCumsums(X, rows, cols) | 1.113855| 1.147492| 0.7246133| 1.140790| 1.129039| 0.0346227|
+|3  |colCummins(X[rows, cols]) | 1.369913| 1.459125| 0.9255104| 1.462477| 1.452725| 0.0495741|
 
 _Table: Benchmarking of rowCumsums_X_S(), rowCumsums(X, cols, rows)() and rowCumsums(X[cols, rows])() on integer+10x10 data (transposed). The top panel shows times in milliseconds and the bottom panel shows relative times._
 
@@ -100,16 +100,16 @@ _Table: Benchmarking of rowCumsums_X_S(), rowCumsums(X, cols, rows)() and rowCum
 
 |   |expr                      |      min|        lq|      mean|    median|        uq|      max|
 |:--|:-------------------------|--------:|---------:|---------:|---------:|---------:|--------:|
-|1  |rowCumsums_X_S            | 0.002350| 0.0026605| 0.0028917| 0.0027205| 0.0028165| 0.006084|
-|2  |rowCumsums(X, cols, rows) | 0.002675| 0.0029190| 0.0046180| 0.0030540| 0.0031765| 0.143122|
-|3  |rowCumsums(X[cols, rows]) | 0.003225| 0.0038140| 0.0042492| 0.0039275| 0.0040645| 0.014073|
+|1  |rowCumsums_X_S            | 0.002192| 0.0024270| 0.0025563| 0.0024875| 0.0026365| 0.004748|
+|2  |rowCumsums(X, cols, rows) | 0.002492| 0.0027175| 0.0043897| 0.0027865| 0.0028960| 0.158584|
+|3  |rowCumsums(X[cols, rows]) | 0.003003| 0.0034560| 0.0036023| 0.0035515| 0.0036320| 0.007585|
 
 
 |   |expr                      |      min|       lq|     mean|   median|       uq|       max|
 |:--|:-------------------------|--------:|--------:|--------:|--------:|--------:|---------:|
 |1  |rowCumsums_X_S            | 1.000000| 1.000000| 1.000000| 1.000000| 1.000000|  1.000000|
-|2  |rowCumsums(X, cols, rows) | 1.138298| 1.097162| 1.596963| 1.122588| 1.127818| 23.524326|
-|3  |rowCumsums(X[cols, rows]) | 1.372340| 1.433565| 1.469433| 1.443668| 1.443103|  2.313116|
+|2  |rowCumsums(X, cols, rows) | 1.136861| 1.119695| 1.717188| 1.120201| 1.098426| 33.400168|
+|3  |rowCumsums(X[cols, rows]) | 1.369982| 1.423980| 1.409172| 1.427739| 1.377584|  1.597515|
 
 _Figure: Benchmarking of colCumsums_X_S(), colCumsums(X, rows, cols)() and colCummins(X[rows, cols])() on integer+10x10 data  as well as rowCumsums_X_S(), rowCumsums(X, cols, rows)() and rowCumsums(X[cols, rows])() on the same data transposed.  Outliers are displayed as crosses.  Times are in milliseconds._
 
@@ -123,14 +123,14 @@ _Table: Benchmarking of colCumsums_X_S() and rowCumsums_X_S() on integer+10x10 d
 
 |   |expr           |   min|     lq|    mean| median|     uq|     max|
 |:--|:--------------|-----:|------:|-------:|------:|------:|-------:|
-|1  |colCumsums_X_S | 2.356| 2.5070| 4.00786| 2.5865| 2.6740| 142.918|
-|2  |rowCumsums_X_S | 2.350| 2.6605| 2.89172| 2.7205| 2.8165|   6.084|
+|1  |colCumsums_X_S | 2.187| 2.3425| 3.88846| 2.4185| 2.5225| 146.407|
+|2  |rowCumsums_X_S | 2.192| 2.4270| 2.55633| 2.4875| 2.6365|   4.748|
 
 
-|   |expr           |       min|       lq|      mean|   median|       uq|       max|
-|:--|:--------------|---------:|--------:|---------:|--------:|--------:|---------:|
-|1  |colCumsums_X_S | 1.0000000| 1.000000| 1.0000000| 1.000000| 1.000000| 1.0000000|
-|2  |rowCumsums_X_S | 0.9974533| 1.061229| 0.7215122| 1.051808| 1.053291| 0.0425699|
+|   |expr           |      min|       lq|      mean|  median|       uq|       max|
+|:--|:--------------|--------:|--------:|---------:|-------:|--------:|---------:|
+|1  |colCumsums_X_S | 1.000000| 1.000000| 1.0000000| 1.00000| 1.000000| 1.0000000|
+|2  |rowCumsums_X_S | 1.002286| 1.036073| 0.6574145| 1.02853| 1.045193| 0.0324301|
 
 _Figure: Benchmarking of colCumsums_X_S() and rowCumsums_X_S() on integer+10x10 data (original and transposed).  Outliers are displayed as crosses. Times are in milliseconds._
 
@@ -146,16 +146,16 @@ _Figure: Benchmarking of colCumsums_X_S() and rowCumsums_X_S() on integer+10x10 
 > X_S <- X[rows, cols]
 > gc()
           used  (Mb) gc trigger  (Mb) max used  (Mb)
-Ncells 5178345 276.6    7554717 403.5  7554717 403.5
-Vcells 9072344  69.3   31793280 242.6 60508962 461.7
+Ncells 5207495 278.2    7916910 422.9  7916910 422.9
+Vcells 9509455  72.6   33191153 253.3 53339345 407.0
 > colStats <- microbenchmark(colCumsums_X_S = colCumsums(X_S), `colCumsums(X, rows, cols)` = colCumsums(X, 
 +     rows = rows, cols = cols), `colCummins(X[rows, cols])` = colCumsums(X[rows, cols]), unit = "ms")
 > X <- t(X)
 > X_S <- t(X_S)
 > gc()
           used  (Mb) gc trigger  (Mb) max used  (Mb)
-Ncells 5178339 276.6    7554717 403.5  7554717 403.5
-Vcells 9077427  69.3   31793280 242.6 60508962 461.7
+Ncells 5207489 278.2    7916910 422.9  7916910 422.9
+Vcells 9514538  72.6   33191153 253.3 53339345 407.0
 > rowStats <- microbenchmark(rowCumsums_X_S = rowCumsums(X_S), `rowCumsums(X, cols, rows)` = rowCumsums(X, 
 +     rows = cols, cols = rows), `rowCumsums(X[cols, rows])` = rowCumsums(X[cols, rows]), unit = "ms")
 ```
@@ -164,18 +164,18 @@ _Table: Benchmarking of colCumsums_X_S(), colCumsums(X, rows, cols)() and colCum
 
 
 
-|   |expr                      |      min|        lq|      mean|   median|        uq|      max|
-|:--|:-------------------------|--------:|---------:|---------:|--------:|---------:|--------:|
-|1  |colCumsums_X_S            | 0.015078| 0.0152545| 0.0155275| 0.015381| 0.0155395| 0.021331|
-|2  |colCumsums(X, rows, cols) | 0.023880| 0.0241985| 0.0244677| 0.024303| 0.0244660| 0.030364|
-|3  |colCummins(X[rows, cols]) | 0.025986| 0.0263630| 0.0270514| 0.026565| 0.0269100| 0.051681|
+|   |expr                      |      min|       lq|      mean|    median|        uq|      max|
+|:--|:-------------------------|--------:|--------:|---------:|---------:|---------:|--------:|
+|1  |colCumsums_X_S            | 0.014966| 0.015374| 0.0158363| 0.0154960| 0.0156730| 0.027424|
+|2  |colCumsums(X, rows, cols) | 0.023868| 0.024176| 0.0246965| 0.0243465| 0.0244700| 0.041711|
+|3  |colCummins(X[rows, cols]) | 0.026372| 0.026909| 0.0281198| 0.0271350| 0.0273285| 0.059165|
 
 
 |   |expr                      |      min|       lq|     mean|   median|       uq|      max|
 |:--|:-------------------------|--------:|--------:|--------:|--------:|--------:|--------:|
 |1  |colCumsums_X_S            | 1.000000| 1.000000| 1.000000| 1.000000| 1.000000| 1.000000|
-|2  |colCumsums(X, rows, cols) | 1.583764| 1.586319| 1.575765| 1.580066| 1.574439| 1.423468|
-|3  |colCummins(X[rows, cols]) | 1.723438| 1.728211| 1.742158| 1.727131| 1.731716| 2.422812|
+|2  |colCumsums(X, rows, cols) | 1.594815| 1.572525| 1.559489| 1.571147| 1.561284| 1.520967|
+|3  |colCummins(X[rows, cols]) | 1.762128| 1.750293| 1.775658| 1.751097| 1.743667| 2.157417|
 
 _Table: Benchmarking of rowCumsums_X_S(), rowCumsums(X, cols, rows)() and rowCumsums(X[cols, rows])() on integer+100x100 data (transposed). The top panel shows times in milliseconds and the bottom panel shows relative times._
 
@@ -183,16 +183,16 @@ _Table: Benchmarking of rowCumsums_X_S(), rowCumsums(X, cols, rows)() and rowCum
 
 |   |expr                      |      min|        lq|      mean|    median|        uq|      max|
 |:--|:-------------------------|--------:|---------:|---------:|---------:|---------:|--------:|
-|1  |rowCumsums_X_S            | 0.020722| 0.0217515| 0.0222327| 0.0219665| 0.0221505| 0.038553|
-|2  |rowCumsums(X, cols, rows) | 0.023558| 0.0244710| 0.0250260| 0.0246485| 0.0247965| 0.057406|
-|3  |rowCumsums(X[cols, rows]) | 0.031433| 0.0329940| 0.0334907| 0.0332295| 0.0335910| 0.047728|
+|1  |rowCumsums_X_S            | 0.020501| 0.0216520| 0.0222227| 0.0218275| 0.0222305| 0.031656|
+|2  |rowCumsums(X, cols, rows) | 0.023009| 0.0242820| 0.0253671| 0.0244575| 0.0248665| 0.070186|
+|3  |rowCumsums(X[cols, rows]) | 0.031315| 0.0329925| 0.0346110| 0.0332590| 0.0340310| 0.067481|
 
 
-|   |expr                      |      min|       lq|     mean|   median|       uq|      max|
-|:--|:-------------------------|--------:|--------:|--------:|--------:|--------:|--------:|
-|1  |rowCumsums_X_S            | 1.000000| 1.000000| 1.000000| 1.000000| 1.000000| 1.000000|
-|2  |rowCumsums(X, cols, rows) | 1.136859| 1.125026| 1.125641| 1.122095| 1.119455| 1.489015|
-|3  |rowCumsums(X[cols, rows]) | 1.516890| 1.516861| 1.506375| 1.512735| 1.516490| 1.237984|
+|   |expr                      |      min|       lq|     mean|  median|       uq|      max|
+|:--|:-------------------------|--------:|--------:|--------:|-------:|--------:|--------:|
+|1  |rowCumsums_X_S            | 1.000000| 1.000000| 1.000000| 1.00000| 1.000000| 1.000000|
+|2  |rowCumsums(X, cols, rows) | 1.122335| 1.121467| 1.141493| 1.12049| 1.118576| 2.217147|
+|3  |rowCumsums(X[cols, rows]) | 1.527486| 1.523762| 1.557458| 1.52372| 1.530825| 2.131697|
 
 _Figure: Benchmarking of colCumsums_X_S(), colCumsums(X, rows, cols)() and colCummins(X[rows, cols])() on integer+100x100 data  as well as rowCumsums_X_S(), rowCumsums(X, cols, rows)() and rowCumsums(X[cols, rows])() on the same data transposed.  Outliers are displayed as crosses.  Times are in milliseconds._
 
@@ -204,16 +204,16 @@ _Table: Benchmarking of colCumsums_X_S() and rowCumsums_X_S() on integer+100x100
 
 
 
-|   |expr           |    min|      lq|     mean|  median|      uq|    max|
-|:--|:--------------|------:|-------:|--------:|-------:|-------:|------:|
-|1  |colCumsums_X_S | 15.078| 15.2545| 15.52751| 15.3810| 15.5395| 21.331|
-|2  |rowCumsums_X_S | 20.722| 21.7515| 22.23266| 21.9665| 22.1505| 38.553|
+|   |expr           |    min|     lq|     mean|  median|      uq|    max|
+|:--|:--------------|------:|------:|--------:|-------:|-------:|------:|
+|1  |colCumsums_X_S | 14.966| 15.374| 15.83628| 15.4960| 15.6730| 27.424|
+|2  |rowCumsums_X_S | 20.501| 21.652| 22.22272| 21.8275| 22.2305| 31.656|
 
 
-|   |expr           |     min|       lq|     mean|   median|       uq|     max|
-|:--|:--------------|-------:|--------:|--------:|--------:|--------:|-------:|
-|1  |colCumsums_X_S | 1.00000| 1.000000| 1.000000| 1.000000| 1.000000| 1.00000|
-|2  |rowCumsums_X_S | 1.37432| 1.425907| 1.431824| 1.428158| 1.425432| 1.80737|
+|   |expr           |      min|       lq|     mean|   median|       uq|      max|
+|:--|:--------------|--------:|--------:|--------:|--------:|--------:|--------:|
+|1  |colCumsums_X_S | 1.000000| 1.000000| 1.000000| 1.000000| 1.000000| 1.000000|
+|2  |rowCumsums_X_S | 1.369838| 1.408352| 1.403279| 1.408589| 1.418395| 1.154317|
 
 _Figure: Benchmarking of colCumsums_X_S() and rowCumsums_X_S() on integer+100x100 data (original and transposed).  Outliers are displayed as crosses. Times are in milliseconds._
 
@@ -229,16 +229,16 @@ _Figure: Benchmarking of colCumsums_X_S() and rowCumsums_X_S() on integer+100x10
 > X_S <- X[rows, cols]
 > gc()
           used  (Mb) gc trigger  (Mb) max used  (Mb)
-Ncells 5178545 276.6    7554717 403.5  7554717 403.5
-Vcells 9073225  69.3   31793280 242.6 60508962 461.7
+Ncells 5208237 278.2    7916910 422.9  7916910 422.9
+Vcells 9513506  72.6   33191153 253.3 53339345 407.0
 > colStats <- microbenchmark(colCumsums_X_S = colCumsums(X_S), `colCumsums(X, rows, cols)` = colCumsums(X, 
 +     rows = rows, cols = cols), `colCummins(X[rows, cols])` = colCumsums(X[rows, cols]), unit = "ms")
 > X <- t(X)
 > X_S <- t(X_S)
 > gc()
           used  (Mb) gc trigger  (Mb) max used  (Mb)
-Ncells 5178539 276.6    7554717 403.5  7554717 403.5
-Vcells 9078308  69.3   31793280 242.6 60508962 461.7
+Ncells 5208231 278.2    7916910 422.9  7916910 422.9
+Vcells 9518589  72.7   33191153 253.3 53339345 407.0
 > rowStats <- microbenchmark(rowCumsums_X_S = rowCumsums(X_S), `rowCumsums(X, cols, rows)` = rowCumsums(X, 
 +     rows = cols, cols = rows), `rowCumsums(X[cols, rows])` = rowCumsums(X[cols, rows]), unit = "ms")
 ```
@@ -247,35 +247,35 @@ _Table: Benchmarking of colCumsums_X_S(), colCumsums(X, rows, cols)() and colCum
 
 
 
-|   |expr                      |      min|        lq|      mean|    median|        uq|      max|
-|:--|:-------------------------|--------:|---------:|---------:|---------:|---------:|--------:|
-|1  |colCumsums_X_S            | 0.014986| 0.0152135| 0.0155751| 0.0153505| 0.0155010| 0.029554|
-|2  |colCumsums(X, rows, cols) | 0.024897| 0.0251685| 0.0255792| 0.0253365| 0.0256285| 0.034479|
-|3  |colCummins(X[rows, cols]) | 0.026824| 0.0271010| 0.0281908| 0.0272935| 0.0275785| 0.059659|
+|   |expr                      |      min|       lq|      mean|    median|        uq|      max|
+|:--|:-------------------------|--------:|--------:|---------:|---------:|---------:|--------:|
+|1  |colCumsums_X_S            | 0.014539| 0.014901| 0.0153663| 0.0152690| 0.0154305| 0.030117|
+|2  |colCumsums(X, rows, cols) | 0.023026| 0.024256| 0.0251102| 0.0246265| 0.0253655| 0.038718|
+|3  |colCummins(X[rows, cols]) | 0.024820| 0.026322| 0.0273808| 0.0270345| 0.0276205| 0.052923|
 
 
 |   |expr                      |      min|       lq|     mean|   median|       uq|      max|
 |:--|:-------------------------|--------:|--------:|--------:|--------:|--------:|--------:|
 |1  |colCumsums_X_S            | 1.000000| 1.000000| 1.000000| 1.000000| 1.000000| 1.000000|
-|2  |colCumsums(X, rows, cols) | 1.661351| 1.654353| 1.642310| 1.650533| 1.653345| 1.166644|
-|3  |colCummins(X[rows, cols]) | 1.789937| 1.781378| 1.809984| 1.778020| 1.779143| 2.018644|
+|2  |colCumsums(X, rows, cols) | 1.583740| 1.627810| 1.634107| 1.612843| 1.643855| 1.285586|
+|3  |colCummins(X[rows, cols]) | 1.707132| 1.766459| 1.781873| 1.770548| 1.789994| 1.757247|
 
 _Table: Benchmarking of rowCumsums_X_S(), rowCumsums(X, cols, rows)() and rowCumsums(X[cols, rows])() on integer+1000x10 data (transposed). The top panel shows times in milliseconds and the bottom panel shows relative times._
 
 
 
-|   |expr                      |      min|        lq|      mean|    median|        uq|      max|
-|:--|:-------------------------|--------:|---------:|---------:|---------:|---------:|--------:|
-|1  |rowCumsums_X_S            | 0.023028| 0.0236255| 0.0241999| 0.0237995| 0.0241170| 0.040517|
-|2  |rowCumsums(X, cols, rows) | 0.027742| 0.0281910| 0.0286811| 0.0283820| 0.0286790| 0.034906|
-|3  |rowCumsums(X[cols, rows]) | 0.036672| 0.0372015| 0.0380584| 0.0374740| 0.0378585| 0.072539|
+|   |expr                      |      min|       lq|      mean|    median|       uq|      max|
+|:--|:-------------------------|--------:|--------:|---------:|---------:|--------:|--------:|
+|1  |rowCumsums_X_S            | 0.020600| 0.021898| 0.0229122| 0.0226535| 0.023488| 0.038163|
+|2  |rowCumsums(X, cols, rows) | 0.024954| 0.026149| 0.0274845| 0.0276460| 0.028356| 0.039416|
+|3  |rowCumsums(X[cols, rows]) | 0.033005| 0.034743| 0.0365598| 0.0361615| 0.037538| 0.065182|
 
 
-|   |expr                      |      min|       lq|     mean|   median|       uq|       max|
-|:--|:-------------------------|--------:|--------:|--------:|--------:|--------:|---------:|
-|1  |rowCumsums_X_S            | 1.000000| 1.000000| 1.000000| 1.000000| 1.000000| 1.0000000|
-|2  |rowCumsums(X, cols, rows) | 1.204707| 1.193245| 1.185172| 1.192546| 1.189161| 0.8615149|
-|3  |rowCumsums(X[cols, rows]) | 1.592496| 1.574633| 1.572666| 1.574571| 1.569785| 1.7903349|
+|   |expr                      |      min|       lq|     mean|   median|       uq|      max|
+|:--|:-------------------------|--------:|--------:|--------:|--------:|--------:|--------:|
+|1  |rowCumsums_X_S            | 1.000000| 1.000000| 1.000000| 1.000000| 1.000000| 1.000000|
+|2  |rowCumsums(X, cols, rows) | 1.211359| 1.194127| 1.199558| 1.220385| 1.207255| 1.032833|
+|3  |rowCumsums(X[cols, rows]) | 1.602184| 1.586583| 1.595650| 1.596288| 1.598178| 1.707989|
 
 _Figure: Benchmarking of colCumsums_X_S(), colCumsums(X, rows, cols)() and colCummins(X[rows, cols])() on integer+1000x10 data  as well as rowCumsums_X_S(), rowCumsums(X, cols, rows)() and rowCumsums(X[cols, rows])() on the same data transposed.  Outliers are displayed as crosses.  Times are in milliseconds._
 
@@ -287,16 +287,16 @@ _Table: Benchmarking of colCumsums_X_S() and rowCumsums_X_S() on integer+1000x10
 
 
 
-|   |expr           |    min|      lq|     mean|  median|     uq|    max|
-|:--|:--------------|------:|-------:|--------:|-------:|------:|------:|
-|1  |colCumsums_X_S | 14.986| 15.2135| 15.57514| 15.3505| 15.501| 29.554|
-|2  |rowCumsums_X_S | 23.028| 23.6255| 24.19992| 23.7995| 24.117| 40.517|
+|   |expr           |    min|     lq|     mean|  median|      uq|    max|
+|:--|:--------------|------:|------:|--------:|-------:|-------:|------:|
+|1  |colCumsums_X_S | 14.539| 14.901| 15.36630| 15.2690| 15.4305| 30.117|
+|2  |rowCumsums_X_S | 20.600| 21.898| 22.91216| 22.6535| 23.4880| 38.163|
 
 
-|   |expr           |      min|      lq|     mean|   median|       uq|      max|
-|:--|:--------------|--------:|-------:|--------:|--------:|--------:|--------:|
-|1  |colCumsums_X_S | 1.000000| 1.00000| 1.000000| 1.000000| 1.000000| 1.000000|
-|2  |rowCumsums_X_S | 1.536634| 1.55293| 1.553753| 1.550406| 1.555835| 1.370948|
+|   |expr           |      min|       lq|     mean|   median|      uq|      max|
+|:--|:--------------|--------:|--------:|--------:|--------:|-------:|--------:|
+|1  |colCumsums_X_S | 1.000000| 1.000000| 1.000000| 1.000000| 1.00000| 1.000000|
+|2  |rowCumsums_X_S | 1.416879| 1.469566| 1.491065| 1.483627| 1.52218| 1.267158|
 
 _Figure: Benchmarking of colCumsums_X_S() and rowCumsums_X_S() on integer+1000x10 data (original and transposed).  Outliers are displayed as crosses. Times are in milliseconds._
 
@@ -312,16 +312,16 @@ _Figure: Benchmarking of colCumsums_X_S() and rowCumsums_X_S() on integer+1000x1
 > X_S <- X[rows, cols]
 > gc()
           used  (Mb) gc trigger  (Mb) max used  (Mb)
-Ncells 5178750 276.6    7554717 403.5  7554717 403.5
-Vcells 9074056  69.3   31793280 242.6 60508962 461.7
+Ncells 5208442 278.2    7916910 422.9  7916910 422.9
+Vcells 9514334  72.6   33191153 253.3 53339345 407.0
 > colStats <- microbenchmark(colCumsums_X_S = colCumsums(X_S), `colCumsums(X, rows, cols)` = colCumsums(X, 
 +     rows = rows, cols = cols), `colCummins(X[rows, cols])` = colCumsums(X[rows, cols]), unit = "ms")
 > X <- t(X)
 > X_S <- t(X_S)
 > gc()
           used  (Mb) gc trigger  (Mb) max used  (Mb)
-Ncells 5178744 276.6    7554717 403.5  7554717 403.5
-Vcells 9079139  69.3   31793280 242.6 60508962 461.7
+Ncells 5208436 278.2    7916910 422.9  7916910 422.9
+Vcells 9519417  72.7   33191153 253.3 53339345 407.0
 > rowStats <- microbenchmark(rowCumsums_X_S = rowCumsums(X_S), `rowCumsums(X, cols, rows)` = rowCumsums(X, 
 +     rows = cols, cols = rows), `rowCumsums(X[cols, rows])` = rowCumsums(X[cols, rows]), unit = "ms")
 ```
@@ -330,18 +330,18 @@ _Table: Benchmarking of colCumsums_X_S(), colCumsums(X, rows, cols)() and colCum
 
 
 
-|   |expr                      |      min|        lq|      mean|    median|        uq|      max|
-|:--|:-------------------------|--------:|---------:|---------:|---------:|---------:|--------:|
-|1  |colCumsums_X_S            | 0.016164| 0.0164885| 0.0172254| 0.0167430| 0.0175585| 0.033175|
-|2  |colCumsums(X, rows, cols) | 0.027351| 0.0276935| 0.0283253| 0.0278620| 0.0281325| 0.044117|
-|3  |colCummins(X[rows, cols]) | 0.029817| 0.0302075| 0.0311404| 0.0304365| 0.0320095| 0.046788|
+|   |expr                      |      min|        lq|      mean|   median|        uq|      max|
+|:--|:-------------------------|--------:|---------:|---------:|--------:|---------:|--------:|
+|1  |colCumsums_X_S            | 0.015101| 0.0159295| 0.0167881| 0.016561| 0.0167885| 0.035414|
+|2  |colCumsums(X, rows, cols) | 0.025431| 0.0266525| 0.0277261| 0.027781| 0.0280280| 0.042531|
+|3  |colCummins(X[rows, cols]) | 0.028260| 0.0299825| 0.0307777| 0.030895| 0.0311495| 0.043917|
 
 
 |   |expr                      |      min|       lq|     mean|   median|       uq|      max|
 |:--|:-------------------------|--------:|--------:|--------:|--------:|--------:|--------:|
 |1  |colCumsums_X_S            | 1.000000| 1.000000| 1.000000| 1.000000| 1.000000| 1.000000|
-|2  |colCumsums(X, rows, cols) | 1.692093| 1.679564| 1.644393| 1.664098| 1.602216| 1.329827|
-|3  |colCummins(X[rows, cols]) | 1.844655| 1.832034| 1.807819| 1.817864| 1.823020| 1.410339|
+|2  |colCumsums(X, rows, cols) | 1.684061| 1.673154| 1.651534| 1.677495| 1.669476| 1.200966|
+|3  |colCummins(X[rows, cols]) | 1.871399| 1.882200| 1.833308| 1.865527| 1.855407| 1.240103|
 
 _Table: Benchmarking of rowCumsums_X_S(), rowCumsums(X, cols, rows)() and rowCumsums(X[cols, rows])() on integer+10x1000 data (transposed). The top panel shows times in milliseconds and the bottom panel shows relative times._
 
@@ -349,16 +349,16 @@ _Table: Benchmarking of rowCumsums_X_S(), rowCumsums(X, cols, rows)() and rowCum
 
 |   |expr                      |      min|        lq|      mean|    median|        uq|      max|
 |:--|:-------------------------|--------:|---------:|---------:|---------:|---------:|--------:|
-|1  |rowCumsums_X_S            | 0.020043| 0.0203430| 0.0210565| 0.0207165| 0.0214790| 0.027380|
-|2  |rowCumsums(X, cols, rows) | 0.023510| 0.0239335| 0.0247495| 0.0241895| 0.0251085| 0.050414|
-|3  |rowCumsums(X[cols, rows]) | 0.031952| 0.0323205| 0.0333155| 0.0326070| 0.0339875| 0.048422|
+|1  |rowCumsums_X_S            | 0.018594| 0.0201560| 0.0205578| 0.0203280| 0.0206045| 0.033723|
+|2  |rowCumsums(X, cols, rows) | 0.021955| 0.0235780| 0.0246662| 0.0238220| 0.0241395| 0.063707|
+|3  |rowCumsums(X[cols, rows]) | 0.029738| 0.0320155| 0.0324293| 0.0322925| 0.0326635| 0.047299|
 
 
 |   |expr                      |      min|       lq|     mean|   median|       uq|      max|
 |:--|:-------------------------|--------:|--------:|--------:|--------:|--------:|--------:|
 |1  |rowCumsums_X_S            | 1.000000| 1.000000| 1.000000| 1.000000| 1.000000| 1.000000|
-|2  |rowCumsums(X, cols, rows) | 1.172978| 1.176498| 1.175388| 1.167644| 1.168979| 1.841271|
-|3  |rowCumsums(X[cols, rows]) | 1.594172| 1.588777| 1.582195| 1.573963| 1.582359| 1.768517|
+|2  |rowCumsums(X, cols, rows) | 1.180757| 1.169776| 1.199849| 1.171881| 1.171564| 1.889126|
+|3  |rowCumsums(X[cols, rows]) | 1.599333| 1.588386| 1.577474| 1.588572| 1.585260| 1.402574|
 
 _Figure: Benchmarking of colCumsums_X_S(), colCumsums(X, rows, cols)() and colCummins(X[rows, cols])() on integer+10x1000 data  as well as rowCumsums_X_S(), rowCumsums(X, cols, rows)() and rowCumsums(X[cols, rows])() on the same data transposed.  Outliers are displayed as crosses.  Times are in milliseconds._
 
@@ -370,16 +370,16 @@ _Table: Benchmarking of colCumsums_X_S() and rowCumsums_X_S() on integer+10x1000
 
 
 
-|   |expr           |    min|      lq|     mean|  median|      uq|    max|
-|:--|:--------------|------:|-------:|--------:|-------:|-------:|------:|
-|1  |colCumsums_X_S | 16.164| 16.4885| 17.22541| 16.7430| 17.5585| 33.175|
-|2  |rowCumsums_X_S | 20.043| 20.3430| 21.05649| 20.7165| 21.4790| 27.380|
+|   |expr           |    min|      lq|     mean| median|      uq|    max|
+|:--|:--------------|------:|-------:|--------:|------:|-------:|------:|
+|1  |colCumsums_X_S | 15.101| 15.9295| 16.78808| 16.561| 16.7885| 35.414|
+|2  |rowCumsums_X_S | 18.594| 20.1560| 20.55776| 20.328| 20.6045| 33.723|
 
 
 |   |expr           |      min|       lq|     mean|   median|       uq|       max|
 |:--|:--------------|--------:|--------:|--------:|--------:|--------:|---------:|
 |1  |colCumsums_X_S | 1.000000| 1.000000| 1.000000| 1.000000| 1.000000| 1.0000000|
-|2  |rowCumsums_X_S | 1.239978| 1.233769| 1.222409| 1.237323| 1.223282| 0.8253203|
+|2  |rowCumsums_X_S | 1.231309| 1.265325| 1.224545| 1.227462| 1.227298| 0.9522505|
 
 _Figure: Benchmarking of colCumsums_X_S() and rowCumsums_X_S() on integer+10x1000 data (original and transposed).  Outliers are displayed as crosses. Times are in milliseconds._
 
@@ -395,16 +395,16 @@ _Figure: Benchmarking of colCumsums_X_S() and rowCumsums_X_S() on integer+10x100
 > X_S <- X[rows, cols]
 > gc()
           used  (Mb) gc trigger  (Mb) max used  (Mb)
-Ncells 5178960 276.6    7554717 403.5  7554717 403.5
-Vcells 9096726  69.5   31793280 242.6 60508962 461.7
+Ncells 5208653 278.2    7916910 422.9  7916910 422.9
+Vcells 9537005  72.8   33191153 253.3 53339345 407.0
 > colStats <- microbenchmark(colCumsums_X_S = colCumsums(X_S), `colCumsums(X, rows, cols)` = colCumsums(X, 
 +     rows = rows, cols = cols), `colCummins(X[rows, cols])` = colCumsums(X[rows, cols]), unit = "ms")
 > X <- t(X)
 > X_S <- t(X_S)
 > gc()
           used  (Mb) gc trigger  (Mb) max used  (Mb)
-Ncells 5178954 276.6    7554717 403.5  7554717 403.5
-Vcells 9146809  69.8   31793280 242.6 60508962 461.7
+Ncells 5208647 278.2    7916910 422.9  7916910 422.9
+Vcells 9587088  73.2   33191153 253.3 53339345 407.0
 > rowStats <- microbenchmark(rowCumsums_X_S = rowCumsums(X_S), `rowCumsums(X, cols, rows)` = rowCumsums(X, 
 +     rows = cols, cols = rows), `rowCumsums(X[cols, rows])` = rowCumsums(X[cols, rows]), unit = "ms")
 ```
@@ -415,33 +415,33 @@ _Table: Benchmarking of colCumsums_X_S(), colCumsums(X, rows, cols)() and colCum
 
 |   |expr                      |      min|        lq|      mean|    median|        uq|      max|
 |:--|:-------------------------|--------:|---------:|---------:|---------:|---------:|--------:|
-|1  |colCumsums_X_S            | 0.090620| 0.0985225| 0.1077157| 0.1030480| 0.1160365| 0.165373|
-|2  |colCumsums(X, rows, cols) | 0.151589| 0.1666765| 0.1812233| 0.1722155| 0.1989635| 0.280863|
-|3  |colCummins(X[rows, cols]) | 0.166007| 0.1832420| 0.1999983| 0.1893055| 0.2188905| 0.245082|
+|1  |colCumsums_X_S            | 0.085659| 0.0935475| 0.1058033| 0.1009105| 0.1145250| 0.152515|
+|2  |colCumsums(X, rows, cols) | 0.143120| 0.1570405| 0.1777168| 0.1722325| 0.1949645| 0.284269|
+|3  |colCummins(X[rows, cols]) | 0.157417| 0.1737415| 0.2003399| 0.1900500| 0.2192475| 0.320763|
 
 
 |   |expr                      |      min|       lq|     mean|   median|       uq|      max|
 |:--|:-------------------------|--------:|--------:|--------:|--------:|--------:|--------:|
 |1  |colCumsums_X_S            | 1.000000| 1.000000| 1.000000| 1.000000| 1.000000| 1.000000|
-|2  |colCumsums(X, rows, cols) | 1.672799| 1.691761| 1.682422| 1.671216| 1.714663| 1.698361|
-|3  |colCummins(X[rows, cols]) | 1.831902| 1.859900| 1.856723| 1.837061| 1.886394| 1.481995|
+|2  |colCumsums(X, rows, cols) | 1.670811| 1.678725| 1.679691| 1.706785| 1.702375| 1.863876|
+|3  |colCummins(X[rows, cols]) | 1.837717| 1.857254| 1.893514| 1.883352| 1.914407| 2.103157|
 
 _Table: Benchmarking of rowCumsums_X_S(), rowCumsums(X, cols, rows)() and rowCumsums(X[cols, rows])() on integer+100x1000 data (transposed). The top panel shows times in milliseconds and the bottom panel shows relative times._
 
 
 
-|   |expr                      |      min|        lq|      mean|    median|       uq|      max|
-|:--|:-------------------------|--------:|---------:|---------:|---------:|--------:|--------:|
-|1  |rowCumsums_X_S            | 0.122374| 0.1371845| 0.1650639| 0.1510930| 0.173808| 0.361733|
-|2  |rowCumsums(X, cols, rows) | 0.138146| 0.1463215| 0.1744124| 0.1601350| 0.184100| 0.338477|
-|3  |rowCumsums(X[cols, rows]) | 0.189116| 0.2087185| 0.2384822| 0.2277335| 0.253692| 0.446322|
+|   |expr                      |      min|        lq|      mean|    median|        uq|      max|
+|:--|:-------------------------|--------:|---------:|---------:|---------:|---------:|--------:|
+|1  |rowCumsums_X_S            | 0.116090| 0.1361245| 0.1502013| 0.1459120| 0.1627330| 0.222236|
+|2  |rowCumsums(X, cols, rows) | 0.131060| 0.1424760| 0.1632429| 0.1601415| 0.1759785| 0.274895|
+|3  |rowCumsums(X[cols, rows]) | 0.179466| 0.2028175| 0.2281330| 0.2247085| 0.2418230| 0.314098|
 
 
-|   |expr                      |      min|       lq|     mean|   median|       uq|       max|
-|:--|:-------------------------|--------:|--------:|--------:|--------:|--------:|---------:|
-|1  |rowCumsums_X_S            | 1.000000| 1.000000| 1.000000| 1.000000| 1.000000| 1.0000000|
-|2  |rowCumsums(X, cols, rows) | 1.128884| 1.066604| 1.056636| 1.059844| 1.059215| 0.9357095|
-|3  |rowCumsums(X[cols, rows]) | 1.545394| 1.521444| 1.444788| 1.507241| 1.459611| 1.2338437|
+|   |expr                      |      min|       lq|     mean|   median|       uq|      max|
+|:--|:-------------------------|--------:|--------:|--------:|--------:|--------:|--------:|
+|1  |rowCumsums_X_S            | 1.000000| 1.000000| 1.000000| 1.000000| 1.000000| 1.000000|
+|2  |rowCumsums(X, cols, rows) | 1.128952| 1.046660| 1.086827| 1.097521| 1.081394| 1.236951|
+|3  |rowCumsums(X[cols, rows]) | 1.545921| 1.489941| 1.518849| 1.540028| 1.486011| 1.413353|
 
 _Figure: Benchmarking of colCumsums_X_S(), colCumsums(X, rows, cols)() and colCummins(X[rows, cols])() on integer+100x1000 data  as well as rowCumsums_X_S(), rowCumsums(X, cols, rows)() and rowCumsums(X[cols, rows])() on the same data transposed.  Outliers are displayed as crosses.  Times are in milliseconds._
 
@@ -453,16 +453,16 @@ _Table: Benchmarking of colCumsums_X_S() and rowCumsums_X_S() on integer+100x100
 
 
 
-|   |expr           |     min|       lq|     mean|  median|       uq|     max|
-|:--|:--------------|-------:|--------:|--------:|-------:|--------:|-------:|
-|1  |colCumsums_X_S |  90.620|  98.5225| 107.7157| 103.048| 116.0365| 165.373|
-|2  |rowCumsums_X_S | 122.374| 137.1845| 165.0639| 151.093| 173.8080| 361.733|
+|   |expr           |     min|       lq|     mean|   median|      uq|     max|
+|:--|:--------------|-------:|--------:|--------:|--------:|-------:|-------:|
+|1  |colCumsums_X_S |  85.659|  93.5475| 105.8033| 100.9105| 114.525| 152.515|
+|2  |rowCumsums_X_S | 116.090| 136.1245| 150.2013| 145.9120| 162.733| 222.236|
 
 
 |   |expr           |      min|       lq|     mean|   median|       uq|      max|
 |:--|:--------------|--------:|--------:|--------:|--------:|--------:|--------:|
 |1  |colCumsums_X_S | 1.000000| 1.000000| 1.000000| 1.000000| 1.000000| 1.000000|
-|2  |rowCumsums_X_S | 1.350408| 1.392418| 1.532402| 1.466239| 1.497874| 2.187376|
+|2  |rowCumsums_X_S | 1.355258| 1.455138| 1.419628| 1.445955| 1.420939| 1.457142|
 
 _Figure: Benchmarking of colCumsums_X_S() and rowCumsums_X_S() on integer+100x1000 data (original and transposed).  Outliers are displayed as crosses. Times are in milliseconds._
 
@@ -478,16 +478,16 @@ _Figure: Benchmarking of colCumsums_X_S() and rowCumsums_X_S() on integer+100x10
 > X_S <- X[rows, cols]
 > gc()
           used  (Mb) gc trigger  (Mb) max used  (Mb)
-Ncells 5179173 276.6    7554717 403.5  7554717 403.5
-Vcells 9097506  69.5   31793280 242.6 60508962 461.7
+Ncells 5208863 278.2    7916910 422.9  7916910 422.9
+Vcells 9537781  72.8   33191153 253.3 53339345 407.0
 > colStats <- microbenchmark(colCumsums_X_S = colCumsums(X_S), `colCumsums(X, rows, cols)` = colCumsums(X, 
 +     rows = rows, cols = cols), `colCummins(X[rows, cols])` = colCumsums(X[rows, cols]), unit = "ms")
 > X <- t(X)
 > X_S <- t(X_S)
 > gc()
           used  (Mb) gc trigger  (Mb) max used  (Mb)
-Ncells 5179167 276.6    7554717 403.5  7554717 403.5
-Vcells 9147589  69.8   31793280 242.6 60508962 461.7
+Ncells 5208857 278.2    7916910 422.9  7916910 422.9
+Vcells 9587864  73.2   33191153 253.3 53339345 407.0
 > rowStats <- microbenchmark(rowCumsums_X_S = rowCumsums(X_S), `rowCumsums(X, cols, rows)` = rowCumsums(X, 
 +     rows = cols, cols = rows), `rowCumsums(X[cols, rows])` = rowCumsums(X[cols, rows]), unit = "ms")
 ```
@@ -498,16 +498,16 @@ _Table: Benchmarking of colCumsums_X_S(), colCumsums(X, rows, cols)() and colCum
 
 |   |expr                      |      min|        lq|      mean|    median|        uq|      max|
 |:--|:-------------------------|--------:|---------:|---------:|---------:|---------:|--------:|
-|1  |colCumsums_X_S            | 0.093071| 0.0994620| 0.1088297| 0.1028665| 0.1187235| 0.175346|
-|2  |colCumsums(X, rows, cols) | 0.155869| 0.1659045| 0.1870771| 0.1768915| 0.2042335| 0.255181|
-|3  |colCummins(X[rows, cols]) | 0.168046| 0.1798535| 0.2069833| 0.1958960| 0.2318720| 0.322307|
+|1  |colCumsums_X_S            | 0.085421| 0.0960880| 0.1051075| 0.1023735| 0.1125505| 0.158771|
+|2  |colCumsums(X, rows, cols) | 0.142818| 0.1601600| 0.1767880| 0.1709135| 0.1898255| 0.232814|
+|3  |colCummins(X[rows, cols]) | 0.154752| 0.1737175| 0.1935330| 0.1871860| 0.2144070| 0.295733|
 
 
-|   |expr                      |      min|       lq|     mean|   median|       uq|     max|
-|:--|:-------------------------|--------:|--------:|--------:|--------:|--------:|-------:|
-|1  |colCumsums_X_S            | 1.000000| 1.000000| 1.000000| 1.000000| 1.000000| 1.00000|
-|2  |colCumsums(X, rows, cols) | 1.674732| 1.668019| 1.718989| 1.719622| 1.720245| 1.45530|
-|3  |colCummins(X[rows, cols]) | 1.805568| 1.808264| 1.901900| 1.904371| 1.953042| 1.83812|
+|   |expr                      |      min|       lq|     mean|   median|       uq|      max|
+|:--|:-------------------------|--------:|--------:|--------:|--------:|--------:|--------:|
+|1  |colCumsums_X_S            | 1.000000| 1.000000| 1.000000| 1.000000| 1.000000| 1.000000|
+|2  |colCumsums(X, rows, cols) | 1.671931| 1.666805| 1.681973| 1.669509| 1.686581| 1.466351|
+|3  |colCummins(X[rows, cols]) | 1.811639| 1.807900| 1.841286| 1.828461| 1.904985| 1.862639|
 
 _Table: Benchmarking of rowCumsums_X_S(), rowCumsums(X, cols, rows)() and rowCumsums(X[cols, rows])() on integer+1000x100 data (transposed). The top panel shows times in milliseconds and the bottom panel shows relative times._
 
@@ -515,16 +515,16 @@ _Table: Benchmarking of rowCumsums_X_S(), rowCumsums(X, cols, rows)() and rowCum
 
 |   |expr                      |      min|        lq|      mean|    median|        uq|      max|
 |:--|:-------------------------|--------:|---------:|---------:|---------:|---------:|--------:|
-|1  |rowCumsums_X_S            | 0.127101| 0.1427845| 0.1547259| 0.1477725| 0.1664225| 0.200627|
-|2  |rowCumsums(X, cols, rows) | 0.149558| 0.1638010| 0.1785156| 0.1695755| 0.1896685| 0.297375|
-|3  |rowCumsums(X[cols, rows]) | 0.204415| 0.2220810| 0.2423144| 0.2313880| 0.2612570| 0.310886|
+|1  |rowCumsums_X_S            | 0.120129| 0.1305330| 0.1520348| 0.1486140| 0.1692605| 0.234467|
+|2  |rowCumsums(X, cols, rows) | 0.134202| 0.1560545| 0.1767003| 0.1693115| 0.1873500| 0.342235|
+|3  |rowCumsums(X[cols, rows]) | 0.184329| 0.2055035| 0.2388848| 0.2318885| 0.2660125| 0.392404|
 
 
-|   |expr                      |      min|       lq|     mean|   median|       uq|      max|
-|:--|:-------------------------|--------:|--------:|--------:|--------:|--------:|--------:|
-|1  |rowCumsums_X_S            | 1.000000| 1.000000| 1.000000| 1.000000| 1.000000| 1.000000|
-|2  |rowCumsums(X, cols, rows) | 1.176686| 1.147190| 1.153753| 1.147544| 1.139681| 1.482228|
-|3  |rowCumsums(X[cols, rows]) | 1.608288| 1.555358| 1.566088| 1.565839| 1.569842| 1.549572|
+|   |expr                      |      min|       lq|     mean|   median|       uq|     max|
+|:--|:-------------------------|--------:|--------:|--------:|--------:|--------:|-------:|
+|1  |rowCumsums_X_S            | 1.000000| 1.000000| 1.000000| 1.000000| 1.000000| 1.00000|
+|2  |rowCumsums(X, cols, rows) | 1.117149| 1.195518| 1.162236| 1.139270| 1.106874| 1.45963|
+|3  |rowCumsums(X[cols, rows]) | 1.534425| 1.574341| 1.571250| 1.560341| 1.571616| 1.67360|
 
 _Figure: Benchmarking of colCumsums_X_S(), colCumsums(X, rows, cols)() and colCummins(X[rows, cols])() on integer+1000x100 data  as well as rowCumsums_X_S(), rowCumsums(X, cols, rows)() and rowCumsums(X[cols, rows])() on the same data transposed.  Outliers are displayed as crosses.  Times are in milliseconds._
 
@@ -536,16 +536,16 @@ _Table: Benchmarking of colCumsums_X_S() and rowCumsums_X_S() on integer+1000x10
 
 
 
-|   |expr           |     min|       lq|     mean|   median|       uq|     max|
-|:--|:--------------|-------:|--------:|--------:|--------:|--------:|-------:|
-|1  |colCumsums_X_S |  93.071|  99.4620| 108.8297| 102.8665| 118.7235| 175.346|
-|2  |rowCumsums_X_S | 127.101| 142.7845| 154.7259| 147.7725| 166.4225| 200.627|
+|   |expr           |     min|      lq|     mean|   median|       uq|     max|
+|:--|:--------------|-------:|-------:|--------:|--------:|--------:|-------:|
+|1  |colCumsums_X_S |  85.421|  96.088| 105.1075| 102.3735| 112.5505| 158.771|
+|2  |rowCumsums_X_S | 120.129| 130.533| 152.0349| 148.6140| 169.2605| 234.467|
 
 
-|   |expr           |      min|       lq|     mean|   median|       uq|      max|
-|:--|:--------------|--------:|--------:|--------:|--------:|--------:|--------:|
-|1  |colCumsums_X_S | 1.000000| 1.000000| 1.000000| 1.000000| 1.000000| 1.000000|
-|2  |rowCumsums_X_S | 1.365635| 1.435568| 1.421725| 1.436546| 1.401765| 1.144178|
+|   |expr           |      min|       lq|    mean|   median|       uq|      max|
+|:--|:--------------|--------:|--------:|-------:|--------:|--------:|--------:|
+|1  |colCumsums_X_S | 1.000000| 1.000000| 1.00000| 1.000000| 1.000000| 1.000000|
+|2  |rowCumsums_X_S | 1.406317| 1.358473| 1.44647| 1.451684| 1.503863| 1.476762|
 
 _Figure: Benchmarking of colCumsums_X_S() and rowCumsums_X_S() on integer+1000x100 data (original and transposed).  Outliers are displayed as crosses. Times are in milliseconds._
 
@@ -602,16 +602,16 @@ _Figure: Benchmarking of colCumsums_X_S() and rowCumsums_X_S() on integer+1000x1
 > X_S <- X[rows, cols]
 > gc()
           used  (Mb) gc trigger  (Mb) max used  (Mb)
-Ncells 5179390 276.7    7554717 403.5  7554717 403.5
-Vcells 9188612  70.2   31793280 242.6 60508962 461.7
+Ncells 5209081 278.2    7916910 422.9  7916910 422.9
+Vcells 9628888  73.5   33191153 253.3 53339345 407.0
 > colStats <- microbenchmark(colCumsums_X_S = colCumsums(X_S), `colCumsums(X, rows, cols)` = colCumsums(X, 
 +     rows = rows, cols = cols), `colCummins(X[rows, cols])` = colCumsums(X[rows, cols]), unit = "ms")
 > X <- t(X)
 > X_S <- t(X_S)
 > gc()
           used  (Mb) gc trigger  (Mb) max used  (Mb)
-Ncells 5179375 276.7    7554717 403.5  7554717 403.5
-Vcells 9188780  70.2   31793280 242.6 60508962 461.7
+Ncells 5209066 278.2    7916910 422.9  7916910 422.9
+Vcells 9629056  73.5   33191153 253.3 53339345 407.0
 > rowStats <- microbenchmark(rowCumsums_X_S = rowCumsums(X_S), `rowCumsums(X, cols, rows)` = rowCumsums(X, 
 +     rows = cols, cols = rows), `rowCumsums(X[cols, rows])` = rowCumsums(X[cols, rows]), unit = "ms")
 ```
@@ -622,33 +622,33 @@ _Table: Benchmarking of colCumsums_X_S(), colCumsums(X, rows, cols)() and colCum
 
 |   |expr                      |      min|        lq|      mean|    median|        uq|      max|
 |:--|:-------------------------|--------:|---------:|---------:|---------:|---------:|--------:|
-|1  |colCumsums_X_S            | 0.002003| 0.0021920| 0.0025323| 0.0022415| 0.0023075| 0.026683|
-|2  |colCumsums(X, rows, cols) | 0.002226| 0.0024940| 0.0026220| 0.0025775| 0.0026725| 0.005402|
-|3  |colCummins(X[rows, cols]) | 0.003010| 0.0032195| 0.0033985| 0.0032860| 0.0034130| 0.010404|
+|1  |colCumsums_X_S            | 0.002109| 0.0022375| 0.0025103| 0.0023225| 0.0024230| 0.016412|
+|2  |colCumsums(X, rows, cols) | 0.002292| 0.0025845| 0.0027037| 0.0026600| 0.0027540| 0.005152|
+|3  |colCummins(X[rows, cols]) | 0.003126| 0.0033755| 0.0035408| 0.0034990| 0.0036175| 0.007606|
 
 
-|   |expr                      |      min|       lq|     mean|   median|      uq|       max|
-|:--|:-------------------------|--------:|--------:|--------:|--------:|-------:|---------:|
-|1  |colCumsums_X_S            | 1.000000| 1.000000| 1.000000| 1.000000| 1.00000| 1.0000000|
-|2  |colCumsums(X, rows, cols) | 1.111333| 1.137774| 1.035434| 1.149900| 1.15818| 0.2024510|
-|3  |colCummins(X[rows, cols]) | 1.502746| 1.468750| 1.342051| 1.465983| 1.47909| 0.3899112|
+|   |expr                      |      min|       lq|     mean|   median|       uq|       max|
+|:--|:-------------------------|--------:|--------:|--------:|--------:|--------:|---------:|
+|1  |colCumsums_X_S            | 1.000000| 1.000000| 1.000000| 1.000000| 1.000000| 1.0000000|
+|2  |colCumsums(X, rows, cols) | 1.086771| 1.155084| 1.077076| 1.145317| 1.136607| 0.3139166|
+|3  |colCummins(X[rows, cols]) | 1.482219| 1.508603| 1.410539| 1.506566| 1.492984| 0.4634414|
 
 _Table: Benchmarking of rowCumsums_X_S(), rowCumsums(X, cols, rows)() and rowCumsums(X[cols, rows])() on double+10x10 data (transposed). The top panel shows times in milliseconds and the bottom panel shows relative times._
 
 
 
-|   |expr                      |      min|       lq|      mean|   median|       uq|      max|
-|:--|:-------------------------|--------:|--------:|---------:|--------:|--------:|--------:|
-|1  |rowCumsums_X_S            | 0.002170| 0.002449| 0.0025898| 0.002535| 0.002629| 0.004765|
-|2  |rowCumsums(X, cols, rows) | 0.002678| 0.002809| 0.0030652| 0.002886| 0.002957| 0.017422|
-|3  |rowCumsums(X[cols, rows]) | 0.003158| 0.003565| 0.0037174| 0.003683| 0.003807| 0.005669|
+|   |expr                      |      min|        lq|      mean|    median|        uq|      max|
+|:--|:-------------------------|--------:|---------:|---------:|---------:|---------:|--------:|
+|1  |rowCumsums_X_S            | 0.002113| 0.0023265| 0.0027674| 0.0024285| 0.0025725| 0.010611|
+|2  |rowCumsums(X, cols, rows) | 0.002334| 0.0026040| 0.0031750| 0.0027805| 0.0029730| 0.019302|
+|3  |rowCumsums(X[cols, rows]) | 0.003246| 0.0035160| 0.0039242| 0.0036210| 0.0037795| 0.010398|
 
 
-|   |expr                      |      min|       lq|     mean|   median|       uq|      max|
-|:--|:-------------------------|--------:|--------:|--------:|--------:|--------:|--------:|
-|1  |rowCumsums_X_S            | 1.000000| 1.000000| 1.000000| 1.000000| 1.000000| 1.000000|
-|2  |rowCumsums(X, cols, rows) | 1.234101| 1.146999| 1.183529| 1.138462| 1.124762| 3.656243|
-|3  |rowCumsums(X[cols, rows]) | 1.455299| 1.455696| 1.435374| 1.452860| 1.448079| 1.189717|
+|   |expr                      |      min|       lq|     mean|   median|       uq|       max|
+|:--|:-------------------------|--------:|--------:|--------:|--------:|--------:|---------:|
+|1  |rowCumsums_X_S            | 1.000000| 1.000000| 1.000000| 1.000000| 1.000000| 1.0000000|
+|2  |rowCumsums(X, cols, rows) | 1.104591| 1.119278| 1.147272| 1.144945| 1.155685| 1.8190557|
+|3  |rowCumsums(X[cols, rows]) | 1.536204| 1.511283| 1.418008| 1.491044| 1.469193| 0.9799265|
 
 _Figure: Benchmarking of colCumsums_X_S(), colCumsums(X, rows, cols)() and colCummins(X[rows, cols])() on double+10x10 data  as well as rowCumsums_X_S(), rowCumsums(X, cols, rows)() and rowCumsums(X[cols, rows])() on the same data transposed.  Outliers are displayed as crosses.  Times are in milliseconds._
 
@@ -660,16 +660,16 @@ _Table: Benchmarking of colCumsums_X_S() and rowCumsums_X_S() on double+10x10 da
 
 
 
-|   |expr           |   min|    lq|    mean| median|     uq|    max|
-|:--|:--------------|-----:|-----:|-------:|------:|------:|------:|
-|1  |colCumsums_X_S | 2.003| 2.192| 2.53231| 2.2415| 2.3075| 26.683|
-|2  |rowCumsums_X_S | 2.170| 2.449| 2.58984| 2.5350| 2.6290|  4.765|
+|   |expr           |   min|     lq|    mean| median|     uq|    max|
+|:--|:--------------|-----:|------:|-------:|------:|------:|------:|
+|1  |colCumsums_X_S | 2.109| 2.2375| 2.51026| 2.3225| 2.4230| 16.412|
+|2  |rowCumsums_X_S | 2.113| 2.3265| 2.76739| 2.4285| 2.5725| 10.611|
 
 
-|   |expr           |      min|       lq|     mean|   median|       uq|       max|
-|:--|:--------------|--------:|--------:|--------:|--------:|--------:|---------:|
-|1  |colCumsums_X_S | 1.000000| 1.000000| 1.000000| 1.000000| 1.000000| 1.0000000|
-|2  |rowCumsums_X_S | 1.083375| 1.117244| 1.022718| 1.130939| 1.139328| 0.1785781|
+|   |expr           |      min|       lq|     mean|  median|     uq|       max|
+|:--|:--------------|--------:|--------:|--------:|-------:|------:|---------:|
+|1  |colCumsums_X_S | 1.000000| 1.000000| 1.000000| 1.00000| 1.0000| 1.0000000|
+|2  |rowCumsums_X_S | 1.001897| 1.039777| 1.102432| 1.04564| 1.0617| 0.6465391|
 
 _Figure: Benchmarking of colCumsums_X_S() and rowCumsums_X_S() on double+10x10 data (original and transposed).  Outliers are displayed as crosses. Times are in milliseconds._
 
@@ -685,16 +685,16 @@ _Figure: Benchmarking of colCumsums_X_S() and rowCumsums_X_S() on double+10x10 d
 > X_S <- X[rows, cols]
 > gc()
           used  (Mb) gc trigger  (Mb) max used  (Mb)
-Ncells 5179587 276.7    7554717 403.5  7554717 403.5
-Vcells 9194561  70.2   31793280 242.6 60508962 461.7
+Ncells 5209280 278.3    7916910 422.9  7916910 422.9
+Vcells 9634838  73.6   33191153 253.3 53339345 407.0
 > colStats <- microbenchmark(colCumsums_X_S = colCumsums(X_S), `colCumsums(X, rows, cols)` = colCumsums(X, 
 +     rows = rows, cols = cols), `colCummins(X[rows, cols])` = colCumsums(X[rows, cols]), unit = "ms")
 > X <- t(X)
 > X_S <- t(X_S)
 > gc()
           used  (Mb) gc trigger  (Mb) max used  (Mb)
-Ncells 5179581 276.7    7554717 403.5  7554717 403.5
-Vcells 9204644  70.3   31793280 242.6 60508962 461.7
+Ncells 5209274 278.3    7916910 422.9  7916910 422.9
+Vcells 9644921  73.6   33191153 253.3 53339345 407.0
 > rowStats <- microbenchmark(rowCumsums_X_S = rowCumsums(X_S), `rowCumsums(X, cols, rows)` = rowCumsums(X, 
 +     rows = cols, cols = rows), `rowCumsums(X[cols, rows])` = rowCumsums(X[cols, rows]), unit = "ms")
 ```
@@ -703,35 +703,35 @@ _Table: Benchmarking of colCumsums_X_S(), colCumsums(X, rows, cols)() and colCum
 
 
 
-|   |expr                      |      min|        lq|      mean|    median|       uq|      max|
-|:--|:-------------------------|--------:|---------:|---------:|---------:|--------:|--------:|
-|1  |colCumsums_X_S            | 0.008714| 0.0091065| 0.0097830| 0.0092470| 0.009482| 0.041217|
-|2  |colCumsums(X, rows, cols) | 0.013844| 0.0141300| 0.0144088| 0.0142695| 0.014420| 0.019848|
-|3  |colCummins(X[rows, cols]) | 0.025082| 0.0254380| 0.0268037| 0.0256185| 0.025884| 0.081552|
+|   |expr                      |      min|       lq|      mean|    median|        uq|      max|
+|:--|:-------------------------|--------:|--------:|---------:|---------:|---------:|--------:|
+|1  |colCumsums_X_S            | 0.008385| 0.008832| 0.0091381| 0.0090265| 0.0092485| 0.012737|
+|2  |colCumsums(X, rows, cols) | 0.013312| 0.013789| 0.0140690| 0.0140650| 0.0142015| 0.017707|
+|3  |colCummins(X[rows, cols]) | 0.024722| 0.025222| 0.0262576| 0.0253960| 0.0256840| 0.057829|
 
 
-|   |expr                      |      min|       lq|     mean|   median|       uq|       max|
-|:--|:-------------------------|--------:|--------:|--------:|--------:|--------:|---------:|
-|1  |colCumsums_X_S            | 1.000000| 1.000000| 1.000000| 1.000000| 1.000000| 1.0000000|
-|2  |colCumsums(X, rows, cols) | 1.588708| 1.551639| 1.472850| 1.543149| 1.520776| 0.4815489|
-|3  |colCummins(X[rows, cols]) | 2.878357| 2.793389| 2.739837| 2.770466| 2.729804| 1.9786011|
+|   |expr                      |      min|       lq|     mean|   median|       uq|      max|
+|:--|:-------------------------|--------:|--------:|--------:|--------:|--------:|--------:|
+|1  |colCumsums_X_S            | 1.000000| 1.000000| 1.000000| 1.000000| 1.000000| 1.000000|
+|2  |colCumsums(X, rows, cols) | 1.587597| 1.561254| 1.539601| 1.558190| 1.535546| 1.390202|
+|3  |colCummins(X[rows, cols]) | 2.948360| 2.855752| 2.873430| 2.813494| 2.777099| 4.540237|
 
 _Table: Benchmarking of rowCumsums_X_S(), rowCumsums(X, cols, rows)() and rowCumsums(X[cols, rows])() on double+100x100 data (transposed). The top panel shows times in milliseconds and the bottom panel shows relative times._
 
 
 
-|   |expr                      |      min|       lq|      mean|    median|        uq|      max|
-|:--|:-------------------------|--------:|--------:|---------:|---------:|---------:|--------:|
-|1  |rowCumsums_X_S            | 0.007054| 0.007720| 0.0084850| 0.0081655| 0.0085290| 0.040387|
-|2  |rowCumsums(X, cols, rows) | 0.013757| 0.014198| 0.0146477| 0.0143410| 0.0145200| 0.037871|
-|3  |rowCumsums(X[cols, rows]) | 0.023566| 0.023846| 0.0245571| 0.0244920| 0.0248365| 0.031436|
+|   |expr                      |      min|        lq|      mean|   median|        uq|      max|
+|:--|:-------------------------|--------:|---------:|---------:|--------:|---------:|--------:|
+|1  |rowCumsums_X_S            | 0.006892| 0.0076505| 0.0082450| 0.008164| 0.0085210| 0.013263|
+|2  |rowCumsums(X, cols, rows) | 0.013694| 0.0140090| 0.0149928| 0.014199| 0.0144140| 0.045128|
+|3  |rowCumsums(X[cols, rows]) | 0.023596| 0.0240160| 0.0249024| 0.024710| 0.0252885| 0.035033|
 
 
-|   |expr                      |      min|       lq|     mean|   median|       uq|       max|
-|:--|:-------------------------|--------:|--------:|--------:|--------:|--------:|---------:|
-|1  |rowCumsums_X_S            | 1.000000| 1.000000| 1.000000| 1.000000| 1.000000| 1.0000000|
-|2  |rowCumsums(X, cols, rows) | 1.950241| 1.839119| 1.726304| 1.756292| 1.702427| 0.9377027|
-|3  |rowCumsums(X[cols, rows]) | 3.340800| 3.088860| 2.894176| 2.999449| 2.912006| 0.7783693|
+|   |expr                      |      min|       lq|     mean|   median|       uq|      max|
+|:--|:-------------------------|--------:|--------:|--------:|--------:|--------:|--------:|
+|1  |rowCumsums_X_S            | 1.000000| 1.000000| 1.000000| 1.000000| 1.000000| 1.000000|
+|2  |rowCumsums(X, cols, rows) | 1.986941| 1.831122| 1.818416| 1.739221| 1.691585| 3.402548|
+|3  |rowCumsums(X[cols, rows]) | 3.423680| 3.139141| 3.020310| 3.026703| 2.967786| 2.641408|
 
 _Figure: Benchmarking of colCumsums_X_S(), colCumsums(X, rows, cols)() and colCummins(X[rows, cols])() on double+100x100 data  as well as rowCumsums_X_S(), rowCumsums(X, cols, rows)() and rowCumsums(X[cols, rows])() on the same data transposed.  Outliers are displayed as crosses.  Times are in milliseconds._
 
@@ -743,16 +743,16 @@ _Table: Benchmarking of colCumsums_X_S() and rowCumsums_X_S() on double+100x100 
 
 
 
-|   |expr           |   min|     lq|    mean| median|    uq|    max|
-|:--|:--------------|-----:|------:|-------:|------:|-----:|------:|
-|2  |rowCumsums_X_S | 7.054| 7.7200| 8.48501| 8.1655| 8.529| 40.387|
-|1  |colCumsums_X_S | 8.714| 9.1065| 9.78295| 9.2470| 9.482| 41.217|
+|   |expr           |   min|     lq|    mean| median|     uq|    max|
+|:--|:--------------|-----:|------:|-------:|------:|------:|------:|
+|2  |rowCumsums_X_S | 6.892| 7.6505| 8.24499| 8.1640| 8.5210| 13.263|
+|1  |colCumsums_X_S | 8.385| 8.8320| 9.13808| 9.0265| 9.2485| 12.737|
 
 
-|   |expr           |      min|       lq|     mean|   median|       uq|      max|
-|:--|:--------------|--------:|--------:|--------:|--------:|--------:|--------:|
-|2  |rowCumsums_X_S | 1.000000| 1.000000| 1.000000| 1.000000| 1.000000| 1.000000|
-|1  |colCumsums_X_S | 1.235327| 1.179598| 1.152969| 1.132448| 1.111736| 1.020551|
+|   |expr           |      min|       lq|     mean|   median|       uq|       max|
+|:--|:--------------|--------:|--------:|--------:|--------:|--------:|---------:|
+|2  |rowCumsums_X_S | 1.000000| 1.000000| 1.000000| 1.000000| 1.000000| 1.0000000|
+|1  |colCumsums_X_S | 1.216628| 1.154434| 1.108319| 1.105647| 1.085377| 0.9603408|
 
 _Figure: Benchmarking of colCumsums_X_S() and rowCumsums_X_S() on double+100x100 data (original and transposed).  Outliers are displayed as crosses. Times are in milliseconds._
 
@@ -768,16 +768,16 @@ _Figure: Benchmarking of colCumsums_X_S() and rowCumsums_X_S() on double+100x100
 > X_S <- X[rows, cols]
 > gc()
           used  (Mb) gc trigger  (Mb) max used  (Mb)
-Ncells 5179787 276.7    7554717 403.5  7554717 403.5
-Vcells 9195962  70.2   31793280 242.6 60508962 461.7
+Ncells 5209479 278.3    7916910 422.9  7916910 422.9
+Vcells 9636239  73.6   33191153 253.3 53339345 407.0
 > colStats <- microbenchmark(colCumsums_X_S = colCumsums(X_S), `colCumsums(X, rows, cols)` = colCumsums(X, 
 +     rows = rows, cols = cols), `colCummins(X[rows, cols])` = colCumsums(X[rows, cols]), unit = "ms")
 > X <- t(X)
 > X_S <- t(X_S)
 > gc()
           used  (Mb) gc trigger  (Mb) max used  (Mb)
-Ncells 5179781 276.7    7554717 403.5  7554717 403.5
-Vcells 9206045  70.3   31793280 242.6 60508962 461.7
+Ncells 5209473 278.3    7916910 422.9  7916910 422.9
+Vcells 9646322  73.6   33191153 253.3 53339345 407.0
 > rowStats <- microbenchmark(rowCumsums_X_S = rowCumsums(X_S), `rowCumsums(X, cols, rows)` = rowCumsums(X, 
 +     rows = cols, cols = rows), `rowCumsums(X[cols, rows])` = rowCumsums(X[cols, rows]), unit = "ms")
 ```
@@ -786,35 +786,35 @@ _Table: Benchmarking of colCumsums_X_S(), colCumsums(X, rows, cols)() and colCum
 
 
 
-|   |expr                      |      min|        lq|      mean|    median|       uq|      max|
-|:--|:-------------------------|--------:|---------:|---------:|---------:|--------:|--------:|
-|1  |colCumsums_X_S            | 0.010789| 0.0110745| 0.0112044| 0.0111740| 0.011281| 0.013561|
-|2  |colCumsums(X, rows, cols) | 0.014936| 0.0152600| 0.0157408| 0.0153815| 0.015595| 0.030643|
-|3  |colCummins(X[rows, cols]) | 0.027603| 0.0279590| 0.0288596| 0.0281525| 0.028374| 0.060013|
+|   |expr                      |      min|        lq|      mean|    median|        uq|      max|
+|:--|:-------------------------|--------:|---------:|---------:|---------:|---------:|--------:|
+|1  |colCumsums_X_S            | 0.010257| 0.0109105| 0.0114655| 0.0110805| 0.0112095| 0.042591|
+|2  |colCumsums(X, rows, cols) | 0.014083| 0.0150475| 0.0155989| 0.0152585| 0.0155235| 0.030346|
+|3  |colCummins(X[rows, cols]) | 0.026451| 0.0278425| 0.0288871| 0.0280870| 0.0283535| 0.057928|
 
 
-|   |expr                      |      min|       lq|     mean|   median|       uq|      max|
-|:--|:-------------------------|--------:|--------:|--------:|--------:|--------:|--------:|
-|1  |colCumsums_X_S            | 1.000000| 1.000000| 1.000000| 1.000000| 1.000000| 1.000000|
-|2  |colCumsums(X, rows, cols) | 1.384373| 1.377940| 1.404878| 1.376544| 1.382413| 2.259642|
-|3  |colCummins(X[rows, cols]) | 2.558439| 2.524629| 2.575748| 2.519465| 2.515203| 4.425411|
+|   |expr                      |      min|       lq|     mean|   median|       uq|       max|
+|:--|:-------------------------|--------:|--------:|--------:|--------:|--------:|---------:|
+|1  |colCumsums_X_S            | 1.000000| 1.000000| 1.000000| 1.000000| 1.000000| 1.0000000|
+|2  |colCumsums(X, rows, cols) | 1.373014| 1.379176| 1.360508| 1.377059| 1.384852| 0.7124979|
+|3  |colCummins(X[rows, cols]) | 2.578824| 2.551900| 2.519485| 2.534813| 2.529417| 1.3600996|
 
 _Table: Benchmarking of rowCumsums_X_S(), rowCumsums(X, cols, rows)() and rowCumsums(X[cols, rows])() on double+1000x10 data (transposed). The top panel shows times in milliseconds and the bottom panel shows relative times._
 
 
 
-|   |expr                      |      min|       lq|      mean|   median|       uq|      max|
-|:--|:-------------------------|--------:|--------:|---------:|--------:|--------:|--------:|
-|1  |rowCumsums_X_S            | 0.009361| 0.010291| 0.0113101| 0.010585| 0.011284| 0.041348|
-|2  |rowCumsums(X, cols, rows) | 0.017095| 0.017516| 0.0179195| 0.017738| 0.018028| 0.022821|
-|3  |rowCumsums(X[cols, rows]) | 0.029225| 0.030022| 0.0306717| 0.030283| 0.030626| 0.058459|
+|   |expr                      |      min|        lq|      mean|    median|        uq|      max|
+|:--|:-------------------------|--------:|---------:|---------:|---------:|---------:|--------:|
+|1  |rowCumsums_X_S            | 0.009068| 0.0097245| 0.0109601| 0.0102480| 0.0110915| 0.018957|
+|2  |rowCumsums(X, cols, rows) | 0.017052| 0.0177405| 0.0197559| 0.0180285| 0.0186185| 0.049472|
+|3  |rowCumsums(X[cols, rows]) | 0.029108| 0.0298330| 0.0330052| 0.0307890| 0.0314115| 0.100503|
 
 
-|   |expr                      |      min|       lq|     mean|   median|       uq|       max|
-|:--|:-------------------------|--------:|--------:|--------:|--------:|--------:|---------:|
-|1  |rowCumsums_X_S            | 1.000000| 1.000000| 1.000000| 1.000000| 1.000000| 1.0000000|
-|2  |rowCumsums(X, cols, rows) | 1.826194| 1.702070| 1.584380| 1.675768| 1.597660| 0.5519251|
-|3  |rowCumsums(X[cols, rows]) | 3.121996| 2.917306| 2.711886| 2.860935| 2.714109| 1.4138290|
+|   |expr                      |      min|       lq|     mean|   median|       uq|      max|
+|:--|:-------------------------|--------:|--------:|--------:|--------:|--------:|--------:|
+|1  |rowCumsums_X_S            | 1.000000| 1.000000| 1.000000| 1.000000| 1.000000| 1.000000|
+|2  |rowCumsums(X, cols, rows) | 1.880459| 1.824310| 1.802529| 1.759221| 1.678628| 2.609696|
+|3  |rowCumsums(X[cols, rows]) | 3.209969| 3.067818| 3.011400| 3.004391| 2.832034| 5.301630|
 
 _Figure: Benchmarking of colCumsums_X_S(), colCumsums(X, rows, cols)() and colCummins(X[rows, cols])() on double+1000x10 data  as well as rowCumsums_X_S(), rowCumsums(X, cols, rows)() and rowCumsums(X[cols, rows])() on the same data transposed.  Outliers are displayed as crosses.  Times are in milliseconds._
 
@@ -826,16 +826,16 @@ _Table: Benchmarking of colCumsums_X_S() and rowCumsums_X_S() on double+1000x10 
 
 
 
-|   |expr           |    min|      lq|     mean| median|     uq|    max|
-|:--|:--------------|------:|-------:|--------:|------:|------:|------:|
-|2  |rowCumsums_X_S |  9.361| 10.2910| 11.31008| 10.585| 11.284| 41.348|
-|1  |colCumsums_X_S | 10.789| 11.0745| 11.20436| 11.174| 11.281| 13.561|
+|   |expr           |    min|      lq|     mean|  median|      uq|    max|
+|:--|:--------------|------:|-------:|--------:|-------:|-------:|------:|
+|2  |rowCumsums_X_S |  9.068|  9.7245| 10.96010| 10.2480| 11.0915| 18.957|
+|1  |colCumsums_X_S | 10.257| 10.9105| 11.46547| 11.0805| 11.2095| 42.591|
 
 
-|   |expr           |      min|       lq|      mean|   median|        uq|       max|
-|:--|:--------------|--------:|--------:|---------:|--------:|---------:|---------:|
-|2  |rowCumsums_X_S | 1.000000| 1.000000| 1.0000000| 1.000000| 1.0000000| 1.0000000|
-|1  |colCumsums_X_S | 1.152548| 1.076134| 0.9906526| 1.055645| 0.9997341| 0.3279723|
+|   |expr           |     min|      lq|    mean|   median|       uq|      max|
+|:--|:--------------|-------:|-------:|-------:|--------:|--------:|--------:|
+|2  |rowCumsums_X_S | 1.00000| 1.00000| 1.00000| 1.000000| 1.000000| 1.000000|
+|1  |colCumsums_X_S | 1.13112| 1.12196| 1.04611| 1.081235| 1.010639| 2.246716|
 
 _Figure: Benchmarking of colCumsums_X_S() and rowCumsums_X_S() on double+1000x10 data (original and transposed).  Outliers are displayed as crosses. Times are in milliseconds._
 
@@ -851,16 +851,16 @@ _Figure: Benchmarking of colCumsums_X_S() and rowCumsums_X_S() on double+1000x10
 > X_S <- X[rows, cols]
 > gc()
           used  (Mb) gc trigger  (Mb) max used  (Mb)
-Ncells 5179992 276.7    7554717 403.5  7554717 403.5
-Vcells 9196098  70.2   31793280 242.6 60508962 461.7
+Ncells 5209684 278.3    7916910 422.9  7916910 422.9
+Vcells 9636375  73.6   33191153 253.3 53339345 407.0
 > colStats <- microbenchmark(colCumsums_X_S = colCumsums(X_S), `colCumsums(X, rows, cols)` = colCumsums(X, 
 +     rows = rows, cols = cols), `colCummins(X[rows, cols])` = colCumsums(X[rows, cols]), unit = "ms")
 > X <- t(X)
 > X_S <- t(X_S)
 > gc()
           used  (Mb) gc trigger  (Mb) max used  (Mb)
-Ncells 5179986 276.7    7554717 403.5  7554717 403.5
-Vcells 9206181  70.3   31793280 242.6 60508962 461.7
+Ncells 5209678 278.3    7916910 422.9  7916910 422.9
+Vcells 9646458  73.6   33191153 253.3 53339345 407.0
 > rowStats <- microbenchmark(rowCumsums_X_S = rowCumsums(X_S), `rowCumsums(X, cols, rows)` = rowCumsums(X, 
 +     rows = cols, cols = rows), `rowCumsums(X[cols, rows])` = rowCumsums(X[cols, rows]), unit = "ms")
 ```
@@ -869,18 +869,18 @@ _Table: Benchmarking of colCumsums_X_S(), colCumsums(X, rows, cols)() and colCum
 
 
 
-|   |expr                      |      min|        lq|      mean|   median|        uq|      max|
-|:--|:-------------------------|--------:|---------:|---------:|--------:|---------:|--------:|
-|1  |colCumsums_X_S            | 0.006926| 0.0076010| 0.0083334| 0.008162| 0.0085225| 0.025163|
-|2  |colCumsums(X, rows, cols) | 0.013172| 0.0138095| 0.0145494| 0.014245| 0.0149150| 0.033590|
-|3  |colCummins(X[rows, cols]) | 0.023584| 0.0242525| 0.0261357| 0.025956| 0.0263435| 0.056606|
+|   |expr                      |      min|        lq|      mean|    median|        uq|      max|
+|:--|:-------------------------|--------:|---------:|---------:|---------:|---------:|--------:|
+|1  |colCumsums_X_S            | 0.008074| 0.0088665| 0.0102586| 0.0091860| 0.0097660| 0.048346|
+|2  |colCumsums(X, rows, cols) | 0.015422| 0.0162015| 0.0178825| 0.0166055| 0.0175145| 0.036718|
+|3  |colCummins(X[rows, cols]) | 0.027596| 0.0290160| 0.0315073| 0.0292980| 0.0300845| 0.069444|
 
 
-|   |expr                      |      min|       lq|     mean|   median|       uq|      max|
-|:--|:-------------------------|--------:|--------:|--------:|--------:|--------:|--------:|
-|1  |colCumsums_X_S            | 1.000000| 1.000000| 1.000000| 1.000000| 1.000000| 1.000000|
-|2  |colCumsums(X, rows, cols) | 1.901819| 1.816800| 1.745923| 1.745283| 1.750073| 1.334896|
-|3  |colCummins(X[rows, cols]) | 3.405140| 3.190699| 3.136275| 3.180103| 3.091053| 2.249573|
+|   |expr                      |      min|       lq|     mean|   median|       uq|       max|
+|:--|:-------------------------|--------:|--------:|--------:|--------:|--------:|---------:|
+|1  |colCumsums_X_S            | 1.000000| 1.000000| 1.000000| 1.000000| 1.000000| 1.0000000|
+|2  |colCumsums(X, rows, cols) | 1.910082| 1.827271| 1.743170| 1.807697| 1.793416| 0.7594837|
+|3  |colCummins(X[rows, cols]) | 3.417885| 3.272543| 3.071309| 3.189419| 3.080535| 1.4363960|
 
 _Table: Benchmarking of rowCumsums_X_S(), rowCumsums(X, cols, rows)() and rowCumsums(X[cols, rows])() on double+10x1000 data (transposed). The top panel shows times in milliseconds and the bottom panel shows relative times._
 
@@ -888,16 +888,16 @@ _Table: Benchmarking of rowCumsums_X_S(), rowCumsums(X, cols, rows)() and rowCum
 
 |   |expr                      |      min|        lq|      mean|    median|        uq|      max|
 |:--|:-------------------------|--------:|---------:|---------:|---------:|---------:|--------:|
-|1  |rowCumsums_X_S            | 0.007121| 0.0078075| 0.0084029| 0.0082855| 0.0087210| 0.014663|
-|2  |rowCumsums(X, cols, rows) | 0.015031| 0.0154685| 0.0164107| 0.0156735| 0.0161185| 0.047022|
-|3  |rowCumsums(X[cols, rows]) | 0.023984| 0.0246390| 0.0256810| 0.0255755| 0.0262470| 0.041040|
+|1  |rowCumsums_X_S            | 0.006717| 0.0075325| 0.0081717| 0.0080655| 0.0083825| 0.017332|
+|2  |rowCumsums(X, cols, rows) | 0.014666| 0.0150885| 0.0156827| 0.0152660| 0.0154865| 0.038996|
+|3  |rowCumsums(X[cols, rows]) | 0.023749| 0.0244450| 0.0255443| 0.0250915| 0.0256115| 0.056241|
 
 
 |   |expr                      |      min|       lq|     mean|   median|       uq|      max|
 |:--|:-------------------------|--------:|--------:|--------:|--------:|--------:|--------:|
 |1  |rowCumsums_X_S            | 1.000000| 1.000000| 1.000000| 1.000000| 1.000000| 1.000000|
-|2  |rowCumsums(X, cols, rows) | 2.110799| 1.981236| 1.952969| 1.891678| 1.848240| 3.206847|
-|3  |rowCumsums(X[cols, rows]) | 3.368066| 3.155812| 3.056195| 3.086778| 3.009632| 2.798881|
+|2  |rowCumsums(X, cols, rows) | 2.183415| 2.003120| 1.919141| 1.892753| 1.847480| 2.249942|
+|3  |rowCumsums(X[cols, rows]) | 3.535656| 3.245271| 3.125940| 3.110966| 3.055353| 3.244923|
 
 _Figure: Benchmarking of colCumsums_X_S(), colCumsums(X, rows, cols)() and colCummins(X[rows, cols])() on double+10x1000 data  as well as rowCumsums_X_S(), rowCumsums(X, cols, rows)() and rowCumsums(X[cols, rows])() on the same data transposed.  Outliers are displayed as crosses.  Times are in milliseconds._
 
@@ -909,16 +909,16 @@ _Table: Benchmarking of colCumsums_X_S() and rowCumsums_X_S() on double+10x1000 
 
 
 
-|   |expr           |   min|     lq|    mean| median|     uq|    max|
-|:--|:--------------|-----:|------:|-------:|------:|------:|------:|
-|1  |colCumsums_X_S | 6.926| 7.6010| 8.33337| 8.1620| 8.5225| 25.163|
-|2  |rowCumsums_X_S | 7.121| 7.8075| 8.40294| 8.2855| 8.7210| 14.663|
+|   |expr           |   min|     lq|     mean| median|     uq|    max|
+|:--|:--------------|-----:|------:|--------:|------:|------:|------:|
+|2  |rowCumsums_X_S | 6.717| 7.5325|  8.17173| 8.0655| 8.3825| 17.332|
+|1  |colCumsums_X_S | 8.074| 8.8665| 10.25858| 9.1860| 9.7660| 48.346|
 
 
-|   |expr           |      min|       lq|     mean|   median|       uq|       max|
-|:--|:--------------|--------:|--------:|--------:|--------:|--------:|---------:|
-|1  |colCumsums_X_S | 1.000000| 1.000000| 1.000000| 1.000000| 1.000000| 1.0000000|
-|2  |rowCumsums_X_S | 1.028155| 1.027168| 1.008348| 1.015131| 1.023291| 0.5827207|
+|   |expr           |      min|       lq|     mean|   median|       uq|      max|
+|:--|:--------------|--------:|--------:|--------:|--------:|--------:|--------:|
+|2  |rowCumsums_X_S | 1.000000| 1.000000| 1.000000| 1.000000| 1.000000| 1.000000|
+|1  |colCumsums_X_S | 1.202025| 1.177099| 1.255374| 1.138925| 1.165046| 2.789407|
 
 _Figure: Benchmarking of colCumsums_X_S() and rowCumsums_X_S() on double+10x1000 data (original and transposed).  Outliers are displayed as crosses. Times are in milliseconds._
 
@@ -934,16 +934,16 @@ _Figure: Benchmarking of colCumsums_X_S() and rowCumsums_X_S() on double+10x1000
 > X_S <- X[rows, cols]
 > gc()
           used  (Mb) gc trigger  (Mb) max used  (Mb)
-Ncells 5180202 276.7    7554717 403.5  7554717 403.5
-Vcells 9241552  70.6   31793280 242.6 60508962 461.7
+Ncells 5209895 278.3    7916910 422.9  7916910 422.9
+Vcells 9681827  73.9   33191153 253.3 53339345 407.0
 > colStats <- microbenchmark(colCumsums_X_S = colCumsums(X_S), `colCumsums(X, rows, cols)` = colCumsums(X, 
 +     rows = rows, cols = cols), `colCummins(X[rows, cols])` = colCumsums(X[rows, cols]), unit = "ms")
 > X <- t(X)
 > X_S <- t(X_S)
 > gc()
           used  (Mb) gc trigger  (Mb) max used  (Mb)
-Ncells 5180196 276.7    7554717 403.5  7554717 403.5
-Vcells 9341635  71.3   31793280 242.6 60508962 461.7
+Ncells 5209889 278.3    7916910 422.9  7916910 422.9
+Vcells 9781910  74.7   33191153 253.3 53339345 407.0
 > rowStats <- microbenchmark(rowCumsums_X_S = rowCumsums(X_S), `rowCumsums(X, cols, rows)` = rowCumsums(X, 
 +     rows = cols, cols = rows), `rowCumsums(X[cols, rows])` = rowCumsums(X[cols, rows]), unit = "ms")
 ```
@@ -954,16 +954,16 @@ _Table: Benchmarking of colCumsums_X_S(), colCumsums(X, rows, cols)() and colCum
 
 |   |expr                      |      min|        lq|      mean|    median|        uq|      max|
 |:--|:-------------------------|--------:|---------:|---------:|---------:|---------:|--------:|
-|1  |colCumsums_X_S            | 0.049680| 0.0529560| 0.0587576| 0.0552390| 0.0628555| 0.103390|
-|2  |colCumsums(X, rows, cols) | 0.092682| 0.0957765| 0.1054847| 0.0993675| 0.1154780| 0.215070|
-|3  |colCummins(X[rows, cols]) | 0.167871| 0.1802020| 0.1972260| 0.1916365| 0.2149325| 0.270819|
+|1  |colCumsums_X_S            | 0.052834| 0.0604730| 0.0887941| 0.0680615| 0.0867560| 0.271492|
+|2  |colCumsums(X, rows, cols) | 0.094961| 0.0992340| 0.1383374| 0.1064625| 0.1384710| 0.371713|
+|3  |colCummins(X[rows, cols]) | 0.178834| 0.1890475| 0.2551509| 0.2082200| 0.2843435| 0.672803|
 
 
 |   |expr                      |      min|       lq|     mean|   median|       uq|      max|
 |:--|:-------------------------|--------:|--------:|--------:|--------:|--------:|--------:|
 |1  |colCumsums_X_S            | 1.000000| 1.000000| 1.000000| 1.000000| 1.000000| 1.000000|
-|2  |colCumsums(X, rows, cols) | 1.865580| 1.808605| 1.795253| 1.798865| 1.837198| 2.080182|
-|3  |colCummins(X[rows, cols]) | 3.379046| 3.402863| 3.356606| 3.469225| 3.419470| 2.619393|
+|2  |colCumsums(X, rows, cols) | 1.797346| 1.640964| 1.557956| 1.564210| 1.596097| 1.369149|
+|3  |colCummins(X[rows, cols]) | 3.384828| 3.126147| 2.873511| 3.059292| 3.277508| 2.478169|
 
 _Table: Benchmarking of rowCumsums_X_S(), rowCumsums(X, cols, rows)() and rowCumsums(X[cols, rows])() on double+100x1000 data (transposed). The top panel shows times in milliseconds and the bottom panel shows relative times._
 
@@ -971,16 +971,16 @@ _Table: Benchmarking of rowCumsums_X_S(), rowCumsums(X, cols, rows)() and rowCum
 
 |   |expr                      |      min|        lq|      mean|    median|        uq|      max|
 |:--|:-------------------------|--------:|---------:|---------:|---------:|---------:|--------:|
-|1  |rowCumsums_X_S            | 0.041039| 0.0433530| 0.0493181| 0.0481225| 0.0524060| 0.096854|
-|2  |rowCumsums(X, cols, rows) | 0.088550| 0.0914345| 0.1021283| 0.0976640| 0.1105510| 0.216169|
-|3  |rowCumsums(X[cols, rows]) | 0.160818| 0.1704605| 0.1884259| 0.1851570| 0.2057895| 0.276527|
+|1  |rowCumsums_X_S            | 0.040027| 0.0418715| 0.0494413| 0.0440965| 0.0505560| 0.107859|
+|2  |rowCumsums(X, cols, rows) | 0.083877| 0.0872310| 0.0955318| 0.0892380| 0.0931000| 0.164449|
+|3  |rowCumsums(X[cols, rows]) | 0.157927| 0.1653100| 0.1802106| 0.1691215| 0.1768535| 0.303600|
 
 
 |   |expr                      |      min|       lq|     mean|   median|       uq|      max|
 |:--|:-------------------------|--------:|--------:|--------:|--------:|--------:|--------:|
 |1  |rowCumsums_X_S            | 1.000000| 1.000000| 1.000000| 1.000000| 1.000000| 1.000000|
-|2  |rowCumsums(X, cols, rows) | 2.157704| 2.109070| 2.070809| 2.029487| 2.109510| 2.231906|
-|3  |rowCumsums(X[cols, rows]) | 3.918663| 3.931919| 3.820626| 3.847618| 3.926831| 2.855091|
+|2  |rowCumsums(X, cols, rows) | 2.095511| 2.083302| 1.932228| 2.023698| 1.841522| 1.524666|
+|3  |rowCumsums(X[cols, rows]) | 3.945512| 3.948031| 3.644943| 3.835259| 3.498170| 2.814786|
 
 _Figure: Benchmarking of colCumsums_X_S(), colCumsums(X, rows, cols)() and colCummins(X[rows, cols])() on double+100x1000 data  as well as rowCumsums_X_S(), rowCumsums(X, cols, rows)() and rowCumsums(X[cols, rows])() on the same data transposed.  Outliers are displayed as crosses.  Times are in milliseconds._
 
@@ -992,16 +992,16 @@ _Table: Benchmarking of colCumsums_X_S() and rowCumsums_X_S() on double+100x1000
 
 
 
-|   |expr           |    min|     lq|     mean|  median|      uq|     max|
-|:--|:--------------|------:|------:|--------:|-------:|-------:|-------:|
-|2  |rowCumsums_X_S | 41.039| 43.353| 49.31807| 48.1225| 52.4060|  96.854|
-|1  |colCumsums_X_S | 49.680| 52.956| 58.75757| 55.2390| 62.8555| 103.390|
+|   |expr           |    min|      lq|     mean|  median|     uq|     max|
+|:--|:--------------|------:|-------:|--------:|-------:|------:|-------:|
+|2  |rowCumsums_X_S | 40.027| 41.8715| 49.44127| 44.0965| 50.556| 107.859|
+|1  |colCumsums_X_S | 52.834| 60.4730| 88.79412| 68.0615| 86.756| 271.492|
 
 
-|   |expr           |      min|       lq|   mean|   median|       uq|      max|
-|:--|:--------------|--------:|--------:|------:|--------:|--------:|--------:|
-|2  |rowCumsums_X_S | 1.000000| 1.000000| 1.0000| 1.000000| 1.000000| 1.000000|
-|1  |colCumsums_X_S | 1.210556| 1.221507| 1.1914| 1.147883| 1.199395| 1.067483|
+|   |expr           |      min|       lq|     mean|   median|       uq|      max|
+|:--|:--------------|--------:|--------:|--------:|--------:|--------:|--------:|
+|2  |rowCumsums_X_S | 1.000000| 1.000000| 1.000000| 1.000000| 1.000000| 1.000000|
+|1  |colCumsums_X_S | 1.319959| 1.444252| 1.795951| 1.543467| 1.716038| 2.517101|
 
 _Figure: Benchmarking of colCumsums_X_S() and rowCumsums_X_S() on double+100x1000 data (original and transposed).  Outliers are displayed as crosses. Times are in milliseconds._
 
@@ -1017,16 +1017,16 @@ _Figure: Benchmarking of colCumsums_X_S() and rowCumsums_X_S() on double+100x100
 > X_S <- X[rows, cols]
 > gc()
           used  (Mb) gc trigger  (Mb) max used  (Mb)
-Ncells 5180415 276.7    7554717 403.5  7554717 403.5
-Vcells 9241696  70.6   31793280 242.6 60508962 461.7
+Ncells 5210105 278.3    7916910 422.9  7916910 422.9
+Vcells 9681968  73.9   33191153 253.3 53339345 407.0
 > colStats <- microbenchmark(colCumsums_X_S = colCumsums(X_S), `colCumsums(X, rows, cols)` = colCumsums(X, 
 +     rows = rows, cols = cols), `colCummins(X[rows, cols])` = colCumsums(X[rows, cols]), unit = "ms")
 > X <- t(X)
 > X_S <- t(X_S)
 > gc()
           used  (Mb) gc trigger  (Mb) max used  (Mb)
-Ncells 5180409 276.7    7554717 403.5  7554717 403.5
-Vcells 9341779  71.3   31793280 242.6 60508962 461.7
+Ncells 5210099 278.3    7916910 422.9  7916910 422.9
+Vcells 9782051  74.7   33191153 253.3 53339345 407.0
 > rowStats <- microbenchmark(rowCumsums_X_S = rowCumsums(X_S), `rowCumsums(X, cols, rows)` = rowCumsums(X, 
 +     rows = cols, cols = rows), `rowCumsums(X[cols, rows])` = rowCumsums(X[cols, rows]), unit = "ms")
 ```
@@ -1035,35 +1035,35 @@ _Table: Benchmarking of colCumsums_X_S(), colCumsums(X, rows, cols)() and colCum
 
 
 
-|   |expr                      |      min|        lq|      mean|    median|        uq|      max|
-|:--|:-------------------------|--------:|---------:|---------:|---------:|---------:|--------:|
-|1  |colCumsums_X_S            | 0.063523| 0.0663655| 0.0731867| 0.0687945| 0.0780490| 0.116755|
-|2  |colCumsums(X, rows, cols) | 0.085553| 0.0902500| 0.0993743| 0.0975505| 0.1063755| 0.173982|
-|3  |colCummins(X[rows, cols]) | 0.178131| 0.1860545| 0.2102233| 0.2041575| 0.2293815| 0.357688|
+|   |expr                      |      min|        lq|      mean|   median|        uq|      max|
+|:--|:-------------------------|--------:|---------:|---------:|--------:|---------:|--------:|
+|1  |colCumsums_X_S            | 0.067361| 0.0726580| 0.1369943| 0.109547| 0.2004660| 0.217652|
+|2  |colCumsums(X, rows, cols) | 0.090478| 0.1009495| 0.1576254| 0.126204| 0.2241475| 0.265737|
+|3  |colCummins(X[rows, cols]) | 0.189788| 0.2197365| 0.3164680| 0.261764| 0.4417790| 0.487193|
 
 
 |   |expr                      |      min|       lq|     mean|   median|       uq|      max|
 |:--|:-------------------------|--------:|--------:|--------:|--------:|--------:|--------:|
 |1  |colCumsums_X_S            | 1.000000| 1.000000| 1.000000| 1.000000| 1.000000| 1.000000|
-|2  |colCumsums(X, rows, cols) | 1.346804| 1.359893| 1.357819| 1.417998| 1.362932| 1.490146|
-|3  |colCummins(X[rows, cols]) | 2.804197| 2.803482| 2.872425| 2.967643| 2.938942| 3.063578|
+|2  |colCumsums(X, rows, cols) | 1.343181| 1.389379| 1.150598| 1.152054| 1.118132| 1.220926|
+|3  |colCummins(X[rows, cols]) | 2.817476| 3.024258| 2.310082| 2.389513| 2.203760| 2.238403|
 
 _Table: Benchmarking of rowCumsums_X_S(), rowCumsums(X, cols, rows)() and rowCumsums(X[cols, rows])() on double+1000x100 data (transposed). The top panel shows times in milliseconds and the bottom panel shows relative times._
 
 
 
-|   |expr                      |      min|        lq|      mean|    median|       uq|      max|
-|:--|:-------------------------|--------:|---------:|---------:|---------:|--------:|--------:|
-|1  |rowCumsums_X_S            | 0.042228| 0.0453995| 0.0513375| 0.0482310| 0.052909| 0.099519|
-|2  |rowCumsums(X, cols, rows) | 0.094616| 0.0994170| 0.1097773| 0.1065720| 0.119569| 0.235060|
-|3  |rowCumsums(X[cols, rows]) | 0.169288| 0.1758050| 0.1983652| 0.1959215| 0.212306| 0.267079|
+|   |expr                      |      min|        lq|      mean|    median|        uq|      max|
+|:--|:-------------------------|--------:|---------:|---------:|---------:|---------:|--------:|
+|1  |rowCumsums_X_S            | 0.041043| 0.0432690| 0.0494292| 0.0463665| 0.0512750| 0.095122|
+|2  |rowCumsums(X, cols, rows) | 0.091367| 0.0955605| 0.1073948| 0.1015550| 0.1141825| 0.237039|
+|3  |rowCumsums(X[cols, rows]) | 0.163954| 0.1725130| 0.1903939| 0.1836175| 0.2059775| 0.275066|
 
 
 |   |expr                      |      min|       lq|     mean|   median|       uq|      max|
 |:--|:-------------------------|--------:|--------:|--------:|--------:|--------:|--------:|
 |1  |rowCumsums_X_S            | 1.000000| 1.000000| 1.000000| 1.000000| 1.000000| 1.000000|
-|2  |rowCumsums(X, cols, rows) | 2.240599| 2.189826| 2.138344| 2.209616| 2.259899| 2.361961|
-|3  |rowCumsums(X[cols, rows]) | 4.008904| 3.872400| 3.863941| 4.062149| 4.012663| 2.683699|
+|2  |rowCumsums(X, cols, rows) | 2.226129| 2.208521| 2.172701| 2.190267| 2.226865| 2.491947|
+|3  |rowCumsums(X[cols, rows]) | 3.994689| 3.986988| 3.851852| 3.960133| 4.017114| 2.891718|
 
 _Figure: Benchmarking of colCumsums_X_S(), colCumsums(X, rows, cols)() and colCummins(X[rows, cols])() on double+1000x100 data  as well as rowCumsums_X_S(), rowCumsums(X, cols, rows)() and rowCumsums(X[cols, rows])() on the same data transposed.  Outliers are displayed as crosses.  Times are in milliseconds._
 
@@ -1075,16 +1075,16 @@ _Table: Benchmarking of colCumsums_X_S() and rowCumsums_X_S() on double+1000x100
 
 
 
-|   |expr           |    min|      lq|     mean|  median|     uq|     max|
-|:--|:--------------|------:|-------:|--------:|-------:|------:|-------:|
-|2  |rowCumsums_X_S | 42.228| 45.3995| 51.33753| 48.2310| 52.909|  99.519|
-|1  |colCumsums_X_S | 63.523| 66.3655| 73.18669| 68.7945| 78.049| 116.755|
+|   |expr           |    min|     lq|      mean|   median|      uq|     max|
+|:--|:--------------|------:|------:|---------:|--------:|-------:|-------:|
+|2  |rowCumsums_X_S | 41.043| 43.269|  49.42919|  46.3665|  51.275|  95.122|
+|1  |colCumsums_X_S | 67.361| 72.658| 136.99427| 109.5470| 200.466| 217.652|
 
 
-|   |expr           |      min|       lq|     mean|   median|       uq|      max|
-|:--|:--------------|--------:|--------:|--------:|--------:|--------:|--------:|
-|2  |rowCumsums_X_S | 1.000000| 1.000000| 1.000000| 1.000000| 1.000000| 1.000000|
-|1  |colCumsums_X_S | 1.504286| 1.461811| 1.425598| 1.426354| 1.475156| 1.173193|
+|   |expr           |     min|       lq|     mean|   median|       uq|      max|
+|:--|:--------------|-------:|--------:|--------:|--------:|--------:|--------:|
+|2  |rowCumsums_X_S | 1.00000| 1.000000| 1.000000| 1.000000| 1.000000| 1.000000|
+|1  |colCumsums_X_S | 1.64123| 1.679216| 2.771526| 2.362633| 3.909625| 2.288135|
 
 _Figure: Benchmarking of colCumsums_X_S() and rowCumsums_X_S() on double+1000x100 data (original and transposed).  Outliers are displayed as crosses. Times are in milliseconds._
 
@@ -1120,7 +1120,7 @@ attached base packages:
 other attached packages:
 [1] microbenchmark_1.4-7   matrixStats_0.60.0     ggplot2_3.3.5         
 [4] knitr_1.33             R.devices_2.17.0       R.utils_2.10.1        
-[7] R.oo_1.24.0            R.methodsS3_1.8.1-9001
+[7] R.oo_1.24.0            R.methodsS3_1.8.1-9001 history_0.0.1-9000    
 
 loaded via a namespace (and not attached):
  [1] Biobase_2.52.0          httr_1.4.2              splines_4.1.1          
@@ -1139,18 +1139,20 @@ loaded via a namespace (and not attached):
 [40] magrittr_2.0.1          crayon_1.4.1            statnet.common_4.5.0   
 [43] memoise_2.0.0           laeken_0.5.1            fansi_0.5.0            
 [46] R.cache_0.15.0          MASS_7.3-54             R.rsp_0.44.0           
-[49] tools_4.1.1             lifecycle_1.0.0         S4Vectors_0.30.0       
-[52] trust_0.1-8             munsell_0.5.0           AnnotationDbi_1.54.1   
-[55] Biostrings_2.60.2       compiler_4.1.1          GenomeInfoDb_1.28.1    
-[58] rlang_0.4.11            grid_4.1.1              RCurl_1.98-1.4         
-[61] cwhmisc_6.6             rappdirs_0.3.3          labeling_0.4.2         
-[64] bitops_1.0-7            base64enc_0.1-3         boot_1.3-28            
-[67] gtable_0.3.0            DBI_1.1.1               markdown_1.1           
-[70] R6_2.5.1                lpSolveAPI_5.5.2.0-17.7 rle_0.9.2              
-[73] dplyr_1.0.7             fastmap_1.1.0           bit_4.0.4              
-[76] utf8_1.2.2              parallel_4.1.1          Rcpp_1.0.7             
-[79] vctrs_0.3.8             png_0.1-7               DEoptimR_1.0-9         
-[82] tidyselect_1.1.1        xfun_0.25               coda_0.19-4            
+[49] progressr_0.8.0         tools_4.1.1             lifecycle_1.0.0        
+[52] S4Vectors_0.30.0        trust_0.1-8             munsell_0.5.0          
+[55] tabby_0.0.1-9001        AnnotationDbi_1.54.1    Biostrings_2.60.2      
+[58] compiler_4.1.1          GenomeInfoDb_1.28.1     rlang_0.4.11           
+[61] grid_4.1.1              RCurl_1.98-1.4          cwhmisc_6.6            
+[64] rstudioapi_0.13         rappdirs_0.3.3          startup_0.15.0         
+[67] labeling_0.4.2          bitops_1.0-7            base64enc_0.1-3        
+[70] boot_1.3-28             gtable_0.3.0            DBI_1.1.1              
+[73] markdown_1.1            R6_2.5.1                lpSolveAPI_5.5.2.0-17.7
+[76] rle_0.9.2               dplyr_1.0.7             fastmap_1.1.0          
+[79] bit_4.0.4               utf8_1.2.2              parallel_4.1.1         
+[82] Rcpp_1.0.7              vctrs_0.3.8             png_0.1-7              
+[85] DEoptimR_1.0-9          tidyselect_1.1.1        xfun_0.25              
+[88] coda_0.19-4            
 ```
 Total processing time was 23.3 secs.
 
@@ -1169,7 +1171,7 @@ html <- matrixStats:::benchmark('colRowCumsums_subset')
 [StackOverflow:rowProds?]: https://stackoverflow.com/questions/20198801/ "Stack Overflow: Row product of matrix and column sum of matrix"
 
 ---------------------------------------
-Copyright Dongcan Jiang. Last updated on 2021-08-25 17:39:02 (+0200 UTC). Powered by [RSP].
+Copyright Dongcan Jiang. Last updated on 2021-08-25 22:14:45 (+0200 UTC). Powered by [RSP].
 
 <script>
  var link = document.createElement('link');

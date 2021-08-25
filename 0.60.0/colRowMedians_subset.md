@@ -63,18 +63,18 @@ This report benchmark the performance of colMedians() and rowMedians() on subset
 > cols <- sample.int(ncol(X), size = ncol(X) * 0.7)
 > X_S <- X[rows, cols]
 > gc()
-          used  (Mb) gc trigger  (Mb) max used  (Mb)
-Ncells 5196680 277.6   10014072 534.9 10014072 534.9
-Vcells 9714775  74.2   18204443 138.9 18204443 138.9
+           used  (Mb) gc trigger  (Mb) max used  (Mb)
+Ncells  5261358 281.0    7916910 422.9  7916910 422.9
+Vcells 10162638  77.6   33191153 253.3 53339345 407.0
 > colStats <- microbenchmark(colMedians_X_S = colMedians(X_S, na.rm = FALSE), `colMedians(X, rows, cols)` = colMedians(X, 
 +     rows = rows, cols = cols, na.rm = FALSE), `colMedians(X[rows, cols])` = colMedians(X[rows, cols], 
 +     na.rm = FALSE), unit = "ms")
 > X <- t(X)
 > X_S <- t(X_S)
 > gc()
-          used  (Mb) gc trigger  (Mb) max used  (Mb)
-Ncells 5182571 276.8   10014072 534.9 10014072 534.9
-Vcells 9668402  73.8   18204443 138.9 18204443 138.9
+           used  (Mb) gc trigger  (Mb) max used  (Mb)
+Ncells  5248479 280.3    7916910 422.9  7916910 422.9
+Vcells 10120101  77.3   33191153 253.3 53339345 407.0
 > rowStats <- microbenchmark(rowMedians_X_S = rowMedians(X_S, na.rm = FALSE), `rowMedians(X, cols, rows)` = rowMedians(X, 
 +     rows = cols, cols = rows, na.rm = FALSE), `rowMedians(X[cols, rows])` = rowMedians(X[cols, rows], 
 +     na.rm = FALSE), unit = "ms")
@@ -86,16 +86,16 @@ _Table: Benchmarking of colMedians_X_S(), colMedians(X, rows, cols)() and colMed
 
 |   |expr                      |      min|        lq|      mean|    median|        uq|      max|
 |:--|:-------------------------|--------:|---------:|---------:|---------:|---------:|--------:|
-|1  |colMedians_X_S            | 0.002174| 0.0022065| 0.0025157| 0.0022495| 0.0023185| 0.019440|
-|2  |colMedians(X, rows, cols) | 0.002503| 0.0025945| 0.0026968| 0.0026295| 0.0026940| 0.005564|
-|3  |colMedians(X[rows, cols]) | 0.003014| 0.0032035| 0.0034162| 0.0033160| 0.0034615| 0.007157|
+|1  |colMedians_X_S            | 0.002539| 0.0026150| 0.0029159| 0.0026825| 0.0028075| 0.020596|
+|2  |colMedians(X, rows, cols) | 0.002845| 0.0029630| 0.0030915| 0.0030270| 0.0031540| 0.005979|
+|3  |colMedians(X[rows, cols]) | 0.003396| 0.0036455| 0.0038512| 0.0037765| 0.0038855| 0.008260|
 
 
 |   |expr                      |      min|       lq|     mean|   median|       uq|       max|
 |:--|:-------------------------|--------:|--------:|--------:|--------:|--------:|---------:|
 |1  |colMedians_X_S            | 1.000000| 1.000000| 1.000000| 1.000000| 1.000000| 1.0000000|
-|2  |colMedians(X, rows, cols) | 1.151334| 1.175844| 1.071988| 1.168926| 1.161958| 0.2862140|
-|3  |colMedians(X[rows, cols]) | 1.386384| 1.451847| 1.357943| 1.474105| 1.492991| 0.3681584|
+|2  |colMedians(X, rows, cols) | 1.120520| 1.133078| 1.060207| 1.128425| 1.123419| 0.2902991|
+|3  |colMedians(X[rows, cols]) | 1.337535| 1.394073| 1.320767| 1.407828| 1.383971| 0.4010487|
 
 _Table: Benchmarking of rowMedians_X_S(), rowMedians(X, cols, rows)() and rowMedians(X[cols, rows])() on integer+10x10 data (transposed). The top panel shows times in milliseconds and the bottom panel shows relative times._
 
@@ -103,16 +103,16 @@ _Table: Benchmarking of rowMedians_X_S(), rowMedians(X, cols, rows)() and rowMed
 
 |   |expr                      |      min|        lq|      mean|    median|        uq|      max|
 |:--|:-------------------------|--------:|---------:|---------:|---------:|---------:|--------:|
-|1  |rowMedians_X_S            | 0.002103| 0.0022015| 0.0024566| 0.0022325| 0.0023830| 0.016748|
-|2  |rowMedians(X, cols, rows) | 0.002458| 0.0025755| 0.0028581| 0.0026185| 0.0027445| 0.020989|
-|3  |rowMedians(X[cols, rows]) | 0.002991| 0.0031680| 0.0033960| 0.0033205| 0.0034320| 0.006162|
+|1  |rowMedians_X_S            | 0.002582| 0.0026555| 0.0027794| 0.0027055| 0.0028280| 0.005478|
+|2  |rowMedians(X, cols, rows) | 0.002927| 0.0030785| 0.0033691| 0.0031330| 0.0032205| 0.022349|
+|3  |rowMedians(X[cols, rows]) | 0.003506| 0.0037010| 0.0038899| 0.0037835| 0.0039360| 0.006272|
 
 
-|   |expr                      |      min|       lq|     mean|   median|       uq|       max|
-|:--|:-------------------------|--------:|--------:|--------:|--------:|--------:|---------:|
-|1  |rowMedians_X_S            | 1.000000| 1.000000| 1.000000| 1.000000| 1.000000| 1.0000000|
-|2  |rowMedians(X, cols, rows) | 1.168807| 1.169884| 1.163443| 1.172900| 1.151700| 1.2532243|
-|3  |rowMedians(X[cols, rows]) | 1.422254| 1.439019| 1.382398| 1.487346| 1.440201| 0.3679245|
+|   |expr                      |      min|       lq|     mean|   median|       uq|      max|
+|:--|:-------------------------|--------:|--------:|--------:|--------:|--------:|--------:|
+|1  |rowMedians_X_S            | 1.000000| 1.000000| 1.000000| 1.000000| 1.000000| 1.000000|
+|2  |rowMedians(X, cols, rows) | 1.133617| 1.159292| 1.212178| 1.158011| 1.138791| 4.079774|
+|3  |rowMedians(X[cols, rows]) | 1.357862| 1.393711| 1.399545| 1.398448| 1.391796| 1.144943|
 
 _Figure: Benchmarking of colMedians_X_S(), colMedians(X, rows, cols)() and colMedians(X[rows, cols])() on integer+10x10 data  as well as rowMedians_X_S(), rowMedians(X, cols, rows)() and rowMedians(X[cols, rows])() on the same data transposed.  Outliers are displayed as crosses.  Times are in milliseconds._
 
@@ -126,14 +126,14 @@ _Table: Benchmarking of colMedians_X_S() and rowMedians_X_S() on integer+10x10 d
 
 |   |expr           |   min|     lq|    mean| median|     uq|    max|
 |:--|:--------------|-----:|------:|-------:|------:|------:|------:|
-|2  |rowMedians_X_S | 2.103| 2.2015| 2.45663| 2.2325| 2.3830| 16.748|
-|1  |colMedians_X_S | 2.174| 2.2065| 2.51571| 2.2495| 2.3185| 19.440|
+|1  |colMedians_X_S | 2.539| 2.6150| 2.91592| 2.6825| 2.8075| 20.596|
+|2  |rowMedians_X_S | 2.582| 2.6555| 2.77941| 2.7055| 2.8280|  5.478|
 
 
-|   |expr           |      min|       lq|     mean|   median|        uq|      max|
-|:--|:--------------|--------:|--------:|--------:|--------:|---------:|--------:|
-|2  |rowMedians_X_S | 1.000000| 1.000000| 1.000000| 1.000000| 1.0000000| 1.000000|
-|1  |colMedians_X_S | 1.033761| 1.002271| 1.024049| 1.007615| 0.9729333| 1.160736|
+|   |expr           |      min|       lq|      mean|   median|       uq|      max|
+|:--|:--------------|--------:|--------:|---------:|--------:|--------:|--------:|
+|1  |colMedians_X_S | 1.000000| 1.000000| 1.0000000| 1.000000| 1.000000| 1.000000|
+|2  |rowMedians_X_S | 1.016936| 1.015488| 0.9531846| 1.008574| 1.007302| 0.265974|
 
 _Figure: Benchmarking of colMedians_X_S() and rowMedians_X_S() on integer+10x10 data (original and transposed).  Outliers are displayed as crosses. Times are in milliseconds._
 
@@ -150,8 +150,8 @@ _Figure: Benchmarking of colMedians_X_S() and rowMedians_X_S() on integer+10x10 
 > X_S <- X[rows, cols]
 > gc()
           used  (Mb) gc trigger  (Mb) max used  (Mb)
-Ncells 5181174 276.8   10014072 534.9 10014072 534.9
-Vcells 9336635  71.3   18204443 138.9 18204443 138.9
+Ncells 5247066 280.3    7916910 422.9  7916910 422.9
+Vcells 9788306  74.7   33191153 253.3 53339345 407.0
 > colStats <- microbenchmark(colMedians_X_S = colMedians(X_S, na.rm = FALSE), `colMedians(X, rows, cols)` = colMedians(X, 
 +     rows = rows, cols = cols, na.rm = FALSE), `colMedians(X[rows, cols])` = colMedians(X[rows, cols], 
 +     na.rm = FALSE), unit = "ms")
@@ -159,8 +159,8 @@ Vcells 9336635  71.3   18204443 138.9 18204443 138.9
 > X_S <- t(X_S)
 > gc()
           used  (Mb) gc trigger  (Mb) max used  (Mb)
-Ncells 5181150 276.8   10014072 534.9 10014072 534.9
-Vcells 9341688  71.3   18204443 138.9 18204443 138.9
+Ncells 5247060 280.3    7916910 422.9  7916910 422.9
+Vcells 9793389  74.8   33191153 253.3 53339345 407.0
 > rowStats <- microbenchmark(rowMedians_X_S = rowMedians(X_S, na.rm = FALSE), `rowMedians(X, cols, rows)` = rowMedians(X, 
 +     rows = cols, cols = rows, na.rm = FALSE), `rowMedians(X[cols, rows])` = rowMedians(X[cols, rows], 
 +     na.rm = FALSE), unit = "ms")
@@ -172,33 +172,33 @@ _Table: Benchmarking of colMedians_X_S(), colMedians(X, rows, cols)() and colMed
 
 |   |expr                      |      min|        lq|      mean|    median|        uq|      max|
 |:--|:-------------------------|--------:|---------:|---------:|---------:|---------:|--------:|
-|1  |colMedians_X_S            | 0.067922| 0.0713380| 0.0767179| 0.0743660| 0.0805590| 0.098023|
-|2  |colMedians(X, rows, cols) | 0.068533| 0.0719635| 0.0780336| 0.0752720| 0.0834805| 0.104846|
-|3  |colMedians(X[rows, cols]) | 0.077800| 0.0813205| 0.0879097| 0.0843645| 0.0937805| 0.145726|
+|1  |colMedians_X_S            | 0.067030| 0.0697475| 0.0793841| 0.0764250| 0.0835475| 0.137287|
+|2  |colMedians(X, rows, cols) | 0.068161| 0.0714950| 0.0804575| 0.0780000| 0.0861465| 0.133461|
+|3  |colMedians(X[rows, cols]) | 0.077466| 0.0805995| 0.0896371| 0.0872435| 0.0966095| 0.148208|
 
 
-|   |expr                      |      min|       lq|     mean|   median|       uq|      max|
-|:--|:-------------------------|--------:|--------:|--------:|--------:|--------:|--------:|
-|1  |colMedians_X_S            | 1.000000| 1.000000| 1.000000| 1.000000| 1.000000| 1.000000|
-|2  |colMedians(X, rows, cols) | 1.008996| 1.008768| 1.017150| 1.012183| 1.036265| 1.069606|
-|3  |colMedians(X[rows, cols]) | 1.145431| 1.139932| 1.145882| 1.134450| 1.164122| 1.486651|
+|   |expr                      |      min|       lq|     mean|   median|       uq|       max|
+|:--|:-------------------------|--------:|--------:|--------:|--------:|--------:|---------:|
+|1  |colMedians_X_S            | 1.000000| 1.000000| 1.000000| 1.000000| 1.000000| 1.0000000|
+|2  |colMedians(X, rows, cols) | 1.016873| 1.025055| 1.013521| 1.020608| 1.031108| 0.9721314|
+|3  |colMedians(X[rows, cols]) | 1.155692| 1.155590| 1.129157| 1.141557| 1.156342| 1.0795487|
 
 _Table: Benchmarking of rowMedians_X_S(), rowMedians(X, cols, rows)() and rowMedians(X[cols, rows])() on integer+100x100 data (transposed). The top panel shows times in milliseconds and the bottom panel shows relative times._
 
 
 
-|   |expr                      |      min|        lq|      mean|    median|        uq|      max|
-|:--|:-------------------------|--------:|---------:|---------:|---------:|---------:|--------:|
-|2  |rowMedians(X, cols, rows) | 0.068032| 0.0717120| 0.0772793| 0.0751005| 0.0814995| 0.124429|
-|1  |rowMedians_X_S            | 0.069498| 0.0727255| 0.0793976| 0.0762080| 0.0845155| 0.109531|
-|3  |rowMedians(X[cols, rows]) | 0.078942| 0.0826970| 0.0896605| 0.0868435| 0.0952900| 0.118050|
+|   |expr                      |      min|       lq|      mean|    median|        uq|      max|
+|:--|:-------------------------|--------:|--------:|---------:|---------:|---------:|--------:|
+|1  |rowMedians_X_S            | 0.064076| 0.068283| 0.0754529| 0.0738020| 0.0816530| 0.105578|
+|2  |rowMedians(X, cols, rows) | 0.067314| 0.070207| 0.0774424| 0.0762515| 0.0825315| 0.125626|
+|3  |rowMedians(X[cols, rows]) | 0.074273| 0.078959| 0.0861093| 0.0847715| 0.0915495| 0.109607|
 
 
-|   |expr                      |      min|       lq|     mean|   median|       uq|       max|
-|:--|:-------------------------|--------:|--------:|--------:|--------:|--------:|---------:|
-|2  |rowMedians(X, cols, rows) | 1.000000| 1.000000| 1.000000| 1.000000| 1.000000| 1.0000000|
-|1  |rowMedians_X_S            | 1.021549| 1.014133| 1.027411| 1.014747| 1.037006| 0.8802691|
-|3  |rowMedians(X[cols, rows]) | 1.160366| 1.153182| 1.160213| 1.156364| 1.169210| 0.9487338|
+|   |expr                      |      min|       lq|     mean|   median|       uq|      max|
+|:--|:-------------------------|--------:|--------:|--------:|--------:|--------:|--------:|
+|1  |rowMedians_X_S            | 1.000000| 1.000000| 1.000000| 1.000000| 1.000000| 1.000000|
+|2  |rowMedians(X, cols, rows) | 1.050534| 1.028177| 1.026368| 1.033190| 1.010759| 1.189888|
+|3  |rowMedians(X[cols, rows]) | 1.159139| 1.156349| 1.141233| 1.148634| 1.121202| 1.038161|
 
 _Figure: Benchmarking of colMedians_X_S(), colMedians(X, rows, cols)() and colMedians(X[rows, cols])() on integer+100x100 data  as well as rowMedians_X_S(), rowMedians(X, cols, rows)() and rowMedians(X[cols, rows])() on the same data transposed.  Outliers are displayed as crosses.  Times are in milliseconds._
 
@@ -212,14 +212,14 @@ _Table: Benchmarking of colMedians_X_S() and rowMedians_X_S() on integer+100x100
 
 |   |expr           |    min|      lq|     mean| median|      uq|     max|
 |:--|:--------------|------:|-------:|--------:|------:|-------:|-------:|
-|1  |colMedians_X_S | 67.922| 71.3380| 76.71790| 74.366| 80.5590|  98.023|
-|2  |rowMedians_X_S | 69.498| 72.7255| 79.39757| 76.208| 84.5155| 109.531|
+|2  |rowMedians_X_S | 64.076| 68.2830| 75.45288| 73.802| 81.6530| 105.578|
+|1  |colMedians_X_S | 67.030| 69.7475| 79.38413| 76.425| 83.5475| 137.287|
 
 
-|   |expr           |      min|      lq|     mean|   median|       uq|      max|
-|:--|:--------------|--------:|-------:|--------:|--------:|--------:|--------:|
-|1  |colMedians_X_S | 1.000000| 1.00000| 1.000000| 1.000000| 1.000000| 1.000000|
-|2  |rowMedians_X_S | 1.023203| 1.01945| 1.034929| 1.024769| 1.049113| 1.117401|
+|   |expr           |      min|       lq|     mean|   median|       uq|      max|
+|:--|:--------------|--------:|--------:|--------:|--------:|--------:|--------:|
+|2  |rowMedians_X_S | 1.000000| 1.000000| 1.000000| 1.000000| 1.000000| 1.000000|
+|1  |colMedians_X_S | 1.046102| 1.021448| 1.052102| 1.035541| 1.023202| 1.300337|
 
 _Figure: Benchmarking of colMedians_X_S() and rowMedians_X_S() on integer+100x100 data (original and transposed).  Outliers are displayed as crosses. Times are in milliseconds._
 
@@ -236,8 +236,8 @@ _Figure: Benchmarking of colMedians_X_S() and rowMedians_X_S() on integer+100x10
 > X_S <- X[rows, cols]
 > gc()
           used  (Mb) gc trigger  (Mb) max used  (Mb)
-Ncells 5181917 276.8   10014072 534.9 10014072 534.9
-Vcells 9340688  71.3   18204443 138.9 18204443 138.9
+Ncells 5247808 280.3    7916910 422.9  7916910 422.9
+Vcells 9792357  74.8   33191153 253.3 53339345 407.0
 > colStats <- microbenchmark(colMedians_X_S = colMedians(X_S, na.rm = FALSE), `colMedians(X, rows, cols)` = colMedians(X, 
 +     rows = rows, cols = cols, na.rm = FALSE), `colMedians(X[rows, cols])` = colMedians(X[rows, cols], 
 +     na.rm = FALSE), unit = "ms")
@@ -245,8 +245,8 @@ Vcells 9340688  71.3   18204443 138.9 18204443 138.9
 > X_S <- t(X_S)
 > gc()
           used  (Mb) gc trigger  (Mb) max used  (Mb)
-Ncells 5181893 276.8   10014072 534.9 10014072 534.9
-Vcells 9345741  71.4   18204443 138.9 18204443 138.9
+Ncells 5247802 280.3    7916910 422.9  7916910 422.9
+Vcells 9797440  74.8   33191153 253.3 53339345 407.0
 > rowStats <- microbenchmark(rowMedians_X_S = rowMedians(X_S, na.rm = FALSE), `rowMedians(X, cols, rows)` = rowMedians(X, 
 +     rows = cols, cols = rows, na.rm = FALSE), `rowMedians(X[cols, rows])` = rowMedians(X[cols, rows], 
 +     na.rm = FALSE), unit = "ms")
@@ -258,16 +258,16 @@ _Table: Benchmarking of colMedians_X_S(), colMedians(X, rows, cols)() and colMed
 
 |   |expr                      |      min|        lq|      mean|    median|        uq|      max|
 |:--|:-------------------------|--------:|---------:|---------:|---------:|---------:|--------:|
-|1  |colMedians_X_S            | 0.053826| 0.0570435| 0.0614137| 0.0605315| 0.0653485| 0.080074|
-|2  |colMedians(X, rows, cols) | 0.055128| 0.0579095| 0.0624135| 0.0607905| 0.0653515| 0.086371|
-|3  |colMedians(X[rows, cols]) | 0.063684| 0.0654055| 0.0716143| 0.0694305| 0.0751920| 0.127035|
+|1  |colMedians_X_S            | 0.051732| 0.0562565| 0.0601103| 0.0592305| 0.0639270| 0.076885|
+|2  |colMedians(X, rows, cols) | 0.053468| 0.0567755| 0.0621583| 0.0610460| 0.0652130| 0.085031|
+|3  |colMedians(X[rows, cols]) | 0.061557| 0.0647875| 0.0720022| 0.0692910| 0.0763975| 0.125133|
 
 
-|   |expr                      |      min|       lq|     mean|   median|       uq|     max|
-|:--|:-------------------------|--------:|--------:|--------:|--------:|--------:|-------:|
-|1  |colMedians_X_S            | 1.000000| 1.000000| 1.000000| 1.000000| 1.000000| 1.00000|
-|2  |colMedians(X, rows, cols) | 1.024189| 1.015181| 1.016278| 1.004279| 1.000046| 1.07864|
-|3  |colMedians(X[rows, cols]) | 1.183146| 1.146590| 1.166095| 1.147014| 1.150631| 1.58647|
+|   |expr                      |      min|       lq|     mean|   median|       uq|      max|
+|:--|:-------------------------|--------:|--------:|--------:|--------:|--------:|--------:|
+|1  |colMedians_X_S            | 1.000000| 1.000000| 1.000000| 1.000000| 1.000000| 1.000000|
+|2  |colMedians(X, rows, cols) | 1.033558| 1.009226| 1.034070| 1.030651| 1.020117| 1.105950|
+|3  |colMedians(X[rows, cols]) | 1.189921| 1.151645| 1.197834| 1.169853| 1.195074| 1.627535|
 
 _Table: Benchmarking of rowMedians_X_S(), rowMedians(X, cols, rows)() and rowMedians(X[cols, rows])() on integer+1000x10 data (transposed). The top panel shows times in milliseconds and the bottom panel shows relative times._
 
@@ -275,16 +275,16 @@ _Table: Benchmarking of rowMedians_X_S(), rowMedians(X, cols, rows)() and rowMed
 
 |   |expr                      |      min|       lq|      mean|    median|        uq|      max|
 |:--|:-------------------------|--------:|--------:|---------:|---------:|---------:|--------:|
-|1  |rowMedians_X_S            | 0.055470| 0.057623| 0.0626324| 0.0610295| 0.0660825| 0.087608|
-|2  |rowMedians(X, cols, rows) | 0.056186| 0.058245| 0.0632394| 0.0636200| 0.0672000| 0.077478|
-|3  |rowMedians(X[cols, rows]) | 0.067292| 0.068919| 0.0761266| 0.0752275| 0.0795540| 0.131223|
+|1  |rowMedians_X_S            | 0.051167| 0.055490| 0.0597463| 0.0583290| 0.0625435| 0.083070|
+|2  |rowMedians(X, cols, rows) | 0.053707| 0.058568| 0.0627956| 0.0630935| 0.0667320| 0.076504|
+|3  |rowMedians(X[cols, rows]) | 0.063305| 0.068806| 0.0744493| 0.0742565| 0.0788030| 0.131429|
 
 
 |   |expr                      |      min|       lq|     mean|   median|       uq|       max|
 |:--|:-------------------------|--------:|--------:|--------:|--------:|--------:|---------:|
 |1  |rowMedians_X_S            | 1.000000| 1.000000| 1.000000| 1.000000| 1.000000| 1.0000000|
-|2  |rowMedians(X, cols, rows) | 1.012908| 1.010794| 1.009692| 1.042447| 1.016911| 0.8843713|
-|3  |rowMedians(X[cols, rows]) | 1.213124| 1.196033| 1.215451| 1.232642| 1.203859| 1.4978427|
+|2  |rowMedians(X, cols, rows) | 1.049641| 1.055470| 1.051037| 1.081683| 1.066969| 0.9209582|
+|3  |rowMedians(X[cols, rows]) | 1.237223| 1.239971| 1.246091| 1.273063| 1.259971| 1.5821476|
 
 _Figure: Benchmarking of colMedians_X_S(), colMedians(X, rows, cols)() and colMedians(X[rows, cols])() on integer+1000x10 data  as well as rowMedians_X_S(), rowMedians(X, cols, rows)() and rowMedians(X[cols, rows])() on the same data transposed.  Outliers are displayed as crosses.  Times are in milliseconds._
 
@@ -298,14 +298,14 @@ _Table: Benchmarking of colMedians_X_S() and rowMedians_X_S() on integer+1000x10
 
 |   |expr           |    min|      lq|     mean|  median|      uq|    max|
 |:--|:--------------|------:|-------:|--------:|-------:|-------:|------:|
-|1  |colMedians_X_S | 53.826| 57.0435| 61.41374| 60.5315| 65.3485| 80.074|
-|2  |rowMedians_X_S | 55.470| 57.6230| 62.63237| 61.0295| 66.0825| 87.608|
+|2  |rowMedians_X_S | 51.167| 55.4900| 59.74629| 58.3290| 62.5435| 83.070|
+|1  |colMedians_X_S | 51.732| 56.2565| 60.11033| 59.2305| 63.9270| 76.885|
 
 
-|   |expr           |      min|       lq|     mean|   median|       uq|      max|
-|:--|:--------------|--------:|--------:|--------:|--------:|--------:|--------:|
-|1  |colMedians_X_S | 1.000000| 1.000000| 1.000000| 1.000000| 1.000000| 1.000000|
-|2  |rowMedians_X_S | 1.030543| 1.010159| 1.019843| 1.008227| 1.011232| 1.094088|
+|   |expr           |      min|       lq|     mean|   median|       uq|       max|
+|:--|:--------------|--------:|--------:|--------:|--------:|--------:|---------:|
+|2  |rowMedians_X_S | 1.000000| 1.000000| 1.000000| 1.000000| 1.000000| 1.0000000|
+|1  |colMedians_X_S | 1.011042| 1.013813| 1.006093| 1.015455| 1.022121| 0.9255447|
 
 _Figure: Benchmarking of colMedians_X_S() and rowMedians_X_S() on integer+1000x10 data (original and transposed).  Outliers are displayed as crosses. Times are in milliseconds._
 
@@ -322,8 +322,8 @@ _Figure: Benchmarking of colMedians_X_S() and rowMedians_X_S() on integer+1000x1
 > X_S <- X[rows, cols]
 > gc()
           used  (Mb) gc trigger  (Mb) max used  (Mb)
-Ncells 5182122 276.8   10014072 534.9 10014072 534.9
-Vcells 9341570  71.3   18204443 138.9 18204443 138.9
+Ncells 5248012 280.3    7916910 422.9  7916910 422.9
+Vcells 9793238  74.8   33191153 253.3 53339345 407.0
 > colStats <- microbenchmark(colMedians_X_S = colMedians(X_S, na.rm = FALSE), `colMedians(X, rows, cols)` = colMedians(X, 
 +     rows = rows, cols = cols, na.rm = FALSE), `colMedians(X[rows, cols])` = colMedians(X[rows, cols], 
 +     na.rm = FALSE), unit = "ms")
@@ -331,8 +331,8 @@ Vcells 9341570  71.3   18204443 138.9 18204443 138.9
 > X_S <- t(X_S)
 > gc()
           used  (Mb) gc trigger  (Mb) max used  (Mb)
-Ncells 5182098 276.8   10014072 534.9 10014072 534.9
-Vcells 9346623  71.4   18204443 138.9 18204443 138.9
+Ncells 5248006 280.3    7916910 422.9  7916910 422.9
+Vcells 9798321  74.8   33191153 253.3 53339345 407.0
 > rowStats <- microbenchmark(rowMedians_X_S = rowMedians(X_S, na.rm = FALSE), `rowMedians(X, cols, rows)` = rowMedians(X, 
 +     rows = cols, cols = rows, na.rm = FALSE), `rowMedians(X[cols, rows])` = rowMedians(X[cols, rows], 
 +     na.rm = FALSE), unit = "ms")
@@ -342,18 +342,18 @@ _Table: Benchmarking of colMedians_X_S(), colMedians(X, rows, cols)() and colMed
 
 
 
-|   |expr                      |      min|        lq|      mean|    median|        uq|      max|
-|:--|:-------------------------|--------:|---------:|---------:|---------:|---------:|--------:|
-|2  |colMedians(X, rows, cols) | 0.058550| 0.0637025| 0.0691570| 0.0665220| 0.0751450| 0.101076|
-|1  |colMedians_X_S            | 0.058302| 0.0635725| 0.0691944| 0.0685485| 0.0732130| 0.114861|
-|3  |colMedians(X[rows, cols]) | 0.069883| 0.0763320| 0.0821655| 0.0813615| 0.0861525| 0.108260|
+|   |expr                      |      min|        lq|      mean|   median|       uq|      max|
+|:--|:-------------------------|--------:|---------:|---------:|--------:|--------:|--------:|
+|1  |colMedians_X_S            | 0.053946| 0.0605370| 0.0657424| 0.065430| 0.069156| 0.110516|
+|2  |colMedians(X, rows, cols) | 0.060174| 0.0642105| 0.0707670| 0.069485| 0.075568| 0.101287|
+|3  |colMedians(X[rows, cols]) | 0.065230| 0.0734625| 0.0791696| 0.079116| 0.084034| 0.099485|
 
 
-|   |expr                      |       min|        lq|     mean|   median|        uq|      max|
-|:--|:-------------------------|---------:|---------:|--------:|--------:|---------:|--------:|
-|2  |colMedians(X, rows, cols) | 1.0000000| 1.0000000| 1.000000| 1.000000| 1.0000000| 1.000000|
-|1  |colMedians_X_S            | 0.9957643| 0.9979593| 1.000541| 1.030464| 0.9742897| 1.136383|
-|3  |colMedians(X[rows, cols]) | 1.1935611| 1.1982575| 1.188101| 1.223077| 1.1464835| 1.071075|
+|   |expr                      |      min|       lq|     mean|   median|       uq|       max|
+|:--|:-------------------------|--------:|--------:|--------:|--------:|--------:|---------:|
+|1  |colMedians_X_S            | 1.000000| 1.000000| 1.000000| 1.000000| 1.000000| 1.0000000|
+|2  |colMedians(X, rows, cols) | 1.115449| 1.060682| 1.076428| 1.061975| 1.092718| 0.9164917|
+|3  |colMedians(X[rows, cols]) | 1.209172| 1.213514| 1.204239| 1.209170| 1.215137| 0.9001864|
 
 _Table: Benchmarking of rowMedians_X_S(), rowMedians(X, cols, rows)() and rowMedians(X[cols, rows])() on integer+10x1000 data (transposed). The top panel shows times in milliseconds and the bottom panel shows relative times._
 
@@ -361,16 +361,16 @@ _Table: Benchmarking of rowMedians_X_S(), rowMedians(X, cols, rows)() and rowMed
 
 |   |expr                      |      min|        lq|      mean|    median|        uq|      max|
 |:--|:-------------------------|--------:|---------:|---------:|---------:|---------:|--------:|
-|1  |rowMedians_X_S            | 0.057334| 0.0628475| 0.0678032| 0.0668150| 0.0724650| 0.095108|
-|2  |rowMedians(X, cols, rows) | 0.057151| 0.0644545| 0.0688338| 0.0672115| 0.0725845| 0.117625|
-|3  |rowMedians(X[cols, rows]) | 0.067570| 0.0738170| 0.0797269| 0.0775265| 0.0854600| 0.110360|
+|1  |rowMedians_X_S            | 0.055236| 0.0613350| 0.0655234| 0.0646645| 0.0693605| 0.092072|
+|2  |rowMedians(X, cols, rows) | 0.056363| 0.0670275| 0.0725988| 0.0713910| 0.0785210| 0.118767|
+|3  |rowMedians(X[cols, rows]) | 0.064038| 0.0714920| 0.0778549| 0.0770710| 0.0842430| 0.099946|
 
 
-|   |expr                      |       min|       lq|     mean|   median|       uq|      max|
-|:--|:-------------------------|---------:|--------:|--------:|--------:|--------:|--------:|
-|1  |rowMedians_X_S            | 1.0000000| 1.000000| 1.000000| 1.000000| 1.000000| 1.000000|
-|2  |rowMedians(X, cols, rows) | 0.9968082| 1.025570| 1.015200| 1.005934| 1.001649| 1.236752|
-|3  |rowMedians(X[cols, rows]) | 1.1785328| 1.174541| 1.175858| 1.160316| 1.179328| 1.160365|
+|   |expr                      |      min|       lq|     mean|   median|       uq|      max|
+|:--|:-------------------------|--------:|--------:|--------:|--------:|--------:|--------:|
+|1  |rowMedians_X_S            | 1.000000| 1.000000| 1.000000| 1.000000| 1.000000| 1.000000|
+|2  |rowMedians(X, cols, rows) | 1.020403| 1.092810| 1.107983| 1.104021| 1.132071| 1.289936|
+|3  |rowMedians(X[cols, rows]) | 1.159353| 1.165599| 1.188201| 1.191860| 1.214567| 1.085520|
 
 _Figure: Benchmarking of colMedians_X_S(), colMedians(X, rows, cols)() and colMedians(X[rows, cols])() on integer+10x1000 data  as well as rowMedians_X_S(), rowMedians(X, cols, rows)() and rowMedians(X[cols, rows])() on the same data transposed.  Outliers are displayed as crosses.  Times are in milliseconds._
 
@@ -382,16 +382,16 @@ _Table: Benchmarking of colMedians_X_S() and rowMedians_X_S() on integer+10x1000
 
 
 
-|   |expr           |    min|      lq|     mean|  median|     uq|     max|
-|:--|:--------------|------:|-------:|--------:|-------:|------:|-------:|
-|2  |rowMedians_X_S | 57.334| 62.8475| 67.80319| 66.8150| 72.465|  95.108|
-|1  |colMedians_X_S | 58.302| 63.5725| 69.19440| 68.5485| 73.213| 114.861|
+|   |expr           |    min|     lq|     mean|  median|      uq|     max|
+|:--|:--------------|------:|------:|--------:|-------:|-------:|-------:|
+|2  |rowMedians_X_S | 55.236| 61.335| 65.52338| 64.6645| 69.3605|  92.072|
+|1  |colMedians_X_S | 53.946| 60.537| 65.74241| 65.4300| 69.1560| 110.516|
 
 
-|   |expr           |      min|       lq|     mean|   median|       uq|     max|
-|:--|:--------------|--------:|--------:|--------:|--------:|--------:|-------:|
-|2  |rowMedians_X_S | 1.000000| 1.000000| 1.000000| 1.000000| 1.000000| 1.00000|
-|1  |colMedians_X_S | 1.016884| 1.011536| 1.020518| 1.025945| 1.010322| 1.20769|
+|   |expr           |       min|        lq|     mean|   median|        uq|      max|
+|:--|:--------------|---------:|---------:|--------:|--------:|---------:|--------:|
+|2  |rowMedians_X_S | 1.0000000| 1.0000000| 1.000000| 1.000000| 1.0000000| 1.000000|
+|1  |colMedians_X_S | 0.9766457| 0.9869895| 1.003343| 1.011838| 0.9970516| 1.200322|
 
 _Figure: Benchmarking of colMedians_X_S() and rowMedians_X_S() on integer+10x1000 data (original and transposed).  Outliers are displayed as crosses. Times are in milliseconds._
 
@@ -408,8 +408,8 @@ _Figure: Benchmarking of colMedians_X_S() and rowMedians_X_S() on integer+10x100
 > X_S <- X[rows, cols]
 > gc()
           used  (Mb) gc trigger  (Mb) max used  (Mb)
-Ncells 5182332 276.8   10014072 534.9 10014072 534.9
-Vcells 9364252  71.5   18204443 138.9 18204443 138.9
+Ncells 5248225 280.3    7916910 422.9  7916910 422.9
+Vcells 9815924  74.9   33191153 253.3 53339345 407.0
 > colStats <- microbenchmark(colMedians_X_S = colMedians(X_S, na.rm = FALSE), `colMedians(X, rows, cols)` = colMedians(X, 
 +     rows = rows, cols = cols, na.rm = FALSE), `colMedians(X[rows, cols])` = colMedians(X[rows, cols], 
 +     na.rm = FALSE), unit = "ms")
@@ -417,8 +417,8 @@ Vcells 9364252  71.5   18204443 138.9 18204443 138.9
 > X_S <- t(X_S)
 > gc()
           used  (Mb) gc trigger  (Mb) max used  (Mb)
-Ncells 5182308 276.8   10014072 534.9 10014072 534.9
-Vcells 9414305  71.9   18204443 138.9 18204443 138.9
+Ncells 5248219 280.3    7916910 422.9  7916910 422.9
+Vcells 9866007  75.3   33191153 253.3 53339345 407.0
 > rowStats <- microbenchmark(rowMedians_X_S = rowMedians(X_S, na.rm = FALSE), `rowMedians(X, cols, rows)` = rowMedians(X, 
 +     rows = cols, cols = rows, na.rm = FALSE), `rowMedians(X[cols, rows])` = rowMedians(X[cols, rows], 
 +     na.rm = FALSE), unit = "ms")
@@ -430,33 +430,33 @@ _Table: Benchmarking of colMedians_X_S(), colMedians(X, rows, cols)() and colMed
 
 |   |expr                      |      min|        lq|      mean|    median|       uq|      max|
 |:--|:-------------------------|--------:|---------:|---------:|---------:|--------:|--------:|
-|2  |colMedians(X, rows, cols) | 0.641636| 0.6433855| 0.6751624| 0.6447565| 0.649610| 1.100555|
-|1  |colMedians_X_S            | 0.644590| 0.6464800| 0.6839102| 0.6480340| 0.660054| 1.072875|
-|3  |colMedians(X[rows, cols]) | 0.711779| 0.7141165| 0.7618441| 0.7182110| 0.728960| 1.160574|
+|1  |colMedians_X_S            | 0.617813| 0.6192955| 0.6433942| 0.6204390| 0.625912| 0.866421|
+|2  |colMedians(X, rows, cols) | 0.625488| 0.6277925| 0.6480555| 0.6292565| 0.635836| 0.913809|
+|3  |colMedians(X[rows, cols]) | 0.685097| 0.6870250| 0.7164150| 0.6883195| 0.703381| 0.916572|
 
 
-|   |expr                      |      min|       lq|     mean|   median|       uq|       max|
-|:--|:-------------------------|--------:|--------:|--------:|--------:|--------:|---------:|
-|2  |colMedians(X, rows, cols) | 1.000000| 1.000000| 1.000000| 1.000000| 1.000000| 1.0000000|
-|1  |colMedians_X_S            | 1.004604| 1.004810| 1.012957| 1.005083| 1.016077| 0.9748491|
-|3  |colMedians(X[rows, cols]) | 1.109319| 1.109936| 1.128386| 1.113926| 1.122150| 1.0545352|
+|   |expr                      |      min|       lq|     mean|   median|       uq|      max|
+|:--|:-------------------------|--------:|--------:|--------:|--------:|--------:|--------:|
+|1  |colMedians_X_S            | 1.000000| 1.000000| 1.000000| 1.000000| 1.000000| 1.000000|
+|2  |colMedians(X, rows, cols) | 1.012423| 1.013720| 1.007245| 1.014212| 1.015855| 1.054694|
+|3  |colMedians(X[rows, cols]) | 1.108907| 1.109365| 1.113493| 1.109407| 1.123770| 1.057883|
 
 _Table: Benchmarking of rowMedians_X_S(), rowMedians(X, cols, rows)() and rowMedians(X[cols, rows])() on integer+100x1000 data (transposed). The top panel shows times in milliseconds and the bottom panel shows relative times._
 
 
 
-|   |expr                      |      min|       lq|      mean|    median|        uq|      max|
-|:--|:-------------------------|--------:|--------:|---------:|---------:|---------:|--------:|
-|2  |rowMedians(X, cols, rows) | 0.651544| 0.653609| 0.6768917| 0.6551245| 0.6581280| 1.081896|
-|1  |rowMedians_X_S            | 0.653874| 0.656539| 0.7029894| 0.6582925| 0.6721540| 1.129902|
-|3  |rowMedians(X[cols, rows]) | 0.719636| 0.722066| 0.7648408| 0.7275005| 0.7407165| 1.093086|
+|   |expr                      |      min|        lq|      mean|    median|        uq|      max|
+|:--|:-------------------------|--------:|---------:|---------:|---------:|---------:|--------:|
+|1  |rowMedians_X_S            | 0.617588| 0.6217030| 0.6845461| 0.6335880| 0.6729925| 1.095878|
+|2  |rowMedians(X, cols, rows) | 0.639315| 0.6420035| 0.6794513| 0.6485915| 0.6680865| 1.266033|
+|3  |rowMedians(X[cols, rows]) | 0.682908| 0.6888280| 0.7544767| 0.7046215| 0.7500345| 1.149237|
 
 
-|   |expr                      |      min|       lq|     mean|   median|       uq|      max|
-|:--|:-------------------------|--------:|--------:|--------:|--------:|--------:|--------:|
-|2  |rowMedians(X, cols, rows) | 1.000000| 1.000000| 1.000000| 1.000000| 1.000000| 1.000000|
-|1  |rowMedians_X_S            | 1.003576| 1.004483| 1.038555| 1.004836| 1.021312| 1.044372|
-|3  |rowMedians(X[cols, rows]) | 1.104509| 1.104737| 1.129931| 1.110477| 1.125490| 1.010343|
+|   |expr                      |      min|       lq|      mean|   median|        uq|      max|
+|:--|:-------------------------|--------:|--------:|---------:|--------:|---------:|--------:|
+|1  |rowMedians_X_S            | 1.000000| 1.000000| 1.0000000| 1.000000| 1.0000000| 1.000000|
+|2  |rowMedians(X, cols, rows) | 1.035180| 1.032653| 0.9925574| 1.023680| 0.9927102| 1.155268|
+|3  |rowMedians(X[cols, rows]) | 1.105766| 1.107970| 1.1021562| 1.112113| 1.1144768| 1.048691|
 
 _Figure: Benchmarking of colMedians_X_S(), colMedians(X, rows, cols)() and colMedians(X[rows, cols])() on integer+100x1000 data  as well as rowMedians_X_S(), rowMedians(X, cols, rows)() and rowMedians(X[cols, rows])() on the same data transposed.  Outliers are displayed as crosses.  Times are in milliseconds._
 
@@ -468,16 +468,16 @@ _Table: Benchmarking of colMedians_X_S() and rowMedians_X_S() on integer+100x100
 
 
 
-|   |expr           |     min|      lq|     mean|   median|      uq|      max|
-|:--|:--------------|-------:|-------:|--------:|--------:|-------:|--------:|
-|1  |colMedians_X_S | 644.590| 646.480| 683.9102| 648.0340| 660.054| 1072.875|
-|2  |rowMedians_X_S | 653.874| 656.539| 702.9894| 658.2925| 672.154| 1129.902|
+|   |expr           |     min|       lq|     mean|  median|       uq|      max|
+|:--|:--------------|-------:|--------:|--------:|-------:|--------:|--------:|
+|1  |colMedians_X_S | 617.813| 619.2955| 643.3942| 620.439| 625.9120|  866.421|
+|2  |rowMedians_X_S | 617.588| 621.7030| 684.5461| 633.588| 672.9925| 1095.878|
 
 
-|   |expr           |      min|      lq|     mean|  median|       uq|      max|
-|:--|:--------------|--------:|-------:|--------:|-------:|--------:|--------:|
-|1  |colMedians_X_S | 1.000000| 1.00000| 1.000000| 1.00000| 1.000000| 1.000000|
-|2  |rowMedians_X_S | 1.014403| 1.01556| 1.027897| 1.01583| 1.018332| 1.053153|
+|   |expr           |       min|       lq|     mean|   median|       uq|      max|
+|:--|:--------------|---------:|--------:|--------:|--------:|--------:|--------:|
+|1  |colMedians_X_S | 1.0000000| 1.000000| 1.000000| 1.000000| 1.000000| 1.000000|
+|2  |rowMedians_X_S | 0.9996358| 1.003888| 1.063961| 1.021193| 1.075219| 1.264833|
 
 _Figure: Benchmarking of colMedians_X_S() and rowMedians_X_S() on integer+100x1000 data (original and transposed).  Outliers are displayed as crosses. Times are in milliseconds._
 
@@ -494,8 +494,8 @@ _Figure: Benchmarking of colMedians_X_S() and rowMedians_X_S() on integer+100x10
 > X_S <- X[rows, cols]
 > gc()
           used  (Mb) gc trigger  (Mb) max used  (Mb)
-Ncells 5182545 276.8   10014072 534.9 10014072 534.9
-Vcells 9365050  71.5   18204443 138.9 18204443 138.9
+Ncells 5248435 280.3    7916910 422.9  7916910 422.9
+Vcells 9816719  74.9   33191153 253.3 53339345 407.0
 > colStats <- microbenchmark(colMedians_X_S = colMedians(X_S, na.rm = FALSE), `colMedians(X, rows, cols)` = colMedians(X, 
 +     rows = rows, cols = cols, na.rm = FALSE), `colMedians(X[rows, cols])` = colMedians(X[rows, cols], 
 +     na.rm = FALSE), unit = "ms")
@@ -503,8 +503,8 @@ Vcells 9365050  71.5   18204443 138.9 18204443 138.9
 > X_S <- t(X_S)
 > gc()
           used  (Mb) gc trigger  (Mb) max used  (Mb)
-Ncells 5182521 276.8   10014072 534.9 10014072 534.9
-Vcells 9415103  71.9   18204443 138.9 18204443 138.9
+Ncells 5248429 280.3    7916910 422.9  7916910 422.9
+Vcells 9866802  75.3   33191153 253.3 53339345 407.0
 > rowStats <- microbenchmark(rowMedians_X_S = rowMedians(X_S, na.rm = FALSE), `rowMedians(X, cols, rows)` = rowMedians(X, 
 +     rows = cols, cols = rows, na.rm = FALSE), `rowMedians(X[cols, rows])` = rowMedians(X[cols, rows], 
 +     na.rm = FALSE), unit = "ms")
@@ -516,16 +516,16 @@ _Table: Benchmarking of colMedians_X_S(), colMedians(X, rows, cols)() and colMed
 
 |   |expr                      |      min|        lq|      mean|    median|        uq|      max|
 |:--|:-------------------------|--------:|---------:|---------:|---------:|---------:|--------:|
-|2  |colMedians(X, rows, cols) | 0.542302| 0.5444950| 0.5828454| 0.5455490| 0.5504320| 0.896537|
-|1  |colMedians_X_S            | 0.549096| 0.5509370| 0.5870593| 0.5533565| 0.5653340| 0.918822|
-|3  |colMedians(X[rows, cols]) | 0.613419| 0.6155765| 0.6562243| 0.6219400| 0.6503215| 1.055996|
+|1  |colMedians_X_S            | 0.524673| 0.5284170| 0.6080464| 0.5625435| 0.6194565| 1.118931|
+|2  |colMedians(X, rows, cols) | 0.531137| 0.5425495| 0.6333145| 0.5776520| 0.6754200| 1.172393|
+|3  |colMedians(X[rows, cols]) | 0.588329| 0.6008250| 0.7059546| 0.6505860| 0.7684900| 1.324848|
 
 
-|   |expr                      |      min|       lq|     mean|   median|       uq|      max|
-|:--|:-------------------------|--------:|--------:|--------:|--------:|--------:|--------:|
-|2  |colMedians(X, rows, cols) | 1.000000| 1.000000| 1.000000| 1.000000| 1.000000| 1.000000|
-|1  |colMedians_X_S            | 1.012528| 1.011831| 1.007230| 1.014311| 1.027073| 1.024857|
-|3  |colMedians(X[rows, cols]) | 1.131139| 1.130546| 1.125898| 1.140026| 1.181475| 1.177861|
+|   |expr                      |      min|       lq|     mean|   median|       uq|     max|
+|:--|:-------------------------|--------:|--------:|--------:|--------:|--------:|-------:|
+|1  |colMedians_X_S            | 1.000000| 1.000000| 1.000000| 1.000000| 1.000000| 1.00000|
+|2  |colMedians(X, rows, cols) | 1.012320| 1.026745| 1.041556| 1.026857| 1.090343| 1.04778|
+|3  |colMedians(X[rows, cols]) | 1.121325| 1.137028| 1.161021| 1.156508| 1.240587| 1.18403|
 
 _Table: Benchmarking of rowMedians_X_S(), rowMedians(X, cols, rows)() and rowMedians(X[cols, rows])() on integer+1000x100 data (transposed). The top panel shows times in milliseconds and the bottom panel shows relative times._
 
@@ -533,16 +533,16 @@ _Table: Benchmarking of rowMedians_X_S(), rowMedians(X, cols, rows)() and rowMed
 
 |   |expr                      |      min|        lq|      mean|    median|        uq|      max|
 |:--|:-------------------------|--------:|---------:|---------:|---------:|---------:|--------:|
-|2  |rowMedians(X, cols, rows) | 0.561385| 0.5642720| 0.5983768| 0.5655515| 0.5726525| 0.989849|
-|1  |rowMedians_X_S            | 0.562010| 0.5645900| 0.6002289| 0.5668670| 0.5810320| 0.869672|
-|3  |rowMedians(X[cols, rows]) | 0.630054| 0.6349735| 0.6760368| 0.6408980| 0.6615010| 1.036591|
+|1  |rowMedians_X_S            | 0.526715| 0.5290245| 0.5710529| 0.5335425| 0.5847075| 0.836033|
+|2  |rowMedians(X, cols, rows) | 0.551788| 0.5546635| 0.5970884| 0.5592390| 0.5949400| 0.969852|
+|3  |rowMedians(X[cols, rows]) | 0.595780| 0.6022510| 0.6614477| 0.6136995| 0.6897845| 1.015102|
 
 
-|   |expr                      |      min|       lq|     mean|   median|       uq|       max|
-|:--|:-------------------------|--------:|--------:|--------:|--------:|--------:|---------:|
-|2  |rowMedians(X, cols, rows) | 1.000000| 1.000000| 1.000000| 1.000000| 1.000000| 1.0000000|
-|1  |rowMedians_X_S            | 1.001113| 1.000564| 1.003095| 1.002326| 1.014633| 0.8785906|
-|3  |rowMedians(X[cols, rows]) | 1.122321| 1.125297| 1.129784| 1.133227| 1.155153| 1.0472213|
+|   |expr                      |      min|       lq|     mean|   median|       uq|      max|
+|:--|:-------------------------|--------:|--------:|--------:|--------:|--------:|--------:|
+|1  |rowMedians_X_S            | 1.000000| 1.000000| 1.000000| 1.000000| 1.000000| 1.000000|
+|2  |rowMedians(X, cols, rows) | 1.047603| 1.048465| 1.045592| 1.048162| 1.017500| 1.160064|
+|3  |rowMedians(X[cols, rows]) | 1.131124| 1.138418| 1.158295| 1.150235| 1.179709| 1.214189|
 
 _Figure: Benchmarking of colMedians_X_S(), colMedians(X, rows, cols)() and colMedians(X[rows, cols])() on integer+1000x100 data  as well as rowMedians_X_S(), rowMedians(X, cols, rows)() and rowMedians(X[cols, rows])() on the same data transposed.  Outliers are displayed as crosses.  Times are in milliseconds._
 
@@ -554,16 +554,16 @@ _Table: Benchmarking of colMedians_X_S() and rowMedians_X_S() on integer+1000x10
 
 
 
-|   |expr           |     min|      lq|     mean|   median|      uq|     max|
-|:--|:--------------|-------:|-------:|--------:|--------:|-------:|-------:|
-|1  |colMedians_X_S | 549.096| 550.937| 587.0593| 553.3565| 565.334| 918.822|
-|2  |rowMedians_X_S | 562.010| 564.590| 600.2289| 566.8670| 581.032| 869.672|
+|   |expr           |     min|       lq|     mean|   median|       uq|      max|
+|:--|:--------------|-------:|--------:|--------:|--------:|--------:|--------:|
+|2  |rowMedians_X_S | 526.715| 529.0245| 571.0529| 533.5425| 584.7075|  836.033|
+|1  |colMedians_X_S | 524.673| 528.4170| 608.0465| 562.5435| 619.4565| 1118.931|
 
 
-|   |expr           |      min|       lq|     mean|   median|       uq|       max|
-|:--|:--------------|--------:|--------:|--------:|--------:|--------:|---------:|
-|1  |colMedians_X_S | 1.000000| 1.000000| 1.000000| 1.000000| 1.000000| 1.0000000|
-|2  |rowMedians_X_S | 1.023519| 1.024781| 1.022433| 1.024415| 1.027768| 0.9465076|
+|   |expr           |       min|        lq|     mean|   median|      uq|      max|
+|:--|:--------------|---------:|---------:|--------:|--------:|-------:|--------:|
+|2  |rowMedians_X_S | 1.0000000| 1.0000000| 1.000000| 1.000000| 1.00000| 1.000000|
+|1  |colMedians_X_S | 0.9961231| 0.9988517| 1.064781| 1.054356| 1.05943| 1.338381|
 
 _Figure: Benchmarking of colMedians_X_S() and rowMedians_X_S() on integer+1000x100 data (original and transposed).  Outliers are displayed as crosses. Times are in milliseconds._
 
@@ -621,8 +621,8 @@ _Figure: Benchmarking of colMedians_X_S() and rowMedians_X_S() on integer+1000x1
 > X_S <- X[rows, cols]
 > gc()
           used  (Mb) gc trigger  (Mb) max used  (Mb)
-Ncells 5182762 276.8   10014072 534.9 10014072 534.9
-Vcells 9456169  72.2   18204443 138.9 18204443 138.9
+Ncells 5248654 280.4    7916910 422.9  7916910 422.9
+Vcells 9907851  75.6   33191153 253.3 53339345 407.0
 > colStats <- microbenchmark(colMedians_X_S = colMedians(X_S, na.rm = FALSE), `colMedians(X, rows, cols)` = colMedians(X, 
 +     rows = rows, cols = cols, na.rm = FALSE), `colMedians(X[rows, cols])` = colMedians(X[rows, cols], 
 +     na.rm = FALSE), unit = "ms")
@@ -630,8 +630,8 @@ Vcells 9456169  72.2   18204443 138.9 18204443 138.9
 > X_S <- t(X_S)
 > gc()
           used  (Mb) gc trigger  (Mb) max used  (Mb)
-Ncells 5182729 276.8   10014072 534.9 10014072 534.9
-Vcells 9456307  72.2   18204443 138.9 18204443 138.9
+Ncells 5248639 280.4    7916910 422.9  7916910 422.9
+Vcells 9908019  75.6   33191153 253.3 53339345 407.0
 > rowStats <- microbenchmark(rowMedians_X_S = rowMedians(X_S, na.rm = FALSE), `rowMedians(X, cols, rows)` = rowMedians(X, 
 +     rows = cols, cols = rows, na.rm = FALSE), `rowMedians(X[cols, rows])` = rowMedians(X[cols, rows], 
 +     na.rm = FALSE), unit = "ms")
@@ -643,16 +643,16 @@ _Table: Benchmarking of colMedians_X_S(), colMedians(X, rows, cols)() and colMed
 
 |   |expr                      |      min|        lq|      mean|    median|        uq|      max|
 |:--|:-------------------------|--------:|---------:|---------:|---------:|---------:|--------:|
-|1  |colMedians_X_S            | 0.002483| 0.0025190| 0.0027969| 0.0025615| 0.0026540| 0.021153|
-|2  |colMedians(X, rows, cols) | 0.002826| 0.0029655| 0.0030827| 0.0030390| 0.0031235| 0.005823|
-|3  |colMedians(X[rows, cols]) | 0.003347| 0.0035210| 0.0038329| 0.0037060| 0.0038585| 0.009953|
+|1  |colMedians_X_S            | 0.002866| 0.0029550| 0.0032791| 0.0030360| 0.0031385| 0.022626|
+|2  |colMedians(X, rows, cols) | 0.003050| 0.0032545| 0.0034643| 0.0033360| 0.0034415| 0.010705|
+|3  |colMedians(X[rows, cols]) | 0.003830| 0.0040550| 0.0043854| 0.0041545| 0.0042640| 0.019014|
 
 
 |   |expr                      |      min|       lq|     mean|   median|       uq|       max|
 |:--|:-------------------------|--------:|--------:|--------:|--------:|--------:|---------:|
 |1  |colMedians_X_S            | 1.000000| 1.000000| 1.000000| 1.000000| 1.000000| 1.0000000|
-|2  |colMedians(X, rows, cols) | 1.138139| 1.177253| 1.102177| 1.186414| 1.176903| 0.2752801|
-|3  |colMedians(X[rows, cols]) | 1.347966| 1.397777| 1.370423| 1.446808| 1.453843| 0.4705243|
+|2  |colMedians(X, rows, cols) | 1.064201| 1.101354| 1.056488| 1.098814| 1.096543| 0.4731283|
+|3  |colMedians(X[rows, cols]) | 1.336357| 1.372250| 1.337369| 1.368412| 1.358611| 0.8403606|
 
 _Table: Benchmarking of rowMedians_X_S(), rowMedians(X, cols, rows)() and rowMedians(X[cols, rows])() on double+10x10 data (transposed). The top panel shows times in milliseconds and the bottom panel shows relative times._
 
@@ -660,16 +660,16 @@ _Table: Benchmarking of rowMedians_X_S(), rowMedians(X, cols, rows)() and rowMed
 
 |   |expr                      |      min|        lq|      mean|    median|        uq|      max|
 |:--|:-------------------------|--------:|---------:|---------:|---------:|---------:|--------:|
-|1  |rowMedians_X_S            | 0.002372| 0.0024280| 0.0025605| 0.0025040| 0.0026150| 0.005374|
-|2  |rowMedians(X, cols, rows) | 0.002719| 0.0028705| 0.0031887| 0.0029285| 0.0030175| 0.023324|
-|3  |rowMedians(X[cols, rows]) | 0.003206| 0.0034530| 0.0038643| 0.0035615| 0.0037285| 0.017906|
+|1  |rowMedians_X_S            | 0.002877| 0.0030065| 0.0031335| 0.0030585| 0.0031765| 0.006756|
+|2  |rowMedians(X, cols, rows) | 0.003057| 0.0033045| 0.0036690| 0.0033760| 0.0035090| 0.027124|
+|3  |rowMedians(X[cols, rows]) | 0.003871| 0.0041005| 0.0042870| 0.0041935| 0.0043220| 0.007832|
 
 
 |   |expr                      |      min|       lq|     mean|   median|       uq|      max|
 |:--|:-------------------------|--------:|--------:|--------:|--------:|--------:|--------:|
 |1  |rowMedians_X_S            | 1.000000| 1.000000| 1.000000| 1.000000| 1.000000| 1.000000|
-|2  |rowMedians(X, cols, rows) | 1.146290| 1.182249| 1.245329| 1.169529| 1.153920| 4.340156|
-|3  |rowMedians(X[cols, rows]) | 1.351602| 1.422158| 1.509182| 1.422324| 1.425813| 3.331969|
+|2  |rowMedians(X, cols, rows) | 1.062565| 1.099119| 1.170893| 1.103809| 1.104675| 4.014802|
+|3  |rowMedians(X[cols, rows]) | 1.345499| 1.363878| 1.368101| 1.371097| 1.360617| 1.159266|
 
 _Figure: Benchmarking of colMedians_X_S(), colMedians(X, rows, cols)() and colMedians(X[rows, cols])() on double+10x10 data  as well as rowMedians_X_S(), rowMedians(X, cols, rows)() and rowMedians(X[cols, rows])() on the same data transposed.  Outliers are displayed as crosses.  Times are in milliseconds._
 
@@ -681,16 +681,16 @@ _Table: Benchmarking of colMedians_X_S() and rowMedians_X_S() on double+10x10 da
 
 
 
-|   |expr           |   min|    lq|    mean| median|    uq|    max|
-|:--|:--------------|-----:|-----:|-------:|------:|-----:|------:|
-|2  |rowMedians_X_S | 2.372| 2.428| 2.56052| 2.5040| 2.615|  5.374|
-|1  |colMedians_X_S | 2.483| 2.519| 2.79691| 2.5615| 2.654| 21.153|
+|   |expr           |   min|     lq|    mean| median|     uq|    max|
+|:--|:--------------|-----:|------:|-------:|------:|------:|------:|
+|1  |colMedians_X_S | 2.866| 2.9550| 3.27911| 3.0360| 3.1385| 22.626|
+|2  |rowMedians_X_S | 2.877| 3.0065| 3.13354| 3.0585| 3.1765|  6.756|
 
 
-|   |expr           |      min|       lq|     mean|   median|       uq|      max|
-|:--|:--------------|--------:|--------:|--------:|--------:|--------:|--------:|
-|2  |rowMedians_X_S | 1.000000| 1.000000| 1.000000| 1.000000| 1.000000| 1.000000|
-|1  |colMedians_X_S | 1.046796| 1.037479| 1.092321| 1.022963| 1.014914| 3.936174|
+|   |expr           |      min|       lq|      mean|   median|       uq|       max|
+|:--|:--------------|--------:|--------:|---------:|--------:|--------:|---------:|
+|1  |colMedians_X_S | 1.000000| 1.000000| 1.0000000| 1.000000| 1.000000| 1.0000000|
+|2  |rowMedians_X_S | 1.003838| 1.017428| 0.9556069| 1.007411| 1.012108| 0.2985945|
 
 _Figure: Benchmarking of colMedians_X_S() and rowMedians_X_S() on double+10x10 data (original and transposed).  Outliers are displayed as crosses. Times are in milliseconds._
 
@@ -707,8 +707,8 @@ _Figure: Benchmarking of colMedians_X_S() and rowMedians_X_S() on double+10x10 d
 > X_S <- X[rows, cols]
 > gc()
           used  (Mb) gc trigger  (Mb) max used  (Mb)
-Ncells 5182959 276.8   10014072 534.9 10014072 534.9
-Vcells 9462135  72.2   18204443 138.9 18204443 138.9
+Ncells 5248852 280.4    7916910 422.9  7916910 422.9
+Vcells 9913818  75.7   33191153 253.3 53339345 407.0
 > colStats <- microbenchmark(colMedians_X_S = colMedians(X_S, na.rm = FALSE), `colMedians(X, rows, cols)` = colMedians(X, 
 +     rows = rows, cols = cols, na.rm = FALSE), `colMedians(X[rows, cols])` = colMedians(X[rows, cols], 
 +     na.rm = FALSE), unit = "ms")
@@ -716,8 +716,8 @@ Vcells 9462135  72.2   18204443 138.9 18204443 138.9
 > X_S <- t(X_S)
 > gc()
           used  (Mb) gc trigger  (Mb) max used  (Mb)
-Ncells 5182935 276.8   10014072 534.9 10014072 534.9
-Vcells 9472188  72.3   18204443 138.9 18204443 138.9
+Ncells 5248846 280.4    7916910 422.9  7916910 422.9
+Vcells 9923901  75.8   33191153 253.3 53339345 407.0
 > rowStats <- microbenchmark(rowMedians_X_S = rowMedians(X_S, na.rm = FALSE), `rowMedians(X, cols, rows)` = rowMedians(X, 
 +     rows = cols, cols = rows, na.rm = FALSE), `rowMedians(X[cols, rows])` = rowMedians(X[cols, rows], 
 +     na.rm = FALSE), unit = "ms")
@@ -727,35 +727,35 @@ _Table: Benchmarking of colMedians_X_S(), colMedians(X, rows, cols)() and colMed
 
 
 
-|   |expr                      |      min|        lq|      mean|    median|       uq|      max|
-|:--|:-------------------------|--------:|---------:|---------:|---------:|--------:|--------:|
-|2  |colMedians(X, rows, cols) | 0.098791| 0.1100660| 0.1185886| 0.1165740| 0.125439| 0.159360|
-|1  |colMedians_X_S            | 0.101181| 0.1109935| 0.1204460| 0.1184665| 0.126605| 0.151809|
-|3  |colMedians(X[rows, cols]) | 0.112686| 0.1236485| 0.1345599| 0.1318450| 0.143464| 0.192535|
+|   |expr                      |      min|       lq|      mean|    median|        uq|      max|
+|:--|:-------------------------|--------:|--------:|---------:|---------:|---------:|--------:|
+|1  |colMedians_X_S            | 0.103994| 0.110689| 0.1200387| 0.1141755| 0.1265470| 0.157468|
+|2  |colMedians(X, rows, cols) | 0.106586| 0.111645| 0.1205535| 0.1155800| 0.1283115| 0.152400|
+|3  |colMedians(X[rows, cols]) | 0.116216| 0.123479| 0.1347654| 0.1280850| 0.1460190| 0.195296|
 
 
 |   |expr                      |      min|       lq|     mean|   median|       uq|       max|
 |:--|:-------------------------|--------:|--------:|--------:|--------:|--------:|---------:|
-|2  |colMedians(X, rows, cols) | 1.000000| 1.000000| 1.000000| 1.000000| 1.000000| 1.0000000|
-|1  |colMedians_X_S            | 1.024193| 1.008427| 1.015662| 1.016234| 1.009295| 0.9526167|
-|3  |colMedians(X[rows, cols]) | 1.140651| 1.123403| 1.134678| 1.130998| 1.143695| 1.2081765|
+|1  |colMedians_X_S            | 1.000000| 1.000000| 1.000000| 1.000000| 1.000000| 1.0000000|
+|2  |colMedians(X, rows, cols) | 1.024925| 1.008637| 1.004289| 1.012301| 1.013943| 0.9678157|
+|3  |colMedians(X[rows, cols]) | 1.117526| 1.115549| 1.122683| 1.121826| 1.153872| 1.2402266|
 
 _Table: Benchmarking of rowMedians_X_S(), rowMedians(X, cols, rows)() and rowMedians(X[cols, rows])() on double+100x100 data (transposed). The top panel shows times in milliseconds and the bottom panel shows relative times._
 
 
 
-|   |expr                      |      min|       lq|      mean|    median|        uq|      max|
-|:--|:-------------------------|--------:|--------:|---------:|---------:|---------:|--------:|
-|2  |rowMedians(X, cols, rows) | 0.099023| 0.110926| 0.1194382| 0.1167710| 0.1284485| 0.174646|
-|1  |rowMedians_X_S            | 0.100736| 0.110686| 0.1207495| 0.1179685| 0.1309570| 0.156523|
-|3  |rowMedians(X[cols, rows]) | 0.112073| 0.126479| 0.1329905| 0.1311500| 0.1409745| 0.168122|
+|   |expr                      |      min|        lq|      mean|    median|        uq|      max|
+|:--|:-------------------------|--------:|---------:|---------:|---------:|---------:|--------:|
+|1  |rowMedians_X_S            | 0.109658| 0.1139415| 0.1283539| 0.1256335| 0.1385855| 0.179993|
+|2  |rowMedians(X, cols, rows) | 0.110766| 0.1156400| 0.1304482| 0.1278560| 0.1392520| 0.201395|
+|3  |rowMedians(X[cols, rows]) | 0.122515| 0.1281795| 0.1444028| 0.1414955| 0.1576605| 0.193491|
 
 
-|   |expr                      |      min|        lq|     mean|   median|       uq|       max|
-|:--|:-------------------------|--------:|---------:|--------:|--------:|--------:|---------:|
-|2  |rowMedians(X, cols, rows) | 1.000000| 1.0000000| 1.000000| 1.000000| 1.000000| 1.0000000|
-|1  |rowMedians_X_S            | 1.017299| 0.9978364| 1.010979| 1.010255| 1.019529| 0.8962301|
-|3  |rowMedians(X[cols, rows]) | 1.131788| 1.1402106| 1.113467| 1.123139| 1.097518| 0.9626444|
+|   |expr                      |      min|       lq|     mean|   median|       uq|      max|
+|:--|:-------------------------|--------:|--------:|--------:|--------:|--------:|--------:|
+|1  |rowMedians_X_S            | 1.000000| 1.000000| 1.000000| 1.000000| 1.000000| 1.000000|
+|2  |rowMedians(X, cols, rows) | 1.010104| 1.014907| 1.016317| 1.017690| 1.004809| 1.118905|
+|3  |rowMedians(X[cols, rows]) | 1.117246| 1.124959| 1.125037| 1.126256| 1.137641| 1.074992|
 
 _Figure: Benchmarking of colMedians_X_S(), colMedians(X, rows, cols)() and colMedians(X[rows, cols])() on double+100x100 data  as well as rowMedians_X_S(), rowMedians(X, cols, rows)() and rowMedians(X[cols, rows])() on the same data transposed.  Outliers are displayed as crosses.  Times are in milliseconds._
 
@@ -767,16 +767,16 @@ _Table: Benchmarking of colMedians_X_S() and rowMedians_X_S() on double+100x100 
 
 
 
-|   |expr           |     min|       lq|     mean|   median|      uq|     max|
-|:--|:--------------|-------:|--------:|--------:|--------:|-------:|-------:|
-|2  |rowMedians_X_S | 100.736| 110.6860| 120.7495| 117.9685| 130.957| 156.523|
-|1  |colMedians_X_S | 101.181| 110.9935| 120.4460| 118.4665| 126.605| 151.809|
+|   |expr           |     min|       lq|     mean|   median|       uq|     max|
+|:--|:--------------|-------:|--------:|--------:|--------:|--------:|-------:|
+|1  |colMedians_X_S | 103.994| 110.6890| 120.0387| 114.1755| 126.5470| 157.468|
+|2  |rowMedians_X_S | 109.658| 113.9415| 128.3539| 125.6335| 138.5855| 179.993|
 
 
-|   |expr           |      min|       lq|      mean|   median|        uq|      max|
-|:--|:--------------|--------:|--------:|---------:|--------:|---------:|--------:|
-|2  |rowMedians_X_S | 1.000000| 1.000000| 1.0000000| 1.000000| 1.0000000| 1.000000|
-|1  |colMedians_X_S | 1.004417| 1.002778| 0.9974862| 1.004222| 0.9667677| 0.969883|
+|   |expr           |      min|       lq|     mean|   median|       uq|      max|
+|:--|:--------------|--------:|--------:|--------:|--------:|--------:|--------:|
+|1  |colMedians_X_S | 1.000000| 1.000000| 1.000000| 1.000000| 1.000000| 1.000000|
+|2  |rowMedians_X_S | 1.054465| 1.029384| 1.069271| 1.100354| 1.095131| 1.143045|
 
 _Figure: Benchmarking of colMedians_X_S() and rowMedians_X_S() on double+100x100 data (original and transposed).  Outliers are displayed as crosses. Times are in milliseconds._
 
@@ -793,8 +793,8 @@ _Figure: Benchmarking of colMedians_X_S() and rowMedians_X_S() on double+100x100
 > X_S <- X[rows, cols]
 > gc()
           used  (Mb) gc trigger  (Mb) max used  (Mb)
-Ncells 5183159 276.9   10014072 534.9 10014072 534.9
-Vcells 9463568  72.3   18204443 138.9 18204443 138.9
+Ncells 5249051 280.4    7916910 422.9  7916910 422.9
+Vcells 9915238  75.7   33191153 253.3 53339345 407.0
 > colStats <- microbenchmark(colMedians_X_S = colMedians(X_S, na.rm = FALSE), `colMedians(X, rows, cols)` = colMedians(X, 
 +     rows = rows, cols = cols, na.rm = FALSE), `colMedians(X[rows, cols])` = colMedians(X[rows, cols], 
 +     na.rm = FALSE), unit = "ms")
@@ -802,8 +802,8 @@ Vcells 9463568  72.3   18204443 138.9 18204443 138.9
 > X_S <- t(X_S)
 > gc()
           used  (Mb) gc trigger  (Mb) max used  (Mb)
-Ncells 5183135 276.9   10014072 534.9 10014072 534.9
-Vcells 9473621  72.3   18204443 138.9 18204443 138.9
+Ncells 5249045 280.4    7916910 422.9  7916910 422.9
+Vcells 9925321  75.8   33191153 253.3 53339345 407.0
 > rowStats <- microbenchmark(rowMedians_X_S = rowMedians(X_S, na.rm = FALSE), `rowMedians(X, cols, rows)` = rowMedians(X, 
 +     rows = cols, cols = rows, na.rm = FALSE), `rowMedians(X[cols, rows])` = rowMedians(X[cols, rows], 
 +     na.rm = FALSE), unit = "ms")
@@ -813,18 +813,18 @@ _Table: Benchmarking of colMedians_X_S(), colMedians(X, rows, cols)() and colMed
 
 
 
-|   |expr                      |      min|        lq|      mean|    median|        uq|      max|
-|:--|:-------------------------|--------:|---------:|---------:|---------:|---------:|--------:|
-|1  |colMedians_X_S            | 0.101067| 0.1104610| 0.1199452| 0.1140005| 0.1304930| 0.149186|
-|2  |colMedians(X, rows, cols) | 0.100475| 0.1104570| 0.1180528| 0.1142640| 0.1275185| 0.147039|
-|3  |colMedians(X[rows, cols]) | 0.112116| 0.1198055| 0.1314218| 0.1270840| 0.1417455| 0.191592|
+|   |expr                      |      min|       lq|      mean|    median|        uq|      max|
+|:--|:-------------------------|--------:|--------:|---------:|---------:|---------:|--------:|
+|2  |colMedians(X, rows, cols) | 0.101813| 0.108786| 0.1170997| 0.1125975| 0.1253585| 0.152606|
+|1  |colMedians_X_S            | 0.099749| 0.107163| 0.1173915| 0.1126875| 0.1271455| 0.141702|
+|3  |colMedians(X[rows, cols]) | 0.112376| 0.116818| 0.1292413| 0.1242275| 0.1409765| 0.192323|
 
 
-|   |expr                      |       min|        lq|      mean|   median|        uq|       max|
-|:--|:-------------------------|---------:|---------:|---------:|--------:|---------:|---------:|
-|1  |colMedians_X_S            | 1.0000000| 1.0000000| 1.0000000| 1.000000| 1.0000000| 1.0000000|
-|2  |colMedians(X, rows, cols) | 0.9941425| 0.9999638| 0.9842231| 1.002311| 0.9772057| 0.9856086|
-|3  |colMedians(X[rows, cols]) | 1.1093235| 1.0845955| 1.0956821| 1.114767| 1.0862307| 1.2842492|
+|   |expr                      |       min|        lq|     mean|   median|       uq|      max|
+|:--|:-------------------------|---------:|---------:|--------:|--------:|--------:|--------:|
+|2  |colMedians(X, rows, cols) | 1.0000000| 1.0000000| 1.000000| 1.000000| 1.000000| 1.000000|
+|1  |colMedians_X_S            | 0.9797275| 0.9850808| 1.002492| 1.000799| 1.014255| 0.928548|
+|3  |colMedians(X[rows, cols]) | 1.1037490| 1.0738330| 1.103687| 1.103288| 1.124587| 1.260258|
 
 _Table: Benchmarking of rowMedians_X_S(), rowMedians(X, cols, rows)() and rowMedians(X[cols, rows])() on double+1000x10 data (transposed). The top panel shows times in milliseconds and the bottom panel shows relative times._
 
@@ -832,16 +832,16 @@ _Table: Benchmarking of rowMedians_X_S(), rowMedians(X, cols, rows)() and rowMed
 
 |   |expr                      |      min|        lq|      mean|    median|        uq|      max|
 |:--|:-------------------------|--------:|---------:|---------:|---------:|---------:|--------:|
-|1  |rowMedians_X_S            | 0.097372| 0.1100165| 0.1173209| 0.1138955| 0.1235340| 0.150493|
-|2  |rowMedians(X, cols, rows) | 0.101385| 0.1098145| 0.1197408| 0.1156610| 0.1297235| 0.158539|
-|3  |rowMedians(X[cols, rows]) | 0.111742| 0.1224520| 0.1348226| 0.1302795| 0.1449115| 0.205625|
+|1  |rowMedians_X_S            | 0.097308| 0.1070735| 0.1136451| 0.1103630| 0.1178175| 0.144058|
+|2  |rowMedians(X, cols, rows) | 0.100292| 0.1094890| 0.1177984| 0.1139905| 0.1283830| 0.155317|
+|3  |rowMedians(X[cols, rows]) | 0.112283| 0.1227505| 0.1311003| 0.1270895| 0.1399430| 0.200809|
 
 
-|   |expr                      |      min|        lq|     mean|   median|       uq|      max|
-|:--|:-------------------------|--------:|---------:|--------:|--------:|--------:|--------:|
-|1  |rowMedians_X_S            | 1.000000| 1.0000000| 1.000000| 1.000000| 1.000000| 1.000000|
-|2  |rowMedians(X, cols, rows) | 1.041213| 0.9981639| 1.020627| 1.015501| 1.050104| 1.053464|
-|3  |rowMedians(X[cols, rows]) | 1.147578| 1.1130330| 1.149178| 1.143851| 1.173050| 1.366343|
+|   |expr                      |      min|       lq|     mean|   median|       uq|      max|
+|:--|:-------------------------|--------:|--------:|--------:|--------:|--------:|--------:|
+|1  |rowMedians_X_S            | 1.000000| 1.000000| 1.000000| 1.000000| 1.000000| 1.000000|
+|2  |rowMedians(X, cols, rows) | 1.030666| 1.022559| 1.036546| 1.032869| 1.089677| 1.078156|
+|3  |rowMedians(X[cols, rows]) | 1.153893| 1.146413| 1.153593| 1.151559| 1.187795| 1.393946|
 
 _Figure: Benchmarking of colMedians_X_S(), colMedians(X, rows, cols)() and colMedians(X[rows, cols])() on double+1000x10 data  as well as rowMedians_X_S(), rowMedians(X, cols, rows)() and rowMedians(X[cols, rows])() on the same data transposed.  Outliers are displayed as crosses.  Times are in milliseconds._
 
@@ -853,16 +853,16 @@ _Table: Benchmarking of colMedians_X_S() and rowMedians_X_S() on double+1000x10 
 
 
 
-|   |expr           |     min|       lq|     mean|   median|      uq|     max|
-|:--|:--------------|-------:|--------:|--------:|--------:|-------:|-------:|
-|2  |rowMedians_X_S |  97.372| 110.0165| 117.3209| 113.8955| 123.534| 150.493|
-|1  |colMedians_X_S | 101.067| 110.4610| 119.9452| 114.0005| 130.493| 149.186|
+|   |expr           |    min|       lq|     mean|   median|       uq|     max|
+|:--|:--------------|------:|--------:|--------:|--------:|--------:|-------:|
+|2  |rowMedians_X_S | 97.308| 107.0735| 113.6451| 110.3630| 117.8175| 144.058|
+|1  |colMedians_X_S | 99.749| 107.1630| 117.3915| 112.6875| 127.1455| 141.702|
 
 
-|   |expr           |      min|      lq|     mean|   median|       uq|       max|
-|:--|:--------------|--------:|-------:|--------:|--------:|--------:|---------:|
-|2  |rowMedians_X_S | 1.000000| 1.00000| 1.000000| 1.000000| 1.000000| 1.0000000|
-|1  |colMedians_X_S | 1.037947| 1.00404| 1.022369| 1.000922| 1.056333| 0.9913152|
+|   |expr           |      min|       lq|     mean|   median|       uq|       max|
+|:--|:--------------|--------:|--------:|--------:|--------:|--------:|---------:|
+|2  |rowMedians_X_S | 1.000000| 1.000000| 1.000000| 1.000000| 1.000000| 1.0000000|
+|1  |colMedians_X_S | 1.025085| 1.000836| 1.032965| 1.021062| 1.079173| 0.9836455|
 
 _Figure: Benchmarking of colMedians_X_S() and rowMedians_X_S() on double+1000x10 data (original and transposed).  Outliers are displayed as crosses. Times are in milliseconds._
 
@@ -879,8 +879,8 @@ _Figure: Benchmarking of colMedians_X_S() and rowMedians_X_S() on double+1000x10
 > X_S <- X[rows, cols]
 > gc()
           used  (Mb) gc trigger  (Mb) max used  (Mb)
-Ncells 5183364 276.9   10014072 534.9 10014072 534.9
-Vcells 9463704  72.3   18204443 138.9 18204443 138.9
+Ncells 5249255 280.4    7916910 422.9  7916910 422.9
+Vcells 9915373  75.7   33191153 253.3 53339345 407.0
 > colStats <- microbenchmark(colMedians_X_S = colMedians(X_S, na.rm = FALSE), `colMedians(X, rows, cols)` = colMedians(X, 
 +     rows = rows, cols = cols, na.rm = FALSE), `colMedians(X[rows, cols])` = colMedians(X[rows, cols], 
 +     na.rm = FALSE), unit = "ms")
@@ -888,8 +888,8 @@ Vcells 9463704  72.3   18204443 138.9 18204443 138.9
 > X_S <- t(X_S)
 > gc()
           used  (Mb) gc trigger  (Mb) max used  (Mb)
-Ncells 5183340 276.9   10014072 534.9 10014072 534.9
-Vcells 9473757  72.3   18204443 138.9 18204443 138.9
+Ncells 5249249 280.4    7916910 422.9  7916910 422.9
+Vcells 9925456  75.8   33191153 253.3 53339345 407.0
 > rowStats <- microbenchmark(rowMedians_X_S = rowMedians(X_S, na.rm = FALSE), `rowMedians(X, cols, rows)` = rowMedians(X, 
 +     rows = cols, cols = rows, na.rm = FALSE), `rowMedians(X[cols, rows])` = rowMedians(X[cols, rows], 
 +     na.rm = FALSE), unit = "ms")
@@ -899,18 +899,18 @@ _Table: Benchmarking of colMedians_X_S(), colMedians(X, rows, cols)() and colMed
 
 
 
-|   |expr                      |      min|       lq|      mean|    median|        uq|      max|
-|:--|:-------------------------|--------:|--------:|---------:|---------:|---------:|--------:|
-|2  |colMedians(X, rows, cols) | 0.090003| 0.094519| 0.1014696| 0.0978075| 0.1026785| 0.144005|
-|1  |colMedians_X_S            | 0.088707| 0.094191| 0.1045241| 0.1013055| 0.1130635| 0.146814|
-|3  |colMedians(X[rows, cols]) | 0.104835| 0.111378| 0.1197998| 0.1158900| 0.1293695| 0.147209|
+|   |expr                      |      min|        lq|      mean|    median|        uq|      max|
+|:--|:-------------------------|--------:|---------:|---------:|---------:|---------:|--------:|
+|1  |colMedians_X_S            | 0.083126| 0.0901515| 0.0967791| 0.0940785| 0.1018675| 0.147479|
+|2  |colMedians(X, rows, cols) | 0.085603| 0.0920450| 0.0980304| 0.0949215| 0.1020990| 0.137271|
+|3  |colMedians(X[rows, cols]) | 0.101828| 0.1068940| 0.1134429| 0.1098645| 0.1177940| 0.156936|
 
 
-|   |expr                      |       min|        lq|     mean|   median|       uq|      max|
-|:--|:-------------------------|---------:|---------:|--------:|--------:|--------:|--------:|
-|2  |colMedians(X, rows, cols) | 1.0000000| 1.0000000| 1.000000| 1.000000| 1.000000| 1.000000|
-|1  |colMedians_X_S            | 0.9856005| 0.9965298| 1.030102| 1.035764| 1.101141| 1.019506|
-|3  |colMedians(X[rows, cols]) | 1.1647945| 1.1783663| 1.180647| 1.184878| 1.259947| 1.022249|
+|   |expr                      |      min|       lq|     mean|   median|       uq|       max|
+|:--|:-------------------------|--------:|--------:|--------:|--------:|--------:|---------:|
+|1  |colMedians_X_S            | 1.000000| 1.000000| 1.000000| 1.000000| 1.000000| 1.0000000|
+|2  |colMedians(X, rows, cols) | 1.029798| 1.021003| 1.012930| 1.008961| 1.002273| 0.9307834|
+|3  |colMedians(X[rows, cols]) | 1.224984| 1.185715| 1.172184| 1.167796| 1.156345| 1.0641244|
 
 _Table: Benchmarking of rowMedians_X_S(), rowMedians(X, cols, rows)() and rowMedians(X[cols, rows])() on double+10x1000 data (transposed). The top panel shows times in milliseconds and the bottom panel shows relative times._
 
@@ -918,16 +918,16 @@ _Table: Benchmarking of rowMedians_X_S(), rowMedians(X, cols, rows)() and rowMed
 
 |   |expr                      |      min|        lq|      mean|    median|        uq|      max|
 |:--|:-------------------------|--------:|---------:|---------:|---------:|---------:|--------:|
-|2  |rowMedians(X, cols, rows) | 0.091449| 0.0977910| 0.1061736| 0.0998515| 0.1133700| 0.173333|
-|1  |rowMedians_X_S            | 0.092464| 0.0971355| 0.1070987| 0.1034415| 0.1159620| 0.139192|
-|3  |rowMedians(X[cols, rows]) | 0.106387| 0.1106520| 0.1229203| 0.1198395| 0.1370345| 0.160572|
+|1  |rowMedians_X_S            | 0.083556| 0.0913700| 0.0999967| 0.0953660| 0.1068230| 0.167358|
+|2  |rowMedians(X, cols, rows) | 0.086561| 0.0925225| 0.0998162| 0.0959085| 0.1024865| 0.161939|
+|3  |rowMedians(X[cols, rows]) | 0.096264| 0.1044415| 0.1163377| 0.1112965| 0.1236995| 0.204862|
 
 
-|   |expr                      |      min|        lq|     mean|   median|       uq|       max|
-|:--|:-------------------------|--------:|---------:|--------:|--------:|--------:|---------:|
-|2  |rowMedians(X, cols, rows) | 1.000000| 1.0000000| 1.000000| 1.000000| 1.000000| 1.0000000|
-|1  |rowMedians_X_S            | 1.011099| 0.9932969| 1.008713| 1.035953| 1.022863| 0.8030323|
-|3  |rowMedians(X[cols, rows]) | 1.163348| 1.1315152| 1.157729| 1.200177| 1.208737| 0.9263787|
+|   |expr                      |      min|       lq|      mean|   median|        uq|       max|
+|:--|:-------------------------|--------:|--------:|---------:|--------:|---------:|---------:|
+|1  |rowMedians_X_S            | 1.000000| 1.000000| 1.0000000| 1.000000| 1.0000000| 1.0000000|
+|2  |rowMedians(X, cols, rows) | 1.035964| 1.012614| 0.9981943| 1.005689| 0.9594048| 0.9676203|
+|3  |rowMedians(X[cols, rows]) | 1.152090| 1.143061| 1.1634150| 1.167046| 1.1579856| 1.2240945|
 
 _Figure: Benchmarking of colMedians_X_S(), colMedians(X, rows, cols)() and colMedians(X[rows, cols])() on double+10x1000 data  as well as rowMedians_X_S(), rowMedians(X, cols, rows)() and rowMedians(X[cols, rows])() on the same data transposed.  Outliers are displayed as crosses.  Times are in milliseconds._
 
@@ -939,16 +939,16 @@ _Table: Benchmarking of colMedians_X_S() and rowMedians_X_S() on double+10x1000 
 
 
 
-|   |expr           |    min|      lq|     mean|   median|       uq|     max|
-|:--|:--------------|------:|-------:|--------:|--------:|--------:|-------:|
-|1  |colMedians_X_S | 88.707| 94.1910| 104.5241| 101.3055| 113.0635| 146.814|
-|2  |rowMedians_X_S | 92.464| 97.1355| 107.0987| 103.4415| 115.9620| 139.192|
+|   |expr           |    min|      lq|     mean|  median|       uq|     max|
+|:--|:--------------|------:|-------:|--------:|-------:|--------:|-------:|
+|1  |colMedians_X_S | 83.126| 90.1515| 96.77906| 94.0785| 101.8675| 147.479|
+|2  |rowMedians_X_S | 83.556| 91.3700| 99.99674| 95.3660| 106.8230| 167.358|
 
 
 |   |expr           |      min|       lq|     mean|   median|       uq|      max|
 |:--|:--------------|--------:|--------:|--------:|--------:|--------:|--------:|
 |1  |colMedians_X_S | 1.000000| 1.000000| 1.000000| 1.000000| 1.000000| 1.000000|
-|2  |rowMedians_X_S | 1.042353| 1.031261| 1.024632| 1.021085| 1.025636| 0.948084|
+|2  |rowMedians_X_S | 1.005173| 1.013516| 1.033248| 1.013685| 1.048647| 1.134792|
 
 _Figure: Benchmarking of colMedians_X_S() and rowMedians_X_S() on double+10x1000 data (original and transposed).  Outliers are displayed as crosses. Times are in milliseconds._
 
@@ -965,17 +965,17 @@ _Figure: Benchmarking of colMedians_X_S() and rowMedians_X_S() on double+10x1000
 > X_S <- X[rows, cols]
 > gc()
           used  (Mb) gc trigger  (Mb) max used  (Mb)
-Ncells 5183574 276.9   10014072 534.9 10014072 534.9
-Vcells 9509187  72.6   18204443 138.9 18204443 138.9
+Ncells 5249468 280.4    7916910 422.9  7916910 422.9
+Vcells 9960869  76.0   33191153 253.3 53339345 407.0
 > colStats <- microbenchmark(colMedians_X_S = colMedians(X_S, na.rm = FALSE), `colMedians(X, rows, cols)` = colMedians(X, 
 +     rows = rows, cols = cols, na.rm = FALSE), `colMedians(X[rows, cols])` = colMedians(X[rows, cols], 
 +     na.rm = FALSE), unit = "ms")
 > X <- t(X)
 > X_S <- t(X_S)
 > gc()
-          used  (Mb) gc trigger  (Mb) max used  (Mb)
-Ncells 5183550 276.9   10014072 534.9 10014072 534.9
-Vcells 9609240  73.4   18204443 138.9 18204443 138.9
+           used  (Mb) gc trigger  (Mb) max used  (Mb)
+Ncells  5249462 280.4    7916910 422.9  7916910 422.9
+Vcells 10060952  76.8   33191153 253.3 53339345 407.0
 > rowStats <- microbenchmark(rowMedians_X_S = rowMedians(X_S, na.rm = FALSE), `rowMedians(X, cols, rows)` = rowMedians(X, 
 +     rows = cols, cols = rows, na.rm = FALSE), `rowMedians(X[cols, rows])` = rowMedians(X[cols, rows], 
 +     na.rm = FALSE), unit = "ms")
@@ -985,35 +985,35 @@ _Table: Benchmarking of colMedians_X_S(), colMedians(X, rows, cols)() and colMed
 
 
 
-|   |expr                      |      min|       lq|      mean|    median|       uq|      max|
-|:--|:-------------------------|--------:|--------:|---------:|---------:|--------:|--------:|
-|2  |colMedians(X, rows, cols) | 0.925595| 0.928728| 0.9582757| 0.9302515| 0.932439| 1.611927|
-|1  |colMedians_X_S            | 0.938752| 0.943093| 0.9806483| 0.9447770| 0.947354| 1.563775|
-|3  |colMedians(X[rows, cols]) | 1.035171| 1.039205| 1.0895215| 1.0414320| 1.046107| 1.594206|
+|   |expr                      |      min|        lq|     mean|    median|       uq|      max|
+|:--|:-------------------------|--------:|---------:|--------:|---------:|--------:|--------:|
+|1  |colMedians_X_S            | 0.899679| 0.9511215| 1.038798| 0.9962655| 1.074001| 1.561260|
+|2  |colMedians(X, rows, cols) | 0.913745| 0.9796190| 1.079340| 1.0483620| 1.136159| 1.808542|
+|3  |colMedians(X[rows, cols]) | 0.996477| 1.0448190| 1.199718| 1.1293160| 1.288202| 1.919176|
 
 
-|   |expr                      |      min|       lq|     mean|   median|       uq|       max|
-|:--|:-------------------------|--------:|--------:|--------:|--------:|--------:|---------:|
-|2  |colMedians(X, rows, cols) | 1.000000| 1.000000| 1.000000| 1.000000| 1.000000| 1.0000000|
-|1  |colMedians_X_S            | 1.014215| 1.015467| 1.023347| 1.015615| 1.015996| 0.9701277|
-|3  |colMedians(X[rows, cols]) | 1.118384| 1.118955| 1.136960| 1.119517| 1.121904| 0.9890063|
+|   |expr                      |      min|       lq|     mean|   median|       uq|      max|
+|:--|:-------------------------|--------:|--------:|--------:|--------:|--------:|--------:|
+|1  |colMedians_X_S            | 1.000000| 1.000000| 1.000000| 1.000000| 1.000000| 1.000000|
+|2  |colMedians(X, rows, cols) | 1.015634| 1.029962| 1.039027| 1.052292| 1.057875| 1.158386|
+|3  |colMedians(X[rows, cols]) | 1.107592| 1.098513| 1.154909| 1.133549| 1.199442| 1.229248|
 
 _Table: Benchmarking of rowMedians_X_S(), rowMedians(X, cols, rows)() and rowMedians(X[cols, rows])() on double+100x1000 data (transposed). The top panel shows times in milliseconds and the bottom panel shows relative times._
 
 
 
-|   |expr                      |      min|        lq|      mean|   median|        uq|      max|
-|:--|:-------------------------|--------:|---------:|---------:|--------:|---------:|--------:|
-|1  |rowMedians_X_S            | 0.936823| 0.9406570| 0.9946235| 0.943358| 0.9698065| 1.634674|
-|2  |rowMedians(X, cols, rows) | 0.947208| 0.9504405| 0.9711060| 0.952405| 0.9565780| 1.521328|
-|3  |rowMedians(X[cols, rows]) | 1.031641| 1.0415750| 1.0871180| 1.046970| 1.0627035| 1.590101|
+|   |expr                      |      min|       lq|     mean|   median|       uq|      max|
+|:--|:-------------------------|--------:|--------:|--------:|--------:|--------:|--------:|
+|1  |rowMedians_X_S            | 0.917956| 1.004488| 1.117562| 1.072184| 1.185041| 1.739220|
+|2  |rowMedians(X, cols, rows) | 0.940122| 1.036550| 1.175913| 1.130084| 1.273694| 2.034522|
+|3  |rowMedians(X[cols, rows]) | 1.002727| 1.095776| 1.236680| 1.174289| 1.328539| 1.753591|
 
 
-|   |expr                      |      min|       lq|      mean|   median|        uq|       max|
-|:--|:-------------------------|--------:|--------:|---------:|--------:|---------:|---------:|
-|1  |rowMedians_X_S            | 1.000000| 1.000000| 1.0000000| 1.000000| 1.0000000| 1.0000000|
-|2  |rowMedians(X, cols, rows) | 1.011085| 1.010401| 0.9763554| 1.009590| 0.9863597| 0.9306614|
-|3  |rowMedians(X[cols, rows]) | 1.101212| 1.107285| 1.0929944| 1.109833| 1.0957892| 0.9727328|
+|   |expr                      |      min|       lq|     mean|   median|       uq|      max|
+|:--|:-------------------------|--------:|--------:|--------:|--------:|--------:|--------:|
+|1  |rowMedians_X_S            | 1.000000| 1.000000| 1.000000| 1.000000| 1.000000| 1.000000|
+|2  |rowMedians(X, cols, rows) | 1.024147| 1.031919| 1.052212| 1.054002| 1.074810| 1.169790|
+|3  |rowMedians(X[cols, rows]) | 1.092348| 1.090880| 1.106587| 1.095231| 1.121091| 1.008263|
 
 _Figure: Benchmarking of colMedians_X_S(), colMedians(X, rows, cols)() and colMedians(X[rows, cols])() on double+100x1000 data  as well as rowMedians_X_S(), rowMedians(X, cols, rows)() and rowMedians(X[cols, rows])() on the same data transposed.  Outliers are displayed as crosses.  Times are in milliseconds._
 
@@ -1025,16 +1025,16 @@ _Table: Benchmarking of colMedians_X_S() and rowMedians_X_S() on double+100x1000
 
 
 
-|   |expr           |     min|      lq|     mean|  median|       uq|      max|
-|:--|:--------------|-------:|-------:|--------:|-------:|--------:|--------:|
-|2  |rowMedians_X_S | 936.823| 940.657| 994.6235| 943.358| 969.8065| 1634.674|
-|1  |colMedians_X_S | 938.752| 943.093| 980.6483| 944.777| 947.3540| 1563.775|
+|   |expr           |     min|        lq|     mean|    median|       uq|     max|
+|:--|:--------------|-------:|---------:|--------:|---------:|--------:|-------:|
+|1  |colMedians_X_S | 899.679|  951.1215| 1038.799|  996.2655| 1074.001| 1561.26|
+|2  |rowMedians_X_S | 917.956| 1004.4880| 1117.562| 1072.1840| 1185.041| 1739.22|
 
 
-|   |expr           |      min|      lq|      mean|   median|        uq|      max|
-|:--|:--------------|--------:|-------:|---------:|--------:|---------:|--------:|
-|2  |rowMedians_X_S | 1.000000| 1.00000| 1.0000000| 1.000000| 1.0000000| 1.000000|
-|1  |colMedians_X_S | 1.002059| 1.00259| 0.9859493| 1.001504| 0.9768485| 0.956628|
+|   |expr           |      min|       lq|     mean|   median|       uq|      max|
+|:--|:--------------|--------:|--------:|--------:|--------:|--------:|--------:|
+|1  |colMedians_X_S | 1.000000| 1.000000| 1.000000| 1.000000| 1.000000| 1.000000|
+|2  |rowMedians_X_S | 1.020315| 1.056109| 1.075822| 1.076203| 1.103389| 1.113985|
 
 _Figure: Benchmarking of colMedians_X_S() and rowMedians_X_S() on double+100x1000 data (original and transposed).  Outliers are displayed as crosses. Times are in milliseconds._
 
@@ -1051,17 +1051,17 @@ _Figure: Benchmarking of colMedians_X_S() and rowMedians_X_S() on double+100x100
 > X_S <- X[rows, cols]
 > gc()
           used  (Mb) gc trigger  (Mb) max used  (Mb)
-Ncells 5183787 276.9   10014072 534.9 10014072 534.9
-Vcells 9509331  72.6   18204443 138.9 18204443 138.9
+Ncells 5249678 280.4    7916910 422.9  7916910 422.9
+Vcells 9961010  76.0   33191153 253.3 53339345 407.0
 > colStats <- microbenchmark(colMedians_X_S = colMedians(X_S, na.rm = FALSE), `colMedians(X, rows, cols)` = colMedians(X, 
 +     rows = rows, cols = cols, na.rm = FALSE), `colMedians(X[rows, cols])` = colMedians(X[rows, cols], 
 +     na.rm = FALSE), unit = "ms")
 > X <- t(X)
 > X_S <- t(X_S)
 > gc()
-          used  (Mb) gc trigger  (Mb) max used  (Mb)
-Ncells 5183763 276.9   10014072 534.9 10014072 534.9
-Vcells 9609384  73.4   18204443 138.9 18204443 138.9
+           used  (Mb) gc trigger  (Mb) max used  (Mb)
+Ncells  5249672 280.4    7916910 422.9  7916910 422.9
+Vcells 10061093  76.8   33191153 253.3 53339345 407.0
 > rowStats <- microbenchmark(rowMedians_X_S = rowMedians(X_S, na.rm = FALSE), `rowMedians(X, cols, rows)` = rowMedians(X, 
 +     rows = cols, cols = rows, na.rm = FALSE), `rowMedians(X[cols, rows])` = rowMedians(X[cols, rows], 
 +     na.rm = FALSE), unit = "ms")
@@ -1071,18 +1071,18 @@ _Table: Benchmarking of colMedians_X_S(), colMedians(X, rows, cols)() and colMed
 
 
 
-|   |expr                      |      min|        lq|      mean|    median|        uq|      max|
-|:--|:-------------------------|--------:|---------:|---------:|---------:|---------:|--------:|
-|2  |colMedians(X, rows, cols) | 0.846222| 0.8495785| 0.9168000| 0.8516795| 0.8580505| 1.434930|
-|1  |colMedians_X_S            | 0.861820| 0.8651205| 0.9249602| 0.8674370| 0.8769135| 1.485600|
-|3  |colMedians(X[rows, cols]) | 0.955359| 0.9594185| 1.0305594| 0.9623825| 1.0070955| 1.693016|
+|   |expr                      |      min|       lq|      mean|    median|       uq|      max|
+|:--|:-------------------------|--------:|--------:|---------:|---------:|--------:|--------:|
+|1  |colMedians_X_S            | 0.826431| 0.875139| 0.9632611| 0.9171335| 1.010642| 1.482132|
+|2  |colMedians(X, rows, cols) | 0.834494| 0.927260| 1.0432954| 0.9840365| 1.090420| 1.895048|
+|3  |colMedians(X[rows, cols]) | 0.919544| 1.021737| 1.1578928| 1.1212815| 1.274457| 2.079346|
 
 
 |   |expr                      |      min|       lq|     mean|   median|       uq|      max|
 |:--|:-------------------------|--------:|--------:|--------:|--------:|--------:|--------:|
-|2  |colMedians(X, rows, cols) | 1.000000| 1.000000| 1.000000| 1.000000| 1.000000| 1.000000|
-|1  |colMedians_X_S            | 1.018433| 1.018294| 1.008901| 1.018502| 1.021984| 1.035312|
-|3  |colMedians(X[rows, cols]) | 1.128970| 1.129288| 1.124083| 1.129982| 1.173702| 1.179860|
+|1  |colMedians_X_S            | 1.000000| 1.000000| 1.000000| 1.000000| 1.000000| 1.000000|
+|2  |colMedians(X, rows, cols) | 1.009756| 1.059557| 1.083087| 1.072948| 1.078937| 1.278596|
+|3  |colMedians(X[rows, cols]) | 1.112669| 1.167515| 1.202055| 1.222594| 1.261037| 1.402942|
 
 _Table: Benchmarking of rowMedians_X_S(), rowMedians(X, cols, rows)() and rowMedians(X[cols, rows])() on double+1000x100 data (transposed). The top panel shows times in milliseconds and the bottom panel shows relative times._
 
@@ -1090,16 +1090,16 @@ _Table: Benchmarking of rowMedians_X_S(), rowMedians(X, cols, rows)() and rowMed
 
 |   |expr                      |      min|        lq|      mean|    median|        uq|      max|
 |:--|:-------------------------|--------:|---------:|---------:|---------:|---------:|--------:|
-|1  |rowMedians_X_S            | 0.861959| 0.8661280| 0.9214288| 0.8680560| 0.8774515| 1.508327|
-|2  |rowMedians(X, cols, rows) | 0.876102| 0.8791985| 0.9328414| 0.8808025| 0.8853900| 1.599710|
-|3  |rowMedians(X[cols, rows]) | 0.961269| 0.9673215| 1.0361266| 0.9717435| 0.9971810| 1.614493|
+|1  |rowMedians_X_S            | 0.827908| 0.8323610| 0.8929356| 0.8347095| 0.8697840| 1.533365|
+|2  |rowMedians(X, cols, rows) | 0.864646| 0.8697185| 0.9246822| 0.8722690| 0.8823855| 1.538825|
+|3  |rowMedians(X[cols, rows]) | 0.928314| 0.9371655| 1.0057969| 0.9427665| 0.9748030| 1.642082|
 
 
 |   |expr                      |      min|       lq|     mean|   median|       uq|      max|
 |:--|:-------------------------|--------:|--------:|--------:|--------:|--------:|--------:|
 |1  |rowMedians_X_S            | 1.000000| 1.000000| 1.000000| 1.000000| 1.000000| 1.000000|
-|2  |rowMedians(X, cols, rows) | 1.016408| 1.015091| 1.012386| 1.014684| 1.009047| 1.060586|
-|3  |rowMedians(X[cols, rows]) | 1.115214| 1.116834| 1.124478| 1.119448| 1.136451| 1.070387|
+|2  |rowMedians(X, cols, rows) | 1.044374| 1.044881| 1.035553| 1.044997| 1.014488| 1.003561|
+|3  |rowMedians(X[cols, rows]) | 1.121277| 1.125912| 1.126394| 1.129455| 1.120742| 1.070901|
 
 _Figure: Benchmarking of colMedians_X_S(), colMedians(X, rows, cols)() and colMedians(X[rows, cols])() on double+1000x100 data  as well as rowMedians_X_S(), rowMedians(X, cols, rows)() and rowMedians(X[cols, rows])() on the same data transposed.  Outliers are displayed as crosses.  Times are in milliseconds._
 
@@ -1111,16 +1111,16 @@ _Table: Benchmarking of colMedians_X_S() and rowMedians_X_S() on double+1000x100
 
 
 
-|   |expr           |     min|       lq|     mean|  median|       uq|      max|
-|:--|:--------------|-------:|--------:|--------:|-------:|--------:|--------:|
-|1  |colMedians_X_S | 861.820| 865.1205| 924.9602| 867.437| 876.9135| 1485.600|
-|2  |rowMedians_X_S | 861.959| 866.1280| 921.4288| 868.056| 877.4515| 1508.327|
+|   |expr           |     min|      lq|     mean|   median|       uq|      max|
+|:--|:--------------|-------:|-------:|--------:|--------:|--------:|--------:|
+|2  |rowMedians_X_S | 827.908| 832.361| 892.9356| 834.7095|  869.784| 1533.365|
+|1  |colMedians_X_S | 826.431| 875.139| 963.2611| 917.1335| 1010.642| 1482.132|
 
 
-|   |expr           |      min|       lq|      mean|   median|       uq|      max|
-|:--|:--------------|--------:|--------:|---------:|--------:|--------:|--------:|
-|1  |colMedians_X_S | 1.000000| 1.000000| 1.0000000| 1.000000| 1.000000| 1.000000|
-|2  |rowMedians_X_S | 1.000161| 1.001165| 0.9961821| 1.000714| 1.000614| 1.015298|
+|   |expr           |      min|       lq|     mean|   median|       uq|       max|
+|:--|:--------------|--------:|--------:|--------:|--------:|--------:|---------:|
+|2  |rowMedians_X_S | 1.000000| 1.000000| 1.000000| 1.000000| 1.000000| 1.0000000|
+|1  |colMedians_X_S | 0.998216| 1.051394| 1.078758| 1.098746| 1.161946| 0.9665879|
 
 _Figure: Benchmarking of colMedians_X_S() and rowMedians_X_S() on double+1000x100 data (original and transposed).  Outliers are displayed as crosses. Times are in milliseconds._
 
@@ -1153,7 +1153,7 @@ attached base packages:
 [1] stats     graphics  grDevices utils     datasets  methods   base     
 
 other attached packages:
-[1] microbenchmark_1.4-7   matrixStats_0.60.1     ggplot2_3.3.5         
+[1] microbenchmark_1.4-7   matrixStats_0.60.0     ggplot2_3.3.5         
 [4] knitr_1.33             R.devices_2.17.0       R.utils_2.10.1        
 [7] R.oo_1.24.0            R.methodsS3_1.8.1-9001 history_0.0.1-9000    
 
@@ -1179,16 +1179,17 @@ loaded via a namespace (and not attached):
 [55] tabby_0.0.1-9001        AnnotationDbi_1.54.1    Biostrings_2.60.2      
 [58] compiler_4.1.1          GenomeInfoDb_1.28.1     rlang_0.4.11           
 [61] grid_4.1.1              RCurl_1.98-1.4          cwhmisc_6.6            
-[64] rappdirs_0.3.3          startup_0.15.0          labeling_0.4.2         
-[67] bitops_1.0-7            base64enc_0.1-3         boot_1.3-28            
-[70] gtable_0.3.0            DBI_1.1.1               markdown_1.1           
-[73] R6_2.5.1                lpSolveAPI_5.5.2.0-17.7 rle_0.9.2              
-[76] dplyr_1.0.7             fastmap_1.1.0           bit_4.0.4              
-[79] utf8_1.2.2              parallel_4.1.1          Rcpp_1.0.7             
-[82] vctrs_0.3.8             png_0.1-7               DEoptimR_1.0-9         
-[85] tidyselect_1.1.1        xfun_0.25               coda_0.19-4            
+[64] rstudioapi_0.13         rappdirs_0.3.3          startup_0.15.0         
+[67] labeling_0.4.2          bitops_1.0-7            base64enc_0.1-3        
+[70] boot_1.3-28             gtable_0.3.0            DBI_1.1.1              
+[73] markdown_1.1            R6_2.5.1                lpSolveAPI_5.5.2.0-17.7
+[76] rle_0.9.2               dplyr_1.0.7             fastmap_1.1.0          
+[79] bit_4.0.4               utf8_1.2.2              parallel_4.1.1         
+[82] Rcpp_1.0.7              vctrs_0.3.8             png_0.1-7              
+[85] DEoptimR_1.0-9          tidyselect_1.1.1        xfun_0.25              
+[88] coda_0.19-4            
 ```
-Total processing time was 24.07 secs.
+Total processing time was 25.56 secs.
 
 
 ### Reproducibility
@@ -1205,7 +1206,7 @@ html <- matrixStats:::benchmark('colRowMedians_subset')
 [StackOverflow:rowProds?]: https://stackoverflow.com/questions/20198801/ "Stack Overflow: Row product of matrix and column sum of matrix"
 
 ---------------------------------------
-Copyright Dongcan Jiang. Last updated on 2021-08-25 18:06:42 (+0200 UTC). Powered by [RSP].
+Copyright Dongcan Jiang. Last updated on 2021-08-25 22:20:04 (+0200 UTC). Powered by [RSP].
 
 <script>
  var link = document.createElement('link');

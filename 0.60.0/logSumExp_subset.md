@@ -53,8 +53,8 @@ This report benchmark the performance of logSumExp() on subsetted computation.
 > x_S <- x[idxs]
 > gc()
            used  (Mb) gc trigger  (Mb) max used  (Mb)
-Ncells  5277649 281.9   10014072 534.9 10014072 534.9
-Vcells 11299594  86.3   36079799 275.3 55956209 427.0
+Ncells  5344003 285.5    7916910 422.9  7916910 422.9
+Vcells 11773401  89.9   36893127 281.5 57430649 438.2
 > stats <- microbenchmark(logSumExp_x_S = logSumExp(x_S), `logSumExp(x, idxs)` = logSumExp(x, idxs = idxs), 
 +     `logSumExp(x[idxs])` = logSumExp(x[idxs]), unit = "ms")
 ```
@@ -63,18 +63,18 @@ _Table: Benchmarking of logSumExp_x_S(), logSumExp(x, idxs)() and logSumExp(x[id
 
 
 
-|   |expr               |      min|       lq|      mean|    median|        uq|      max|
-|:--|:------------------|--------:|--------:|---------:|---------:|---------:|--------:|
-|1  |logSumExp_x_S      | 0.016976| 0.017082| 0.0173005| 0.0171505| 0.0172510| 0.022090|
-|3  |logSumExp(x[idxs]) | 0.019453| 0.019698| 0.0204920| 0.0198910| 0.0204820| 0.045966|
-|2  |logSumExp(x, idxs) | 0.020445| 0.020665| 0.0210489| 0.0208485| 0.0214335| 0.023719|
+|   |expr               |      min|        lq|      mean|    median|        uq|      max|
+|:--|:------------------|--------:|---------:|---------:|---------:|---------:|--------:|
+|1  |logSumExp_x_S      | 0.015992| 0.0167825| 0.0173882| 0.0168795| 0.0169820| 0.037199|
+|3  |logSumExp(x[idxs]) | 0.018401| 0.0193560| 0.0214968| 0.0195630| 0.0197525| 0.119437|
+|2  |logSumExp(x, idxs) | 0.019504| 0.0203955| 0.0205936| 0.0205040| 0.0206095| 0.030093|
 
 
-|   |expr               |      min|       lq|     mean|   median|       uq|      max|
-|:--|:------------------|--------:|--------:|--------:|--------:|--------:|--------:|
-|1  |logSumExp_x_S      | 1.000000| 1.000000| 1.000000| 1.000000| 1.000000| 1.000000|
-|3  |logSumExp(x[idxs]) | 1.145912| 1.153144| 1.184474| 1.159791| 1.187294| 2.080851|
-|2  |logSumExp(x, idxs) | 1.204347| 1.209753| 1.216664| 1.215620| 1.242450| 1.073744|
+|   |expr               |      min|       lq|     mean|   median|       uq|       max|
+|:--|:------------------|--------:|--------:|--------:|--------:|--------:|---------:|
+|1  |logSumExp_x_S      | 1.000000| 1.000000| 1.000000| 1.000000| 1.000000| 1.0000000|
+|3  |logSumExp(x[idxs]) | 1.150638| 1.153344| 1.236287| 1.158980| 1.163143| 3.2107584|
+|2  |logSumExp(x, idxs) | 1.219610| 1.215284| 1.184344| 1.214728| 1.213609| 0.8089734|
 
 _Figure: Benchmarking of logSumExp_x_S(), logSumExp(x, idxs)() and logSumExp(x[idxs])() on n = 1000 data.  Outliers are displayed as crosses.  Times are in milliseconds._
 
@@ -88,8 +88,8 @@ _Figure: Benchmarking of logSumExp_x_S(), logSumExp(x, idxs)() and logSumExp(x[i
 > x_S <- x[idxs]
 > gc()
            used  (Mb) gc trigger  (Mb) max used  (Mb)
-Ncells  5274154 281.7   10014072 534.9 10014072 534.9
-Vcells 10964913  83.7   36079799 275.3 55956209 427.0
+Ncells  5340765 285.3    7916910 422.9  7916910 422.9
+Vcells 11439488  87.3   36893127 281.5 57430649 438.2
 > stats <- microbenchmark(logSumExp_x_S = logSumExp(x_S), `logSumExp(x, idxs)` = logSumExp(x, idxs = idxs), 
 +     `logSumExp(x[idxs])` = logSumExp(x[idxs]), unit = "ms")
 ```
@@ -100,16 +100,16 @@ _Table: Benchmarking of logSumExp_x_S(), logSumExp(x, idxs)() and logSumExp(x[id
 
 |   |expr               |      min|        lq|      mean|    median|       uq|      max|
 |:--|:------------------|--------:|---------:|---------:|---------:|--------:|--------:|
-|1  |logSumExp_x_S      | 0.108191| 0.1189490| 0.1320320| 0.1270555| 0.145741| 0.160701|
-|3  |logSumExp(x[idxs]) | 0.122949| 0.1352225| 0.1496275| 0.1439025| 0.159921| 0.270821|
-|2  |logSumExp(x, idxs) | 0.137557| 0.1506430| 0.1680354| 0.1607365| 0.186560| 0.216649|
+|1  |logSumExp_x_S      | 0.107942| 0.1155185| 0.1326706| 0.1234485| 0.148291| 0.227294|
+|3  |logSumExp(x[idxs]) | 0.122316| 0.1346590| 0.1504823| 0.1405490| 0.163293| 0.267099|
+|2  |logSumExp(x, idxs) | 0.138869| 0.1499025| 0.1718531| 0.1632120| 0.190533| 0.282027|
 
 
 |   |expr               |      min|       lq|     mean|   median|       uq|      max|
 |:--|:------------------|--------:|--------:|--------:|--------:|--------:|--------:|
 |1  |logSumExp_x_S      | 1.000000| 1.000000| 1.000000| 1.000000| 1.000000| 1.000000|
-|3  |logSumExp(x[idxs]) | 1.136407| 1.136811| 1.133267| 1.132596| 1.097296| 1.685248|
-|2  |logSumExp(x, idxs) | 1.271427| 1.266450| 1.272687| 1.265089| 1.280079| 1.348150|
+|3  |logSumExp(x[idxs]) | 1.133164| 1.165692| 1.134256| 1.138523| 1.101166| 1.175126|
+|2  |logSumExp(x, idxs) | 1.286515| 1.297649| 1.295337| 1.322106| 1.284859| 1.240803|
 
 _Figure: Benchmarking of logSumExp_x_S(), logSumExp(x, idxs)() and logSumExp(x[idxs])() on n = 10000 data.  Outliers are displayed as crosses.  Times are in milliseconds._
 
@@ -123,8 +123,8 @@ _Figure: Benchmarking of logSumExp_x_S(), logSumExp(x, idxs)() and logSumExp(x[i
 > x_S <- x[idxs]
 > gc()
            used  (Mb) gc trigger  (Mb) max used  (Mb)
-Ncells  5274226 281.7   10014072 534.9 10014072 534.9
-Vcells 11059973  84.4   36079799 275.3 55956209 427.0
+Ncells  5340837 285.3    7916910 422.9  7916910 422.9
+Vcells 11534548  88.1   36893127 281.5 57430649 438.2
 > stats <- microbenchmark(logSumExp_x_S = logSumExp(x_S), `logSumExp(x, idxs)` = logSumExp(x, idxs = idxs), 
 +     `logSumExp(x[idxs])` = logSumExp(x[idxs]), unit = "ms")
 ```
@@ -133,18 +133,18 @@ _Table: Benchmarking of logSumExp_x_S(), logSumExp(x, idxs)() and logSumExp(x[id
 
 
 
-|   |expr               |      min|       lq|     mean|   median|       uq|      max|
-|:--|:------------------|--------:|--------:|--------:|--------:|--------:|--------:|
-|1  |logSumExp_x_S      | 0.966091| 1.018860| 1.062453| 1.039030| 1.054947| 1.662332|
-|3  |logSumExp(x[idxs]) | 1.152469| 1.215738| 1.327762| 1.324237| 1.399139| 2.030117|
-|2  |logSumExp(x, idxs) | 1.594151| 1.691815| 1.819251| 1.849838| 1.901143| 2.176117|
+|   |expr               |      min|        lq|      mean|    median|       uq|      max|
+|:--|:------------------|--------:|---------:|---------:|---------:|--------:|--------:|
+|1  |logSumExp_x_S      | 0.905993| 0.9066275| 0.9577668| 0.9084235| 0.921494| 1.597944|
+|3  |logSumExp(x[idxs]) | 1.085253| 1.0978600| 1.1642811| 1.1007840| 1.109797| 1.930893|
+|2  |logSumExp(x, idxs) | 1.463108| 1.4638735| 1.5068310| 1.4664320| 1.468910| 2.205679|
 
 
 |   |expr               |      min|       lq|     mean|   median|       uq|      max|
 |:--|:------------------|--------:|--------:|--------:|--------:|--------:|--------:|
 |1  |logSumExp_x_S      | 1.000000| 1.000000| 1.000000| 1.000000| 1.000000| 1.000000|
-|3  |logSumExp(x[idxs]) | 1.192920| 1.193234| 1.249713| 1.274494| 1.326265| 1.221246|
-|2  |logSumExp(x, idxs) | 1.650104| 1.660499| 1.712312| 1.780351| 1.802122| 1.309075|
+|3  |logSumExp(x[idxs]) | 1.197860| 1.210927| 1.215621| 1.211752| 1.204346| 1.208361|
+|2  |logSumExp(x, idxs) | 1.614922| 1.614636| 1.573276| 1.614260| 1.594053| 1.380323|
 
 _Figure: Benchmarking of logSumExp_x_S(), logSumExp(x, idxs)() and logSumExp(x[idxs])() on n = 100000 data.  Outliers are displayed as crosses.  Times are in milliseconds._
 
@@ -158,8 +158,8 @@ _Figure: Benchmarking of logSumExp_x_S(), logSumExp(x, idxs)() and logSumExp(x[i
 > x_S <- x[idxs]
 > gc()
            used  (Mb) gc trigger  (Mb) max used  (Mb)
-Ncells  5274298 281.7   10014072 534.9 10014072 534.9
-Vcells 12005022  91.6   36079799 275.3 55956209 427.0
+Ncells  5340909 285.3    7916910 422.9  7916910 422.9
+Vcells 12479597  95.3   36893127 281.5 57430649 438.2
 > stats <- microbenchmark(logSumExp_x_S = logSumExp(x_S), `logSumExp(x, idxs)` = logSumExp(x, idxs = idxs), 
 +     `logSumExp(x[idxs])` = logSumExp(x[idxs]), unit = "ms")
 ```
@@ -170,16 +170,16 @@ _Table: Benchmarking of logSumExp_x_S(), logSumExp(x, idxs)() and logSumExp(x[id
 
 |   |expr               |       min|       lq|     mean|   median|       uq|      max|
 |:--|:------------------|---------:|--------:|--------:|--------:|--------:|--------:|
-|1  |logSumExp_x_S      |  9.676549| 11.69232| 12.71659| 12.59117| 13.92423| 16.26900|
-|3  |logSumExp(x[idxs]) | 17.908413| 20.64643| 22.11629| 21.52385| 23.18826| 31.89858|
-|2  |logSumExp(x, idxs) | 36.408699| 39.95166| 44.15334| 42.13355| 44.79714| 65.30414|
+|1  |logSumExp_x_S      |  9.222615| 11.48087| 12.64326| 12.42652| 13.75433| 16.48410|
+|3  |logSumExp(x[idxs]) | 18.627014| 21.55948| 23.33542| 22.88887| 24.69123| 38.75325|
+|2  |logSumExp(x, idxs) | 34.404055| 40.45209| 46.56888| 46.82454| 51.61983| 66.48265|
 
 
 |   |expr               |      min|       lq|     mean|   median|       uq|      max|
 |:--|:------------------|--------:|--------:|--------:|--------:|--------:|--------:|
 |1  |logSumExp_x_S      | 1.000000| 1.000000| 1.000000| 1.000000| 1.000000| 1.000000|
-|3  |logSumExp(x[idxs]) | 1.850702| 1.765811| 1.739168| 1.709441| 1.665317| 1.960697|
-|2  |logSumExp(x, idxs) | 3.762571| 3.416914| 3.472105| 3.346279| 3.217209| 4.014024|
+|3  |logSumExp(x[idxs]) | 2.019711| 1.877861| 1.845681| 1.841938| 1.795161| 2.350947|
+|2  |logSumExp(x, idxs) | 3.730401| 3.523433| 3.683296| 3.768114| 3.752988| 4.033137|
 
 _Figure: Benchmarking of logSumExp_x_S(), logSumExp(x, idxs)() and logSumExp(x[idxs])() on n = 1000000 data.  Outliers are displayed as crosses.  Times are in milliseconds._
 
@@ -210,7 +210,7 @@ attached base packages:
 [1] stats     graphics  grDevices utils     datasets  methods   base     
 
 other attached packages:
-[1] microbenchmark_1.4-7   matrixStats_0.60.1     ggplot2_3.3.5         
+[1] microbenchmark_1.4-7   matrixStats_0.60.0     ggplot2_3.3.5         
 [4] knitr_1.33             R.devices_2.17.0       R.utils_2.10.1        
 [7] R.oo_1.24.0            R.methodsS3_1.8.1-9001 history_0.0.1-9000    
 
@@ -236,16 +236,17 @@ loaded via a namespace (and not attached):
 [55] tabby_0.0.1-9001        AnnotationDbi_1.54.1    Biostrings_2.60.2      
 [58] compiler_4.1.1          GenomeInfoDb_1.28.1     rlang_0.4.11           
 [61] grid_4.1.1              RCurl_1.98-1.4          cwhmisc_6.6            
-[64] rappdirs_0.3.3          startup_0.15.0          labeling_0.4.2         
-[67] bitops_1.0-7            base64enc_0.1-3         boot_1.3-28            
-[70] gtable_0.3.0            DBI_1.1.1               markdown_1.1           
-[73] R6_2.5.1                lpSolveAPI_5.5.2.0-17.7 rle_0.9.2              
-[76] dplyr_1.0.7             fastmap_1.1.0           bit_4.0.4              
-[79] utf8_1.2.2              parallel_4.1.1          Rcpp_1.0.7             
-[82] vctrs_0.3.8             png_0.1-7               DEoptimR_1.0-9         
-[85] tidyselect_1.1.1        xfun_0.25               coda_0.19-4            
+[64] rstudioapi_0.13         rappdirs_0.3.3          startup_0.15.0-9000    
+[67] labeling_0.4.2          bitops_1.0-7            base64enc_0.1-3        
+[70] boot_1.3-28             gtable_0.3.0            DBI_1.1.1              
+[73] markdown_1.1            R6_2.5.1                lpSolveAPI_5.5.2.0-17.7
+[76] rle_0.9.2               dplyr_1.0.7             fastmap_1.1.0          
+[79] bit_4.0.4               utf8_1.2.2              parallel_4.1.1         
+[82] Rcpp_1.0.7              vctrs_0.3.8             png_0.1-7              
+[85] DEoptimR_1.0-9          tidyselect_1.1.1        xfun_0.25              
+[88] coda_0.19-4            
 ```
-Total processing time was 12.61 secs.
+Total processing time was 12.95 secs.
 
 
 ### Reproducibility
@@ -262,7 +263,7 @@ html <- matrixStats:::benchmark('logSumExp_subset')
 [StackOverflow:rowProds?]: https://stackoverflow.com/questions/20198801/ "Stack Overflow: Row product of matrix and column sum of matrix"
 
 ---------------------------------------
-Copyright Dongcan Jiang. Last updated on 2021-08-25 18:21:31 (+0200 UTC). Powered by [RSP].
+Copyright Dongcan Jiang. Last updated on 2021-08-25 22:35:17 (+0200 UTC). Powered by [RSP].
 
 <script>
  var link = document.createElement('link');

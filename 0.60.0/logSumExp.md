@@ -64,8 +64,8 @@ where
 > x <- data[["n = 1000"]]
 > gc()
            used  (Mb) gc trigger  (Mb) max used  (Mb)
-Ncells  5276853 281.9   10014072 534.9 10014072 534.9
-Vcells 13139797 100.3   36079799 275.3 55956209 427.0
+Ncells  5343460 285.4    7916910 422.9  7916910 422.9
+Vcells 13614354 103.9   36893127 281.5 57430649 438.2
 > stats <- microbenchmark(logSumExp = logSumExp(x), logSumExp_R = logSumExp_R(x), unit = "ms")
 ```
 
@@ -73,16 +73,16 @@ _Table: Benchmarking of logSumExp() and logSumExp_R() on n = 1000 data. The top 
 
 
 
-|   |expr        |     min|        lq|      mean|   median|        uq|      max|
-|:--|:-----------|-------:|---------:|---------:|--------:|---------:|--------:|
-|1  |logSumExp   | 0.02363| 0.0238150| 0.0242594| 0.023959| 0.0241820| 0.047487|
-|2  |logSumExp_R | 0.02937| 0.0299205| 0.0308444| 0.030275| 0.0306215| 0.062950|
+|   |expr        |      min|        lq|      mean|    median|       uq|      max|
+|:--|:-----------|--------:|---------:|---------:|---------:|--------:|--------:|
+|1  |logSumExp   | 0.022266| 0.0225450| 0.0230288| 0.0227255| 0.022914| 0.046002|
+|2  |logSumExp_R | 0.028683| 0.0294105| 0.0308637| 0.0299415| 0.030497| 0.064713|
 
 
-|   |expr        |      min|       lq|     mean|   median|       uq|      max|
-|:--|:-----------|--------:|--------:|--------:|--------:|--------:|--------:|
-|1  |logSumExp   | 1.000000| 1.000000| 1.000000| 1.000000| 1.000000| 1.000000|
-|2  |logSumExp_R | 1.242912| 1.256372| 1.271439| 1.263617| 1.266293| 1.325626|
+|   |expr        |      min|       lq|    mean|   median|       uq|      max|
+|:--|:-----------|--------:|--------:|-------:|--------:|--------:|--------:|
+|1  |logSumExp   | 1.000000| 1.000000| 1.00000| 1.000000| 1.000000| 1.000000|
+|2  |logSumExp_R | 1.288197| 1.304524| 1.34022| 1.317529| 1.330933| 1.406743|
 
 _Figure: Benchmarking of logSumExp() and logSumExp_R() on n = 1000 data.  Outliers are displayed as crosses.  Times are in milliseconds._
 
@@ -94,8 +94,8 @@ _Figure: Benchmarking of logSumExp() and logSumExp_R() on n = 1000 data.  Outlie
 > x <- data[["n = 10000"]]
 > gc()
            used  (Mb) gc trigger  (Mb) max used  (Mb)
-Ncells  5274622 281.7   10014072 534.9 10014072 534.9
-Vcells 10954836  83.6   36079799 275.3 55956209 427.0
+Ncells  5341232 285.3    7916910 422.9  7916910 422.9
+Vcells 11429405  87.2   36893127 281.5 57430649 438.2
 > stats <- microbenchmark(logSumExp = logSumExp(x), logSumExp_R = logSumExp_R(x), unit = "ms")
 ```
 
@@ -103,16 +103,16 @@ _Table: Benchmarking of logSumExp() and logSumExp_R() on n = 10000 data. The top
 
 
 
-|   |expr        |      min|        lq|      mean|   median|        uq|      max|
-|:--|:-----------|--------:|---------:|---------:|--------:|---------:|--------:|
-|1  |logSumExp   | 0.164073| 0.1756005| 0.1926990| 0.186173| 0.2090055| 0.241616|
-|2  |logSumExp_R | 0.188733| 0.2052210| 0.2224624| 0.214844| 0.2403720| 0.284412|
+|   |expr        |      min|        lq|      mean|    median|        uq|      max|
+|:--|:-----------|--------:|---------:|---------:|---------:|---------:|--------:|
+|1  |logSumExp   | 0.154077| 0.1691225| 0.1852944| 0.1789375| 0.2009460| 0.310048|
+|2  |logSumExp_R | 0.192103| 0.2000760| 0.2222996| 0.2145080| 0.2367025| 0.353637|
 
 
-|   |expr        |      min|       lq|     mean|   median|       uq|      max|
-|:--|:-----------|--------:|--------:|--------:|--------:|--------:|--------:|
-|1  |logSumExp   | 1.000000| 1.000000| 1.000000| 1.000000| 1.000000| 1.000000|
-|2  |logSumExp_R | 1.150299| 1.168681| 1.154455| 1.154002| 1.150075| 1.177124|
+|   |expr        |      min|       lq|    mean|   median|       uq|      max|
+|:--|:-----------|--------:|--------:|-------:|--------:|--------:|--------:|
+|1  |logSumExp   | 1.000000| 1.000000| 1.00000| 1.000000| 1.000000| 1.000000|
+|2  |logSumExp_R | 1.246799| 1.183024| 1.19971| 1.198787| 1.177941| 1.140588|
 
 _Figure: Benchmarking of logSumExp() and logSumExp_R() on n = 10000 data.  Outliers are displayed as crosses.  Times are in milliseconds._
 
@@ -124,8 +124,8 @@ _Figure: Benchmarking of logSumExp() and logSumExp_R() on n = 10000 data.  Outli
 > x <- data[["n = 100000"]]
 > gc()
            used  (Mb) gc trigger  (Mb) max used  (Mb)
-Ncells  5274685 281.7   10014072 534.9 10014072 534.9
-Vcells 10954878  83.6   36079799 275.3 55956209 427.0
+Ncells  5341295 285.3    7916910 422.9  7916910 422.9
+Vcells 11429447  87.2   36893127 281.5 57430649 438.2
 > stats <- microbenchmark(logSumExp = logSumExp(x), logSumExp_R = logSumExp_R(x), unit = "ms")
 ```
 
@@ -135,14 +135,14 @@ _Table: Benchmarking of logSumExp() and logSumExp_R() on n = 100000 data. The to
 
 |   |expr        |      min|       lq|     mean|   median|       uq|      max|
 |:--|:-----------|--------:|--------:|--------:|--------:|--------:|--------:|
-|1  |logSumExp   | 1.383647| 1.494358| 1.554475| 1.507747| 1.547846| 2.147978|
-|2  |logSumExp_R | 1.922449| 2.233416| 2.279514| 2.284849| 2.305359| 2.829940|
+|1  |logSumExp   | 1.279054| 1.306963| 1.428666| 1.364008| 1.431050| 2.133753|
+|2  |logSumExp_R | 1.528733| 1.656939| 1.996871| 2.083162| 2.181539| 3.109036|
 
 
-|   |expr        |      min|       lq|     mean|   median|       uq|     max|
-|:--|:-----------|--------:|--------:|--------:|--------:|--------:|-------:|
-|1  |logSumExp   | 1.000000| 1.000000| 1.000000| 1.000000| 1.000000| 1.00000|
-|2  |logSumExp_R | 1.389407| 1.494565| 1.466421| 1.515407| 1.489398| 1.31749|
+|   |expr        |      min|       lq|     mean|   median|       uq|      max|
+|:--|:-----------|--------:|--------:|--------:|--------:|--------:|--------:|
+|1  |logSumExp   | 1.000000| 1.000000| 1.000000| 1.000000| 1.000000| 1.000000|
+|2  |logSumExp_R | 1.195206| 1.267778| 1.397717| 1.527235| 1.524433| 1.457074|
 
 _Figure: Benchmarking of logSumExp() and logSumExp_R() on n = 100000 data.  Outliers are displayed as crosses.  Times are in milliseconds._
 
@@ -154,8 +154,8 @@ _Figure: Benchmarking of logSumExp() and logSumExp_R() on n = 100000 data.  Outl
 > x <- data[["n = 1000000"]]
 > gc()
            used  (Mb) gc trigger  (Mb) max used  (Mb)
-Ncells  5274748 281.8   10014072 534.9 10014072 534.9
-Vcells 10955433  83.6   36079799 275.3 55956209 427.0
+Ncells  5341358 285.3    7916910 422.9  7916910 422.9
+Vcells 11430002  87.3   36893127 281.5 57430649 438.2
 > stats <- microbenchmark(logSumExp = logSumExp(x), logSumExp_R = logSumExp_R(x), unit = "ms")
 ```
 
@@ -163,16 +163,16 @@ _Table: Benchmarking of logSumExp() and logSumExp_R() on n = 1000000 data. The t
 
 
 
-|   |expr        |      min|       lq|     mean|   median|       uq|       max|
-|:--|:-----------|--------:|--------:|--------:|--------:|--------:|---------:|
-|1  |logSumExp   | 14.11827| 15.43141| 15.58049| 15.55832| 15.66653|  21.07568|
-|2  |logSumExp_R | 22.65165| 23.66279| 28.87874| 23.96369| 24.34453| 412.61758|
+|   |expr        |      min|       lq|     mean|   median|       uq|      max|
+|:--|:-----------|--------:|--------:|--------:|--------:|--------:|--------:|
+|1  |logSumExp   | 13.13373| 13.41856| 13.84355| 13.64258| 13.93897| 19.88573|
+|2  |logSumExp_R | 21.35258| 22.24761| 24.18817| 22.52311| 23.08262| 45.37122|
 
 
-|   |expr        |      min|       lq|     mean|   median|       uq|     max|
-|:--|:-----------|--------:|--------:|--------:|--------:|--------:|-------:|
-|1  |logSumExp   | 1.000000| 1.000000| 1.000000| 1.000000| 1.000000|  1.0000|
-|2  |logSumExp_R | 1.604421| 1.533418| 1.853519| 1.540249| 1.553919| 19.5779|
+|   |expr        |      min|       lq|     mean|   median|       uq|      max|
+|:--|:-----------|--------:|--------:|--------:|--------:|--------:|--------:|
+|1  |logSumExp   | 1.000000| 1.000000| 1.000000| 1.000000| 1.000000| 1.000000|
+|2  |logSumExp_R | 1.625782| 1.657973| 1.747252| 1.650942| 1.655978| 2.281597|
 
 _Figure: Benchmarking of logSumExp() and logSumExp_R() on n = 1000000 data.  Outliers are displayed as crosses.  Times are in milliseconds._
 
@@ -203,7 +203,7 @@ attached base packages:
 [1] stats     graphics  grDevices utils     datasets  methods   base     
 
 other attached packages:
-[1] microbenchmark_1.4-7   matrixStats_0.60.1     ggplot2_3.3.5         
+[1] microbenchmark_1.4-7   matrixStats_0.60.0     ggplot2_3.3.5         
 [4] knitr_1.33             R.devices_2.17.0       R.utils_2.10.1        
 [7] R.oo_1.24.0            R.methodsS3_1.8.1-9001 history_0.0.1-9000    
 
@@ -229,16 +229,17 @@ loaded via a namespace (and not attached):
 [55] tabby_0.0.1-9001        AnnotationDbi_1.54.1    Biostrings_2.60.2      
 [58] compiler_4.1.1          GenomeInfoDb_1.28.1     rlang_0.4.11           
 [61] grid_4.1.1              RCurl_1.98-1.4          cwhmisc_6.6            
-[64] rappdirs_0.3.3          startup_0.15.0          labeling_0.4.2         
-[67] bitops_1.0-7            base64enc_0.1-3         boot_1.3-28            
-[70] gtable_0.3.0            DBI_1.1.1               markdown_1.1           
-[73] R6_2.5.1                lpSolveAPI_5.5.2.0-17.7 rle_0.9.2              
-[76] dplyr_1.0.7             fastmap_1.1.0           bit_4.0.4              
-[79] utf8_1.2.2              parallel_4.1.1          Rcpp_1.0.7             
-[82] vctrs_0.3.8             png_0.1-7               DEoptimR_1.0-9         
-[85] tidyselect_1.1.1        xfun_0.25               coda_0.19-4            
+[64] rstudioapi_0.13         rappdirs_0.3.3          startup_0.15.0-9000    
+[67] labeling_0.4.2          bitops_1.0-7            base64enc_0.1-3        
+[70] boot_1.3-28             gtable_0.3.0            DBI_1.1.1              
+[73] markdown_1.1            R6_2.5.1                lpSolveAPI_5.5.2.0-17.7
+[76] rle_0.9.2               dplyr_1.0.7             fastmap_1.1.0          
+[79] bit_4.0.4               utf8_1.2.2              parallel_4.1.1         
+[82] Rcpp_1.0.7              vctrs_0.3.8             png_0.1-7              
+[85] DEoptimR_1.0-9          tidyselect_1.1.1        xfun_0.25              
+[88] coda_0.19-4            
 ```
-Total processing time was 10.55 secs.
+Total processing time was 9.79 secs.
 
 
 ### Reproducibility
@@ -255,7 +256,7 @@ html <- matrixStats:::benchmark('logSumExp')
 [StackOverflow:rowProds?]: https://stackoverflow.com/questions/20198801/ "Stack Overflow: Row product of matrix and column sum of matrix"
 
 ---------------------------------------
-Copyright Henrik Bengtsson. Last updated on 2021-08-25 18:21:43 (+0200 UTC). Powered by [RSP].
+Copyright Henrik Bengtsson. Last updated on 2021-08-25 22:35:28 (+0200 UTC). Powered by [RSP].
 
 <script>
  var link = document.createElement('link');

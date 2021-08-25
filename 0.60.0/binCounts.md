@@ -49,8 +49,8 @@ as below
 ```r
 > gc()
           used  (Mb) gc trigger  (Mb) max used  (Mb)
-Ncells 5142110 274.7    7554717 403.5  7554717 403.5
-Vcells 9114802  69.6   31793280 242.6 60508962 461.7
+Ncells 5164682 275.9    7916910 422.9  7916910 422.9
+Vcells 9240731  70.6   33191153 253.3 53339345 407.0
 > stats <- microbenchmark(binCounts = binCounts(x, bx = bx), hist = binCounts_hist(x, bx = bx), unit = "ms")
 ```
 
@@ -60,14 +60,14 @@ _Table: Benchmarking of binCounts() and hist() on integer+unsorted data. The top
 
 |   |expr      |      min|       lq|     mean|   median|       uq|      max|
 |:--|:---------|--------:|--------:|--------:|--------:|--------:|--------:|
-|1  |binCounts | 5.143101| 5.294598| 5.662567| 5.327070| 5.599934| 11.54100|
-|2  |hist      | 8.494042| 8.678722| 9.024064| 8.751588| 8.850162| 15.84129|
+|1  |binCounts | 5.221739| 5.291779| 5.519676| 5.322615| 5.356448|  9.70044|
+|2  |hist      | 8.632203| 8.710278| 8.920086| 8.757371| 8.827594| 14.58375|
 
 
-|   |expr      |      min|       lq|     mean|   median|       uq|     max|
-|:--|:---------|--------:|--------:|--------:|--------:|--------:|-------:|
-|1  |binCounts | 1.000000| 1.000000| 1.000000| 1.000000| 1.000000| 1.00000|
-|2  |hist      | 1.651541| 1.639165| 1.593635| 1.642852| 1.580405| 1.37261|
+|   |expr      |      min|       lq|     mean|   median|       uq|      max|
+|:--|:---------|--------:|--------:|--------:|--------:|--------:|--------:|
+|1  |binCounts | 1.000000| 1.000000| 1.000000| 1.000000| 1.000000| 1.000000|
+|2  |hist      | 1.653128| 1.646002| 1.616052| 1.645314| 1.648031| 1.503411|
 
 _Figure: Benchmarking of binCounts() and hist() on integer+unsorted data.  Outliers are displayed as crosses.  Times are in milliseconds._
 
@@ -82,8 +82,8 @@ _Figure: Benchmarking of binCounts() and hist() on integer+unsorted data.  Outli
 ```r
 > gc()
           used  (Mb) gc trigger  (Mb) max used  (Mb)
-Ncells 5141580 274.6    7554717 403.5  7554717 403.5
-Vcells 8970760  68.5   31793280 242.6 60508962 461.7
+Ncells 5152060 275.2    7916910 422.9  7916910 422.9
+Vcells 9057518  69.2   33191153 253.3 53339345 407.0
 > stats <- microbenchmark(binCounts = binCounts(x, bx = bx), hist = binCounts_hist(x, bx = bx), unit = "ms")
 ```
 
@@ -91,16 +91,16 @@ _Table: Benchmarking of binCounts() and hist() on integer+sorted data. The top p
 
 
 
-|   |expr      |      min|       lq|     mean|    median|       uq|      max|
-|:--|:---------|--------:|--------:|--------:|---------:|--------:|--------:|
-|1  |binCounts | 0.819913| 0.844897| 1.317841| 0.9380055| 1.569059| 9.564587|
-|2  |hist      | 3.533727| 3.588396| 4.141887| 3.8537660| 4.734369| 9.218416|
+|   |expr      |      min|       lq|      mean|    median|        uq|      max|
+|:--|:---------|--------:|--------:|---------:|---------:|---------:|--------:|
+|1  |binCounts | 0.818483| 0.838998| 0.9454563| 0.8567175| 0.8816355| 4.359132|
+|2  |hist      | 3.515065| 3.572513| 3.8929789| 3.6355275| 3.8108480| 7.925165|
 
 
-|   |expr      |     min|      lq|     mean|   median|      uq|      max|
-|:--|:---------|-------:|-------:|--------:|--------:|-------:|--------:|
-|1  |binCounts | 1.00000| 1.00000| 1.000000| 1.000000| 1.00000| 1.000000|
-|2  |hist      | 4.30988| 4.24714| 3.142935| 4.108468| 3.01733| 0.963807|
+|   |expr      |     min|       lq|     mean|   median|       uq|     max|
+|:--|:---------|-------:|--------:|--------:|--------:|--------:|-------:|
+|1  |binCounts | 1.00000| 1.000000| 1.000000| 1.000000| 1.000000| 1.00000|
+|2  |hist      | 4.29461| 4.258071| 4.117566| 4.243555| 4.322476| 1.81806|
 
 _Figure: Benchmarking of binCounts() and hist() on integer+sorted data.  Outliers are displayed as crosses.  Times are in milliseconds._
 
@@ -131,8 +131,8 @@ _Figure: Benchmarking of binCounts() and hist() on integer+sorted data.  Outlier
 ```r
 > gc()
           used  (Mb) gc trigger  (Mb) max used  (Mb)
-Ncells 5141643 274.6    7554717 403.5  7554717 403.5
-Vcells 9020802  68.9   31793280 242.6 60508962 461.7
+Ncells 5152123 275.2    7916910 422.9  7916910 422.9
+Vcells 9107560  69.5   33191153 253.3 53339345 407.0
 > stats <- microbenchmark(binCounts = binCounts(x, bx = bx), hist = binCounts_hist(x, bx = bx), unit = "ms")
 ```
 
@@ -142,14 +142,14 @@ _Table: Benchmarking of binCounts() and hist() on double+unsorted data. The top 
 
 |   |expr      |      min|       lq|     mean|   median|       uq|      max|
 |:--|:---------|--------:|--------:|--------:|--------:|--------:|--------:|
-|1  |binCounts | 7.528173| 7.691774| 7.990074| 7.729523| 7.834112| 12.95266|
-|2  |hist      | 8.681784| 8.880285| 9.278072| 8.966653| 9.097704| 15.93504|
+|1  |binCounts | 7.638411| 7.690463| 8.003047| 7.732960| 7.758226| 13.53363|
+|2  |hist      | 8.804883| 8.872464| 9.066958| 8.953775| 9.030924| 13.77090|
 
 
-|   |expr      |      min|       lq|   mean|   median|       uq|      max|
-|:--|:---------|--------:|--------:|------:|--------:|--------:|--------:|
-|1  |binCounts | 1.000000| 1.000000| 1.0000| 1.000000| 1.000000| 1.000000|
-|2  |hist      | 1.153239| 1.154517| 1.1612| 1.160052| 1.161293| 1.230252|
+|   |expr      |      min|       lq|     mean|   median|       uq|      max|
+|:--|:---------|--------:|--------:|--------:|--------:|--------:|--------:|
+|1  |binCounts | 1.000000| 1.000000| 1.000000| 1.000000| 1.000000| 1.000000|
+|2  |hist      | 1.152711| 1.153697| 1.132938| 1.157872| 1.164045| 1.017532|
 
 _Figure: Benchmarking of binCounts() and hist() on double+unsorted data.  Outliers are displayed as crosses.  Times are in milliseconds._
 
@@ -164,8 +164,8 @@ _Figure: Benchmarking of binCounts() and hist() on double+unsorted data.  Outlie
 ```r
 > gc()
           used  (Mb) gc trigger  (Mb) max used  (Mb)
-Ncells 5141709 274.6    7554717 403.5  7554717 403.5
-Vcells 9021358  68.9   31793280 242.6 60508962 461.7
+Ncells 5152189 275.2    7916910 422.9  7916910 422.9
+Vcells 9108116  69.5   33191153 253.3 53339345 407.0
 > stats <- microbenchmark(binCounts = binCounts(x, bx = bx), hist = binCounts_hist(x, bx = bx), unit = "ms")
 ```
 
@@ -173,16 +173,16 @@ _Table: Benchmarking of binCounts() and hist() on double+sorted data. The top pa
 
 
 
-|   |expr      |      min|       lq|     mean|   median|       uq|      max|
-|:--|:---------|--------:|--------:|--------:|--------:|--------:|--------:|
-|1  |binCounts | 0.850783| 1.803626| 2.127301| 1.871829| 2.118526| 9.675235|
-|2  |hist      | 4.003160| 4.081607| 4.493071| 4.205863| 5.033793| 9.439822|
+|   |expr      |      min|      lq|     mean|   median|       uq|      max|
+|:--|:---------|--------:|-------:|--------:|--------:|--------:|--------:|
+|1  |binCounts | 0.899685| 1.82550| 2.075927| 1.878453| 1.991132| 6.068830|
+|2  |hist      | 4.017487| 4.11005| 4.483815| 4.206721| 4.750952| 8.044012|
 
 
-|   |expr      |      min|       lq|     mean|   median|       uq|       max|
-|:--|:---------|--------:|--------:|--------:|--------:|--------:|---------:|
-|1  |binCounts | 1.000000| 1.000000| 1.000000| 1.000000| 1.000000| 1.0000000|
-|2  |hist      | 4.705266| 2.263001| 2.112099| 2.246927| 2.376083| 0.9756685|
+|   |expr      |      min|       lq|     mean|  median|       uq|      max|
+|:--|:---------|--------:|--------:|--------:|-------:|--------:|--------:|
+|1  |binCounts | 1.000000| 1.000000| 1.000000| 1.00000| 1.000000| 1.000000|
+|2  |hist      | 4.465437| 2.251465| 2.159909| 2.23946| 2.386056| 1.325463|
 
 _Figure: Benchmarking of binCounts() and hist() on double+sorted data.  Outliers are displayed as crosses.  Times are in milliseconds._
 
@@ -218,7 +218,7 @@ attached base packages:
 other attached packages:
 [1] microbenchmark_1.4-7   matrixStats_0.60.0     ggplot2_3.3.5         
 [4] knitr_1.33             R.devices_2.17.0       R.utils_2.10.1        
-[7] R.oo_1.24.0            R.methodsS3_1.8.1-9001
+[7] R.oo_1.24.0            R.methodsS3_1.8.1-9001 history_0.0.1-9000    
 
 loaded via a namespace (and not attached):
  [1] Biobase_2.52.0          httr_1.4.2              splines_4.1.1          
@@ -237,20 +237,22 @@ loaded via a namespace (and not attached):
 [40] magrittr_2.0.1          crayon_1.4.1            statnet.common_4.5.0   
 [43] memoise_2.0.0           laeken_0.5.1            fansi_0.5.0            
 [46] R.cache_0.15.0          MASS_7.3-54             R.rsp_0.44.0           
-[49] tools_4.1.1             lifecycle_1.0.0         S4Vectors_0.30.0       
-[52] trust_0.1-8             munsell_0.5.0           AnnotationDbi_1.54.1   
-[55] Biostrings_2.60.2       compiler_4.1.1          GenomeInfoDb_1.28.1    
-[58] rlang_0.4.11            grid_4.1.1              RCurl_1.98-1.4         
-[61] cwhmisc_6.6             rappdirs_0.3.3          labeling_0.4.2         
-[64] bitops_1.0-7            base64enc_0.1-3         boot_1.3-28            
-[67] gtable_0.3.0            DBI_1.1.1               markdown_1.1           
-[70] R6_2.5.1                lpSolveAPI_5.5.2.0-17.7 rle_0.9.2              
-[73] dplyr_1.0.7             fastmap_1.1.0           bit_4.0.4              
-[76] utf8_1.2.2              parallel_4.1.1          Rcpp_1.0.7             
-[79] vctrs_0.3.8             png_0.1-7               DEoptimR_1.0-9         
-[82] tidyselect_1.1.1        xfun_0.25               coda_0.19-4            
+[49] progressr_0.8.0         tools_4.1.1             lifecycle_1.0.0        
+[52] S4Vectors_0.30.0        trust_0.1-8             munsell_0.5.0          
+[55] tabby_0.0.1-9001        AnnotationDbi_1.54.1    Biostrings_2.60.2      
+[58] compiler_4.1.1          GenomeInfoDb_1.28.1     rlang_0.4.11           
+[61] grid_4.1.1              RCurl_1.98-1.4          cwhmisc_6.6            
+[64] rstudioapi_0.13         rappdirs_0.3.3          startup_0.15.0         
+[67] labeling_0.4.2          bitops_1.0-7            base64enc_0.1-3        
+[70] boot_1.3-28             gtable_0.3.0            DBI_1.1.1              
+[73] markdown_1.1            R6_2.5.1                lpSolveAPI_5.5.2.0-17.7
+[76] rle_0.9.2               dplyr_1.0.7             fastmap_1.1.0          
+[79] bit_4.0.4               utf8_1.2.2              parallel_4.1.1         
+[82] Rcpp_1.0.7              vctrs_0.3.8             png_0.1-7              
+[85] DEoptimR_1.0-9          tidyselect_1.1.1        xfun_0.25              
+[88] coda_0.19-4            
 ```
-Total processing time was 7.65 secs.
+Total processing time was 7.7 secs.
 
 
 ### Reproducibility
@@ -267,7 +269,7 @@ html <- matrixStats:::benchmark('binCounts')
 [StackOverflow:rowProds?]: https://stackoverflow.com/questions/20198801/ "Stack Overflow: Row product of matrix and column sum of matrix"
 
 ---------------------------------------
-Copyright Henrik Bengtsson. Last updated on 2021-08-25 17:33:45 (+0200 UTC). Powered by [RSP].
+Copyright Henrik Bengtsson. Last updated on 2021-08-25 22:09:23 (+0200 UTC). Powered by [RSP].
 
 <script>
  var link = document.createElement('link');
